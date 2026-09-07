@@ -1,19 +1,20 @@
 import {createBuilder} from './builder.js';
 import {addPines} from './pine.js';
 import {SHUNDE,assemblyAt} from './spec.js';
+import {addRear} from './rear.js';
 
 /** Actual geometry; the user photograph calibrates ratios, never used as a facade map. */
 export function createShundeModel(THREE,{textured=true,foliage=true,signGlyphs=null}={}){
  const B=createBuilder(THREE),{box,cylinder}=B,S=SHUNDE,F=S.facade,E=S.entrance,W=S.width,D=S.depth;
- const group=new THREE.Group();group.name='Shunde V2 — new front-photo calibration';group.userData={...S};
+ const group=new THREE.Group();group.name='Shunde V3 — calibrated front and confirmed curved rear';group.userData={...S};
  const part=(name,parent=group,data={})=>{const g=new THREE.Group();g.name=name;g.userData=data;parent.add(g);return g;};
- const building=part('Shunde V2 architecture — hidden elevations inferred');
+ const building=part('Shunde V3 architecture — confirmed rear, estimated dimensions');
  const campus=part('Continuous campus ground — planting placement photo-informed');
  const portico=part('Two-column recessed monumental entrance',building);
  const tiers=S.facadeBands.map(b=>part(b.name,building,{interiorStatus:S.interiorStatus,observableBand:true}));
  const upper=part('Recessed narrow roof window strip — not an asserted storey',building,{interiorStatus:S.interiorStatus});tiers.push(upper);
  const roof=part('Roof fascia — hidden roof inferred',building,{interiorStatus:S.interiorStatus});tiers.push(roof);
- const arc=part('Unverified arc hypothesis — excluded by default',building,{status:'inferred-placement-and-radius',orientationStatus:'unverified'});arc.visible=S.arcEnabled;
+ const arc=part('Confirmed rear-cylinder base',tiers[0],{status:'inferred-placement-and-radius',orientationStatus:'user-confirmed-rear'});arc.visible=S.arcEnabled;
  const plain=(name,color,roughness=.8,metalness=0)=>new THREE.MeshStandardMaterial({name,color,roughness,metalness});
  const pbr=(name,kind,rgb,world,size=512)=>textured?B.pbr(name,kind,rgb,world,size):plain(name,new THREE.Color(...rgb.map(v=>v/255)));
  const tile=pbr('Pale warm-gray square ceramic grid','square-grid',[181,179,169],[1.68,1.68]);tile.normalScale?.set(.15,.15);
@@ -28,7 +29,7 @@ export function createShundeModel(THREE,{textured=true,foliage=true,signGlyphs=n
  const grass=pbr('Muted campus lawn','grain',[84,99,65],[3,3]);
  const stripe=plain('Dark paving inlay','#565d5a',.92);
  const gold=plain('Sign brass','#c4a763',.28,.6);
- const stats=B.stats;Object.assign(stats,{porticoColumns:2,portals:1,hallIntermediateSlabs:0,arcClosedCircle:false,arcPlacement:'unverified-disabled',dimensionsStatus:S.dimensionsStatus,facadeBands:S.facadeBands,facadePierWidth:F.pierWidth,openCasements:0});
+ const stats=B.stats;Object.assign(stats,{porticoColumns:2,portals:1,hallIntermediateSlabs:0,arcClosedCircle:false,arcPlacement:'confirmed-rear-dimensions-estimated',dimensionsStatus:S.dimensionsStatus,facadeBands:S.facadeBands,facadePierWidth:F.pierWidth,openCasements:0});
  const pane=(g,x,y,z,w,h,open=false)=>{
   box(g,'window reveal',x,y,z-.12,w+.10,h+.12,.24,dark);
   box(g,'glass',x,y,z+.04,w,h,.08,glass);stats.windows++;
@@ -70,32 +71,13 @@ export function createShundeModel(THREE,{textured=true,foliage=true,signGlyphs=n
    const x=-2*F.bayWidth,support=part('Short round wing support',g,{role:'short-round-wing-support',placement:'photo-informed, grid-estimated'});
    cylinder(support,[x,y,4.68],[x,y+h,4.68],.57,.57,limestone,40);
   }
-  // Exact side/rear openings are unknown; conservative repeated rhythm only.
-  for(const side of [-1,1]){
-   box(g,'inferred side sill',side*(W/2-.3),y+.6,5-D/2,.6,1.2,D,tile);
-   box(g,'inferred side lintel',side*(W/2-.3),y+h-.45,5-D/2,.6,.9,D,tile);
-   for(let j=0;j<6;j++){
-    const z=3-j*3.9;
-    box(g,'inferred side glass',side*(W/2+.02),b.windowCenter,z,.1,b.windowHeight,2.6,glass);stats.windows++;
-    for(const dz of [-1.34,0,1.34])box(g,'side window rail',side*(W/2+.1),b.windowCenter,z+dz,.10,b.windowHeight,.065,frame);
-    box(g,'inferred side pier',side*(W/2-.15),y+h/2,z-1.8,.6,h,1.03,tile);
-   }
-  }
-  box(g,'inferred rear wall',0,y+h/2,5-D,W,h,.42,tile);
-  for(let j=0;j<16;j++){const x=-W/2+(j+.5)*F.bayWidth;box(g,'inferred rear glazing',x,b.windowCenter,4.76-D,F.opening,b.windowHeight,.1,glass);stats.windows++;}
-  if(l===0||l===3)box(g,'inferred slab',0,y-.11,5-D/2,W-.5,.22,D-.5,concrete);
-  else{
-   const wing=(W-2*E.halfWidth)/2;
-   for(const side of [-1,1])box(g,'inferred wing slab',side*(E.halfWidth+wing/2),y-.11,5-D/2,wing-.1,.22,D-.5,concrete);
-   box(g,'inferred rear slab beyond tall hall',0,y-.11,5-D*.72,E.halfWidth*2,.22,D*.53,concrete);
-  }
-  if(l>0)for(const x of [-24,-16,16,24])box(g,'inferred partition',x,y+1.0,-9,.12,2,15,concrete);
+  // Rear/side walls and cut floor outlines are authored together in addRear below.
  }
  const R=S.roofBand;
- box(upper,'roof-strip slab',0,R.base-.1,5-D/2,W,.2,D,concrete);
+ // Nonrectangular roof-strip floor generated by addRear.
  box(upper,'recessed slit shadow',0,R.windowCenter,4.21,W,R.windowHeight+.18,.4,dark);
  for(let i=0;i<32;i++){const x=-W/2+(i+.5)*W/32;box(upper,'narrow clerestory glass',x,R.windowCenter,4.43,W/32-.09,R.windowHeight,.1,glass);box(upper,'slit vertical frame',x-W/64,R.windowCenter,4.52,.06,R.windowHeight,.08,frame);stats.windows++;}
- box(roof,'roof solid cap',0,R.fasciaTop-.12,5-D/2,W+.2,.24,D+.2,limestone);
+ // Nonrectangular cap generated by addRear.
  box(roof,'broad pale ceramic roof fascia',0,(R.fasciaTop+R.fasciaBottom)/2,4.78,W+.12,R.fasciaTop-R.fasciaBottom,.82,tile);
  for(let i=0;i<17;i++)box(upper,'projecting short roof fin',-W/2+i*F.bayWidth,R.windowCenter+.13,5.13,.25,1.17,1.42,limestone);
  // The portico top aligns precisely with the bottom of the top regular facade group.
@@ -133,7 +115,7 @@ export function createShundeModel(THREE,{textured=true,foliage=true,signGlyphs=n
  makeSign('舜德楼',8.0,.71,1.17,'black');
  makeSign('清华大学工业工程系',3.27,doorWidth,.59,'white');
  stats.signs=['舜德楼','清华大学工业工程系'];stats.portalHeightToColumnHeight=(E.portalTop-S.baseY)/(E.top-S.baseY);
- box(portico,'buried continuous building foundation',0,.18,5-D/2,W,1.44,D,limestone);
+ // Foundation follows the same nonrectangular outline as the upper plates.
  // The photo's wide apron continues far past the columns into the facade plinth.
  box(portico,'continuous facade plinth course',0,.52,5.40,W,.76,1.3,limestone);
  box(portico,'continuous upper landing',0,.40,6.03,33.2,1.0,1.25,limestone);
@@ -146,7 +128,7 @@ export function createShundeModel(THREE,{textured=true,foliage=true,signGlyphs=n
   const strip=part('Short alternating stair-nosing warning',step,{role:'stair-warning'});
   for(let j=0;j<16;j++)box(strip,'bonded anti-slip segment',1.65+(j-7.5)*.075,top+.002,5.56+depth-.07,.075,.004,.12,j%2?warningYellow:warningBlack);
  }
- // No ambiguous historic curved rear extension is generated in the evidence-led V2.
+ addRear(THREE,B,{part,tiers,roof,upper,portico,arc,campus,S,materials:{tile,concrete,limestone,glass,frame,spandrel,paving}});
  box(campus,'continuous earth',0,-.45,0,320,.8,320,grass);
  box(campus,'flush broad forecourt',0,-.017,23,69,.067,36,paving);
  for(let x=-32;x<=32;x+=4)box(campus,'long paving inlay',x,.021,23,.075,.008,36,stripe);
