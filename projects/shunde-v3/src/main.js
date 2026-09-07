@@ -33,18 +33,28 @@ async function init(){
  engine={renderer,scene,camera,built,pipeline,glass,lastTime:null};renderAt(pending,true);renderer.shadowMap.autoUpdate=false;
  let meshes=0,triangles=0;built.group.traverse(o=>{if(o.isMesh){meshes++;triangles+=(o.geometry.index?.count||o.geometry.attributes.position.count)/3*(o.isInstancedMesh?o.count:1);}});
  window.__modelStats={...built.stats,meshBatches:meshes,triangles,buildingBounds:reportBounds(built.building),sceneBounds:reportBounds(built.group),renderer:renderer.getContext().getParameter(renderer.getContext().RENDERER)};
- window.captureCalibration=()=>{
-  const width=1920,height=1281;
-  built.setTime(0);camera.position.set(-.22,3.2,36.25);camera.lookAt(-.22,3.2,5);camera.fov=44;camera.aspect=width/height;camera.updateProjectionMatrix();
-  // Architectural shifted-lens calibration: vertical piers remain parallel as in the supplied photo.
-  camera.projectionMatrix.elements[9]=.637;camera.projectionMatrixInverse.copy(camera.projectionMatrix).invert();
-  renderer.setSize(width,height,false);pipeline.composer.setSize(width,height);renderer.shadowMap.needsUpdate=true;scene.updateMatrixWorld(true);glass.update(camera);pipeline.render();
-  const project=(x,y,z)=>{const p=new THREE.Vector3(x,y,z).project(camera);return [(p.x+1)*width/2,(1-p.y)*height/2];};
-  const landmarks={roofTop:project(0,SHUNDE.roofBand.fasciaTop,5),slit:project(0,SHUNDE.roofBand.windowCenter,5),porticoTop:project(0,SHUNDE.entrance.top,5),landing:project(0,SHUNDE.baseY,5),columnLeft:project(-SHUNDE.entrance.columnX,6,5.22),columnRight:project(SHUNDE.entrance.columnX,6,5.22)};
-  const data=renderer.domElement.toDataURL('image/png');
-  renderer.setSize(1920,1080,false);pipeline.composer.setSize(1920,1080);camera.aspect=1920/1080;renderAt(pending,true);
-  return {data,landmarks,size:[width,height],note:'Ratio calibration only; no surveyed dimensions'};
- };
+ const rearPose={position:[-9,4.2,-55],target:[-1,10.4,-14],fov:45};
+ const topPose={position:[0,100,-9.01],target:[0,0,-9],fov:46};
+ const rearQuarterPose={position:[-43,38,-65],target:[0,10,-8],fov:46};
+ const applyPose=(pose,width,height)=>{camera.up.set(0,1,0);camera.position.set(...pose.position);camera.lookAt(...pose.target);camera.fov=pose.fov;camera.aspect=width/height;camera.updateProjectionMatrix();if(pose.shift){camera.projectionMatrix.elements[9]=pose.shift;camera.projectionMatrixInverse.copy(camera.projectionMatrix).invert();}};
+ const draw=()=>{renderer.shadowMap.needsUpdate=true;scene.updateMatrixWorld(true);glass.update(camera);pipeline.render();};
+ function capturePose(pose,width,height,metadata=()=>({})){
+  const saved=camera.clone(),size=renderer.getSize(new THREE.Vector2()),positions=built.tiers.map(g=>g.position.clone());
+  try{
+   built.setTime(0);applyPose(pose,width,height);renderer.setSize(width,height,false);pipeline.composer.setSize(width,height);visibilityRevision++;draw();
+   return {data:renderer.domElement.toDataURL('image/png'),size:[width,height],pose,...metadata(),note:'Photo-constrained estimate; not surveyed'};
+  }finally{
+   built.tiers.forEach((g,i)=>g.position.copy(positions[i]));camera.copy(saved);renderer.setSize(size.x,size.y,false);pipeline.composer.setSize(size.x,size.y);visibilityRevision++;draw();
+  }
+ }
+ window.captureCalibration=()=>capturePose({position:[-.22,3.2,36.25],target:[-.22,3.2,5],fov:44,shift:.637},1920,1281,()=>{
+  const project=(x,y,z)=>{const p=new THREE.Vector3(x,y,z).project(camera);return [(p.x+1)*1920/2,(1-p.y)*1281/2];};
+  return {landmarks:{roofTop:project(0,SHUNDE.roofBand.fasciaTop,5),slit:project(0,SHUNDE.roofBand.windowCenter,5),porticoTop:project(0,SHUNDE.entrance.top,5),landing:project(0,SHUNDE.baseY,5),columnLeft:project(-SHUNDE.entrance.columnX,6,5.22),columnRight:project(SHUNDE.entrance.columnX,6,5.22)}};
+ });
+ window.captureRearCalibration=()=>capturePose(rearPose,1080,810);
+ window.captureTop=()=>capturePose(topPose,1600,1200);
+ window.captureRearQuarter=()=>capturePose(rearQuarterPose,1600,1200);
+ window.__getCaptureState=()=>({pending,lastTime:engine.lastTime,size:renderer.getSize(new THREE.Vector2()).toArray(),position:camera.position.toArray(),quaternion:camera.quaternion.toArray(),projection:camera.projectionMatrix.toArray(),tiers:built.tiers.map(g=>g.position.toArray())});
  window.__glassReflectionStats=glass.stats;
  window.setGlassReflectionEnabled=value=>{glass.setEnabled(value);renderAt(pending,true);};
  window.__getExplosionState=()=>({amount:assemblyAt(pending),tiers:built.tiers.map(g=>({name:g.name,y:g.position.y})),porticoY:built.portico.position.y});
@@ -78,7 +88,9 @@ async function init(){
   const controls=new OrbitControls(camera,renderer.domElement);controls.target.set(...shundeCameraAt(0).target);controls.minDistance=8;controls.maxDistance=150;controls.maxPolarAngle=Math.PI/2-.01;controls.update();
   controls.addEventListener('change',()=>{glass.update(camera);pipeline.render();});
   document.querySelectorAll('[data-shot]').forEach(button=>button.onclick=()=>{renderAt(Number(button.dataset.shot),true);controls.target.set(...shundeCameraAt(Number(button.dataset.shot)).target);controls.update();});
-  document.getElementById('arc-toggle').onclick=()=>{built.arc.visible=!built.arc.visible;visibilityRevision++;renderAt(pending,true);};
+  const show=pose=>{renderAt(0,true);applyPose(pose,1920,1080);controls.target.set(...pose.target);controls.update();draw();};
+  document.getElementById('rear-view').onclick=()=>show(rearPose);
+  document.getElementById('top-view').onclick=()=>show(topPose);
   document.getElementById('download').onclick=async()=>{const b64=await window.exportGLB(),url=URL.createObjectURL(new Blob([Uint8Array.from(atob(b64),c=>c.charCodeAt(0))],{type:'model/gltf-binary'}));const a=document.createElement('a');a.href=url;a.download='Shunde3D.glb';a.click();URL.revokeObjectURL(url);};
  }
  window.__sceneReady=true;

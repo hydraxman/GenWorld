@@ -40,7 +40,7 @@ test('V2 observable window-band proportions drive built geometry rather than a f
  assert.equal(SHUNDE.roofBand?.kind,'recessed-narrow-strip');
  assert.ok(SHUNDE.roofBand.windowHeight<SHUNDE.facadeBands[1].windowHeight*.35);
  const m=model();assert.deepEqual(m.stats.facadeBands,SHUNDE.facadeBands);
- assert.equal(m.arc.visible,false);
+ assert.equal(m.arc.visible,true);assert.equal(m.arc.userData.orientationStatus,'user-confirmed-rear');assert.equal(m.stats.rearRectangleRemoved,true);
  assert.ok(m.stats.facadePierWidth>1);
  assert.ok(m.stats.openCasements>0);
  assert.equal(m.tiers.length,6);
