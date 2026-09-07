@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import * as THREE from 'three';
 import {createShundeModel} from './model.js';
 import {SHUNDE,shundeCameraAt} from './spec.js';
+import {REAR} from './rear.js';
 import {SHUNDE as V2,shundeCameraAt as cameraV2} from './fixtures/v2-spec.js';
 const build=()=>createShundeModel(THREE,{textured:false,foliage:false});
 const groups=(m,role)=>{const a=[];m.building.traverse(o=>{if(o.userData.role===role)a.push(o);});return a;};
@@ -17,18 +18,18 @@ test('confirmed rear curve is geometry, not a disabled optional hypothesis',()=>
  assert.equal(m.stats.rearRectangleRemoved,true);
 });
 test('rear corners are cut through walls, roof, floors and foundation',()=>{
- const m=build();for(const x of [-30,30])assert.equal(down(m.building,x,-18).length,0,'old box corner must be empty at every height');
- assert.ok(down(m.building,-5,-21).length,'cylinder belongs to continuous footprint');
+ const m=build();for(const [x,z] of [[-30,-28],[-5,-40]])assert.equal(down(m.building,x,z).length,0,'outside the revised wedge must be empty at every height');
+ assert.ok(down(m.building,REAR.center[0],REAR.center[1]-6).length,'cylinder belongs to continuous footprint');
  for(const tier of [m.tiers[1],m.tiers[2]])assert.equal(down(tier,0,4.995).length,0,'hall opening must reach the front edge without a thin crossbeam');
  for(const role of ['footprint-slab','footprint-roof','footprint-foundation']){
-  const g=groups(m,role);assert.ok(g.length,role);for(const o of g)assert.equal(down(o,30,-18).length,0);
+  const g=groups(m,role);assert.ok(g.length,role);for(const o of g)assert.equal(down(o,-30,-28).length,0);
  }
 });
 test('curved solid piers have varied normals and narrow windows are real holes',()=>{
  const m=build(),walls=groups(m,'rear-curved-wall'),normals=new Set();
  for(const g of walls)g.traverse(o=>{if(o.isMesh){const n=o.geometry.attributes.normal;for(let i=0;i<n.count;i++)if(Math.abs(n.getY(i))<.01)normals.add(`${n.getX(i).toFixed(2)},${n.getZ(i).toFixed(2)}`);}});
  assert.ok(normals.size>35,'real curved surfaces');
- const ray=a=>new THREE.Raycaster(new THREE.Vector3(-5+18*Math.cos(a),5.7,-15+18*Math.sin(a)),new THREE.Vector3(-Math.cos(a),0,-Math.sin(a))).intersectObject(m.building,true);
+ const ray=a=>new THREE.Raycaster(new THREE.Vector3(REAR.center[0]+18*Math.cos(a),5.7,REAR.center[1]+18*Math.sin(a)),new THREE.Vector3(-Math.cos(a),0,-Math.sin(a))).intersectObject(m.building,true);
  const glazing=ray(-Math.PI/2+.035);assert.ok(glazing.length);assert.match(glazing[0].object.material.name,/glass/i,'opening not painted over solid cylinder');
  const pier=ray(-Math.PI/2+.20);assert.ok(pier.length);assert.match(pier[0].object.material.name,/ceramic/i);
 });

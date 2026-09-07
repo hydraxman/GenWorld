@@ -51,12 +51,25 @@ try{
  for(const [fn,file,size] of [['captureRearCalibration','rear-calibrated.png',[1080,810]],['captureTop','top.png',[1600,1200]],['captureRearQuarter','rear-quarter.png',[1600,1200]]]){
   await page.evaluate(()=>window.renderAt(40,true));const before=await page.evaluate(()=>window.__getCaptureState());
   const cap=await page.evaluate(fn=>window[fn](),fn);assert.deepEqual(cap.size,size);
+  if(fn==='captureTop'){
+   assert.equal(cap.projectionType,'OrthographicCamera','top evidence must be genuinely orthographic');
+   assert.equal(cap.plan.frontRightDot,0);assert.ok(cap.plan.depthToWidth>.7);
+   assert.ok(Math.abs(cap.plan.screenDot)<1e-8,'projected right angle must remain 90 degrees');
+  }
   const after=await page.evaluate(()=>window.__getCaptureState());assert.deepEqual(after,before,'capture must restore exploded camera and time');
   await fs.writeFile(path.join(root,'qa/frames',file),Buffer.from(cap.data.split(',')[1],'base64'));delete cap.data;report.rearCaptures.push({file,...cap,restored:true});
  }
  const saved=await page.evaluate(()=>window.__getCaptureState());await page.evaluate(()=>window.captureCalibration());assert.deepEqual(await page.evaluate(()=>window.__getCaptureState()),saved);report.frontCaptureRestored=true;
  report.errors=errors;report.warnings=warnings;
- const viewer=await browser.newPage();await viewer.setViewport({width:1366,height:900,deviceScaleFactor:1});await viewer.goto(url.replace('index.html','viewer.html'),{waitUntil:'networkidle0'});await viewer.waitForFunction(()=>window.__sceneReady,{timeout:180000});await viewer.click('[data-shot="40"]');report.viewer={exploded:await viewer.evaluate(()=>window.__getExplosionState())};assert.equal(report.viewer.exploded.amount,1);await viewer.screenshot({path:path.join(root,'qa/frames/viewer-exploded.jpg'),type:'jpeg',quality:92});await viewer.click('[data-shot="46"]');assert.equal((await viewer.evaluate(()=>window.__getExplosionState())).amount,0);await viewer.click('#rear-view');await viewer.click('#top-view');report.viewer.controlsPassed=true;await viewer.close();
+ const viewer=await browser.newPage();await viewer.setViewport({width:1366,height:900,deviceScaleFactor:1});await viewer.goto(url.replace('index.html','viewer.html'),{waitUntil:'networkidle0'});await viewer.waitForFunction(()=>window.__sceneReady,{timeout:180000});await viewer.click('[data-shot="40"]');report.viewer={exploded:await viewer.evaluate(()=>window.__getExplosionState())};assert.equal(report.viewer.exploded.amount,1);await viewer.screenshot({path:path.join(root,'qa/frames/viewer-exploded.jpg'),type:'jpeg',quality:92});await viewer.click('[data-shot="46"]');assert.equal((await viewer.evaluate(()=>window.__getExplosionState())).amount,0);report.viewer.exportRestoration=[];
+ for(const selector of ['#rear-view','#top-view']){
+  await viewer.click(selector);const before=await viewer.evaluate(()=>window.__getCaptureState()),pixelsBefore=hash(await viewer.screenshot({type:'png'}));
+  await viewer.evaluate(async()=>{await window.exportGLB();});
+  const after=await viewer.evaluate(()=>window.__getCaptureState()),pixelsAfter=hash(await viewer.screenshot({type:'png'}));
+  report.viewer.exportRestoration.push({selector,statePass:JSON.stringify(before)===JSON.stringify(after),pixelsBefore,pixelsAfter,pixelPass:pixelsBefore===pixelsAfter});
+  assert.deepEqual(after,before,'GLB export must preserve the selected viewer camera');assert.equal(pixelsAfter,pixelsBefore,'GLB export must preserve the viewer image');
+ }
+ report.viewer.controlsPassed=true;await viewer.close();
  assert.equal(errors.length,0);report.pass=true;
 } catch(e){report.error=String(e.stack||e);report.pass=false;process.exitCode=1;}finally{
  await fs.writeFile(path.join(root,process.argv.includes('--quick')?'qa/quick-check.json':'qa/browser-check.json'),JSON.stringify(report,null,2));console.log(JSON.stringify({...report,gpu:report.gpu?.devices,glb:report.glb?{...report.glb,namedParts:undefined}:undefined},null,2));await browser.close();await new Promise(r=>server.close(r));

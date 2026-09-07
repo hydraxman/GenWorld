@@ -7,6 +7,7 @@ import {createLightingPipeline} from '../../../shared/illumination.js';
 import {installGlassReflections} from '../../../shared/glass-reflections.js';
 import {createShundeModel} from './model.js';
 import {shundeCameraAt,assemblyAt,SHUNDE} from './spec.js';
+import {mainFootprint,REAR} from './rear.js';
 
 let engine,pending=0,visibilityRevision=0;
 window.renderAt=renderAt;
@@ -33,9 +34,9 @@ async function init(){
  engine={renderer,scene,camera,built,pipeline,glass,lastTime:null};renderAt(pending,true);renderer.shadowMap.autoUpdate=false;
  let meshes=0,triangles=0;built.group.traverse(o=>{if(o.isMesh){meshes++;triangles+=(o.geometry.index?.count||o.geometry.attributes.position.count)/3*(o.isInstancedMesh?o.count:1);}});
  window.__modelStats={...built.stats,meshBatches:meshes,triangles,buildingBounds:reportBounds(built.building),sceneBounds:reportBounds(built.group),renderer:renderer.getContext().getParameter(renderer.getContext().RENDERER)};
- const rearPose={position:[3,4.2,-62],target:[2,10.4,-14],fov:45};
- const topPose={position:[0,100,-9.01],target:[0,0,-9],fov:46};
- const rearQuarterPose={position:[-43,38,-65],target:[0,10,-8],fov:46};
+ const rearPose={position:[-55,4.2,-51],target:[-24,10.4,-14],fov:45};
+ const topPose={position:[0,115,-24.01],target:[0,0,-24],fov:46};
+ const rearQuarterPose={position:[-74,66,-103],target:[0,9,-23],fov:46};
  const applyPose=(pose,width,height)=>{camera.up.set(0,1,0);camera.position.set(...pose.position);camera.lookAt(...pose.target);camera.fov=pose.fov;camera.aspect=width/height;camera.updateProjectionMatrix();if(pose.shift){camera.projectionMatrix.elements[9]=pose.shift;camera.projectionMatrixInverse.copy(camera.projectionMatrix).invert();}};
  const draw=()=>{renderer.shadowMap.needsUpdate=true;scene.updateMatrixWorld(true);glass.update(camera);pipeline.render();};
  function capturePose(pose,width,height,metadata=()=>({})){
@@ -52,7 +53,23 @@ async function init(){
   return {landmarks:{roofTop:project(0,SHUNDE.roofBand.fasciaTop,5),slit:project(0,SHUNDE.roofBand.windowCenter,5),porticoTop:project(0,SHUNDE.entrance.top,5),landing:project(0,SHUNDE.baseY,5),columnLeft:project(-SHUNDE.entrance.columnX,6,5.22),columnRight:project(SHUNDE.entrance.columnX,6,5.22)}};
  });
  window.captureRearCalibration=()=>capturePose(rearPose,1080,810);
- window.captureTop=()=>capturePose(topPose,1600,1200);
+ // Independent real orthographic camera/pipeline, not a high perspective pose.
+ window.captureTop=()=>{
+  const width=1600,height=1200,size=renderer.getSize(new THREE.Vector2()),positions=built.tiers.map(g=>g.position.clone());
+  const topCamera=new THREE.OrthographicCamera(-56,56,42,-42,.15,400);
+  topCamera.position.set(0,110,-24);topCamera.up.set(0,0,-1);topCamera.lookAt(0,0,-24);topCamera.updateMatrixWorld(true);
+  const topPipeline=createLightingPipeline(renderer,scene,topCamera);
+  try{
+   built.setTime(0);renderer.setSize(width,height,false);topPipeline.composer.setSize(width,height);topPipeline.ao.setSize(width/2,height/2);
+   visibilityRevision++;renderer.shadowMap.needsUpdate=true;scene.updateMatrixWorld(true);glass.update(topCamera);topPipeline.render();
+   const project=p=>{const v=new THREE.Vector3(p[0],0,p[1]).project(topCamera);return [(v.x+1)*width/2,(1-v.y)*height/2];};
+   const [a,b,c]=mainFootprint.slice(0,3).map(project),u=[a[0]-b[0],a[1]-b[1]],v=[c[0]-b[0],c[1]-b[1]];
+   return {data:renderer.domElement.toDataURL('image/png'),size:[width,height],projectionType:topCamera.type,pose:{position:topCamera.position.toArray(),target:[0,0,-24],up:[0,0,-1],frustum:[-56,56,42,-42]},plan:{frontRightDot:Math.abs((mainFootprint[0][0]-mainFootprint[1][0])*(mainFootprint[2][0]-mainFootprint[1][0])),screenDot:u[0]*v[0]+u[1]*v[1],depthToWidth:REAR.rightDepth/REAR.frontWidth,frontCorners:[a,b],rearRight:project([33.28,-53]),cylinder:project(REAR.center),parameters:REAR},note:'True orthographic plan; front at bottom, +X at right. Dimensions estimated, not surveyed.'};
+  }finally{
+   topPipeline.composer.passes.forEach(pass=>pass.dispose?.());topPipeline.composer.dispose();
+   built.tiers.forEach((g,i)=>g.position.copy(positions[i]));renderer.setSize(size.x,size.y,false);visibilityRevision++;draw();
+  }
+ };
  window.captureRearQuarter=()=>capturePose(rearQuarterPose,1600,1200);
  window.__getCaptureState=()=>({pending,lastTime:engine.lastTime,size:renderer.getSize(new THREE.Vector2()).toArray(),position:camera.position.toArray(),quaternion:camera.quaternion.toArray(),projection:camera.projectionMatrix.toArray(),tiers:built.tiers.map(g=>g.position.toArray())});
  window.__glassReflectionStats=glass.stats;
@@ -63,7 +80,7 @@ async function init(){
   return {overrideSkipped:glass.stats.capturePasses===before};
  };
  window.exportGLB=async({campus=true}={})=>{
-  const oldTime=pending;built.setTime(0);const restore=glass.beginExport();let buffer;
+  const oldTime=pending,savedCamera=camera.clone();built.setTime(0);const restore=glass.beginExport();let buffer;
   const correctedTextures=[];const clonedMaterials=[],clonedGeometries=[];
   try{
    const root=(campus?built.group:built.building).clone(true);root.name=campus?'Shunde Hall with illustrative campus — estimated dimensions':'Shunde Hall architecture — estimated dimensions';
@@ -75,7 +92,7 @@ async function init(){
    // Explicit tangents avoid GLTFLoader's derivative-tangent Y correction and preserve the baked normal convention.
    root.traverse(o=>{if(o.isMesh&&o.material.normalMap){o.geometry=o.geometry.clone();o.geometry.computeTangents();clonedGeometries.push(o.geometry);}});
    root.updateMatrixWorld(true);buffer=await new GLTFExporter().parseAsync(root,{binary:true,onlyVisible:true,maxTextureSize:1024,includeCustomExtensions:true});
-  }finally{restore();built.setTime(oldTime);for(const t of correctedTextures)t.dispose();for(const m of clonedMaterials)m.dispose();for(const g of clonedGeometries)g.dispose();renderAt(oldTime,true);}
+  }finally{restore();built.setTime(oldTime);for(const t of correctedTextures)t.dispose();for(const m of clonedMaterials)m.dispose();for(const g of clonedGeometries)g.dispose();camera.copy(savedCamera);draw();}
   const parsed=await new GLTFLoader().parseAsync(buffer,'');let meshes=0,instances=0;const textures=new Set(),namedParts=[];let normalYPositive=true;
   parsed.scene.traverse(o=>{if(o.name)namedParts.push(o.name);if(o.isMesh){meshes++;if(o.isInstancedMesh)instances+=o.count;for(const key of ['map','normalMap','roughnessMap'])if(o.material[key])textures.add(o.material[key].uuid);normalYPositive&&=!o.material.normalMap||o.material.normalScale.y>=0;}});
   const view=new DataView(buffer),jsonLength=view.getUint32(12,true),manifest=JSON.parse(new TextDecoder().decode(new Uint8Array(buffer,20,jsonLength)));

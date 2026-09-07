@@ -1,11 +1,17 @@
 // Photo-confirmed rear identity; all coordinates below remain estimates, not a survey.
-export const REAR=Object.freeze({center:[-5,-15],radius:6.4,lowRoof:14.8,orientationStatus:'user-confirmed-rear'});
-const arcPoints=(radius,a,b,n=64)=>Array.from({length:n+1},(_,i)=>{const t=a+(b-a)*i/n;return [-5+radius*Math.cos(t),-15+radius*Math.sin(t)];});
-const rearArc=arcPoints(6.4,0,-Math.PI);
-export const mainFootprint=[[-33.28,5],[33.28,5],[32,-1],[1.4,-9],...rearArc,[-27,-9]];
-// Screen-left in the rear photo is world +X: one planar tall-hall facade.
-const hallLine=Array.from({length:9},(_,i)=>{const t=i/8;return [28+(1.4-28)*t,-6+(-15+6)*t];});
-export const lowFootprint=[[1.4,-9],[32,-1],[28,-6],...hallLine.slice(1)];
+export const REAR=Object.freeze({center:[-27.28,-14],radius:6.4,lowRoof:14.8,frontWidth:66.56,rightDepth:58,mainRightDepth:52,orientationStatus:'user-confirmed-rear',planStatus:'user-confirmed-right-angle-wedge',dimensionsStatus:'sketch-proportioned-not-surveyed'});
+const arcPoints=(radius,a,b,n=64)=>Array.from({length:n+1},(_,i)=>{const t=a+(b-a)*i/n;return [REAR.center[0]+radius*Math.cos(t),REAR.center[1]+radius*Math.sin(t)];});
+const rearArc=arcPoints(REAR.radius,0,-Math.PI);
+// World +X is the long perpendicular side; -Z is behind the z=5 frontage.
+// A 6-unit recessed high boundary leaves a lower, open-height glazed strip.
+const frontLeft=[-33.28,5],frontRight=[33.28,5],innerTip=[33.28,-47],outerTip=[33.28,-53];
+const circleJoin=rearArc[0],innerJoin=[circleJoin[0],circleJoin[1]+6];
+export const mainFootprint=[frontLeft,frontRight,innerTip,innerJoin,...rearArc];
+export const mainEdges=[[frontLeft,rearArc.at(-1)],[circleJoin,innerJoin],[innerJoin,innerTip],[innerTip,frontRight]];
+// Screen-left in the rear photograph is world +X along this SINGLE diagonal.
+export const hallLine=Array.from({length:9},(_,i)=>{const t=i/8;return [outerTip[0]+(circleJoin[0]-outerTip[0])*t,outerTip[1]+(circleJoin[1]-outerTip[1])*t];});
+export const lowFootprint=[innerJoin,innerTip,outerTip,...hallLine.slice(1)];
+export const hallReturn=[innerTip,outerTip];
 
 export function addRear(THREE,B,{part,tiers,roof,upper,portico,arc,campus,S,materials}){
  const {tile,concrete,limestone,glass,frame,spandrel,paving}=materials,{box,cylinder}=B;
@@ -47,7 +53,7 @@ export function addRear(THREE,B,{part,tiers,roof,upper,portico,arc,campus,S,mate
    sector(g,previous,0,y,top,tile);
   }
   // Angled side/back planes use the polygon boundaries, not the retired rectangular box.
-  const edges=[[[-33.28,5],[-27,-9]],[[-27,-9],[-11.4,-15]],[[1.4,-15],[1.4,-9]],[[1.4,-9],[32,-1]],[[32,-1],[33.28,5]]];
+  const edges=mainEdges;
   const side=part('Slanted rear and side planes '+l,tiers[l],{role:'rear-diagonal-wall'});
   for(const [a,bp] of edges){
    const dx=bp[0]-a[0],dz=bp[1]-a[1],length=Math.hypot(dx,dz),angle=-Math.atan2(dz,dx);
@@ -69,11 +75,11 @@ export function addRear(THREE,B,{part,tiers,roof,upper,portico,arc,campus,S,mate
   }
  }
  const supports=part('Rear cylinder raised base supports',arc,{role:'rear-supports'});
- for(const a of [-2.7,-1.95,-1.17,-.42]){const x=-5+6.02*Math.cos(a),z=-15+6.02*Math.sin(a);cylinder(supports,[x,.25,z],[x,3.9,z],.38,.38,limestone,32);}
+ for(const a of [-2.7,-1.95,-1.17,-.42]){const x=REAR.center[0]+6.02*Math.cos(a),z=REAR.center[1]+6.02*Math.sin(a);cylinder(supports,[x,.25,z],[x,3.9,z],.38,.38,limestone,32);}
  solid(upper,'Nonrectangular clerestory floor',mainFootprint,19.0,19.2,concrete,'footprint-slab');
  const parapet=part('High unbroken rear-cylinder parapet',roof,{role:'rear-curved-wall'});sector(parapet,-Math.PI,0,19.2,22.1,tile);
  // Solid high fascia along angled boundaries; no full-width rear rectangular parapet.
- for(const [a,b] of [[[-33.28,5],[-27,-9]],[[-27,-9],[-11.4,-15]],[[1.4,-15],[1.4,-9]],[[1.4,-9],[32,-1]],[[32,-1],[33.28,5]]]){
+ for(const [a,b] of mainEdges){
   const dx=b[0]-a[0],dz=b[1]-a[1];box(roof,'angled roof fascia',(a[0]+b[0])/2,20.65,(a[1]+b[1])/2,Math.hypot(dx,dz),2.9,.38,tile,-Math.atan2(dz,dx));
  }
  solid(roof,'Nonrectangular roof cap',mainFootprint,21.92,22.1,limestone,'footprint-roof');
@@ -83,8 +89,11 @@ export function addRear(THREE,B,{part,tiers,roof,upper,portico,arc,campus,S,mate
  const hallBase=S.baseY,hallTop=S.facadeBands[2].base;
  const hall=part('Straight double-height glazed rear hall',tiers[0],{role:'rear-straight-tall-hall',intermediateSlabs:0,photoSide:'left',heightStatus:'estimated-from-photo'});
  const gallery=part('Straight upper hall window band',tiers[2],{role:'rear-straight-upper-wing'});
- for(let i=0;i<hallLine.length-1;i++){
-  const a=hallLine[i],b=hallLine[i+1],dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz),rotation=-Math.atan2(dz,dx),x=(a[0]+b[0])/2,z=(a[1]+b[1])/2;
+ // The short outer return is an inferred glazed enclosure, not an intentional opening.
+ hall.userData.endReturnStatus='inferred-glazed-enclosure';
+ const hallEdges=[...hallLine.slice(1).map((b,i)=>[hallLine[i],b]),hallReturn];
+ for(const [a,b] of hallEdges){
+  const dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz),rotation=-Math.atan2(dz,dx),x=(a[0]+b[0])/2,z=(a[1]+b[1])/2;
   box(hall,'straight hall low sill',x,hallBase+.10,z,length+.01,.20,.40,tile,rotation);
   box(hall,'straight hall head beam',x,hallTop-.22,z,length+.01,.44,.48,tile,rotation);
   box(hall,'continuous floor-to-ceiling glazing',x,(hallBase+hallTop)/2-.12,z+.06,length-.10,hallTop-hallBase-.68,.08,glass,rotation);B.stats.windows++;
@@ -105,7 +114,7 @@ export function addRear(THREE,B,{part,tiers,roof,upper,portico,arc,campus,S,mate
  box(pergola,'single straight open roof lintel',(hallLine[0][0]+end[0])/2,17,(hallLine[0][1]+end[1])/2,length,.42,.32,tile,rotation);
  B.stats.leftRearHall={facade:'straight',glazing:'double-height',intermediateSlabs:0};
  // Flush walking route on continuous earth; no raised rectangular display plinth.
- const path=Array.from({length:65},(_,i)=>{const t=i/64,x=-46+92*t;return [x,-31+5*Math.sin(t*Math.PI*2)];});
+ const path=Array.from({length:65},(_,i)=>{const t=i/64,x=-46+92*t;return [x,-64+5*Math.sin(t*Math.PI*2)];});
  const band=[...path.map(([x,z])=>[x,z-1]),...path.toReversed().map(([x,z])=>[x,z+1])];
  solid(campus,'Flush curved rear garden walk',band,-.05,.005,paving,'rear-campus-path');
  B.stats.rearRectangleRemoved=true;B.stats.rearSlots=slots.length;B.stats.rearEvidence='user-confirmed-rear-photo';B.stats.rearParameters=REAR;

@@ -1,7 +1,7 @@
 export const DURATION=46;
 // Photographic calibration, not a survey: native reference y≈1164/1012/796/574/241/88.
 // Chosen working scale only; depth and unseen elevations remain hypotheses.
-export const SHUNDE=Object.freeze({name:'舜德楼',version:3,width:66.56,depth:26.4,height:22.5,frontZ:5,baseY:.9,
+export const SHUNDE=Object.freeze({name:'舜德楼',version:3,width:66.56,depth:58,height:22.5,frontZ:5,baseY:.9,
  dimensionsStatus:'estimated-from-photos',interiorStatus:'inferred-not-surveyed',
  facadeBands:[
   {name:'lowest observable window band',base:.9,height:3.0,windowCenter:2.85,windowHeight:1.30},
@@ -23,7 +23,7 @@ export function shundeCameraAt(seconds){
  else if(t<16){q=ease((t-8)/8);a=[0,4.0,46];b=[2,4.3,41];target=[0,10.7,4];fov=45;}
  else if(t<24){q=ease((t-16)/8);a=[25,10,63];b=[31,12,59];target=[0,10,0];fov=45;}
  else if(t<31){q=ease((t-24)/7);a=[-3,4.2,29];b=[1,4.5,28];target=[0,7.1,3.8];fov=46;}
- else if(t<36){q=ease((t-31)/5);a=[-28,11,-71];b=[-20,10,-65];target=[-2,10,-10];fov=44;}
- else{return {position:[-43,48,-85],target:[0,20,-9],fov:45};}
+ else if(t<36){q=ease((t-31)/5);a=[-69,15,-80];b=[-61,12,-72];target=[-13,10,-24];fov=44;}
+ else{return {position:[-74,70,-108],target:[0,21,-24],fov:45};}
  return {position:mix(a,b,q),target,fov};
 }
