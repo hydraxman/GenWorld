@@ -1,5 +1,6 @@
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
-import {createPBRTools} from '../../../shared/pbr.js';
+import {createPBRTools} from './pbr.js';
+export {squareGridAt} from './pbr.js';
 export function createBuilder(THREE,seed=27531){
  const stats={textures:0,windows:0,trees:0,leafInstances:0,batches:0};
  const materials={},textureWorld=new Map();

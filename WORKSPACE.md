@@ -1,41 +1,35 @@
-# 两栋楼共用工作目录
+# 建筑项目工作区
 
-工程根为桌面 `Courtyard3D-v6`，不以 `.hermes/artifacts` 为项目入口。根目录原 `src/`、`index.html` 和既有视频保留。
+工程根：桌面 `Courtyard3D-v6`（沿用已经找到的文件夹名称，不再新建版本编号目录）。
 
-## 目录
+## 当前入口
 
-- `shared/`：两楼共用叶片轮廓和CC0纹理、PBR、光照、环境及局部场景玻璃反射；契约见 `shared/API.md`。
-- `projects/courtyard/`：旧楼反射更新版，原建筑几何及相机保持一致。
-- `projects/shunde/`：舜德楼独立项目，模型及视频已完成；`references/analysis.md` 记录照片证据和缺失视角。
+- `projects/courtyard/`：庭院旧楼的当前反射更新版。
+- `projects/shunde/`：舜德楼唯一工作目录，最新照片修订已覆盖到这里。
+- `shared/`：可共用的渲染、光照、反射与叶片素材。
 
-## 旧楼更新版
+`projects/shunde-v2/` 已移除。后续修改直接更新对应项目，历史通过 Git 提交保存，不通过复制文件夹保存。
 
-在本工程根运行：
+## 本地 Git
 
-```sh
-npm --prefix projects/courtyard run build
-node --test shared/*.test.js projects/courtyard/src/*.test.js projects/shunde/src/*.test.js
-python3 -m http.server 8773 --bind 127.0.0.1
-```
+仓库已在本工程根初始化，分支为 `main`。首个提交保存整合前源码基线，后续提交记录舜德楼修订与目录归并。未配置 remote，未创建 GitHub 仓库，未推送。
 
-打开 `http://127.0.0.1:8773/projects/courtyard/index.html`。
+模型参考图、视频/GLB、运行截图/报告、投递回执、依赖及缓存均留在本地并被 `.gitignore` 排除。用于回归校验的少量哈希基线 JSON 例外，纳入版本控制。
 
-完整反射A/B、非顺序seek与GLB导出验证（服务器先启动）：
+## 构建和验证
+
+从工程根执行：
 
 ```sh
-cd projects/courtyard
-node qa-glass.mjs --export
+npm test
+npm run build
+npm run dev
 ```
 
-可用 `QA_URL` 覆盖页面地址、`CHROME_PATH` 指定Chrome路径。测试/截图报告在 `projects/courtyard/qa/glass/`。
+- `http://127.0.0.1:8773/projects/courtyard/index.html`
+- `http://127.0.0.1:8773/projects/shunde/index.html`
+- `http://127.0.0.1:8773/projects/shunde/viewer.html`
 
-## 状态与边界
+目录归并后：庭院26项、舜德楼16项测试通过，两楼构建通过。舜德楼最新修订仍需在唯一目录完成最终浏览器/GLB及成片检查；先前发送的舜德楼视频是修订前结果，不能冒充当前最新成片。
 
-- 已在桌面工程根合跑33项测试通过；两楼均成功构建，并通过HyperFrames严格浏览器检查。
-- 旧楼46秒、1920×1080、30fps反射更新视频已渲染完成，1380帧；母版和飞书版完整解码通过，抽帧检查通过。
-- 母版：`projects/courtyard/output/Courtyard-reflections-46s.mp4`；飞书版：`projects/courtyard/output/Courtyard-reflections-46s-feishu.mp4`（19,679,028字节，同分辨率）。
-- 飞书版已发送当前请求者私聊，消息回读成功，回执 `projects/courtyard/output/feishu-video-receipt.json`；原生视频仅验证消息存在，未下载远端视频逐字节比对。
-- 舜德楼母版 `projects/shunde/output/Shunde3D.mp4`、飞书版 `projects/shunde/output/Shunde3D-feishu.mp4` 已完成；46秒、1920×1080、30fps、1380帧，均完整解码通过。飞书版已发送请求者私聊并回读消息，回执在同目录 `feishu-video-receipt.json`。
-- 舜德楼模型 `projects/shunde/output/Shunde3D.glb`；通过上述8773服务可访问 `/projects/shunde/viewer.html` 交互查看。
-- 玻璃使用局部CubeCamera采集真实场景，但单探针有视差近似；GLB仅保留PBR fallback，不包含动态反射渲染管线。
-- 舜德楼米制尺寸、隐藏立面、圆弧体量与主立面的接合、室内布局没有测绘依据，不宣称实测。公开参考图未发现开放许可，不作为可自由再分发贴图。
+详细照片依据、纹理和几何边界见 `projects/shunde/README.md` 与 `DESIGN.md`。实际可见窗组不等于已经查证的法定楼层；隐藏立面、屋面、内部构造与米制尺寸仍为估计。

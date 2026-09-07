@@ -2,13 +2,13 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
 import {createShundeModel} from './model.js';
-import {assemblyAt} from './spec.js';
+import {assemblyAt,SHUNDE} from './spec.js';
 const build=()=>createShundeModel(THREE,{textured:false,foliage:false});
 test('photo identity: 2 tall round columns, stone portal, repetitive glazing, not photo planes',()=>{
  const m=build();assert.equal(m.stats.porticoColumns,2);assert.equal(m.stats.portals,1);assert.ok(m.stats.windows>100);
  assert.equal(m.group.userData.dimensionsStatus,'estimated-from-photos');
  const glasses=new Set();m.building.traverse(o=>{if(o.isMesh&&/glass/i.test(o.material.name))glasses.add(o.material.uuid);});assert.equal(glasses.size,1);
- const b=new THREE.Box3().setFromObject(m.building);assert.ok(b.max.x-b.min.x>=62);assert.ok(b.max.y>20);assert.ok(b.max.z-b.min.z>=30);
+ const b=new THREE.Box3().setFromObject(m.building);assert.ok(b.max.x-b.min.x>=62);assert.ok(b.max.y>20);assert.ok(b.max.z-b.min.z>=SHUNDE.depth);
 });
 test('finite real geometry and bounded static draw calls',()=>{
  const m=build();let count=0;m.group.traverse(o=>{if(o.isMesh){count++;const p=o.geometry.attributes.position;assert.ok(p.count>0);assert.ok(Array.from(p.array).every(Number.isFinite));}});assert.ok(count>20&&count<170);

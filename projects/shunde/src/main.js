@@ -2,12 +2,11 @@ import * as THREE from 'three';
 import {GLTFExporter} from 'three/addons/exporters/GLTFExporter.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
-import {makeEnvironment,addCampusLights} from '../../../shared/environment.js';
+import {makeEnvironment,addCampusLights,createReflectionGrove} from './environment.js';
 import {createLightingPipeline} from '../../../shared/illumination.js';
-import {loadLeafTextures} from '../../../shared/leaves.js';
 import {installGlassReflections} from '../../../shared/glass-reflections.js';
 import {createShundeModel} from './model.js';
-import {shundeCameraAt,assemblyAt} from './spec.js';
+import {shundeCameraAt,assemblyAt,SHUNDE} from './spec.js';
 
 let engine,pending=0,visibilityRevision=0;
 window.renderAt=renderAt;
@@ -27,13 +26,25 @@ async function init(){
  const renderer=new THREE.WebGLRenderer({canvas:document.getElementById('scene'),antialias:true,preserveDrawingBuffer:true,powerPreference:'high-performance'});
  renderer.setPixelRatio(1);renderer.setSize(1920,1080,false);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.03;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
  const scene=new THREE.Scene(),env=makeEnvironment(THREE,renderer);scene.background=env.background;scene.environment=env.environment;scene.environmentIntensity=.75;scene.fog=new THREE.Fog('#d7dfd5',105,240);
- const camera=new THREE.PerspectiveCamera(44,1920/1080,.15,400);addCampusLights(THREE,scene);
- await loadLeafTextures(THREE);const built=createShundeModel(THREE);scene.add(built.group);scene.updateMatrixWorld(true);
+ const camera=new THREE.PerspectiveCamera(44,1920/1080,.15,400);addCampusLights(THREE,scene);scene.add(createReflectionGrove(THREE));
+ const signGlyphs=await new Promise((resolve,reject)=>{const image=new Image();image.onload=()=>resolve(image);image.onerror=reject;image.src='assets/name-glyphs.png';});const built=createShundeModel(THREE,{signGlyphs});scene.add(built.group);scene.updateMatrixWorld(true);
  const pipeline=createLightingPipeline(renderer,scene,camera);
- const glass=installGlassReflections(THREE,renderer,scene,built.group,{position:[0,7,9],resolution:256,intensity:1.75,roughness:.035,metalness:.75,getRevision:()=>`${assemblyAt(pending)}:${visibilityRevision}`});
+ const glass=installGlassReflections(THREE,renderer,scene,built.group,{position:[0,7,9],resolution:512,intensity:1.75,roughness:.015,metalness:.75,getRevision:()=>`${assemblyAt(pending)}:${visibilityRevision}`});
  engine={renderer,scene,camera,built,pipeline,glass,lastTime:null};renderAt(pending,true);renderer.shadowMap.autoUpdate=false;
  let meshes=0,triangles=0;built.group.traverse(o=>{if(o.isMesh){meshes++;triangles+=(o.geometry.index?.count||o.geometry.attributes.position.count)/3*(o.isInstancedMesh?o.count:1);}});
  window.__modelStats={...built.stats,meshBatches:meshes,triangles,buildingBounds:reportBounds(built.building),sceneBounds:reportBounds(built.group),renderer:renderer.getContext().getParameter(renderer.getContext().RENDERER)};
+ window.captureCalibration=()=>{
+  const width=1920,height=1281;
+  built.setTime(0);camera.position.set(-.22,3.2,36.25);camera.lookAt(-.22,3.2,5);camera.fov=44;camera.aspect=width/height;camera.updateProjectionMatrix();
+  // Architectural shifted-lens calibration: vertical piers remain parallel as in the supplied photo.
+  camera.projectionMatrix.elements[9]=.637;camera.projectionMatrixInverse.copy(camera.projectionMatrix).invert();
+  renderer.setSize(width,height,false);pipeline.composer.setSize(width,height);renderer.shadowMap.needsUpdate=true;scene.updateMatrixWorld(true);glass.update(camera);pipeline.render();
+  const project=(x,y,z)=>{const p=new THREE.Vector3(x,y,z).project(camera);return [(p.x+1)*width/2,(1-p.y)*height/2];};
+  const landmarks={roofTop:project(0,SHUNDE.roofBand.fasciaTop,5),slit:project(0,SHUNDE.roofBand.windowCenter,5),porticoTop:project(0,SHUNDE.entrance.top,5),landing:project(0,SHUNDE.baseY,5),columnLeft:project(-SHUNDE.entrance.columnX,6,5.22),columnRight:project(SHUNDE.entrance.columnX,6,5.22)};
+  const data=renderer.domElement.toDataURL('image/png');
+  renderer.setSize(1920,1080,false);pipeline.composer.setSize(1920,1080);camera.aspect=1920/1080;renderAt(pending,true);
+  return {data,landmarks,size:[width,height],note:'Ratio calibration only; no surveyed dimensions'};
+ };
  window.__glassReflectionStats=glass.stats;
  window.setGlassReflectionEnabled=value=>{glass.setEnabled(value);renderAt(pending,true);};
  window.__getExplosionState=()=>({amount:assemblyAt(pending),tiers:built.tiers.map(g=>({name:g.name,y:g.position.y})),porticoY:built.portico.position.y});
@@ -58,7 +69,7 @@ async function init(){
   const parsed=await new GLTFLoader().parseAsync(buffer,'');let meshes=0,instances=0;const textures=new Set(),namedParts=[];let normalYPositive=true;
   parsed.scene.traverse(o=>{if(o.name)namedParts.push(o.name);if(o.isMesh){meshes++;if(o.isInstancedMesh)instances+=o.count;for(const key of ['map','normalMap','roughnessMap'])if(o.material[key])textures.add(o.material[key].uuid);normalYPositive&&=!o.material.normalMap||o.material.normalScale.y>=0;}});
   const view=new DataView(buffer),jsonLength=view.getUint32(12,true),manifest=JSON.parse(new TextDecoder().decode(new Uint8Array(buffer,20,jsonLength)));
-  window.__glbVerified={bytes:buffer.byteLength,meshes,instances,textures:textures.size,bounds:reportBounds(parsed.scene),normalYPositive,extensionsUsed:manifest.extensionsUsed||[],images:manifest.images?.length||0,materials:manifest.materials?.length||0,namedParts,sourceAssemblyRestored:built.tiers.every((g,i)=>g.position.y===assemblyAt(oldTime)*i*3.7),closedAssembly:reportBounds(parsed.scene).max[1]<21.6};
+  window.__glbVerified={bytes:buffer.byteLength,meshes,instances,textures:textures.size,bounds:reportBounds(parsed.scene),normalYPositive,extensionsUsed:manifest.extensionsUsed||[],images:manifest.images?.length||0,materials:manifest.materials?.length||0,namedParts,sourceAssemblyRestored:built.tiers.every((g,i)=>g.position.y===assemblyAt(oldTime)*i*3.7),closedAssembly:reportBounds(parsed.scene).max[1]<=SHUNDE.height};
   window.__lastGLBScene=parsed.scene;
   const bytes=new Uint8Array(buffer),chunks=[];for(let i=0;i<bytes.length;i+=32768)chunks.push(String.fromCharCode(...bytes.subarray(i,i+32768)));return btoa(chunks.join(''));
  };

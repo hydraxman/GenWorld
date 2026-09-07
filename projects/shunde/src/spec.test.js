@@ -5,7 +5,7 @@ test('correct building name and source uncertainty remain explicit',()=>{
  assert.equal(SHUNDE.name,'舜德楼');assert.equal(DURATION,46);
  assert.equal(SHUNDE.dimensionsStatus,'estimated-from-photos');
  assert.equal(SHUNDE.interiorStatus,'inferred-not-surveyed');
- assert.ok(SHUNDE.width>SHUNDE.height);assert.ok(SHUNDE.floorHeights.every(x=>x>0));
+ assert.ok(SHUNDE.width>SHUNDE.height);assert.ok(SHUNDE.facadeBands.every(x=>x.height>0));
 });
 test('all film poses are deterministic finite and have framing range',()=>{
  for(let t=0;t<=46;t+=.1){const a=shundeCameraAt(t),b=shundeCameraAt(t);assert.deepEqual(a,b);assert.ok([...a.position,...a.target,a.fov].every(Number.isFinite));assert.ok(a.fov>=35&&a.fov<=55);}
