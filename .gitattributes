@@ -1,0 +1,3 @@
+# Preserve upstream vendor bundles and downloaded license evidence byte-for-byte.
+**/gsap.min.js -whitespace
+**/maple-license-evidence.html -whitespace
