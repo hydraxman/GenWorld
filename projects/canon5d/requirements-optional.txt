@@ -1,0 +1,2 @@
+# Only for historical mcp_run.py. Baseline render/verify does not require MCP.
+mcp

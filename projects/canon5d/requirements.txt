@@ -1,0 +1,3 @@
+# Verified with /usr/local/bin/python3 in the local archive acceptance.
+Pillow==12.1.1
+numpy==2.4.2

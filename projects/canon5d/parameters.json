@@ -1,0 +1,151 @@
+{
+  "project": "canon5d",
+  "delivery": {
+    "file": "film45/replacement-v3/Canon5D-NewModel-Xiaoxiao2-V3.mp4",
+    "sha256": "449ef099d879970670bd4129fd44b30d6bc7b76b9249d62774cab25ecc76b1ba",
+    "duration_seconds": 45,
+    "width": 1280,
+    "height": 720,
+    "fps": 24,
+    "frames": 1080,
+    "video_codec": "H.264",
+    "audio_codec": "AAC",
+    "audio_bitrate": "160k"
+  },
+  "scene": {
+    "file": "film45/replacement-v3/canon5d-v3-production.blend",
+    "blender": "5.2.1 LTS",
+    "scene": "Canon5D_Replacement_V3",
+    "engine": "BLENDER_EEVEE",
+    "resolution": [
+      1280,
+      720
+    ],
+    "resolution_percentage": 100,
+    "fps": 24,
+    "frame_range": [
+      1,
+      1080
+    ],
+    "samples": 24,
+    "view_transform": "AgX",
+    "camera": "FILM_MainCamera.001",
+    "camera_lens_mm": 50.0,
+    "camera_type": "ORTHO",
+    "camera_ortho_scale": 9.600000381469727,
+    "lens_note": "50mm is stored but not used for ORTHO projection",
+    "raytracing": false,
+    "world_unit_system": "METRIC",
+    "world_unit_scale": 0.019999999552965164,
+    "missing_external_images": [],
+    "frame": 481,
+    "output": "qa/render-481.png",
+    "source_blend_not_saved": true
+  },
+  "model": {
+    "asset": "BlenderKit c71ed1a5-0c66-41af-9894-a5fd3ffdeb01 | sotilrac Asmat | Royalty Free",
+    "new_meshes": 109,
+    "new_polygons": 134565,
+    "assembly_bbox": [
+      [
+        -3.990363359451294,
+        -5.09837532043457,
+        0.4943852424621582
+      ],
+      [
+        2.7986273765563965,
+        1.8973639011383057,
+        6.070240020751953
+      ]
+    ]
+  },
+  "narration": {
+    "voice_id": "zh-CN-Xiaoxiao2:DragonHDFlashLatestNeural",
+    "sample_rate_hz": 48000,
+    "channels": 1,
+    "pcm_bits": 16,
+    "max_atempo": 1.309027777777778,
+    "tempo_cap": 1.45,
+    "master_gain_db": -1.23255776280274,
+    "segments": [
+      {
+        "id": 1,
+        "slot_start": 0,
+        "slot_end": 8,
+        "text": "以佳能单反为例，先转一圈，看清镜头、机身和背面的操控区。",
+        "atempo": 1.0
+      },
+      {
+        "id": 2,
+        "slot_start": 8,
+        "slot_end": 12,
+        "text": "拆开外壳，跟着光线看内部。",
+        "atempo": 1.0
+      },
+      {
+        "id": 3,
+        "slot_start": 12,
+        "slot_end": 16,
+        "text": "镜片组折射光线，让它汇聚。",
+        "atempo": 1.0
+      },
+      {
+        "id": 4,
+        "slot_start": 16,
+        "slot_end": 19,
+        "text": "光圈调节开口，控制进光量。",
+        "atempo": 1.0
+      },
+      {
+        "id": 5,
+        "slot_start": 19,
+        "slot_end": 23,
+        "text": "取景时，主反光镜把光线向上反射。",
+        "atempo": 1.0
+      },
+      {
+        "id": 6,
+        "slot_start": 23,
+        "slot_end": 25.5,
+        "text": "光线在对焦屏上形成像。",
+        "atempo": 1.2058823529411766
+      },
+      {
+        "id": 7,
+        "slot_start": 25.5,
+        "slot_end": 28.5,
+        "text": "五棱镜改变光路，校正像的方向。",
+        "atempo": 1.309027777777778
+      },
+      {
+        "id": 8,
+        "slot_start": 28.5,
+        "slot_end": 31,
+        "text": "最后，通过目镜进入眼睛。",
+        "atempo": 1.0
+      },
+      {
+        "id": 9,
+        "slot_start": 31,
+        "slot_end": 36,
+        "text": "拍照时，反光镜抬起，快门打开，光线才直达传感器。",
+        "atempo": 1.1004098360655739
+      },
+      {
+        "id": 10,
+        "slot_start": 36,
+        "slot_end": 42,
+        "text": "镜头把景物成像在传感器上。感光像素把光转换成电信号。",
+        "atempo": 1.151360544217687
+      },
+      {
+        "id": 11,
+        "slot_start": 42,
+        "slot_end": 45,
+        "text": "图像处理器再把信号处理成照片。",
+        "atempo": 1.0833333333333335
+      }
+    ]
+  },
+  "accuracy": "Exterior uses licensed asset; internal optics, dimensions and disassembly remain educational approximations, not Canon CAD."
+}

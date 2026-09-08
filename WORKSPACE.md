@@ -1,4 +1,4 @@
-# 建筑项目工作区
+# Courtyard 3D 项目工作区
 
 工程根：桌面 `Courtyard3D-v6`（沿用已经找到的文件夹名称，不再新建版本编号目录）。
 
@@ -6,7 +6,10 @@
 
 - `projects/courtyard/`：庭院旧楼的当前反射更新版。
 - `projects/shunde/`：舜德楼唯一工作目录，最新照片修订已覆盖到这里。
+- `projects/canon5d/`：相机精细模型V3的工作入口，包含成片、Blender模型、代码、参数、建模来源及相关skills；见该目录README。原桌面Canon5D-Cutaway仅保留为旧快照。
 - `shared/`：可共用的渲染、光照、反射与叶片素材。
+
+相机子项目独立使用Blender/Python/FFmpeg，不影响下方建筑npm命令。相机验收：`cd projects/canon5d && python3 -m unittest discover -s tests -v`。Git仓库包含相机代码、参数、文档与skills；相机资产为Royalty Free，模型/贴图/媒体只留本地，不随代码推送。
 
 `projects/shunde-v2/` 已移除。后续修改直接更新对应项目，历史通过 Git 提交保存，不通过复制文件夹保存。
 
