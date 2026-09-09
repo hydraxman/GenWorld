@@ -1,0 +1,6 @@
+# Keep hashed source metadata byte-identical across LF/CRLF checkouts.
+audio/*.json -text
+audio/*.ssml -text
+photos/all-manifest.json -text
+# Preserve the upstream font license byte-for-byte.
+fonts/OFL.txt -text -whitespace

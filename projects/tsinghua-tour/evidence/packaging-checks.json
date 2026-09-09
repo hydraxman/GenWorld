@@ -1,0 +1,88 @@
+{
+  "baseline_commit": "2f180759400e3be204e5340e0b307faa9b698882",
+  "scope": "Final artifact/assets verified; current 21-frame previews for both modes; inherited prior 48-frame smoke, same rendering files except package metadata; offline exporter regressions and tests passed.",
+  "baseline_limits": [
+    "Existing root npm test times out after 17 reported courtyard successes (also before Tsinghua changes)",
+    "Existing camera tests: 2 pass, 1 failure and 4 errors caused by intentionally untracked model/audio/frame/video files; not changed by this PR"
+  ],
+  "frozen_final_sha256": "0152e1cb27e1d71a00ff8f60c669f9de57877895306a0f185c6b434dbfe5ed9e",
+  "node_tests": {
+    "passed": 11,
+    "failed": 0
+  },
+  "python_tests": {
+    "passed": 12,
+    "failed": 0
+  },
+  "visual_review": "passed: both 21-frame preview contact sheets and side-by-side campus view inspected",
+  "root_build": "passed on updated main base",
+  "paid_tts_regeneration": "not run; optional entry dry-run only",
+  "pr_base_commit": "166217002d04784802992388920cc8a5451e967d",
+  "npm_audit": {
+    "vulnerabilities": 0,
+    "speech_sdk": "1.51.0"
+  },
+  "panjin_tests_and_source_validators": "passed; no Panjin files modified",
+  "prior_migration_smoke": {
+    "standard": {
+      "preview_frames": 21,
+      "capture_frames": 48,
+      "smoke_sha256": "e4d7a05f8e8ba75f361a3a9cdd95a78545467480b8f15d960e4d860029b17aa9",
+      "smoke_duration_seconds": 2.005,
+      "strict_decode": true,
+      "capture_fingerprint": "f0388f6328fde6f3fcf36f91cf7062a8d600ead4cf954503691c2c0545170f4a"
+    },
+    "satellite": {
+      "preview_frames": 21,
+      "capture_frames": 48,
+      "smoke_sha256": "48ad1a1b5402e12d53664954088a6e3ffd1411fc08c658d4bc4485c4578278e5",
+      "smoke_duration_seconds": 2.005,
+      "strict_decode": true,
+      "capture_fingerprint": "7517f929ea984737370433793d2c5fb94e7b4e875b1ac284c63c7966653a5a6e"
+    }
+  },
+  "latest_online_checks": {
+    "standard": {
+      "preview_frames": 21,
+      "preview_errors": [],
+      "capture_frames_completed": 33,
+      "capture_errors": [
+        "Waiting failed: 90000ms exceeded"
+      ],
+      "capture_complete": false,
+      "render_inputs_match_prior_except_package_metadata": true,
+      "fingerprint": "7ee07fc8c7d17e52f283ab0d45a0179aaff326683c061a61871f2ccd3fb4f66c",
+      "verified_prefix_export": {
+        "frames": 33,
+        "sha256": "3e2373bd4b916eb61d6486ed59c96a30a7a14ba6608ebd05bfefc453f9f83d48",
+        "duration_seconds": 1.386,
+        "strict_decode": true,
+        "scope": "short smoke render",
+        "visual_review": "passed"
+      }
+    },
+    "satellite": {
+      "preview_frames": 21,
+      "preview_errors": [],
+      "capture_frames_completed": 23,
+      "capture_errors": [
+        "Waiting failed: 90000ms exceeded"
+      ],
+      "capture_complete": false,
+      "render_inputs_match_prior_except_package_metadata": true,
+      "fingerprint": "498cee0536d8a21ff1c22e3ba9525fc81adc0520b8081edc8cf54cafd3f8f655",
+      "verified_prefix_export": {
+        "frames": 23,
+        "sha256": "dee0d9963faf92fd1dd2baf40c150554ae188780c01477a65ffc46ef798d5b58",
+        "duration_seconds": 0.96,
+        "strict_decode": true,
+        "scope": "short smoke render",
+        "visual_review": "passed"
+      }
+    }
+  },
+  "online_blocker": "Continuous capture waits on OpenFreeMap tiles; standalone probes of two pending URLs returned HTTP 403 / error 1010. Not claimed as a successful latest 48-frame capture.",
+  "notes": [
+    "最新同指纹的33/23帧有效连续前缀已复用并实际导出短片；不重新请求瓦片，保留此前等待超时记录，不声称48帧重捕成功。"
+  ]
+}

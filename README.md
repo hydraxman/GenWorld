@@ -2,6 +2,7 @@
 
 ## 项目入口
 
+- [清华园十二站视频 / 普通地图与卫星图切换](projects/tsinghua-tour/README.md)：最终星空卫星版、核心素材、原速晓晓与 SSML、可复现捕获/导出命令及制作调度 skill。默认卫星底图，`--basemap standard` 切普通地图。
 - [相机精细模型 V3 / xiaoxiao2](projects/canon5d/README.md)：已交付45秒成片、Blender工程、核心参数、代码、建模来源/许可和相关skills。
 - [盘锦道路锚点地图导览](projects/panjin-map-tour/README.md)：MapLibre＋OSRM路线、道路入口锚点、大号编号、Azure SSML讲解、确定性相机和完整QA流程。
 - 庭院与舜德楼目录及开发入口见 [WORKSPACE.md](WORKSPACE.md)。

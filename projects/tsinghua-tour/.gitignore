@@ -1,0 +1,17 @@
+# Only the reviewed final film is deliberately versioned.
+!final/tsinghua-v5-satellite-stars.mp4
+output/
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+*.part
+*.log
+# Runtime exports and delivery state must never enter the archive.
+*-qa/
+delivery-private/
+# Full web-page text snapshots remain local; commit facts, URLs and selected image evidence instead.
+research/evidence/*.txt

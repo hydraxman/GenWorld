@@ -1,0 +1,447 @@
+{
+  "id": "canteen",
+  "name": "紫荆园食堂",
+  "style": "friendly",
+  "rate": "0%",
+  "pitch": "+1%",
+  "text": "走了这么久，最后一站就留给紫荆园食堂吧。这里在紫荆学生公寓区附近，也是校园日常生活的一部分。如果当天允许访客用餐，就选一份合口味的饭菜，坐下来歇歇。逛校园，也别忘了好好吃饭呀。",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "ssml_sha256": "a4bd86ba8f51a6c9e5d3985947279987b4e3e1feb9523e3a2041090dc9147a11",
+  "duration_seconds": 19.540125,
+  "sha256": "4376bd648189a7804f17fbebb69742af2192976b72d8b14108fdd0bb9f5f71c6",
+  "boundaries": [
+    {
+      "audioOffset": 500000,
+      "duration": 8500000,
+      "text": "走了这么久",
+      "textOffset": 243,
+      "wordLength": 5,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 10000000,
+      "duration": 2000000,
+      "text": "，",
+      "textOffset": 248,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 12000000,
+      "duration": 3375000,
+      "text": "最后",
+      "textOffset": 249,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 15500000,
+      "duration": 1500000,
+      "text": "一",
+      "textOffset": 251,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 17000000,
+      "duration": 3125000,
+      "text": "站",
+      "textOffset": 252,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 21000000,
+      "duration": 1500000,
+      "text": "就",
+      "textOffset": 253,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 22625000,
+      "duration": 2750000,
+      "text": "留给",
+      "textOffset": 254,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 25500000,
+      "duration": 9125000,
+      "text": "紫荆园食堂",
+      "textOffset": 256,
+      "wordLength": 5,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 34625000,
+      "duration": 2375000,
+      "text": "吧",
+      "textOffset": 261,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 37125000,
+      "duration": 1000000,
+      "text": "。",
+      "textOffset": 262,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 46125000,
+      "duration": 3875000,
+      "text": "这里",
+      "textOffset": 284,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 50125000,
+      "duration": 1625000,
+      "text": "在",
+      "textOffset": 286,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 51875000,
+      "duration": 3000000,
+      "text": "紫荆",
+      "textOffset": 287,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 55000000,
+      "duration": 3875000,
+      "text": "学生",
+      "textOffset": 289,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 58875000,
+      "duration": 3000000,
+      "text": "公寓",
+      "textOffset": 291,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 61875000,
+      "duration": 1750000,
+      "text": "区",
+      "textOffset": 293,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 63750000,
+      "duration": 5125000,
+      "text": "附近",
+      "textOffset": 294,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 69875000,
+      "duration": 1875000,
+      "text": "，",
+      "textOffset": 296,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 71750000,
+      "duration": 2250000,
+      "text": "也是",
+      "textOffset": 297,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 74125000,
+      "duration": 4250000,
+      "text": "校园",
+      "textOffset": 299,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 78500000,
+      "duration": 6875000,
+      "text": "日常生活",
+      "textOffset": 301,
+      "wordLength": 4,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 85375000,
+      "duration": 875000,
+      "text": "的",
+      "textOffset": 305,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 86375000,
+      "duration": 6125000,
+      "text": "一部分",
+      "textOffset": 306,
+      "wordLength": 3,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 92625000,
+      "duration": 1000000,
+      "text": "。",
+      "textOffset": 309,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 101625000,
+      "duration": 3500000,
+      "text": "如果",
+      "textOffset": 331,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 105250000,
+      "duration": 3750000,
+      "text": "当天",
+      "textOffset": 333,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 109125000,
+      "duration": 3375000,
+      "text": "允许",
+      "textOffset": 335,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 112625000,
+      "duration": 3125000,
+      "text": "访客",
+      "textOffset": 337,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 115875000,
+      "duration": 5375000,
+      "text": "用餐",
+      "textOffset": 339,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 122250000,
+      "duration": 1250000,
+      "text": "，",
+      "textOffset": 341,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 123500000,
+      "duration": 1500000,
+      "text": "就",
+      "textOffset": 342,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 125000000,
+      "duration": 1750000,
+      "text": "选",
+      "textOffset": 343,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 126875000,
+      "duration": 1000000,
+      "text": "一",
+      "textOffset": 344,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 127875000,
+      "duration": 1750000,
+      "text": "份",
+      "textOffset": 345,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 129750000,
+      "duration": 5125000,
+      "text": "合口味",
+      "textOffset": 346,
+      "wordLength": 3,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 134875000,
+      "duration": 750000,
+      "text": "的",
+      "textOffset": 349,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 135750000,
+      "duration": 4875000,
+      "text": "饭菜",
+      "textOffset": 350,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 141625000,
+      "duration": 1625000,
+      "text": "，",
+      "textOffset": 352,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 143250000,
+      "duration": 3250000,
+      "text": "坐下",
+      "textOffset": 353,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 146625000,
+      "duration": 1375000,
+      "text": "来",
+      "textOffset": 355,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 148125000,
+      "duration": 2000000,
+      "text": "歇",
+      "textOffset": 356,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 150125000,
+      "duration": 3125000,
+      "text": "歇",
+      "textOffset": 357,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 153375000,
+      "duration": 1000000,
+      "text": "。",
+      "textOffset": 358,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 162375000,
+      "duration": 2000000,
+      "text": "逛",
+      "textOffset": 380,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 164375000,
+      "duration": 5625000,
+      "text": "校园",
+      "textOffset": 381,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 171000000,
+      "duration": 1000000,
+      "text": "，",
+      "textOffset": 383,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 172000000,
+      "duration": 1250000,
+      "text": "也",
+      "textOffset": 384,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 173250000,
+      "duration": 1500000,
+      "text": "别",
+      "textOffset": 385,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 174750000,
+      "duration": 1625000,
+      "text": "忘",
+      "textOffset": 386,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 176375000,
+      "duration": 625000,
+      "text": "了",
+      "textOffset": 387,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 177125000,
+      "duration": 3125000,
+      "text": "好好",
+      "textOffset": 388,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 180250000,
+      "duration": 4375000,
+      "text": "吃饭",
+      "textOffset": 390,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 184625000,
+      "duration": 2125000,
+      "text": "呀",
+      "textOffset": 392,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 186875000,
+      "duration": 1000000,
+      "text": "。",
+      "textOffset": 393,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    }
+  ],
+  "file": "audio/canteen.wav"
+}

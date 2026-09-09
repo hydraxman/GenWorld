@@ -1,0 +1,374 @@
+{
+  "id": "library",
+  "name": "老图书馆",
+  "style": "gentle",
+  "rate": "0%",
+  "text": "接着去老图书馆外看看。它的一期工程在一九一九年建成，一九三一年完成杨廷宝主持的扩建。红砖、拱窗和爬山虎，组成清华读书记忆里的经典画面。经过这里，咱们也把声音放轻一点。",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "ssml_sha256": "cb4cc971cbd5039aff09df2dbdbaf0fc48ee60fa42fdf5cb832cecce10048f7e",
+  "duration_seconds": 18.9625,
+  "sha256": "ed244a9b06be11469cbc97a92a4ab321206d2bfe266ca22b7110f70b8c0ff0ef",
+  "boundaries": [
+    {
+      "audioOffset": 500000,
+      "duration": 3125000,
+      "text": "接着",
+      "textOffset": 240,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 3625000,
+      "duration": 1375000,
+      "text": "去",
+      "textOffset": 242,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 5250000,
+      "duration": 1500000,
+      "text": "老",
+      "textOffset": 243,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 6750000,
+      "duration": 4875000,
+      "text": "图书馆",
+      "textOffset": 244,
+      "wordLength": 3,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 11625000,
+      "duration": 1625000,
+      "text": "外",
+      "textOffset": 247,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 13250000,
+      "duration": 5000000,
+      "text": "看看",
+      "textOffset": 248,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 18250000,
+      "duration": 1125000,
+      "text": "。",
+      "textOffset": 250,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 27375000,
+      "duration": 1625000,
+      "text": "它",
+      "textOffset": 272,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 29000000,
+      "duration": 875000,
+      "text": "的",
+      "textOffset": 273,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 30000000,
+      "duration": 2875000,
+      "text": "一期",
+      "textOffset": 274,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 33000000,
+      "duration": 5375000,
+      "text": "工程",
+      "textOffset": 276,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 39375000,
+      "duration": 1875000,
+      "text": "在",
+      "textOffset": 278,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 41375000,
+      "duration": 8125000,
+      "text": "一九一九年",
+      "textOffset": 279,
+      "wordLength": 5,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 49625000,
+      "duration": 5000000,
+      "text": "建成",
+      "textOffset": 284,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 55625000,
+      "duration": 2625000,
+      "text": "，",
+      "textOffset": 286,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 58250000,
+      "duration": 10000000,
+      "text": "一九三一年",
+      "textOffset": 287,
+      "wordLength": 5,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 69125000,
+      "duration": 3250000,
+      "text": "完成",
+      "textOffset": 292,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 72625000,
+      "duration": 5125000,
+      "text": "杨廷宝",
+      "textOffset": 294,
+      "wordLength": 3,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 78000000,
+      "duration": 3250000,
+      "text": "主持",
+      "textOffset": 297,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 81250000,
+      "duration": 875000,
+      "text": "的",
+      "textOffset": 299,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 82250000,
+      "duration": 4875000,
+      "text": "扩建",
+      "textOffset": 300,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 87250000,
+      "duration": 1125000,
+      "text": "。",
+      "textOffset": 302,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 96375000,
+      "duration": 2625000,
+      "text": "红",
+      "textOffset": 324,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 99000000,
+      "duration": 2875000,
+      "text": "砖",
+      "textOffset": 325,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 102875000,
+      "duration": 875000,
+      "text": "、",
+      "textOffset": 326,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 103750000,
+      "duration": 5375000,
+      "text": "拱窗",
+      "textOffset": 327,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 110000000,
+      "duration": 1250000,
+      "text": "和",
+      "textOffset": 329,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 111375000,
+      "duration": 6875000,
+      "text": "爬山虎",
+      "textOffset": 330,
+      "wordLength": 3,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 119250000,
+      "duration": 2375000,
+      "text": "，",
+      "textOffset": 333,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 121625000,
+      "duration": 3750000,
+      "text": "组成",
+      "textOffset": 334,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 125625000,
+      "duration": 3250000,
+      "text": "清华",
+      "textOffset": 336,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 129000000,
+      "duration": 3250000,
+      "text": "读书",
+      "textOffset": 338,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 132375000,
+      "duration": 4750000,
+      "text": "记忆里的",
+      "textOffset": 340,
+      "wordLength": 4,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 137375000,
+      "duration": 3500000,
+      "text": "经典",
+      "textOffset": 344,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 140875000,
+      "duration": 4625000,
+      "text": "画面",
+      "textOffset": 346,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 145500000,
+      "duration": 1125000,
+      "text": "。",
+      "textOffset": 348,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 154625000,
+      "duration": 3000000,
+      "text": "经过",
+      "textOffset": 370,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 157750000,
+      "duration": 4375000,
+      "text": "这里",
+      "textOffset": 372,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 163125000,
+      "duration": 1875000,
+      "text": "，",
+      "textOffset": 374,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 165000000,
+      "duration": 2250000,
+      "text": "咱们",
+      "textOffset": 375,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 167375000,
+      "duration": 1125000,
+      "text": "也",
+      "textOffset": 377,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 168500000,
+      "duration": 1125000,
+      "text": "把",
+      "textOffset": 378,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 169750000,
+      "duration": 3375000,
+      "text": "声音",
+      "textOffset": 379,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 173375000,
+      "duration": 7500000,
+      "text": "放轻一点",
+      "textOffset": 381,
+      "wordLength": 4,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 181000000,
+      "duration": 1125000,
+      "text": "。",
+      "textOffset": 385,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    }
+  ],
+  "file": "audio/library.wav"
+}

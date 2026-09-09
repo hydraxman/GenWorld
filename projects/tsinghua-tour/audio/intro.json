@@ -1,0 +1,423 @@
+{
+  "id": "intro",
+  "name": "开场",
+  "style": "friendly",
+  "rate": "+1%",
+  "pitch": "+2%",
+  "text": "走吧，今天咱们一起逛逛清华园。从地球上一点点靠近北京，把镜头落在主楼前。接下来，串起十二处校园风景，看看老建筑，听听园林里的故事，最后去食堂，为这一天收个尾。",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "ssml_sha256": "c28a4d4bd8743033bbc923920bfad601384c88be1c1fe755beae208e9d2cf918",
+  "duration_seconds": 18.0240625,
+  "sha256": "252b51bfcf3542b79aa87763d3798ca9a9965e1df2cd298ef71343f8b9fc16bd",
+  "boundaries": [
+    {
+      "audioOffset": 495000,
+      "duration": 2103950,
+      "text": "走",
+      "textOffset": 244,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 2598950,
+      "duration": 2475200,
+      "text": "吧",
+      "textOffset": 245,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 6064370,
+      "duration": 2103950,
+      "text": "，",
+      "textOffset": 246,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 8168330,
+      "duration": 3589160,
+      "text": "今天",
+      "textOffset": 247,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 11881250,
+      "duration": 2227700,
+      "text": "咱们",
+      "textOffset": 249,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 14108950,
+      "duration": 5074160,
+      "text": "一起",
+      "textOffset": 251,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 20049580,
+      "duration": 1856450,
+      "text": "逛",
+      "textOffset": 253,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 21906040,
+      "duration": 1608950,
+      "text": "逛",
+      "textOffset": 254,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 23638540,
+      "duration": 6683120,
+      "text": "清华园",
+      "textOffset": 255,
+      "wordLength": 3,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 30445620,
+      "duration": 990000,
+      "text": "。",
+      "textOffset": 258,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 39391040,
+      "duration": 2227700,
+      "text": "从",
+      "textOffset": 280,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 41742500,
+      "duration": 3217910,
+      "text": "地球",
+      "textOffset": 281,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 44960410,
+      "duration": 2475200,
+      "text": "上",
+      "textOffset": 283,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 47559370,
+      "duration": 4702910,
+      "text": "一点点",
+      "textOffset": 284,
+      "wordLength": 3,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 52386040,
+      "duration": 3341660,
+      "text": "靠近",
+      "textOffset": 287,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 55851450,
+      "duration": 4950410,
+      "text": "北京",
+      "textOffset": 289,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 61792080,
+      "duration": 1361450,
+      "text": "，",
+      "textOffset": 291,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 63153540,
+      "duration": 1485000,
+      "text": "把",
+      "textOffset": 292,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 64638540,
+      "duration": 4826660,
+      "text": "镜头",
+      "textOffset": 293,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 69465410,
+      "duration": 1608750,
+      "text": "落",
+      "textOffset": 295,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 71074160,
+      "duration": 1485200,
+      "text": "在",
+      "textOffset": 296,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 72683120,
+      "duration": 3341660,
+      "text": "主楼",
+      "textOffset": 297,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 76024790,
+      "duration": 3712910,
+      "text": "前",
+      "textOffset": 299,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 79861450,
+      "duration": 990000,
+      "text": "。",
+      "textOffset": 300,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 88806870,
+      "duration": 6930620,
+      "text": "接下来",
+      "textOffset": 322,
+      "wordLength": 3,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 96727700,
+      "duration": 1361450,
+      "text": "，",
+      "textOffset": 325,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 98089160,
+      "duration": 2351450,
+      "text": "串",
+      "textOffset": 326,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 100440620,
+      "duration": 1608950,
+      "text": "起",
+      "textOffset": 327,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 102173330,
+      "duration": 4950410,
+      "text": "十二处",
+      "textOffset": 328,
+      "wordLength": 3,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 107247500,
+      "duration": 5693120,
+      "text": "校园风",
+      "textOffset": 331,
+      "wordLength": 3,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 112940620,
+      "duration": 2846450,
+      "text": "景",
+      "textOffset": 334,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 116777290,
+      "duration": 1237500,
+      "text": "，",
+      "textOffset": 335,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 118014790,
+      "duration": 3093950,
+      "text": "看看",
+      "textOffset": 336,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 121232700,
+      "duration": 1608950,
+      "text": "老",
+      "textOffset": 338,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 122841660,
+      "duration": 5074160,
+      "text": "建筑",
+      "textOffset": 339,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 128906040,
+      "duration": 1361250,
+      "text": "，",
+      "textOffset": 341,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 130267290,
+      "duration": 3217910,
+      "text": "听听",
+      "textOffset": 342,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 133608950,
+      "duration": 3093950,
+      "text": "园林",
+      "textOffset": 344,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 136702910,
+      "duration": 7178120,
+      "text": "里的故事",
+      "textOffset": 346,
+      "wordLength": 4,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 144871250,
+      "duration": 1732700,
+      "text": "，",
+      "textOffset": 350,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 146603950,
+      "duration": 3589160,
+      "text": "最后",
+      "textOffset": 351,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 150316870,
+      "duration": 1485200,
+      "text": "去",
+      "textOffset": 353,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 151802080,
+      "duration": 5445620,
+      "text": "食堂",
+      "textOffset": 354,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 157495000,
+      "duration": 866250,
+      "text": "，",
+      "textOffset": 356,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 158856450,
+      "duration": 1856450,
+      "text": "为",
+      "textOffset": 357,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 160836660,
+      "duration": 1237500,
+      "text": "这",
+      "textOffset": 358,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 162074160,
+      "duration": 2970200,
+      "text": "一天",
+      "textOffset": 359,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 165168330,
+      "duration": 2103950,
+      "text": "收",
+      "textOffset": 361,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 167272290,
+      "duration": 1361450,
+      "text": "个",
+      "textOffset": 362,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 168633750,
+      "duration": 2970200,
+      "text": "尾",
+      "textOffset": 363,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 171727700,
+      "duration": 990000,
+      "text": "。",
+      "textOffset": 364,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    }
+  ],
+  "file": "audio/intro.wav"
+}
