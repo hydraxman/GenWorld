@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "npm --prefix projects/courtyard run build && npm --prefix projects/shunde run build",
-    "test": "npm --prefix projects/courtyard test && npm --prefix projects/shunde test",
+    "test": "npm --prefix projects/panjin-map-tour test && npm --prefix projects/courtyard test && npm --prefix projects/shunde test",
     "dev": "python3 -m http.server 8773 --bind 127.0.0.1",
     "check": "npx hyperframes@0.8.24 check",
     "render": "npx hyperframes@0.8.24 render --fps 30 --quality high --browser-gpu --workers 1 --output output/Courtyard3D.mp4"

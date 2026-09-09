@@ -1,0 +1,14 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..'),HOST=process.env.CDP_HOST||'http://127.0.0.1:9225',PAGE=process.env.TOUR_URL||'http://127.0.0.1:8768/public/index.html';
+const schedule=JSON.parse(fs.readFileSync(path.join(ROOT,'data','narration-schedule.json'),'utf8'));
+const target=await fetch(`${HOST}/json/new?${encodeURIComponent(PAGE)}`,{method:'PUT'}).then(r=>r.json());const cdpHostname=new URL(HOST).hostname;const wsUrl=target.webSocketDebuggerUrl.replace('127.0.0.1',cdpHostname).replace('localhost',cdpHostname);const ws=new WebSocket(wsUrl);let id=0;const pending=new Map();ws.onmessage=e=>{const m=JSON.parse(e.data);if(m.id&&pending.has(m.id)){const p=pending.get(m.id);pending.delete(m.id);m.error?p.reject(m.error):p.resolve(m.result)}};await new Promise((a,b)=>{ws.onopen=a;ws.onerror=b});const send=(method,params={})=>{const n=++id;ws.send(JSON.stringify({id:n,method,params}));return new Promise((resolve,reject)=>pending.set(n,{resolve,reject}))};const sleep=ms=>new Promise(r=>setTimeout(r,ms));await send('Runtime.enable');let ready=false;for(let i=0;i<80;i++){await sleep(500);const r=await send('Runtime.evaluate',{expression:'Boolean(window.__TOUR_READY__)',returnByValue:true});if(r.result.value){ready=true;break}}if(!ready)throw new Error('page not ready');
+const results=[];
+for(let stopId=1;stopId<=10;stopId++){
+ const seg=schedule.segments.find(s=>s.id===`stop-${stopId}`);const t=(seg.start_s+seg.speech_end_s)/2;
+ await send('Runtime.evaluate',{expression:`window.renderAt(${t})`,awaitPromise:true,returnByValue:true});
+ const expression=`(()=>{const stop=window.__STOPS__[${stopId-1}],el=document.querySelector('.pin[data-stop-id="${stopId}"]'),badge=el.querySelector('.badge'),r=el.getBoundingClientRect(),b=badge.getBoundingClientRect(),p=window.__MAP__.project(stop.coordinates);return {stop_id:${stopId},name:stop.name,coordinate:stop.coordinates,projected:[p.x,p.y],marker_bottom_center:[r.left+r.width/2,r.bottom],anchor_error_px:Math.hypot(r.left+r.width/2-p.x,r.bottom-p.y),badge_px:[b.width,b.height],visible:p.x>30&&p.x<1410&&p.y>90&&p.y<1025};})()`;
+ const r=await send('Runtime.evaluate',{expression,returnByValue:true});results.push(r.result.value);
+}
+const out={results,max_anchor_error_px:Math.max(...results.map(x=>x.anchor_error_px)),min_active_badge_px:Math.min(...results.map(x=>x.badge_px[0])),all_visible:results.every(x=>x.visible)};out.pass=out.max_anchor_error_px<=1&&out.min_active_badge_px>=63&&out.all_visible;fs.mkdirSync(path.join(ROOT,'qa'),{recursive:true});fs.writeFileSync(path.join(ROOT,'qa','marker-anchor-validation.json'),JSON.stringify(out,null,2)+'\n');console.log(JSON.stringify(out));ws.close();await fetch(`${HOST}/json/close/${target.id}`).catch(()=>{});if(!out.pass)process.exitCode=1;

@@ -1,8 +1,9 @@
-# Courtyard 3D 工作区
+# GenWorld 工作区
 
 ## 项目入口
 
 - [相机精细模型 V3 / xiaoxiao2](projects/canon5d/README.md)：已交付45秒成片、Blender工程、核心参数、代码、建模来源/许可和相关skills。
+- [盘锦道路锚点地图导览](projects/panjin-map-tour/README.md)：MapLibre＋OSRM路线、道路入口锚点、大号编号、Azure SSML讲解、确定性相机和完整QA流程。
 - 庭院与舜德楼目录及开发入口见 [WORKSPACE.md](WORKSPACE.md)。
 - 相机为独立Blender子项目，不接入建筑的Three.js构建；模型和媒体只在本地保留。
 

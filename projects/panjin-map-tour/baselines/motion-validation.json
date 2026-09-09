@@ -1,0 +1,13 @@
+{
+  "frames": 3351,
+  "bearing_range_deg": 0,
+  "bearing_frame_delta_max_deg": 0,
+  "center_step_max_m": 348.211,
+  "center_accel_max_m_per_frame2": 5.255,
+  "zoom_frame_delta_max": 0.028626,
+  "pitch_frame_delta_max_deg": 0.165566,
+  "progress_monotonic": true,
+  "hard_center_jumps_gt_500m": 0,
+  "bearing_jumps_gt_0_1deg": 0,
+  "pass": true
+}

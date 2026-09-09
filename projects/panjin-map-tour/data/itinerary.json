@@ -1,0 +1,245 @@
+{
+  "title": "盘锦湿地与人文经典自驾路线",
+  "mode": "自驾/包车；红海滩景区内以现场交通规定为准",
+  "days": 2,
+  "total_distance_m": 142547,
+  "estimated_drive_minutes": 162,
+  "stops": [
+    {
+      "id": 1,
+      "name": "盘锦站",
+      "short": "盘锦站",
+      "day": 1,
+      "note": "抵达盘锦，开启湿地与人文之旅",
+      "source": "OSM way 280842106",
+      "poi_coordinates": [
+        122.0568121,
+        41.1957096
+      ],
+      "coordinates": [
+        122.056452,
+        41.195628
+      ],
+      "anchor_kind": "OSRM road access point; marker and route share this coordinate",
+      "snap_distance_m": 31.6
+    },
+    {
+      "id": 2,
+      "name": "盘锦辽河碑林景区",
+      "short": "辽河碑林",
+      "day": 1,
+      "note": "中国唯一不断代碑林，纵览书法文脉",
+      "source": "OSM way 279938664",
+      "poi_coordinates": [
+        122.0166052,
+        41.1863096
+      ],
+      "coordinates": [
+        122.015554,
+        41.188407
+      ],
+      "anchor_kind": "OSRM road access point; marker and route share this coordinate",
+      "snap_distance_m": 249.0
+    },
+    {
+      "id": 3,
+      "name": "辽河湿地公园",
+      "short": "湿地公园",
+      "day": 1,
+      "note": "沿辽河城市湿地慢行观景",
+      "source": "OSM way 279990953",
+      "poi_coordinates": [
+        122.0524644,
+        41.179433
+      ],
+      "coordinates": [
+        122.052544,
+        41.180541
+      ],
+      "anchor_kind": "OSRM road access point; marker and route share this coordinate",
+      "snap_distance_m": 123.2
+    },
+    {
+      "id": 4,
+      "name": "盘锦市博物馆",
+      "short": "市博物馆",
+      "day": 1,
+      "note": "在明代兴隆台烽火台旧址读懂盘锦历史",
+      "source": "OSM way 466912108; Panjin Government",
+      "poi_coordinates": [
+        122.0584942,
+        41.1298025
+      ],
+      "coordinates": [
+        122.057913,
+        41.129817
+      ],
+      "anchor_kind": "OSRM road access point; marker and route share this coordinate",
+      "snap_distance_m": 48.8
+    },
+    {
+      "id": 5,
+      "name": "盘锦广厦艺术街",
+      "short": "广厦艺术街",
+      "day": 1,
+      "note": "书画、非遗与夜间城市生活",
+      "source": "Amap GCJ-02 listing converted to WGS84; Liaoning Government",
+      "poi_coordinates": [
+        122.0975938,
+        41.1311983
+      ],
+      "coordinates": [
+        122.097659,
+        41.130817
+      ],
+      "anchor_kind": "OSRM road access point; marker and route share this coordinate",
+      "snap_distance_m": 42.7
+    },
+    {
+      "id": 6,
+      "name": "北旅田园·黑风关古镇",
+      "short": "黑风关古镇",
+      "day": 1,
+      "note": "唐风古街与沉浸式夜游",
+      "source": "OSM way 1468434669",
+      "poi_coordinates": [
+        122.1835022,
+        41.111284
+      ],
+      "coordinates": [
+        122.181781,
+        41.111264
+      ],
+      "anchor_kind": "OSRM road access point; marker and route share this coordinate",
+      "snap_distance_m": 144.5
+    },
+    {
+      "id": 7,
+      "name": "田庄台镇",
+      "short": "田庄台镇",
+      "day": 2,
+      "note": "镇区、小吃与甲午末战历史",
+      "source": "OSM node 4616138133",
+      "poi_coordinates": [
+        122.1316053,
+        40.8315494
+      ],
+      "coordinates": [
+        122.131585,
+        40.831233
+      ],
+      "anchor_kind": "OSRM road access point; marker and route share this coordinate",
+      "snap_distance_m": 35.1
+    },
+    {
+      "id": 8,
+      "name": "盘锦江南风情园景区",
+      "short": "江南风情园",
+      "day": 2,
+      "note": "辽东湾沿线的园林休闲空间",
+      "source": "OSM way 466331066",
+      "poi_coordinates": [
+        122.1585303,
+        40.7325603
+      ],
+      "coordinates": [
+        122.157814,
+        40.73422
+      ],
+      "anchor_kind": "OSRM road access point; marker and route share this coordinate",
+      "snap_distance_m": 194.0
+    },
+    {
+      "id": 9,
+      "name": "红海滩国家风景廊道游客中心",
+      "short": "红海滩游客中心",
+      "day": 2,
+      "note": "换乘景区交通，进入滨海湿地",
+      "source": "OSM way 1111729147",
+      "poi_coordinates": [
+        121.840581,
+        40.9006564
+      ],
+      "coordinates": [
+        121.840032,
+        40.900668
+      ],
+      "anchor_kind": "OSRM road access point; marker and route share this coordinate",
+      "snap_distance_m": 46.3
+    },
+    {
+      "id": 10,
+      "name": "红海滩国家风景廊道·踏霞漫步",
+      "short": "踏霞漫步",
+      "day": 2,
+      "note": "在红滩、绿苇与稻田间收束旅程",
+      "source": "OSM node 10171004880",
+      "poi_coordinates": [
+        121.8446284,
+        40.8560035
+      ],
+      "coordinates": [
+        121.844881,
+        40.856086
+      ],
+      "anchor_kind": "OSRM road access point; marker and route share this coordinate",
+      "snap_distance_m": 23.2
+    }
+  ],
+  "legs": [
+    {
+      "from": 1,
+      "to": 2,
+      "distance_m": 4258,
+      "drive_minutes": 5
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "distance_m": 4505,
+      "drive_minutes": 6
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "distance_m": 7881,
+      "drive_minutes": 8
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "distance_m": 4365,
+      "drive_minutes": 4
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "distance_m": 10160,
+      "drive_minutes": 17
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "distance_m": 44207,
+      "drive_minutes": 49
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "distance_m": 18071,
+      "drive_minutes": 17
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "distance_m": 40898,
+      "drive_minutes": 43
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "distance_m": 8201,
+      "drive_minutes": 13
+    }
+  ]
+}

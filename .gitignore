@@ -27,6 +27,8 @@ review/
 # Local reference photos and restricted research downloads
 **/assets/reference*
 **/references/
+!projects/**/skills/**/references/
+!projects/**/skills/**/references/**
 
 # Credentials and local settings
 .env
