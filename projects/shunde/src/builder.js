@@ -8,6 +8,9 @@ export function createBuilder(THREE,seed=27531){
  const tools=createPBRTools(THREE,{rand,stats,materials,textureWorld});
  const buckets=new Map();
  function add(group,geometry,material){
+  // Procedural boxes are indexed; extrusions/polyhedra may not be. Normalize
+  // before batching so one material may safely cover both primitive families.
+  if(!geometry.index)geometry.setIndex(Array.from({length:geometry.attributes.position.count},(_,i)=>i));
   const key=group.uuid+'|'+material.uuid;
   if(!buckets.has(key))buckets.set(key,{group,material,geometries:[]});
   buckets.get(key).geometries.push(geometry);

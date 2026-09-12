@@ -1,0 +1,3 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs/promises';import os from 'node:os';import path from 'node:path';
+import {fingerprint,verifyFingerprint} from '../scripts/render-inputs.mjs';
+test('render snapshot fails closed on changed real input bytes',async()=>{const d=await fs.mkdtemp(path.join(os.tmpdir(),'shunde-hash-'));try{const f=path.join(d,'source.js');await fs.writeFile(f,'const x=1;');const before=await fingerprint([f]);assert.equal(await verifyFingerprint(before),true);await fs.writeFile(f,'const x=2;');await assert.rejects(()=>verifyFingerprint(before),/changed/);}finally{await fs.rm(d,{recursive:true});}});

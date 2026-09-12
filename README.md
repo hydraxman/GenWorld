@@ -4,6 +4,7 @@
 
 - [相机精细模型 V3 / xiaoxiao2](projects/canon5d/README.md)：已交付45秒成片、Blender工程、核心参数、代码、建模来源/许可和相关skills。
 - [盘锦道路锚点地图导览](projects/panjin-map-tour/README.md)：MapLibre＋OSRM路线、道路入口锚点、大号编号、Azure SSML讲解、确定性相机和完整QA流程。
+- [舜德楼庭院重建](projects/shunde/README.md)：北侧正门、朝中庭圆体、斜向内立面与北侧开口；[平面和照片对应依据](projects/shunde/docs/courtyard-reconstruction.md)。OSM 为伟伦楼与舜德楼组合轮廓，未见立面与尺寸保留推定边界。
 - 庭院与舜德楼目录及开发入口见 [WORKSPACE.md](WORKSPACE.md)。
 - 相机为独立Blender子项目，不接入建筑的Three.js构建；模型和媒体只在本地保留。
 

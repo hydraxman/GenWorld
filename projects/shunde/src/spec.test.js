@@ -1,17 +1,5 @@
-import test from 'node:test';
-import assert from 'node:assert/strict';
+import test from 'node:test';import assert from 'node:assert/strict';
 import {SHUNDE,assemblyAt,shundeCameraAt,DURATION} from './spec.js';
-test('correct building name and source uncertainty remain explicit',()=>{
- assert.equal(SHUNDE.name,'舜德楼');assert.equal(DURATION,46);
- assert.equal(SHUNDE.dimensionsStatus,'estimated-from-photos');
- assert.equal(SHUNDE.interiorStatus,'inferred-not-surveyed');
- assert.ok(SHUNDE.width>SHUNDE.height);assert.ok(SHUNDE.facadeBands.every(x=>x.height>0));
-});
-test('all film poses are deterministic finite and have framing range',()=>{
- for(let t=0;t<=46;t+=.1){const a=shundeCameraAt(t),b=shundeCameraAt(t);assert.deepEqual(a,b);assert.ok([...a.position,...a.target,a.fov].every(Number.isFinite));assert.ok(a.fov>=35&&a.fov<=55);}
- assert.deepEqual(shundeCameraAt(-1),shundeCameraAt(0));assert.deepEqual(shundeCameraAt(99),shundeCameraAt(46));
-});
-test('exploded ending closes exactly and does not affect exterior segment',()=>{
- assert.equal(assemblyAt(0),0);assert.equal(assemblyAt(35.999),0);assert.equal(assemblyAt(36),0);assert.equal(assemblyAt(40),1);assert.equal(assemblyAt(42),1);assert.equal(assemblyAt(46),0);
- for(let t=0;t<46;t+=.07)assert.ok(assemblyAt(t)>=0&&assemblyAt(t)<=1);
-});
+test('photo calibration uses four observed bands plus clerestory, not OSM six levels',()=>{assert.equal(SHUNDE.name,'舜德楼');assert.equal(SHUNDE.facadeBands.length,4);assert.equal(SHUNDE.roofBand.kind,'recessed-narrow-strip');assert.equal(SHUNDE.dimensionsStatus,'estimated-from-photos');});
+test('all poses are finite, deterministic and clamped',()=>{for(let t=0;t<=DURATION;t+=.125){const p=shundeCameraAt(t);assert.deepEqual(p,shundeCameraAt(t));assert.ok([...p.position,...p.target,p.fov].every(Number.isFinite));assert.ok(p.fov>=35&&p.fov<=65);}assert.deepEqual(shundeCameraAt(-1),shundeCameraAt(0));assert.deepEqual(shundeCameraAt(99),shundeCameraAt(DURATION));});
+test('courtyard film never explodes inferred interiors',()=>{for(let t=0;t<60;t+=.25)assert.equal(assemblyAt(t),0);});

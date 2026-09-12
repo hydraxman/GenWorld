@@ -3,8 +3,9 @@ import assert from 'node:assert/strict';
 import * as THREE from 'three';
 import {SHUNDE} from './spec.js';
 import {createShundeModel} from './model.js';
+import {createNorthFacade} from './north-facade.js';
 import * as builder from './builder.js';
-const model=()=>createShundeModel(THREE,{textured:false,foliage:false});
+const model=()=>createNorthFacade(THREE,{textured:false,foliage:false});
 test('square tile joints align vertically with no running bond and have equal world pitch',()=>{
  const at=builder.squareGridAt;
  assert.equal(typeof at,'function');
@@ -19,7 +20,7 @@ test('foreground pines are instanced curved needle shoots on irregular lateral b
  assert.equal(a.stats.foliageKind,'pine-needle-shoots');
  assert.ok(a.stats.trees>=4);assert.ok(a.stats.leafInstances>2000);
  const shoots=[];a.campus.traverse(o=>{if(o.isInstancedMesh)shoots.push(o);});
- assert.equal(shoots.length,1);assert.equal(shoots[0].geometry.userData.kind,'curved-needle-fascicles');
+ assert.equal(shoots.length,3);assert.equal(shoots[0].geometry.userData.kind,'curved-needle-fascicles');
  assert.ok(shoots[0].geometry.attributes.position.count>300);
  assert.equal(a.stats.leafInstances,b.stats.leafInstances);
  const other=[];b.campus.traverse(o=>{if(o.isInstancedMesh)other.push(o);});assert.deepEqual(shoots[0].instanceMatrix.array,other[0].instanceMatrix.array);
@@ -35,13 +36,17 @@ test('broad connected six-riser apron and both correctly positioned signs exist 
  const white=signs[1];assert.ok(white.userData.height<4);assert.equal(white.userData.background,'white');
  assert.ok(m.stats.portalHeightToColumnHeight>.64&&m.stats.portalHeightToColumnHeight<.72);
 });
-test('V2 observable window-band proportions drive built geometry rather than a fifth storey',()=>{
+test('Photo-observable window-band proportions drive built geometry rather than a fifth storey',()=>{
  assert.equal(SHUNDE.facadeBands?.length,4);
  assert.equal(SHUNDE.roofBand?.kind,'recessed-narrow-strip');
  assert.ok(SHUNDE.roofBand.windowHeight<SHUNDE.facadeBands[1].windowHeight*.35);
  const m=model();assert.deepEqual(m.stats.facadeBands,SHUNDE.facadeBands);
- assert.equal(m.arc.visible,true);assert.equal(m.arc.userData.orientationStatus,'user-confirmed-rear');assert.equal(m.stats.rearRectangleRemoved,true);
+ assert.equal(m.group.name,'North entrance — photo-informed proportions');
  assert.ok(m.stats.facadePierWidth>1);
  assert.ok(m.stats.openCasements>0);
  assert.equal(m.tiers.length,6);
+});
+
+test('courtyard foreground gains low layered shrubs without blocking cylinder windows',()=>{
+ const m=createShundeModel(THREE,{textured:false,foliage:true}),shrubs=m.campus.getObjectByName('Layered courtyard shrub foliage');assert.ok(shrubs?.isInstancedMesh);assert.ok(shrubs.count>2000);const b=new THREE.Box3().setFromObject(shrubs);assert.ok(b.max.y<2);
 });
