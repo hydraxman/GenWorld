@@ -119,6 +119,8 @@ export function createShundeModel(THREE,{textured=true,foliage=true,signGlyphs=n
  frontAnchor.rotation.y=Math.PI-angle;frontAnchor.scale.x=Math.hypot(dx,dz)/66.56;
  frontAnchor.position.set((a[0]+b[0])/2-5*Math.sin(angle),0,(a[1]+b[1])/2+5*Math.cos(angle));front.building.traverse(o=>{if(o.isMesh&&/architectural glass/i.test(o.material.name))o.material=glass;});frontAnchor.add(front.building);
  const frontLandscape=part('North forecourt planting',campus);frontLandscape.position.copy(frontAnchor.position);frontLandscape.rotation.copy(frontAnchor.rotation);
+ // Move the complete pine crowns/branches north, clear of the facade and plinth.
+ frontLandscape.translateZ(7);
  if(foliage)addPines(THREE,B,frontLandscape,{textured});
  box(campus,'continuous earth',32,-.49,22,550,.9,550,lawn);
  // Broad north apron joins ground, no display-model plinth.
