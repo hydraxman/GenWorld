@@ -42,7 +42,19 @@ export function createShundeModel(THREE,{textured=true,foliage=true,signGlyphs=n
  }
  const upperOutline=[...FOOTPRINT.slice(0,3),...arcPoints,...inset,...FOOTPRINT.slice(16)];
  const lowOutline=[...outerHall,...inset.toReversed()];
- for(const [points,y,h,material] of [[outline,-.4,1.3,tile],[upperOutline,21.55,.4,concrete],[lowOutline,14.4,.4,concrete]]){
+ // Door offsets/count are conservative inference within the photo-supported row.
+ const gardenDoors=[11,13].map(edge=>{
+  const a=FOOTPRINT[edge],b=FOOTPRINT[edge+1],L=Math.hypot(b[0]-a[0],b[1]-a[1]),dx=(b[0]-a[0])/L,dz=(b[1]-a[1])/L;
+  return {edge,x:L/2,width:2.4,toWorld:(x,z)=>[a[0]+dx*x-dz*z,a[1]+dz*x+dx*z]};
+ });
+ // Keep the continuous buried base, but notch its raised part through the doors.
+ // Cutting only the panes would leave the old 0.9m foundation across the passage.
+ const foundationOutline=outline.flatMap(p=>{
+  const door=gardenDoors.find(d=>Math.hypot(p[0]-FOOTPRINT[d.edge][0],p[1]-FOOTPRINT[d.edge][1])<1e-7);if(!door)return [p];
+  const lo=door.x-1.3,hi=door.x+1.3;
+  return [p,...[[lo,0],[lo,3.3],[hi,3.3],[hi,0]].map(([x,z])=>door.toWorld(x,z))];
+ });
+ for(const [points,y,h,material] of [[outline,-.4,.45,tile],[foundationOutline,.05,.85,tile],[upperOutline,21.55,.4,concrete],[lowOutline,14.4,.4,concrete]]){
   const shape=new THREE.Shape(points.map(([x,z])=>new THREE.Vector2(x,-z)));
   const g=new THREE.ExtrudeGeometry(shape,{depth:h,bevelEnabled:false,curveSegments:1});g.rotateX(-Math.PI/2);g.translate(0,y,0);B.worldUV(g,material);B.add(roof,g,material);
  }
@@ -71,6 +83,32 @@ export function createShundeModel(THREE,{textured=true,foliage=true,signGlyphs=n
   }
   strip(g,L/2,L+.035,21.95,.65,tile);length+=L;
  }
+ // Photo-left is the WEST arc near v9/v10. s11 provides only the local axes;
+ // its recessed plane is occluded in the approved camera, not a measured anchor.
+ // Three visible platform rhythms are an interpretation, not a surveyed count.
+ const {g:balconies}=panel(building,FOOTPRINT[11],FOOTPRINT[12],'Photo-left cylinder fin and balconies');
+ balconies.translateZ(-6);
+ balconies.userData={role:'court-cylinder-balconies',source:'user-confirmed sohu_old_2',dimensionsStatus:'inferred west-arc attachment; platform levels and count not surveyed'};
+ const finMat=plain('Photo-supported red-brown vertical fin','#77584e');
+ const railMat=plain('Light painted balcony rails','#d4d5cb',.46,.25);
+ const fin=part('Attached red-brown vertical fin',balconies,{role:'court-vertical-fin'});
+ box(fin,'vertical blade',.55,11.25,-3.7,.65,16.1,2.8,finMat);
+ const supports=part('Slim pale supports below fin',balconies,{role:'court-fin-supports'});
+ for(const z of [-4.5,-2.8])cylinder(supports,[.55,.025,z],[.55,3.2,z],.12,.12,railMat,12);
+ const cap=part('Projecting fin cap',balconies,{role:'court-fin-cap'});
+ box(cap,'cap slab',0,18.4,-3.3,5.4,.30,4.1,finMat);
+ for(const y of [4.4,8.8,13.2]){
+  const deck=part(`Inferred small platform ${y}`,balconies,{role:'court-balcony-platform',levelStatus:'estimated'});
+  box(deck,'platform slab',0,y,-3.3,5.4,.27,4.0,finMat);
+  const rail=part(`Light platform railing ${y}`,balconies,{role:'court-balcony-railing'});
+  // Open wall edge; thin posts and three horizontal rails on exposed edges.
+  for(const x of [-2.7,2.7])for(let z=-5.3;z<=-1.29;z+=1)box(rail,'rail post',x,y+.66,z,.045,1.05,.045,railMat);
+  for(let x=-2.7;x<=2.71;x+=.9)box(rail,'front post',x,y+.66,-5.3,.045,1.05,.045,railMat);
+  for(const h of [.40,.72,1.18]){
+   box(rail,'front rail',0,y+h,-5.3,5.4,.045,.045,railMat);
+   for(const x of [-2.7,2.7])box(rail,'side rail',x,y+h,-3.3,.045,.045,4,railMat);
+  }
+ }
  // Remaining envelope. North is replaced by the authored photo-front component.
  const perimeterEdges=[[0,1],[2,3],[11,12],[12,13],[13,14],[14,15],[15,16],[16,17],[17,18],[18,19],[19,20],[20,21],[21,22],[22,23],[23,0]];
  for(const [ia,ib] of perimeterEdges){
@@ -79,9 +117,27 @@ export function createShundeModel(THREE,{textured=true,foliage=true,signGlyphs=n
   const n=Math.max(1,Math.round(L/4.15)),w=L/n;
   for(let i=0;i<n;i++){
    const x=(i+.5)*w,opening=w*.68;
+   const doorSpec=gardenDoors.find(d=>d.edge===ia&&Math.abs(x-d.x)<.01);
    if(isWest){
     // Photo-informed lower tall glass hall, not regular upper window storeys.
-    pane(g,x,6.0,w-.25,10.2);strip(g,x-w/2,.25,6.0,10.2,tile,-.08,.5);
+    if(doorSpec){
+     const dw=doorSpec.width,side=(w-.25-dw)/2;
+     pane(g,x,7.025,w-.25,8.15); // transom starts at 2.95m; no backer across entry
+     for(const sign of [-1,1])pane(g,x+sign*(dw/2+side/2),1.925,side,2.05);
+     const door=part(`Garden access door s${ia}`,g,{role:'garden-door',width:dw,clearHead:2.85,sourceStatus:'row photo-confirmed; bay, count and open leaves inferred'});
+     door.position.x=x;
+     for(const sign of [-1,1]){
+      box(door,'door jamb',sign*dw/2,1.5,-.12,.085,2.9,.16,frame);
+      const leaf=part('Inferred inward-open glazed leaf',door,{role:'open-glazed-door-leaf',opening:'90 degrees; illustrative, not observed hardware'});
+      box(leaf,'open leaf glass',sign*(dw/2-.045),1.43,.54,.035,2.70,1.08,glass);
+      for(const z of [0,1.10])box(leaf,'leaf stile',sign*(dw/2-.045),1.43,z,.065,2.76,.06,frame);
+      for(const y of [.065,2.795])box(leaf,'leaf rail',sign*(dw/2-.045),y,.55,.065,.065,1.16,frame);
+      box(leaf,'simple pull',sign*(dw/2-.12),1.2,.91,.045,.38,.045,frame);
+     }
+     box(door,'door head',0,2.9,-.12,dw+.09,.1,.16,frame);
+     box(door,'continuous low stone threshold',0,.0275,.6,2.6,.055,5.4,paving);
+    }else pane(g,x,6.0,w-.25,10.2);
+    strip(g,x-w/2,.25,6.0,10.2,tile,-.08,.5);
     strip(g,x,w,11.45,.65,tile);pane(g,x,12.3,w-.18,.9);
     strip(g,x,w,13.3,1.1,tile);strip(g,x,w,14.1,.5,tile);
    }else{
@@ -95,7 +151,10 @@ export function createShundeModel(THREE,{textured=true,foliage=true,signGlyphs=n
     }
    }
    if(!isWest){pane(g,x,19.52,w-.3,.58);strip(g,x,w,21.1,2.3,mat);strip(g,x,w+.01,22.0,.45,mat);}
-   strip(g,x,w+.01,.8,.25,mat);
+   if(doorSpec){
+    const side=(w-doorSpec.width)/2;
+    for(const sign of [-1,1])strip(g,x+sign*(doorSpec.width/2+side/2),side,.8,.25,mat);
+   }else strip(g,x,w+.01,.8,.25,mat);
   }
  }
  // Setback upper enclosure and open pergola are explicitly inferred depth,
@@ -132,6 +191,10 @@ export function createShundeModel(THREE,{textured=true,foliage=true,signGlyphs=n
  const path=(points,width)=>{const c=new THREE.CatmullRomCurve3(points.map(([x,z])=>new THREE.Vector3(x,.04,z)));const ps=c.getPoints(70);for(let i=0;i<70;i++){const a=ps[i],b=ps[i+1];box(campus,'continuous winding gravel path',(a.x+b.x)/2,.025,(a.z+b.z)/2,width,.045,a.distanceTo(b)+.07,pathMat,Math.atan2(b.x-a.x,b.z-a.z));}};
  path([[38,-8],[38,5],[40,16],[35,27],[18,35],[0,37],[-14,44]],1.8);
  path([[38,27],[50,31],[65,35],[74,42]],1.45);
+ for(const door of gardenDoors){
+  const start=door.toWorld(door.x,-1.8);
+  path(door.edge===11?[start,[-1.4,18],[-2,28],[0,37]]:[start,[-12,35],[-14,44]],1.8);
+ }
  const bark=pbr('Garden tree bark','grain',[83,77,61],[.5,2]);
  if(foliage){
   const points=[[5,29,5.1],[27,31,5.5],[48,20,5.6],[63,30,6.2],[60,39,4.8],[-8,32,4.5],[69,13,6.0],[35,-23,7],[-45,-22,7]];
