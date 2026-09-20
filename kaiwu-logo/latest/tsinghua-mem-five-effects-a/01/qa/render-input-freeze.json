@@ -1,0 +1,22 @@
+{
+  "frozen": true,
+  "files": {
+    "scripts/SelectiveExtrudeGeometry.js": "1a7221bfe1a5cb561b0dea386120c69e78f20f8b8907f4b5d1a6cd700b3ab11e",
+    "scripts/background.js": "f80bed265b4ecec2bdda790ae8152dbb446272a2c3b820b49cb4b51d6b7981ef",
+    "scripts/build.py": "95172ccdf1c2ad74cfd4788f2ed60593124a8b89421800d58e3b5f1aa6dc78e5",
+    "scripts/scene.js": "0bd29f434e21d8b0299482072e71cc5555ede411aabf821adbb3bf894cff8081",
+    "assets/gsap.min.js": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280",
+    "assets/scene.bundle.js": "12ccc8f881e00d95060b2435b758d6d40ca3358b8a77bab75b1f1a3967fec1aa",
+    "inputs/semantic-geometry.json": "154131acf59c90c77db021eedce8f1425227766cef64e51a905757c627f55ade",
+    "inputs/source.svg": "89bdad7d41062bf6b2cf4ed340d79ba62499126fb1f785b725ed4c76813c038c",
+    "vendor/three/LICENSE": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601",
+    "vendor/three/build/three.core.js": "03fb6e9fa08628385a9096948593251ae473239c7039496d7c280cba73d84631",
+    "vendor/three/build/three.module.js": "1bb0b770bac5da2b59b21aa5fff4c547eeb864d4e408e4c36fbc6ced1dce0e9e",
+    "vendor/three/examples/jsm/loaders/SVGLoader.js": "92694da0a1b44fd93ffdc0f4a6c80d28cc9e3a53d5cfc0206793a8dcabc7c4c4",
+    "index.html": "bb12d4ca0cc36de5fd531ab13afe22e2be7423a943aacbb0810655d9e9848f7e",
+    "hyperframes.json": "61171ded7c8539067100819665c51b4474c48ef1ae81b5b6d379f6aa6adc2173",
+    "deliverables/Tsinghua-MEM-01.html": "bfdfa5209a5199646e35c210ba20f9b95ca42de052ba997268214c28da6b8c1e"
+  },
+  "mode": "render",
+  "declaredWriters": 0
+}

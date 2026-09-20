@@ -1,0 +1,29 @@
+{
+  "frozen": true,
+  "soleAuthorStoppedWriting": true,
+  "approved": "Parent approved revised t8/t10 after previous pose review; no remaining render-input writers",
+  "utc": "2026-09-19T08:46:51.849169+00:00",
+  "files": {
+    "assets/gsap.min.js": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280",
+    "assets/scene.bundle.js": "5620965c9a469f2ed059ff7552c2ce7c2a1b29691247030ec46ef6279465edde",
+    "hyperframes.json": "61171ded7c8539067100819665c51b4474c48ef1ae81b5b6d379f6aa6adc2173",
+    "index.html": "5b69e4a2e3c9e7599f023103bd76d281802400398b66bf930f27fdc13f22df81",
+    "inputs/Tsinghua-MEM-2023-Transparent.svg": "89bdad7d41062bf6b2cf4ed340d79ba62499126fb1f785b725ed4c76813c038c",
+    "inputs/semantic-geometry.json": "154131acf59c90c77db021eedce8f1425227766cef64e51a905757c627f55ade",
+    "inputs/source-polygons.json": "974406b82c230265f620b72bc337b1c1ae4ccbd3fe0b1b701a7af817fc2684df",
+    "meta.json": "377a235376cbb5b3a1c3d400f69306bd3ee5d01ef1fe79700ced589b342e79ec",
+    "package.json": "911efb29718bc948b3f06205b731df30336854c50d1e8133ade2f89935d42721",
+    "scripts/SelectiveExtrudeGeometry.js": "1a7221bfe1a5cb561b0dea386120c69e78f20f8b8907f4b5d1a6cd700b3ab11e",
+    "scripts/build.py": "b253f40761e9b9164f1a6d1c97800dfed951096d4b1f02c2099b3ad3bb3ddf03",
+    "scripts/compare_masks.py": "b61404a8b300e186d870694bb5b5ad29ae57b41654d7c5973b37586f87d6376e",
+    "scripts/export-polygons.mjs": "32a8ffa52daa7b02d4359530c1bd1829e4d1688d163e54643626401f391083c1",
+    "scripts/investigate_geometry.py": "ac24339e02b8103874ceabc78a4017e23d28c781456455ebd2912ded83b79e09",
+    "scripts/prototype.mjs": "c5e786ebd1fd8d9e70f383645117e007c4d5bcdfaff5dc9d2e6f9bfe4072cbc1",
+    "scripts/scene.js": "92de6bd6bd5c759795938c2c52a0c14dca75553933ce81c792611e42c7177a41",
+    "scripts/split_geometry.py": "0a022c1d238a046ee1c501a111f4bdaf221d2f483a00ad9c3e9b44383528cbcb",
+    "vendor/three/LICENSE": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601",
+    "vendor/three/build/three.core.js": "03fb6e9fa08628385a9096948593251ae473239c7039496d7c280cba73d84631",
+    "vendor/three/build/three.module.js": "1bb0b770bac5da2b59b21aa5fff4c547eeb864d4e408e4c36fbc6ced1dce0e9e",
+    "vendor/three/examples/jsm/loaders/SVGLoader.js": "92694da0a1b44fd93ffdc0f4a6c80d28cc9e3a53d5cfc0206793a8dcabc7c4c4"
+  }
+}

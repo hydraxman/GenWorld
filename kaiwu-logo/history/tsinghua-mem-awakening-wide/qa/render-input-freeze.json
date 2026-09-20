@@ -1,0 +1,28 @@
+{
+  "frozen": true,
+  "files": {
+    "assets/gsap.min.js": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280",
+    "assets/scene.bundle.js": "f50247fdf430710f244e37da95aec415afd952d2f9b01f7bf7d73d420be144d1",
+    "hyperframes.json": "61171ded7c8539067100819665c51b4474c48ef1ae81b5b6d379f6aa6adc2173",
+    "index.html": "6ad00dde989075412e0781daa5b3f8a273db6c9a9d89328ee93a5cc84685532e",
+    "inputs/Tsinghua-MEM-2023-Transparent.svg": "89bdad7d41062bf6b2cf4ed340d79ba62499126fb1f785b725ed4c76813c038c",
+    "inputs/semantic-geometry.json": "154131acf59c90c77db021eedce8f1425227766cef64e51a905757c627f55ade",
+    "inputs/source-polygons.json": "974406b82c230265f620b72bc337b1c1ae4ccbd3fe0b1b701a7af817fc2684df",
+    "package.json": "0d5b8a3079983ae4718c9c0e8022f8daa8b821214be35edb24a3ca71740eda96",
+    "scripts/SelectiveExtrudeGeometry.js": "1a7221bfe1a5cb561b0dea386120c69e78f20f8b8907f4b5d1a6cd700b3ab11e",
+    "scripts/build.py": "ac5435dce0a68ff0ec106e5bf32266b06b827c3a5ce35d1e45517a956424bc12",
+    "scripts/galaxy.js": "05281a20d6c2d61673a71141a09ad211bc51bd0dc9557e7cd68b4b34d467b6d6",
+    "scripts/scene.js": "4d447995dca57aab4d892b567bf360e7307d2e11e21414ef9ae9e6b04f4c475c",
+    "vendor/three/LICENSE": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601",
+    "vendor/three/build/three.core.js": "03fb6e9fa08628385a9096948593251ae473239c7039496d7c280cba73d84631",
+    "vendor/three/build/three.module.js": "1bb0b770bac5da2b59b21aa5fff4c547eeb864d4e408e4c36fbc6ced1dce0e9e",
+    "vendor/three/examples/jsm/loaders/SVGLoader.js": "92694da0a1b44fd93ffdc0f4a6c80d28cc9e3a53d5cfc0206793a8dcabc7c4c4",
+    "deliverables/Tsinghua-MEM-Awakening-Wide.html": "bfb055ae14ae7aa14ecc5a1a464093cb1e9c3e0c07cf36a3b84c79bd1dc71182"
+  },
+  "author_handoff": "Author has exited; approved visual, parent owns deterministic render",
+  "dimensions": [
+    1920,
+    1080
+  ],
+  "duration": 12
+}

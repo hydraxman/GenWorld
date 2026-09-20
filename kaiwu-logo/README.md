@@ -49,6 +49,12 @@ python3 -m http.server 8080 --bind 127.0.0.1
 
 原构建 / 渲染 / QA 脚本原样存档：部分依赖旧机器的 Puppeteer、Chrome、esbuild 缓存绝对路径、历史 QA 文件或输出视频；迁移环境须先调整路径并创建输出目录。这次只验证了场景入口编译与离线播放器，不声称所有历史辅助脚本跨机器直接可用，也没有重渲染所有视频。各旧 README 中提到但本库未收录的视频、QA 帧及 ZIP 是原交付记录，不是缺失源代码。
 
+## 原稿与渲染前置文件
+
+- `source-art/` 保存原始透明 SVG、矢量化脚本 `vectorize.py` 和预览脚本 `render.mjs`。矢量化依赖 Pillow / Potrace；脚本引用的最初 JPG 已不在本机，因此只能保留生成流程，不能宣称现在可从原始 JPG 重建。现有 SVG 完整可用。
+- 保留各工程 `qa/render-input-freeze.json` 以及必要的离线验证脚本。8 份冻结清单引用的文件均已逐项重新校验哈希；不把这些渲染前置文件误当普通 QA 截图删除。
+- `open-world/scripts/setup.py` 是会覆盖场景的历史派生脚本，不是安装步骤；通常无需运行。
+
 ## 归档与许可边界
 
 - `archive-manifest.json` 记录原项目名、每个归档文件的相对路径、字节数和 SHA-256；源文件保持原样。

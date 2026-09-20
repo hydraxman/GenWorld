@@ -184,5 +184,51 @@
       "passed": true
     }
   ],
-  "scope": "Archive smoke tests only: offline loading, no HTTP requests, no page errors, timeline seeking changes pixels; 3D entrypoints compile. No full video re-render or portability claim for historical helper scripts."
+  "scope": "Archive smoke tests only: offline loading, no HTTP requests, no page errors, timeline seeking changes pixels; 3D entrypoints compile. No full video re-render or portability claim for historical helper scripts.",
+  "frozenInputChecks": [
+    {
+      "path": "history/tsinghua-mem-3d-book-opening/qa/render-input-freeze.json",
+      "verifiedFiles": 21,
+      "passed": true
+    },
+    {
+      "path": "history/tsinghua-mem-awakening-wide/qa/render-input-freeze.json",
+      "verifiedFiles": 17,
+      "passed": true
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/01/qa/render-input-freeze.json",
+      "verifiedFiles": 15,
+      "passed": true
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/02/qa/render-input-freeze.json",
+      "verifiedFiles": 15,
+      "passed": true
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/03/qa/render-input-freeze.json",
+      "verifiedFiles": 15,
+      "passed": true
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/04/qa/render-input-freeze.json",
+      "verifiedFiles": 15,
+      "passed": true
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/qa/render-input-freeze.json",
+      "verifiedFiles": 23,
+      "passed": true
+    },
+    {
+      "path": "history/tsinghua-mem-open-world/qa/render-input-freeze.json",
+      "verifiedFiles": 21,
+      "passed": true
+    }
+  ],
+  "sourceArt": {
+    "originalRasterExists": false,
+    "revectorizationTested": false
+  }
 }

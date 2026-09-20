@@ -1,0 +1,30 @@
+{
+  "frozen": true,
+  "writers": "none; sole author stopped scene/build writes before capture",
+  "frozenUTC": "2026-09-20T16:57:15.786660+00:00",
+  "files": {
+    "assets/cloud-sky-4k.jpg": "f4950297a0b7987d8ecd1890731d8af194c8ba286905cb2eb7fcfab7db52e359",
+    "assets/gsap.min.js": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280",
+    "assets/scene.bundle.js": "461b4a102579bc3eb5d9936f7340d557c07dbf129bdc0c8d76a169daf3dc7fd7",
+    "assets/sky-data.json": "048859130c6aa89c351d8e0f7d43a7fee3007003c200b199c7c8978cf38f4ab1",
+    "deliverables/05-Blue-Sky-Cloud-Opening.html": "264823159595deca7af3ecc9dc0e39de393990e33e753aad435faddf04643ea8",
+    "index.html": "2e84e78a32a3301f7398b98337a20c3ec1bee304c1b6b3dab3686af516dcf866",
+    "inputs/Tsinghua-MEM-2023-Transparent.svg": "89bdad7d41062bf6b2cf4ed340d79ba62499126fb1f785b725ed4c76813c038c",
+    "inputs/semantic-geometry.json": "154131acf59c90c77db021eedce8f1425227766cef64e51a905757c627f55ade",
+    "inputs/source-polygons.json": "974406b82c230265f620b72bc337b1c1ae4ccbd3fe0b1b701a7af817fc2684df",
+    "references.json": "690cf602f89f42f9081f62ae62804cdf66799b4e78f4b4b77a227344d5fb3fcd",
+    "research/ImprovedNoise.js": "d3821241e25bf0c8bfc13cec941924573bbaaf8f599a4fa07d60664b97832b39",
+    "research/three-license.txt": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc",
+    "scripts/SelectiveExtrudeGeometry.js": "1a7221bfe1a5cb561b0dea386120c69e78f20f8b8907f4b5d1a6cd700b3ab11e",
+    "scripts/build.py": "ea799c5d10e5655cc8ca8b5dce270b3f476c76fdb0fae0e409ae3e580f6c6ad0",
+    "scripts/clouds.js": "8b01752b05523de0ed68f2ebd389dad651f0de44943b1cafbfac302eaf093d75",
+    "scripts/direct-render.mjs": "f3b45dd4527a2cc0298c4e98cd12173df23c1119477597c46571163920db375c",
+    "scripts/freeze.py": "73d706fabc5960ff007a444fa47f0e31514ba8bc2d198f0055c8dcdc32185fe4",
+    "scripts/preview.mjs": "946db8e2998bb5eafde2ce217f14bab84724c5c0221e768a3afe2780034451c2",
+    "scripts/scene.js": "6c31b0478506964d2dee9b196ccb30d91d02930e3dbd3f894ea973c070913068",
+    "vendor/three/LICENSE": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601",
+    "vendor/three/build/three.core.js": "03fb6e9fa08628385a9096948593251ae473239c7039496d7c280cba73d84631",
+    "vendor/three/build/three.module.js": "1bb0b770bac5da2b59b21aa5fff4c547eeb864d4e408e4c36fbc6ced1dce0e9e",
+    "vendor/three/examples/jsm/loaders/SVGLoader.js": "92694da0a1b44fd93ffdc0f4a6c80d28cc9e3a53d5cfc0206793a8dcabc7c4c4"
+  }
+}
