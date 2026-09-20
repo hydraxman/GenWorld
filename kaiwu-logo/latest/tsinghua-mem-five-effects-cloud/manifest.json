@@ -1,0 +1,26 @@
+{
+  "versions": [
+    {
+      "id": "05",
+      "name": "蓝天云启",
+      "duration": 5.0,
+      "fps": 30,
+      "width": 1920,
+      "height": 1080,
+      "frames": 150,
+      "audio": false,
+      "project": "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-cloud",
+      "mp4": "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-cloud/deliverables/05-Blue-Sky-Cloud-Opening.mp4",
+      "offlineHTML": "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-cloud/deliverables/05-Blue-Sky-Cloud-Opening.html",
+      "references": "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-cloud/references.json",
+      "MITLicense": "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-cloud/research/three-license.txt",
+      "freeze": "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-cloud/qa/render-input-freeze.json",
+      "verification": "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-cloud/qa/final-verification.json",
+      "foregroundComparison": "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-cloud/qa/foreground-comparison.json",
+      "mp4SHA256": "099a0c840c0f5886136b9afac12618a5e9ec87d965e63f7736389035297fa95b",
+      "offlineSHA256": "264823159595deca7af3ecc9dc0e39de393990e33e753aad435faddf04643ea8",
+      "frozen": true,
+      "writers": 0
+    }
+  ]
+}

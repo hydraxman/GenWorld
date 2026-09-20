@@ -1,0 +1,12 @@
+# Reference ledger / visual research
+
+Read live article and demos before authoring. Text snapshots and browser captures in this directory are research evidence only, not film assets.
+
+1. https://tympanus.net/codrops/2025/02/17/implementing-a-dissolve-effect-with-shaders-and-particles-in-three-js/ — Jatin Chopra, 2025-02-17. Live DOM fully read: correlated noise threshold clips solid fragments, narrow threshold band becomes emissive, particles inhabit the same edge; highlight control avoids overpowering reflective material. Reverse the general mechanism for 03 assembly, using our own trigonometric/noise GLSL and deterministic surface samples instead of the tutorial's incremental velocity code.
+2. https://tympanus.net/Tutorials/EmissiveDissolveEffect/ — inspected actual WebGL demo: cyan luminous fragmented edges over reflective gray solid, temporary emitted particles. 03 instead uses inward trajectories and the user's purple badge. No demo/source code copied. User-provided provenance boundary: JatinChopra/emissive-dissolve-effect at 9a913c840beb6b9e979f43ed07f35ec44cb95f2e has no license via API; do not interpret public source visibility as permission.
+3. https://reactbits.dev/backgrounds/iridescence — inspected browser preview/DOM; slowly advected iridescent waves, customizable base color/speed/amplitude. Visual reference only: custom continuous optical field for 04; no ReactBits component or GLSL copied. User-specified MIT + Commons Clause restrictions on independent component redistribution are respected; this is film-specific independent implementation, not redistributing their component.
+4. https://threejs.org/examples/webgl_shaders_ocean.html — inspected rendered ocean reflection, cohesive wave distortion and continuous highlights. Mechanism only: wave-derived normal/refraction displacement, coherent time-varying surface. No example source or textures copied.
+
+Reuse: approved local awakening-wide semantic geometry, SelectiveExtrudeGeometry, PBR setup, and Three.js vendor (LICENSE preserved) copied into each isolated project. No new third-party visual assets. No HyperFrames registry code copied; own geometry-sampled particle implementation avoids license ambiguity and preserves logo topology.
+
+Reference screen images/text are not embedded in deliverable HTML/MP4. Film embeds only original procedural effects and supplied logo. No assertion of ownership of the Tsinghua/MEM mark or new trademark rights.

@@ -1,0 +1,18 @@
+from pathlib import Path
+import subprocess,json,shutil,hashlib
+P=Path(__file__).resolve().parent
+es=next((Path.home()/'.npm/_npx').glob('*/node_modules/esbuild/bin/esbuild'))
+for mode in ['03','04']:
+ d=P/mode;shutil.copy2(P/'effects.js',d/'scripts/effects.js')
+ subprocess.run([str(es),'scripts/scene.js','--bundle','--format=iife','--minify','--alias:three='+str(d/'vendor/three/build/three.module.js'),'--outfile=assets/scene.bundle.js'],cwd=d,check=True)
+ title='星尘凝徽' if mode=='03' else '折光涟漪'
+ timeline=f"const clock={{_t:0,get t(){{return this._t}},set t(v){{this._t=v;if(window.renderAt)window.renderAt(v)}}}};const tl=gsap.timeline({{paused:true}});tl.to(clock,{{t:5,duration:5,ease:'none'}},0);window.__timelines={{'mem-effect-{mode}':tl}};"
+ css='*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;background:#080b14}#root{position:relative;width:1920px;height:1080px;overflow:hidden}.clip{position:absolute;inset:0}canvas{position:absolute;inset:0;display:block;width:100%;height:100%}'
+ base=f'<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>清华MEM {mode} {title}</title><style>{css}</style></head><body><div id="root" data-composition-id="mem-effect-{mode}" data-duration="5" data-width="1920" data-height="1080" data-fps="30"><div class="clip" id="effect-{mode}" data-start="0" data-duration="5" data-track-index="1"><canvas id="three-layer" width="1920" height="1080"></canvas></div></div><script src="assets/gsap.min.js"></script><script>{timeline}</script><script src="assets/scene.bundle.js"></script></body></html>'
+ (d/'index.html').write_text(base)
+ controls='<div class="controls"><button id="play">播放</button><button id="replay">重播</button><input id="scrub" aria-label="时间轴" type="range" min="0" max="5" step=".001" value="0"><output id="time">0.00 / 5</output></div>'
+ playercss='html,body{height:auto;min-height:100%;color:#dce0ee;font:14px sans-serif}body{display:flex;align-items:center;flex-direction:column;padding:18px}#frame{width:min(94vw,145vh,1920px);aspect-ratio:16/9;position:relative}#root{transform-origin:top left}.controls{width:min(90vw,760px);display:flex;gap:12px;padding:16px 0;align-items:center}button{background:#282239;color:#eee;border:1px solid #796489;border-radius:6px;padding:9px 14px}input{flex:1}'
+ playerjs="const root=document.getElementById('root'),frame=document.createElement('div');frame.id='frame';root.before(frame);frame.append(root);const resize=()=>{root.style.transform='scale('+frame.clientWidth/1920+')'};window.addEventListener('resize',resize);resize();const play=document.getElementById('play'),scrub=document.getElementById('scrub'),out=document.getElementById('time');function sync(){scrub.value=tl.time();out.textContent=tl.time().toFixed(2)+' / 5';if(tl.time()>=5){tl.pause();play.textContent='播放'}}tl.eventCallback('onUpdate',sync);play.onclick=()=>{if(tl.paused()){if(tl.time()>=5)tl.time(0);tl.play();play.textContent='暂停'}else{tl.pause();play.textContent='播放'}};document.getElementById('replay').onclick=()=>{tl.time(0).play();play.textContent='暂停'};scrub.oninput=()=>{tl.pause().time(Number(scrub.value));window.renderAt(Number(scrub.value));play.textContent='播放';sync()};"
+ offline=base.replace('<script src="assets/gsap.min.js"></script>','<script>'+(d/'assets/gsap.min.js').read_text()+'</script>').replace('<script src="assets/scene.bundle.js"></script>','<script>'+(d/'assets/scene.bundle.js').read_text()+'</script>').replace('</head>','<style>'+playercss+'</style></head>').replace('</body>',controls+'<script>'+playerjs+'</script></body>')
+ (d/f'deliverables/Tsinghua-MEM-{mode}.html').write_text(offline)
+ print('Built',mode,title)

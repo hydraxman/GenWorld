@@ -1,0 +1,52 @@
+[
+  {
+    "id": "01",
+    "name": "星际穿越",
+    "mp4": "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-a/01/deliverables/Tsinghua-MEM-01-5s.mp4",
+    "offline_html": "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-a/01/deliverables/Tsinghua-MEM-01.html",
+    "duration": 5,
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "frames": 150,
+    "audio": false,
+    "source_paths": [
+      "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-a/01/index.html",
+      "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-a/01/scripts",
+      "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-a/01/inputs",
+      "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-a/01/vendor",
+      "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-a/01/assets",
+      "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-a/01/hyperframes.json",
+      "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-a/references.json"
+    ],
+    "qa_path": "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-a/01/qa",
+    "references": "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-a/references.json",
+    "sha256": "c08a167019407de976cb23147f5e746fb2d43417c1351b91be12f064c2c1bb1f",
+    "frozen": true
+  },
+  {
+    "id": "02",
+    "name": "极光织带",
+    "mp4": "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-a/02/deliverables/Tsinghua-MEM-02-5s.mp4",
+    "offline_html": "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-a/02/deliverables/Tsinghua-MEM-02.html",
+    "duration": 5,
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "frames": 150,
+    "audio": false,
+    "source_paths": [
+      "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-a/02/index.html",
+      "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-a/02/scripts",
+      "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-a/02/inputs",
+      "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-a/02/vendor",
+      "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-a/02/assets",
+      "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-a/02/hyperframes.json",
+      "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-a/references.json"
+    ],
+    "qa_path": "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-a/02/qa",
+    "references": "/Users/bryannathan/.hermes/workspace/videos/tsinghua-mem-five-effects-a/references.json",
+    "sha256": "0e43ab5bfcdc8d0bda97f8f7be485043c833aa60b4ae3de5b692408ec76f0384",
+    "frozen": true
+  }
+]

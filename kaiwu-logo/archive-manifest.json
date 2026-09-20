@@ -1,0 +1,1493 @@
+{
+  "purpose": "Unmodified source snapshots; historical environment-specific scripts are retained as provenance, not promised portable entrypoints.",
+  "projects": [
+    "tsinghua-mem-3d-book-opening",
+    "tsinghua-mem-3d-starlight",
+    "tsinghua-mem-awakening-wide",
+    "tsinghua-mem-badge-motion",
+    "tsinghua-mem-five-effects-a",
+    "tsinghua-mem-five-effects-b",
+    "tsinghua-mem-five-effects-cloud",
+    "tsinghua-mem-open-world",
+    "tsinghua-mem-seven-studies",
+    "tsinghua-mem-starlight-v2"
+  ],
+  "files": [
+    {
+      "path": "history/tsinghua-mem-3d-book-opening/BRIEF.md",
+      "source": "tsinghua-mem-3d-book-opening/BRIEF.md",
+      "sha256": "b544da1f1deb5a34a848dc6f4eac5b2ed097bb9fef22ff4ece886cde2f5dd22c",
+      "bytes": 1247
+    },
+    {
+      "path": "history/tsinghua-mem-3d-book-opening/README.md",
+      "source": "tsinghua-mem-3d-book-opening/README.md",
+      "sha256": "df3fd7ceb93060592fcc9f4bfd901f83f314f706975ea847bf32e1bf93d3650e",
+      "bytes": 3203
+    },
+    {
+      "path": "history/tsinghua-mem-3d-book-opening/hyperframes.json",
+      "source": "tsinghua-mem-3d-book-opening/hyperframes.json",
+      "sha256": "61171ded7c8539067100819665c51b4474c48ef1ae81b5b6d379f6aa6adc2173",
+      "bytes": 110
+    },
+    {
+      "path": "history/tsinghua-mem-3d-book-opening/index.html",
+      "source": "tsinghua-mem-3d-book-opening/index.html",
+      "sha256": "5b69e4a2e3c9e7599f023103bd76d281802400398b66bf930f27fdc13f22df81",
+      "bytes": 1258
+    },
+    {
+      "path": "history/tsinghua-mem-3d-book-opening/meta.json",
+      "source": "tsinghua-mem-3d-book-opening/meta.json",
+      "sha256": "377a235376cbb5b3a1c3d400f69306bd3ee5d01ef1fe79700ced589b342e79ec",
+      "bytes": 93
+    },
+    {
+      "path": "history/tsinghua-mem-3d-book-opening/package.json",
+      "source": "tsinghua-mem-3d-book-opening/package.json",
+      "sha256": "911efb29718bc948b3f06205b731df30336854c50d1e8133ade2f89935d42721",
+      "bytes": 349
+    },
+    {
+      "path": "history/tsinghua-mem-3d-book-opening/deliverables/Tsinghua-MEM-3D-Book-Opening.html",
+      "source": "tsinghua-mem-3d-book-opening/deliverables/Tsinghua-MEM-3D-Book-Opening.html",
+      "sha256": "219e0fc6d573f20740cd95510186c9dfc64d85435cac600957020d0deccac45d",
+      "bytes": 2106693
+    },
+    {
+      "path": "history/tsinghua-mem-3d-book-opening/scripts/SelectiveExtrudeGeometry.js",
+      "source": "tsinghua-mem-3d-book-opening/scripts/SelectiveExtrudeGeometry.js",
+      "sha256": "1a7221bfe1a5cb561b0dea386120c69e78f20f8b8907f4b5d1a6cd700b3ab11e",
+      "bytes": 21556
+    },
+    {
+      "path": "history/tsinghua-mem-3d-book-opening/scripts/build.py",
+      "source": "tsinghua-mem-3d-book-opening/scripts/build.py",
+      "sha256": "b253f40761e9b9164f1a6d1c97800dfed951096d4b1f02c2099b3ad3bb3ddf03",
+      "bytes": 4940
+    },
+    {
+      "path": "history/tsinghua-mem-3d-book-opening/scripts/compare_masks.py",
+      "source": "tsinghua-mem-3d-book-opening/scripts/compare_masks.py",
+      "sha256": "b61404a8b300e186d870694bb5b5ad29ae57b41654d7c5973b37586f87d6376e",
+      "bytes": 2164
+    },
+    {
+      "path": "history/tsinghua-mem-3d-book-opening/scripts/export-polygons.mjs",
+      "source": "tsinghua-mem-3d-book-opening/scripts/export-polygons.mjs",
+      "sha256": "32a8ffa52daa7b02d4359530c1bd1829e4d1688d163e54643626401f391083c1",
+      "bytes": 1655
+    },
+    {
+      "path": "history/tsinghua-mem-3d-book-opening/scripts/investigate_geometry.py",
+      "source": "tsinghua-mem-3d-book-opening/scripts/investigate_geometry.py",
+      "sha256": "ac24339e02b8103874ceabc78a4017e23d28c781456455ebd2912ded83b79e09",
+      "bytes": 1482
+    },
+    {
+      "path": "history/tsinghua-mem-3d-book-opening/scripts/prototype.mjs",
+      "source": "tsinghua-mem-3d-book-opening/scripts/prototype.mjs",
+      "sha256": "c5e786ebd1fd8d9e70f383645117e007c4d5bcdfaff5dc9d2e6f9bfe4072cbc1",
+      "bytes": 3730
+    },
+    {
+      "path": "history/tsinghua-mem-3d-book-opening/scripts/scene.js",
+      "source": "tsinghua-mem-3d-book-opening/scripts/scene.js",
+      "sha256": "92de6bd6bd5c759795938c2c52a0c14dca75553933ce81c792611e42c7177a41",
+      "bytes": 8941
+    },
+    {
+      "path": "history/tsinghua-mem-3d-book-opening/scripts/split_geometry.py",
+      "source": "tsinghua-mem-3d-book-opening/scripts/split_geometry.py",
+      "sha256": "0a022c1d238a046ee1c501a111f4bdaf221d2f483a00ad9c3e9b44383528cbcb",
+      "bytes": 2723
+    },
+    {
+      "path": "history/tsinghua-mem-3d-book-opening/assets/gsap.min.js",
+      "source": "tsinghua-mem-3d-book-opening/assets/gsap.min.js",
+      "sha256": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280",
+      "bytes": 72779
+    },
+    {
+      "path": "history/tsinghua-mem-3d-book-opening/assets/scene.bundle.js",
+      "source": "tsinghua-mem-3d-book-opening/assets/scene.bundle.js",
+      "sha256": "5620965c9a469f2ed059ff7552c2ce7c2a1b29691247030ec46ef6279465edde",
+      "bytes": 2030971
+    },
+    {
+      "path": "history/tsinghua-mem-3d-book-opening/vendor/three/LICENSE",
+      "source": "tsinghua-mem-3d-book-opening/vendor/three/LICENSE",
+      "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601",
+      "bytes": 1081
+    },
+    {
+      "path": "history/tsinghua-mem-3d-book-opening/vendor/three/examples/jsm/loaders/SVGLoader.js",
+      "source": "tsinghua-mem-3d-book-opening/vendor/three/examples/jsm/loaders/SVGLoader.js",
+      "sha256": "92694da0a1b44fd93ffdc0f4a6c80d28cc9e3a53d5cfc0206793a8dcabc7c4c4",
+      "bytes": 72759
+    },
+    {
+      "path": "history/tsinghua-mem-3d-book-opening/vendor/three/build/three.core.js",
+      "source": "tsinghua-mem-3d-book-opening/vendor/three/build/three.core.js",
+      "sha256": "03fb6e9fa08628385a9096948593251ae473239c7039496d7c280cba73d84631",
+      "bytes": 1405971
+    },
+    {
+      "path": "history/tsinghua-mem-3d-book-opening/vendor/three/build/three.module.js",
+      "source": "tsinghua-mem-3d-book-opening/vendor/three/build/three.module.js",
+      "sha256": "1bb0b770bac5da2b59b21aa5fff4c547eeb864d4e408e4c36fbc6ced1dce0e9e",
+      "bytes": 626071
+    },
+    {
+      "path": "history/tsinghua-mem-3d-book-opening/inputs/Tsinghua-MEM-2023-Transparent.svg",
+      "source": "tsinghua-mem-3d-book-opening/inputs/Tsinghua-MEM-2023-Transparent.svg",
+      "sha256": "89bdad7d41062bf6b2cf4ed340d79ba62499126fb1f785b725ed4c76813c038c",
+      "bytes": 67793
+    },
+    {
+      "path": "history/tsinghua-mem-3d-book-opening/inputs/semantic-geometry.json",
+      "source": "tsinghua-mem-3d-book-opening/inputs/semantic-geometry.json",
+      "sha256": "154131acf59c90c77db021eedce8f1425227766cef64e51a905757c627f55ade",
+      "bytes": 1305951
+    },
+    {
+      "path": "history/tsinghua-mem-3d-book-opening/inputs/source-polygons.json",
+      "source": "tsinghua-mem-3d-book-opening/inputs/source-polygons.json",
+      "sha256": "974406b82c230265f620b72bc337b1c1ae4ccbd3fe0b1b701a7af817fc2684df",
+      "bytes": 983274
+    },
+    {
+      "path": "history/tsinghua-mem-3d-starlight/BRIEF.md",
+      "source": "tsinghua-mem-3d-starlight/BRIEF.md",
+      "sha256": "e6b5d8a8974da0364150d916d4b61b81b565707689bfd672621b497f33dd3cf8",
+      "bytes": 1064
+    },
+    {
+      "path": "history/tsinghua-mem-3d-starlight/README.md",
+      "source": "tsinghua-mem-3d-starlight/README.md",
+      "sha256": "2bc90835fd75ce2dc9ed7162e41068a114de7e87cbd7085bb7a0cddf4ec67e34",
+      "bytes": 2565
+    },
+    {
+      "path": "history/tsinghua-mem-3d-starlight/hyperframes.json",
+      "source": "tsinghua-mem-3d-starlight/hyperframes.json",
+      "sha256": "381b3d176c838d8dfc5c0c882d2a13b11a2999cb590fd311b02be7dd59c2dd12",
+      "bytes": 112
+    },
+    {
+      "path": "history/tsinghua-mem-3d-starlight/index.html",
+      "source": "tsinghua-mem-3d-starlight/index.html",
+      "sha256": "797278e28c29d817f213b471247b48c8eee4e477ca9792c66195441d404391bc",
+      "bytes": 1225
+    },
+    {
+      "path": "history/tsinghua-mem-3d-starlight/meta.json",
+      "source": "tsinghua-mem-3d-starlight/meta.json",
+      "sha256": "e03305bf9e0af130aec16391631cc3613c2cfb435f30add2a8bddac1ab6330b3",
+      "bytes": 68
+    },
+    {
+      "path": "history/tsinghua-mem-3d-starlight/package.json",
+      "source": "tsinghua-mem-3d-starlight/package.json",
+      "sha256": "7d8f0ddb9f039698a72275afff742b5d615ecc3aefc9ca2ce4bde168d0716805",
+      "bytes": 336
+    },
+    {
+      "path": "history/tsinghua-mem-3d-starlight/deliverables/Tsinghua-MEM-3D-Starlight.html",
+      "source": "tsinghua-mem-3d-starlight/deliverables/Tsinghua-MEM-3D-Starlight.html",
+      "sha256": "87f9b4c70ef04677edd21274d398f75a4d60d0b6517bd5f56ca5856570d6315b",
+      "bytes": 1084857
+    },
+    {
+      "path": "history/tsinghua-mem-3d-starlight/deliverables/contact-sheet.jpg",
+      "source": "tsinghua-mem-3d-starlight/deliverables/contact-sheet.jpg",
+      "sha256": "c8a0cb2ffe66f5d89ed5e1eea1473813b66b39eba72faf56b32dc8f7d10d0816",
+      "bytes": 195360
+    },
+    {
+      "path": "history/tsinghua-mem-3d-starlight/scripts/build.py",
+      "source": "tsinghua-mem-3d-starlight/scripts/build.py",
+      "sha256": "9aef0108057b2ca7e1a9309946ba4c6cb83c5a7368aa4639ebc8207eacd04833",
+      "bytes": 4921
+    },
+    {
+      "path": "history/tsinghua-mem-3d-starlight/scripts/nebula.py",
+      "source": "tsinghua-mem-3d-starlight/scripts/nebula.py",
+      "sha256": "9915fb251f8e4a47da3d3add92738ad592849bf071f9a050fe3061e58e12bf55",
+      "bytes": 1414
+    },
+    {
+      "path": "history/tsinghua-mem-3d-starlight/scripts/prototype.mjs",
+      "source": "tsinghua-mem-3d-starlight/scripts/prototype.mjs",
+      "sha256": "93e59e7f981bb0c124a9a3e6f068ee1c5832e1ed1e5ad632a80659fae7b13851",
+      "bytes": 1648
+    },
+    {
+      "path": "history/tsinghua-mem-3d-starlight/scripts/scene.js",
+      "source": "tsinghua-mem-3d-starlight/scripts/scene.js",
+      "sha256": "723537d97c02908c7ea4f31e2d95fd4c89c876d35c9c4cbc58fd7fc217696010",
+      "bytes": 6051
+    },
+    {
+      "path": "history/tsinghua-mem-3d-starlight/scripts/verify.mjs",
+      "source": "tsinghua-mem-3d-starlight/scripts/verify.mjs",
+      "sha256": "a34cb65ccbeb4a767a4889a8cf303364cf1d2b529c7f1fe5fa69bb03f2b17b54",
+      "bytes": 5212
+    },
+    {
+      "path": "history/tsinghua-mem-3d-starlight/assets/gsap.min.js",
+      "source": "tsinghua-mem-3d-starlight/assets/gsap.min.js",
+      "sha256": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280",
+      "bytes": 72779
+    },
+    {
+      "path": "history/tsinghua-mem-3d-starlight/assets/nebula-0.jpg",
+      "source": "tsinghua-mem-3d-starlight/assets/nebula-0.jpg",
+      "sha256": "a09247e9c0e6d05f0e475ab68ddabe21fbca559d6a556c6975e8cb0d6147e340",
+      "bytes": 148790
+    },
+    {
+      "path": "history/tsinghua-mem-3d-starlight/assets/nebula-1.jpg",
+      "source": "tsinghua-mem-3d-starlight/assets/nebula-1.jpg",
+      "sha256": "d66190887527ce38241448ccdc6ae40b06ff8616e5fbedb812f19acc84d41a04",
+      "bytes": 154325
+    },
+    {
+      "path": "history/tsinghua-mem-3d-starlight/assets/nebula-2.jpg",
+      "source": "tsinghua-mem-3d-starlight/assets/nebula-2.jpg",
+      "sha256": "fe0e32429809fb7c8947160dd04ef089828ef3d4a86d3140d1471d416ed4ba95",
+      "bytes": 148453
+    },
+    {
+      "path": "history/tsinghua-mem-3d-starlight/assets/nebula-3.jpg",
+      "source": "tsinghua-mem-3d-starlight/assets/nebula-3.jpg",
+      "sha256": "8481404f40ea7978ad26646d12467ea5dd4a65eed88676de42f89083a72aba62",
+      "bytes": 158119
+    },
+    {
+      "path": "history/tsinghua-mem-3d-starlight/assets/scene.bundle.js",
+      "source": "tsinghua-mem-3d-starlight/assets/scene.bundle.js",
+      "sha256": "2725fe5c03c6c676c2e0e3db83a1015c350ab4ac22f9645ec8e824ff20358c41",
+      "bytes": 1009198
+    },
+    {
+      "path": "history/tsinghua-mem-3d-starlight/vendor/three/LICENSE",
+      "source": "tsinghua-mem-3d-starlight/vendor/three/LICENSE",
+      "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601",
+      "bytes": 1081
+    },
+    {
+      "path": "history/tsinghua-mem-3d-starlight/vendor/three/examples/jsm/loaders/SVGLoader.js",
+      "source": "tsinghua-mem-3d-starlight/vendor/three/examples/jsm/loaders/SVGLoader.js",
+      "sha256": "92694da0a1b44fd93ffdc0f4a6c80d28cc9e3a53d5cfc0206793a8dcabc7c4c4",
+      "bytes": 72759
+    },
+    {
+      "path": "history/tsinghua-mem-3d-starlight/vendor/three/build/three.core.js",
+      "source": "tsinghua-mem-3d-starlight/vendor/three/build/three.core.js",
+      "sha256": "03fb6e9fa08628385a9096948593251ae473239c7039496d7c280cba73d84631",
+      "bytes": 1405971
+    },
+    {
+      "path": "history/tsinghua-mem-3d-starlight/vendor/three/build/three.module.js",
+      "source": "tsinghua-mem-3d-starlight/vendor/three/build/three.module.js",
+      "sha256": "1bb0b770bac5da2b59b21aa5fff4c547eeb864d4e408e4c36fbc6ced1dce0e9e",
+      "bytes": 626071
+    },
+    {
+      "path": "history/tsinghua-mem-3d-starlight/inputs/Tsinghua-MEM-2023-Transparent.svg",
+      "source": "tsinghua-mem-3d-starlight/inputs/Tsinghua-MEM-2023-Transparent.svg",
+      "sha256": "89bdad7d41062bf6b2cf4ed340d79ba62499126fb1f785b725ed4c76813c038c",
+      "bytes": 67793
+    },
+    {
+      "path": "history/tsinghua-mem-awakening-wide/BRIEF.md",
+      "source": "tsinghua-mem-awakening-wide/BRIEF.md",
+      "sha256": "1e27505e37dafa98e2be47f37f85e171fac0261f843497ab85e60f68f88d72e4",
+      "bytes": 952
+    },
+    {
+      "path": "history/tsinghua-mem-awakening-wide/README.md",
+      "source": "tsinghua-mem-awakening-wide/README.md",
+      "sha256": "8123aa852680181bde44e09c249fcecf10c072dc074917384a71c0fdc005b37b",
+      "bytes": 1974
+    },
+    {
+      "path": "history/tsinghua-mem-awakening-wide/hyperframes.json",
+      "source": "tsinghua-mem-awakening-wide/hyperframes.json",
+      "sha256": "61171ded7c8539067100819665c51b4474c48ef1ae81b5b6d379f6aa6adc2173",
+      "bytes": 110
+    },
+    {
+      "path": "history/tsinghua-mem-awakening-wide/index.html",
+      "source": "tsinghua-mem-awakening-wide/index.html",
+      "sha256": "6ad00dde989075412e0781daa5b3f8a273db6c9a9d89328ee93a5cc84685532e",
+      "bytes": 1125
+    },
+    {
+      "path": "history/tsinghua-mem-awakening-wide/meta.json",
+      "source": "tsinghua-mem-awakening-wide/meta.json",
+      "sha256": "c004f367abfa4699e53b70f136ddf94a0feed192347e9e167cf9066036ad1096",
+      "bytes": 106
+    },
+    {
+      "path": "history/tsinghua-mem-awakening-wide/package.json",
+      "source": "tsinghua-mem-awakening-wide/package.json",
+      "sha256": "0d5b8a3079983ae4718c9c0e8022f8daa8b821214be35edb24a3ca71740eda96",
+      "bytes": 347
+    },
+    {
+      "path": "history/tsinghua-mem-awakening-wide/deliverables/Tsinghua-MEM-Awakening-Wide.html",
+      "source": "tsinghua-mem-awakening-wide/deliverables/Tsinghua-MEM-Awakening-Wide.html",
+      "sha256": "bfb055ae14ae7aa14ecc5a1a464093cb1e9c3e0c07cf36a3b84c79bd1dc71182",
+      "bytes": 2109511
+    },
+    {
+      "path": "history/tsinghua-mem-awakening-wide/scripts/SelectiveExtrudeGeometry.js",
+      "source": "tsinghua-mem-awakening-wide/scripts/SelectiveExtrudeGeometry.js",
+      "sha256": "1a7221bfe1a5cb561b0dea386120c69e78f20f8b8907f4b5d1a6cd700b3ab11e",
+      "bytes": 21556
+    },
+    {
+      "path": "history/tsinghua-mem-awakening-wide/scripts/build.py",
+      "source": "tsinghua-mem-awakening-wide/scripts/build.py",
+      "sha256": "ac5435dce0a68ff0ec106e5bf32266b06b827c3a5ce35d1e45517a956424bc12",
+      "bytes": 4808
+    },
+    {
+      "path": "history/tsinghua-mem-awakening-wide/scripts/capture.mjs",
+      "source": "tsinghua-mem-awakening-wide/scripts/capture.mjs",
+      "sha256": "c3aa64adaa0c94363467dcaaa4d60e4f68eaa649893e9b7fc8d122263fe41b68",
+      "bytes": 4052
+    },
+    {
+      "path": "history/tsinghua-mem-awakening-wide/scripts/galaxy.js",
+      "source": "tsinghua-mem-awakening-wide/scripts/galaxy.js",
+      "sha256": "05281a20d6c2d61673a71141a09ad211bc51bd0dc9557e7cd68b4b34d467b6d6",
+      "bytes": 3613
+    },
+    {
+      "path": "history/tsinghua-mem-awakening-wide/scripts/scene.js",
+      "source": "tsinghua-mem-awakening-wide/scripts/scene.js",
+      "sha256": "4d447995dca57aab4d892b567bf360e7307d2e11e21414ef9ae9e6b04f4c475c",
+      "bytes": 8496
+    },
+    {
+      "path": "history/tsinghua-mem-awakening-wide/scripts/verify.mjs",
+      "source": "tsinghua-mem-awakening-wide/scripts/verify.mjs",
+      "sha256": "4014a47b2daa0060c8a7032d0679f8893e23376631d252e72fac8c726f82b047",
+      "bytes": 2859
+    },
+    {
+      "path": "history/tsinghua-mem-awakening-wide/assets/gsap.min.js",
+      "source": "tsinghua-mem-awakening-wide/assets/gsap.min.js",
+      "sha256": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280",
+      "bytes": 72779
+    },
+    {
+      "path": "history/tsinghua-mem-awakening-wide/assets/scene.bundle.js",
+      "source": "tsinghua-mem-awakening-wide/assets/scene.bundle.js",
+      "sha256": "f50247fdf430710f244e37da95aec415afd952d2f9b01f7bf7d73d420be144d1",
+      "bytes": 2033927
+    },
+    {
+      "path": "history/tsinghua-mem-awakening-wide/vendor/three/LICENSE",
+      "source": "tsinghua-mem-awakening-wide/vendor/three/LICENSE",
+      "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601",
+      "bytes": 1081
+    },
+    {
+      "path": "history/tsinghua-mem-awakening-wide/vendor/three/examples/jsm/loaders/SVGLoader.js",
+      "source": "tsinghua-mem-awakening-wide/vendor/three/examples/jsm/loaders/SVGLoader.js",
+      "sha256": "92694da0a1b44fd93ffdc0f4a6c80d28cc9e3a53d5cfc0206793a8dcabc7c4c4",
+      "bytes": 72759
+    },
+    {
+      "path": "history/tsinghua-mem-awakening-wide/vendor/three/build/three.core.js",
+      "source": "tsinghua-mem-awakening-wide/vendor/three/build/three.core.js",
+      "sha256": "03fb6e9fa08628385a9096948593251ae473239c7039496d7c280cba73d84631",
+      "bytes": 1405971
+    },
+    {
+      "path": "history/tsinghua-mem-awakening-wide/vendor/three/build/three.module.js",
+      "source": "tsinghua-mem-awakening-wide/vendor/three/build/three.module.js",
+      "sha256": "1bb0b770bac5da2b59b21aa5fff4c547eeb864d4e408e4c36fbc6ced1dce0e9e",
+      "bytes": 626071
+    },
+    {
+      "path": "history/tsinghua-mem-awakening-wide/inputs/Tsinghua-MEM-2023-Transparent.svg",
+      "source": "tsinghua-mem-awakening-wide/inputs/Tsinghua-MEM-2023-Transparent.svg",
+      "sha256": "89bdad7d41062bf6b2cf4ed340d79ba62499126fb1f785b725ed4c76813c038c",
+      "bytes": 67793
+    },
+    {
+      "path": "history/tsinghua-mem-awakening-wide/inputs/semantic-geometry.json",
+      "source": "tsinghua-mem-awakening-wide/inputs/semantic-geometry.json",
+      "sha256": "154131acf59c90c77db021eedce8f1425227766cef64e51a905757c627f55ade",
+      "bytes": 1305951
+    },
+    {
+      "path": "history/tsinghua-mem-awakening-wide/inputs/source-polygons.json",
+      "source": "tsinghua-mem-awakening-wide/inputs/source-polygons.json",
+      "sha256": "974406b82c230265f620b72bc337b1c1ae4ccbd3fe0b1b701a7af817fc2684df",
+      "bytes": 983274
+    },
+    {
+      "path": "history/tsinghua-mem-badge-motion/BRIEF.md",
+      "source": "tsinghua-mem-badge-motion/BRIEF.md",
+      "sha256": "0d22f2a8aac264b6d8cd7001a607aef0e512076b2e58059913e59aee4d34cca8",
+      "bytes": 2764
+    },
+    {
+      "path": "history/tsinghua-mem-badge-motion/hyperframes.json",
+      "source": "tsinghua-mem-badge-motion/hyperframes.json",
+      "sha256": "2db9aa800746e99446c0a9e1db6de686c67618dbc3d75d06c231189074a192e4",
+      "bytes": 526
+    },
+    {
+      "path": "history/tsinghua-mem-badge-motion/hyperframes.lock.json",
+      "source": "tsinghua-mem-badge-motion/hyperframes.lock.json",
+      "sha256": "8fefb8c936dc4279db3ffaa517acf51e49ae299f712e61d70415503d3377f3e1",
+      "bytes": 119
+    },
+    {
+      "path": "history/tsinghua-mem-badge-motion/index.html",
+      "source": "tsinghua-mem-badge-motion/index.html",
+      "sha256": "e13ad612f95957f50fe598d43eb511b91b2d95636d5e9a889d033085f69cc08a",
+      "bytes": 75447
+    },
+    {
+      "path": "history/tsinghua-mem-badge-motion/meta.json",
+      "source": "tsinghua-mem-badge-motion/meta.json",
+      "sha256": "55cdff1e38dc07b64a53ef181ddba00f2c059ba5eb04e52cd109ff1d4e5fc75e",
+      "bytes": 121
+    },
+    {
+      "path": "history/tsinghua-mem-badge-motion/package.json",
+      "source": "tsinghua-mem-badge-motion/package.json",
+      "sha256": "ce1821589bd4fccd25d6204e25f2897b4b72f1715608fa6d3ca2724c23ac0d77",
+      "bytes": 310
+    },
+    {
+      "path": "history/tsinghua-mem-badge-motion/shot-plan.json",
+      "source": "tsinghua-mem-badge-motion/shot-plan.json",
+      "sha256": "1d9613fd7c110a14ba6263f00859ec1d100d268c332413d37f750fcf9c9f41ca",
+      "bytes": 570
+    },
+    {
+      "path": "history/tsinghua-mem-badge-motion/compositions/components/shimmer-sweep.html",
+      "source": "tsinghua-mem-badge-motion/compositions/components/shimmer-sweep.html",
+      "sha256": "0358db4e2ec9137c65771e17139741a13e2c12a37be5688fc6cfede9a718d8d6",
+      "bytes": 1917
+    },
+    {
+      "path": "history/tsinghua-mem-badge-motion/deliverables/Tsinghua-MEM-Light-Studies.html",
+      "source": "tsinghua-mem-badge-motion/deliverables/Tsinghua-MEM-Light-Studies.html",
+      "sha256": "fc9b3d84ea87c3461002127c542c0b44134002eb6d75a6e4000de213d43c7879",
+      "bytes": 150952
+    },
+    {
+      "path": "history/tsinghua-mem-badge-motion/deliverables/contact-sheet.jpg",
+      "source": "tsinghua-mem-badge-motion/deliverables/contact-sheet.jpg",
+      "sha256": "dd9a93598722967e2adbc131112c1206bd1336052a2953ab2a1af423e435e018",
+      "bytes": 293288
+    },
+    {
+      "path": "history/tsinghua-mem-badge-motion/scripts/build.py",
+      "source": "tsinghua-mem-badge-motion/scripts/build.py",
+      "sha256": "0a2ba45c0e867cb4df86a43ae58e6becde78df66a3d16be55a82b2e11d69f508",
+      "bytes": 11824
+    },
+    {
+      "path": "history/tsinghua-mem-badge-motion/scripts/inspect-source.mjs",
+      "source": "tsinghua-mem-badge-motion/scripts/inspect-source.mjs",
+      "sha256": "42ac66f9039681f60419fdb1c4697caa090070010f2c4718dab48629297c11dc",
+      "bytes": 1318
+    },
+    {
+      "path": "history/tsinghua-mem-badge-motion/scripts/verify-selector.mjs",
+      "source": "tsinghua-mem-badge-motion/scripts/verify-selector.mjs",
+      "sha256": "b7d606132c354fbba3dfc9b1f5cb964eef21c74e6631f1b6fd5d33724c9cf3f1",
+      "bytes": 2902
+    },
+    {
+      "path": "history/tsinghua-mem-badge-motion/scripts/verify-video.py",
+      "source": "tsinghua-mem-badge-motion/scripts/verify-video.py",
+      "sha256": "35d23a7c306f701057249231e4f1d646ea7df2feb8c3ad73029d0e2a831f0f1a",
+      "bytes": 3127
+    },
+    {
+      "path": "history/tsinghua-mem-badge-motion/scripts/verify.mjs",
+      "source": "tsinghua-mem-badge-motion/scripts/verify.mjs",
+      "sha256": "a94f1139da5141907cd82a3cd2c7ef2b06893f63fc75cf9a4716d4caaabe290a",
+      "bytes": 5034
+    },
+    {
+      "path": "history/tsinghua-mem-badge-motion/assets/animation.js",
+      "source": "tsinghua-mem-badge-motion/assets/animation.js",
+      "sha256": "51c2851e2f174c86b61b3bad18b1a3b0a35d6515b423e3e022bd83771f6bbee2",
+      "bytes": 1726
+    },
+    {
+      "path": "history/tsinghua-mem-badge-motion/assets/gsap.min.js",
+      "source": "tsinghua-mem-badge-motion/assets/gsap.min.js",
+      "sha256": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280",
+      "bytes": 72779
+    },
+    {
+      "path": "history/tsinghua-mem-badge-motion/assets/light-stage.svg",
+      "source": "tsinghua-mem-badge-motion/assets/light-stage.svg",
+      "sha256": "a91dd92578a766bf37fd6c039be51d0c0b99c0f649bfb142ee3f1d6e2de46e86",
+      "bytes": 72275
+    },
+    {
+      "path": "history/tsinghua-mem-badge-motion/inputs/Tsinghua-MEM-2023-Transparent.svg",
+      "source": "tsinghua-mem-badge-motion/inputs/Tsinghua-MEM-2023-Transparent.svg",
+      "sha256": "89bdad7d41062bf6b2cf4ed340d79ba62499126fb1f785b725ed4c76813c038c",
+      "bytes": 67793
+    },
+    {
+      "path": "history/tsinghua-mem-badge-motion/inputs/checkerboard-preview.png",
+      "source": "tsinghua-mem-badge-motion/inputs/checkerboard-preview.png",
+      "sha256": "f1ffba971084548ad5b32634ac14c21b80fe3c4386cade7cfc53a39ce63ddb62",
+      "bytes": 330452
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/manifest.json",
+      "source": "tsinghua-mem-five-effects-a/manifest.json",
+      "sha256": "004a735ba81dc83c14755d527bf37b0cc56b443946cfa0d9c837cd6728e0bc05",
+      "bytes": 2830
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/offline-verify.mjs",
+      "source": "tsinghua-mem-five-effects-a/offline-verify.mjs",
+      "sha256": "58d162a1272daad87c6ff3d68954f6195868fa76254a25a596c8c94384cbdec9",
+      "bytes": 1645
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/references.json",
+      "source": "tsinghua-mem-five-effects-a/references.json",
+      "sha256": "c18bba1a7d8c6e25595c0c04c2bd120ff7c41c7a453278600962f15259c7a200",
+      "bytes": 2520
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/render.mjs",
+      "source": "tsinghua-mem-five-effects-a/render.mjs",
+      "sha256": "ae3afe685a59ff49ad250afa88e16bcca27c553b03cd1e4d6a6980cf995e5b74",
+      "bytes": 4185
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/setup.py",
+      "source": "tsinghua-mem-five-effects-a/setup.py",
+      "sha256": "12fed016c98a50b3d1ea0c6c65b5015339ea5077f9b84342385f73e703ff4c71",
+      "bytes": 4368
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/verify.py",
+      "source": "tsinghua-mem-five-effects-a/verify.py",
+      "sha256": "ce327181412ba086a1f8c28f7509abe4f6d22307ef28060541e68544a41865dc",
+      "bytes": 4179
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/02/BRIEF.md",
+      "source": "tsinghua-mem-five-effects-a/02/BRIEF.md",
+      "sha256": "d7827c4393a3a06776b890020487da7ea575c1f6acbe396bd80a1858968b9091",
+      "bytes": 470
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/02/hyperframes.json",
+      "source": "tsinghua-mem-five-effects-a/02/hyperframes.json",
+      "sha256": "61171ded7c8539067100819665c51b4474c48ef1ae81b5b6d379f6aa6adc2173",
+      "bytes": 110
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/02/index.html",
+      "source": "tsinghua-mem-five-effects-a/02/index.html",
+      "sha256": "51f55d09ff49a0661dbf8ae92d28fd2ba3f41e536275c9c107f3667bdcfb18da",
+      "bytes": 1100
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/02/meta.json",
+      "source": "tsinghua-mem-five-effects-a/02/meta.json",
+      "sha256": "eab7708f60161d048baac814814b166b340921ff42c58dbe4a4c92c69fff3c83",
+      "bytes": 94
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/02/package.json",
+      "source": "tsinghua-mem-five-effects-a/02/package.json",
+      "sha256": "0bb613e897483ecb0beee863510a8da035dbbec558827a5df3eb92f8cf1186a5",
+      "bytes": 330
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/02/deliverables/Tsinghua-MEM-02.html",
+      "source": "tsinghua-mem-five-effects-a/02/deliverables/Tsinghua-MEM-02.html",
+      "sha256": "6f1f3e5c4576803571cbbe2491101c5101118867fccf95edf545d11777ff6244",
+      "bytes": 2107943
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/02/scripts/SelectiveExtrudeGeometry.js",
+      "source": "tsinghua-mem-five-effects-a/02/scripts/SelectiveExtrudeGeometry.js",
+      "sha256": "1a7221bfe1a5cb561b0dea386120c69e78f20f8b8907f4b5d1a6cd700b3ab11e",
+      "bytes": 21556
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/02/scripts/background.js",
+      "source": "tsinghua-mem-five-effects-a/02/scripts/background.js",
+      "sha256": "c8802fee13ca202f316949a06949150a6ebd84505a51e0f25c10ed7defb75f1a",
+      "bytes": 2003
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/02/scripts/build.py",
+      "source": "tsinghua-mem-five-effects-a/02/scripts/build.py",
+      "sha256": "f2860a8680dd8ea99a2097660fc34b4ef26fc1fd7370f1fa3e788547299be717",
+      "bytes": 4728
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/02/scripts/scene.js",
+      "source": "tsinghua-mem-five-effects-a/02/scripts/scene.js",
+      "sha256": "e10838eea88d0a98c65ee19368e7dde4c26b8cf178695ac196e741d970f5e02d",
+      "bytes": 8681
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/02/assets/gsap.min.js",
+      "source": "tsinghua-mem-five-effects-a/02/assets/gsap.min.js",
+      "sha256": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280",
+      "bytes": 72779
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/02/assets/scene.bundle.js",
+      "source": "tsinghua-mem-five-effects-a/02/assets/scene.bundle.js",
+      "sha256": "ae453805dbd076e7ceb1ff9be153dc21cd15e7b2f373ee2da47372f7dad7d775",
+      "bytes": 2032389
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/02/vendor/three/LICENSE",
+      "source": "tsinghua-mem-five-effects-a/02/vendor/three/LICENSE",
+      "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601",
+      "bytes": 1081
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/02/vendor/three/examples/jsm/loaders/SVGLoader.js",
+      "source": "tsinghua-mem-five-effects-a/02/vendor/three/examples/jsm/loaders/SVGLoader.js",
+      "sha256": "92694da0a1b44fd93ffdc0f4a6c80d28cc9e3a53d5cfc0206793a8dcabc7c4c4",
+      "bytes": 72759
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/02/vendor/three/build/three.core.js",
+      "source": "tsinghua-mem-five-effects-a/02/vendor/three/build/three.core.js",
+      "sha256": "03fb6e9fa08628385a9096948593251ae473239c7039496d7c280cba73d84631",
+      "bytes": 1405971
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/02/vendor/three/build/three.module.js",
+      "source": "tsinghua-mem-five-effects-a/02/vendor/three/build/three.module.js",
+      "sha256": "1bb0b770bac5da2b59b21aa5fff4c547eeb864d4e408e4c36fbc6ced1dce0e9e",
+      "bytes": 626071
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/02/inputs/semantic-geometry.json",
+      "source": "tsinghua-mem-five-effects-a/02/inputs/semantic-geometry.json",
+      "sha256": "154131acf59c90c77db021eedce8f1425227766cef64e51a905757c627f55ade",
+      "bytes": 1305951
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/02/inputs/source.svg",
+      "source": "tsinghua-mem-five-effects-a/02/inputs/source.svg",
+      "sha256": "89bdad7d41062bf6b2cf4ed340d79ba62499126fb1f785b725ed4c76813c038c",
+      "bytes": 67793
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/01/BRIEF.md",
+      "source": "tsinghua-mem-five-effects-a/01/BRIEF.md",
+      "sha256": "912f756a33965a422ab3981267f013bfa75cb0b9ea6fb74843899370b7ebc678",
+      "bytes": 498
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/01/hyperframes.json",
+      "source": "tsinghua-mem-five-effects-a/01/hyperframes.json",
+      "sha256": "61171ded7c8539067100819665c51b4474c48ef1ae81b5b6d379f6aa6adc2173",
+      "bytes": 110
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/01/index.html",
+      "source": "tsinghua-mem-five-effects-a/01/index.html",
+      "sha256": "bb12d4ca0cc36de5fd531ab13afe22e2be7423a943aacbb0810655d9e9848f7e",
+      "bytes": 1100
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/01/meta.json",
+      "source": "tsinghua-mem-five-effects-a/01/meta.json",
+      "sha256": "277dc8a1ca440dbc152d4f7c08d1cd2d41b2bc6d9366eea2e84e2d15447120ad",
+      "bytes": 94
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/01/package.json",
+      "source": "tsinghua-mem-five-effects-a/01/package.json",
+      "sha256": "31381611d271dd8303d426352a446edb90504a9933662440ecf58c167470e1e8",
+      "bytes": 330
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/01/deliverables/Tsinghua-MEM-01.html",
+      "source": "tsinghua-mem-five-effects-a/01/deliverables/Tsinghua-MEM-01.html",
+      "sha256": "bfdfa5209a5199646e35c210ba20f9b95ca42de052ba997268214c28da6b8c1e",
+      "bytes": 2109030
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/01/scripts/SelectiveExtrudeGeometry.js",
+      "source": "tsinghua-mem-five-effects-a/01/scripts/SelectiveExtrudeGeometry.js",
+      "sha256": "1a7221bfe1a5cb561b0dea386120c69e78f20f8b8907f4b5d1a6cd700b3ab11e",
+      "bytes": 21556
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/01/scripts/background.js",
+      "source": "tsinghua-mem-five-effects-a/01/scripts/background.js",
+      "sha256": "f80bed265b4ecec2bdda790ae8152dbb446272a2c3b820b49cb4b51d6b7981ef",
+      "bytes": 3647
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/01/scripts/build.py",
+      "source": "tsinghua-mem-five-effects-a/01/scripts/build.py",
+      "sha256": "95172ccdf1c2ad74cfd4788f2ed60593124a8b89421800d58e3b5f1aa6dc78e5",
+      "bytes": 4728
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/01/scripts/scene.js",
+      "source": "tsinghua-mem-five-effects-a/01/scripts/scene.js",
+      "sha256": "0bd29f434e21d8b0299482072e71cc5555ede411aabf821adbb3bf894cff8081",
+      "bytes": 8709
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/01/assets/gsap.min.js",
+      "source": "tsinghua-mem-five-effects-a/01/assets/gsap.min.js",
+      "sha256": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280",
+      "bytes": 72779
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/01/assets/scene.bundle.js",
+      "source": "tsinghua-mem-five-effects-a/01/assets/scene.bundle.js",
+      "sha256": "12ccc8f881e00d95060b2435b758d6d40ca3358b8a77bab75b1f1a3967fec1aa",
+      "bytes": 2033476
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/01/vendor/three/LICENSE",
+      "source": "tsinghua-mem-five-effects-a/01/vendor/three/LICENSE",
+      "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601",
+      "bytes": 1081
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/01/vendor/three/examples/jsm/loaders/SVGLoader.js",
+      "source": "tsinghua-mem-five-effects-a/01/vendor/three/examples/jsm/loaders/SVGLoader.js",
+      "sha256": "92694da0a1b44fd93ffdc0f4a6c80d28cc9e3a53d5cfc0206793a8dcabc7c4c4",
+      "bytes": 72759
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/01/vendor/three/build/three.core.js",
+      "source": "tsinghua-mem-five-effects-a/01/vendor/three/build/three.core.js",
+      "sha256": "03fb6e9fa08628385a9096948593251ae473239c7039496d7c280cba73d84631",
+      "bytes": 1405971
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/01/vendor/three/build/three.module.js",
+      "source": "tsinghua-mem-five-effects-a/01/vendor/three/build/three.module.js",
+      "sha256": "1bb0b770bac5da2b59b21aa5fff4c547eeb864d4e408e4c36fbc6ced1dce0e9e",
+      "bytes": 626071
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/01/inputs/semantic-geometry.json",
+      "source": "tsinghua-mem-five-effects-a/01/inputs/semantic-geometry.json",
+      "sha256": "154131acf59c90c77db021eedce8f1425227766cef64e51a905757c627f55ade",
+      "bytes": 1305951
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/01/inputs/source.svg",
+      "source": "tsinghua-mem-five-effects-a/01/inputs/source.svg",
+      "sha256": "89bdad7d41062bf6b2cf4ed340d79ba62499126fb1f785b725ed4c76813c038c",
+      "bytes": 67793
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/BRIEF.md",
+      "source": "tsinghua-mem-five-effects-b/BRIEF.md",
+      "sha256": "c5fb895893079b2f2a135f6243c41a61f4efe92b0b1aa9571936ecc5d9e303be",
+      "bytes": 1335
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/build.py",
+      "source": "tsinghua-mem-five-effects-b/build.py",
+      "sha256": "6217824d9268f36f24757fd9a54776b778d0a06fb6c794d0885405cb96c6b39c",
+      "bytes": 3712
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/capture.mjs",
+      "source": "tsinghua-mem-five-effects-b/capture.mjs",
+      "sha256": "c2e1a68c2ec55354b4b1b85ebf7e61af764c4f3845bce43c8a5e655536dd9983",
+      "bytes": 5769
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/effects.js",
+      "source": "tsinghua-mem-five-effects-b/effects.js",
+      "sha256": "41fcfd4a0d45040372aaeb17912be76a3d26e42575a250d37f5149ef4913f843",
+      "bytes": 9250
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/finalize.py",
+      "source": "tsinghua-mem-five-effects-b/finalize.py",
+      "sha256": "2244563be7f8a3737a6f60f3d50c9a191af600b03c0b3f2d9e894330b8dbf0f2",
+      "bytes": 4803
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/manifest.json",
+      "source": "tsinghua-mem-five-effects-b/manifest.json",
+      "sha256": "d89bdfb1ee54fcba6a4974a033c737d1945475896952f8f0b7f2de0fbee20546",
+      "bytes": 1598
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/setup.py",
+      "source": "tsinghua-mem-five-effects-b/setup.py",
+      "sha256": "fb1088e975bacc5a2e3b5e16608b3e66d4db56b37069ad0854600a8e9db0d10c",
+      "bytes": 3878
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/03/hyperframes.json",
+      "source": "tsinghua-mem-five-effects-b/03/hyperframes.json",
+      "sha256": "6ea447d522cc04eae436782dd98f8a23bac46086126fd4fd09349c35cbeaaaee",
+      "bytes": 94
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/03/index.html",
+      "source": "tsinghua-mem-five-effects-b/03/index.html",
+      "sha256": "ee5116386cabdc707491b5bd13ac69931234abd3b4471dc41f2bcbbfd38a1cca",
+      "bytes": 1006
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/03/meta.json",
+      "source": "tsinghua-mem-five-effects-b/03/meta.json",
+      "sha256": "7a643989cb031872ab379919b4077ed642678771521c1df122395249a314bcf1",
+      "bytes": 50
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/03/deliverables/Tsinghua-MEM-03.html",
+      "source": "tsinghua-mem-five-effects-b/03/deliverables/Tsinghua-MEM-03.html",
+      "sha256": "5a27fcd6bad5fef13f33b293b5676b7a3360a18efa007b7c3abced601df95913",
+      "bytes": 2113804
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/03/scripts/SelectiveExtrudeGeometry.js",
+      "source": "tsinghua-mem-five-effects-b/03/scripts/SelectiveExtrudeGeometry.js",
+      "sha256": "1a7221bfe1a5cb561b0dea386120c69e78f20f8b8907f4b5d1a6cd700b3ab11e",
+      "bytes": 21556
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/03/scripts/effects.js",
+      "source": "tsinghua-mem-five-effects-b/03/scripts/effects.js",
+      "sha256": "41fcfd4a0d45040372aaeb17912be76a3d26e42575a250d37f5149ef4913f843",
+      "bytes": 9250
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/03/scripts/scene.js",
+      "source": "tsinghua-mem-five-effects-b/03/scripts/scene.js",
+      "sha256": "53c404666b4b3e1024078c3e11aae9e775fcfcc6e8eb0cc10f4226843856de47",
+      "bytes": 8257
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/03/assets/gsap.min.js",
+      "source": "tsinghua-mem-five-effects-b/03/assets/gsap.min.js",
+      "sha256": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280",
+      "bytes": 72779
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/03/assets/scene.bundle.js",
+      "source": "tsinghua-mem-five-effects-b/03/assets/scene.bundle.js",
+      "sha256": "8d485da10512c3bce6b02191cd8481529d802c95d277d7908401850054a7cdcb",
+      "bytes": 2038462
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/03/vendor/three/LICENSE",
+      "source": "tsinghua-mem-five-effects-b/03/vendor/three/LICENSE",
+      "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601",
+      "bytes": 1081
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/03/vendor/three/examples/jsm/loaders/SVGLoader.js",
+      "source": "tsinghua-mem-five-effects-b/03/vendor/three/examples/jsm/loaders/SVGLoader.js",
+      "sha256": "92694da0a1b44fd93ffdc0f4a6c80d28cc9e3a53d5cfc0206793a8dcabc7c4c4",
+      "bytes": 72759
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/03/vendor/three/build/three.core.js",
+      "source": "tsinghua-mem-five-effects-b/03/vendor/three/build/three.core.js",
+      "sha256": "03fb6e9fa08628385a9096948593251ae473239c7039496d7c280cba73d84631",
+      "bytes": 1405971
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/03/vendor/three/build/three.module.js",
+      "source": "tsinghua-mem-five-effects-b/03/vendor/three/build/three.module.js",
+      "sha256": "1bb0b770bac5da2b59b21aa5fff4c547eeb864d4e408e4c36fbc6ced1dce0e9e",
+      "bytes": 626071
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/03/inputs/Tsinghua-MEM-2023-Transparent.svg",
+      "source": "tsinghua-mem-five-effects-b/03/inputs/Tsinghua-MEM-2023-Transparent.svg",
+      "sha256": "89bdad7d41062bf6b2cf4ed340d79ba62499126fb1f785b725ed4c76813c038c",
+      "bytes": 67793
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/03/inputs/semantic-geometry.json",
+      "source": "tsinghua-mem-five-effects-b/03/inputs/semantic-geometry.json",
+      "sha256": "154131acf59c90c77db021eedce8f1425227766cef64e51a905757c627f55ade",
+      "bytes": 1305951
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/03/inputs/source-polygons.json",
+      "source": "tsinghua-mem-five-effects-b/03/inputs/source-polygons.json",
+      "sha256": "974406b82c230265f620b72bc337b1c1ae4ccbd3fe0b1b701a7af817fc2684df",
+      "bytes": 983274
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/04/hyperframes.json",
+      "source": "tsinghua-mem-five-effects-b/04/hyperframes.json",
+      "sha256": "6ea447d522cc04eae436782dd98f8a23bac46086126fd4fd09349c35cbeaaaee",
+      "bytes": 94
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/04/index.html",
+      "source": "tsinghua-mem-five-effects-b/04/index.html",
+      "sha256": "0672bc38ada08cae585a61ab0a52e99f28be336b2defcd7ce9eceb6196e11733",
+      "bytes": 1006
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/04/meta.json",
+      "source": "tsinghua-mem-five-effects-b/04/meta.json",
+      "sha256": "e095e16d6da47ee9d357dff762e71ef80db2a74b5715f6edd039ac2827505498",
+      "bytes": 50
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/04/deliverables/Tsinghua-MEM-04.html",
+      "source": "tsinghua-mem-five-effects-b/04/deliverables/Tsinghua-MEM-04.html",
+      "sha256": "3258b8b212b506c044ca1391f49e8074278337d4a6702bb8dada9c9af38236dd",
+      "bytes": 2113804
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/04/scripts/SelectiveExtrudeGeometry.js",
+      "source": "tsinghua-mem-five-effects-b/04/scripts/SelectiveExtrudeGeometry.js",
+      "sha256": "1a7221bfe1a5cb561b0dea386120c69e78f20f8b8907f4b5d1a6cd700b3ab11e",
+      "bytes": 21556
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/04/scripts/effects.js",
+      "source": "tsinghua-mem-five-effects-b/04/scripts/effects.js",
+      "sha256": "41fcfd4a0d45040372aaeb17912be76a3d26e42575a250d37f5149ef4913f843",
+      "bytes": 9250
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/04/scripts/scene.js",
+      "source": "tsinghua-mem-five-effects-b/04/scripts/scene.js",
+      "sha256": "f6f64b9567a0f614a15916e68e74eb284ec2899e8131499c320b5f7d557d2820",
+      "bytes": 8257
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/04/assets/gsap.min.js",
+      "source": "tsinghua-mem-five-effects-b/04/assets/gsap.min.js",
+      "sha256": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280",
+      "bytes": 72779
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/04/assets/scene.bundle.js",
+      "source": "tsinghua-mem-five-effects-b/04/assets/scene.bundle.js",
+      "sha256": "42acc3c0d439c438bcb96094ffb0d6c315d00940f57359696b3ed8c82a14d523",
+      "bytes": 2038462
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/04/vendor/three/LICENSE",
+      "source": "tsinghua-mem-five-effects-b/04/vendor/three/LICENSE",
+      "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601",
+      "bytes": 1081
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/04/vendor/three/examples/jsm/loaders/SVGLoader.js",
+      "source": "tsinghua-mem-five-effects-b/04/vendor/three/examples/jsm/loaders/SVGLoader.js",
+      "sha256": "92694da0a1b44fd93ffdc0f4a6c80d28cc9e3a53d5cfc0206793a8dcabc7c4c4",
+      "bytes": 72759
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/04/vendor/three/build/three.core.js",
+      "source": "tsinghua-mem-five-effects-b/04/vendor/three/build/three.core.js",
+      "sha256": "03fb6e9fa08628385a9096948593251ae473239c7039496d7c280cba73d84631",
+      "bytes": 1405971
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/04/vendor/three/build/three.module.js",
+      "source": "tsinghua-mem-five-effects-b/04/vendor/three/build/three.module.js",
+      "sha256": "1bb0b770bac5da2b59b21aa5fff4c547eeb864d4e408e4c36fbc6ced1dce0e9e",
+      "bytes": 626071
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/04/inputs/Tsinghua-MEM-2023-Transparent.svg",
+      "source": "tsinghua-mem-five-effects-b/04/inputs/Tsinghua-MEM-2023-Transparent.svg",
+      "sha256": "89bdad7d41062bf6b2cf4ed340d79ba62499126fb1f785b725ed4c76813c038c",
+      "bytes": 67793
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/04/inputs/semantic-geometry.json",
+      "source": "tsinghua-mem-five-effects-b/04/inputs/semantic-geometry.json",
+      "sha256": "154131acf59c90c77db021eedce8f1425227766cef64e51a905757c627f55ade",
+      "bytes": 1305951
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/04/inputs/source-polygons.json",
+      "source": "tsinghua-mem-five-effects-b/04/inputs/source-polygons.json",
+      "sha256": "974406b82c230265f620b72bc337b1c1ae4ccbd3fe0b1b701a7af817fc2684df",
+      "bytes": 983274
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/refs/REFERENCES.md",
+      "source": "tsinghua-mem-five-effects-b/refs/REFERENCES.md",
+      "sha256": "df47e362698bfbcbe324d82870969c39378c6d22b0a87152bcd3fbcc4494656f",
+      "bytes": 2455
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/hyperframes.json",
+      "source": "tsinghua-mem-five-effects-cloud/hyperframes.json",
+      "sha256": "381b3d176c838d8dfc5c0c882d2a13b11a2999cb590fd311b02be7dd59c2dd12",
+      "bytes": 112
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/index.html",
+      "source": "tsinghua-mem-five-effects-cloud/index.html",
+      "sha256": "2e84e78a32a3301f7398b98337a20c3ec1bee304c1b6b3dab3686af516dcf866",
+      "bytes": 1100
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/manifest.json",
+      "source": "tsinghua-mem-five-effects-cloud/manifest.json",
+      "sha256": "65ca99cb63122738de2f4644b701602b390e93e0edaa1c07603a4c2f94b61a12",
+      "bytes": 1434
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/meta.json",
+      "source": "tsinghua-mem-five-effects-cloud/meta.json",
+      "sha256": "5650a881a15be88ff4f9a50059f96f030639cd985583eaac93f106c79fcacd6f",
+      "bytes": 64
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/references.json",
+      "source": "tsinghua-mem-five-effects-cloud/references.json",
+      "sha256": "690cf602f89f42f9081f62ae62804cdf66799b4e78f4b4b77a227344d5fb3fcd",
+      "bytes": 2549
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/deliverables/05-Blue-Sky-Cloud-Opening.html",
+      "source": "tsinghua-mem-five-effects-cloud/deliverables/05-Blue-Sky-Cloud-Opening.html",
+      "sha256": "264823159595deca7af3ecc9dc0e39de393990e33e753aad435faddf04643ea8",
+      "bytes": 3279014
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/scripts/SelectiveExtrudeGeometry.js",
+      "source": "tsinghua-mem-five-effects-cloud/scripts/SelectiveExtrudeGeometry.js",
+      "sha256": "1a7221bfe1a5cb561b0dea386120c69e78f20f8b8907f4b5d1a6cd700b3ab11e",
+      "bytes": 21556
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/scripts/build.py",
+      "source": "tsinghua-mem-five-effects-cloud/scripts/build.py",
+      "sha256": "ea799c5d10e5655cc8ca8b5dce270b3f476c76fdb0fae0e409ae3e580f6c6ad0",
+      "bytes": 4710
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/scripts/clouds.js",
+      "source": "tsinghua-mem-five-effects-cloud/scripts/clouds.js",
+      "sha256": "8b01752b05523de0ed68f2ebd389dad651f0de44943b1cafbfac302eaf093d75",
+      "bytes": 5924
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/scripts/direct-render.mjs",
+      "source": "tsinghua-mem-five-effects-cloud/scripts/direct-render.mjs",
+      "sha256": "f3b45dd4527a2cc0298c4e98cd12173df23c1119477597c46571163920db375c",
+      "bytes": 4455
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/scripts/freeze.py",
+      "source": "tsinghua-mem-five-effects-cloud/scripts/freeze.py",
+      "sha256": "73d706fabc5960ff007a444fa47f0e31514ba8bc2d198f0055c8dcdc32185fe4",
+      "bytes": 4218
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/scripts/preview.mjs",
+      "source": "tsinghua-mem-five-effects-cloud/scripts/preview.mjs",
+      "sha256": "946db8e2998bb5eafde2ce217f14bab84724c5c0221e768a3afe2780034451c2",
+      "bytes": 2748
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/scripts/scene.js",
+      "source": "tsinghua-mem-five-effects-cloud/scripts/scene.js",
+      "sha256": "6c31b0478506964d2dee9b196ccb30d91d02930e3dbd3f894ea973c070913068",
+      "bytes": 8655
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/assets/cloud-sky-4k.jpg",
+      "source": "tsinghua-mem-five-effects-cloud/assets/cloud-sky-4k.jpg",
+      "sha256": "f4950297a0b7987d8ecd1890731d8af194c8ba286905cb2eb7fcfab7db52e359",
+      "bytes": 873853
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/assets/gsap.min.js",
+      "source": "tsinghua-mem-five-effects-cloud/assets/gsap.min.js",
+      "sha256": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280",
+      "bytes": 72779
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/assets/scene.bundle.js",
+      "source": "tsinghua-mem-five-effects-cloud/assets/scene.bundle.js",
+      "sha256": "461b4a102579bc3eb5d9936f7340d557c07dbf129bdc0c8d76a169daf3dc7fd7",
+      "bytes": 3202087
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/assets/sky-data.json",
+      "source": "tsinghua-mem-five-effects-cloud/assets/sky-data.json",
+      "sha256": "048859130c6aa89c351d8e0f7d43a7fee3007003c200b199c7c8978cf38f4ab1",
+      "bytes": 1165174
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/vendor/three/LICENSE",
+      "source": "tsinghua-mem-five-effects-cloud/vendor/three/LICENSE",
+      "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601",
+      "bytes": 1081
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/vendor/three/examples/jsm/loaders/SVGLoader.js",
+      "source": "tsinghua-mem-five-effects-cloud/vendor/three/examples/jsm/loaders/SVGLoader.js",
+      "sha256": "92694da0a1b44fd93ffdc0f4a6c80d28cc9e3a53d5cfc0206793a8dcabc7c4c4",
+      "bytes": 72759
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/vendor/three/build/three.core.js",
+      "source": "tsinghua-mem-five-effects-cloud/vendor/three/build/three.core.js",
+      "sha256": "03fb6e9fa08628385a9096948593251ae473239c7039496d7c280cba73d84631",
+      "bytes": 1405971
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/vendor/three/build/three.module.js",
+      "source": "tsinghua-mem-five-effects-cloud/vendor/three/build/three.module.js",
+      "sha256": "1bb0b770bac5da2b59b21aa5fff4c547eeb864d4e408e4c36fbc6ced1dce0e9e",
+      "bytes": 626071
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/inputs/Tsinghua-MEM-2023-Transparent.svg",
+      "source": "tsinghua-mem-five-effects-cloud/inputs/Tsinghua-MEM-2023-Transparent.svg",
+      "sha256": "89bdad7d41062bf6b2cf4ed340d79ba62499126fb1f785b725ed4c76813c038c",
+      "bytes": 67793
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/inputs/semantic-geometry.json",
+      "source": "tsinghua-mem-five-effects-cloud/inputs/semantic-geometry.json",
+      "sha256": "154131acf59c90c77db021eedce8f1425227766cef64e51a905757c627f55ade",
+      "bytes": 1305951
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/inputs/source-polygons.json",
+      "source": "tsinghua-mem-five-effects-cloud/inputs/source-polygons.json",
+      "sha256": "974406b82c230265f620b72bc337b1c1ae4ccbd3fe0b1b701a7af817fc2684df",
+      "bytes": 983274
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/research/ImprovedNoise.js",
+      "source": "tsinghua-mem-five-effects-cloud/research/ImprovedNoise.js",
+      "sha256": "d3821241e25bf0c8bfc13cec941924573bbaaf8f599a4fa07d60664b97832b39",
+      "bytes": 3034
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/research/three-license.txt",
+      "source": "tsinghua-mem-five-effects-cloud/research/three-license.txt",
+      "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc",
+      "bytes": 1081
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/research/polyhaven-cloud-files.json",
+      "source": "tsinghua-mem-five-effects-cloud/research/polyhaven-cloud-files.json",
+      "sha256": "fdfe4582a32d7c4d5f8803192405d23cc77d5a17f6196ed1af744fe1a444c4ee",
+      "bytes": 2485
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/research/polyhaven-license.txt",
+      "source": "tsinghua-mem-five-effects-cloud/research/polyhaven-license.txt",
+      "sha256": "94eff0bc834dcafc4ebe1a5f1a5934b063750a509b7c6169c387e2a6a4fb02ed",
+      "bytes": 5662
+    },
+    {
+      "path": "history/tsinghua-mem-open-world/BRIEF.md",
+      "source": "tsinghua-mem-open-world/BRIEF.md",
+      "sha256": "8b5e108aaec1ef86a990b6438da55cf4a09e3c95f6c50dce10352cb297f65b15",
+      "bytes": 701
+    },
+    {
+      "path": "history/tsinghua-mem-open-world/README.md",
+      "source": "tsinghua-mem-open-world/README.md",
+      "sha256": "1f919832bdd4a51c5d906ba4099137bd4eb45630d71d3ad42b2e2fcc5a695cee",
+      "bytes": 3134
+    },
+    {
+      "path": "history/tsinghua-mem-open-world/hyperframes.json",
+      "source": "tsinghua-mem-open-world/hyperframes.json",
+      "sha256": "381b3d176c838d8dfc5c0c882d2a13b11a2999cb590fd311b02be7dd59c2dd12",
+      "bytes": 112
+    },
+    {
+      "path": "history/tsinghua-mem-open-world/index.html",
+      "source": "tsinghua-mem-open-world/index.html",
+      "sha256": "94b78711276539469143c7902674130940fae67dc8b228eac3f98263c3d514b9",
+      "bytes": 1324
+    },
+    {
+      "path": "history/tsinghua-mem-open-world/meta.json",
+      "source": "tsinghua-mem-open-world/meta.json",
+      "sha256": "d8608bc082c4cf677f12a20a66a68db4c3ac60d27340fe8225a9b4782faff6c7",
+      "bytes": 81
+    },
+    {
+      "path": "history/tsinghua-mem-open-world/deliverables/Tsinghua-MEM-Open-World.html",
+      "source": "tsinghua-mem-open-world/deliverables/Tsinghua-MEM-Open-World.html",
+      "sha256": "72511d85c4af0ea0c22dc5db3e8e3084d2f568147dbec803eef05b6bd8ae3199",
+      "bytes": 2110798
+    },
+    {
+      "path": "history/tsinghua-mem-open-world/scripts/SelectiveExtrudeGeometry.js",
+      "source": "tsinghua-mem-open-world/scripts/SelectiveExtrudeGeometry.js",
+      "sha256": "1a7221bfe1a5cb561b0dea386120c69e78f20f8b8907f4b5d1a6cd700b3ab11e",
+      "bytes": 21556
+    },
+    {
+      "path": "history/tsinghua-mem-open-world/scripts/atmosphere.js",
+      "source": "tsinghua-mem-open-world/scripts/atmosphere.js",
+      "sha256": "5ffbe6d028ae13ccc87e1236911be710f8400ab9733235f1bfbdae1cd79f50e5",
+      "bytes": 5497
+    },
+    {
+      "path": "history/tsinghua-mem-open-world/scripts/build.py",
+      "source": "tsinghua-mem-open-world/scripts/build.py",
+      "sha256": "f80894c81856d95b29760ff66aab19c015ce2b25035c6586302db4442095f54e",
+      "bytes": 4277
+    },
+    {
+      "path": "history/tsinghua-mem-open-world/scripts/prototype.mjs",
+      "source": "tsinghua-mem-open-world/scripts/prototype.mjs",
+      "sha256": "6f7ad581e4a2305ff0f646c63da439ca80e247526bfeeb416334314acd7a1d0a",
+      "bytes": 2102
+    },
+    {
+      "path": "history/tsinghua-mem-open-world/scripts/render.mjs",
+      "source": "tsinghua-mem-open-world/scripts/render.mjs",
+      "sha256": "f741d41b4866db82046d2b7f49c5f5b392229626be8d93e8cc1486926bb84b5d",
+      "bytes": 2981
+    },
+    {
+      "path": "history/tsinghua-mem-open-world/scripts/scene.js",
+      "source": "tsinghua-mem-open-world/scripts/scene.js",
+      "sha256": "5dd5bed63806e3c85d5367485f1b782f22bb269fab2d36cf71a3d5c6fd59d4c9",
+      "bytes": 8086
+    },
+    {
+      "path": "history/tsinghua-mem-open-world/scripts/setup.py",
+      "source": "tsinghua-mem-open-world/scripts/setup.py",
+      "sha256": "6b603545956c1d06b941f5911d6ee98f89f250af62b7afe6fc090ea0f8299fba",
+      "bytes": 4934
+    },
+    {
+      "path": "history/tsinghua-mem-open-world/scripts/verify.py",
+      "source": "tsinghua-mem-open-world/scripts/verify.py",
+      "sha256": "e9032b31050bd555ae79251b2bfd4d82afde86b1a9e1e4bf5ae4c3f63bca898b",
+      "bytes": 2847
+    },
+    {
+      "path": "history/tsinghua-mem-open-world/assets/gsap.min.js",
+      "source": "tsinghua-mem-open-world/assets/gsap.min.js",
+      "sha256": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280",
+      "bytes": 72779
+    },
+    {
+      "path": "history/tsinghua-mem-open-world/assets/scene.bundle.js",
+      "source": "tsinghua-mem-open-world/assets/scene.bundle.js",
+      "sha256": "472be95b1c25bdfe2093d42be79ccbcf09df2ba5a0d5916233c43f8fb47c73bf",
+      "bytes": 2035041
+    },
+    {
+      "path": "history/tsinghua-mem-open-world/vendor/three/LICENSE",
+      "source": "tsinghua-mem-open-world/vendor/three/LICENSE",
+      "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601",
+      "bytes": 1081
+    },
+    {
+      "path": "history/tsinghua-mem-open-world/vendor/three/examples/jsm/loaders/SVGLoader.js",
+      "source": "tsinghua-mem-open-world/vendor/three/examples/jsm/loaders/SVGLoader.js",
+      "sha256": "92694da0a1b44fd93ffdc0f4a6c80d28cc9e3a53d5cfc0206793a8dcabc7c4c4",
+      "bytes": 72759
+    },
+    {
+      "path": "history/tsinghua-mem-open-world/vendor/three/build/three.core.js",
+      "source": "tsinghua-mem-open-world/vendor/three/build/three.core.js",
+      "sha256": "03fb6e9fa08628385a9096948593251ae473239c7039496d7c280cba73d84631",
+      "bytes": 1405971
+    },
+    {
+      "path": "history/tsinghua-mem-open-world/vendor/three/build/three.module.js",
+      "source": "tsinghua-mem-open-world/vendor/three/build/three.module.js",
+      "sha256": "1bb0b770bac5da2b59b21aa5fff4c547eeb864d4e408e4c36fbc6ced1dce0e9e",
+      "bytes": 626071
+    },
+    {
+      "path": "history/tsinghua-mem-open-world/inputs/Tsinghua-MEM-2023-Transparent.svg",
+      "source": "tsinghua-mem-open-world/inputs/Tsinghua-MEM-2023-Transparent.svg",
+      "sha256": "89bdad7d41062bf6b2cf4ed340d79ba62499126fb1f785b725ed4c76813c038c",
+      "bytes": 67793
+    },
+    {
+      "path": "history/tsinghua-mem-open-world/inputs/semantic-geometry.json",
+      "source": "tsinghua-mem-open-world/inputs/semantic-geometry.json",
+      "sha256": "154131acf59c90c77db021eedce8f1425227766cef64e51a905757c627f55ade",
+      "bytes": 1305951
+    },
+    {
+      "path": "history/tsinghua-mem-open-world/inputs/source-polygons.json",
+      "source": "tsinghua-mem-open-world/inputs/source-polygons.json",
+      "sha256": "974406b82c230265f620b72bc337b1c1ae4ccbd3fe0b1b701a7af817fc2684df",
+      "bytes": 983274
+    },
+    {
+      "path": "history/tsinghua-mem-seven-studies/BRIEF.md",
+      "source": "tsinghua-mem-seven-studies/BRIEF.md",
+      "sha256": "126d075e444424bb3e884ca694c27f7bb2ffaabcc80fee7949d0e96496400469",
+      "bytes": 1283
+    },
+    {
+      "path": "history/tsinghua-mem-seven-studies/README.md",
+      "source": "tsinghua-mem-seven-studies/README.md",
+      "sha256": "955ea4fa8104ef1c239296d726c36ae86eb1cd46c68720f4082b1d9767d69c3a",
+      "bytes": 2053
+    },
+    {
+      "path": "history/tsinghua-mem-seven-studies/hyperframes.json",
+      "source": "tsinghua-mem-seven-studies/hyperframes.json",
+      "sha256": "22b0219d6854b06c1f6fa6df9eb295bd2c7bb5c16da4bc3727220c3f2de953f2",
+      "bytes": 118
+    },
+    {
+      "path": "history/tsinghua-mem-seven-studies/index.html",
+      "source": "tsinghua-mem-seven-studies/index.html",
+      "sha256": "d9be8688f0cbf3e0c7ca95d86961a8e5652182a266a2dc1c0086c7bb10311b4f",
+      "bytes": 79328
+    },
+    {
+      "path": "history/tsinghua-mem-seven-studies/package.json",
+      "source": "tsinghua-mem-seven-studies/package.json",
+      "sha256": "59ff28e8380dfd02dccea7d8b38c0f2ef0c54959e5ab2a8414868d67da3af184",
+      "bytes": 228
+    },
+    {
+      "path": "history/tsinghua-mem-seven-studies/deliverables/Seven-Studies.html",
+      "source": "tsinghua-mem-seven-studies/deliverables/Seven-Studies.html",
+      "sha256": "bf125d8dff14af968b6c2690bb5c7b72a7e7c3406bab7944d7e2489d7bdc9ef6",
+      "bytes": 2003921
+    },
+    {
+      "path": "history/tsinghua-mem-seven-studies/deliverables/browser-contact.jpg",
+      "source": "tsinghua-mem-seven-studies/deliverables/browser-contact.jpg",
+      "sha256": "781fb215b4b2c91588d78d82dc3f607868e232ee044617fa29afbf8a0b2b6bac",
+      "bytes": 839601
+    },
+    {
+      "path": "history/tsinghua-mem-seven-studies/deliverables/manifest.json",
+      "source": "tsinghua-mem-seven-studies/deliverables/manifest.json",
+      "sha256": "b525934d0388bcaecb365bd0d04b4a455465c123cf3d9f634656a158bb98ecf6",
+      "bytes": 1297
+    },
+    {
+      "path": "history/tsinghua-mem-seven-studies/deliverables/video-contact.jpg",
+      "source": "tsinghua-mem-seven-studies/deliverables/video-contact.jpg",
+      "sha256": "5c2a632e082160939d80793983a7f9df41b4f8137742aa0d8414a5687ab63495",
+      "bytes": 854794
+    },
+    {
+      "path": "history/tsinghua-mem-seven-studies/scripts/build.py",
+      "source": "tsinghua-mem-seven-studies/scripts/build.py",
+      "sha256": "3c0d6ea11ed25d3be4cd9bb1482ee0acc13dd1bfa07356bb4d588a4250eae906",
+      "bytes": 10898
+    },
+    {
+      "path": "history/tsinghua-mem-seven-studies/scripts/finish.py",
+      "source": "tsinghua-mem-seven-studies/scripts/finish.py",
+      "sha256": "4c0e760b68a4f4c524d2849c5f34bdab6245908ba9cf7d56ae614d01a9d7c9f9",
+      "bytes": 4723
+    },
+    {
+      "path": "history/tsinghua-mem-seven-studies/scripts/proof.mjs",
+      "source": "tsinghua-mem-seven-studies/scripts/proof.mjs",
+      "sha256": "9b9733f8665a8ae13132cbe97c60fbbd35089d3ff80eceba737769a71a2b109e",
+      "bytes": 2976
+    },
+    {
+      "path": "history/tsinghua-mem-seven-studies/assets/animation.js",
+      "source": "tsinghua-mem-seven-studies/assets/animation.js",
+      "sha256": "f799fb731c85ecb14eb4142d0920cbf9ffe5b9f6e8b772f2949cfeea713c8639",
+      "bytes": 7568
+    },
+    {
+      "path": "history/tsinghua-mem-seven-studies/assets/badge-stage.svg",
+      "source": "tsinghua-mem-seven-studies/assets/badge-stage.svg",
+      "sha256": "b7e2886f461bf5420fb0ce56cf36b0d9a781e38605837bf74e3b98f5b37eebab",
+      "bytes": 70637
+    },
+    {
+      "path": "history/tsinghua-mem-seven-studies/assets/clouds.png",
+      "source": "tsinghua-mem-seven-studies/assets/clouds.png",
+      "sha256": "c877034d69e572dcb7ae93e1b105f8de1cfddcecdd8aaccd9939c5b614503185",
+      "bytes": 391762
+    },
+    {
+      "path": "history/tsinghua-mem-seven-studies/assets/gsap.min.js",
+      "source": "tsinghua-mem-seven-studies/assets/gsap.min.js",
+      "sha256": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280",
+      "bytes": 72779
+    },
+    {
+      "path": "history/tsinghua-mem-seven-studies/assets/milky.png",
+      "source": "tsinghua-mem-seven-studies/assets/milky.png",
+      "sha256": "6a42cf38cb3e3f20024f0c12d222b2ea1542bb7c616342e3d3174869a76e1070",
+      "bytes": 325457
+    },
+    {
+      "path": "history/tsinghua-mem-seven-studies/assets/nebula.png",
+      "source": "tsinghua-mem-seven-studies/assets/nebula.png",
+      "sha256": "92960db6e389832ce7f17181d7a7533354c3e6c0f667a7c479dea1050a76e184",
+      "bytes": 670411
+    },
+    {
+      "path": "history/tsinghua-mem-seven-studies/inputs/logo.svg",
+      "source": "tsinghua-mem-seven-studies/inputs/logo.svg",
+      "sha256": "89bdad7d41062bf6b2cf4ed340d79ba62499126fb1f785b725ed4c76813c038c",
+      "bytes": 67793
+    },
+    {
+      "path": "history/tsinghua-mem-starlight-v2/BRIEF.md",
+      "source": "tsinghua-mem-starlight-v2/BRIEF.md",
+      "sha256": "0e382aad64e6474355bdec35c70e17970b9fd6915622ea192d960cff4768dc6a",
+      "bytes": 1661
+    },
+    {
+      "path": "history/tsinghua-mem-starlight-v2/scripts/nebula.py",
+      "source": "tsinghua-mem-starlight-v2/scripts/nebula.py",
+      "sha256": "9915fb251f8e4a47da3d3add92738ad592849bf071f9a050fe3061e58e12bf55",
+      "bytes": 1414
+    },
+    {
+      "path": "history/tsinghua-mem-starlight-v2/assets/gsap.min.js",
+      "source": "tsinghua-mem-starlight-v2/assets/gsap.min.js",
+      "sha256": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280",
+      "bytes": 72779
+    },
+    {
+      "path": "history/tsinghua-mem-starlight-v2/inputs/Tsinghua-MEM-2023-Transparent.svg",
+      "source": "tsinghua-mem-starlight-v2/inputs/Tsinghua-MEM-2023-Transparent.svg",
+      "sha256": "89bdad7d41062bf6b2cf4ed340d79ba62499126fb1f785b725ed4c76813c038c",
+      "bytes": 67793
+    }
+  ]
+}

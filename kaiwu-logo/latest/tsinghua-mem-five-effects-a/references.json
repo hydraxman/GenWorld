@@ -1,0 +1,30 @@
+{
+  "references": [
+    {
+      "id": "01",
+      "name": "星际穿越",
+      "page": "https://reactbits.dev/backgrounds/hyperspeed",
+      "source_url": "https://raw.githubusercontent.com/DavidHDev/react-bits/23b6d2c0ab10b949c7891b3e76b2f801dff186a3/src/content/Backgrounds/Hyperspeed/Hyperspeed.jsx",
+      "commit": "23b6d2c0ab10b949c7891b3e76b2f801dff186a3",
+      "access": "Official page HTTP 200; pinned source HTTP 200 and read for mechanism study. Browser CDP dependency unavailable, direct official HTTP used.",
+      "borrowed_mechanisms": "Perspective depth convergence; long forward-traveling light streaks; curved trajectories and acceleration, derived from the road/lane light-pair and distortion description. Original implementation here uses cylindrical depth lanes rather than a road.",
+      "implementation": "Independently authored film-specific Three.js background, no copied React Bits component or port",
+      "source_sha256": "0be3a45b611a6b029eb5c5a92f4db4b9d86257a0f4ebeb750bb6351d950ac4e4",
+      "license": "MIT + Commons Clause; component redistribution prohibited; downloaded research source excluded from delivery source_paths"
+    },
+    {
+      "id": "02",
+      "name": "极光织带",
+      "page": "https://reactbits.dev/backgrounds/aurora",
+      "source_url": "https://raw.githubusercontent.com/DavidHDev/react-bits/23b6d2c0ab10b949c7891b3e76b2f801dff186a3/src/content/Backgrounds/Aurora/Aurora.jsx",
+      "commit": "23b6d2c0ab10b949c7891b3e76b2f801dff186a3",
+      "access": "Official page HTTP 200; pinned source HTTP 200 and read for mechanism study. Browser CDP dependency unavailable, direct official HTTP used.",
+      "borrowed_mechanisms": "Soft luminous color-ramped curtains; time-varying wave height and feathered blend. Original implementation here uses five analytical sine-fold ribbons and vertical interference rays, not the component simplex-noise shader.",
+      "implementation": "Independently authored film-specific Three.js background, no copied React Bits component or port",
+      "source_sha256": "1ca0baa117d299e8a53e0b9901a0d0267b929c80d1adc2e349e8123b358dc417",
+      "license": "MIT + Commons Clause; component redistribution prohibited; downloaded research source excluded from delivery source_paths"
+    }
+  ],
+  "license_url": "https://raw.githubusercontent.com/DavidHDev/react-bits/23b6d2c0ab10b949c7891b3e76b2f801dff186a3/LICENSE.md",
+  "research_evidence_internal_only": "reference-evidence/; do not redistribute copied reference components"
+}

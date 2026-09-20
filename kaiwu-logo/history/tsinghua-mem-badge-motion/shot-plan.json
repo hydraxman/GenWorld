@@ -1,0 +1,32 @@
+{
+  "source": "inputs/Tsinghua-MEM-2023-Transparent.svg",
+  "category": "logo-light-studies",
+  "duration": 18,
+  "fps": 30,
+  "dimensions": [
+    960,
+    960
+  ],
+  "variants": [
+    {
+      "id": "A",
+      "start": 0,
+      "end": 6,
+      "effect": "moving purple backlight"
+    },
+    {
+      "id": "B",
+      "start": 6,
+      "end": 12,
+      "effect": "actual cutout projection rays"
+    },
+    {
+      "id": "C",
+      "start": 12,
+      "end": 18,
+      "effect": "source-masked iridescent band and edge"
+    }
+  ],
+  "source_paths": 53,
+  "asset_needs": []
+}
