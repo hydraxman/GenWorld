@@ -1,0 +1,398 @@
+{
+  "id": "school",
+  "name": "清华学堂",
+  "style": "friendly",
+  "rate": "+1%",
+  "text": "接着看清华学堂。灰砖和红瓦呈现出德国古典建筑的风格。一九一一年，这里响起了读书声，清华的办学历程由此开启。老建筑不只是背景，也藏着一代代人的求学记忆。",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "ssml_sha256": "ab63e26f1f4114f476a4424465587e6ce850936df6d7fa89e33022cd9849a80a",
+  "duration_seconds": 17.6380833,
+  "sha256": "f1389356fd63df9b6b0c75a760d8bdb263ecb32b04d74298fbe7162c051af29a",
+  "boundaries": [
+    {
+      "audioOffset": 495000,
+      "duration": 3217910,
+      "text": "接着",
+      "textOffset": 243,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 3712910,
+      "duration": 2598950,
+      "text": "看",
+      "textOffset": 245,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 6435620,
+      "duration": 9529790,
+      "text": "清华学堂",
+      "textOffset": 246,
+      "wordLength": 4,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 16089160,
+      "duration": 990000,
+      "text": "。",
+      "textOffset": 250,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 25034580,
+      "duration": 2227700,
+      "text": "灰",
+      "textOffset": 272,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 27262290,
+      "duration": 2227700,
+      "text": "砖",
+      "textOffset": 273,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 29613950,
+      "duration": 1361450,
+      "text": "和",
+      "textOffset": 274,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 31098950,
+      "duration": 2598950,
+      "text": "红",
+      "textOffset": 275,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 33697910,
+      "duration": 2598950,
+      "text": "瓦",
+      "textOffset": 276,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 37163330,
+      "duration": 3836660,
+      "text": "呈现",
+      "textOffset": 277,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 41000000,
+      "duration": 2227700,
+      "text": "出",
+      "textOffset": 279,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 43351450,
+      "duration": 3341660,
+      "text": "德国",
+      "textOffset": 280,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 46816870,
+      "duration": 6683120,
+      "text": "古典建筑",
+      "textOffset": 282,
+      "wordLength": 4,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 53500000,
+      "duration": 866250,
+      "text": "的",
+      "textOffset": 286,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 54490000,
+      "duration": 5197910,
+      "text": "风格",
+      "textOffset": 287,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 59811870,
+      "duration": 990000,
+      "text": "。",
+      "textOffset": 289,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 68757500,
+      "duration": 9901040,
+      "text": "一九一一年",
+      "textOffset": 311,
+      "wordLength": 5,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 79648540,
+      "duration": 1361450,
+      "text": "，",
+      "textOffset": 316,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 81010000,
+      "duration": 2846450,
+      "text": "这里",
+      "textOffset": 317,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 83980200,
+      "duration": 1980200,
+      "text": "响",
+      "textOffset": 319,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 85960410,
+      "duration": 1361450,
+      "text": "起",
+      "textOffset": 320,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 87321870,
+      "duration": 866250,
+      "text": "了",
+      "textOffset": 321,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 88311870,
+      "duration": 3589160,
+      "text": "读书",
+      "textOffset": 322,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 91901040,
+      "duration": 3093950,
+      "text": "声",
+      "textOffset": 324,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 95985200,
+      "duration": 1485000,
+      "text": "，",
+      "textOffset": 325,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 97470200,
+      "duration": 3589160,
+      "text": "清华",
+      "textOffset": 326,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 101059370,
+      "duration": 866250,
+      "text": "的",
+      "textOffset": 328,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 102049580,
+      "duration": 3093950,
+      "text": "办学",
+      "textOffset": 329,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 105143540,
+      "duration": 5693120,
+      "text": "历程",
+      "textOffset": 331,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 111826660,
+      "duration": 3341660,
+      "text": "由此",
+      "textOffset": 333,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 115168330,
+      "duration": 5445620,
+      "text": "开启",
+      "textOffset": 335,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 120737700,
+      "duration": 990000,
+      "text": "。",
+      "textOffset": 337,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 129683120,
+      "duration": 1980200,
+      "text": "老",
+      "textOffset": 359,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 131663330,
+      "duration": 4455410,
+      "text": "建筑",
+      "textOffset": 360,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 136242500,
+      "duration": 2598950,
+      "text": "不只",
+      "textOffset": 362,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 138841660,
+      "duration": 1361450,
+      "text": "是",
+      "textOffset": 364,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 140326660,
+      "duration": 5197910,
+      "text": "背景",
+      "textOffset": 365,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 146514790,
+      "duration": 1732700,
+      "text": "，",
+      "textOffset": 367,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 148247500,
+      "duration": 1237700,
+      "text": "也",
+      "textOffset": 368,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 149485200,
+      "duration": 2351450,
+      "text": "藏",
+      "textOffset": 369,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 151836660,
+      "duration": 990000,
+      "text": "着",
+      "textOffset": 370,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 152826660,
+      "duration": 2722700,
+      "text": "一代",
+      "textOffset": 371,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 155549580,
+      "duration": 1732500,
+      "text": "代",
+      "textOffset": 373,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 157282080,
+      "duration": 1361450,
+      "text": "人",
+      "textOffset": 374,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 158643540,
+      "duration": 742500,
+      "text": "的",
+      "textOffset": 375,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 159510000,
+      "duration": 3589160,
+      "text": "求学",
+      "textOffset": 376,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 163222700,
+      "duration": 4702910,
+      "text": "记忆",
+      "textOffset": 378,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 168049580,
+      "duration": 990000,
+      "text": "。",
+      "textOffset": 380,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    }
+  ],
+  "file": "audio/school.wav"
+}

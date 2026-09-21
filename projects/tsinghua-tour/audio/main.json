@@ -1,0 +1,430 @@
+{
+  "id": "main",
+  "name": "新主楼",
+  "style": "friendly",
+  "rate": "+1%",
+  "text": "咱们从主楼广场开始。眼前是校园东区的主楼群，由东、西和中央三部分组成。中央主楼在一九六六年五月建成，东西主楼通过过街楼与它相连。先看看这份开阔，再慢慢走进校园吧。",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "ssml_sha256": "0d4b76783fdb0e9d0091fe62695f4e7e0ff2a60276343fbc8c9f7dc8d2f65bf0",
+  "duration_seconds": 19.3758125,
+  "sha256": "527968889cea61b1f9366867051358e4a27bfd367073de66553885d944b368d7",
+  "boundaries": [
+    {
+      "audioOffset": 495000,
+      "duration": 3217910,
+      "text": "咱们",
+      "textOffset": 243,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 3836660,
+      "duration": 2227700,
+      "text": "从",
+      "textOffset": 245,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 6064370,
+      "duration": 3093950,
+      "text": "主楼",
+      "textOffset": 246,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 9158330,
+      "duration": 3712910,
+      "text": "广场",
+      "textOffset": 248,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 12995000,
+      "duration": 5693120,
+      "text": "开始",
+      "textOffset": 250,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 18811870,
+      "duration": 990000,
+      "text": "。",
+      "textOffset": 252,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 27757500,
+      "duration": 5197910,
+      "text": "眼前",
+      "textOffset": 274,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 33079160,
+      "duration": 1608950,
+      "text": "是",
+      "textOffset": 276,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 34688120,
+      "duration": 3712910,
+      "text": "校园",
+      "textOffset": 277,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 38524790,
+      "duration": 3341450,
+      "text": "东区",
+      "textOffset": 279,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 41866250,
+      "duration": 990000,
+      "text": "的",
+      "textOffset": 281,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 42980200,
+      "duration": 1485200,
+      "text": "主",
+      "textOffset": 282,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 44465410,
+      "duration": 5321870,
+      "text": "楼群",
+      "textOffset": 283,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 50777290,
+      "duration": 1608750,
+      "text": "，",
+      "textOffset": 285,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 52386040,
+      "duration": 1732700,
+      "text": "由",
+      "textOffset": 286,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 54118750,
+      "duration": 2846450,
+      "text": "东",
+      "textOffset": 287,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 57955410,
+      "duration": 1113950,
+      "text": "、",
+      "textOffset": 288,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 59069370,
+      "duration": 3465410,
+      "text": "西和",
+      "textOffset": 289,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 62658330,
+      "duration": 3341660,
+      "text": "中央",
+      "textOffset": 291,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 66123750,
+      "duration": 2227700,
+      "text": "三",
+      "textOffset": 293,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 68351450,
+      "duration": 2970200,
+      "text": "部分",
+      "textOffset": 294,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 71321870,
+      "duration": 5321870,
+      "text": "组成",
+      "textOffset": 296,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 76767290,
+      "duration": 990000,
+      "text": "。",
+      "textOffset": 298,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 85712910,
+      "duration": 3465410,
+      "text": "中央",
+      "textOffset": 320,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 89302080,
+      "duration": 5074160,
+      "text": "主楼",
+      "textOffset": 322,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 95242500,
+      "duration": 2227700,
+      "text": "在",
+      "textOffset": 324,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 97593950,
+      "duration": 8415830,
+      "text": "一九六六年",
+      "textOffset": 325,
+      "wordLength": 5,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 106133750,
+      "duration": 2970200,
+      "text": "五月",
+      "textOffset": 330,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 109227700,
+      "duration": 6064370,
+      "text": "建成",
+      "textOffset": 332,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 116282080,
+      "duration": 2475200,
+      "text": "，",
+      "textOffset": 334,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 118757500,
+      "duration": 3093950,
+      "text": "东西",
+      "textOffset": 335,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 121975200,
+      "duration": 4331660,
+      "text": "主楼",
+      "textOffset": 337,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 126430620,
+      "duration": 3093950,
+      "text": "通过",
+      "textOffset": 339,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 129524790,
+      "duration": 1237500,
+      "text": "过",
+      "textOffset": 341,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 130762290,
+      "duration": 2103950,
+      "text": "街",
+      "textOffset": 342,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 132866250,
+      "duration": 3217910,
+      "text": "楼",
+      "textOffset": 343,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 137074160,
+      "duration": 1237700,
+      "text": "与",
+      "textOffset": 344,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 138311870,
+      "duration": 1237700,
+      "text": "它",
+      "textOffset": 345,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 139673330,
+      "duration": 5321870,
+      "text": "相连",
+      "textOffset": 346,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 145118750,
+      "duration": 990000,
+      "text": "。",
+      "textOffset": 348,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 154064370,
+      "duration": 2475200,
+      "text": "先",
+      "textOffset": 370,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 156539580,
+      "duration": 3093950,
+      "text": "看看",
+      "textOffset": 371,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 159757500,
+      "duration": 1113750,
+      "text": "这",
+      "textOffset": 373,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 160871250,
+      "duration": 1361450,
+      "text": "份",
+      "textOffset": 374,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 162356450,
+      "duration": 5445620,
+      "text": "开阔",
+      "textOffset": 375,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 168792080,
+      "duration": 1237700,
+      "text": "，",
+      "textOffset": 377,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 170029790,
+      "duration": 1608750,
+      "text": "再",
+      "textOffset": 378,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 171638540,
+      "duration": 3589160,
+      "text": "慢慢",
+      "textOffset": 379,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 175351450,
+      "duration": 1485200,
+      "text": "走",
+      "textOffset": 381,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 176836660,
+      "duration": 5940620,
+      "text": "进校园",
+      "textOffset": 382,
+      "wordLength": 3,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 182777290,
+      "duration": 2475200,
+      "text": "吧",
+      "textOffset": 385,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 185376250,
+      "duration": 990000,
+      "text": "。",
+      "textOffset": 386,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    }
+  ],
+  "file": "audio/main.wav"
+}

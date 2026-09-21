@@ -1,0 +1,332 @@
+{
+  "schema_version": 1,
+  "photos": 12,
+  "voice_segments": 15,
+  "files": [
+    {
+      "path": "photos/01-erkxiaomen.png",
+      "bytes": 783180,
+      "sha256": "de4c267a4659bc6ad8264ee3c36ca84aac706cd8044c45c19dd2323a2171c04f"
+    },
+    {
+      "path": "photos/02-qinghua-xuetang.jpg",
+      "bytes": 803881,
+      "sha256": "17ad9410b72c3cebc938c37d8b8594523d638bdacfa1a7b1fc3de66273707da1"
+    },
+    {
+      "path": "photos/03-sundial.jpg",
+      "bytes": 344276,
+      "sha256": "313ccde1b25f21e23839cad240be9840f9ebbceb7d9b79278285d42c22aeb07a"
+    },
+    {
+      "path": "photos/04-auditorium.jpg",
+      "bytes": 1645137,
+      "sha256": "90dafe849f950eb1d3105d996e047ddeda7bbe1e60b41de41f1fbe1e718a76c7"
+    },
+    {
+      "path": "photos/05-shuimu-qinghua.png",
+      "bytes": 949347,
+      "sha256": "2308899a5680e1bd5a7342cbec37caa03e3954efeb499a8bfa89be9f17afada9"
+    },
+    {
+      "path": "photos/06-gongziting.jpg",
+      "bytes": 1880156,
+      "sha256": "beedb2c36506279decd69edb82081326f9a06102950ecdf87ded1692cc8d083e"
+    },
+    {
+      "path": "photos/07-jinchunyuan.jpg",
+      "bytes": 1849379,
+      "sha256": "511554e0da2cdcee439d53a3ba3fd4eebe4c4dd520297c638347486becc8da74"
+    },
+    {
+      "path": "photos/08-shundelou.jpg",
+      "bytes": 126604,
+      "sha256": "117f7e1c42e14852089bb6bd405c23364e6689b5b3742baa90f7c29c75bce53d"
+    },
+    {
+      "path": "photos/all-manifest.json",
+      "bytes": 20409,
+      "sha256": "00715098cb764ea9f8cbd3ebd732bb557c64d24c6c12122d350b153ee6828446"
+    },
+    {
+      "path": "photos/main-building.jpg",
+      "bytes": 1444530,
+      "sha256": "e744ad295f62abbee4c4c0cb2493ee3da0a375abb0a2bcea5880c7c0de9114fc"
+    },
+    {
+      "path": "photos/old-library.jpg",
+      "bytes": 290434,
+      "sha256": "5e2e0a90bed2c98b349c92c3c3e072ba27d9a30de1aba0ae625cf10f442952f7"
+    },
+    {
+      "path": "photos/west-gymnasium.jpg",
+      "bytes": 1348420,
+      "sha256": "5dcf310f80d92bbc95242af61a92d8866de77d990b55203f540b848a3d49d74c"
+    },
+    {
+      "path": "photos/zijingyuan.jpg",
+      "bytes": 406124,
+      "sha256": "964f7f655e408a1d7474c7169bba7840d45a88885afe9570669b74f5a3383779"
+    },
+    {
+      "path": "audio/approved-narration.m4a",
+      "bytes": 5767598,
+      "sha256": "ff38e751958174b4161eac59c67b9838e7f3033aee2af747a9fd4704e0b2b106"
+    },
+    {
+      "path": "audio/auditorium.json",
+      "bytes": 9809,
+      "sha256": "ad64e67fad62fabf10bdf199d47d343b0725a37876b4656f57c024392e77a062"
+    },
+    {
+      "path": "audio/auditorium.ssml",
+      "bytes": 606,
+      "sha256": "84f35fb84189144ddb2e271becf809654a42880458dc8d27baee1808f198c848"
+    },
+    {
+      "path": "audio/auditorium.wav",
+      "bytes": 1790472,
+      "sha256": "001fa310cc5a4721a87922f591f3c12403b51354c1c5762754c6d47b39bdabf7"
+    },
+    {
+      "path": "audio/canteen.json",
+      "bytes": 10420,
+      "sha256": "583847ed74c6203f04b1923301fa49e1af1e8af1a10b86bcf0f28d655aeb82f3"
+    },
+    {
+      "path": "audio/canteen.ssml",
+      "bytes": 636,
+      "sha256": "a4bd86ba8f51a6c9e5d3985947279987b4e3e1feb9523e3a2041090dc9147a11"
+    },
+    {
+      "path": "audio/canteen.wav",
+      "bytes": 1875896,
+      "sha256": "4376bd648189a7804f17fbebb69742af2192976b72d8b14108fdd0bb9f5f71c6"
+    },
+    {
+      "path": "audio/couplet.json",
+      "bytes": 6673,
+      "sha256": "66976dcf6627b47fb13e62199831f6c377c408e5d71f6ebe2444653e045ba91f"
+    },
+    {
+      "path": "audio/couplet.ssml",
+      "bytes": 640,
+      "sha256": "6fec8f862fbf623174057ce37e82132f655d75512d76b79534958ee17ae28d58"
+    },
+    {
+      "path": "audio/couplet.wav",
+      "bytes": 1672002,
+      "sha256": "aee3a1d0f68ee547bbd0bf003f54c92a146a85b91999b483d686c06b107d3ca7"
+    },
+    {
+      "path": "audio/gate.json",
+      "bytes": 10473,
+      "sha256": "fcc69e7a8e50976218a8e10a3cc4fae9b2cc2ead9ae2375e3c98c388ebec7cd5"
+    },
+    {
+      "path": "audio/gate.ssml",
+      "bytes": 582,
+      "sha256": "b6408b9f21aeefdc8ad90d9795f71840f253b20d56b9c125a3f53612e09fc03d"
+    },
+    {
+      "path": "audio/gate.wav",
+      "bytes": 1628380,
+      "sha256": "a6f9e4c3612c814280543761f7bdb225a25a3b9b1bb84d984b05798da2e43cc1"
+    },
+    {
+      "path": "audio/gongzi.json",
+      "bytes": 9074,
+      "sha256": "7fb5e89888793ffb2436c1587a0cc9fb3077644cbc780391764606704e6849f0"
+    },
+    {
+      "path": "audio/gongzi.ssml",
+      "bytes": 594,
+      "sha256": "ced3ecda5216cb911ab16b9ec8e0f38dba21a52cdced25ba5c8cbce6eb14b164"
+    },
+    {
+      "path": "audio/gongzi.wav",
+      "bytes": 1666844,
+      "sha256": "c0647688a8abd26c6812605ab7db98c0410437c8ed60d6eab9239109e11a7777"
+    },
+    {
+      "path": "audio/gym.json",
+      "bytes": 8745,
+      "sha256": "031524bcce91d7ccb326371f8882c57c6e2727ba97c43b372a99fba47180020b"
+    },
+    {
+      "path": "audio/gym.ssml",
+      "bytes": 606,
+      "sha256": "42820aa7c238cb3f3bd2c3d640304ac0fdfaa4502cc959eec1de4facf831fcd5"
+    },
+    {
+      "path": "audio/gym.wav",
+      "bytes": 1795544,
+      "sha256": "c7d198c8190a54a252d09e22356a3cfe4ca00bc7a95386a94c078dcc3844bca9"
+    },
+    {
+      "path": "audio/intro.json",
+      "bytes": 9830,
+      "sha256": "5081da8b7ae2f0a2bef3ae681c8045fa595723965ed8623b2887b83461212224"
+    },
+    {
+      "path": "audio/intro.ssml",
+      "bytes": 589,
+      "sha256": "c28a4d4bd8743033bbc923920bfad601384c88be1c1fe755beae208e9d2cf918"
+    },
+    {
+      "path": "audio/intro.wav",
+      "bytes": 1730354,
+      "sha256": "252b51bfcf3542b79aa87763d3798ca9a9965e1df2cd298ef71343f8b9fc16bd"
+    },
+    {
+      "path": "audio/jinchun.json",
+      "bytes": 9949,
+      "sha256": "56a1d0c85650561e69dbbecdfebd8156345b7d9825f6b464d9b0307db02aca5f"
+    },
+    {
+      "path": "audio/jinchun.ssml",
+      "bytes": 574,
+      "sha256": "01dc73cee0e21e11792c3cb51d27da4222630117d2c4be6c653ac5cc9e86e5d7"
+    },
+    {
+      "path": "audio/jinchun.wav",
+      "bytes": 1612404,
+      "sha256": "262978a9792857e53f9b50e37bf0900118be33e2f8c83ea517f73e8ef40120b1"
+    },
+    {
+      "path": "audio/library.json",
+      "bytes": 8781,
+      "sha256": "7d048808f427e7f5dca815276385fffd7c6004cba36e8cb357b807b0384b17c1"
+    },
+    {
+      "path": "audio/library.ssml",
+      "bytes": 618,
+      "sha256": "cb4cc971cbd5039aff09df2dbdbaf0fc48ee60fa42fdf5cb832cecce10048f7e"
+    },
+    {
+      "path": "audio/library.wav",
+      "bytes": 1820444,
+      "sha256": "ed244a9b06be11469cbc97a92a4ab321206d2bfe266ca22b7110f70b8c0ff0ef"
+    },
+    {
+      "path": "audio/main.json",
+      "bytes": 9985,
+      "sha256": "12848cc555ef86c9129e6b75a216fd69d92a05bc780533a02a405d8307ae319d"
+    },
+    {
+      "path": "audio/main.ssml",
+      "bytes": 615,
+      "sha256": "0d4b76783fdb0e9d0091fe62695f4e7e0ff2a60276343fbc8c9f7dc8d2f65bf0"
+    },
+    {
+      "path": "audio/main.wav",
+      "bytes": 1860122,
+      "sha256": "527968889cea61b1f9366867051358e4a27bfd367073de66553885d944b368d7"
+    },
+    {
+      "path": "audio/manifest.json",
+      "bytes": 155620,
+      "sha256": "249df7f168547e02a1b97caff25df2583cca493649407da0d091afba8eca06b7"
+    },
+    {
+      "path": "audio/outro.json",
+      "bytes": 11652,
+      "sha256": "0b8e5c9cc3d4eb67c822382f49b7933425733a64d9b68bb459b2c809fd78bc99"
+    },
+    {
+      "path": "audio/outro.ssml",
+      "bytes": 659,
+      "sha256": "6a5f46822b3096105a6a69ca640973326eacbdd50ea1af717c52701094869dd1"
+    },
+    {
+      "path": "audio/outro.wav",
+      "bytes": 2127644,
+      "sha256": "0591659187aebad6052692f0d3c4a59b43a7a6cc49c5ffa3de6c6dd008b91d43"
+    },
+    {
+      "path": "audio/school.json",
+      "bytes": 9247,
+      "sha256": "3205bb5733029ee030ce17d985705950bfaaef8ad2848fb5bc1a099d294f76ad"
+    },
+    {
+      "path": "audio/school.ssml",
+      "bytes": 597,
+      "sha256": "ab63e26f1f4114f476a4424465587e6ce850936df6d7fa89e33022cd9849a80a"
+    },
+    {
+      "path": "audio/school.wav",
+      "bytes": 1693300,
+      "sha256": "f1389356fd63df9b6b0c75a760d8bdb263ecb32b04d74298fbe7162c051af29a"
+    },
+    {
+      "path": "audio/shuimu.json",
+      "bytes": 11097,
+      "sha256": "82cae5c0783698d93fdfa3774e55e7573444db6f0e0d788fa2e84ca837a67056"
+    },
+    {
+      "path": "audio/shuimu.ssml",
+      "bytes": 655,
+      "sha256": "8d691ce19ca7c8d25f11ae4a2b6ffad83099e5a57dc59ac16d48c4b692671a08"
+    },
+    {
+      "path": "audio/shuimu.wav",
+      "bytes": 2030840,
+      "sha256": "38db4ed6322c619c15270fed1c790116030f64904fbb12466d6da4c8329283c8"
+    },
+    {
+      "path": "audio/shunde.json",
+      "bytes": 7789,
+      "sha256": "fc18239f5cf5858790e05299c217814c037b231b3b088712a3ee27253f7539ae"
+    },
+    {
+      "path": "audio/shunde.ssml",
+      "bytes": 549,
+      "sha256": "3920d1ed9eabd472daef485e106aa8f797cfcac9c19385926508a4c11b21a78e"
+    },
+    {
+      "path": "audio/shunde.wav",
+      "bytes": 1451970,
+      "sha256": "a7816261e404b34b1245dc41bd8bf1a4f71c2eced09d668921d4342f818197bb"
+    },
+    {
+      "path": "audio/sundial.json",
+      "bytes": 9778,
+      "sha256": "f3b19d489c8776048b346b8e00e37498c4940233f78e65d15706aefc3c4ad82d"
+    },
+    {
+      "path": "audio/sundial.ssml",
+      "bytes": 597,
+      "sha256": "1a123f843c642eda8a6596e6b756987e1d4cd426fc73f91f30bf48d0624152c9"
+    },
+    {
+      "path": "audio/sundial.wav",
+      "bytes": 1638044,
+      "sha256": "73c67cba57d368c8f3758f166a41ed295ad9d5889b65a46ba0f83f30538b5f44"
+    },
+    {
+      "path": "fonts/MaShanZheng-Regular.ttf",
+      "bytes": 5857936,
+      "sha256": "6d2546bb189c732a8ca29af9e22457b152387d158aa459e4ac2ce1e51788b7fb"
+    },
+    {
+      "path": "fonts/OFL.txt",
+      "bytes": 4397,
+      "sha256": "d7bdb1cee215b689e23c2f95672a6084c790542170648267a55114103d756a08"
+    },
+    {
+      "path": "final/tsinghua-v5-satellite-stars.mp4",
+      "bytes": 26904371,
+      "sha256": "0152e1cb27e1d71a00ff8f60c669f9de57877895306a0f185c6b434dbfe5ed9e"
+    },
+    {
+      "path": "research/evidence/shuimu-close.png",
+      "bytes": 1215273,
+      "sha256": "51c42d060cba13badddd8c7c16cda23cc68136c6060c7159d908dbd1a4c55615"
+    },
+    {
+      "path": "research/evidence/shuimu-front.png",
+      "bytes": 1649701,
+      "sha256": "b6dee5e7f4663800c177c45f84f4ef89f91f2772fea1979b69c6d4cd9afbe86c"
+    }
+  ]
+}

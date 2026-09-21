@@ -1,0 +1,26 @@
+{
+  "ShortName": "zh-CN-XiaoxiaoNeural",
+  "Gender": "Female",
+  "StyleList": [
+    "assistant",
+    "chat",
+    "customerservice",
+    "newscast",
+    "affectionate",
+    "angry",
+    "calm",
+    "cheerful",
+    "disgruntled",
+    "fearful",
+    "gentle",
+    "lyrical",
+    "sad",
+    "serious",
+    "poetry-reading",
+    "friendly",
+    "chat-casual",
+    "whispering",
+    "sorry",
+    "excited"
+  ]
+}

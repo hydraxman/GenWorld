@@ -1,0 +1,390 @@
+{
+  "id": "gongzi",
+  "name": "工字厅",
+  "style": "gentle",
+  "rate": "0%",
+  "text": "再到工字厅外侧看一看。前后两座大殿由短廊连接，俯视形似一个工字，因此得名。一九一一年，清华学堂的开学仪式就在这里举行。在院外，也能感受古典园林的气息。",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "ssml_sha256": "ced3ecda5216cb911ab16b9ec8e0f38dba21a52cdced25ba5c8cbce6eb14b164",
+  "duration_seconds": 17.3625,
+  "sha256": "c0647688a8abd26c6812605ab7db98c0410437c8ed60d6eab9239109e11a7777",
+  "boundaries": [
+    {
+      "audioOffset": 500000,
+      "duration": 1625000,
+      "text": "再",
+      "textOffset": 240,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 2125000,
+      "duration": 1375000,
+      "text": "到",
+      "textOffset": 241,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 3750000,
+      "duration": 3000000,
+      "text": "工字",
+      "textOffset": 242,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 6750000,
+      "duration": 1750000,
+      "text": "厅",
+      "textOffset": 244,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 8500000,
+      "duration": 3500000,
+      "text": "外侧",
+      "textOffset": 245,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 12000000,
+      "duration": 2375000,
+      "text": "看",
+      "textOffset": 247,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 14375000,
+      "duration": 1000000,
+      "text": "一",
+      "textOffset": 248,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 15375000,
+      "duration": 2875000,
+      "text": "看",
+      "textOffset": 249,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 18250000,
+      "duration": 1125000,
+      "text": "。",
+      "textOffset": 250,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 27375000,
+      "duration": 3500000,
+      "text": "前后",
+      "textOffset": 272,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 31000000,
+      "duration": 2875000,
+      "text": "两座",
+      "textOffset": 274,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 34000000,
+      "duration": 4875000,
+      "text": "大殿",
+      "textOffset": 276,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 39750000,
+      "duration": 1500000,
+      "text": "由",
+      "textOffset": 278,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 41375000,
+      "duration": 3375000,
+      "text": "短廊",
+      "textOffset": 279,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 44875000,
+      "duration": 4750000,
+      "text": "连接",
+      "textOffset": 281,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 50625000,
+      "duration": 2875000,
+      "text": "，",
+      "textOffset": 283,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 53500000,
+      "duration": 3125000,
+      "text": "俯视",
+      "textOffset": 284,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 56875000,
+      "duration": 3125000,
+      "text": "形似",
+      "textOffset": 286,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 60125000,
+      "duration": 1750000,
+      "text": "一个",
+      "textOffset": 288,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 62000000,
+      "duration": 4625000,
+      "text": "工字",
+      "textOffset": 290,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 67625000,
+      "duration": 1750000,
+      "text": "，",
+      "textOffset": 292,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 69375000,
+      "duration": 3250000,
+      "text": "因此",
+      "textOffset": 293,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 72750000,
+      "duration": 4750000,
+      "text": "得名",
+      "textOffset": 295,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 77625000,
+      "duration": 1125000,
+      "text": "。",
+      "textOffset": 297,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 86750000,
+      "duration": 9625000,
+      "text": "一九一一年",
+      "textOffset": 319,
+      "wordLength": 5,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 97375000,
+      "duration": 2125000,
+      "text": "，",
+      "textOffset": 324,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 99500000,
+      "duration": 6875000,
+      "text": "清华学堂",
+      "textOffset": 325,
+      "wordLength": 4,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 106375000,
+      "duration": 625000,
+      "text": "的",
+      "textOffset": 329,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 107250000,
+      "duration": 3125000,
+      "text": "开学",
+      "textOffset": 330,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 110375000,
+      "duration": 5125000,
+      "text": "仪式",
+      "textOffset": 332,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 116500000,
+      "duration": 1500000,
+      "text": "就",
+      "textOffset": 334,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 118000000,
+      "duration": 1375000,
+      "text": "在",
+      "textOffset": 335,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 119375000,
+      "duration": 2750000,
+      "text": "这里",
+      "textOffset": 336,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 122250000,
+      "duration": 4500000,
+      "text": "举行",
+      "textOffset": 338,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 126875000,
+      "duration": 1125000,
+      "text": "。",
+      "textOffset": 340,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 136000000,
+      "duration": 1625000,
+      "text": "在",
+      "textOffset": 362,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 137750000,
+      "duration": 2250000,
+      "text": "院",
+      "textOffset": 363,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 140000000,
+      "duration": 2750000,
+      "text": "外",
+      "textOffset": 364,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 143750000,
+      "duration": 2125000,
+      "text": "，",
+      "textOffset": 365,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 145875000,
+      "duration": 1125000,
+      "text": "也",
+      "textOffset": 366,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 147000000,
+      "duration": 1250000,
+      "text": "能",
+      "textOffset": 367,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 148250000,
+      "duration": 3875000,
+      "text": "感受",
+      "textOffset": 368,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 152375000,
+      "duration": 3125000,
+      "text": "古典",
+      "textOffset": 370,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 155500000,
+      "duration": 3250000,
+      "text": "园林",
+      "textOffset": 372,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 158750000,
+      "duration": 750000,
+      "text": "的",
+      "textOffset": 374,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 159625000,
+      "duration": 5250000,
+      "text": "气息",
+      "textOffset": 375,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 165000000,
+      "duration": 1125000,
+      "text": "。",
+      "textOffset": 377,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    }
+  ],
+  "file": "audio/gongzi.wav"
+}

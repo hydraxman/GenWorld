@@ -1,0 +1,422 @@
+{
+  "id": "sundial",
+  "name": "日晷",
+  "style": "gentle",
+  "rate": "0%",
+  "text": "沿着草坪来到日晷。底座上的行胜于言，提醒人们把想法落实为行动。从这里望向北侧，还能看到大礼堂。不妨停一小会儿，看看光影，也想想自己今天想做成的一件小事。",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "ssml_sha256": "1a123f843c642eda8a6596e6b756987e1d4cd426fc73f91f30bf48d0624152c9",
+  "duration_seconds": 17.0625,
+  "sha256": "73c67cba57d368c8f3758f166a41ed295ad9d5889b65a46ba0f83f30538b5f44",
+  "boundaries": [
+    {
+      "audioOffset": 500000,
+      "duration": 3125000,
+      "text": "沿着",
+      "textOffset": 240,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 3625000,
+      "duration": 4625000,
+      "text": "草坪",
+      "textOffset": 242,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 8500000,
+      "duration": 2625000,
+      "text": "来到",
+      "textOffset": 244,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 11250000,
+      "duration": 4750000,
+      "text": "日晷",
+      "textOffset": 246,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 16125000,
+      "duration": 1125000,
+      "text": "。",
+      "textOffset": 248,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 25250000,
+      "duration": 3375000,
+      "text": "底座",
+      "textOffset": 270,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 28625000,
+      "duration": 1500000,
+      "text": "上",
+      "textOffset": 272,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 30125000,
+      "duration": 750000,
+      "text": "的",
+      "textOffset": 273,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 31125000,
+      "duration": 1750000,
+      "text": "行",
+      "textOffset": 274,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 32875000,
+      "duration": 3250000,
+      "text": "胜于",
+      "textOffset": 275,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 36125000,
+      "duration": 3250000,
+      "text": "言",
+      "textOffset": 277,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 40375000,
+      "duration": 2375000,
+      "text": "，",
+      "textOffset": 278,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 42750000,
+      "duration": 3250000,
+      "text": "提醒",
+      "textOffset": 279,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 46000000,
+      "duration": 3875000,
+      "text": "人们",
+      "textOffset": 281,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 50875000,
+      "duration": 1250000,
+      "text": "把",
+      "textOffset": 283,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 52250000,
+      "duration": 3875000,
+      "text": "想法",
+      "textOffset": 284,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 56375000,
+      "duration": 3250000,
+      "text": "落实",
+      "textOffset": 286,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 59625000,
+      "duration": 1375000,
+      "text": "为",
+      "textOffset": 288,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 61125000,
+      "duration": 4750000,
+      "text": "行动",
+      "textOffset": 289,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 66000000,
+      "duration": 1125000,
+      "text": "。",
+      "textOffset": 291,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 75125000,
+      "duration": 2125000,
+      "text": "从",
+      "textOffset": 313,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 77250000,
+      "duration": 2375000,
+      "text": "这里",
+      "textOffset": 314,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 79875000,
+      "duration": 1375000,
+      "text": "望",
+      "textOffset": 316,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 81250000,
+      "duration": 1625000,
+      "text": "向",
+      "textOffset": 317,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 83000000,
+      "duration": 5125000,
+      "text": "北侧",
+      "textOffset": 318,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 89125000,
+      "duration": 1625000,
+      "text": "，",
+      "textOffset": 320,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 90750000,
+      "duration": 1250000,
+      "text": "还",
+      "textOffset": 321,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 92000000,
+      "duration": 1000000,
+      "text": "能",
+      "textOffset": 322,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 93000000,
+      "duration": 2875000,
+      "text": "看到",
+      "textOffset": 323,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 96125000,
+      "duration": 6500000,
+      "text": "大礼堂",
+      "textOffset": 325,
+      "wordLength": 3,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 102750000,
+      "duration": 1125000,
+      "text": "。",
+      "textOffset": 328,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 111875000,
+      "duration": 3125000,
+      "text": "不妨",
+      "textOffset": 350,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 115250000,
+      "duration": 1500000,
+      "text": "停",
+      "textOffset": 352,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 116750000,
+      "duration": 1125000,
+      "text": "一",
+      "textOffset": 353,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 117875000,
+      "duration": 4750000,
+      "text": "小会儿",
+      "textOffset": 354,
+      "wordLength": 3,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 123625000,
+      "duration": 1875000,
+      "text": "，",
+      "textOffset": 357,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 125500000,
+      "duration": 3250000,
+      "text": "看看",
+      "textOffset": 358,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 128875000,
+      "duration": 2125000,
+      "text": "光",
+      "textOffset": 360,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 131000000,
+      "duration": 2875000,
+      "text": "影",
+      "textOffset": 361,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 134875000,
+      "duration": 2000000,
+      "text": "，",
+      "textOffset": 362,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 136875000,
+      "duration": 1000000,
+      "text": "也",
+      "textOffset": 363,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 137875000,
+      "duration": 1875000,
+      "text": "想",
+      "textOffset": 364,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 139750000,
+      "duration": 1875000,
+      "text": "想",
+      "textOffset": 365,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 141625000,
+      "duration": 2750000,
+      "text": "自己",
+      "textOffset": 366,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 144500000,
+      "duration": 3250000,
+      "text": "今天",
+      "textOffset": 368,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 148000000,
+      "duration": 2000000,
+      "text": "想",
+      "textOffset": 370,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 150000000,
+      "duration": 2875000,
+      "text": "做成",
+      "textOffset": 371,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 152875000,
+      "duration": 625000,
+      "text": "的",
+      "textOffset": 373,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 153625000,
+      "duration": 3000000,
+      "text": "一件",
+      "textOffset": 374,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 156625000,
+      "duration": 5375000,
+      "text": "小事",
+      "textOffset": 376,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 162000000,
+      "duration": 1125000,
+      "text": "。",
+      "textOffset": 378,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    }
+  ],
+  "file": "audio/sundial.wav"
+}

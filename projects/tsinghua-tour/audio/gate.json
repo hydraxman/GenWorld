@@ -1,0 +1,454 @@
+{
+  "id": "gate",
+  "name": "二校门",
+  "style": "friendly",
+  "rate": "+1%",
+  "text": "到二校门啦，抬头就能看到清华园三个字。青砖白柱的三拱牌坊，是校园最具代表性的地标之一。它曾是清华最早的校门，适合在这里拍张合影，把今天的心情也留在照片里。",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "ssml_sha256": "b6408b9f21aeefdc8ad90d9795f71840f253b20d56b9c125a3f53612e09fc03d",
+  "duration_seconds": 16.9618333,
+  "sha256": "a6f9e4c3612c814280543761f7bdb225a25a3b9b1bb84d984b05798da2e43cc1",
+  "boundaries": [
+    {
+      "audioOffset": 495000,
+      "duration": 1485200,
+      "text": "到",
+      "textOffset": 243,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 2103950,
+      "duration": 5197910,
+      "text": "二校门",
+      "textOffset": 244,
+      "wordLength": 3,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 7302080,
+      "duration": 2351450,
+      "text": "啦",
+      "textOffset": 247,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 10643540,
+      "duration": 2103950,
+      "text": "，",
+      "textOffset": 248,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 12747500,
+      "duration": 5197910,
+      "text": "抬头",
+      "textOffset": 249,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 18069370,
+      "duration": 1608750,
+      "text": "就",
+      "textOffset": 251,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 19678120,
+      "duration": 1113950,
+      "text": "能",
+      "textOffset": 252,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 20792080,
+      "duration": 3341660,
+      "text": "看到",
+      "textOffset": 253,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 24257500,
+      "duration": 5074160,
+      "text": "清华园",
+      "textOffset": 255,
+      "wordLength": 3,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 29455410,
+      "duration": 3093950,
+      "text": "三个",
+      "textOffset": 258,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 32549580,
+      "duration": 2722700,
+      "text": "字",
+      "textOffset": 260,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 35396040,
+      "duration": 990000,
+      "text": "。",
+      "textOffset": 261,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 44341660,
+      "duration": 2475200,
+      "text": "青",
+      "textOffset": 283,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 46816870,
+      "duration": 1732700,
+      "text": "砖",
+      "textOffset": 284,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 48673330,
+      "duration": 1856450,
+      "text": "白",
+      "textOffset": 285,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 50529790,
+      "duration": 1485000,
+      "text": "柱",
+      "textOffset": 286,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 52014790,
+      "duration": 990000,
+      "text": "的",
+      "textOffset": 287,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 53128750,
+      "duration": 2103950,
+      "text": "三",
+      "textOffset": 288,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 55232700,
+      "duration": 1485200,
+      "text": "拱",
+      "textOffset": 289,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 56841660,
+      "duration": 5197910,
+      "text": "牌坊",
+      "textOffset": 290,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 63029790,
+      "duration": 1608750,
+      "text": "，",
+      "textOffset": 292,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 64638540,
+      "duration": 1361450,
+      "text": "是",
+      "textOffset": 293,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 66123750,
+      "duration": 4950410,
+      "text": "校园",
+      "textOffset": 294,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 71197910,
+      "duration": 1980200,
+      "text": "最",
+      "textOffset": 296,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 73178120,
+      "duration": 1113950,
+      "text": "具",
+      "textOffset": 297,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 74415830,
+      "duration": 4950410,
+      "text": "代表性",
+      "textOffset": 298,
+      "wordLength": 3,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 79366250,
+      "duration": 866250,
+      "text": "的",
+      "textOffset": 301,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 80356450,
+      "duration": 3341660,
+      "text": "地标",
+      "textOffset": 302,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 83821870,
+      "duration": 4950410,
+      "text": "之一",
+      "textOffset": 304,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 88896040,
+      "duration": 990000,
+      "text": "。",
+      "textOffset": 306,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 97841660,
+      "duration": 1608750,
+      "text": "它",
+      "textOffset": 328,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 99450410,
+      "duration": 1856450,
+      "text": "曾",
+      "textOffset": 329,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 101306870,
+      "duration": 1113950,
+      "text": "是",
+      "textOffset": 330,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 102544580,
+      "duration": 3836660,
+      "text": "清华",
+      "textOffset": 331,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 106505000,
+      "duration": 3712910,
+      "text": "最早",
+      "textOffset": 333,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 110217910,
+      "duration": 742500,
+      "text": "的",
+      "textOffset": 335,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 111084160,
+      "duration": 5445620,
+      "text": "校门",
+      "textOffset": 336,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 117519790,
+      "duration": 1608950,
+      "text": "，",
+      "textOffset": 338,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 119128750,
+      "duration": 2722700,
+      "text": "适合",
+      "textOffset": 339,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 121975200,
+      "duration": 1361450,
+      "text": "在",
+      "textOffset": 341,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 123336660,
+      "duration": 2970200,
+      "text": "这里",
+      "textOffset": 342,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 126430620,
+      "duration": 1732700,
+      "text": "拍",
+      "textOffset": 344,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 128163330,
+      "duration": 1732700,
+      "text": "张",
+      "textOffset": 345,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 129896040,
+      "duration": 4826660,
+      "text": "合影",
+      "textOffset": 346,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 135712910,
+      "duration": 1856450,
+      "text": "，",
+      "textOffset": 348,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 137569370,
+      "duration": 1237700,
+      "text": "把",
+      "textOffset": 349,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 138930620,
+      "duration": 3093950,
+      "text": "今天",
+      "textOffset": 350,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 142024790,
+      "duration": 742500,
+      "text": "的",
+      "textOffset": 352,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 142891040,
+      "duration": 6188120,
+      "text": "心情",
+      "textOffset": 353,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 150069370,
+      "duration": 1485200,
+      "text": "也",
+      "textOffset": 355,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 151678120,
+      "duration": 1361450,
+      "text": "留",
+      "textOffset": 356,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 153039580,
+      "duration": 1237700,
+      "text": "在",
+      "textOffset": 357,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 154401040,
+      "duration": 4702910,
+      "text": "照片",
+      "textOffset": 358,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 159103950,
+      "duration": 1980200,
+      "text": "里",
+      "textOffset": 360,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 161207910,
+      "duration": 990000,
+      "text": "。",
+      "textOffset": 361,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    }
+  ],
+  "file": "audio/gate.wav"
+}
