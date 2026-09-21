@@ -1,65 +1,80 @@
-# 舜德楼 — 正面校准与背部空间修订
+# 舜德楼庭院结构重建
 
-本项目唯一源码目录为 `Courtyard3D-v6/projects/shunde/`。直接在此更新；历史由工程根 Git 提交保存，不再建立带版本号的项目文件夹。当前只配置本地 Git，没有 remote。
+在原 `projects/shunde/` 中更新的照片与地图约束三维模型。重点还原北侧正门、朝中庭突出的圆体及较低的玻璃厅，保留庭院与北侧通道。旧实心楔形版本可从 Git 历史恢复，不再维护平行版本目录。
 
-## 本轮依据与修正
+**范围说明：** 地图源是伟伦楼与舜德楼的组合轮廓，不是单栋舜德楼的测绘数据。两栋楼分界、门洞精确偏移、未见立面和楼高仍有推定部分。
 
-以用户新发的正面照片为主要依据；之前公开参考照片已发回用户私聊核对，发送回执在 `review/reference-delivery.json`。
+## 安装与运行
 
-- 正面可见四排常规窗组，但底层开窗较矮；上方另有窄后退窗带。这里的动画层组不等于已核验的法定楼层数。
-- 重对门廊下檐、柱距、棕色石材门框、黑底金字“舜德楼”竖匾和白底“清华大学工业工程系”横牌的位置。
-- 方砖采用正交网格，区分浅灰砖墙、灰粉色窗下板和棕色杂纹入口石材；保留宽竖墙带与部分外开窗扇。
-- 台阶和基座横向展开，不再只在大门前放狭窄台块。
-- 前方绿化改为曲面针叶束和横向树枝，不继续用首版阔叶球冠；树形仍属示意，不宣称植物测绘。
-- 用户已确认 `references/sohu_old_2.jpg` 是正后方：照片中央的圆柱在真实俯视中位于左侧接合，保留弧墙、成对窄窗与底部支撑；两翼为直线。画面左侧改成直墙高玻璃大厅，去掉错误的低曲线翼及截断大厅的中间楼板。墙、楼板、屋面和基础共同采用非矩形轮廓，不是在长方盒后叠加圆柱。
-- 最新用户草图确认直角三角形/楔形平面：正面 z=5 与右侧 x=33.28 严格90°，后部为平面上的斜向直边，不是倾斜屋顶。总右侧进深58、主屋面右侧进深52、正面宽66.56；圆柱中心(-27.28,-14)、半径6.4。进深/正面宽约0.871，均为草图比例工作尺度，不是测绘。保留正面规格及0–31秒相机。
-
-## 运行
-
-在本目录：
+需要 Node.js 22+、Python 3、Pillow、FFmpeg，以及支持 WebGL2 的本地 Chrome/Chromium。
 
 ```sh
+cd projects/shunde
+npm install
+python3 -m pip install Pillow
 npm test
 npm run build
-npm run qa
-python3 scripts/verify_glb.py
+npm run dev
 ```
 
-`npm run qa` 使用 GPU 浏览器采样、反射开关、重复 seek、GLB 导出/回读等验证；依赖本机 Chrome，可用 `CHROME_PATH` 指定。依赖复用总工程 `node_modules`。
+打开 http://127.0.0.1:8778/viewer.html ，可拖动旋转、缩放，选择北入口／高位／庭院视角，或下载 GLB。
 
-也可以在总工程根运行：
+在第二个终端、同一目录运行：
 
 ```sh
-python3 -m http.server 8773 --bind 127.0.0.1
+npm run qa       # 浏览器检查、正交俯视图、GLB 导出与重载
+npm run render   # 生成三视角视频，并检查渲染输入未变化
+python3 scripts/verify_glb.py  # 回读实际 GLB 文件和嵌入纹理
+npm run check    # 固定版本 HyperFrames composition 检查
 ```
 
-- 影片入口：`http://127.0.0.1:8773/projects/shunde/index.html`
-- 交互入口：`http://127.0.0.1:8773/projects/shunde/viewer.html`
+`index.html` 是唯一 HyperFrames composition，使用单一暂停时间轴和绝对时间相机。视频为 **24 秒、1920×1080、24 fps、576 帧、无声**，依次展示北侧入口、庭院整体与北口、院内圆体及玻璃厅。画面由真实 Three.js 几何经本地浏览器 GPU 渲染，再由 FFmpeg 编码，不是照片幻灯片或生成式视频。
 
-静态影片页由 HyperFrames 驱动时间；交互页可操作模型。
+### 可配置项
 
-## 输出与证据
+- `SHUNDE_OUTPUT`：输出目录，默认 `~/.hermes/outputs/shunde-courtyard-rebuild/delivery/`。成片、模型和检查文件不进入 Git。
+- `SHUNDE_URL`：已启动的本地 `index.html` 地址，默认 `http://127.0.0.1:8778/index.html`。
+- `CHROME_PATH`：Chrome 可执行文件路径；默认使用本机 Puppeteer Chrome-for-Testing 150 的 macOS 缓存路径，其他机器应覆盖。
+- `SHUNDE_FONT_FILES`：用于输入指纹的实际字体文件列表，以平台路径分隔符分隔。macOS 默认值对应 CoreText 查得的 PingFang SC、Kaiti、Georgia；系统字体不随工程分发，其他机器应指定实际使用的字体文件。
+- `PYTHON`：Node 回归测试调用的 Python 可执行文件，默认 `python3`。
 
-- `output/Shunde3D.glb`：当前闭合三维模型，需支持 `EXT_mesh_gpu_instancing`。
-- `qa/frames/reference-calibrated.png`：与用户新照片同画幅、近似同投影的正面对照视图。
-- `qa/frames/27s.jpg`：门廊细部。
-- `qa/browser-check.json`、`qa/glb-disk-check.json`：对应当前模型的实际验证结果。
-- `review/`：父代理维护的参考资料投递、比较图及最终验收资料。
+`npm run build` 将项目与共享照明模块的 `three` / `three/addons` 解析到同一依赖实例。依赖版本在项目包中固定，根工作区也有兼容版本。
 
-当前直角楔形修订已通过26项测试、build、完整GPU浏览器QA及磁盘GLB回读，详见 `qa/WEDGE-QA.md`。四种capture接口前后PNG像素哈希一致；大厅短外端玻璃收口四高度射线测试保留，背面/俯视交互相机GLB导出前后状态和像素一致。
+## 结构与依据
 
-**本轮未渲染视频，也未发送消息。所有现有MP4、`qa/final-video-verification.json` 和旧 `review/rear-straight-hall-*` 比较图均是此前几何，不能作为当前楔形版本的证据。**
+完整来源、方位与不确定性说明见 [庭院重建依据](docs/courtyard-reconstruction.md)。
 
-新证据：`qa/frames/wedge-rear-calibrated.png`、`wedge-top-orthographic.png`、`wedge-rear-quarter.png`。其中top由真正的 `OrthographicCamera` 垂直下视生成，正面在下、+X在右；几何点积和投影点积均为0。对应原始接口输出也更新至 `rear-calibrated.png`、`top.png`、`rear-quarter.png`。交互页俯视按钮仍为透视导航；独立 `captureTop()` 才是正交校准图。capture接口恢复相机、尺寸及展开状态。
+| 文件 | 用途 |
+|---|---|
+| `docs/courtyard/source-footprint.json` | OSM way 84653293 v9 的原始 WGS84、ENU、节点与许可记录 |
+| `docs/courtyard/footprint-plan.svg` | 北向平面图；同目录有 PNG 与院内拍摄方向图 |
+| `src/footprint.js` | 坐标映射：x=东、y=估计高度、z=−北，保留源平面 24 个顶点 |
+| `src/model.js` | 凹形楼体、开放中庭、圆体、低玻璃厅、栏架与环境 |
+| `src/north-facade.js` | 复用照片参照的北立面、双柱门廊、窗排、牌匾和台阶 |
+| `src/spec.js` | 照片比例参数与三段确定性相机 |
+| `scripts/capture.mjs` | 浏览器验收、模型导出和视频逐帧捕获 |
 
-## 共享与专有实现
+- 西侧 s12–s15 保留各自的直线分段，不压成一条新斜边。圆体仅对顶点 v3–v11 插值平滑，并穿过源顶点；s11 平直接合面不纳入圆弧。
+- 庭院下方不残留旧矩形或楔形体块。屋面、基础与立面共同遵守开放的凹形轮廓；北侧缺口不补无依据的连廊。
+- 北门组件的 `frontZ=5` 只是旧组件局部坐标，放入新场景后朝地理北侧。保留短地面窗带、三组常规上层窗带、屋顶窄窗，而不是按合并 OSM 的 `levels=6` 统一造六层。
+- 低玻璃厅沿 s11–s15 布置：**14.8 米屋面、8 米内退深度**为工作估计，玻璃覆盖范围与后方高体量分界也是推定；圆体与其余高屋面约 22 米，非测绘高度。
+- 圆体照片左侧已补红褐竖片、薄挑檐、叠层小平台与浅色栏杆，下端为细柱和开敞空间；玻璃厅增加示意通园门、低门槛及接入原步道的支路。门洞同步切除玻璃背板和抬高基础，不以深色窗格冒充通道。尺寸、门数、门扇及连接点的推定边界见[细节依据](docs/courtyard-reconstruction.md#照片确认后的庭院局部细节)。
+- 南侧和东侧楼翼为较低细节的组合环境。绿化、步道、石头、座椅和庭院灯为示意补全，不能视为原场地逐物测绘。
 
-复用总工程 `shared/illumination.js` 的 GTAO/渲染管线及 `shared/glass-reflections.js` 的实景立方体反射。V2 方砖/棕石材、针叶松树和按新照片校准的环境为本楼专有实现，不为“共享”强行保留不符合照片的枫叶造型。未修改共享模块或其他楼。
+## 验证与输出
 
-## 证据边界
+`npm test` 检查实际 Three.js 几何，包括开放庭院与北通道、源顶点、圆体法线与窄窗、玻璃朝向、独立接合面、低厅内部无中间楼板、短边封闭、北立面细节、相机和植物确定性、输入文件变化时拒绝通过，以及 GLB 共享网格资源的正确计数。旧楔形与分层动画断言已按新需求替换，不静默跳过。
 
-1. 两张用户正面照均有左右裁切；完整楼宽、背部尺寸及接合角度、屋面和室内布局仍无测绘依据；正后方身份及圆弧/斜面体量已获用户确认。源码米制数值是比例建模工作尺度，不是实测尺寸。
-2. 正面校准是图像平面比例与近似相机匹配，不能当作完整摄影测量。
-3. 旧入口照片有经管学院英文横牌，不能据此替换当前工业工程系牌子；新竖匾使用新照片提取的字形透明层，仅用于该牌面，不是把建筑照片贴到平面上冒充模型。
-4. 玻璃通过真实场景 CubeCamera 反射，但单探针存在视差近似；GLB 使用 PBR 备用反射，不能携带浏览器动态反射管线。
-5. 公开建筑照片只作私聊建模参考，未发现开放再分发许可；公开打包时不能默认包含原始参考照片。用户照片及提取字形同样不作开放授权声明。
+`npm run qa` 导出 `Shunde-courtyard-context.glb`，用 GLTFLoader 重载，回读边界、网格、材质、纹理和实例数，并对庭院／北口做射线检查。`verify_glb.py` 另外检查真实文件的长度、嵌入图片、法线纹理切线与实例数量；区分共享网格资源数和场景中的网格对象数。
+
+捕获脚本记录 CDP GPU 设备信息、浏览器错误、真正北向上正交俯视图和重复跳转的像素一致性。渲染前后用 SHA-256 检查源码、构建产物、平面输入、资源、共享照明与实际字体文件；发现变化即失败，不将旧成片算作新源码的结果。
+
+标准 GLB 保存几何和 PBR 材质，并使用 `EXT_mesh_gpu_instancing` 保存植物实例，但不保存查看器的天空、灯光、阴影设置和屏幕空间 AO。需要完整画面效果时使用项目查看器。
+
+本项目的验证不等同于根工作区所有其他项目测试通过。
+
+## 许可
+
+平面数据：© OpenStreetMap contributors，ODbL 1.0，详见 https://www.openstreetmap.org/copyright 。
+
+参考网络照片及用户照片仅用于本地视觉比对，不嵌入模型立面、仓库图片资源或成片；归档的是来源链接、校验值与对应关系。既有植物和字形资源的来源记录保留在 `assets/`。

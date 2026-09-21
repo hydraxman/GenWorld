@@ -1,41 +1,18 @@
-import test from 'node:test';
-import assert from 'node:assert/strict';
-import * as THREE from 'three';
-import {createShundeModel} from './model.js';
-import {SHUNDE,shundeCameraAt} from './spec.js';
-import {REAR} from './rear.js';
-import {SHUNDE as V2,shundeCameraAt as cameraV2} from './fixtures/v2-spec.js';
-const build=()=>createShundeModel(THREE,{textured:false,foliage:false});
-const groups=(m,role)=>{const a=[];m.building.traverse(o=>{if(o.userData.role===role)a.push(o);});return a;};
-const down=(g,x,z)=>new THREE.Raycaster(new THREE.Vector3(x,70,z),new THREE.Vector3(0,-1,0)).intersectObject(g,true);
-test('V2 front calibration and first 31 seconds remain unchanged',()=>{
- for(const key of ['width','frontZ','baseY','facade','facadeBands','roofBand','entrance'])assert.deepEqual(SHUNDE[key],V2[key]);
- for(let t=0;t<31;t+=.125)assert.deepEqual(shundeCameraAt(t),cameraV2(t));
+import test from 'node:test';import assert from 'node:assert/strict';import * as THREE from 'three';
+import {createShundeModel} from './model.js';import {FOOTPRINT,SOURCE_ENU} from './footprint.js';
+const m=createShundeModel(THREE,{textured:false,foliage:false});
+test('all 24 source vertices occur in actual shared roof and foundation geometry',()=>{
+ const vertices=[];m.roof.traverse(o=>{if(o.isMesh){const p=o.geometry.attributes.position;for(let i=0;i<p.count;i++){const v=new THREE.Vector3().fromBufferAttribute(p,i).applyMatrix4(o.matrixWorld);vertices.push(v);}}});
+ for(const [i,[x,z]] of FOOTPRINT.entries())for(const y of [.9,i>=12&&i<=15?14.8:21.95])assert.ok(vertices.some(v=>Math.abs(v.x-x)<.0001&&Math.abs(v.z-z)<.0001&&Math.abs(v.y-y)<.0001),`source vertex ${x},${z}, height ${y}`);
+ assert.equal(SOURCE_ENU.length,24);
 });
-test('confirmed rear curve is geometry, not a disabled optional hypothesis',()=>{
- const m=build();assert.equal(m.arc.visible,true);assert.equal(m.arc.userData.orientationStatus,'user-confirmed-rear');
- assert.ok(groups(m,'rear-curved-wall').length>=4);assert.ok(groups(m,'rear-supports').length);assert.ok(groups(m,'rear-diagonal-wall').length>=4);
- assert.equal(m.stats.rearRectangleRemoved,true);
-});
-test('rear corners are cut through walls, roof, floors and foundation',()=>{
- const m=build();for(const [x,z] of [[-30,-28],[-5,-40]])assert.equal(down(m.building,x,z).length,0,'outside the revised wedge must be empty at every height');
- assert.ok(down(m.building,REAR.center[0],REAR.center[1]-6).length,'cylinder belongs to continuous footprint');
- for(const tier of [m.tiers[1],m.tiers[2]])assert.equal(down(tier,0,4.995).length,0,'hall opening must reach the front edge without a thin crossbeam');
- for(const role of ['footprint-slab','footprint-roof','footprint-foundation']){
-  const g=groups(m,role);assert.ok(g.length,role);for(const o of g)assert.equal(down(o,-30,-28).length,0);
+test('cylinder facade has varied real normals and slit apertures',()=>{
+ const normals=new Set();let slots=0,piers=0;
+ for(const g of m.arc.children){if(!g.name.startsWith('Curved court'))continue;
+  const bounds=new THREE.Box3().setFromObject(g),p=g.worldToLocal(bounds.getCenter(new THREE.Vector3()));
+  const from=g.localToWorld(new THREE.Vector3(p.x,8,-1));const dir=new THREE.Vector3(0,0,1).transformDirection(g.matrixWorld);
+  const hits=new THREE.Raycaster(from,dir,0,2).intersectObject(g,true);if(hits[0]){if(/glazing/.test(hits[0].object.material.name))slots++;if(/ceramic/.test(hits[0].object.material.name))piers++;}
+  const n=new THREE.Vector3(0,0,-1).transformDirection(g.matrixWorld);normals.add(n.x.toFixed(2)+','+n.z.toFixed(2));
  }
-});
-test('curved solid piers have varied normals and narrow windows are real holes',()=>{
- const m=build(),walls=groups(m,'rear-curved-wall'),normals=new Set();
- for(const g of walls)g.traverse(o=>{if(o.isMesh){const n=o.geometry.attributes.normal;for(let i=0;i<n.count;i++)if(Math.abs(n.getY(i))<.01)normals.add(`${n.getX(i).toFixed(2)},${n.getZ(i).toFixed(2)}`);}});
- assert.ok(normals.size>35,'real curved surfaces');
- const ray=a=>new THREE.Raycaster(new THREE.Vector3(REAR.center[0]+18*Math.cos(a),5.7,REAR.center[1]+18*Math.sin(a)),new THREE.Vector3(-Math.cos(a),0,-Math.sin(a))).intersectObject(m.building,true);
- const glazing=ray(-Math.PI/2+.035);assert.ok(glazing.length);assert.match(glazing[0].object.material.name,/glass/i,'opening not painted over solid cylinder');
- const pier=ray(-Math.PI/2+.20);assert.ok(pier.length);assert.match(pier[0].object.material.name,/ceramic/i);
-});
-test('all rear wall/roof assemblies explode and reclose without drifting',()=>{
- const m=build(),initial=new THREE.Box3().setFromObject(m.building);m.setTime(40);
- assert.ok(groups(m,'rear-curved-wall').some(g=>g.getWorldPosition(new THREE.Vector3()).y>7));
- assert.ok(groups(m,'footprint-roof').some(g=>g.getWorldPosition(new THREE.Vector3()).y>14));
- m.setTime(46);assert.deepEqual(new THREE.Box3().setFromObject(m.building),initial);assert.equal(m.stats.hallIntermediateSlabs,0);
+ assert.ok(normals.size>35);assert.ok(slots>=8);assert.ok(piers>40);
 });

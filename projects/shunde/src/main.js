@@ -2,113 +2,59 @@ import * as THREE from 'three';
 import {GLTFExporter} from 'three/addons/exporters/GLTFExporter.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
-import {makeEnvironment,addCampusLights,createReflectionGrove} from './environment.js';
+import {makeEnvironment} from './environment.js';
 import {createLightingPipeline} from '../../../shared/illumination.js';
-import {installGlassReflections} from '../../../shared/glass-reflections.js';
 import {createShundeModel} from './model.js';
-import {shundeCameraAt,assemblyAt,SHUNDE} from './spec.js';
-import {mainFootprint,REAR} from './rear.js';
-
-let engine,pending=0,visibilityRevision=0;
-window.renderAt=renderAt;
-window.addEventListener('hf-seek',e=>renderAt(Number(e.detail.time)));
-function renderAt(time,force=false){
- if(!Number.isFinite(time))return;pending=Math.max(0,Math.min(46,time));if(!engine)return;
- if(!force&&engine.lastTime===pending)return;
- const {camera,built,renderer,scene,glass,pipeline}=engine,pose=shundeCameraAt(pending);
- camera.position.set(...pose.position);camera.lookAt(...pose.target);camera.fov=pose.fov;camera.updateProjectionMatrix();
- built.setTime(pending);renderer.shadowMap.needsUpdate=true;scene.updateMatrixWorld(true);glass.update(camera);pipeline.render();
- const note=document.getElementById('interior-note');if(note)note.style.opacity=pending>=36?'1':'0';
- const chapter=document.getElementById('chapter');if(chapter)chapter.textContent=pending>=36?'06 / 分层示意':pending>=31?'05 / 背面 · 圆弧与斜面':pending>=24?'04 / 门廊细部':pending>=16?'03 / 侧向体量 · 推测':pending>=8?'02 / 中央入口':'01 / 主立面';
- engine.lastTime=pending;window.__lastCamera=pose;
-}
-function reportBounds(object){const b=new THREE.Box3().setFromObject(object);return {min:b.min.toArray(),max:b.max.toArray(),size:b.getSize(new THREE.Vector3()).toArray()};}
+import {shundeCameraAt,DURATION} from './spec.js';
+let engine,pending=0;
+window.renderAt=time=>{pending=Math.max(0,Math.min(DURATION,Number(time)||0));if(!engine)return;const {camera,draw}=engine,p=shundeCameraAt(pending);camera.up.set(0,1,0);camera.position.set(...p.position);camera.lookAt(...p.target);camera.fov=p.fov;camera.aspect=16/9;camera.updateProjectionMatrix();draw();const chapter=document.getElementById('chapter');if(chapter)chapter.textContent=p.chapter;window.__lastCamera=p;};
+window.addEventListener('hf-seek',e=>window.renderAt(e.detail.time));
+const bounds=o=>{const b=new THREE.Box3().setFromObject(o);return {min:b.min.toArray(),max:b.max.toArray(),size:b.getSize(new THREE.Vector3()).toArray()};};
 async function init(){
  const renderer=new THREE.WebGLRenderer({canvas:document.getElementById('scene'),antialias:true,preserveDrawingBuffer:true,powerPreference:'high-performance'});
- renderer.setPixelRatio(1);renderer.setSize(1920,1080,false);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.03;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
- const scene=new THREE.Scene(),env=makeEnvironment(THREE,renderer);scene.background=env.background;scene.environment=env.environment;scene.environmentIntensity=.75;scene.fog=new THREE.Fog('#d7dfd5',105,240);
- const camera=new THREE.PerspectiveCamera(44,1920/1080,.15,400);addCampusLights(THREE,scene);scene.add(createReflectionGrove(THREE));
- const signGlyphs=await new Promise((resolve,reject)=>{const image=new Image();image.onload=()=>resolve(image);image.onerror=reject;image.src='assets/name-glyphs.png';});const built=createShundeModel(THREE,{signGlyphs});scene.add(built.group);scene.updateMatrixWorld(true);
- const pipeline=createLightingPipeline(renderer,scene,camera);
- const glass=installGlassReflections(THREE,renderer,scene,built.group,{position:[0,7,9],resolution:512,intensity:1.75,roughness:.015,metalness:.75,getRevision:()=>`${assemblyAt(pending)}:${visibilityRevision}`});
- engine={renderer,scene,camera,built,pipeline,glass,lastTime:null};renderAt(pending,true);renderer.shadowMap.autoUpdate=false;
+ renderer.setSize(1920,1080,false);renderer.setPixelRatio(1);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.03;
+ renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+ const scene=new THREE.Scene(),env=makeEnvironment(THREE,renderer);scene.background=env.background;scene.backgroundBlurriness=.025;scene.environment=env.environment;scene.environmentIntensity=.80;scene.fog=new THREE.Fog('#d7dfd5',240,470);
+ scene.add(new THREE.HemisphereLight('#d8e8fa','#89916d',1.1));
+ const sun=new THREE.DirectionalLight('#fff2da',2.5);sun.position.set(-65,95,-45);sun.target.position.set(25,0,20);sun.castShadow=true;sun.shadow.mapSize.set(4096,4096);Object.assign(sun.shadow.camera,{left:-115,right:115,top:105,bottom:-95,near:1,far:300});sun.shadow.bias=-.00005;sun.shadow.normalBias=.035;scene.add(sun,sun.target);
+ const fill=new THREE.DirectionalLight('#d4e5f5',.45);fill.position.set(10,30,80);scene.add(fill);
+ const camera=new THREE.PerspectiveCamera(44,16/9,.15,700);
+ const signGlyphs=await new Promise((resolve,reject)=>{const image=new Image();image.onload=()=>resolve(image);image.onerror=reject;image.src='assets/name-glyphs.png';});
+ const built=createShundeModel(THREE,{signGlyphs});scene.add(built.group);scene.updateMatrixWorld(true);
+ const pipeline=createLightingPipeline(renderer,scene,camera),draw=()=>{scene.updateMatrixWorld(true);pipeline.render();};
+ engine={renderer,scene,camera,built,pipeline,draw};window.renderAt(pending);renderer.shadowMap.autoUpdate=false;
+ const gl=renderer.getContext(),debug=gl.getExtension('WEBGL_debug_renderer_info');
  let meshes=0,triangles=0;built.group.traverse(o=>{if(o.isMesh){meshes++;triangles+=(o.geometry.index?.count||o.geometry.attributes.position.count)/3*(o.isInstancedMesh?o.count:1);}});
- window.__modelStats={...built.stats,meshBatches:meshes,triangles,buildingBounds:reportBounds(built.building),sceneBounds:reportBounds(built.group),renderer:renderer.getContext().getParameter(renderer.getContext().RENDERER)};
- const rearPose={position:[-55,4.2,-51],target:[-24,10.4,-14],fov:45};
- const topPose={position:[0,115,-24.01],target:[0,0,-24],fov:46};
- const rearQuarterPose={position:[-74,66,-103],target:[0,9,-23],fov:46};
- const applyPose=(pose,width,height)=>{camera.up.set(0,1,0);camera.position.set(...pose.position);camera.lookAt(...pose.target);camera.fov=pose.fov;camera.aspect=width/height;camera.updateProjectionMatrix();if(pose.shift){camera.projectionMatrix.elements[9]=pose.shift;camera.projectionMatrixInverse.copy(camera.projectionMatrix).invert();}};
- const draw=()=>{renderer.shadowMap.needsUpdate=true;scene.updateMatrixWorld(true);glass.update(camera);pipeline.render();};
- function capturePose(pose,width,height,metadata=()=>({})){
-  const saved=camera.clone(),size=renderer.getSize(new THREE.Vector2()),aoSize=[pipeline.ao.width,pipeline.ao.height],positions=built.tiers.map(g=>g.position.clone());
-  try{
-   built.setTime(0);applyPose(pose,width,height);renderer.setSize(width,height,false);pipeline.composer.setSize(width,height);visibilityRevision++;draw();
-   return {data:renderer.domElement.toDataURL('image/png'),size:[width,height],pose,...metadata(),note:'Photo-constrained estimate; not surveyed'};
-  }finally{
-   built.tiers.forEach((g,i)=>g.position.copy(positions[i]));camera.copy(saved);renderer.setSize(size.x,size.y,false);pipeline.composer.setSize(size.x,size.y);pipeline.ao.setSize(...aoSize);visibilityRevision++;draw();
-  }
- }
- window.captureCalibration=()=>capturePose({position:[-.22,3.2,36.25],target:[-.22,3.2,5],fov:44,shift:.637},1920,1281,()=>{
-  const project=(x,y,z)=>{const p=new THREE.Vector3(x,y,z).project(camera);return [(p.x+1)*1920/2,(1-p.y)*1281/2];};
-  return {landmarks:{roofTop:project(0,SHUNDE.roofBand.fasciaTop,5),slit:project(0,SHUNDE.roofBand.windowCenter,5),porticoTop:project(0,SHUNDE.entrance.top,5),landing:project(0,SHUNDE.baseY,5),columnLeft:project(-SHUNDE.entrance.columnX,6,5.22),columnRight:project(SHUNDE.entrance.columnX,6,5.22)}};
- });
- window.captureRearCalibration=()=>capturePose(rearPose,1080,810);
- // Independent real orthographic camera/pipeline, not a high perspective pose.
+ window.__modelStats={...built.stats,meshBatches:meshes,triangles,buildingBounds:bounds(built.building),renderer:debug?gl.getParameter(debug.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER),threeRevision:THREE.REVISION};
+ window.__getCaptureState=()=>({position:camera.position.toArray(),quaternion:camera.quaternion.toArray(),projection:camera.projectionMatrix.toArray(),pending});
  window.captureTop=()=>{
-  const width=1600,height=1200,size=renderer.getSize(new THREE.Vector2()),positions=built.tiers.map(g=>g.position.clone());
-  const topCamera=new THREE.OrthographicCamera(-56,56,42,-42,.15,400);
-  topCamera.position.set(0,110,-24);topCamera.up.set(0,0,-1);topCamera.lookAt(0,0,-24);topCamera.updateMatrixWorld(true);
-  const topPipeline=createLightingPipeline(renderer,scene,topCamera);
-  try{
-   built.setTime(0);renderer.setSize(width,height,false);topPipeline.composer.setSize(width,height);topPipeline.ao.setSize(width/2,height/2);
-   visibilityRevision++;renderer.shadowMap.needsUpdate=true;scene.updateMatrixWorld(true);glass.update(topCamera);topPipeline.render();
-   const project=p=>{const v=new THREE.Vector3(p[0],0,p[1]).project(topCamera);return [(v.x+1)*width/2,(1-v.y)*height/2];};
-   const [a,b,c]=mainFootprint.slice(0,3).map(project),u=[a[0]-b[0],a[1]-b[1]],v=[c[0]-b[0],c[1]-b[1]];
-   return {data:renderer.domElement.toDataURL('image/png'),size:[width,height],projectionType:topCamera.type,pose:{position:topCamera.position.toArray(),target:[0,0,-24],up:[0,0,-1],frustum:[-56,56,42,-42]},plan:{frontRightDot:Math.abs((mainFootprint[0][0]-mainFootprint[1][0])*(mainFootprint[2][0]-mainFootprint[1][0])),screenDot:u[0]*v[0]+u[1]*v[1],depthToWidth:REAR.rightDepth/REAR.frontWidth,frontCorners:[a,b],rearRight:project([33.28,-53]),cylinder:project(REAR.center),parameters:REAR},note:'True orthographic plan; front at bottom, +X at right. Dimensions estimated, not surveyed.'};
-  }finally{
-   topPipeline.composer.passes.forEach(pass=>pass.dispose?.());topPipeline.composer.dispose();
-   built.tiers.forEach((g,i)=>g.position.copy(positions[i]));renderer.setSize(size.x,size.y,false);visibilityRevision++;draw();
-  }
+  const top=new THREE.OrthographicCamera(-88,88,52,-52,.1,400);top.position.set(32,150,25);top.up.set(0,0,-1);top.lookAt(32,0,25);top.updateMatrixWorld(true);
+  const size=renderer.getSize(new THREE.Vector2());try{renderer.setSize(1760,1040,false);renderer.render(scene,top);return {data:renderer.domElement.toDataURL('image/png'),projectionType:top.type,up:[0,0,-1],north:'image top',buildingBounds:bounds(built.building)};}finally{renderer.setSize(size.x,size.y,false);draw();}
  };
- window.captureRearQuarter=()=>capturePose(rearQuarterPose,1600,1200);
- window.__getCaptureState=()=>({pending,lastTime:engine.lastTime,size:renderer.getSize(new THREE.Vector2()).toArray(),position:camera.position.toArray(),quaternion:camera.quaternion.toArray(),projection:camera.projectionMatrix.toArray(),tiers:built.tiers.map(g=>g.position.toArray())});
- window.__glassReflectionStats=glass.stats;
- window.setGlassReflectionEnabled=value=>{glass.setEnabled(value);renderAt(pending,true);};
- window.__getExplosionState=()=>({amount:assemblyAt(pending),tiers:built.tiers.map(g=>({name:g.name,y:g.position.y})),porticoY:built.portico.position.y});
- window.__verifyGlassSafety=()=>{
-  const old=scene.overrideMaterial,before=glass.stats.capturePasses;scene.overrideMaterial=new THREE.MeshNormalMaterial();glass.update(camera);scene.overrideMaterial.dispose();scene.overrideMaterial=old;
-  return {overrideSkipped:glass.stats.capturePasses===before};
- };
+ const captureAt=t=>{const saved=camera.clone(),oldPending=pending;try{window.renderAt(t);return {data:renderer.domElement.toDataURL('image/png'),pose:window.__lastCamera};}finally{camera.copy(saved);pending=oldPending;draw();}};
+ window.captureCalibration=()=>captureAt(3);
+ window.captureRearCalibration=()=>captureAt(20); // legacy API alias; meaning now COURT
+ window.captureCourtyard=()=>captureAt(20);
  window.exportGLB=async({campus=true}={})=>{
-  const oldTime=pending,savedCamera=camera.clone();built.setTime(0);const restore=glass.beginExport();let buffer;
-  const correctedTextures=[];const clonedMaterials=[],clonedGeometries=[];
-  try{
-   const root=(campus?built.group:built.building).clone(true);root.name=campus?'Shunde Hall with illustrative campus — estimated dimensions':'Shunde Hall architecture — estimated dimensions';
-   // glTF can encode scalar normal scale only: bake shared leaf DirectX green inversion for parity.
-   const materials=new Map();
-   root.traverse(o=>{if(o.isMesh&&o.material.normalScale?.y<0){
-    let m=materials.get(o.material);if(!m){m=o.material.clone();const image=m.normalMap.image,c=document.createElement('canvas');c.width=image.width;c.height=image.height;const x=c.getContext('2d');x.drawImage(image,0,0);const d=x.getImageData(0,0,c.width,c.height);for(let i=1;i<d.data.length;i+=4)d.data[i]=255-d.data[i];x.putImageData(d,0,0);m.normalMap=new THREE.CanvasTexture(c);m.normalMap.flipY=o.material.normalMap.flipY;m.normalScale.y=Math.abs(m.normalScale.y);correctedTextures.push(m.normalMap);clonedMaterials.push(m);materials.set(o.material,m);}o.material=m;
-   }});
-   // Explicit tangents avoid GLTFLoader's derivative-tangent Y correction and preserve the baked normal convention.
-   root.traverse(o=>{if(o.isMesh&&o.material.normalMap){o.geometry=o.geometry.clone();o.geometry.computeTangents();clonedGeometries.push(o.geometry);}});
-   root.updateMatrixWorld(true);buffer=await new GLTFExporter().parseAsync(root,{binary:true,onlyVisible:true,maxTextureSize:1024,includeCustomExtensions:true});
-  }finally{restore();built.setTime(oldTime);for(const t of correctedTextures)t.dispose();for(const m of clonedMaterials)m.dispose();for(const g of clonedGeometries)g.dispose();camera.copy(savedCamera);draw();}
-  const parsed=await new GLTFLoader().parseAsync(buffer,'');let meshes=0,instances=0;const textures=new Set(),namedParts=[];let normalYPositive=true;
-  parsed.scene.traverse(o=>{if(o.name)namedParts.push(o.name);if(o.isMesh){meshes++;if(o.isInstancedMesh)instances+=o.count;for(const key of ['map','normalMap','roughnessMap'])if(o.material[key])textures.add(o.material[key].uuid);normalYPositive&&=!o.material.normalMap||o.material.normalScale.y>=0;}});
-  const view=new DataView(buffer),jsonLength=view.getUint32(12,true),manifest=JSON.parse(new TextDecoder().decode(new Uint8Array(buffer,20,jsonLength)));
-  window.__glbVerified={bytes:buffer.byteLength,meshes,instances,textures:textures.size,bounds:reportBounds(parsed.scene),normalYPositive,extensionsUsed:manifest.extensionsUsed||[],images:manifest.images?.length||0,materials:manifest.materials?.length||0,namedParts,sourceAssemblyRestored:built.tiers.every((g,i)=>g.position.y===assemblyAt(oldTime)*i*3.7),closedAssembly:reportBounds(parsed.scene).max[1]<=SHUNDE.height};
+  const root=(campus?built.group:built.building).clone(true);root.updateMatrixWorld(true);
+  const exportGeometries=[];root.traverse(o=>{if(o.isMesh&&o.material.normalMap){o.geometry=o.geometry.clone();o.geometry.computeTangents();exportGeometries.push(o.geometry);}});
+  let buffer;try{buffer=await new GLTFExporter().parseAsync(root,{binary:true,onlyVisible:true,maxTextureSize:1024,includeCustomExtensions:true});}finally{exportGeometries.forEach(g=>g.dispose());}
+  const parsed=await new GLTFLoader().parseAsync(buffer,'');let meshes=0,instances=0;const textures=new Set();parsed.scene.traverse(o=>{if(o.isMesh){o.castShadow=!/glaz|glass/i.test(o.material.name);o.receiveShadow=true;meshes++;if(o.isInstancedMesh)instances+=o.count;for(const key of ['map','normalMap','roughnessMap'])if(o.material[key])textures.add(o.material[key].uuid);}});
+  const view=new DataView(buffer),manifest=JSON.parse(new TextDecoder().decode(new Uint8Array(buffer,20,view.getUint32(12,true))));
+  window.__glbVerified={bytes:buffer.byteLength,meshes,instances,textures:textures.size,bounds:bounds(parsed.scene),extensionsUsed:manifest.extensionsUsed||[],images:manifest.images?.length||0,materials:manifest.materials?.length||0};
   window.__lastGLBScene=parsed.scene;
   const bytes=new Uint8Array(buffer),chunks=[];for(let i=0;i<bytes.length;i+=32768)chunks.push(String.fromCharCode(...bytes.subarray(i,i+32768)));return btoa(chunks.join(''));
  };
- window.renderExportedModel=()=>{if(!window.__lastGLBScene)throw new Error('Export model first');const restore=glass.beginExport();built.group.visible=false;scene.add(window.__lastGLBScene);renderer.shadowMap.needsUpdate=true;pipeline.render();scene.remove(window.__lastGLBScene);built.group.visible=true;restore();};
+ window.verifyExportTopology=()=>{
+  const architecture=window.__lastGLBScene;if(!architecture)throw new Error('Export first');architecture.updateMatrixWorld(true);
+  const ray=(x,z)=>new THREE.Raycaster(new THREE.Vector3(x,40,z),new THREE.Vector3(0,-1,0)).intersectObject(architecture,true).filter(h=>h.point.y>.5).map(h=>({y:h.point.y,name:h.object.name}));
+  return {northGap:ray(38,5),court:ray(38,32),cylinder:ray(18,12),south:ray(0,55),east:ray(90,25)};
+ };
+ window.renderExportedModel=()=>{if(!window.__lastGLBScene)throw new Error('Export first');built.group.visible=false;scene.add(window.__lastGLBScene);renderer.shadowMap.needsUpdate=true;draw();const data=renderer.domElement.toDataURL('image/png');scene.remove(window.__lastGLBScene);built.group.visible=true;renderer.shadowMap.needsUpdate=true;draw();return data;};
  if(document.body.dataset.viewer==='true'){
-  const controls=new OrbitControls(camera,renderer.domElement);controls.target.set(...shundeCameraAt(0).target);controls.minDistance=8;controls.maxDistance=150;controls.maxPolarAngle=Math.PI/2-.01;controls.update();
-  controls.addEventListener('change',()=>{glass.update(camera);pipeline.render();});
-  document.querySelectorAll('[data-shot]').forEach(button=>button.onclick=()=>{renderAt(Number(button.dataset.shot),true);controls.target.set(...shundeCameraAt(Number(button.dataset.shot)).target);controls.update();});
-  const show=pose=>{renderAt(0,true);applyPose(pose,1920,1080);controls.target.set(...pose.target);controls.update();draw();};
-  document.getElementById('rear-view').onclick=()=>show(rearPose);
-  document.getElementById('top-view').onclick=()=>show(topPose);
-  document.getElementById('download').onclick=async()=>{const b64=await window.exportGLB(),url=URL.createObjectURL(new Blob([Uint8Array.from(atob(b64),c=>c.charCodeAt(0))],{type:'model/gltf-binary'}));const a=document.createElement('a');a.href=url;a.download='Shunde3D.glb';a.click();URL.revokeObjectURL(url);};
+  const controls=new OrbitControls(camera,renderer.domElement);controls.target.set(...shundeCameraAt(0).target);controls.maxDistance=300;controls.minDistance=5;controls.update();controls.addEventListener('change',draw);
+  document.querySelectorAll('[data-shot]').forEach(button=>button.onclick=()=>{window.renderAt(Number(button.dataset.shot));controls.target.set(...shundeCameraAt(Number(button.dataset.shot)).target);controls.update();});
+  document.getElementById('download').onclick=async()=>{const b64=await window.exportGLB(),url=URL.createObjectURL(new Blob([Uint8Array.from(atob(b64),c=>c.charCodeAt(0))],{type:'model/gltf-binary'})),a=document.createElement('a');a.href=url;a.download='Shunde-courtyard-context.glb';a.click();URL.revokeObjectURL(url);};
  }
  window.__sceneReady=true;
 }

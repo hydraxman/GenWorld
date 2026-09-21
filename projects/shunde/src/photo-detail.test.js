@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
-import {createShundeModel} from './model.js';
+import {createNorthFacade as createShundeModel} from './north-facade.js';
 import {SHUNDE} from './spec.js';
 import * as environment from './environment.js';
 import * as pbr from './pbr.js';

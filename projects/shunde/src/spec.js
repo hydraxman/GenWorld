@@ -1,7 +1,7 @@
-export const DURATION=46;
+export const DURATION=24;
 // Photographic calibration, not a survey: native reference y≈1164/1012/796/574/241/88.
 // Chosen working scale only; depth and unseen elevations remain hypotheses.
-export const SHUNDE=Object.freeze({name:'舜德楼',version:3,width:66.56,depth:58,height:22.5,frontZ:5,baseY:.9,
+export const SHUNDE=Object.freeze({name:'舜德楼',version:4,width:66.56,depth:58,height:22.5,frontZ:5,baseY:.9,
  dimensionsStatus:'estimated-from-photos',interiorStatus:'inferred-not-surveyed',
  facadeBands:[
   {name:'lowest observable window band',base:.9,height:3.0,windowCenter:2.85,windowHeight:1.30},
@@ -13,17 +13,12 @@ export const SHUNDE=Object.freeze({name:'舜德楼',version:3,width:66.56,depth:
  entrance:{halfWidth:7.65,top:12.7,columnX:3.84,columnRadius:.48,portalWidth:5.96,portalTop:9.1,portalHeadHeight:2.04},
  arcEnabled:true,
 });
-const clamp=t=>Math.max(0,Math.min(1,t));
-const ease=t=>{t=clamp(t);return t*t*(3-2*t);};
+const ease=t=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);};
 const mix=(a,b,t)=>a.map((v,i)=>v+(b[i]-v)*t);
-export function assemblyAt(t){if(t<36)return 0;if(t<39.5)return ease((t-36)/3.5);if(t<=42)return 1;return 1-ease((t-42)/3.5);}
+export function assemblyAt(){return 0;}
 export function shundeCameraAt(seconds){
- const t=Math.max(0,Math.min(DURATION,seconds));let a,b,target,fov=44,q;
- if(t<8){q=ease(t/8);a=[-2,4.7,67];b=[1,5,63];target=[0,11.2,4];}
- else if(t<16){q=ease((t-8)/8);a=[0,4.0,46];b=[2,4.3,41];target=[0,10.7,4];fov=45;}
- else if(t<24){q=ease((t-16)/8);a=[25,10,63];b=[31,12,59];target=[0,10,0];fov=45;}
- else if(t<31){q=ease((t-24)/7);a=[-3,4.2,29];b=[1,4.5,28];target=[0,7.1,3.8];fov=46;}
- else if(t<36){q=ease((t-31)/5);a=[-69,15,-80];b=[-61,12,-72];target=[-13,10,-24];fov=44;}
- else{return {position:[-74,70,-108],target:[0,21,-24],fov:45};}
- return {position:mix(a,b,q),target,fov};
+ const t=Math.max(0,Math.min(DURATION,seconds));
+ if(t<8)return {position:mix([-14,5.2,-73],[-6,5.5,-67],ease(t/8)),target:[-8,10,-7],fov:44,chapter:'01 / 北向主入口'};
+ if(t<16)return {position:mix([52,118,116],[73,106,102],ease((t-8)/8)),target:[28,3,25],fov:52,chapter:'02 / 内院与北侧开口 · 组合体量'};
+ return {position:mix([43,3.7,44],[40,4.0,42],ease((t-16)/8)),target:[7,10.5,13],fov:61,chapter:'03 / 院内望向西北 · 圆筒与斜向玻璃厅'};
 }
