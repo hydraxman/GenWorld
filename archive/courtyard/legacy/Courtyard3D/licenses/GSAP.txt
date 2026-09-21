@@ -1,0 +1,2 @@
+GSAP 3.14.2 — Standard no-charge license: https://gsap.com/standard-license.
+The bundled gsap.min.js retains its original copyright/license header.

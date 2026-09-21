@@ -1,0 +1,29 @@
+{
+  "decoded_without_errors": true,
+  "frame_comparisons": [
+    {
+      "frame": "final-01.png",
+      "mean_abs_error": 3.907921489197531
+    },
+    {
+      "frame": "final-02.png",
+      "mean_abs_error": 5.094605516975309
+    },
+    {
+      "frame": "final-03.png",
+      "mean_abs_error": 5.2545029578189295
+    },
+    {
+      "frame": "final-04.png",
+      "mean_abs_error": 5.666588541666667
+    },
+    {
+      "frame": "final-05.png",
+      "mean_abs_error": 3.9746032664609054
+    },
+    {
+      "frame": "final-06.png",
+      "mean_abs_error": 6.46936422968107
+    }
+  ]
+}

@@ -1,8 +1,10 @@
 """Verify immutable cameras, leaf bytes, and source geometry modules against V6."""
 from pathlib import Path
 import hashlib,json
-old=Path('/Users/bryannathan/Desktop/Courtyard3D-v6')
-project=Path(__file__).parent
+project=Path(__file__).resolve().parent
+# V6 baseline from initial commit f4f30eb48fe2f4266f5730aba3354485f4d32bd9;
+# source modules and leaf assets verified byte-identical to the original checkout.
+old=project.parent.parent
 shared=project.parent.parent/'shared'
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 result={'cameraFiles':{},'unchangedGeometryFiles':{},'sharedLeafFiles':{}}

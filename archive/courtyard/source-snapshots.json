@@ -1,0 +1,2058 @@
+[
+  {
+    "version": "Courtyard3D",
+    "status": "historical_superseded_not_current",
+    "directly_runnable": false,
+    "restoration": "在单独临时目录按relative_path物化全部条目；git_blob用git cat-file blob OID读取；校验SHA-256；npm ci后按原package.json构建。不得在当前项目目录恢复。",
+    "files": [
+      {
+        "relative_path": "MODEL_NOTES.md",
+        "sha256": "b8bd9e7e9816f2e4872cac808316c8829ac77576a1b7f3f3a95a3af9a4c43015",
+        "bytes": 8130,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D/MODEL_NOTES.md"
+        }
+      },
+      {
+        "relative_path": "README.md",
+        "sha256": "c152e3cdd3d434f33d2407374ff2ebda0882c18e19aab128932232aa85b6618f",
+        "bytes": 2669,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D/README.md"
+        }
+      },
+      {
+        "relative_path": "design.md",
+        "sha256": "9d33459b61193fab2aa1394332f371f1a63880f267f66b04aad366a2efdb8a0b",
+        "bytes": 1558,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D/design.md"
+        }
+      },
+      {
+        "relative_path": "hyperframes.json",
+        "sha256": "53dbce1e19aa713cbb12ee0bc4d206143b45ab15e6ffbfcaa8f69572d4d24d50",
+        "bytes": 318,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "dc9ec2eb28c67a93113c201a65a3155a19915d7c",
+          "path_hint": [
+            "hyperframes.json"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "index.html",
+        "sha256": "85070858df9e474952e7be136ed50f15cffa479aeba2169453e2eb40c6047762",
+        "bytes": 1067,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D/index.html"
+        }
+      },
+      {
+        "relative_path": "meta.json",
+        "sha256": "7033c2bdc165ecc3b02f4ea99931889bf2f47ab949b667a4e2c28e215ad18cca",
+        "bytes": 93,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D/meta.json"
+        }
+      },
+      {
+        "relative_path": "package-lock.json",
+        "sha256": "0bd9c4e6879cb2aec21156e89c1f793998598f6c4271355aaa8f6fe8597694b3",
+        "bytes": 27075,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "61e2412fc5ddaea6a2424b5a77646209981f885f",
+          "path_hint": [
+            "package-lock.json"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "package.json",
+        "sha256": "e110afb25169425ee2bcd3396735daca21c101adcb7e8af9f64eed2c821b1d98",
+        "bytes": 643,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D/package.json"
+        }
+      },
+      {
+        "relative_path": "qa-browser.mjs",
+        "sha256": "3dd5cb8d1d54c9489fb9482f54a860dc5f64f5a0e961a0c677a048ca6ba1879d",
+        "bytes": 2204,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "09fb5611983db3ceb2e1d14d4c73a12d829d0916",
+          "path_hint": [
+            "qa-browser.mjs"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "qa-viewer.mjs",
+        "sha256": "2c2c1252331deb4634fc5441a8731ca8f157b2a773f03eaa367a88a8087beef4",
+        "bytes": 1287,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D/qa-viewer.mjs"
+        }
+      },
+      {
+        "relative_path": "viewer.html",
+        "sha256": "fc2fc8da6decf8eb674a23afe3b319f18e1890966979cf8b7eb9bca752d55c67",
+        "bytes": 1417,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D/viewer.html"
+        }
+      },
+      {
+        "relative_path": "qa/final-verification.json",
+        "sha256": "7a418f7c3de89a5d0225f5870305377bd567874445a47c804bdb3613083a0eed",
+        "bytes": 973,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D/qa/final-verification.json"
+        }
+      },
+      {
+        "relative_path": "assets/gsap.min.js",
+        "sha256": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280",
+        "bytes": 72779,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "fde57af06cc445f47ca2a6fc1232ec04666346d4",
+          "path_hint": [
+            "assets/gsap.min.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "assets/reference-front.jpg",
+        "sha256": "02b9bc427f7c82751a570641ae895cbcea0ae575ba57de437f0ed469f29f1e48",
+        "bytes": 241076,
+        "restore_from": {
+          "kind": "local_only_asset",
+          "path": "projects/courtyard/assets/reference-front.jpg"
+        }
+      },
+      {
+        "relative_path": "assets/reference-side.jpg",
+        "sha256": "f6d6de4a7d293ad095327bac7d1bb56ab79781647bfae5de1dfd10db366fdd32",
+        "bytes": 366896,
+        "restore_from": {
+          "kind": "local_only_asset",
+          "path": "projects/courtyard/assets/reference-side.jpg"
+        }
+      },
+      {
+        "relative_path": "src/camera.js",
+        "sha256": "c1fc30479a8e914d36d2ae333eaf6b2e1d0834621d119e41ca9be278a9611e03",
+        "bytes": 1084,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "aa580fc8ea7de28089b3b5be6927e7f665804a83",
+          "path_hint": [
+            "projects/courtyard/src/camera.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/camera.test.js",
+        "sha256": "f8d95c44a39be1d5f8a54e760e6ff340c9643b70341b58e589f5b4f964490ff5",
+        "bytes": 946,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "0a9a918d83d4a06bf140094232d18ac6dec9d1c0",
+          "path_hint": [
+            "projects/courtyard/src/camera.test.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/main.js",
+        "sha256": "1b89de15afb4f16f6f45ef39d3890c4072a82de82df1e572664515af14e117fc",
+        "bytes": 5602,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D/src/main.js"
+        }
+      },
+      {
+        "relative_path": "src/model.js",
+        "sha256": "55a3119f637901bac578f9e4ec4d10ec3bfc62be38acda8729eecdbc554da766",
+        "bytes": 26860,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D/src/model.js"
+        }
+      }
+    ]
+  },
+  {
+    "version": "Courtyard3D-v2",
+    "status": "historical_superseded_not_current",
+    "directly_runnable": false,
+    "restoration": "在单独临时目录按relative_path物化全部条目；git_blob用git cat-file blob OID读取；校验SHA-256；npm ci后按原package.json构建。不得在当前项目目录恢复。",
+    "files": [
+      {
+        "relative_path": "MODEL_NOTES.md",
+        "sha256": "090027020c0dc80cfd75efc4d5a1ca81414e5e82dcdda4efa8978f21661a18e4",
+        "bytes": 2434,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v2/MODEL_NOTES.md"
+        }
+      },
+      {
+        "relative_path": "README.md",
+        "sha256": "877dd00bcf47676c9a17ad1931de83506e48cda4ade903af9c7037e4708eb394",
+        "bytes": 1914,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v2/README.md"
+        }
+      },
+      {
+        "relative_path": "design.md",
+        "sha256": "41be1c7526f0847b449ee52f7178576ed3bada50971104f3ab97fc071ca1708f",
+        "bytes": 677,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v2/design.md"
+        }
+      },
+      {
+        "relative_path": "hyperframes.json",
+        "sha256": "53dbce1e19aa713cbb12ee0bc4d206143b45ab15e6ffbfcaa8f69572d4d24d50",
+        "bytes": 318,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "dc9ec2eb28c67a93113c201a65a3155a19915d7c",
+          "path_hint": [
+            "hyperframes.json"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "index.html",
+        "sha256": "85070858df9e474952e7be136ed50f15cffa479aeba2169453e2eb40c6047762",
+        "bytes": 1067,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D/index.html"
+        }
+      },
+      {
+        "relative_path": "meta.json",
+        "sha256": "4c9d64dae070498237abbab66f9ec885335dfe5b3fdb084ea434ea1fe5cc64ff",
+        "bytes": 99,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v2/meta.json"
+        }
+      },
+      {
+        "relative_path": "package-lock.json",
+        "sha256": "0bd9c4e6879cb2aec21156e89c1f793998598f6c4271355aaa8f6fe8597694b3",
+        "bytes": 27075,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "61e2412fc5ddaea6a2424b5a77646209981f885f",
+          "path_hint": [
+            "package-lock.json"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "package.json",
+        "sha256": "b0a62d23479bdf4486c8273860cb959226cdab9af0712894d643289d4d0a80a5",
+        "bytes": 638,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "38ec13c66eca0fcd093f66c3b5db7831f87b455e",
+          "path_hint": [
+            "package.json"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "qa-browser.mjs",
+        "sha256": "3dd5cb8d1d54c9489fb9482f54a860dc5f64f5a0e961a0c677a048ca6ba1879d",
+        "bytes": 2204,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "09fb5611983db3ceb2e1d14d4c73a12d829d0916",
+          "path_hint": [
+            "qa-browser.mjs"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "qa-viewer.mjs",
+        "sha256": "2c2c1252331deb4634fc5441a8731ca8f157b2a773f03eaa367a88a8087beef4",
+        "bytes": 1287,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D/qa-viewer.mjs"
+        }
+      },
+      {
+        "relative_path": "viewer.html",
+        "sha256": "fc2fc8da6decf8eb674a23afe3b319f18e1890966979cf8b7eb9bca752d55c67",
+        "bytes": 1417,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D/viewer.html"
+        }
+      },
+      {
+        "relative_path": "qa/final-verification.json",
+        "sha256": "f515ad8aaa6e61e78ae73c5800cb44c2788b2defaed93397cdcb4801695ddace",
+        "bytes": 1014,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v2/qa/final-verification.json"
+        }
+      },
+      {
+        "relative_path": "qa/v1-baseline.json",
+        "sha256": "6564742d99e9e78a568a53d4a417c81088e0466714cfb710b4bcbb68f30bcd13",
+        "bytes": 174,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "4a02c30827d1429a9df9f30deb17b2558b7db5f0",
+          "path_hint": [
+            "projects/courtyard/qa/v1-baseline.json"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "assets/gsap.min.js",
+        "sha256": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280",
+        "bytes": 72779,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "fde57af06cc445f47ca2a6fc1232ec04666346d4",
+          "path_hint": [
+            "assets/gsap.min.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "assets/reference-front.jpg",
+        "sha256": "02b9bc427f7c82751a570641ae895cbcea0ae575ba57de437f0ed469f29f1e48",
+        "bytes": 241076,
+        "restore_from": {
+          "kind": "local_only_asset",
+          "path": "projects/courtyard/assets/reference-front.jpg"
+        }
+      },
+      {
+        "relative_path": "assets/reference-side.jpg",
+        "sha256": "f6d6de4a7d293ad095327bac7d1bb56ab79781647bfae5de1dfd10db366fdd32",
+        "bytes": 366896,
+        "restore_from": {
+          "kind": "local_only_asset",
+          "path": "projects/courtyard/assets/reference-side.jpg"
+        }
+      },
+      {
+        "relative_path": "src/camera.js",
+        "sha256": "c1fc30479a8e914d36d2ae333eaf6b2e1d0834621d119e41ca9be278a9611e03",
+        "bytes": 1084,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "aa580fc8ea7de28089b3b5be6927e7f665804a83",
+          "path_hint": [
+            "projects/courtyard/src/camera.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/camera.test.js",
+        "sha256": "f8d95c44a39be1d5f8a54e760e6ff340c9643b70341b58e589f5b4f964490ff5",
+        "bytes": 946,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "0a9a918d83d4a06bf140094232d18ac6dec9d1c0",
+          "path_hint": [
+            "projects/courtyard/src/camera.test.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/campus.js",
+        "sha256": "0bbcbbed408ad4d71806e6d22e7c544073ec15bc493c277630523d113a507847",
+        "bytes": 8831,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v2/src/campus.js"
+        }
+      },
+      {
+        "relative_path": "src/main.js",
+        "sha256": "18ce0e891d396cd3d748e125d5c1401932ccedc21ff7af4f24d3cc28b6c13be2",
+        "bytes": 5626,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v2/src/main.js"
+        }
+      },
+      {
+        "relative_path": "src/model.js",
+        "sha256": "434526e302977f526984b24db6f02509ddafdb6b8b4597ec52ea2aa543283fa3",
+        "bytes": 26816,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v2/src/model.js"
+        }
+      },
+      {
+        "relative_path": "src/revision.test.js",
+        "sha256": "7b86a096c777b5a55ea486b31911ce3d558e8ef5f50b02054242532c345c13a0",
+        "bytes": 1178,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "237fa4433278af40a5f38794e99ae435605bf7c5",
+          "path_hint": [
+            "projects/courtyard/src/revision.test.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/water.js",
+        "sha256": "80c0634cbddcca0370be8d6f88fb868341d9e5318849242dc823a1cb9a6f30b6",
+        "bytes": 1642,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v2/src/water.js"
+        }
+      }
+    ]
+  },
+  {
+    "version": "Courtyard3D-v3",
+    "status": "historical_superseded_not_current",
+    "directly_runnable": false,
+    "restoration": "在单独临时目录按relative_path物化全部条目；git_blob用git cat-file blob OID读取；校验SHA-256；npm ci后按原package.json构建。不得在当前项目目录恢复。",
+    "files": [
+      {
+        "relative_path": "MODEL_NOTES.md",
+        "sha256": "a7b275a28538e8dc051efa1559a3be9e9399e962698aebdcc8b0adedea8fe852",
+        "bytes": 2027,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v3/MODEL_NOTES.md"
+        }
+      },
+      {
+        "relative_path": "README.md",
+        "sha256": "3ed1d98e239c80526546f81c59bdba81447f5adf34ae0e40c9207fabc432bd4b",
+        "bytes": 2798,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v3/README.md"
+        }
+      },
+      {
+        "relative_path": "design.md",
+        "sha256": "2d6c09e61a7804a728fb56460b441aa41b087eccb86af47289a87df30e2100ba",
+        "bytes": 648,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v3/design.md"
+        }
+      },
+      {
+        "relative_path": "hyperframes.json",
+        "sha256": "53dbce1e19aa713cbb12ee0bc4d206143b45ab15e6ffbfcaa8f69572d4d24d50",
+        "bytes": 318,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "dc9ec2eb28c67a93113c201a65a3155a19915d7c",
+          "path_hint": [
+            "hyperframes.json"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "index.html",
+        "sha256": "85070858df9e474952e7be136ed50f15cffa479aeba2169453e2eb40c6047762",
+        "bytes": 1067,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D/index.html"
+        }
+      },
+      {
+        "relative_path": "meta.json",
+        "sha256": "22c99984ab1d125bd1178c93adc5537a16983b736bebecc744b92d5df8f07637",
+        "bytes": 99,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v3/meta.json"
+        }
+      },
+      {
+        "relative_path": "package-lock.json",
+        "sha256": "0bd9c4e6879cb2aec21156e89c1f793998598f6c4271355aaa8f6fe8597694b3",
+        "bytes": 27075,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "61e2412fc5ddaea6a2424b5a77646209981f885f",
+          "path_hint": [
+            "package-lock.json"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "package.json",
+        "sha256": "b0a62d23479bdf4486c8273860cb959226cdab9af0712894d643289d4d0a80a5",
+        "bytes": 638,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "38ec13c66eca0fcd093f66c3b5db7831f87b455e",
+          "path_hint": [
+            "package.json"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "qa-browser.mjs",
+        "sha256": "3dd5cb8d1d54c9489fb9482f54a860dc5f64f5a0e961a0c677a048ca6ba1879d",
+        "bytes": 2204,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "09fb5611983db3ceb2e1d14d4c73a12d829d0916",
+          "path_hint": [
+            "qa-browser.mjs"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "qa-reflection.mjs",
+        "sha256": "88955819c36ce8103251936760a060466c1667d15bee3cd47343732a7aa4e5af",
+        "bytes": 1813,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "e636ad9f6a6e30321e430739e53cc931aaf2d273",
+          "path_hint": [
+            "qa-reflection.mjs"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "qa-viewer.mjs",
+        "sha256": "2c2c1252331deb4634fc5441a8731ca8f157b2a773f03eaa367a88a8087beef4",
+        "bytes": 1287,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D/qa-viewer.mjs"
+        }
+      },
+      {
+        "relative_path": "viewer.html",
+        "sha256": "fc2fc8da6decf8eb674a23afe3b319f18e1890966979cf8b7eb9bca752d55c67",
+        "bytes": 1417,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D/viewer.html"
+        }
+      },
+      {
+        "relative_path": "qa/final-verification.json",
+        "sha256": "5f9ac620b95b3cec1f4e40c1d76d58adbe35524966828c4bdbfd1d1020b6a2df",
+        "bytes": 1402,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v3/qa/final-verification.json"
+        }
+      },
+      {
+        "relative_path": "qa/v1-baseline.json",
+        "sha256": "6564742d99e9e78a568a53d4a417c81088e0466714cfb710b4bcbb68f30bcd13",
+        "bytes": 174,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "4a02c30827d1429a9df9f30deb17b2558b7db5f0",
+          "path_hint": [
+            "projects/courtyard/qa/v1-baseline.json"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "assets/gsap.min.js",
+        "sha256": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280",
+        "bytes": 72779,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "fde57af06cc445f47ca2a6fc1232ec04666346d4",
+          "path_hint": [
+            "assets/gsap.min.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "assets/reference-front.jpg",
+        "sha256": "02b9bc427f7c82751a570641ae895cbcea0ae575ba57de437f0ed469f29f1e48",
+        "bytes": 241076,
+        "restore_from": {
+          "kind": "local_only_asset",
+          "path": "projects/courtyard/assets/reference-front.jpg"
+        }
+      },
+      {
+        "relative_path": "assets/reference-side.jpg",
+        "sha256": "f6d6de4a7d293ad095327bac7d1bb56ab79781647bfae5de1dfd10db366fdd32",
+        "bytes": 366896,
+        "restore_from": {
+          "kind": "local_only_asset",
+          "path": "projects/courtyard/assets/reference-side.jpg"
+        }
+      },
+      {
+        "relative_path": "src/camera.js",
+        "sha256": "c1fc30479a8e914d36d2ae333eaf6b2e1d0834621d119e41ca9be278a9611e03",
+        "bytes": 1084,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "aa580fc8ea7de28089b3b5be6927e7f665804a83",
+          "path_hint": [
+            "projects/courtyard/src/camera.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/camera.test.js",
+        "sha256": "f8d95c44a39be1d5f8a54e760e6ff340c9643b70341b58e589f5b4f964490ff5",
+        "bytes": 946,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "0a9a918d83d4a06bf140094232d18ac6dec9d1c0",
+          "path_hint": [
+            "projects/courtyard/src/camera.test.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/campus.js",
+        "sha256": "5e5794998865494a67abc4f780a4d6900410ef6eeb65c3bb4545e60cdba11d87",
+        "bytes": 8831,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v3/src/campus.js"
+        }
+      },
+      {
+        "relative_path": "src/illumination.js",
+        "sha256": "5e6179285dde4eb83661d2cb30a917691c8e67670234e664c10310f78d7e1478",
+        "bytes": 1321,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "e26ba4690e448b9e51a1f4092410c50bc8728b1c",
+          "path_hint": [
+            "shared/illumination.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/main.js",
+        "sha256": "168703d0c34a9211a239eff59a54b2ce7e35fb5cf778c2f7b95f94b7dbe47567",
+        "bytes": 6354,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v3/src/main.js"
+        }
+      },
+      {
+        "relative_path": "src/model.js",
+        "sha256": "37b1071bd4474badd6cdb843b017fd23f7fabcdacb37e28160b25d083f1933ba",
+        "bytes": 27217,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v3/src/model.js"
+        }
+      },
+      {
+        "relative_path": "src/pools.js",
+        "sha256": "ecf102e9cda12dc05b06d00b756bdd2ce49dfc2e4c765504aa27eb4664411e43",
+        "bytes": 445,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "60250313df4515abceb7d798c5ef6aea3fdb781c",
+          "path_hint": [
+            "projects/courtyard/src/pools.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/reflection.test.js",
+        "sha256": "6c14148eb85cf10f4a2d46e709ae8359feef30490b01da8c25ce7ff9d2f31b9f",
+        "bytes": 888,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "a846008a3756b05150463d6e89bd147151fb6bfe",
+          "path_hint": [
+            "projects/courtyard/src/reflection.test.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/revision.test.js",
+        "sha256": "7b86a096c777b5a55ea486b31911ce3d558e8ef5f50b02054242532c345c13a0",
+        "bytes": 1178,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "237fa4433278af40a5f38794e99ae435605bf7c5",
+          "path_hint": [
+            "projects/courtyard/src/revision.test.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/water.js",
+        "sha256": "e935d13e5be6165c2ed4ca9f69f7dcca91c24609017052877e3c04815ecccd4d",
+        "bytes": 3745,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "2585a83e466052e11b80fc1eb424a7543d06c9ea",
+          "path_hint": [
+            "projects/courtyard/src/water.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      }
+    ]
+  },
+  {
+    "version": "Courtyard3D-v4",
+    "status": "historical_superseded_not_current",
+    "directly_runnable": false,
+    "restoration": "在单独临时目录按relative_path物化全部条目；git_blob用git cat-file blob OID读取；校验SHA-256；npm ci后按原package.json构建。不得在当前项目目录恢复。",
+    "files": [
+      {
+        "relative_path": "MODEL_NOTES.md",
+        "sha256": "fa72ae7881a6e1d5106231c64fb4da3e2f32998df1faaf8114ff62fc0788ed5a",
+        "bytes": 923,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v4/MODEL_NOTES.md"
+        }
+      },
+      {
+        "relative_path": "README.md",
+        "sha256": "6c16ec6ecb2c9e1488eb4207fdb1b1fc3bf6d87002f477be68508412461876ff",
+        "bytes": 2110,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v4/README.md"
+        }
+      },
+      {
+        "relative_path": "design.md",
+        "sha256": "2d6c09e61a7804a728fb56460b441aa41b087eccb86af47289a87df30e2100ba",
+        "bytes": 648,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v3/design.md"
+        }
+      },
+      {
+        "relative_path": "hyperframes.json",
+        "sha256": "53dbce1e19aa713cbb12ee0bc4d206143b45ab15e6ffbfcaa8f69572d4d24d50",
+        "bytes": 318,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "dc9ec2eb28c67a93113c201a65a3155a19915d7c",
+          "path_hint": [
+            "hyperframes.json"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "index.html",
+        "sha256": "85070858df9e474952e7be136ed50f15cffa479aeba2169453e2eb40c6047762",
+        "bytes": 1067,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D/index.html"
+        }
+      },
+      {
+        "relative_path": "meta.json",
+        "sha256": "6e8698f0f149cd401a5055ce9ac84fa80a43834fffe433dddf38bc53709cbc01",
+        "bytes": 99,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v4/meta.json"
+        }
+      },
+      {
+        "relative_path": "package-lock.json",
+        "sha256": "0bd9c4e6879cb2aec21156e89c1f793998598f6c4271355aaa8f6fe8597694b3",
+        "bytes": 27075,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "61e2412fc5ddaea6a2424b5a77646209981f885f",
+          "path_hint": [
+            "package-lock.json"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "package.json",
+        "sha256": "b0a62d23479bdf4486c8273860cb959226cdab9af0712894d643289d4d0a80a5",
+        "bytes": 638,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "38ec13c66eca0fcd093f66c3b5db7831f87b455e",
+          "path_hint": [
+            "package.json"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "prepare-leaf.py",
+        "sha256": "8486b167975ab9e6739e30d34823f07b3b31de666dfeb6118400145c7668c261",
+        "bytes": 3007,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "3311594c344a75ea3abd01d1d5c13bdcdf404792",
+          "path_hint": [
+            "prepare-leaf.py"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "qa-browser.mjs",
+        "sha256": "3dd5cb8d1d54c9489fb9482f54a860dc5f64f5a0e961a0c677a048ca6ba1879d",
+        "bytes": 2204,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "09fb5611983db3ceb2e1d14d4c73a12d829d0916",
+          "path_hint": [
+            "qa-browser.mjs"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "qa-reflection.mjs",
+        "sha256": "88955819c36ce8103251936760a060466c1667d15bee3cd47343732a7aa4e5af",
+        "bytes": 1813,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "e636ad9f6a6e30321e430739e53cc931aaf2d273",
+          "path_hint": [
+            "qa-reflection.mjs"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "qa-viewer.mjs",
+        "sha256": "2c2c1252331deb4634fc5441a8731ca8f157b2a773f03eaa367a88a8087beef4",
+        "bytes": 1287,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D/qa-viewer.mjs"
+        }
+      },
+      {
+        "relative_path": "repack-glb.py",
+        "sha256": "32b46a494e615ff28043caeb91218581531b0ab856290d097322642a9539c55d",
+        "bytes": 1962,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v4/repack-glb.py"
+        }
+      },
+      {
+        "relative_path": "viewer.html",
+        "sha256": "fc2fc8da6decf8eb674a23afe3b319f18e1890966979cf8b7eb9bca752d55c67",
+        "bytes": 1417,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D/viewer.html"
+        }
+      },
+      {
+        "relative_path": "qa/final-verification.json",
+        "sha256": "7e3e9a6b80b7d3aacfcb129bb6a85991083c674d184d8ca299e3ffb88fa153e3",
+        "bytes": 582,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v4/qa/final-verification.json"
+        }
+      },
+      {
+        "relative_path": "qa/glb-repack.json",
+        "sha256": "a9c9f2b71f58b914100f43e68a80a6042c9369309a75ffe23e01d5b122807f33",
+        "bytes": 205,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v4/qa/glb-repack.json"
+        }
+      },
+      {
+        "relative_path": "qa/packed-glb-check.json",
+        "sha256": "36b46dbe916684cef773a0909f348defeb5dd7b383ff44c787636f08c9332d8b",
+        "bytes": 727,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v4/qa/packed-glb-check.json"
+        }
+      },
+      {
+        "relative_path": "qa/v1-baseline.json",
+        "sha256": "6564742d99e9e78a568a53d4a417c81088e0466714cfb710b4bcbb68f30bcd13",
+        "bytes": 174,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "4a02c30827d1429a9df9f30deb17b2558b7db5f0",
+          "path_hint": [
+            "projects/courtyard/qa/v1-baseline.json"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "qa/v3-baseline.json",
+        "sha256": "154998e3ddd8b74f11a94b02b2e8a03823b2a5a56502ce09072457ef1ce58119",
+        "bytes": 256,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "f387b73fffe3a78e044c452dd083ff0e3e8e166b",
+          "path_hint": [
+            "projects/courtyard/qa/v3-baseline.json"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "qa/verify-packed.js",
+        "sha256": "373abf00124f589e3b1153a00116c6817a8273ea63c172ce8ce8e2a65464dd8c",
+        "bytes": 640,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v4/qa/verify-packed.js"
+        }
+      },
+      {
+        "relative_path": "qa/sources/maple.html",
+        "sha256": "62ffeda137a1a8bebaa58c5164149c97dcc85d992ad71cde938d8229562dc0c8",
+        "bytes": 279477,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "4d0d4d010f378508183aebc1c1258d78b166a0ea",
+          "path_hint": [
+            "projects/shunde/assets/leaves/maple-license-evidence.html"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "assets/gsap.min.js",
+        "sha256": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280",
+        "bytes": 72779,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "fde57af06cc445f47ca2a6fc1232ec04666346d4",
+          "path_hint": [
+            "assets/gsap.min.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "assets/reference-front.jpg",
+        "sha256": "02b9bc427f7c82751a570641ae895cbcea0ae575ba57de437f0ed469f29f1e48",
+        "bytes": 241076,
+        "restore_from": {
+          "kind": "local_only_asset",
+          "path": "projects/courtyard/assets/reference-front.jpg"
+        }
+      },
+      {
+        "relative_path": "assets/reference-side.jpg",
+        "sha256": "f6d6de4a7d293ad095327bac7d1bb56ab79781647bfae5de1dfd10db366fdd32",
+        "bytes": 366896,
+        "restore_from": {
+          "kind": "local_only_asset",
+          "path": "projects/courtyard/assets/reference-side.jpg"
+        }
+      },
+      {
+        "relative_path": "assets/leaves/BaseColor.png",
+        "sha256": "ddc2cd7c86fdca731db12ca2f80f88faf9e7031c64658b39b641c3c805db5527",
+        "bytes": 1254799,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "1bf5300d82f47141df39c6a2f389412fc26ca5c9",
+          "path_hint": [
+            "assets/leaves/BaseColor.png"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "assets/leaves/Normal.png",
+        "sha256": "1e19423825982625d493567a0cb6cf7d593f27e84759d454c309475d5b20dc99",
+        "bytes": 1588795,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "1a47b2e5599157c5cbec7d3c6a556f91b1269dca",
+          "path_hint": [
+            "assets/leaves/Normal.png"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "assets/leaves/Roughness.png",
+        "sha256": "552ba70531542c94148858a8b08f2ea5c15d45ed4c7fa967cd2dc1fa6de3d7af",
+        "bytes": 494594,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "6af669bad2a15f0b51228fc4dcf54d6639d37e78",
+          "path_hint": [
+            "assets/leaves/Roughness.png"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "assets/leaves/SOURCE.json",
+        "sha256": "353d26ba0b231c397de6842254eb1e071ec501fa2939ec50a82e51ca76e38756",
+        "bytes": 1144,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "332448234a03f1f82d361431060621dc070d99c1",
+          "path_hint": [
+            "assets/leaves/SOURCE.json"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "assets/leaves/maple-color.png",
+        "sha256": "5b8c16d56f0f06065739b54fb6f1582939e47357f9608dc90f7e793890784e87",
+        "bytes": 1252168,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "6df78aa800f927aa08db6ae34274acf8d6158f83",
+          "path_hint": [
+            "assets/leaves/maple-color.png"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "assets/leaves/outline.json",
+        "sha256": "11dc4fdf3b5d747d98c3dad9ae9685ac52d3108658a782200cca8b044ee33aaa",
+        "bytes": 1655,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "02f65ed3250779d3ee77c32d82517bf3791f430c",
+          "path_hint": [
+            "assets/leaves/outline.json"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/camera.js",
+        "sha256": "c1fc30479a8e914d36d2ae333eaf6b2e1d0834621d119e41ca9be278a9611e03",
+        "bytes": 1084,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "aa580fc8ea7de28089b3b5be6927e7f665804a83",
+          "path_hint": [
+            "projects/courtyard/src/camera.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/camera.test.js",
+        "sha256": "f8d95c44a39be1d5f8a54e760e6ff340c9643b70341b58e589f5b4f964490ff5",
+        "bytes": 946,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "0a9a918d83d4a06bf140094232d18ac6dec9d1c0",
+          "path_hint": [
+            "projects/courtyard/src/camera.test.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/campus.js",
+        "sha256": "91a94e15c3a3e91e82ae68fdbd1494a7a2877937a6e849b062a54694521b3ab3",
+        "bytes": 8662,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "2632c5c085cf1bfca15022d2e10b8cea4dab41b5",
+          "path_hint": [
+            "projects/courtyard/src/campus.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/illumination.js",
+        "sha256": "5e6179285dde4eb83661d2cb30a917691c8e67670234e664c10310f78d7e1478",
+        "bytes": 1321,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "e26ba4690e448b9e51a1f4092410c50bc8728b1c",
+          "path_hint": [
+            "shared/illumination.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/leaves.js",
+        "sha256": "0a52c70ed2aa7a26da914373c090e7c11ce15b641c41067a684e99c185fede86",
+        "bytes": 1435,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "9c3463d6725d47085eb9bcc64c427c70ed908418",
+          "path_hint": [
+            "src/leaves.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/leaves.test.js",
+        "sha256": "021811561c548489572e45e0bf9c9941b3d1ac20b528bc950312c2879f86d158",
+        "bytes": 901,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "5047e864ee2efbb401bd5cc6a14e180f521af656",
+          "path_hint": [
+            "src/leaves.test.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/main.js",
+        "sha256": "29c26852627ba971f493b8b638e9f49ed7ca6f67342a451da3e3fb364fa0cc95",
+        "bytes": 6432,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v4/src/main.js"
+        }
+      },
+      {
+        "relative_path": "src/model.js",
+        "sha256": "1cd978f5704ab2f1843658172bbd7e88f50bb9c9b968192311458b8d10ce7b82",
+        "bytes": 27061,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "ed655876036c08dffe88b3c21baf28165c88bef8",
+          "path_hint": [
+            "src/model.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/pools.js",
+        "sha256": "ecf102e9cda12dc05b06d00b756bdd2ce49dfc2e4c765504aa27eb4664411e43",
+        "bytes": 445,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "60250313df4515abceb7d798c5ef6aea3fdb781c",
+          "path_hint": [
+            "projects/courtyard/src/pools.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/reflection.test.js",
+        "sha256": "6c14148eb85cf10f4a2d46e709ae8359feef30490b01da8c25ce7ff9d2f31b9f",
+        "bytes": 888,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "a846008a3756b05150463d6e89bd147151fb6bfe",
+          "path_hint": [
+            "projects/courtyard/src/reflection.test.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/revision.test.js",
+        "sha256": "7b86a096c777b5a55ea486b31911ce3d558e8ef5f50b02054242532c345c13a0",
+        "bytes": 1178,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "237fa4433278af40a5f38794e99ae435605bf7c5",
+          "path_hint": [
+            "projects/courtyard/src/revision.test.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/water.js",
+        "sha256": "e935d13e5be6165c2ed4ca9f69f7dcca91c24609017052877e3c04815ecccd4d",
+        "bytes": 3745,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "2585a83e466052e11b80fc1eb424a7543d06c9ea",
+          "path_hint": [
+            "projects/courtyard/src/water.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      }
+    ]
+  },
+  {
+    "version": "Courtyard3D-v5",
+    "status": "historical_superseded_not_current",
+    "directly_runnable": false,
+    "restoration": "在单独临时目录按relative_path物化全部条目；git_blob用git cat-file blob OID读取；校验SHA-256；npm ci后按原package.json构建。不得在当前项目目录恢复。",
+    "files": [
+      {
+        "relative_path": "MODEL_NOTES.md",
+        "sha256": "94ef72f6b6eede12073962e340e09e38108014d883b9ed143b8b50e6ac451a5d",
+        "bytes": 1652,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "e6ebc517c3869d75358a8e49b0eecc4718f8f689",
+          "path_hint": [
+            "MODEL_NOTES.md"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "README.md",
+        "sha256": "027c863a22504eb388fc268f8394177642b2b8b8e8d0b5220e81bb26ee01eb94",
+        "bytes": 1999,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v5/README.md"
+        }
+      },
+      {
+        "relative_path": "design.md",
+        "sha256": "4954480c7ad457360908f81b1ee79da6594fa6589a01a90587aed10022dfe88a",
+        "bytes": 1244,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v5/design.md"
+        }
+      },
+      {
+        "relative_path": "finalize-video.py",
+        "sha256": "4a3cb4bb1dd87b01bc7b57e8e6f156558d786cbf99c4c486302f9ad3044ba410",
+        "bytes": 2247,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v5/finalize-video.py"
+        }
+      },
+      {
+        "relative_path": "hyperframes.json",
+        "sha256": "53dbce1e19aa713cbb12ee0bc4d206143b45ab15e6ffbfcaa8f69572d4d24d50",
+        "bytes": 318,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "dc9ec2eb28c67a93113c201a65a3155a19915d7c",
+          "path_hint": [
+            "hyperframes.json"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "index.html",
+        "sha256": "6f764c393f191bb8264ae289307758c397559a386be988121c65928df963993f",
+        "bytes": 1539,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "3ed3194cc58d29c5c406939f9022423a19ff4beb",
+          "path_hint": [
+            "index.html"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "meta.json",
+        "sha256": "e476718595cb2905b838e6898a023224f44baffef0aa2329e9e010b82e089e13",
+        "bytes": 99,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v5/meta.json"
+        }
+      },
+      {
+        "relative_path": "package-delivery.py",
+        "sha256": "45403218abdb47884407e95dea7a3aac462ec52020829d908afb3562cbad4960",
+        "bytes": 1694,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v5/package-delivery.py"
+        }
+      },
+      {
+        "relative_path": "package-lock.json",
+        "sha256": "0bd9c4e6879cb2aec21156e89c1f793998598f6c4271355aaa8f6fe8597694b3",
+        "bytes": 27075,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "61e2412fc5ddaea6a2424b5a77646209981f885f",
+          "path_hint": [
+            "package-lock.json"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "package.json",
+        "sha256": "b0a62d23479bdf4486c8273860cb959226cdab9af0712894d643289d4d0a80a5",
+        "bytes": 638,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "38ec13c66eca0fcd093f66c3b5db7831f87b455e",
+          "path_hint": [
+            "package.json"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "prepare-leaf.py",
+        "sha256": "8486b167975ab9e6739e30d34823f07b3b31de666dfeb6118400145c7668c261",
+        "bytes": 3007,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "3311594c344a75ea3abd01d1d5c13bdcdf404792",
+          "path_hint": [
+            "prepare-leaf.py"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "qa-browser.mjs",
+        "sha256": "3dd5cb8d1d54c9489fb9482f54a860dc5f64f5a0e961a0c677a048ca6ba1879d",
+        "bytes": 2204,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "09fb5611983db3ceb2e1d14d4c73a12d829d0916",
+          "path_hint": [
+            "qa-browser.mjs"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "qa-exploded.mjs",
+        "sha256": "62c62e69b92686f2618d1e1bac408a580572da6cd2c0ef28267aba3244fbfb11",
+        "bytes": 2537,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "b49789f5ee74cca91981509bee4a22f2dd4d5cd4",
+          "path_hint": [
+            "qa-exploded.mjs"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "qa-reflection.mjs",
+        "sha256": "88955819c36ce8103251936760a060466c1667d15bee3cd47343732a7aa4e5af",
+        "bytes": 1813,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "e636ad9f6a6e30321e430739e53cc931aaf2d273",
+          "path_hint": [
+            "qa-reflection.mjs"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "qa-viewer.mjs",
+        "sha256": "b840ccb553066e3e1376366c5127ff73a0917719a9f94e1c9de6bf82bf626279",
+        "bytes": 1301,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "695157d19df8394d2e7dad9fd72eccbebb5996a2",
+          "path_hint": [
+            "qa-viewer.mjs"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "repack-glb.py",
+        "sha256": "2f433dddb4c3a6b31015cb64652d7c0323bfee20204ecaed6c0ee1ab9ad9895f",
+        "bytes": 1962,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "6900021912398a82f9b72fc50c94660104bbd913",
+          "path_hint": [
+            "repack-glb.py"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "viewer.html",
+        "sha256": "d65ac66219597c6cfc6e0259378d570473f602f42121c5175bf6231cfccf7530",
+        "bytes": 1551,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "3025bedb3abb7b54fde0eda62b2d2514d026d923",
+          "path_hint": [
+            "projects/courtyard/viewer.html"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "qa/exploded-check.json",
+        "sha256": "9e67579ab58e4f0ef2c63549e607e9a7538609a858922f47eac59d38f681d59a",
+        "bytes": 4258,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v5/qa/exploded-check.json"
+        }
+      },
+      {
+        "relative_path": "qa/final-verification.json",
+        "sha256": "bc49ed3e5c081470ac760153d1d65a8f4bb051ec58d7b8aaafeb4124bcba8fa8",
+        "bytes": 2553,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v5/qa/final-verification.json"
+        }
+      },
+      {
+        "relative_path": "qa/glb-repack.json",
+        "sha256": "53f2bb0ebe605006cf83e7edd3f65415adbf85f722bd0e6f4ff8e5f86f23748b",
+        "bytes": 205,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v5/qa/glb-repack.json"
+        }
+      },
+      {
+        "relative_path": "qa/packed-glb-check.json",
+        "sha256": "eb7d573ade6053f44bc512482f4bb12b153764ae05a80d6a099f1bc5ecec2390",
+        "bytes": 835,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v5/qa/packed-glb-check.json"
+        }
+      },
+      {
+        "relative_path": "qa/v1-baseline.json",
+        "sha256": "6564742d99e9e78a568a53d4a417c81088e0466714cfb710b4bcbb68f30bcd13",
+        "bytes": 174,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "4a02c30827d1429a9df9f30deb17b2558b7db5f0",
+          "path_hint": [
+            "projects/courtyard/qa/v1-baseline.json"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "qa/v3-baseline.json",
+        "sha256": "154998e3ddd8b74f11a94b02b2e8a03823b2a5a56502ce09072457ef1ce58119",
+        "bytes": 256,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "f387b73fffe3a78e044c452dd083ff0e3e8e166b",
+          "path_hint": [
+            "projects/courtyard/qa/v3-baseline.json"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "qa/verify-packed.js",
+        "sha256": "d5293ab424155b02f4b01c533b0c20e78ecfdac49af4aa536ec44dd9b6542a6b",
+        "bytes": 787,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v5/qa/verify-packed.js"
+        }
+      },
+      {
+        "relative_path": "qa/sources/maple.html",
+        "sha256": "62ffeda137a1a8bebaa58c5164149c97dcc85d992ad71cde938d8229562dc0c8",
+        "bytes": 279477,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "4d0d4d010f378508183aebc1c1258d78b166a0ea",
+          "path_hint": [
+            "projects/shunde/assets/leaves/maple-license-evidence.html"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "assets/gsap.min.js",
+        "sha256": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280",
+        "bytes": 72779,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "fde57af06cc445f47ca2a6fc1232ec04666346d4",
+          "path_hint": [
+            "assets/gsap.min.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "assets/reference-front.jpg",
+        "sha256": "02b9bc427f7c82751a570641ae895cbcea0ae575ba57de437f0ed469f29f1e48",
+        "bytes": 241076,
+        "restore_from": {
+          "kind": "local_only_asset",
+          "path": "projects/courtyard/assets/reference-front.jpg"
+        }
+      },
+      {
+        "relative_path": "assets/reference-side.jpg",
+        "sha256": "f6d6de4a7d293ad095327bac7d1bb56ab79781647bfae5de1dfd10db366fdd32",
+        "bytes": 366896,
+        "restore_from": {
+          "kind": "local_only_asset",
+          "path": "projects/courtyard/assets/reference-side.jpg"
+        }
+      },
+      {
+        "relative_path": "assets/leaves/BaseColor.png",
+        "sha256": "ddc2cd7c86fdca731db12ca2f80f88faf9e7031c64658b39b641c3c805db5527",
+        "bytes": 1254799,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "1bf5300d82f47141df39c6a2f389412fc26ca5c9",
+          "path_hint": [
+            "assets/leaves/BaseColor.png"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "assets/leaves/Normal.png",
+        "sha256": "1e19423825982625d493567a0cb6cf7d593f27e84759d454c309475d5b20dc99",
+        "bytes": 1588795,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "1a47b2e5599157c5cbec7d3c6a556f91b1269dca",
+          "path_hint": [
+            "assets/leaves/Normal.png"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "assets/leaves/Roughness.png",
+        "sha256": "552ba70531542c94148858a8b08f2ea5c15d45ed4c7fa967cd2dc1fa6de3d7af",
+        "bytes": 494594,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "6af669bad2a15f0b51228fc4dcf54d6639d37e78",
+          "path_hint": [
+            "assets/leaves/Roughness.png"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "assets/leaves/SOURCE.json",
+        "sha256": "353d26ba0b231c397de6842254eb1e071ec501fa2939ec50a82e51ca76e38756",
+        "bytes": 1144,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "332448234a03f1f82d361431060621dc070d99c1",
+          "path_hint": [
+            "assets/leaves/SOURCE.json"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "assets/leaves/maple-color.png",
+        "sha256": "5b8c16d56f0f06065739b54fb6f1582939e47357f9608dc90f7e793890784e87",
+        "bytes": 1252168,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "6df78aa800f927aa08db6ae34274acf8d6158f83",
+          "path_hint": [
+            "assets/leaves/maple-color.png"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "assets/leaves/outline.json",
+        "sha256": "11dc4fdf3b5d747d98c3dad9ae9685ac52d3108658a782200cca8b044ee33aaa",
+        "bytes": 1655,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "02f65ed3250779d3ee77c32d82517bf3791f430c",
+          "path_hint": [
+            "assets/leaves/outline.json"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "segments/ending.html",
+        "sha256": "c8d8b53781c0b65d8b4a7cb9a0249e30a96a404680f6b2d80e82664b1362210b",
+        "bytes": 1564,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "95accdd1ab60ff2a4fc8dd7d567ed09b203457d1",
+          "path_hint": [
+            "projects/courtyard/segments/ending.html"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/camera.js",
+        "sha256": "c1fc30479a8e914d36d2ae333eaf6b2e1d0834621d119e41ca9be278a9611e03",
+        "bytes": 1084,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "aa580fc8ea7de28089b3b5be6927e7f665804a83",
+          "path_hint": [
+            "projects/courtyard/src/camera.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/camera.test.js",
+        "sha256": "f8d95c44a39be1d5f8a54e760e6ff340c9643b70341b58e589f5b4f964490ff5",
+        "bytes": 946,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "0a9a918d83d4a06bf140094232d18ac6dec9d1c0",
+          "path_hint": [
+            "projects/courtyard/src/camera.test.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/campus.js",
+        "sha256": "91a94e15c3a3e91e82ae68fdbd1494a7a2877937a6e849b062a54694521b3ab3",
+        "bytes": 8662,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "2632c5c085cf1bfca15022d2e10b8cea4dab41b5",
+          "path_hint": [
+            "projects/courtyard/src/campus.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/exploded-geometry.test.js",
+        "sha256": "297e45d4fd46c6b63b24c0970c988360acb68a7dbd920e2f7f646306db00ebd1",
+        "bytes": 14379,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "256082709231faa57fbba81529b4cadb6897b6c3",
+          "path_hint": [
+            "projects/courtyard/src/exploded-geometry.test.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/exploded.js",
+        "sha256": "adcb569d6e7c00fa6b06e4fbf31772e0b040ca72ec89e65bd8f36b32f1149236",
+        "bytes": 19689,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "0c2db3cb98e2a6230a1cc4fefcd1d9ad26c900f5",
+          "path_hint": [
+            "projects/courtyard/src/exploded.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/film-camera.js",
+        "sha256": "2e2c8650ab9a8c7530d76d9200c394dfebd068cca5252bdaa583cb229cbcd9b6",
+        "bytes": 234,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v5/src/film-camera.js"
+        }
+      },
+      {
+        "relative_path": "src/film-camera.test.js",
+        "sha256": "d729841e30258392faa1f238208eaf8b56c6142723ada805ae1fad89a326679d",
+        "bytes": 582,
+        "restore_from": {
+          "kind": "archive_file",
+          "path": "archive/courtyard/legacy/Courtyard3D-v5/src/film-camera.test.js"
+        }
+      },
+      {
+        "relative_path": "src/illumination.js",
+        "sha256": "5e6179285dde4eb83661d2cb30a917691c8e67670234e664c10310f78d7e1478",
+        "bytes": 1321,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "e26ba4690e448b9e51a1f4092410c50bc8728b1c",
+          "path_hint": [
+            "shared/illumination.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/leaves.js",
+        "sha256": "0a52c70ed2aa7a26da914373c090e7c11ce15b641c41067a684e99c185fede86",
+        "bytes": 1435,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "9c3463d6725d47085eb9bcc64c427c70ed908418",
+          "path_hint": [
+            "src/leaves.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/leaves.test.js",
+        "sha256": "021811561c548489572e45e0bf9c9941b3d1ac20b528bc950312c2879f86d158",
+        "bytes": 901,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "5047e864ee2efbb401bd5cc6a14e180f521af656",
+          "path_hint": [
+            "src/leaves.test.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/main.js",
+        "sha256": "04c938ad0f689a7eabae67cf2d449ced7a6a6a8c8b0418e95f2bbeafe25da4cb",
+        "bytes": 7333,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "0813f27b739121bf5afa6747ed3aa7b0fce1835c",
+          "path_hint": [
+            "src/main.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/model.js",
+        "sha256": "1cd978f5704ab2f1843658172bbd7e88f50bb9c9b968192311458b8d10ce7b82",
+        "bytes": 27061,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "ed655876036c08dffe88b3c21baf28165c88bef8",
+          "path_hint": [
+            "src/model.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/pools.js",
+        "sha256": "ecf102e9cda12dc05b06d00b756bdd2ce49dfc2e4c765504aa27eb4664411e43",
+        "bytes": 445,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "60250313df4515abceb7d798c5ef6aea3fdb781c",
+          "path_hint": [
+            "projects/courtyard/src/pools.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/reflection.test.js",
+        "sha256": "6c14148eb85cf10f4a2d46e709ae8359feef30490b01da8c25ce7ff9d2f31b9f",
+        "bytes": 888,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "a846008a3756b05150463d6e89bd147151fb6bfe",
+          "path_hint": [
+            "projects/courtyard/src/reflection.test.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/revision.test.js",
+        "sha256": "7b86a096c777b5a55ea486b31911ce3d558e8ef5f50b02054242532c345c13a0",
+        "bytes": 1178,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "237fa4433278af40a5f38794e99ae435605bf7c5",
+          "path_hint": [
+            "projects/courtyard/src/revision.test.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      },
+      {
+        "relative_path": "src/water.js",
+        "sha256": "e935d13e5be6165c2ed4ca9f69f7dcca91c24609017052877e3c04815ecccd4d",
+        "bytes": 3745,
+        "restore_from": {
+          "kind": "git_blob",
+          "repository": ".",
+          "oid": "2585a83e466052e11b80fc1eb424a7543d06c9ea",
+          "path_hint": [
+            "projects/courtyard/src/water.js"
+          ],
+          "available_in_head_history": true,
+          "available_in_origin_main_history": true
+        }
+      }
+    ]
+  }
+]

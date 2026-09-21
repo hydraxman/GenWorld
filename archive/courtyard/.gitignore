@@ -1,0 +1,4 @@
+# Keep only small frozen historical evidence and QA source.
+!legacy/**/qa/
+!legacy/**/qa/*.json
+!legacy/**/qa/*.js

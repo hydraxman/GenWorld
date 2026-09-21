@@ -1,0 +1,213 @@
+{
+  "errors": [],
+  "stats": {
+    "tiers": 3,
+    "sourceSections": [
+      "Building shell",
+      "Windows and facade joinery",
+      "Terrace balustrade"
+    ],
+    "sourceMeshes": 21,
+    "extractedTriangles": 14906,
+    "removedMassTriangles": 36,
+    "terraceLeafInstances": 300,
+    "stationaryShrubInstances": 11580,
+    "interiorPartitions": 15,
+    "interiorColumns": 20,
+    "offsets": {
+      "base": 0,
+      "main": 5.6,
+      "roof": 12.4
+    },
+    "heightBands": {
+      "base": [
+        0,
+        2.43
+      ],
+      "main": [
+        2.43,
+        9
+      ],
+      "wingRoof": 8.13,
+      "bayRoof": 6.94,
+      "mainRoof": 9
+    },
+    "inferredInterior": true,
+    "meshes": 59,
+    "triangles": 907098,
+    "assemblyHeight": 24.18
+  },
+  "states": [
+    {
+      "t": 36,
+      "state": {
+        "tiers": [
+          {
+            "name": "Exploded base",
+            "y": 0,
+            "visible": true
+          },
+          {
+            "name": "Exploded main",
+            "y": 0,
+            "visible": true
+          },
+          {
+            "name": "Exploded roof",
+            "y": 0,
+            "visible": true
+          }
+        ],
+        "active": true
+      }
+    },
+    {
+      "t": 37.2,
+      "state": {
+        "tiers": [
+          {
+            "name": "Exploded base",
+            "y": 0,
+            "visible": true
+          },
+          {
+            "name": "Exploded main",
+            "y": 0,
+            "visible": true
+          },
+          {
+            "name": "Exploded roof",
+            "y": 1.0045342779616544,
+            "visible": true
+          }
+        ],
+        "active": true
+      }
+    },
+    {
+      "t": 38.5,
+      "state": {
+        "tiers": [
+          {
+            "name": "Exploded base",
+            "y": 0,
+            "visible": true
+          },
+          {
+            "name": "Exploded main",
+            "y": 1.420236016736131,
+            "visible": true
+          },
+          {
+            "name": "Exploded roof",
+            "y": 11.84317762696289,
+            "visible": true
+          }
+        ],
+        "active": true
+      }
+    },
+    {
+      "t": 40.5,
+      "state": {
+        "tiers": [
+          {
+            "name": "Exploded base",
+            "y": 0,
+            "visible": true
+          },
+          {
+            "name": "Exploded main",
+            "y": 5.6,
+            "visible": true
+          },
+          {
+            "name": "Exploded roof",
+            "y": 12.4,
+            "visible": true
+          }
+        ],
+        "active": true
+      }
+    },
+    {
+      "t": 42,
+      "state": {
+        "tiers": [
+          {
+            "name": "Exploded base",
+            "y": 0,
+            "visible": true
+          },
+          {
+            "name": "Exploded main",
+            "y": 5.6,
+            "visible": true
+          },
+          {
+            "name": "Exploded roof",
+            "y": 12.4,
+            "visible": true
+          }
+        ],
+        "active": true
+      }
+    },
+    {
+      "t": 43.5,
+      "state": {
+        "tiers": [
+          {
+            "name": "Exploded base",
+            "y": 0,
+            "visible": true
+          },
+          {
+            "name": "Exploded main",
+            "y": 0.8701580511276847,
+            "visible": true
+          },
+          {
+            "name": "Exploded roof",
+            "y": 11.590110655073055,
+            "visible": true
+          }
+        ],
+        "active": true
+      }
+    },
+    {
+      "t": 45.5,
+      "state": {
+        "tiers": [
+          {
+            "name": "Exploded base",
+            "y": 0,
+            "visible": true
+          },
+          {
+            "name": "Exploded main",
+            "y": 0,
+            "visible": true
+          },
+          {
+            "name": "Exploded roof",
+            "y": 0,
+            "visible": true
+          }
+        ],
+        "active": true
+      }
+    }
+  ],
+  "building_closed_restored_identical": true,
+  "closure_comparison_crop": {
+    "x": 0,
+    "y": 0,
+    "width": 1920,
+    "height": 850,
+    "reason": "Exclude animated foreground water; full-frame difference was confined to x461..795 y860..1079"
+  },
+  "prefix_seek_restored_identical": true,
+  "open_seek_deterministic": true
+}

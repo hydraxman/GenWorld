@@ -1,7 +1,7 @@
 from pathlib import Path
 import subprocess,json,hashlib
 r=Path(__file__).resolve().parent
-prefix=r.parent/'Courtyard3D-v4/output/庭院建筑_V4_真实叶片版.mp4'
+prefix=r/'local-assets/courtyard/legacy-v4/庭院建筑_V4_真实叶片版.mp4'
 tail=r/'output/ending-master.mp4';delivery_tail=r/'output/ending-delivery.mp4'
 output=r/'output/庭院建筑_V6_正面近景分层版.mp4'
 def run(args):return subprocess.run(args,check=True,capture_output=True,text=True).stdout

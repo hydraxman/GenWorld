@@ -1,0 +1,45 @@
+{
+  "video": "output/庭院建筑_V2_砖红校园版.mp4",
+  "probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1920,
+        "height": 1080,
+        "r_frame_rate": "30/1",
+        "nb_read_frames": "1080"
+      }
+    ],
+    "format": {
+      "duration": "36.000000",
+      "size": "22656698"
+    }
+  },
+  "decoded_without_errors": true,
+  "camera_identical_to_v1": true,
+  "shot_frame_comparison": [
+    {
+      "frame": "final-01.png",
+      "mean_abs_rgb_error": 4.314486400462963
+    },
+    {
+      "frame": "final-02.png",
+      "mean_abs_rgb_error": 4.256399819958848
+    },
+    {
+      "frame": "final-03.png",
+      "mean_abs_rgb_error": 5.121357542438272
+    },
+    {
+      "frame": "final-04.png",
+      "mean_abs_rgb_error": 3.722884034207819
+    },
+    {
+      "frame": "final-05.png",
+      "mean_abs_rgb_error": 5.2148188335905346
+    }
+  ],
+  "sha256": "f1a30bcca93770c867cce0810ab60cb8d22e9f8928b2350bc4ac6f4282a2c830"
+}

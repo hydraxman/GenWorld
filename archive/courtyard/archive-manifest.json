@@ -1,0 +1,320 @@
+[
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D/MODEL_NOTES.md",
+    "sha256": "b8bd9e7e9816f2e4872cac808316c8829ac77576a1b7f3f3a95a3af9a4c43015",
+    "bytes": 8130,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D/README.md",
+    "sha256": "c152e3cdd3d434f33d2407374ff2ebda0882c18e19aab128932232aa85b6618f",
+    "bytes": 2669,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D/design.md",
+    "sha256": "9d33459b61193fab2aa1394332f371f1a63880f267f66b04aad366a2efdb8a0b",
+    "bytes": 1558,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D/index.html",
+    "sha256": "85070858df9e474952e7be136ed50f15cffa479aeba2169453e2eb40c6047762",
+    "bytes": 1067,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D/meta.json",
+    "sha256": "7033c2bdc165ecc3b02f4ea99931889bf2f47ab949b667a4e2c28e215ad18cca",
+    "bytes": 93,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D/package.json",
+    "sha256": "e110afb25169425ee2bcd3396735daca21c101adcb7e8af9f64eed2c821b1d98",
+    "bytes": 643,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D/qa-viewer.mjs",
+    "sha256": "2c2c1252331deb4634fc5441a8731ca8f157b2a773f03eaa367a88a8087beef4",
+    "bytes": 1287,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D/viewer.html",
+    "sha256": "fc2fc8da6decf8eb674a23afe3b319f18e1890966979cf8b7eb9bca752d55c67",
+    "bytes": 1417,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D/src/main.js",
+    "sha256": "1b89de15afb4f16f6f45ef39d3890c4072a82de82df1e572664515af14e117fc",
+    "bytes": 5602,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D/src/model.js",
+    "sha256": "55a3119f637901bac578f9e4ec4d10ec3bfc62be38acda8729eecdbc554da766",
+    "bytes": 26860,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v2/MODEL_NOTES.md",
+    "sha256": "090027020c0dc80cfd75efc4d5a1ca81414e5e82dcdda4efa8978f21661a18e4",
+    "bytes": 2434,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v2/README.md",
+    "sha256": "877dd00bcf47676c9a17ad1931de83506e48cda4ade903af9c7037e4708eb394",
+    "bytes": 1914,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v2/design.md",
+    "sha256": "41be1c7526f0847b449ee52f7178576ed3bada50971104f3ab97fc071ca1708f",
+    "bytes": 677,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v2/meta.json",
+    "sha256": "4c9d64dae070498237abbab66f9ec885335dfe5b3fdb084ea434ea1fe5cc64ff",
+    "bytes": 99,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v2/src/campus.js",
+    "sha256": "0bbcbbed408ad4d71806e6d22e7c544073ec15bc493c277630523d113a507847",
+    "bytes": 8831,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v2/src/main.js",
+    "sha256": "18ce0e891d396cd3d748e125d5c1401932ccedc21ff7af4f24d3cc28b6c13be2",
+    "bytes": 5626,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v2/src/model.js",
+    "sha256": "434526e302977f526984b24db6f02509ddafdb6b8b4597ec52ea2aa543283fa3",
+    "bytes": 26816,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v2/src/water.js",
+    "sha256": "80c0634cbddcca0370be8d6f88fb868341d9e5318849242dc823a1cb9a6f30b6",
+    "bytes": 1642,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v3/MODEL_NOTES.md",
+    "sha256": "a7b275a28538e8dc051efa1559a3be9e9399e962698aebdcc8b0adedea8fe852",
+    "bytes": 2027,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v3/README.md",
+    "sha256": "3ed1d98e239c80526546f81c59bdba81447f5adf34ae0e40c9207fabc432bd4b",
+    "bytes": 2798,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v3/design.md",
+    "sha256": "2d6c09e61a7804a728fb56460b441aa41b087eccb86af47289a87df30e2100ba",
+    "bytes": 648,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v3/meta.json",
+    "sha256": "22c99984ab1d125bd1178c93adc5537a16983b736bebecc744b92d5df8f07637",
+    "bytes": 99,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v3/src/campus.js",
+    "sha256": "5e5794998865494a67abc4f780a4d6900410ef6eeb65c3bb4545e60cdba11d87",
+    "bytes": 8831,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v3/src/main.js",
+    "sha256": "168703d0c34a9211a239eff59a54b2ce7e35fb5cf778c2f7b95f94b7dbe47567",
+    "bytes": 6354,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v3/src/model.js",
+    "sha256": "37b1071bd4474badd6cdb843b017fd23f7fabcdacb37e28160b25d083f1933ba",
+    "bytes": 27217,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v4/MODEL_NOTES.md",
+    "sha256": "fa72ae7881a6e1d5106231c64fb4da3e2f32998df1faaf8114ff62fc0788ed5a",
+    "bytes": 923,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v4/README.md",
+    "sha256": "6c16ec6ecb2c9e1488eb4207fdb1b1fc3bf6d87002f477be68508412461876ff",
+    "bytes": 2110,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v4/meta.json",
+    "sha256": "6e8698f0f149cd401a5055ce9ac84fa80a43834fffe433dddf38bc53709cbc01",
+    "bytes": 99,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v4/repack-glb.py",
+    "sha256": "32b46a494e615ff28043caeb91218581531b0ab856290d097322642a9539c55d",
+    "bytes": 1962,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v4/qa/verify-packed.js",
+    "sha256": "373abf00124f589e3b1153a00116c6817a8273ea63c172ce8ce8e2a65464dd8c",
+    "bytes": 640,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v4/src/main.js",
+    "sha256": "29c26852627ba971f493b8b638e9f49ed7ca6f67342a451da3e3fb364fa0cc95",
+    "bytes": 6432,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v5/README.md",
+    "sha256": "027c863a22504eb388fc268f8394177642b2b8b8e8d0b5220e81bb26ee01eb94",
+    "bytes": 1999,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v5/design.md",
+    "sha256": "4954480c7ad457360908f81b1ee79da6594fa6589a01a90587aed10022dfe88a",
+    "bytes": 1244,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v5/finalize-video.py",
+    "sha256": "4a3cb4bb1dd87b01bc7b57e8e6f156558d786cbf99c4c486302f9ad3044ba410",
+    "bytes": 2247,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v5/meta.json",
+    "sha256": "e476718595cb2905b838e6898a023224f44baffef0aa2329e9e010b82e089e13",
+    "bytes": 99,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v5/package-delivery.py",
+    "sha256": "45403218abdb47884407e95dea7a3aac462ec52020829d908afb3562cbad4960",
+    "bytes": 1694,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v5/qa/verify-packed.js",
+    "sha256": "d5293ab424155b02f4b01c533b0c20e78ecfdac49af4aa536ec44dd9b6542a6b",
+    "bytes": 787,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v5/src/film-camera.js",
+    "sha256": "2e2c8650ab9a8c7530d76d9200c394dfebd068cca5252bdaa583cb229cbcd9b6",
+    "bytes": 234,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v5/src/film-camera.test.js",
+    "sha256": "d729841e30258392faa1f238208eaf8b56c6142723ada805ae1fad89a326679d",
+    "bytes": 582,
+    "kind": "historical_core_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D/qa/final-verification.json",
+    "sha256": "7a418f7c3de89a5d0225f5870305377bd567874445a47c804bdb3613083a0eed",
+    "bytes": 973,
+    "kind": "historical_evidence_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v2/qa/final-verification.json",
+    "sha256": "f515ad8aaa6e61e78ae73c5800cb44c2788b2defaed93397cdcb4801695ddace",
+    "bytes": 1014,
+    "kind": "historical_evidence_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v3/qa/final-verification.json",
+    "sha256": "5f9ac620b95b3cec1f4e40c1d76d58adbe35524966828c4bdbfd1d1020b6a2df",
+    "bytes": 1402,
+    "kind": "historical_evidence_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v4/qa/final-verification.json",
+    "sha256": "7e3e9a6b80b7d3aacfcb129bb6a85991083c674d184d8ca299e3ffb88fa153e3",
+    "bytes": 582,
+    "kind": "historical_evidence_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v4/qa/glb-repack.json",
+    "sha256": "a9c9f2b71f58b914100f43e68a80a6042c9369309a75ffe23e01d5b122807f33",
+    "bytes": 205,
+    "kind": "historical_evidence_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v4/qa/packed-glb-check.json",
+    "sha256": "36b46dbe916684cef773a0909f348defeb5dd7b383ff44c787636f08c9332d8b",
+    "bytes": 727,
+    "kind": "historical_evidence_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v5/qa/exploded-check.json",
+    "sha256": "9e67579ab58e4f0ef2c63549e607e9a7538609a858922f47eac59d38f681d59a",
+    "bytes": 4258,
+    "kind": "historical_evidence_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v5/qa/final-verification.json",
+    "sha256": "bc49ed3e5c081470ac760153d1d65a8f4bb051ec58d7b8aaafeb4124bcba8fa8",
+    "bytes": 2553,
+    "kind": "historical_evidence_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v5/qa/glb-repack.json",
+    "sha256": "53f2bb0ebe605006cf83e7edd3f65415adbf85f722bd0e6f4ff8e5f86f23748b",
+    "bytes": 205,
+    "kind": "historical_evidence_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v5/qa/packed-glb-check.json",
+    "sha256": "eb7d573ade6053f44bc512482f4bb12b153764ae05a80d6a099f1bc5ecec2390",
+    "bytes": 835,
+    "kind": "historical_evidence_copy_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D/licenses/GSAP.txt",
+    "sha256": "3c6d609d85dacf8e2862a36e0b397fabbcd6eafd7cad1903d1cf959de4b2356b",
+    "bytes": 150,
+    "kind": "license_extract_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v2/licenses/GSAP.txt",
+    "sha256": "8cd8f998b9dc53fa9a51fac8d940959f6d3dc353c2b95cfb0d81f5be5724e3af",
+    "bytes": 138,
+    "kind": "license_extract_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v4/licenses/GSAP.txt",
+    "sha256": "68f563335a60c2c466731f0000d68bcc0e8146495d5a8868c10f7590ae15b77b",
+    "bytes": 122,
+    "kind": "license_extract_manifest"
+  },
+  {
+    "path": "archive/courtyard/legacy/Courtyard3D-v5/licenses/GSAP.txt",
+    "sha256": "b2c64dcd0b6e6f7df5251b7beed72fec2877a54ca21f707b80e6ed8df2a3dbf0",
+    "bytes": 114,
+    "kind": "license_extract_manifest"
+  }
+]

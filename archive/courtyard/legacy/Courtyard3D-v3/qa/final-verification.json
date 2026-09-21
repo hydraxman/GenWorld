@@ -1,0 +1,60 @@
+{
+  "video": "output/庭院建筑_V3_光影倒影版.mp4",
+  "probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1920,
+        "height": 1080,
+        "r_frame_rate": "30/1",
+        "nb_read_frames": "1080"
+      }
+    ],
+    "format": {
+      "duration": "36.000000",
+      "size": "22825090"
+    }
+  },
+  "decoded_without_errors": true,
+  "camera_identical_to_v1": true,
+  "shot_frame_comparison": [
+    {
+      "frame": "final-01.png",
+      "mean_abs_rgb_error": 3.842552404835391
+    },
+    {
+      "frame": "final-02.png",
+      "mean_abs_rgb_error": 4.686440168467079
+    },
+    {
+      "frame": "final-03.png",
+      "mean_abs_rgb_error": 4.9119643775720165
+    },
+    {
+      "frame": "final-04.png",
+      "mean_abs_rgb_error": 5.595211869855967
+    },
+    {
+      "frame": "final-05.png",
+      "mean_abs_rgb_error": 3.7281004050925923
+    },
+    {
+      "frame": "final-06.png",
+      "mean_abs_rgb_error": 5.480793627829218
+    }
+  ],
+  "sha256": "fad7d01b892398c716454a11f16f7a540e1206e675c762af8c706ca5bb4a96bd",
+  "reflection_check": {
+    "actual_reflection_passes": [
+      2,
+      2,
+      2
+    ],
+    "on_off_different": true,
+    "toggle_roundtrip_identical": true,
+    "fresh_page_deterministic": true,
+    "first_frame_sha256": "1dc69f3491c81d3b42191edf767f4d43c616b22431d7c24a3d023294d9cc3035"
+  }
+}

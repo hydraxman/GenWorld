@@ -1,3 +1,6 @@
+# Local retained assets and historical execution evidence
+/local-assets/
+
 # Dependencies and generated browser bundles
 node_modules
 **/assets/scene.js

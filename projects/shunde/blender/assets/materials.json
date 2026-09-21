@@ -1,0 +1,36 @@
+{
+  "stone": {
+    "color": "derived/granite_tile_03/granite_tile_03_dark_brown_diff_2k.png",
+    "roughness": "textures/granite_tile_03/granite_tile_03_rough_2k.jpg",
+    "normal": "textures/granite_tile_03/granite_tile_03_nor_gl_2k.png",
+    "asset_id": "granite_tile_03",
+    "note": "已单独派生深棕配色匹配原场景RGB[63,48,40]；原始图片未改。roughness与OpenGL normal均为Poly Haven真实原图。源板缝仍在，须控制UV不改变门框构图。",
+    "color_original": "textures/granite_tile_03/granite_tile_03_diff_2k.jpg"
+  },
+  "concrete": {
+    "color": "textures/white_plaster_02/white_plaster_02_diff_2k.jpg",
+    "roughness": "textures/white_plaster_02/white_plaster_02_rough_2k.jpg",
+    "normal": "textures/white_plaster_02/white_plaster_02_nor_gl_2k.png",
+    "asset_id": "white_plaster_02",
+    "note": "仅作细微表面层；保留浅灰方砖RGB[181,179,169]和0.105工作尺度正交方砖缝。灰粉窗下板不可统一改白。"
+  },
+  "paving": {
+    "color": "textures/granite_tile/granite_tile_diff_2k.jpg",
+    "roughness": "textures/granite_tile/granite_tile_rough_2k.jpg",
+    "normal": "textures/granite_tile/granite_tile_nor_gl_2k.png",
+    "asset_id": "granite_tile",
+    "note": "灰色前庭与步道石铺装，保留现有深色分隔条几何。"
+  },
+  "grass": {
+    "color": "textures/leafy_grass/leafy_grass_diff_2k.jpg",
+    "roughness": "textures/leafy_grass/leafy_grass_rough_2k.jpg",
+    "normal": "textures/leafy_grass/leafy_grass_nor_gl_2k.png",
+    "asset_id": "leafy_grass",
+    "note": "真实草叶与少量枯叶地表；保留原低饱和草坪色调[84,99,65]，不要将纹理放大为巨型草叶。"
+  },
+  "hdri": {
+    "file": "hdri/noon_grass_2k.hdr",
+    "asset_id": "noon_grass",
+    "note": "2048x1024 scene-linear Radiance HDR。晴天正午草地；只作照明与反射，不声称是清华校园实拍。"
+  }
+}

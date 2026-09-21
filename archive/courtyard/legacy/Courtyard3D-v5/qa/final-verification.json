@@ -1,0 +1,61 @@
+{
+  "file": "/Users/bryannathan/Desktop/Courtyard3D-v5/output/庭院建筑_V5_分层展开版.mp4",
+  "probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1920,
+        "height": 1080,
+        "r_frame_rate": "30/1",
+        "nb_read_frames": "1380"
+      }
+    ],
+    "format": {
+      "duration": "46.000000",
+      "size": "25375782"
+    }
+  },
+  "first_1080_decoded_frames_identical_to_V4": true,
+  "added_frames": 300,
+  "complete_decode_passed": true,
+  "sha256": "04f0d592be8a5256b2fcbe2103086c0b74dd3a71b0bfed74466c7f611d71dd56",
+  "preview_vs_encoded": [
+    {
+      "time": 36,
+      "preview_vs_encoded_mean_error": 3.693020190329218
+    },
+    {
+      "time": 38.5,
+      "preview_vs_encoded_mean_error": 3.8486959876543207
+    },
+    {
+      "time": 40.5,
+      "preview_vs_encoded_mean_error": 3.6858000578703702
+    },
+    {
+      "time": 45.5,
+      "preview_vs_encoded_mean_error": 3.6432314171810702
+    }
+  ],
+  "source_matches_render_bundle": true,
+  "source_sha256": {
+    "src/film-camera.test.js": "d729841e30258392faa1f238208eaf8b56c6142723ada805ae1fad89a326679d",
+    "src/water.js": "e935d13e5be6165c2ed4ca9f69f7dcca91c24609017052877e3c04815ecccd4d",
+    "src/pools.js": "ecf102e9cda12dc05b06d00b756bdd2ce49dfc2e4c765504aa27eb4664411e43",
+    "src/exploded.js": "adcb569d6e7c00fa6b06e4fbf31772e0b040ca72ec89e65bd8f36b32f1149236",
+    "src/leaves.test.js": "021811561c548489572e45e0bf9c9941b3d1ac20b528bc950312c2879f86d158",
+    "src/reflection.test.js": "6c14148eb85cf10f4a2d46e709ae8359feef30490b01da8c25ce7ff9d2f31b9f",
+    "src/main.js": "04c938ad0f689a7eabae67cf2d449ced7a6a6a8c8b0418e95f2bbeafe25da4cb",
+    "src/exploded-geometry.test.js": "297e45d4fd46c6b63b24c0970c988360acb68a7dbd920e2f7f646306db00ebd1",
+    "src/campus.js": "91a94e15c3a3e91e82ae68fdbd1494a7a2877937a6e849b062a54694521b3ab3",
+    "src/illumination.js": "5e6179285dde4eb83661d2cb30a917691c8e67670234e664c10310f78d7e1478",
+    "src/revision.test.js": "7b86a096c777b5a55ea486b31911ce3d558e8ef5f50b02054242532c345c13a0",
+    "src/camera.js": "c1fc30479a8e914d36d2ae333eaf6b2e1d0834621d119e41ca9be278a9611e03",
+    "src/film-camera.js": "2e2c8650ab9a8c7530d76d9200c394dfebd068cca5252bdaa583cb229cbcd9b6",
+    "src/model.js": "1cd978f5704ab2f1843658172bbd7e88f50bb9c9b968192311458b8d10ce7b82",
+    "src/leaves.js": "0a52c70ed2aa7a26da914373c090e7c11ce15b641c41067a684e99c185fede86",
+    "src/camera.test.js": "f8d95c44a39be1d5f8a54e760e6ff340c9643b70341b58e589f5b4f964490ff5"
+  }
+}

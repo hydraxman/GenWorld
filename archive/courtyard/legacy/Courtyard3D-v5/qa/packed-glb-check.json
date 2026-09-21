@@ -1,0 +1,32 @@
+{
+  "meshes": 134,
+  "tiers": [
+    {
+      "name": "Exploded_base",
+      "y": 0
+    },
+    {
+      "name": "Exploded_main",
+      "y": 0
+    },
+    {
+      "name": "Exploded_roof",
+      "y": 0
+    }
+  ],
+  "interior": [
+    "Courtyard_paving_and_stairs",
+    "Courtyard_paving_and_stairs_—_Earth_and_mulch",
+    "Courtyard_paving_and_stairs_—_Gray_rectangular_stone_paving",
+    "Courtyard_paving_and_stairs_—_Speckled_silver_granite",
+    "Courtyard_paving_and_stairs_—_Light_dressed_granite_coping",
+    "Courtyard_paving_and_stairs_—_Dry_dark_basin_interior",
+    "Courtyard_paving_and_stairs_—_Red_brown_pergola_brick",
+    "Simple_interior_partitions",
+    "Basement_stair_flight",
+    "Main_floor_slab_with_stair_opening",
+    "Simple_interior_partitions_1",
+    "Stairwell_guard_rails"
+  ],
+  "leafMaterials": 6
+}

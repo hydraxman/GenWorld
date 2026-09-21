@@ -1,0 +1,35 @@
+{
+  "meshes": 97,
+  "leaves": [
+    {
+      "name": "Planters_and_low_planting_—_CC0_photographed_green_maple_leaves",
+      "vertices": 2160,
+      "instances": 1,
+      "alphaTest": 0.45
+    },
+    {
+      "name": "Individually_modeled_tree_leaves",
+      "vertices": 77,
+      "instances": 94160,
+      "alphaTest": 0.45
+    },
+    {
+      "name": "Pergola_climbing_vine_leaves",
+      "vertices": 77,
+      "instances": 8255,
+      "alphaTest": 0.45
+    },
+    {
+      "name": "Garden_shrub_leaves",
+      "vertices": 77,
+      "instances": 11880,
+      "alphaTest": 0.45
+    },
+    {
+      "name": "Campus_tree_and_shrub_leaf_clusters",
+      "vertices": 77,
+      "instances": 34440,
+      "alphaTest": 0.45
+    }
+  ]
+}

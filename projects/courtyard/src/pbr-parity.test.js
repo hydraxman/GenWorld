@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 import * as THREE from 'three';
-const source=new URL('file:///Users/bryannathan/Desktop/Courtyard3D-v6/src/');
+// Repository V6 baseline; its input hashes are pinned in shared-parity.test.js.
+const source=new URL('../../../src/',import.meta.url);
 const shared=new URL('../../../shared/',import.meta.url);
 // Canvas is an IO boundary here; deterministic geometry/rand order is real.
 const ctx={fillRect(){},strokeRect(){},beginPath(){},moveTo(){},lineTo(){},stroke(){},putImageData(){},getImageData(x,y,w,h){return {data:new Uint8ClampedArray(w*h*4)};},createImageData(w,h){return {data:new Uint8ClampedArray(w*h*4)};}};

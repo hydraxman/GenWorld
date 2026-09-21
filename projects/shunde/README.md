@@ -4,6 +4,10 @@
 
 **范围说明：** 地图源是伟伦楼与舜德楼的组合轮廓，不是单栋舜德楼的测绘数据。两栋楼分界、门洞精确偏移、未见立面和楼高仍有推定部分。
 
+## 已保留的 Blender 快照
+
+[Blender 脚本与可编辑工程](blender/README.md) 来自旧版 `2f18075` 实心楔形模型，包含46秒原相机、CC0扫描PBR、Cycles玻璃/照明和15秒环绕工程。冻结源数据、贴图、`.blend` 与成片保留在本地并被 Git 忽略；脚本和清单进入 Git。它不是下方最新庭院几何的 Blender 重建版，二者不可混称。
+
 ## 安装与运行
 
 需要 Node.js 22+、Python 3、Pillow、FFmpeg，以及支持 WebGL2 的本地 Chrome/Chromium。
