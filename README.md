@@ -1,6 +1,10 @@
 # GenWorld 工作区
 
+唯一日常工作目录：`~/Desktop/GitHub/GenWorld`，远端：`hydraxman/GenWorld`，主分支：`main`。各子项目直接在本仓库内更新；历史版本使用 Git，不再复制 `Courtyard3D-vN` 或长期保留任务 worktree。
+
 ## 项目入口
+
+- [开悟 Logo 特效](kaiwu-logo/README.md)：五版最新效果及历史效果源码、必要素材和离线播放器。
 
 - [相机精细模型 V3 / xiaoxiao2](projects/canon5d/README.md)：已交付45秒成片、Blender工程、核心参数、代码、建模来源/许可和相关skills。
 - [盘锦道路锚点地图导览](projects/panjin-map-tour/README.md)：MapLibre＋OSRM路线、道路入口锚点、大号编号、Azure SSML讲解、确定性相机和完整QA流程。
