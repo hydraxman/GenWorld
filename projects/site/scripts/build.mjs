@@ -31,6 +31,14 @@ export async function buildSite() {
     await writeFile(path.join(output, file), html);
   }
   for (const file of ['site.css', 'credits.html']) await copy(path.join(site, file), path.join(output, file));
+  const splaytree = await readFile(path.join(repository, 'node_modules', 'splaytree', 'Readme.md'), 'utf8');
+  const notice = splaytree.indexOf('The MIT License (MIT)');
+  if (notice < 0) throw new Error('Missing splaytree license notice');
+  await writeFile(path.join(output, 'LICENSE-geometry.txt'), [
+    'polygon-clipping\n' + await readFile(path.join(repository, 'node_modules', 'polygon-clipping', 'LICENSE.md'), 'utf8'),
+    'splaytree\n' + splaytree.slice(notice),
+    'robust-predicates\n' + await readFile(path.join(repository, 'node_modules', 'robust-predicates', 'LICENSE'), 'utf8'),
+  ].join('\n\n'));
   for (const [source, destination] of [
     ['LICENSE', 'LICENSE'], ['node_modules/three/LICENSE', 'LICENSE-three.txt'],
     ['projects/tsinghua-campus/index.html', 'scenes/campus/index.html'],
@@ -58,8 +66,9 @@ export async function buildSite() {
       bundle: true, minify: true, format: 'iife', target: 'chrome120',
       define: { __PHOTO_SITE_COUNT__: '0' },
       legalComments: 'inline',
-      plugins: [{ name: 'single-three-runtime', setup(context) {
-        context.onResolve({ filter: /^three(?:\/|$)/ }, args => ({ path: fileURLToPath(import.meta.resolve(args.path)) }));
+      plugins: [{ name: 'published-runtime-dependencies', setup(context) {
+        context.onResolve({ filter: /^(?:three(?:\/|$)|polygon-clipping$)/ }, args =>
+          ({ path: fileURLToPath(import.meta.resolve(args.path)) }));
       } }],
     });
   }

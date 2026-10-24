@@ -13,7 +13,7 @@ test('publishes an exact allowlist, with no research media, private files or sou
     .filter(entry => entry.isFile())
     .map(entry => path.relative(output, path.join(entry.parentPath, entry.name)).split(path.sep).join('/')).sort();
   const expected = [
-    '.nojekyll', 'index.html', 'scene.html', 'credits.html', 'site.css', 'preview.js', 'LICENSE', 'LICENSE-three.txt',
+    '.nojekyll', 'index.html', 'scene.html', 'credits.html', 'site.css', 'preview.js', 'LICENSE', 'LICENSE-three.txt', 'LICENSE-geometry.txt',
     ...['.nojekyll', 'index.html', 'styles.css', 'DESIGN.md', 'LICENSE', 'LICENSE-three.txt', 'assets/scene.js',
       'assets/models/SOURCES.md', 'assets/models/kenney-assistant/character.glb',
       'assets/models/kenney-assistant/Textures/colormap.png', 'assets/models/kenney-fountain/pavement-fountain.glb',
@@ -60,6 +60,9 @@ test('all local links and scripts in published HTML resolve', async () => {
 test('retains third-party attribution and downloadable map databases', async () => {
   assert.match(await read('LICENSE'), /MIT License/);
   assert.match(await read('LICENSE-three.txt'), /Copyright/);
+  assert.match(await read('LICENSE-geometry.txt'), /Mike Fogel/);
+  assert.match(await read('LICENSE-geometry.txt'), /Alexander Milevski/);
+  assert.match(await read('LICENSE-geometry.txt'), /public domain/);
   assert.match(await read('scenes/campus/LICENSE-font.txt'), /SIL OPEN FONT LICENSE/);
   assert.match(await read('scenes/knowledge/assets/models/SOURCES.md'), /CC0/);
   assert.equal(JSON.parse(await read('scenes/courtyard/assets/leaves/SOURCE.json')).license, 'CC0');
