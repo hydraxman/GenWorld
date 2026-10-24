@@ -1,0 +1,30 @@
+{
+  "stops": 10,
+  "days": 2,
+  "distance_km": 142.5,
+  "drive_minutes": 162,
+  "route_points": 658,
+  "max_poi_to_road_anchor_m": 249.0,
+  "marker_to_route_m": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "max_marker_to_route_m": 0.0,
+  "required_names": {
+    "红海滩": true,
+    "辽河碑林": true,
+    "黑风关": true,
+    "田庄台": true,
+    "博物馆": true
+  },
+  "errors": [],
+  "pass": true
+}

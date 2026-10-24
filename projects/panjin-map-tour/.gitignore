@@ -1,0 +1,16 @@
+# Local secrets and generated media
+.env
+public/audio/
+audio-work/raw/
+audio-work/wav/
+audio-work/concat.txt
+audio-work/joined.wav
+audio-work/normalized.wav
+frames/
+output/
+qa/
+
+# Runtime caches
+__pycache__/
+*.pyc
+.DS_Store

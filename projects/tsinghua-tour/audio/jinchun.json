@@ -1,0 +1,430 @@
+{
+  "id": "jinchun",
+  "name": "近春园",
+  "style": "gentle",
+  "rate": "-2%",
+  "text": "来到近春园荷塘周边，眼前的临水长廊、树影和小岛，很适合放慢脚步。这里承载着人们对荷塘月色的文学想象。咱们沿外围看看水景，歇一歇，再向北边的老建筑走去。",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "ssml_sha256": "01dc73cee0e21e11792c3cb51d27da4222630117d2c4be6c653ac5cc9e86e5d7",
+  "duration_seconds": 16.7954166,
+  "sha256": "262978a9792857e53f9b50e37bf0900118be33e2f8c83ea517f73e8ef40120b1",
+  "boundaries": [
+    {
+      "audioOffset": 510200,
+      "duration": 3316250,
+      "text": "来到",
+      "textOffset": 241,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 4081660,
+      "duration": 1658120,
+      "text": "近",
+      "textOffset": 243,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 5739790,
+      "duration": 3826450,
+      "text": "春园",
+      "textOffset": 244,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 9821450,
+      "duration": 3188750,
+      "text": "荷塘",
+      "textOffset": 246,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 13137700,
+      "duration": 4591870,
+      "text": "周边",
+      "textOffset": 248,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 18750000,
+      "duration": 2678540,
+      "text": "，",
+      "textOffset": 250,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 21428540,
+      "duration": 3571450,
+      "text": "眼前",
+      "textOffset": 251,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 25000000,
+      "duration": 892910,
+      "text": "的",
+      "textOffset": 253,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 26147910,
+      "duration": 1403120,
+      "text": "临",
+      "textOffset": 254,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 27551040,
+      "duration": 1658120,
+      "text": "水",
+      "textOffset": 255,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 29336660,
+      "duration": 5612290,
+      "text": "长廊",
+      "textOffset": 256,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 35969370,
+      "duration": 1147910,
+      "text": "、",
+      "textOffset": 258,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 37117290,
+      "duration": 1913330,
+      "text": "树",
+      "textOffset": 259,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 39030620,
+      "duration": 1530620,
+      "text": "影",
+      "textOffset": 260,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 40816250,
+      "duration": 1147910,
+      "text": "和",
+      "textOffset": 261,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 42091870,
+      "duration": 2295830,
+      "text": "小",
+      "textOffset": 262,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 44387700,
+      "duration": 2551040,
+      "text": "岛",
+      "textOffset": 263,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 47959160,
+      "duration": 2168330,
+      "text": "，",
+      "textOffset": 264,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 50127500,
+      "duration": 1913330,
+      "text": "很",
+      "textOffset": 265,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 52040830,
+      "duration": 3443950,
+      "text": "适合",
+      "textOffset": 266,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 55739790,
+      "duration": 3188750,
+      "text": "放慢",
+      "textOffset": 268,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 58928540,
+      "duration": 4591870,
+      "text": "脚步",
+      "textOffset": 270,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 63520410,
+      "duration": 1147910,
+      "text": "。",
+      "textOffset": 272,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 72760200,
+      "duration": 2933750,
+      "text": "这里",
+      "textOffset": 294,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 75821450,
+      "duration": 3443750,
+      "text": "承载",
+      "textOffset": 296,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 79265200,
+      "duration": 892910,
+      "text": "着",
+      "textOffset": 298,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 80285620,
+      "duration": 2295830,
+      "text": "人们",
+      "textOffset": 299,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 82581660,
+      "duration": 2933750,
+      "text": "对",
+      "textOffset": 301,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 86535620,
+      "duration": 7653120,
+      "text": "荷塘月色",
+      "textOffset": 302,
+      "wordLength": 4,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 94188750,
+      "duration": 892910,
+      "text": "的",
+      "textOffset": 306,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 95336660,
+      "duration": 3188750,
+      "text": "文学",
+      "textOffset": 307,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 98653120,
+      "duration": 5357080,
+      "text": "想象",
+      "textOffset": 309,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 104137700,
+      "duration": 1147910,
+      "text": "。",
+      "textOffset": 311,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 113377500,
+      "duration": 2551040,
+      "text": "咱们",
+      "textOffset": 333,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 116056040,
+      "duration": 1530620,
+      "text": "沿",
+      "textOffset": 335,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 117586660,
+      "duration": 2933750,
+      "text": "外围",
+      "textOffset": 336,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 120775410,
+      "duration": 3061250,
+      "text": "看看",
+      "textOffset": 338,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 123964370,
+      "duration": 4719370,
+      "text": "水景",
+      "textOffset": 340,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 129704160,
+      "duration": 2168330,
+      "text": "，",
+      "textOffset": 342,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 131872500,
+      "duration": 2295830,
+      "text": "歇",
+      "textOffset": 343,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 134168330,
+      "duration": 1275410,
+      "text": "一",
+      "textOffset": 344,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 135443950,
+      "duration": 2806040,
+      "text": "歇",
+      "textOffset": 345,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 139270410,
+      "duration": 2423540,
+      "text": "，",
+      "textOffset": 346,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 141693950,
+      "duration": 1530620,
+      "text": "再",
+      "textOffset": 347,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 143224580,
+      "duration": 1658120,
+      "text": "向",
+      "textOffset": 348,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 145137700,
+      "duration": 2933750,
+      "text": "北边",
+      "textOffset": 349,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 148071450,
+      "duration": 765200,
+      "text": "的",
+      "textOffset": 351,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 148964370,
+      "duration": 1658120,
+      "text": "老",
+      "textOffset": 352,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 150622500,
+      "duration": 3443950,
+      "text": "建筑",
+      "textOffset": 353,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 154193950,
+      "duration": 2168330,
+      "text": "走",
+      "textOffset": 355,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 156362290,
+      "duration": 2806040,
+      "text": "去",
+      "textOffset": 356,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 159168330,
+      "duration": 1147910,
+      "text": "。",
+      "textOffset": 357,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    }
+  ],
+  "file": "audio/jinchun.wav"
+}

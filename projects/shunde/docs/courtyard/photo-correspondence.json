@@ -1,0 +1,21 @@
+{
+  "courtyard_photo": {
+    "reference_id": "sohu_old_2",
+    "source_page": "https://www.sohu.com/a/462907673_641792",
+    "image_url": "https://p5.itc.cn/q_70/images03/20210425/5aa805cd596b4f3ca72eaff3450fb2dd.jpeg",
+    "sha256": "117f7e1c42e14852089bb6bd405c23364e6689b5b3742baa90f7c29c75bce53d",
+    "license": "No open redistribution license found. Image excluded from repository and film textures.",
+    "correspondence": "Camera inside courtyard, south or southeast of circle, facing roughly north or northwest; curved inner facade centered, oblique glazed wing to photo-left. Qualitative pose only."
+  },
+  "front_photo": {
+    "reference_id": "user_front",
+    "sha256": "556bf16ca4b2f154d47c2b120e9fda4ca91e3793f501c84f63282e953442f4e0",
+    "source": "User supplied; photo excluded from repository",
+    "orientation": "Exterior north-facing entrance; precise doorway offset estimated"
+  },
+  "user_approval": {
+    "date": "2026-09-12",
+    "scope": "Use approved spatial diagrams and photograph correspondence to rebuild projects/shunde and deliver a video",
+    "not_promoted": "No claim of surveyed dimensions or confirmed Weilun/Shunde boundary"
+  }
+}

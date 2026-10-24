@@ -1,0 +1,13 @@
+{
+  "name": "tsinghua-mem-effect-02",
+  "private": true,
+  "scripts": {
+    "build": "python3 scripts/build.py",
+    "check": "hyperframes check",
+    "render": "hyperframes render --quality high --output deliverables/Tsinghua-MEM-02-12s.mp4"
+  },
+  "devDependencies": {
+    "hyperframes": "0.8.38",
+    "esbuild": "0.25.12"
+  }
+}

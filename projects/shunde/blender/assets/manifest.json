@@ -1,0 +1,453 @@
+{
+  "schema_version": 1,
+  "acquired_at_utc": "2026-09-08T10:06:30.939473+00:00",
+  "relative_path_base": "blender/assets/",
+  "scope": "舜德楼当前模型，3套建筑材质、1套可选草地与1个HDRI；不是实际建材或地理环境鉴定",
+  "assets": [
+    {
+      "asset_id": "white_plaster_02",
+      "name": "White Plaster 02",
+      "asset_page_url": "https://polyhaven.com/a/white_plaster_02",
+      "license": "CC0-1.0",
+      "license_url": "https://polyhaven.com/license",
+      "cc0_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "authors": {
+        "Rob Tuytel": "All"
+      },
+      "source_description": "Free 8K plaster texture: smooth, flat white plaster with a soft matte finish, fine micro-roughness and subtle dirt speckling across the surface.",
+      "source_dimensions_mm": [
+        1000,
+        1000
+      ],
+      "source_coords": null,
+      "intended_use_zh": "浅灰方砖的细微矿物表面；保留原有0.105工作尺度正交砖缝，不改成整面抹灰墙",
+      "asset_page_readback": {
+        "http_status": 200,
+        "title": "White Plaster 02 Texture • Poly Haven",
+        "cc0_token_present": true,
+        "sha256": "19b743d31638937079ef3e38869efc106ad5ab000b85e142f392ed306d84a1aa"
+      }
+    },
+    {
+      "asset_id": "granite_tile_03",
+      "name": "Granite Tile 03",
+      "asset_page_url": "https://polyhaven.com/a/granite_tile_03",
+      "license": "CC0-1.0",
+      "license_url": "https://polyhaven.com/license",
+      "cc0_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "authors": {
+        "Charlotte Baglioni": "All"
+      },
+      "source_description": "Free 8K granite tile texture: speckled brown-grey stone slabs with fine grain, subtle micro-roughness, tight grout lines and a low satin sheen.",
+      "source_dimensions_mm": [
+        1802.0000457763672,
+        1802.0000457763672
+      ],
+      "source_coords": null,
+      "intended_use_zh": "棕色入口石材颗粒来源；原图棕灰而非深棕，必须匹配原场景深棕色并控制自带板缝",
+      "asset_page_readback": {
+        "http_status": 200,
+        "title": "Granite Tile 03 Texture • Poly Haven",
+        "cc0_token_present": true,
+        "sha256": "5005707e3b41709df0d7967ea89578ec5833d4ce0c44871a5f5edae0926ee95c"
+      }
+    },
+    {
+      "asset_id": "granite_tile",
+      "name": "Granite Tile",
+      "asset_page_url": "https://polyhaven.com/a/granite_tile",
+      "license": "CC0-1.0",
+      "license_url": "https://polyhaven.com/license",
+      "cc0_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "authors": {
+        "Charlotte Baglioni": "All"
+      },
+      "source_description": "Free 8K texture: dark gray granite square tiles with subtle rough surface, low sheen and neat grout lines, tactile stone tile appearance.",
+      "source_dimensions_mm": [
+        2299.999952316284,
+        2299.999952316284
+      ],
+      "source_coords": null,
+      "intended_use_zh": "灰色前庭、步道铺装；不替换建筑墙面",
+      "asset_page_readback": {
+        "http_status": 200,
+        "title": "Granite Tile Texture • Poly Haven",
+        "cc0_token_present": true,
+        "sha256": "26fbc5691e6c23653d92317bef15a0f77bf18d10cfab711762f4cf5533d0b04a"
+      }
+    },
+    {
+      "asset_id": "leafy_grass",
+      "name": "Leafy Grass",
+      "asset_page_url": "https://polyhaven.com/a/leafy_grass",
+      "license": "CC0-1.0",
+      "license_url": "https://polyhaven.com/license",
+      "cc0_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "authors": {
+        "Charlotte Baglioni": "All"
+      },
+      "source_description": "Free 8K leafy grass texture: trampled green blades with scattered brown leaves and twigs, low-relief rough soil surface with a natural matte finish.",
+      "source_dimensions_mm": [
+        2000,
+        2000
+      ],
+      "source_coords": null,
+      "intended_use_zh": "现有低饱和校园草坪的地表细节，含真实草叶和少量枯叶；不作植物种类鉴定",
+      "asset_page_readback": {
+        "http_status": 200,
+        "title": "Leafy Grass Texture • Poly Haven",
+        "cc0_token_present": true,
+        "sha256": "0a7fb63f87d9653382c2f9728831bf814ed0a174bb2564d8ccf4c5e3458afdcf"
+      }
+    },
+    {
+      "asset_id": "noon_grass",
+      "name": "Noon Grass",
+      "asset_page_url": "https://polyhaven.com/a/noon_grass",
+      "license": "CC0-1.0",
+      "license_url": "https://polyhaven.com/license",
+      "cc0_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "authors": {
+        "Greg Zaal": "All"
+      },
+      "source_description": "Free 16K unclipped HDRI: bright midday sun over an open grassy field with deep blue sky, strong natural light, high-contrast shadows and a warm, neutral outdoor mood.",
+      "source_dimensions_mm": null,
+      "source_coords": [
+        -26.153069,
+        27.991045
+      ],
+      "intended_use_zh": "户外晴天正午HDR照明与反射，不代表清华校园实拍环境",
+      "asset_page_readback": {
+        "http_status": 200,
+        "title": "Noon Grass HDRI • Poly Haven",
+        "cc0_token_present": true,
+        "sha256": "64d434a195757eb9d7eea8a830799d4850e9bf832c8618729dc367560780d95f"
+      }
+    }
+  ],
+  "files": [
+    {
+      "asset_id": "noon_grass",
+      "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/2k/noon_grass_2k.hdr",
+      "asset_page_url": "https://polyhaven.com/a/noon_grass",
+      "license": "CC0-1.0",
+      "license_url": "https://polyhaven.com/license",
+      "cc0_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "local_relative_path": "hdri/noon_grass_2k.hdr",
+      "kind": "hdri",
+      "colorspace": "Linear / Linear Rec.709 (scene-linear)",
+      "expected_bytes": 6367923,
+      "expected_md5": "1e0908b14d868fccc9b024f87587cee4",
+      "original_download": true,
+      "resolution_label": "2k",
+      "bytes": 6367923,
+      "sha256": "cddea890d57b7af3a8fac35a06285d7efc810a12cac521a4e0f286fdcaaca87c",
+      "dimensions_px": [
+        2048,
+        1024
+      ],
+      "verified": true
+    },
+    {
+      "asset_id": "granite_tile",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/granite_tile/granite_tile_diff_2k.jpg",
+      "asset_page_url": "https://polyhaven.com/a/granite_tile",
+      "license": "CC0-1.0",
+      "license_url": "https://polyhaven.com/license",
+      "cc0_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "local_relative_path": "textures/granite_tile/granite_tile_diff_2k.jpg",
+      "kind": "albedo",
+      "colorspace": "sRGB",
+      "expected_bytes": 2938829,
+      "expected_md5": "79a1eaac48a3d6720a88c216997dbd67",
+      "original_download": true,
+      "resolution_label": "2k",
+      "bytes": 2938829,
+      "sha256": "758f9b1cdce11bc6f6a805cdea18fb789639befe40608020ab6087c5c1cba1e5",
+      "dimensions_px": [
+        2048,
+        2048
+      ],
+      "verified": true
+    },
+    {
+      "asset_id": "granite_tile",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/2k/granite_tile/granite_tile_nor_gl_2k.png",
+      "asset_page_url": "https://polyhaven.com/a/granite_tile",
+      "license": "CC0-1.0",
+      "license_url": "https://polyhaven.com/license",
+      "cc0_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "local_relative_path": "textures/granite_tile/granite_tile_nor_gl_2k.png",
+      "kind": "normal_opengl",
+      "colorspace": "Non-Color",
+      "expected_bytes": 20397425,
+      "expected_md5": "e5e72567393aa73c622857fd13f52e66",
+      "original_download": true,
+      "resolution_label": "2k",
+      "bytes": 20397425,
+      "sha256": "d0ce05b54ba7a12da375583408f7a008c38d1f3dec0f3deb622c13a28340e922",
+      "dimensions_px": [
+        2048,
+        2048
+      ],
+      "verified": true
+    },
+    {
+      "asset_id": "granite_tile",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/granite_tile/granite_tile_rough_2k.jpg",
+      "asset_page_url": "https://polyhaven.com/a/granite_tile",
+      "license": "CC0-1.0",
+      "license_url": "https://polyhaven.com/license",
+      "cc0_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "local_relative_path": "textures/granite_tile/granite_tile_rough_2k.jpg",
+      "kind": "roughness",
+      "colorspace": "Non-Color",
+      "expected_bytes": 2738066,
+      "expected_md5": "d772d400dd0f25ef2231fb000360d3d5",
+      "original_download": true,
+      "resolution_label": "2k",
+      "bytes": 2738066,
+      "sha256": "cc05cf72ced0fdad6c6adb9d87c5b8cfc7afff7b045035974622378b38a558be",
+      "dimensions_px": [
+        2048,
+        2048
+      ],
+      "verified": true
+    },
+    {
+      "asset_id": "granite_tile_03",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/granite_tile_03/granite_tile_03_diff_2k.jpg",
+      "asset_page_url": "https://polyhaven.com/a/granite_tile_03",
+      "license": "CC0-1.0",
+      "license_url": "https://polyhaven.com/license",
+      "cc0_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "local_relative_path": "textures/granite_tile_03/granite_tile_03_diff_2k.jpg",
+      "kind": "albedo",
+      "colorspace": "sRGB",
+      "expected_bytes": 4086873,
+      "expected_md5": "2152bc995a6567c2a223490de2964c61",
+      "original_download": true,
+      "resolution_label": "2k",
+      "bytes": 4086873,
+      "sha256": "afb8a91d3f8d9a091698285025b50dfa46e4dd27c4f55645ed458dbf68ac302c",
+      "dimensions_px": [
+        2048,
+        2048
+      ],
+      "verified": true
+    },
+    {
+      "asset_id": "granite_tile_03",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/2k/granite_tile_03/granite_tile_03_nor_gl_2k.png",
+      "asset_page_url": "https://polyhaven.com/a/granite_tile_03",
+      "license": "CC0-1.0",
+      "license_url": "https://polyhaven.com/license",
+      "cc0_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "local_relative_path": "textures/granite_tile_03/granite_tile_03_nor_gl_2k.png",
+      "kind": "normal_opengl",
+      "colorspace": "Non-Color",
+      "expected_bytes": 21610639,
+      "expected_md5": "109895bdc48173429dcfd76041e6e8dd",
+      "original_download": true,
+      "resolution_label": "2k",
+      "bytes": 21610639,
+      "sha256": "03626fabe4a753480ce00f6800b03496a18f2cdec175c5cd42c7dd662ba82eed",
+      "dimensions_px": [
+        2048,
+        2048
+      ],
+      "verified": true
+    },
+    {
+      "asset_id": "granite_tile_03",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/granite_tile_03/granite_tile_03_rough_2k.jpg",
+      "asset_page_url": "https://polyhaven.com/a/granite_tile_03",
+      "license": "CC0-1.0",
+      "license_url": "https://polyhaven.com/license",
+      "cc0_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "local_relative_path": "textures/granite_tile_03/granite_tile_03_rough_2k.jpg",
+      "kind": "roughness",
+      "colorspace": "Non-Color",
+      "expected_bytes": 1572000,
+      "expected_md5": "ce9db38d1b730cffae8ffb49c023380d",
+      "original_download": true,
+      "resolution_label": "2k",
+      "bytes": 1572000,
+      "sha256": "a96689e55c4e08b8a610cd8181134e9f357cc1ac5db62c72d501545a25ef7622",
+      "dimensions_px": [
+        2048,
+        2048
+      ],
+      "verified": true
+    },
+    {
+      "asset_id": "leafy_grass",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/leafy_grass/leafy_grass_diff_2k.jpg",
+      "asset_page_url": "https://polyhaven.com/a/leafy_grass",
+      "license": "CC0-1.0",
+      "license_url": "https://polyhaven.com/license",
+      "cc0_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "local_relative_path": "textures/leafy_grass/leafy_grass_diff_2k.jpg",
+      "kind": "albedo",
+      "colorspace": "sRGB",
+      "expected_bytes": 4766204,
+      "expected_md5": "8014f4dace676a62ed71b3dd76119dae",
+      "original_download": true,
+      "resolution_label": "2k",
+      "bytes": 4766204,
+      "sha256": "8e1c6d21365d4b89bc5a35ab664da98a78dbc3ab9ba6100474881c8619a5b113",
+      "dimensions_px": [
+        2048,
+        2048
+      ],
+      "verified": true
+    },
+    {
+      "asset_id": "leafy_grass",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/2k/leafy_grass/leafy_grass_nor_gl_2k.png",
+      "asset_page_url": "https://polyhaven.com/a/leafy_grass",
+      "license": "CC0-1.0",
+      "license_url": "https://polyhaven.com/license",
+      "cc0_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "local_relative_path": "textures/leafy_grass/leafy_grass_nor_gl_2k.png",
+      "kind": "normal_opengl",
+      "colorspace": "Non-Color",
+      "expected_bytes": 24430051,
+      "expected_md5": "99b68312712462595976eb2baef58c6b",
+      "original_download": true,
+      "resolution_label": "2k",
+      "bytes": 24430051,
+      "sha256": "476a34f2f60186f51644c3b9560d7659531a033f993b01f274f939e447f3de25",
+      "dimensions_px": [
+        2048,
+        2048
+      ],
+      "verified": true
+    },
+    {
+      "asset_id": "leafy_grass",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/leafy_grass/leafy_grass_rough_2k.jpg",
+      "asset_page_url": "https://polyhaven.com/a/leafy_grass",
+      "license": "CC0-1.0",
+      "license_url": "https://polyhaven.com/license",
+      "cc0_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "local_relative_path": "textures/leafy_grass/leafy_grass_rough_2k.jpg",
+      "kind": "roughness",
+      "colorspace": "Non-Color",
+      "expected_bytes": 2274652,
+      "expected_md5": "b5c551ed91162aab5afbfb03b73ae3f5",
+      "original_download": true,
+      "resolution_label": "2k",
+      "bytes": 2274652,
+      "sha256": "34e1733bf4064b6950a575ff57e78c8b7ff71b63749eb48a49221bd65de6fb4f",
+      "dimensions_px": [
+        2048,
+        2048
+      ],
+      "verified": true
+    },
+    {
+      "asset_id": "white_plaster_02",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/white_plaster_02/white_plaster_02_diff_2k.jpg",
+      "asset_page_url": "https://polyhaven.com/a/white_plaster_02",
+      "license": "CC0-1.0",
+      "license_url": "https://polyhaven.com/license",
+      "cc0_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "local_relative_path": "textures/white_plaster_02/white_plaster_02_diff_2k.jpg",
+      "kind": "albedo",
+      "colorspace": "sRGB",
+      "expected_bytes": 2568315,
+      "expected_md5": "35f9c96c16aa0d934da7884b232f6d07",
+      "original_download": true,
+      "resolution_label": "2k",
+      "bytes": 2568315,
+      "sha256": "0ca5245ba70777d3e41ff4566c9f8d363855461891802c55cb7dc0f6f85f084e",
+      "dimensions_px": [
+        2048,
+        2048
+      ],
+      "verified": true
+    },
+    {
+      "asset_id": "white_plaster_02",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/2k/white_plaster_02/white_plaster_02_nor_gl_2k.png",
+      "asset_page_url": "https://polyhaven.com/a/white_plaster_02",
+      "license": "CC0-1.0",
+      "license_url": "https://polyhaven.com/license",
+      "cc0_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "local_relative_path": "textures/white_plaster_02/white_plaster_02_nor_gl_2k.png",
+      "kind": "normal_opengl",
+      "colorspace": "Non-Color",
+      "expected_bytes": 24664332,
+      "expected_md5": "5ebaee84d0be9fce4e5047ab97d584ea",
+      "original_download": true,
+      "resolution_label": "2k",
+      "bytes": 24664332,
+      "sha256": "097bd8bc72bcb5c75fd26bc11f981dad5944ceec4a5d02481b24915c76c34839",
+      "dimensions_px": [
+        2048,
+        2048
+      ],
+      "verified": true
+    },
+    {
+      "asset_id": "white_plaster_02",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/white_plaster_02/white_plaster_02_rough_2k.jpg",
+      "asset_page_url": "https://polyhaven.com/a/white_plaster_02",
+      "license": "CC0-1.0",
+      "license_url": "https://polyhaven.com/license",
+      "cc0_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "local_relative_path": "textures/white_plaster_02/white_plaster_02_rough_2k.jpg",
+      "kind": "roughness",
+      "colorspace": "Non-Color",
+      "expected_bytes": 1604444,
+      "expected_md5": "47f989e9fd3e69e667244ff4b9f406f8",
+      "original_download": true,
+      "resolution_label": "2k",
+      "bytes": 1604444,
+      "sha256": "a3dc1911f6e25d88fdb0031fe0cfb602eec5496084c508774c60691bed087417",
+      "dimensions_px": [
+        2048,
+        2048
+      ],
+      "verified": true
+    }
+  ],
+  "derivatives": [
+    {
+      "asset_id": "granite_tile_03",
+      "license": "CC0-1.0",
+      "license_url": "https://polyhaven.com/license",
+      "url": "https://polyhaven.com/a/granite_tile_03",
+      "kind": "albedo",
+      "colorspace": "sRGB",
+      "original_download": false,
+      "local_relative_path": "derived/granite_tile_03/granite_tile_03_dark_brown_diff_2k.png",
+      "source_relative_path": "textures/granite_tile_03/granite_tile_03_diff_2k.jpg",
+      "source_sha256": "afb8a91d3f8d9a091698285025b50dfa46e4dd27c4f55645ed458dbf68ac302c",
+      "sha256": "22dae4ae5c4e07b1a743605413941e7f1859e28101aa1e4d814c2e044004a11a",
+      "bytes": 7331888,
+      "dimensions_px": [
+        2048,
+        2048
+      ],
+      "derivation": "sRGB decode -> per-channel linear multiply -> sRGB encode; no spatial filtering; original grain retained",
+      "target_mean_linear_from_srgb_bytes": [
+        63,
+        48,
+        40
+      ],
+      "linear_rgb_tint": [
+        0.3720871707729074,
+        0.2727247314612623,
+        0.24033803513457597
+      ],
+      "actual_mean_srgb_bytes": [
+        61.05653691291809,
+        46.53250527381897,
+        38.68755745887756
+      ],
+      "note_zh": "为复刻原场景深棕入口而调色，不代表真实楼宇石材扫描；保留源颗粒及原板缝，原始贴图不变"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+# Local licensed models, media, generated frames and evidence are NOT publishable source.
+*.blend
+*.blend1
+*.glb
+*.png
+*.jpg
+*.jpeg
+*.wav
+*.mp4
+*.ssml
+*.log
+*.txt
+*.json
+!parameters.json
+!timeline.json
+!preserved-source.json
+!narration_segments.json
+!requirements.txt
+!requirements-optional.txt
+__pycache__/
+.venv/
+qa/
+evidence/
+references/
+frames/
+previews/
+final-qa/
+# Parent workspace ignores references globally; allow only these text-only skill snapshots.
+!skills/**/references/
+!skills/**/references/*.md

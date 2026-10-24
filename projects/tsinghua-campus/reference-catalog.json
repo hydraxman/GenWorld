@@ -1,0 +1,361 @@
+{
+  "version": 1,
+  "verifiedAt": "2026-10-12",
+  "licenseNote": "照片版权未获另行授权，仅供本地建模参考，不作纹理或在线再发布，保留原有水印。旧素材的原始下载日期未知。",
+  "sites": [
+    {
+      "id": "chemistry-hall",
+      "name": "化学馆（1932年老馆）",
+      "aliases": ["化学馆", "老化学馆", "Old Chemistry Hall"],
+      "coordinates": [116.313427985, 40.0046710165],
+      "coordinateSource": "冻结OpenFreeMap包围盒中心，名称通过面积重叠关联 OSM way83801034；不包括北侧新化学馆或东侧何添楼，非测绘中心。",
+      "status": "reference-ready",
+      "images": [{
+        "path": "references\\chemistry-hall-historic-official.jpg",
+        "pageUrl": "https://100.chem.tsinghua.edu.cn/info/1017/1030.htm",
+        "imageUrl": "https://100.chem.tsinghua.edu.cn/__local/A/73/9C/1F8B82D313944AFD9921C54FB1D_F39A8BD6_6D1C.jpg",
+        "width": 305, "height": 235,
+        "sha256": "3dfb1ef940ee652ea966b7c6d96a6c5aff27660bf09774309d4ee5a2759d1e55",
+        "license": "清华化学系百年系庆官方历史照片，未查得自由再发布许可；仅本地参考，保留原图，不作纹理或在线再发布。",
+        "view": "历史斜视全馆与倒影，长矩形体量、竖向立面节奏与抬高中段；1932年为建成年份，非确认拍摄日期",
+        "downloadedAt": "2026-10-12"
+      }, {
+        "path": "references\\chemistry-hall-2008-official.jpg",
+        "pageUrl": "https://polymers.chemeng.tsinghua.edu.cn/info/1504/2656.htm",
+        "imageUrl": "https://polymers.chemeng.tsinghua.edu.cn/__local/9/20/C7/70D48804DA2F9ED8E6369706773_EBA39597_5E7E.jpg?e=.jpg",
+        "width": 369, "height": 281,
+        "sha256": "146551c8445e792c821973b9f7a068333219c591b577136ca38c49872dd0259a",
+        "license": "清华化工高分子所官方文章配图，未查得自由再发布许可；仅本地参考，不作纹理或在线再发布。",
+        "view": "正文专节老化学馆的故事，图注2008年毕业合影于化学馆；浅石门额、砖墩、双门和石阶，下部有人群遮挡",
+        "downloadedAt": "2026-10-12"
+      }, {
+        "path": "references\\chemistry-hall-front-commons.jpg",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:%E6%B8%85%E8%8F%AF%E5%A4%A7%E5%AD%B8%E5%8C%96%E5%AD%B8%E9%A4%A8.jpg",
+        "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c3/%E6%B8%85%E8%8F%AF%E5%A4%A7%E5%AD%B8%E5%8C%96%E5%AD%B8%E9%A4%A8.jpg",
+        "width": 4032, "height": 3024,
+        "sha256": "95589700e08e41894d02a3d099d8941741cdf64d051b470b0f885d5ccec743d8",
+        "license": "葉又嘉，Own work，CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/；本项目仅本地参考，不作纹理或在线再发布。",
+        "view": "2019-08-31南入口，上下两组三联格窗、红砖肋柱、阶梯女儿墙、贝壳顶浅龛和石阶；原图4032×3024，EXIF转正显示为3024×4032",
+        "downloadedAt": "2026-10-12"
+      }, {
+        "path": "references\\chemistry-hall-2024-commons.jpg",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Chemistry_Building_of_Tsinghua_University.jpg",
+        "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/46/Chemistry_Building_of_Tsinghua_University.jpg",
+        "width": 8167, "height": 6125,
+        "sha256": "8c50cee3be1d46b2eedd7f64db132766bf1efbf4b09aaba8ff5c4f1697685b95",
+        "license": "HoweyYuan，Own work，CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/；本项目仅本地参考，不作纹理或在线再发布。",
+        "view": "2024-07-07较完整南入口：宽石阶、低砖侧墙、木双门、门额、两层三联窗与高女儿墙；两翼、屋顶及背面不可见",
+        "downloadedAt": "2026-10-12"
+      }],
+      "observations": ["官方历史／2008年老馆照片与2019／2024年入口照片互证身份，不用新化学馆照片", "南入口红砖肋柱、阶梯式女儿墙、上下三联格窗、贝壳顶浅龛、矩形石门额和宽台阶", "完整保留冻结长条轮廓及东端细连接体，只细化南侧中央有照片支持的立面"],
+      "unknowns": ["局部重建；女儿墙后屋顶、两翼逐窗和背面未知，中性封盖不认定历史馆为平屋顶", "高度与构件尺寸是比例估算；东端连接体年代／表皮／高度未知，沿用5米显示值并标注推定", "门额书法、精细浮雕和藤蔓未复刻；原图与审阅衍生图完整记录见 data\\chemistry-hall-references.json，衍生图不重复计入图库"]
+    },
+    {
+      "id": "tongfang",
+      "name": "同方部",
+      "aliases": ["清华同方部", "Tongfang Hall"],
+      "coordinates": [116.319119632, 40.001385711],
+      "coordinateSource": "冻结OpenFreeMap包围盒中心，名称通过面积重叠关联 OSM way226633636；不是清华同方公司，非测绘中心。",
+      "status": "reference-ready",
+      "images": [{
+        "path": "references\\tongfang-official-2018.jpg",
+        "pageUrl": "https://www.tsinghua.edu.cn/info/1367/81660.htm",
+        "imageUrl": "https://www.tsinghua.edu.cn/_mediafile/qh2021b/publish/thu2018/11499/20180806120755067157037/20180806120918497951616.jpg",
+        "width": 1920, "height": 900,
+        "sha256": "01ea63bab7a5cd9a39a6537b750a486e5a3705311be30adcc688b9d565a1b04a",
+        "license": "清华大学官方发布，摄影李派，素材校史馆，图片设计任帅；未查得自由许可，仅本地参考，不作纹理或在线再发布，保留水印。",
+        "view": "西门近景：灰砖浅扁券过梁、层叠砖墩、蓝灰门窗框、右起匾额、双壁灯与装饰窗棂；屋顶裁切",
+        "downloadedAt": "2026-10-12"
+      }, {
+        "path": "references\\tongfang-history-massing.jpg",
+        "pageUrl": "https://xsg.tsinghua.edu.cn/info/1005/1128.htm",
+        "imageUrl": "https://xsg.tsinghua.edu.cn/__local/7/4B/C7/8468B9281B3B58A7D004CC38BF1_CE0CC824_1925E.jpg?e=.jpg",
+        "width": 551, "height": 396,
+        "sha256": "3d0cea9e54c8fe0c8993ad38f898a6482d5324133d80e56aa89be034e1b633d6",
+        "license": "清华校史馆《看得见的历史》配图，摄影者未明确；未查得自由许可，仅本地参考，不作纹理或在线再发布。",
+        "view": "西门山墙斜视及长侧墙：灰砖红瓦双坡、小圆通气口、高长窗和低台阶；东部有遮挡",
+        "downloadedAt": "2026-10-12"
+      }],
+      "observations": ["西门山墙为灰砖红瓦双坡、蓝灰框长窗、浅扁券过梁、层叠砖墩与双壁灯，不是巨大圆拱或柱式入口", "校档案明确匾额在草坪侧西门，正门廊朝南，西部单层较大、东部两层"],
+      "unknowns": ["两图都是西侧入口，南门廊和东部两层仅有文字依据，形式与窗列推定；因此标为局部重建", "所有高度和坡角为估算，不声称复刻原题字书法；完整记录见 data\\tongfang-references.json"]
+    },
+    {
+      "id": "science-hall",
+      "name": "清华科学馆（1919年）",
+      "aliases": ["科学馆", "科學館", "Science Hall", "SCIENCE BVILDING"],
+      "coordinates": [116.317743659, 40.0015603555],
+      "coordinateSource": "冻结OpenFreeMap轮廓包围盒中心，名称关联 OSM way79701310；官方说明位于大礼堂西南、中心草坪西侧。不是生命科学馆，非测绘中心。",
+      "status": "reference-ready",
+      "images": [{
+        "path": "references\\science-hall-official-east.png",
+        "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+        "imageUrl": "https://www.tsinghua.edu.cn/__local/C/0B/77/28AE6C8C1B44A60206B4268D9C5_F6A46B23_A372E.png",
+        "width": 1920, "height": 900,
+        "sha256": "abebdca24686de98f168ba47ebc258d97c271f0672ad8844e4c92100936f88db",
+        "license": "清华官方校园景观配图，未查得自由再发布授权；仅本地参考，不作为纹理，保留原始完整图像。",
+        "view": "东侧中心草坪高机位长正面；三层组合窗、中央双层高圆拱与小山墙、四坡顶及两条低屋顶采光窗",
+        "downloadedAt": "2026-10-12"
+      }],
+      "observations": ["1919年科学馆，红墙灰顶、黄铜门，三层窗列为三联／单窗交错而非均匀网格", "东侧长正面中央圆拱入口跨下两层，上方砖砌小山墙；没有独立四柱门廊", "整栋长条四坡屋面，东坡两条低采光窗"],
+      "unknowns": ["只有一张可靠正面照片，隐藏侧后面仅为轮廓外壳，不声称逐窗复原", "墙高、屋脊、台阶和采光窗进深按地图比例推定，右翼树木遮挡窗列用左翼节奏估算", "门额英文为程序字形示意，中文题字及不可读微小雕刻未复刻；完整采集记录见 data\\science-hall-references.json"]
+    },
+    {
+      "id": "west-gym",
+      "name": "西体育馆",
+      "aliases": ["老体育馆", "West Gymnasium"],
+      "coordinates": null,
+      "status": "reference-ready",
+      "images": [{
+        "path": "references\\west-gym-front.jpg",
+        "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+        "imageUrl": "https://www.tsinghua.edu.cn/__local/9/1E/D7/C040DA1D46F11C38237F81F8EF8_B3CC4C54_149344.jpg",
+        "width": 1920, "height": 900,
+        "sha256": "5dcf310f80d92bbc95242af61a92d8866de77d990b55203f540b848a3d49d74c",
+        "license": "清华官方照片，未查得自由再发布许可；仅本地建模参考，不作为纹理。",
+        "view": "运动场侧正面，可见三山墙拱窗、灰白柱廊、屋顶长天窗和低侧翼",
+        "acquisition": "2026-10-12 从本仓库已验证原图复制；原下载日期未知"
+      }],
+      "observations": ["中央红砖三山墙及三组宽拱窗，前方开放柱廊与栏杆", "中央大跨度暖色坡屋面与长天窗，两侧较低坡屋面"],
+      "unknowns": ["背部增建、隐蔽屋面、精确高度与逐窗布置；照片中的爬藤不作墙面贴图"]
+    },
+    {
+      "id": "gongzi-shuimu",
+      "name": "工字厅 · 水木清华",
+      "aliases": ["工字厅门房", "工字殿", "水木清華"],
+      "coordinates": [116.316855848, 40.001730891],
+      "coordinateSource": "工字厅主殿 OpenFreeMap 轮廓中心；南门房另外匹配 OSM way1059165164，水木清华为后厦临池立面，不另造重复建筑编号",
+      "status": "reference-ready",
+      "images": [{
+        "path": "references\\gongzi-entrance.jpg",
+        "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+        "imageUrl": "https://www.tsinghua.edu.cn/__local/6/EE/80/9A065A38DF72F3F9F59F642B3BD_50D53E6D_1CB05C.jpg",
+        "width": 1920, "height": 900,
+        "sha256": "beedb2c36506279decd69edb82081326f9a06102950ecdf87ded1692cc8d083e",
+        "license": "清华官方照片，未查得自由再发布许可；仅本地建模参考，不作为纹理。",
+        "view": "南门房地面斜视，非主殿全景；灰瓦灰砖、红柱彩梁、屏风与通透入口",
+        "acquisition": "2026-10-12 从本仓库已验证原图复制；原下载日期未知"
+      }, {
+        "path": "references\\shuimu-pond-facade.png",
+        "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+        "imageUrl": "https://www.tsinghua.edu.cn/__local/D/AA/A5/A74F70F8B9CC639E5E2A3D1107B_5E7C943D_E7C63.png",
+        "width": 1920, "height": 900,
+        "sha256": "2308899a5680e1bd5a7342cbec37caa03e3954efeb499a8bfa89be9f17afada9",
+        "license": "清华官方照片，未查得自由再发布许可；仅本地建模参考，不作为纹理。",
+        "view": "荷花池侧看工字厅后厦，灰色传统坡屋顶、红柱格扇和白色台阶栏杆",
+        "acquisition": "2026-10-12 从本仓库已验证原图复制；原下载日期未知"
+      }],
+      "observations": ["主殿为真实工字形，两大殿由短廊相接", "南门房有灰瓦灰砖、红木柱和彩绘梁架，中央入口通透", "北后厦临池有红柱格扇、白石栏杆及下行台阶"],
+      "unknowns": ["主殿南立面、侧院和隐藏屋面相交，内部彩绘与石狮精细雕刻未完整采集", "水木清华 POI 是景点点位，不是独立的建筑轮廓；池岸景观仍需单独细化"]
+    },
+    {
+      "id": "second-gate",
+      "name": "二校门",
+      "aliases": ["二校門", "清华园", "清華園", "The Old Gate"],
+      "coordinates": [116.3182903, 39.9997127],
+      "coordinateSource": "OSM node941370305 v5；2026-10-12 通过官方 OSM API 核对，社区地图点位，非测绘中心",
+      "status": "reference-ready",
+      "images": [{
+        "path": "references\\second-gate-official.png",
+        "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+        "imageUrl": "https://www.tsinghua.edu.cn/__local/8/D3/34/464269BEDDBDCE7FE229998697D_A96F2368_BF34C.png",
+        "width": 1920, "height": 900,
+        "sha256": "de4c267a4659bc6ad8264ee3c36ca84aac706cd8044c45c19dd2323a2171c04f",
+        "license": "清华官方照片，未查得自由再发布许可；仅本地参考，不作为纹理。",
+        "view": "现貌南侧仰视近景，可见中拱、两侧小拱、双圆柱、砖砌柱墩和分级檐口；顶部与基座部分裁切",
+        "acquisition": "2026-10-12 从本仓库已验证原图复制；原下载日期未知"
+      }, {
+        "path": "references\\second-gate-modern-complete.jpg",
+        "pageUrl": "https://xsg.tsinghua.edu.cn/info/1003/3153.htm",
+        "imageUrl": "https://xsg.tsinghua.edu.cn/__local/9/E9/9F/95C7625C7EEB88D4E0FAEEFB833_EB0EC5BE_270574.jpg",
+        "width": 3264, "height": 2448,
+        "sha256": "29e1ccd497e514329881f4bc8acd3fd8a7344e323f60ffb9eea703f478a44173",
+        "license": "清华大学校史馆文章配图，贾珺摄；未查得自由再发布许可，仅本地参考，不作为纹理。",
+        "view": "完整现貌正面，包含阶梯平顶、旗杆、柱基和三拱，用于校正立面比例；不是历史照片",
+        "downloadedAt": "2026-10-12"
+      }, {
+        "path": "references\\second-gate-gallery-b.jpg",
+        "pageUrl": "https://www.tsinghua.edu.cn/info/1183/94394.htm",
+        "imageUrl": "https://www.tsinghua.edu.cn/__local/1/63/BE/E6DAC008600170338C51AF67AA2_A30DA786_A857B.jpg",
+        "width": 1500, "height": 1000,
+        "sha256": "94b5f0cb22a8c0db86c2827ae81d205136656bb89581ca4f4372807f3c3a073b",
+        "license": "清华官方组图，保留原有水印；未查得自由再发布许可，仅本地参考，不作为纹理。",
+        "view": "完整现貌低机位斜视，补证柱径、石基、柱墩多层檐口、侧拱白色墙面和卷涡肩部",
+        "downloadedAt": "2026-10-12"
+      }, {
+        "path": "references\\second-gate-front-official.jpg",
+        "pageUrl": "https://www.tsinghua.edu.cn/info/2116/81037.htm",
+        "imageUrl": "https://www.tsinghua.edu.cn/_mediafile/qh2021b/publish/newthu/9352/20150123092401876250100/20150123092417347995313.jpg",
+        "width": 1200, "height": 400,
+        "sha256": "282d7d4d536acd7bf07a106f6dc85721cffa3789c885fe870aab4a342a9356ad",
+        "license": "清华官方文章所配历史照片，未查得自由再发布许可；仅本地参考。",
+        "view": "历史全高斜视照片，辅助观察三拱比例、基座及顶部；不是当前1991年重建后的现貌",
+        "downloadedAt": "2026-10-12"
+      }],
+      "observations": ["青砖白柱的三拱牌坊，中央拱较高，两侧小拱保持真实通透", "顶部为阶梯式平顶、两边高柱帽及中央小台阶，不是三角山花；中央后方有细旗杆", "中墩双圆柱、较高石基、多层折进折出檐口；侧拱上方为整片白色抹灰墙面", "南侧清华园题字为传统右起读法；官方说明沿清华路北望校门"],
+      "unknowns": ["无测绘平面和实测尺寸，厚度、背面及局部装饰比例仍为推定", "历史照片不证明当前基座及顶部细节完全一致；不恢复已拆除的两翼短墙", "程序字体近似题字，不冒称那桐手迹复制；细小题款未具备可读复刻依据"]
+    },
+    {
+      "id": "sem-complex",
+      "name": "新经管楼 · 建华／李华组团",
+      "aliases": ["经管楼", "砖红楼", "红楼", "建华楼", "李华楼"],
+      "coordinates": [116.323183179, 39.998299558],
+      "coordinateSource": "OpenFreeMap 冻结轮廓包围盒中心；与 OSM way937482182 的建筑重叠关联已验证，不是测绘中心",
+      "status": "reference-ready",
+      "images": [{
+        "path": "references\\sem-exterior-official.jpg",
+        "pageUrl": "https://www.tuef.tsinghua.edu.cn/info/1072/2664.htm",
+        "imageUrl": "https://www.tuef.tsinghua.edu.cn/__local/6/EF/BF/674CB4C9F380C0671EF1EAC94B1_1FF450B3_277C5D4.jpg",
+        "width": 9588,
+        "height": 5295,
+        "sha256": "d6b25a2e7e9f13f4e33ca69f0750b1ed5f2b4fa688ede3c6aebbb9fb5a7aff9d",
+        "license": "清华教育基金会官方照片，未查得自由再发布许可；仅本地参考，不作为纹理。",
+        "view": "地面斜视，可见砖红拱窗体量、上部玻璃与灰色连接",
+        "downloadedAt": "2026-10-09"
+      }],
+      "observations": ["砖红陶板、大板拼缝、上部高拱窗和底层玻璃", "后部上层玻璃幕墙、深色细框、薄檐和竖向砖红翼片", "照片可见灰框架空连接，但不据此确认它是通向舜德的那一条"],
+      "unknowns": ["低区与高区内部体量分界、未见立面、逐窗室内布置", "通舜德的连廊位置和高度按用户描述作示意；不冒称官方建华—李华知识之桥"]
+    },
+    {
+      "id": "main-building",
+      "name": "清华主楼",
+      "aliases": ["主楼", "东区主楼"],
+      "coordinates": null,
+      "status": "reference-ready",
+      "images": [{
+        "path": "references\\main-building-front.jpg",
+        "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+        "imageUrl": "https://www.tsinghua.edu.cn/__local/6/CD/0C/A270492322A02D71B51E60271CA_72BC2495_160AB2.jpg",
+        "width": 1920, "height": 900,
+        "sha256": "e744ad295f62abbee4c4c0cb2493ee3da0a375abb0a2bcea5880c7c0de9114fc",
+        "license": "清华官方照片，未查得自由再发布许可；仅本地参考。",
+        "view": "地面正面",
+        "acquisition": "2026-10-09 从本仓库已验证原图复制；原下载日期未知"
+      }],
+      "observations": ["对称浅色立面，中部主体较高，两侧体量逐级降低", "顶部高窗带、规则竖向窗列、底层深柱廊和宽台阶", "主楼由中央及东西区通过过街楼相连，不宜简化为单一矩形板楼"],
+      "unknowns": ["背立面、隐蔽连接、进深和实测尺寸尚未确认"]
+    },
+    {
+      "id": "shunde-building",
+      "name": "舜德楼",
+      "aliases": ["工业工程系", "伟伦—舜德组合院落"],
+      "coordinates": [116.3247083, 39.9984982],
+      "coordinateSource": "projects/shunde/docs/courtyard/source-footprint.json 已验证 OSM 工业工程系 POI；不是建筑测绘中心",
+      "status": "reference-ready",
+      "images": [{
+        "path": "references\\shunde-north-official.jpg",
+        "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1133.jhtml",
+        "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/23095758a7g3.jpg",
+        "width": 1920, "height": 1281,
+        "sha256": "658e928f0af920c8a8a86f5aec24bd5eb956cd9dbd39b23f29e1303ad9975992",
+        "license": "清华官方照片，未查得自由再发布许可；仅本地参考。",
+        "view": "北侧正门近景",
+        "downloadedAt": "2026-10-09"
+      }, {
+        "path": "references\\shunde-courtyard-oblique.jpg",
+        "pageUrl": "https://www.sohu.com/a/462907673_641792",
+        "imageUrl": "https://p5.itc.cn/q_70/images03/20210425/5aa805cd596b4f3ca72eaff3450fb2dd.jpeg",
+        "width": 1080, "height": 810,
+        "sha256": "117f7e1c42e14852089bb6bd405c23364e6689b5b3742baa90f7c29c75bce53d",
+        "license": "二次发布的学校建筑照片，不是官方域名；未查得自由许可，仅本地参考。",
+        "view": "内院曲面斜视，非外部正门",
+        "acquisition": "2026-10-09 从本仓库已验证原图复制；原下载日期未知"
+      }],
+      "observations": ["北立面有小方砖、灰粉窗下板、细长屋顶窗带", "主入口为双圆柱凹门廊、棕色石材框、黑底金字竖匾和宽台阶", "内院有弧形墙面、成对窄竖窗和棕红色竖向构件"],
+      "unknowns": ["伟伦与舜德精确分界、遮挡构件及隐藏立面仍需核实"]
+    },
+    {
+      "id": "auditorium",
+      "name": "大礼堂",
+      "aliases": ["清华大礼堂"],
+      "coordinates": null,
+      "status": "reference-ready",
+      "images": [{
+        "path": "references\\auditorium-oblique.jpg",
+        "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+        "imageUrl": "https://www.tsinghua.edu.cn/__local/E/C5/CB/171B5114C0D43E853B94AA5CE46_0BACEE5A_191A51.jpg",
+        "width": 1920, "height": 900,
+        "sha256": "90dafe849f950eb1d3105d996e047ddeda7bbe1e60b41de41f1fbe1e718a76c7",
+        "license": "清华官方照片，未查得自由再发布许可；仅本地参考。",
+        "view": "高位斜视，可见穹顶及周围坡屋面",
+        "acquisition": "2026-10-09 从本仓库已验证原图复制；原下载日期未知"
+      }],
+      "observations": ["宽浅灰绿色肋状穹顶，底部有分级圆形檐口和红砖鼓座", "周边有红瓦坡屋面和交错山墙，入口白色柱廊向外突出"],
+      "unknowns": ["穹顶精确曲率和半径、后侧屋面、树木遮挡的底层细节"]
+    },
+    {
+      "id": "tsinghua-school",
+      "name": "清华学堂",
+      "aliases": ["学堂"],
+      "coordinates": null,
+      "status": "reference-ready",
+      "images": [{
+        "path": "references\\tsinghua-school-oblique.jpg",
+        "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+        "imageUrl": "https://www.tsinghua.edu.cn/__local/3/D6/43/55D1EDFDEEAC5CC4720BCF830F2_6E1BFFB2_C4429.jpg",
+        "width": 1920, "height": 900,
+        "sha256": "17ad9410b72c3cebc938c37d8b8594523d638bdacfa1a7b1fc3de66273707da1",
+        "license": "清华官方照片，未查得自由再发布许可；仅本地参考。",
+        "view": "入口及侧翼高位斜视",
+        "acquisition": "2026-10-09 从本仓库已验证原图复制；原下载日期未知"
+      }],
+      "observations": ["灰色墙体、白色线脚、红色坡屋顶、局部抬高的屋顶体量和老虎窗", "入口立面有柱式、栏杆、校名牌和拱形入口"],
+      "unknowns": ["背面和院内立面、遮挡的屋面相交、实测高度"]
+    },
+    {
+      "id": "old-library",
+      "name": "老图书馆",
+      "aliases": ["图书馆老馆", "老馆"],
+      "coordinates": null,
+      "status": "reference-ready",
+      "images": [{
+        "path": "references\\old-library-front.jpg",
+        "pageUrl": "https://lib.tsinghua.edu.cn/gk/gsfm/lg.htm",
+        "imageUrl": "https://lib.tsinghua.edu.cn/images/laoguanwaijingshuiyin.jpeg",
+        "width": 1600, "height": 1067,
+        "sha256": "5e2e0a90bed2c98b349c92c3c3e072ba27d9a30de1aba0ae625cf10f442952f7",
+        "license": "清华图书馆官方照片，保留原水印；未查得自由再发布许可，仅本地参考。",
+        "view": "入口正立面近景",
+        "acquisition": "2026-10-09 从本仓库已验证原图复制；原下载日期未知"
+      }, {
+        "path": "references\\old-library-arch-snow.jpg",
+        "pageUrl": "https://lib.tsinghua.edu.cn/gk/gsfm/lg.htm",
+        "imageUrl": "https://lib.tsinghua.edu.cn/images/tushuguanlaoguanwaijingshuiyin.jpeg",
+        "width": 1600, "height": 1067,
+        "sha256": "f32582e4270719e6e7c45fd2005291fbfba1728f58d0a20fc91a1c6541689b3a",
+        "license": "清华图书馆官方照片，保留原水印；未查得自由再发布许可，仅本地参考，不作为纹理。",
+        "view": "老馆三联拱窗与石刻局部雪景，用于核对拱圈、窗格和石框细部",
+        "downloadedAt": "2026-10-12"
+      }, {
+        "path": "references\\old-library-night.jpg",
+        "pageUrl": "https://lib.tsinghua.edu.cn/gk/gsfm/lg.htm",
+        "imageUrl": "https://lib.tsinghua.edu.cn/images/laoguanyejingshuiyin.jpeg",
+        "width": 1600, "height": 1067,
+        "sha256": "3b0ad1ad785138248ac97dd806240f6185c0d96b75c85fbae89f24bb578a8530",
+        "license": "清华图书馆官方照片，保留原水印；未查得自由再发布许可，仅本地参考，不作为纹理。",
+        "view": "老馆入口与两侧低翼夜景，补证翼部窗列、坡屋面和入口台阶；夜景色温不作为白天材质色",
+        "downloadedAt": "2026-10-12"
+      }],
+      "observations": ["红砖立面，中间三联大拱窗，上方矩形窗", "两侧外凸体量、转角、深檐挑架及入口台阶清晰", "夜景补见原入口两侧低翼的拱窗列和坡屋顶；三张均为同一历史入口区域"],
+      "unknowns": ["冻结轮廓合并了图书馆连通组团，本批只细化照片支持的历史入口／前翼，其余部分仍需重建", "现代连接部分、背面和精确高度未完成；不把路线上建筑外的 POI 当最近建筑强行匹配"]
+    },
+    {
+      "id": "zijing-dormitories",
+      "name": "紫荆学生公寓区",
+      "aliases": ["紫荆宿舍", "紫荆公寓"],
+      "coordinates": null,
+      "status": "reference-ready",
+      "images": [{
+        "path": "references\\zijing-dormitories-official.jpg",
+        "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+        "imageUrl": "https://www.tsinghua.edu.cn/__local/F/FD/71/5EF14317EE5BA6793F7B04DF53C_A4B2B5AD_1EE184.jpg",
+        "width": 1920, "height": 900,
+        "sha256": "281404088e289dc31ca8a7f7dc51b71062a374979fd3e1464a4a1388d8761e1d",
+        "license": "清华官方照片，未查得自由再发布许可；仅本地参考。",
+        "view": "公寓组团高位斜视，不是紫荆园食堂室内",
+        "downloadedAt": "2026-10-09"
+      }],
+      "observations": ["近景为多排灰蓝坡屋顶宿舍，立面有重复凸出的阳台窗间体量", "左后方部分宿舍为红色坡屋顶，后方高层有密集阳台、白色竖向体块及顶层构架", "运动场和树带分隔组团"],
+      "unknowns": ["各栋具体楼号与照片朝向、测量高度、遮挡的地面连接"]
+    }
+  ]
+}

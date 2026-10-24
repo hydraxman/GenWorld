@@ -1,0 +1,12 @@
+{
+  "id": "landmark:osm:node:941370305",
+  "name": "二校门",
+  "coordinates": [116.3182903, 39.9997127],
+  "sourceUrl": "https://api.openstreetmap.org/api/0.6/node/941370305",
+  "sourceVersion": 5,
+  "sourceTimestamp": "2022-09-05T12:57:34Z",
+  "verifiedAt": "2026-10-12",
+  "sourceTags": {"name": "二校门", "name:en": "The Old Gate", "tourism": "attraction"},
+  "attribution": "© OpenStreetMap contributors / ODbL 1.0",
+  "positionLimitations": "Community-map point, not a surveyed center or measured building footprint."
+}

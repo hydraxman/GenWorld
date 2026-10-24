@@ -1,0 +1,55 @@
+{
+  "id": "science-hall",
+  "name": "清华科学馆（1919年）",
+  "aliases": ["科学馆", "科學館", "Science Hall", "Science Building", "SCIENCE BVILDING"],
+  "coordinates": [116.317743659, 40.0015603555],
+  "source": {
+    "buildingId": "building:geometry:91ba4cc6c7a0d501736a0fec",
+    "nameSourceFeatureId": "osm:way:79701310",
+    "nameOverlapConfidence": 0.995,
+    "coordinateSource": "冻结OpenFreeMap建筑包围盒中心；非POI近邻匹配，非测绘中心",
+    "bbox": [[116.317593455, 40.001278869], [116.317893863, 40.001841842]],
+    "frozenFiles": ["data/campus.json", "data/osm-names.json"],
+    "measuredFrozenPolygonIoUApprox": 0.9915083973,
+    "pages": [
+      "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+      "https://www.tsinghua.edu.cn/info/1360/1394.htm",
+      "https://www.tsinghua.org.cn/info/1954/13286.htm"
+    ],
+    "verifiedAt": "2026-10-12",
+    "identityNote": "官方页面说明1919年落成、位于大礼堂西南及中心草坪西侧；OSM冻结way明确名为科学馆并指向清华大学科学馆百科。不是生命科学馆、理学院新楼或科学博物馆。0.995是冻结名称关联置信度，非重新计算的IoU。"
+  },
+  "status": "reference-ready",
+  "images": [
+    {
+      "path": "references/science-hall-official-east.png",
+      "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+      "imageUrl": "https://www.tsinghua.edu.cn/__local/C/0B/77/28AE6C8C1B44A60206B4268D9C5_F6A46B23_A372E.png",
+      "width": 1920,
+      "height": 900,
+      "sha256": "abebdca24686de98f168ba47ebc258d97c271f0672ad8844e4c92100936f88db",
+      "bytes": 669486,
+      "license": "license-local-reference-only",
+      "licenseNote": "清华官方校园景观配图，未查得自由再发布授权；仅本地观察建模，不作为纹理、不作在线或打包再发布。保留原始完整图像。",
+      "view": "从东侧中心草坪高机位看长正面；中央双层高圆拱及小山墙、三层非等距组合钢窗、四坡顶与两条低屋顶采光窗。两侧及远方建筑不属于本轮廓。",
+      "downloadedAt": "2026-10-12",
+      "acquisition": "从该官方页面中明确标注科学馆的swiper-slide独立提取原图URL，经HTTP200、PNG解码、尺寸及SHA256校验后保存当前工程。拍摄日期未标明，不臆称1919年原貌或2026年现拍。"
+    }
+  ],
+  "observations": [
+    "真实目标是1919年墨菲设计的科学馆；官方说明三层、总建筑面积约3550平方米、红墙灰顶及黄铜门。",
+    "东面长立面对应冻结轮廓顶点2至3，长61.4356米，外法线约[0.997752,0,-0.067013]；背面至正面法向进深21.5435米。",
+    "照片中窗列不是均匀网格：左翼三联、单窗、三联、单窗、三联；上层中央两窗，入口跨越下两层高。",
+    "中央入口没有独立四柱门廊；砖墙小山墙下有圆拱钢窗及门额带、铜色双门和浅石台阶。",
+    "屋顶为整栋长条四坡灰褐瓦屋面，东坡两条长低采光窗；中央小山墙接入大坡面。",
+    "生成砖/瓦DataTexture与程序英文字形，不载入任何照片像素；照片只留在references供本地参考。"
+  ],
+  "unknowns": [
+    "只有一张已成功获取并实际查看的可靠正面照片，侧后面与精确尺寸缺证；未为凑数量收录无关横幅、会议合照、示意画或失效历史图URL。",
+    "高位照片的透视及屋顶进深未摄影测量校正；墙高约12.85米，屋脊约18.13米只是地图比例估算，不是实测。",
+    "右翼树木及爬藤遮挡，镜像左翼窗节奏补全；底层、门扇分格、八级台阶和屋顶采光窗进深为估算。",
+    "西侧背面及南北端仅做冻结轮廓全高外壳、石基；未声称逐窗后立面、后门、雕刻及内部已复原。",
+    "门额英文按文献古体SCIENCE BVILDING作程序字形示意；原中文题字与不可读微小雕饰不摹造。",
+    "reconstructionExtent是whole-footprint-estimate，表示全轮廓估算外壳，不等同于完整精确建筑复原。"
+  ]
+}

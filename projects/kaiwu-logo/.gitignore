@@ -1,0 +1,6 @@
+# Keep small render prerequisites despite the repository-wide qa/ rule.
+!**/qa/
+**/qa/*
+!**/qa/render-input-freeze.json
+!**/qa/verify-offline.mjs
+!**/qa/offline-verify.mjs

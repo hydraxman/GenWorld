@@ -1,0 +1,5 @@
+# Optional CUDA comparison toolchain, pinned for numerical reproducibility.
+--extra-index-url https://download.pytorch.org/whl/cu128
+torch==2.8.0+cu128
+numpy==2.3.3
+Pillow==11.3.0

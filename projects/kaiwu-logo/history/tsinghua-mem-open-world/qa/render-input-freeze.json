@@ -1,0 +1,27 @@
+{
+  "frozen": true,
+  "soleWriter": "rendering subagent; all authoring complete",
+  "files": {
+    "scripts/build.py": "f80894c81856d95b29760ff66aab19c015ce2b25035c6586302db4442095f54e",
+    "scripts/scene.js": "5dd5bed63806e3c85d5367485f1b782f22bb269fab2d36cf71a3d5c6fd59d4c9",
+    "scripts/render.mjs": "f741d41b4866db82046d2b7f49c5f5b392229626be8d93e8cc1486926bb84b5d",
+    "scripts/SelectiveExtrudeGeometry.js": "1a7221bfe1a5cb561b0dea386120c69e78f20f8b8907f4b5d1a6cd700b3ab11e",
+    "scripts/prototype.mjs": "6f7ad581e4a2305ff0f646c63da439ca80e247526bfeeb416334314acd7a1d0a",
+    "scripts/setup.py": "6b603545956c1d06b941f5911d6ee98f89f250af62b7afe6fc090ea0f8299fba",
+    "scripts/atmosphere.js": "5ffbe6d028ae13ccc87e1236911be710f8400ab9733235f1bfbdae1cd79f50e5",
+    "scripts/verify.py": "e9032b31050bd555ae79251b2bfd4d82afde86b1a9e1e4bf5ae4c3f63bca898b",
+    "inputs/semantic-geometry.json": "154131acf59c90c77db021eedce8f1425227766cef64e51a905757c627f55ade",
+    "inputs/source-polygons.json": "974406b82c230265f620b72bc337b1c1ae4ccbd3fe0b1b701a7af817fc2684df",
+    "inputs/Tsinghua-MEM-2023-Transparent.svg": "89bdad7d41062bf6b2cf4ed340d79ba62499126fb1f785b725ed4c76813c038c",
+    "vendor/three/LICENSE": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601",
+    "vendor/three/build/three.module.js": "1bb0b770bac5da2b59b21aa5fff4c547eeb864d4e408e4c36fbc6ced1dce0e9e",
+    "vendor/three/build/three.core.js": "03fb6e9fa08628385a9096948593251ae473239c7039496d7c280cba73d84631",
+    "vendor/three/examples/jsm/loaders/SVGLoader.js": "92694da0a1b44fd93ffdc0f4a6c80d28cc9e3a53d5cfc0206793a8dcabc7c4c4",
+    "assets/gsap.min.js": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280",
+    "assets/scene.bundle.js": "472be95b1c25bdfe2093d42be79ccbcf09df2ba5a0d5916233c43f8fb47c73bf",
+    "index.html": "94b78711276539469143c7902674130940fae67dc8b228eac3f98263c3d514b9",
+    "hyperframes.json": "381b3d176c838d8dfc5c0c882d2a13b11a2999cb590fd311b02be7dd59c2dd12",
+    "meta.json": "d8608bc082c4cf677f12a20a66a68db4c3ac60d27340fe8225a9b4782faff6c7",
+    "deliverables/Tsinghua-MEM-Open-World.html": "72511d85c4af0ea0c22dc5db3e8e3084d2f568147dbec803eef05b6bd8ae3199"
+  }
+}

@@ -1,0 +1,502 @@
+{
+  "id": "outro",
+  "name": "收尾",
+  "style": "friendly",
+  "rate": "0%",
+  "text": "今天这条十二站路线，约四点六公里。实际游览请提前确认入校预约，并遵守校园现场的开放与通行安排。食堂的访客用餐方式，也请提前向校方确认。愿你带走的不只是一组照片，还有一段轻松、愉快的清华园记忆。",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "ssml_sha256": "6a5f46822b3096105a6a69ca640973326eacbdd50ea1af717c52701094869dd1",
+  "duration_seconds": 22.1625,
+  "sha256": "0591659187aebad6052692f0d3c4a59b43a7a6cc49c5ffa3de6c6dd008b91d43",
+  "boundaries": [
+    {
+      "audioOffset": 500000,
+      "duration": 4000000,
+      "text": "今天",
+      "textOffset": 242,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 4625000,
+      "duration": 1500000,
+      "text": "这",
+      "textOffset": 244,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 6125000,
+      "duration": 2375000,
+      "text": "条",
+      "textOffset": 245,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 8625000,
+      "duration": 4875000,
+      "text": "十二站",
+      "textOffset": 246,
+      "wordLength": 3,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 13625000,
+      "duration": 4875000,
+      "text": "路线",
+      "textOffset": 249,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 19500000,
+      "duration": 1500000,
+      "text": "，",
+      "textOffset": 251,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 21000000,
+      "duration": 1375000,
+      "text": "约",
+      "textOffset": 252,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 22500000,
+      "duration": 9750000,
+      "text": "四点六公里",
+      "textOffset": 253,
+      "wordLength": 5,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 32375000,
+      "duration": 1000000,
+      "text": "。",
+      "textOffset": 258,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 41375000,
+      "duration": 3750000,
+      "text": "实际",
+      "textOffset": 280,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 45250000,
+      "duration": 4875000,
+      "text": "游览",
+      "textOffset": 282,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 51000000,
+      "duration": 1875000,
+      "text": "请",
+      "textOffset": 284,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 52875000,
+      "duration": 4250000,
+      "text": "提前",
+      "textOffset": 285,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 57125000,
+      "duration": 4000000,
+      "text": "确认",
+      "textOffset": 287,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 61250000,
+      "duration": 1375000,
+      "text": "入",
+      "textOffset": 289,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 62625000,
+      "duration": 2000000,
+      "text": "校",
+      "textOffset": 290,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 64750000,
+      "duration": 4875000,
+      "text": "预约",
+      "textOffset": 291,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 70625000,
+      "duration": 2125000,
+      "text": "，",
+      "textOffset": 293,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 72750000,
+      "duration": 1875000,
+      "text": "并",
+      "textOffset": 294,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 74750000,
+      "duration": 3625000,
+      "text": "遵守",
+      "textOffset": 295,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 78500000,
+      "duration": 3375000,
+      "text": "校园",
+      "textOffset": 297,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 82000000,
+      "duration": 3875000,
+      "text": "现场",
+      "textOffset": 299,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 85875000,
+      "duration": 875000,
+      "text": "的",
+      "textOffset": 301,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 86875000,
+      "duration": 4625000,
+      "text": "开放",
+      "textOffset": 302,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 91625000,
+      "duration": 1500000,
+      "text": "与",
+      "textOffset": 304,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 93250000,
+      "duration": 3875000,
+      "text": "通行",
+      "textOffset": 305,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 97250000,
+      "duration": 5000000,
+      "text": "安排",
+      "textOffset": 307,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 102375000,
+      "duration": 1000000,
+      "text": "。",
+      "textOffset": 309,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 111375000,
+      "duration": 4375000,
+      "text": "食堂",
+      "textOffset": 331,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 115750000,
+      "duration": 875000,
+      "text": "的",
+      "textOffset": 333,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 116750000,
+      "duration": 3500000,
+      "text": "访客",
+      "textOffset": 334,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 120375000,
+      "duration": 3625000,
+      "text": "用餐",
+      "textOffset": 336,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 124125000,
+      "duration": 5000000,
+      "text": "方式",
+      "textOffset": 338,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 130125000,
+      "duration": 1875000,
+      "text": "，",
+      "textOffset": 340,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 132000000,
+      "duration": 1250000,
+      "text": "也",
+      "textOffset": 341,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 133250000,
+      "duration": 1875000,
+      "text": "请",
+      "textOffset": 342,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 135125000,
+      "duration": 5000000,
+      "text": "提前",
+      "textOffset": 343,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 140250000,
+      "duration": 2000000,
+      "text": "向",
+      "textOffset": 345,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 142375000,
+      "duration": 4000000,
+      "text": "校方",
+      "textOffset": 346,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 146500000,
+      "duration": 4750000,
+      "text": "确认",
+      "textOffset": 348,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 151375000,
+      "duration": 1000000,
+      "text": "。",
+      "textOffset": 350,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 160375000,
+      "duration": 1875000,
+      "text": "愿",
+      "textOffset": 372,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 162250000,
+      "duration": 875000,
+      "text": "你",
+      "textOffset": 373,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 163250000,
+      "duration": 1875000,
+      "text": "带",
+      "textOffset": 374,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 165125000,
+      "duration": 2125000,
+      "text": "走",
+      "textOffset": 375,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 167250000,
+      "duration": 2750000,
+      "text": "的",
+      "textOffset": 376,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 170875000,
+      "duration": 2750000,
+      "text": "不只",
+      "textOffset": 377,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 173625000,
+      "duration": 1250000,
+      "text": "是",
+      "textOffset": 379,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 175000000,
+      "duration": 1375000,
+      "text": "一",
+      "textOffset": 380,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 176375000,
+      "duration": 1375000,
+      "text": "组",
+      "textOffset": 381,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 177750000,
+      "duration": 5375000,
+      "text": "照片",
+      "textOffset": 382,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 184125000,
+      "duration": 2000000,
+      "text": "，",
+      "textOffset": 384,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 186125000,
+      "duration": 2375000,
+      "text": "还有",
+      "textOffset": 385,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 188500000,
+      "duration": 2875000,
+      "text": "一段",
+      "textOffset": 387,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 191500000,
+      "duration": 5250000,
+      "text": "轻松",
+      "textOffset": 389,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 197750000,
+      "duration": 750000,
+      "text": "、",
+      "textOffset": 391,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    },
+    {
+      "audioOffset": 198500000,
+      "duration": 3375000,
+      "text": "愉快",
+      "textOffset": 392,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 201875000,
+      "duration": 875000,
+      "text": "的",
+      "textOffset": 394,
+      "wordLength": 1,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 202875000,
+      "duration": 5625000,
+      "text": "清华园",
+      "textOffset": 395,
+      "wordLength": 3,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 208625000,
+      "duration": 4375000,
+      "text": "记忆",
+      "textOffset": 398,
+      "wordLength": 2,
+      "boundaryType": "WordBoundary"
+    },
+    {
+      "audioOffset": 213125000,
+      "duration": 1000000,
+      "text": "。",
+      "textOffset": 400,
+      "wordLength": 1,
+      "boundaryType": "PunctuationBoundary"
+    }
+  ],
+  "file": "audio/outro.wav"
+}

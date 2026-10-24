@@ -1,0 +1,12 @@
+# Local source exports, packed Blender scenes and downloaded CC0 assets
+source/
+assets/*
+!assets/*.py
+!assets/materials.json
+!assets/manifest.json
+output/
+qa/
+.cache/
+*.blend
+*.blend1
+__pycache__/

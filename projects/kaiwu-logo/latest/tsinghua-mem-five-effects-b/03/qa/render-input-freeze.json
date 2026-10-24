@@ -1,0 +1,20 @@
+{
+  "frozen": true,
+  "files": {
+    "inputs/Tsinghua-MEM-2023-Transparent.svg": "89bdad7d41062bf6b2cf4ed340d79ba62499126fb1f785b725ed4c76813c038c",
+    "inputs/semantic-geometry.json": "154131acf59c90c77db021eedce8f1425227766cef64e51a905757c627f55ade",
+    "inputs/source-polygons.json": "974406b82c230265f620b72bc337b1c1ae4ccbd3fe0b1b701a7af817fc2684df",
+    "scripts/SelectiveExtrudeGeometry.js": "1a7221bfe1a5cb561b0dea386120c69e78f20f8b8907f4b5d1a6cd700b3ab11e",
+    "scripts/effects.js": "41fcfd4a0d45040372aaeb17912be76a3d26e42575a250d37f5149ef4913f843",
+    "scripts/scene.js": "53c404666b4b3e1024078c3e11aae9e775fcfcc6e8eb0cc10f4226843856de47",
+    "assets/gsap.min.js": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280",
+    "assets/scene.bundle.js": "8d485da10512c3bce6b02191cd8481529d802c95d277d7908401850054a7cdcb",
+    "vendor/three/LICENSE": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601",
+    "vendor/three/build/three.core.js": "03fb6e9fa08628385a9096948593251ae473239c7039496d7c280cba73d84631",
+    "vendor/three/build/three.module.js": "1bb0b770bac5da2b59b21aa5fff4c547eeb864d4e408e4c36fbc6ced1dce0e9e",
+    "vendor/three/examples/jsm/loaders/SVGLoader.js": "92694da0a1b44fd93ffdc0f4a6c80d28cc9e3a53d5cfc0206793a8dcabc7c4c4",
+    "index.html": "ee5116386cabdc707491b5bd13ac69931234abd3b4471dc41f2bcbbfd38a1cca",
+    "hyperframes.json": "6ea447d522cc04eae436782dd98f8a23bac46086126fd4fd09349c35cbeaaaee",
+    "deliverables/Tsinghua-MEM-03.html": "5a27fcd6bad5fef13f33b293b5676b7a3360a18efa007b7c3abced601df95913"
+  }
+}

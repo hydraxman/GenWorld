@@ -1,0 +1,91 @@
+{
+  "id": "chemistry-hall",
+  "name": "化学馆（1932年老馆）",
+  "aliases": ["化学馆", "老化学馆", "Old Chemistry Hall"],
+  "coordinates": [116.313427985, 40.0046710165],
+  "coordinateSource": "冻结 OpenFreeMap bbox 中心，building:geometry:ad7b725c774db745829afef8；osm:way:83801034 重叠置信度0.934。社区地图关联，非测绘；不包括北侧新化学馆或东侧何添楼。",
+  "status": "reference-ready",
+  "images": [
+    {
+      "path": "references\\chemistry-hall-historic-official.jpg",
+      "pageUrl": "https://100.chem.tsinghua.edu.cn/info/1017/1030.htm",
+      "imageUrl": "https://100.chem.tsinghua.edu.cn/__local/A/73/9C/1F8B82D313944AFD9921C54FB1D_F39A8BD6_6D1C.jpg",
+      "width": 305,
+      "height": 235,
+      "sha256": "3dfb1ef940ee652ea966b7c6d96a6c5aff27660bf09774309d4ee5a2759d1e55",
+      "license": "清华化学系百年系庆官方历史照片，未查得自由再发布许可；仅本地建模参考，保留原图，不作纹理或在线再发布。",
+      "view": "历史斜视全馆与水面倒影，长矩形体量、重复竖向立面节奏和抬高中段；网页注明1932年12月建成，不等于照片拍摄于1932年。",
+      "downloadedAt": "2026-10-12"
+    },
+    {
+      "path": "references\\chemistry-hall-2008-official.jpg",
+      "pageUrl": "https://polymers.chemeng.tsinghua.edu.cn/info/1504/2656.htm",
+      "imageUrl": "https://polymers.chemeng.tsinghua.edu.cn/__local/9/20/C7/70D48804DA2F9ED8E6369706773_EBA39597_5E7E.jpg?e=.jpg",
+      "width": 369,
+      "height": 281,
+      "sha256": "146551c8445e792c821973b9f7a068333219c591b577136ca38c49872dd0259a",
+      "license": "清华化工高分子所官方文章配图，未查得自由再发布许可；仅本地参考，原图保留，不作纹理或在线再发布。",
+      "view": "文章标题元旦晚会与化学馆，正文专节老化学馆的故事，图注2008年分4班毕业合影于化学馆；相同浅石门额、砖墩、双门和石阶，底部有人群遮挡。",
+      "downloadedAt": "2026-10-12"
+    },
+    {
+      "path": "references\\chemistry-hall-front-commons.jpg",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:%E6%B8%85%E8%8F%AF%E5%A4%A7%E5%AD%B8%E5%8C%96%E5%AD%B8%E9%A4%A8.jpg",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c3/%E6%B8%85%E8%8F%AF%E5%A4%A7%E5%AD%B8%E5%8C%96%E5%AD%B8%E9%A4%A8.jpg",
+      "width": 4032,
+      "height": 3024,
+      "sha256": "95589700e08e41894d02a3d099d8941741cdf64d051b470b0f885d5ccec743d8",
+      "license": "葉又嘉，Own work，CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/；本项目仅本地建模参考，不作纹理或在线再发布。",
+      "view": "2019-08-31南入口近景；中央上下两组三联格窗、红砖肋柱、阶梯式女儿墙、贝壳顶浅龛、矩形门额和石阶。原JPEG存储4032×3024，EXIF Orientation=6；显示为3024×4032，勿误用旋转后的尺寸计算hash。",
+      "downloadedAt": "2026-10-12"
+    },
+    {
+      "path": "references\\chemistry-hall-2024-commons.jpg",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Chemistry_Building_of_Tsinghua_University.jpg",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/46/Chemistry_Building_of_Tsinghua_University.jpg",
+      "width": 8167,
+      "height": 6125,
+      "sha256": "8c50cee3be1d46b2eedd7f64db132766bf1efbf4b09aaba8ff5c4f1697685b95",
+      "license": "HoweyYuan，Own work，CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/；本项目仅本地建模参考，不作纹理或在线再发布。",
+      "view": "2024-07-07较完整南入口，宽石阶、低砖侧墙、双扇木门、门额、上下三联窗和高女儿墙。两翼被树和藤遮住，屋面和背面不可见。最新检得照片并非2026年现场核验。",
+      "downloadedAt": "2026-10-12"
+    },
+    {
+      "path": "references\\chemistry-hall-front-commons-review.jpg",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:%E6%B8%85%E8%8F%AF%E5%A4%A7%E5%AD%B8%E5%8C%96%E5%AD%B8%E9%A4%A8.jpg",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c3/%E6%B8%85%E8%8F%AF%E5%A4%A7%E5%AD%B8%E5%8C%96%E5%AD%B8%E9%A4%A8.jpg",
+      "width": 1800,
+      "height": 2400,
+      "sha256": "789927df2ccf01efdd57ce552c5a6af9787716608715b51981d2c1dc7103bb54",
+      "license": "葉又嘉，CC BY-SA 4.0；本地审阅衍生文件：只按EXIF转正、等比缩至1800×2400并JPEG编码，无内容修补。仅本地参考，不作纹理或在线再发布。",
+      "view": "chemistry-hall-front-commons.jpg转正缩小版本；hash和尺寸属于本地衍生文件，不是下载原图。",
+      "acquisition": "2026-10-12 从已保存的原图生成，Pillow EXIF transpose + thumbnail + quality94"
+    },
+    {
+      "path": "references\\chemistry-hall-2024-commons-review.jpg",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Chemistry_Building_of_Tsinghua_University.jpg",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/46/Chemistry_Building_of_Tsinghua_University.jpg",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "c5359590e6c3b60737e2f0efdca4e666557003f8e15ea360449f7697718e144c",
+      "license": "HoweyYuan，CC BY-SA 4.0；本地审阅衍生文件：等比缩至2400×1800并JPEG编码，无内容修补。仅本地参考，不作纹理或在线再发布。",
+      "view": "chemistry-hall-2024-commons.jpg缩小版本；hash和尺寸属于本地衍生文件，不是下载原图。",
+      "acquisition": "2026-10-12 从已保存的原图生成，Pillow EXIF transpose + thumbnail + quality94"
+    }
+  ],
+  "observations": [
+    "身份：官方1932年建成配图、明确老化学馆的2008年文章照片，与2019/2024年正面图的门额、砖墩、木门相互印证；不采用2023年新馆照片。",
+    "方向：Commons 2019拍摄点[116.313331,40.004478]与2024拍摄点[116.313326,40.004309]均在旧馆长南边界南侧；拍摄点为摄影者标注，非建筑测绘点。",
+    "现貌入口：红砖竖向肋柱、阶梯状女儿墙，中央两层各三扇窄格窗，上端贝壳顶浅壁龛，浅石矩形门额及高基脚，深色双门，宽石阶与低砖侧墙。",
+    "原矢量bbox约90.11米东西×25.16米南北；主要南长边约72.42米，向东偏北约3.62度，东端细连接体纳入同一冻结多边形。",
+    "现貌树藤遮挡严重；本模块只把中央南入口作为照片细化区，其他体量保持完整地图平面而不补造逐窗。"
+  ],
+  "unknowns": [
+    "reconstructionExtent=partial；照片不能支持完整现状全馆立面或屋顶还原。",
+    "高度、中央块宽度、窗宽和石阶进深为比例及构件尺度估算，非测绘；详细参数见模块与文档。",
+    "女儿墙后屋顶、背面、侧面和两翼现状逐窗未知；中性平盖仅估计封闭体量，不认定历史馆为平屋顶。",
+    "东端连接体精确平面保留，但年代、表皮和高度未知；沿用5米显示高度且明确推定。",
+    "门额题字未复制；几何贝壳/浮雕简化，不复刻牌匾文字、空调、藤蔓或人群。",
+    "未授权传播官方照片；Commons照片虽为CC BY-SA，本项目仍限制为本地参考，无照片纹理。"
+  ]
+}

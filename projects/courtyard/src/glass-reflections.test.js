@@ -1,0 +1,25 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import * as THREE from 'three';
+const moduleUrl=new URL('../../../shared/glass-reflections.js',import.meta.url);
+test('local scene cube capture is cached, excludes glass/water, skips AO and restores PBR export',async()=>{
+ assert.ok(fs.existsSync(moduleUrl),'scene reflection installer must exist');
+ const {installGlassReflections}=await import(moduleUrl);
+ const scene=new THREE.Scene(),root=new THREE.Group();scene.add(root);
+ const original=new THREE.MeshStandardMaterial({name:'Architectural glass',color:'#435c61',roughness:.22,metalness:.24});
+ const pane=new THREE.Mesh(new THREE.BoxGeometry(3,2,.05),original);root.add(pane);
+ const water=new THREE.Mesh(new THREE.PlaneGeometry(2,2),new THREE.MeshBasicMaterial());water.isReflector=true;scene.add(water);
+ const other=new THREE.Mesh(new THREE.BoxGeometry(),new THREE.MeshStandardMaterial());root.add(other);
+ let captures=0,revision=0,throws=false;
+ const renderer={shadowMap:{enabled:true,autoUpdate:true,needsUpdate:true},info:{autoReset:true,render:{calls:0}},getRenderTarget(){return null;},setRenderTarget(){},xr:{enabled:true}};
+ const T={...THREE,CubeCamera:class extends THREE.Object3D{update(){captures++;assert.equal(pane.visible,false);assert.equal(water.visible,false);assert.equal(other.visible,true);assert.equal(renderer.shadowMap.autoUpdate,false);assert.equal(renderer.shadowMap.enabled,false,'cached probe must not sample previous-frame shadow maps');if(throws)throw Error('capture failure');renderer.info.render.calls+=6;}}};
+ const api=installGlassReflections(T,renderer,scene,root,{getRevision:()=>revision,position:[0,2,1]});
+ scene.overrideMaterial=new THREE.MeshNormalMaterial();api.update(new THREE.PerspectiveCamera());assert.equal(captures,0);scene.overrideMaterial=null;
+ api.update();assert.equal(captures,1);assert.equal(api.stats.capturePasses,6);assert.ok(pane.material.envMap.isCubeTexture);assert.equal(pane.visible,true);assert.equal(water.visible,true);assert.equal(renderer.shadowMap.needsUpdate,true);
+ api.update();assert.equal(captures,1);revision++;api.update();assert.equal(captures,2);
+ api.setEnabled(false);assert.equal(pane.material,original);revision++;api.update();assert.equal(captures,2);
+ api.setEnabled(true);api.update();assert.equal(captures,3);
+ const live=pane.material,restore=api.beginExport();assert.equal(pane.material,original);revision++;api.update();assert.equal(captures,3);restore();assert.equal(pane.material,live);
+ throws=true;assert.throws(()=>api.update(),/capture failure/);assert.equal(pane.visible,true);assert.equal(water.visible,true);assert.equal(renderer.shadowMap.autoUpdate,true);assert.equal(renderer.shadowMap.enabled,true);assert.equal(renderer.info.autoReset,true);
+});

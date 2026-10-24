@@ -1,0 +1,3 @@
+data/*.json text eol=lf
+data/*.geojson text eol=lf
+data/gongzi-entrance-osm.xml text eol=lf

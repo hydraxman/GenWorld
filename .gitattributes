@@ -1,0 +1,8 @@
+# Preserve upstream vendor bundles and downloaded license evidence byte-for-byte.
+**/gsap.min.js -whitespace
+**/maple-license-evidence.html -whitespace
+
+# Keep byte-hashed regression inputs consistent across checkouts.
+projects/courtyard/src/*.js text eol=lf
+shared/illumination.js text eol=lf
+projects/shunde/src/spec.js text eol=lf

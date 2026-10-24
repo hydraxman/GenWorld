@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="openstreetmap-cgimap 2.1.0 (3964030 spike-06.openstreetmap.org)" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
+ <bounds minlat="40.0013000" minlon="116.3166500" maxlat="40.0014800" maxlon="116.3171000"/>
+ <node id="9731738314" visible="true" version="1" changeset="120822175" timestamp="2022-05-11T06:26:21Z" user="StarTrailer" uid="7134367" lat="40.0014450" lon="116.3166836"/>
+ <node id="9731738315" visible="true" version="1" changeset="120822175" timestamp="2022-05-11T06:26:21Z" user="StarTrailer" uid="7134367" lat="40.0013791" lon="116.3166873"/>
+ <node id="9731738316" visible="true" version="1" changeset="120822175" timestamp="2022-05-11T06:26:21Z" user="StarTrailer" uid="7134367" lat="40.0013716" lon="116.3164595"/>
+ <node id="9731761417" visible="true" version="1" changeset="120822175" timestamp="2022-05-11T06:26:21Z" user="StarTrailer" uid="7134367" lat="40.0014375" lon="116.3164558"/>
+ <node id="9731761430" visible="true" version="1" changeset="120822175" timestamp="2022-05-11T06:26:21Z" user="StarTrailer" uid="7134367" lat="40.0014298" lon="116.3170144"/>
+ <node id="9731761431" visible="true" version="1" changeset="120822175" timestamp="2022-05-11T06:26:21Z" user="StarTrailer" uid="7134367" lat="40.0013587" lon="116.3170215"/>
+ <node id="9731761432" visible="true" version="1" changeset="120822175" timestamp="2022-05-11T06:26:21Z" user="StarTrailer" uid="7134367" lat="40.0013426" lon="116.3167455"/>
+ <node id="9731761433" visible="true" version="1" changeset="120822175" timestamp="2022-05-11T06:26:21Z" user="StarTrailer" uid="7134367" lat="40.0014137" lon="116.3167384"/>
+ <node id="9731761434" visible="true" version="1" changeset="120822175" timestamp="2022-05-11T06:26:21Z" user="StarTrailer" uid="7134367" lat="40.0013269" lon="116.3171003"/>
+ <node id="9731761435" visible="true" version="1" changeset="120822175" timestamp="2022-05-11T06:26:21Z" user="StarTrailer" uid="7134367" lat="40.0011600" lon="116.3171143"/>
+ <node id="9731761436" visible="true" version="1" changeset="120822175" timestamp="2022-05-11T06:26:21Z" user="StarTrailer" uid="7134367" lat="40.0011563" lon="116.3170399"/>
+ <node id="9731761437" visible="true" version="1" changeset="120822175" timestamp="2022-05-11T06:26:21Z" user="StarTrailer" uid="7134367" lat="40.0013233" lon="116.3170259"/>
+ <node id="9731761438" visible="true" version="1" changeset="120822175" timestamp="2022-05-11T06:26:21Z" user="StarTrailer" uid="7134367" lat="40.0013136" lon="116.3167920"/>
+ <node id="9731761439" visible="true" version="1" changeset="120822175" timestamp="2022-05-11T06:26:21Z" user="StarTrailer" uid="7134367" lat="40.0011532" lon="116.3168069"/>
+ <node id="9731761440" visible="true" version="1" changeset="120822175" timestamp="2022-05-11T06:26:21Z" user="StarTrailer" uid="7134367" lat="40.0011486" lon="116.3167232"/>
+ <node id="9731761441" visible="true" version="1" changeset="120822175" timestamp="2022-05-11T06:26:21Z" user="StarTrailer" uid="7134367" lat="40.0013090" lon="116.3167083"/>
+ <way id="1059165160" visible="true" version="1" changeset="120822175" timestamp="2022-05-11T06:26:21Z" user="StarTrailer" uid="7134367">
+  <nd ref="9731761417"/>
+  <nd ref="9731738316"/>
+  <nd ref="9731738315"/>
+  <nd ref="9731738314"/>
+  <nd ref="9731761417"/>
+  <tag k="building" v="office"/>
+ </way>
+ <way id="1059165164" visible="true" version="1" changeset="120822175" timestamp="2022-05-11T06:26:21Z" user="StarTrailer" uid="7134367">
+  <nd ref="9731761433"/>
+  <nd ref="9731761432"/>
+  <nd ref="9731761431"/>
+  <nd ref="9731761430"/>
+  <nd ref="9731761433"/>
+  <tag k="building" v="office"/>
+ </way>
+ <way id="1059165165" visible="true" version="1" changeset="120822175" timestamp="2022-05-11T06:26:21Z" user="StarTrailer" uid="7134367">
+  <nd ref="9731761437"/>
+  <nd ref="9731761436"/>
+  <nd ref="9731761435"/>
+  <nd ref="9731761434"/>
+  <nd ref="9731761437"/>
+  <tag k="building" v="office"/>
+ </way>
+ <way id="1059165166" visible="true" version="1" changeset="120822175" timestamp="2022-05-11T06:26:21Z" user="StarTrailer" uid="7134367">
+  <nd ref="9731761441"/>
+  <nd ref="9731761440"/>
+  <nd ref="9731761439"/>
+  <nd ref="9731761438"/>
+  <nd ref="9731761441"/>
+  <tag k="building" v="office"/>
+ </way>
+</osm>

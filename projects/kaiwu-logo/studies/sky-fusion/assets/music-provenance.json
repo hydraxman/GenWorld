@@ -1,0 +1,21 @@
+{
+  "type": "original local synthesis",
+  "purpose": "Rhythm and mood sketch only; not final music selection",
+  "source": "scripts/music.py",
+  "duration_seconds": 8,
+  "sample_rate": 48000,
+  "channels": 2,
+  "borrowed_recordings_or_melodies": false,
+  "cues_seconds": {
+    "formation": 0.35,
+    "three_layer_resolve": 4.4,
+    "glyphs": [
+      4.45,
+      4.87,
+      5.29,
+      5.71
+    ],
+    "sweep": 6.55,
+    "hold": 7.2
+  }
+}

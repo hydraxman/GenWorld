@@ -1,0 +1,51 @@
+name: Publish knowledge demo
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - projects/knowledge-tower/**
+      - shared/**
+      - package.json
+      - package-lock.json
+      - LICENSE
+      - .github/workflows/pages.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run test:knowledge
+      - run: npm run build:pages
+      - name: Update Pages branch
+        working-directory: output/pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git init --initial-branch=gh-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config credential.helper '!gh auth git-credential'
+          git remote add origin "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git"
+          git fetch origin gh-pages
+          git reset --soft FETCH_HEAD
+          git add --all
+          git diff --cached --quiet && exit 0
+          git commit -m "docs: publish knowledge demo" -m "Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
+          git push origin HEAD:gh-pages
+          gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds" --silent

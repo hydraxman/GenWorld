@@ -1,0 +1,22 @@
+{
+  "name": "Maple Leaf 01",
+  "author": "Dorian Zgraggen / cgbookcase",
+  "license": "CC0",
+  "page": "https://www.cgbookcase.com/textures/maple-leaf-01",
+  "license_evidence": "meta name=tex1:license content=cc0 in qa/sources/maple.html",
+  "maps": {
+    "BaseColor": {
+      "url": "https://cgbookcase.b-cdn.net/textures/thumbnails/MapleLeaf01_1K/MapleLeaf01_1K_BaseColor.png",
+      "sha256": "ddc2cd7c86fdca731db12ca2f80f88faf9e7031c64658b39b641c3c805db5527"
+    },
+    "Normal": {
+      "url": "https://cgbookcase.b-cdn.net/textures/thumbnails/MapleLeaf01_1K/MapleLeaf01_1K_Normal.png",
+      "sha256": "1e19423825982625d493567a0cb6cf7d593f27e84759d454c309475d5b20dc99"
+    },
+    "Roughness": {
+      "url": "https://cgbookcase.b-cdn.net/textures/thumbnails/MapleLeaf01_1K/MapleLeaf01_1K_Roughness.png",
+      "sha256": "552ba70531542c94148858a8b08f2ea5c15d45ed4c7fa967cd2dc1fa6de3d7af"
+    }
+  },
+  "changes": "Derived opacity/silhouette from photographed green blade; curved outline geometry; DirectX normal Y inversion at runtime. Original 1K maps retained. Full 2K ZIP endpoint returned HTTP403; using accessible official 1K maps."
+}

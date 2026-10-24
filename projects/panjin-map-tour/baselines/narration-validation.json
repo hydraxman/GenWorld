@@ -1,0 +1,14 @@
+{
+  "segments": 12,
+  "timeline_duration_s": 139.625,
+  "audio_duration_s": 139.625,
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "gender": "Female",
+  "style": "friendly",
+  "style_degree": 1.06,
+  "rate": "+2%",
+  "pitch": "+0%",
+  "caption_source": "schedule segment text verbatim",
+  "errors": [],
+  "pass": true
+}

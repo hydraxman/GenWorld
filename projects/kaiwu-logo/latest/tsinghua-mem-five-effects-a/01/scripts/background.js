@@ -1,0 +1,18 @@
+import * as THREE from '../vendor/three/build/three.module.js';
+// Film-original perspective light tunnel; reference mechanisms only.
+export function makeGalaxy(){
+ const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(70,1920/1080,.1,260);camera.position.z=8;scene.background=new THREE.Color('#09102b');scene.fog=new THREE.FogExp2('#09102b',.0035);
+ const lightColors=['#3799ff','#a7e9ff','#7568ff','#d1acff','#e5a47c'];const tracks=[],streaks=[];const phase=i=>(i*.61803398875)%1;
+ const curve=(a,z,t)=>{const depth=Math.max(0,-z)/140;return new THREE.Vector3(Math.cos(a)*9+Math.sin(depth*3.6+t*.38)*3.8*depth,Math.sin(a)*7+Math.cos(depth*4.2+t*.28)*1.3*depth,z)};
+ for(let i=0;i<24;i++){const a=i/24*Math.PI*2;const points=[];for(let j=0;j<65;j++)points.push(curve(a,7-j*2.5,0));const geom=new THREE.BufferGeometry().setFromPoints(points);const m=new THREE.Line(geom,new THREE.LineBasicMaterial({color:lightColors[i%5],transparent:true,opacity:.28}));scene.add(m);tracks.push({m,a});}
+ const geo=new THREE.BoxGeometry(1,1,1);
+ for(let i=0;i<210;i++){const a=phase(i)*Math.PI*2,r=1+phase(i+11)*.55,l=5+phase(i+23)*21,seed=((Math.sin(i*127.1+31.7)*43758.5453)%1+1)%1;
+ const broad=i%7===0;const width=broad?.18+seed*.12:.035+seed*.055;
+ const m=new THREE.Mesh(geo,new THREE.MeshBasicMaterial({color:lightColors[i%5],transparent:true,opacity:.85}));const glow=new THREE.Mesh(geo,new THREE.MeshBasicMaterial({color:lightColors[i%5],transparent:true,opacity:.10,depthWrite:false,blending:THREE.AdditiveBlending}));const halo=new THREE.Mesh(geo,new THREE.MeshBasicMaterial({color:lightColors[i%5],transparent:true,opacity:.025,depthWrite:false,blending:THREE.AdditiveBlending}));scene.add(m,glow,halo);streaks.push({m,glow,halo,a,r,l,seed,width});}
+ const haze=new THREE.Mesh(new THREE.PlaneGeometry(480,270),new THREE.ShaderMaterial({depthWrite:false,uniforms:{t:{value:0}},vertexShader:'varying vec2 v;void main(){v=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:`varying vec2 v;uniform float t;void main(){vec2 p=(v-.5)*vec2(1.777,1.);float r=length(p);float a=atan(p.y,p.x);float wave=.5+.5*sin(a*3.+r*8.-t*.65);float fog=exp(-r*1.9)*(.55+.45*wave);vec3 c=vec3(.018,.024,.072)+vec3(.055,.065,.17)*fog;c+=vec3(.027,.013,.062)*exp(-abs(p.y+.2*sin(p.x*3.-t*.3)) *5.);gl_FragColor=vec4(c,1.);}`}));haze.position.z=-180;scene.add(haze);
+ const shade=new THREE.Mesh(new THREE.PlaneGeometry(5.1,2.87),new THREE.ShaderMaterial({transparent:true,depthTest:false,depthWrite:false,vertexShader:'varying vec2 v;void main(){v=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:'varying vec2 v;void main(){float r=length((v-.5)*vec2(1.777,1.));float a=.88*(1.-smoothstep(.27,.48,r));gl_FragColor=vec4(.009,.012,.033,a);}'}));shade.position.z=6;shade.renderOrder=100;scene.add(shade);
+ function draw(t){haze.material.uniforms.t.value=t;const travel=t*43+9*t*t/(1+t);for(const {m,a}of tracks){const p=m.geometry.attributes.position;for(let j=0;j<p.count;j++){const v=curve(a,7-j*2.5,t);p.setXYZ(j,v.x,v.y,v.z)}p.needsUpdate=true;}
+ for(const o of streaks){const z=8-((o.seed*168-travel)%168+168)%168;const v=curve(o.a+.035*Math.sin(t*.6),z,t);v.x*=o.r;v.y*=o.r;o.m.position.copy(v);o.m.scale.set(o.width,o.width,o.l);o.glow.position.copy(v);o.glow.scale.set(o.width*3,o.width*3,o.l*1.015);o.halo.position.copy(v);o.halo.scale.set(o.width*7,o.width*7,o.l*1.03);o.m.material.opacity=.45+.5*Math.min(1,(8-z)/12);}
+ }
+ return {scene,camera,draw,mechanism:'210 forward depth streaks in narrow and broad tiers, dual soft halos, 24 bent perspective rails, coherent indigo space mist'};
+}

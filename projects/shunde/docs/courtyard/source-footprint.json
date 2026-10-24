@@ -1,0 +1,810 @@
+{
+  "schema": "shunde-footprint-research/1.1",
+  "generated_at_utc": "2026-09-12T00:41:22.159956+00:00",
+  "orientation_confirmed": {
+    "authority": "Explicit latest user spatial correction",
+    "north": "TOP of supplied screenshot",
+    "front_entrance_side": "NORTH, facing light-green exterior area at screenshot top, on cylindrical/circular building side",
+    "circular_projection": "Attached to northwest/north entrance-side mass, projecting SOUTH / INWARD into courtyard",
+    "south_band": "Bottom long wing is SOUTH / BACK, not the main entrance facade",
+    "gap_label": "NORTH opening on entrance side; do NOT call this rear gap after user orientation correction",
+    "unknown": [
+      "Exact entrance doorway coordinates",
+      "Doorway offset and dimensions",
+      "Exact division between Weilun and Shunde",
+      "As-built facade outline details",
+      "Heights and facade materials"
+    ],
+    "model_status": "User approved reference-based reconstruction on 2026-09-12; source dimensions, wing ownership and hidden elevations remain estimated where stated."
+  },
+  "identity": {
+    "requested_name": "舜德楼 / Shunde",
+    "source_feature_scope": "OSM combined footprint 伟伦楼与舜德楼 (Weilun + Shunde), NOT a surveyed isolated Shunde outline",
+    "scope_warning": "Do not use whole footprint width as Shunde facade width. No source-supported building partition line.",
+    "poi": {
+      "osm_node_id": "10173071017",
+      "current_osm_name": "工业工程系",
+      "wgs84_lon_lat": [
+        116.3247083,
+        39.9984982
+      ]
+    }
+  },
+  "provenance": {
+    "provider": "OpenStreetMap official public API",
+    "way_id": "84653293",
+    "way_version": 9,
+    "way_timestamp": "2022-08-28T05:00:18Z",
+    "changeset": "125463234",
+    "retrieved_date_utc": "2026-09-12",
+    "way_url": "https://www.openstreetmap.org/way/84653293",
+    "api_url": "https://api.openstreetmap.org/api/0.6/way/84653293/full",
+    "source_file": "osm-way-84653293-full.xml",
+    "source_sha256": "e1334fd05e54c8b04773a6e16a9c97f53db286b396438c4f7e5831c0333a87e6",
+    "source_tags_uninterpreted": {
+      "building": "university",
+      "building:levels": "6",
+      "description": "伟伦楼与舜德楼",
+      "name": "经济管理学院",
+      "name:en": "School of Economics and Management",
+      "name:zh": "经济管理学院",
+      "name:zh-Hans": "经济管理学院",
+      "name:zh-Hant": "經濟管理學院",
+      "wikidata": "Q7849734",
+      "wikipedia": "en:Tsinghua University School of Economics and Management"
+    },
+    "license": "ODbL 1.0; © OpenStreetMap contributors",
+    "copyright_url": "https://www.openstreetmap.org/copyright",
+    "screenshot": {
+      "sha256": "60697a753a2825e295fa35273849fb42db55c17fb1dc44a821fdb7263b7058b8",
+      "visible_provider": "OpenFreeMap",
+      "interpretation": "Extruded vector massing, NOT aerial imagery. Shape matches OSM way; exact tile feature ID/version not independently extracted."
+    }
+  },
+  "topology": {
+    "geometry_type": "Polygon",
+    "outer_rings": 1,
+    "inner_rings": 0,
+    "unique_vertices": 24,
+    "closed_coordinate_count": 25,
+    "courtyard": "Unbuilt central recess connected to exterior through NORTH opening; not a closed donut hole.",
+    "north_gap": "Between circular projection and east L-wing; no roof bridge in source ring.",
+    "circular_projection": "Faceted attached bulge projecting south into courtyard, not detached and not a circular hole.",
+    "future_geometry_guardrail": "Retain actual concave boundary if later authorized. No convex hull, triangle, rectangle or bridge across north gap."
+  },
+  "coordinate_system": {
+    "source": "EPSG:4326",
+    "source_order": [
+      "longitude_deg",
+      "latitude_deg"
+    ],
+    "local": "WGS84 ellipsoid ECEF -> tangent ENU",
+    "origin_lon_lat_height": [
+      116.3247083,
+      39.9984982,
+      0.0
+    ],
+    "ellipsoid": {
+      "a_m": 6378137.0,
+      "inverse_flattening": 298.257223563
+    },
+    "ecef_origin_m": [
+      -2169756.642721469,
+      4385406.779951059,
+      4077857.8315138947
+    ],
+    "ecef_delta_to_enu_matrix": [
+      [
+        -0.8962952764835294,
+        -0.4434577514863323,
+        0.0
+      ],
+      [
+        0.28504024376098736,
+        -0.5761095013772938,
+        0.7660612911898648
+      ],
+      [
+        -0.3397158176917739,
+        0.6866171167903493,
+        0.6427675304031133
+      ]
+    ],
+    "enu_order": [
+      "east_m",
+      "north_m",
+      "up_m"
+    ],
+    "assumed_input_ellipsoid_height_m": 0,
+    "height_warning": "Zero altitude is for horizontal coordinate conversion only, not site elevation or building height.",
+    "plan_axes": "EAST right, NORTH up; entrance side TOP; southern back wing BOTTOM. Orthographic plan removes screenshot perspective.",
+    "optional_scene_mapping": "[scene_x,scene_y,scene_z]=[east_m, independently sourced height, -north_m]; entrance side is north / negative scene_z. This does not migrate old frontZ5.",
+    "south_edge_unit_EN": [
+      0.9996729580320268,
+      0.025572973614684847
+    ],
+    "south_edge_rotation_from_east_deg": 1.4653832084735081
+  },
+  "geometry_wgs84": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          116.3242134,
+          39.9979207
+        ],
+        [
+          116.3241918,
+          39.9985655
+        ],
+        [
+          116.3250335,
+          39.998582
+        ],
+        [
+          116.3250355,
+          39.9984895
+        ],
+        [
+          116.3250701,
+          39.9984629
+        ],
+        [
+          116.3250835,
+          39.9983992
+        ],
+        [
+          116.3250527,
+          39.9983314
+        ],
+        [
+          116.3249749,
+          39.9982985
+        ],
+        [
+          116.3248609,
+          39.9983098
+        ],
+        [
+          116.3247952,
+          39.9983561
+        ],
+        [
+          116.324767,
+          39.9983961
+        ],
+        [
+          116.3247703,
+          39.9984362
+        ],
+        [
+          116.3246099,
+          39.9984342
+        ],
+        [
+          116.3245726,
+          39.9983283
+        ],
+        [
+          116.3244948,
+          39.9982338
+        ],
+        [
+          116.3244602,
+          39.9981468
+        ],
+        [
+          116.3244563,
+          39.9980839
+        ],
+        [
+          116.3255986,
+          39.9981064
+        ],
+        [
+          116.325588,
+          39.9984224
+        ],
+        [
+          116.3252737,
+          39.9984163
+        ],
+        [
+          116.3252689,
+          39.9985573
+        ],
+        [
+          116.3259568,
+          39.9985708
+        ],
+        [
+          116.3259707,
+          39.9981575
+        ],
+        [
+          116.3259774,
+          39.9979554
+        ],
+        [
+          116.3242134,
+          39.9979207
+        ]
+      ]
+    ]
+  },
+  "geometry_enu_m": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -42.26270163227938,
+          -64.12236311933938
+        ],
+        [
+          -44.10685004540765,
+          7.472756657644677
+        ],
+        [
+          27.7706566959529,
+          9.30475051524655
+        ],
+        [
+          27.94148564119872,
+          -0.9659497700307926
+        ],
+        [
+          30.89619018361463,
+          -3.9194587985492215
+        ],
+        [
+          32.04052329368691,
+          -10.99235824255077
+        ],
+        [
+          29.41036016890579,
+          -18.52051481773812
+        ],
+        [
+          22.766567315849418,
+          -22.17357593438979
+        ],
+        [
+          13.031423855798224,
+          -20.918907844904403
+        ],
+        [
+          7.420904116019608,
+          -15.778013377466444
+        ],
+        [
+          5.012736678752676,
+          -11.33663128918355
+        ],
+        [
+          5.294539903443938,
+          -6.884143552284374
+        ],
+        [
+          -8.40294744768547,
+          -7.1062099611644065
+        ],
+        [
+          -11.588228964582001,
+          -18.86477007369093
+        ],
+        [
+          -18.232058173052838,
+          -29.357526716572742
+        ],
+        [
+          -21.186788632262626,
+          -39.017529075620715
+        ],
+        [
+          -21.519853422559862,
+          -46.0016042518901
+        ],
+        [
+          76.02825084747761,
+          -43.50297658526027
+        ],
+        [
+          75.12270469526062,
+          -8.416052219656356
+        ],
+        [
+          48.28280210732771,
+          -9.09358085340681
+        ],
+        [
+          47.87280366492945,
+          6.562295649287863
+        ],
+        [
+          106.61645309252205,
+          8.061858925048956
+        ],
+        [
+          107.80410235507325,
+          -37.82872500430106
+        ],
+        [
+          108.3765760577528,
+          -60.26880857157401
+        ],
+        [
+          -42.26270163227938,
+          -64.12236311933938
+        ]
+      ]
+    ]
+  },
+  "vertices": [
+    {
+      "index": 0,
+      "osm_node_id": "975702263",
+      "wgs84_lon_lat": [
+        116.3242134,
+        39.9979207
+      ],
+      "enu_m": [
+        -42.26270163227938,
+        -64.12236311933938,
+        -0.00046298010554934876
+      ],
+      "node_version": "3",
+      "node_timestamp": "2019-11-09T11:02:35Z"
+    },
+    {
+      "index": 1,
+      "osm_node_id": "975702258",
+      "wgs84_lon_lat": [
+        116.3241918,
+        39.9985655
+      ],
+      "enu_m": [
+        -44.10685004540765,
+        7.472756657644677,
+        -0.0001566849482292909
+      ],
+      "node_version": "3",
+      "node_timestamp": "2019-11-09T11:02:35Z"
+    },
+    {
+      "index": 2,
+      "osm_node_id": "983373890",
+      "wgs84_lon_lat": [
+        116.3250335,
+        39.998582
+      ],
+      "enu_m": [
+        27.7706566959529,
+        9.30475051524655,
+        -6.717852142124059e-05
+      ],
+      "node_version": "2",
+      "node_timestamp": "2019-11-09T11:02:35Z"
+    },
+    {
+      "index": 3,
+      "osm_node_id": "975702260",
+      "wgs84_lon_lat": [
+        116.3250355,
+        39.9984895
+      ],
+      "enu_m": [
+        27.94148564119872,
+        -0.9659497700307926,
+        -6.119147871092023e-05
+      ],
+      "node_version": "3",
+      "node_timestamp": "2019-11-09T11:02:35Z"
+    },
+    {
+      "index": 4,
+      "osm_node_id": "6959725298",
+      "wgs84_lon_lat": [
+        116.3250701,
+        39.9984629
+      ],
+      "enu_m": [
+        30.89619018361463,
+        -3.9194587985492215,
+        -7.593577301068244e-05
+      ],
+      "node_version": "1",
+      "node_timestamp": "2019-11-09T11:02:35Z"
+    },
+    {
+      "index": 5,
+      "osm_node_id": "6959725297",
+      "wgs84_lon_lat": [
+        116.3250835,
+        39.9983992
+      ],
+      "enu_m": [
+        32.04052329368691,
+        -10.99235824255077,
+        -8.986334987870492e-05
+      ],
+      "node_version": "1",
+      "node_timestamp": "2019-11-09T11:02:35Z"
+    },
+    {
+      "index": 6,
+      "osm_node_id": "6959725299",
+      "wgs84_lon_lat": [
+        116.3250527,
+        39.9983314
+      ],
+      "enu_m": [
+        29.41036016890579,
+        -18.52051481773812,
+        -9.467186752054602e-05
+      ],
+      "node_version": "1",
+      "node_timestamp": "2019-11-09T11:02:35Z"
+    },
+    {
+      "index": 7,
+      "osm_node_id": "6959725300",
+      "wgs84_lon_lat": [
+        116.3249749,
+        39.9982985
+      ],
+      "enu_m": [
+        22.766567315849418,
+        -22.17357593438979,
+        -7.921787077158626e-05
+      ],
+      "node_version": "1",
+      "node_timestamp": "2019-11-09T11:02:35Z"
+    },
+    {
+      "index": 8,
+      "osm_node_id": "6959725301",
+      "wgs84_lon_lat": [
+        116.3248609,
+        39.9983098
+      ],
+      "enu_m": [
+        13.031423855798224,
+        -20.918907844904403,
+        -4.768734247484474e-05
+      ],
+      "node_version": "1",
+      "node_timestamp": "2019-11-09T11:02:35Z"
+    },
+    {
+      "index": 9,
+      "osm_node_id": "6959725302",
+      "wgs84_lon_lat": [
+        116.3247952,
+        39.9983561
+      ],
+      "enu_m": [
+        7.420904116019608,
+        -15.778013377466444,
+        -2.3877499386593115e-05
+      ],
+      "node_version": "1",
+      "node_timestamp": "2019-11-09T11:02:35Z"
+    },
+    {
+      "index": 10,
+      "osm_node_id": "6959725303",
+      "wgs84_lon_lat": [
+        116.324767,
+        39.9983961
+      ],
+      "enu_m": [
+        5.012736678752676,
+        -11.33663128918355,
+        -1.2067452760611275e-05
+      ],
+      "node_version": "1",
+      "node_timestamp": "2019-11-09T11:02:35Z"
+    },
+    {
+      "index": 11,
+      "osm_node_id": "983373902",
+      "wgs84_lon_lat": [
+        116.3247703,
+        39.9984362
+      ],
+      "enu_m": [
+        5.294539903443938,
+        -6.884143552284374,
+        -5.918381363212433e-06
+      ],
+      "node_version": "2",
+      "node_timestamp": "2019-11-09T11:02:35Z"
+    },
+    {
+      "index": 12,
+      "osm_node_id": "983373895",
+      "wgs84_lon_lat": [
+        116.3246099,
+        39.9984342
+      ],
+      "enu_m": [
+        -8.40294744768547,
+        -7.1062099611644065,
+        -9.497318311790792e-06
+      ],
+      "node_version": "2",
+      "node_timestamp": "2019-11-09T11:02:35Z"
+    },
+    {
+      "index": 13,
+      "osm_node_id": "7631857829",
+      "wgs84_lon_lat": [
+        116.3245726,
+        39.9983283
+      ],
+      "enu_m": [
+        -11.588228964582001,
+        -18.86477007369093,
+        -3.8482731708811e-05
+      ],
+      "node_version": "1",
+      "node_timestamp": "2020-06-18T09:19:19Z"
+    },
+    {
+      "index": 14,
+      "osm_node_id": "7631857828",
+      "wgs84_lon_lat": [
+        116.3244948,
+        39.9982338
+      ],
+      "enu_m": [
+        -18.232058173052838,
+        -29.357526716572742,
+        -9.376027744778526e-05
+      ],
+      "node_version": "1",
+      "node_timestamp": "2020-06-18T09:19:19Z"
+    },
+    {
+      "index": 15,
+      "osm_node_id": "975702261",
+      "wgs84_lon_lat": [
+        116.3244602,
+        39.9981468
+      ],
+      "enu_m": [
+        -21.186788632262626,
+        -39.017529075620715,
+        -0.00015478894352582984
+      ],
+      "node_version": "3",
+      "node_timestamp": "2019-11-09T11:02:35Z"
+    },
+    {
+      "index": 16,
+      "osm_node_id": "975702262",
+      "wgs84_lon_lat": [
+        116.3244563,
+        39.9980839
+      ],
+      "enu_m": [
+        -21.519853422559862,
+        -46.0016042518901,
+        -0.00020257044975480198
+      ],
+      "node_version": "3",
+      "node_timestamp": "2019-11-09T11:02:35Z"
+    },
+    {
+      "index": 17,
+      "osm_node_id": "4481648168",
+      "wgs84_lon_lat": [
+        116.3255986,
+        39.9981064
+      ],
+      "enu_m": [
+        76.02825084747761,
+        -43.50297658526027,
+        -0.0006012462306550503
+      ],
+      "node_version": "2",
+      "node_timestamp": "2019-11-09T11:02:35Z"
+    },
+    {
+      "index": 18,
+      "osm_node_id": "4481648171",
+      "wgs84_lon_lat": [
+        116.325588,
+        39.9984224
+      ],
+      "enu_m": [
+        75.12270469526062,
+        -8.416052219656356,
+        -0.00044735781206473035
+      ],
+      "node_version": "2",
+      "node_timestamp": "2019-11-09T11:02:35Z"
+    },
+    {
+      "index": 19,
+      "osm_node_id": "4481648170",
+      "wgs84_lon_lat": [
+        116.3252737,
+        39.9984163
+      ],
+      "enu_m": [
+        48.28280210732771,
+        -9.09358085340681,
+        -0.00018899788391379957
+      ],
+      "node_version": "2",
+      "node_timestamp": "2019-11-09T11:02:35Z"
+    },
+    {
+      "index": 20,
+      "osm_node_id": "4481648172",
+      "wgs84_lon_lat": [
+        116.3252689,
+        39.9985573
+      ],
+      "enu_m": [
+        47.87280366492945,
+        6.562295649287863,
+        -0.00018279656890474172
+      ],
+      "node_version": "2",
+      "node_timestamp": "2019-11-09T11:02:35Z"
+    },
+    {
+      "index": 21,
+      "osm_node_id": "4481648173",
+      "wgs84_lon_lat": [
+        116.3259568,
+        39.9985708
+      ],
+      "enu_m": [
+        106.61645309252205,
+        8.061858925048956,
+        -0.0008949708267671497
+      ],
+      "node_version": "2",
+      "node_timestamp": "2019-11-09T11:02:35Z"
+    },
+    {
+      "index": 22,
+      "osm_node_id": "4481648169",
+      "wgs84_lon_lat": [
+        116.3259707,
+        39.9981575
+      ],
+      "enu_m": [
+        107.80410235507325,
+        -37.82872500430106,
+        -0.0010222669432202736
+      ],
+      "node_version": "2",
+      "node_timestamp": "2019-11-09T11:02:35Z"
+    },
+    {
+      "index": 23,
+      "osm_node_id": "4481648167",
+      "wgs84_lon_lat": [
+        116.3259774,
+        39.9979554
+      ],
+      "enu_m": [
+        108.3765760577528,
+        -60.26880857157401,
+        -0.0012049660038009335
+      ],
+      "node_version": "2",
+      "node_timestamp": "2019-11-09T11:02:35Z"
+    },
+    {
+      "index": 24,
+      "osm_node_id": "975702263",
+      "wgs84_lon_lat": [
+        116.3242134,
+        39.9979207
+      ],
+      "enu_m": [
+        -42.26270163227938,
+        -64.12236311933938,
+        -0.00046298010554934876
+      ],
+      "node_version": "3",
+      "node_timestamp": "2019-11-09T11:02:35Z"
+    }
+  ],
+  "segments": {
+    "outer_south_back_edge": [
+      23,
+      0
+    ],
+    "outer_west_edge": [
+      0,
+      1
+    ],
+    "northwest_entrance_side_outer_edge": [
+      1,
+      2
+    ],
+    "circular_projection_chain": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "diagonal_inner_west_chain": [
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "inner_south_back_edge": [
+      16,
+      17
+    ],
+    "east_L_inner_chain": [
+      17,
+      18,
+      19,
+      20
+    ],
+    "northeast_outer_edge": [
+      20,
+      21
+    ],
+    "outer_east_chain": [
+      21,
+      22,
+      23
+    ]
+  },
+  "measurements_map_derived_not_survey": {
+    "combined_south_edge_length_m": 150.68855917297515,
+    "bounds_EN_m": [
+      [
+        -44.10685004540765,
+        -64.12236311933938
+      ],
+      [
+        108.3765760577528,
+        9.30475051524655
+      ]
+    ],
+    "signed_area_enu_m2": -7215.8621807648,
+    "area_m2": 7215.8621807648,
+    "north_gap_circle_to_east_wing": {
+      "width_m": 16.352888938458833,
+      "circle_EN_m": [
+        32.04052329368691,
+        -10.99235824255077
+      ],
+      "east_wing_closest_EN_m": [
+        48.28280210732771,
+        -9.09358085340681
+      ],
+      "circle_vertex_index": 5,
+      "east_wing_edge_indices": [
+        19,
+        20
+      ],
+      "method": "Minimum endpoint-to-segment distances of disjoint segment pairs, circle chain edges 3..11 versus east-wing edge 19->20."
+    }
+  },
+  "confidence": {
+    "source_fidelity": "High: exact OSM vertices, not hand-traced.",
+    "topology_agreement": "High: diagonal inner west edge, faceted circle, north opening, east L-wing, south band.",
+    "orientation": "User confirmed north/top and north entrance; not inferred from old model.",
+    "as_built_accuracy": "Unknown; community mapping is not a survey.",
+    "isolated_shunde_boundary": "Unresolved; source explicitly combines two buildings.",
+    "heights_materials": "Not derived; source building:levels tag retained uninterpreted only."
+  }
+}

@@ -1,0 +1,45 @@
+# Local retained assets and historical execution evidence
+/local-assets/
+
+# Dependencies and generated browser bundles
+node_modules
+**/assets/scene.js
+**/assets/scene.js.map
+__pycache__/
+*.pyc
+.DS_Store
+
+# Generated media, QA, delivery receipts and local working files
+output/
+renders/
+snapshots/
+qa/
+review/
+.cache/
+.hyperframes/
+.thumbnails/
+.waveform-cache/
+.media/
+projects/tsinghua-campus/data/diagnostics.json
+*.log
+*.mp4
+*.mov
+*.webm
+*.glb
+*.zip
+*.tmp
+*-receipt.json
+*delivery*.json
+
+# Local reference photos and restricted research downloads
+**/assets/reference*
+**/references/
+!projects/**/skills/**/references/
+!projects/**/skills/**/references/**
+
+# Credentials and local settings
+.env
+.env.*
+!.env.example
+*.pem
+*.key

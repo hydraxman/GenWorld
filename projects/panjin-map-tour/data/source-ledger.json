@@ -1,0 +1,108 @@
+{
+  "project": "盘锦湿地与人文经典自驾路线",
+  "updated": "2026-09-09",
+  "sources": [
+    {
+      "id": "panjin-self-drive-2024",
+      "publisher": "盘锦市人民政府",
+      "title": "七条！盘锦发布自驾游精品线路",
+      "url": "https://www.panjin.gov.cn/html/2535/2024-05-30/content-139584.html",
+      "use": "湿地、滨海、乡村、文化、历史和美食主题线路骨架"
+    },
+    {
+      "id": "panjin-spring-route-2025",
+      "publisher": "盘锦市文化旅游和广播电视局",
+      "title": "2025年盘锦春季自驾深度游精品线路",
+      "url": "https://wlgdj.panjin.gov.cn/2025_04/27_10/content-518591.html",
+      "use": "红海滩、田庄台、黑风关、辽河碑林、博物馆群落和广厦艺术街的多日组合"
+    },
+    {
+      "id": "liaoning-panjin-route-2026",
+      "publisher": "辽宁省文化和旅游厅",
+      "title": "盘锦发布球迷专属旅游线路",
+      "url": "https://whly.ln.gov.cn/whly/mtjj/2026052811083634366/index.shtml",
+      "use": "当前生态、滨海、历史文化和都市体验组合"
+    },
+    {
+      "id": "panjin-scenic-list",
+      "publisher": "盘锦市市场监督管理局 / 盘锦市人民政府办公室",
+      "title": "知名旅游景点",
+      "url": "https://scjgj.panjin.gov.cn/13826",
+      "use": "红海滩5A及辽河碑林、黑风关、广厦艺术街、江南风情园等A级景区身份"
+    },
+    {
+      "id": "panjin-museum",
+      "publisher": "盘锦市人民政府",
+      "title": "盘锦市博物馆正式开馆",
+      "url": "https://www.panjin.gov.cn/html/2535/2023-05-19/content-131565.html",
+      "use": "博物馆位于明代兴隆台烽火台旧址及展陈主题"
+    },
+    {
+      "id": "panjin-red-beach-season",
+      "publisher": "盘锦市人民政府",
+      "title": "盘锦秋季乡村休闲旅游线路",
+      "url": "https://www.panjin.gov.cn/html/2535/2024-09-19/content-141207.html",
+      "use": "红海滩、黑风关等景区性质及季节性边界"
+    },
+    {
+      "id": "panjin-red-beach-best-month",
+      "publisher": "盘锦市人民政府",
+      "title": "红海滩最佳观赏月份答复",
+      "url": "https://panjin.gov.cn:802/portal/index/chaxun2/id/4223.html",
+      "use": "红海滩可观月份与最佳月份口径"
+    },
+    {
+      "id": "osm",
+      "publisher": "OpenStreetMap contributors",
+      "title": "OpenStreetMap data and copyright",
+      "url": "https://www.openstreetmap.org/copyright",
+      "license": "Open Data Commons Open Database License 1.0",
+      "license_url": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "use": "景点、车站、湿地公园、古镇、游客中心和景区内部点位坐标"
+    },
+    {
+      "id": "osrm",
+      "publisher": "OSRM Project / OpenStreetMap contributors",
+      "title": "OSRM Route Service",
+      "url": "https://project-osrm.org/",
+      "use": "10站驾车道路几何、分段里程和时间估算"
+    },
+    {
+      "id": "openfreemap",
+      "publisher": "OpenFreeMap",
+      "title": "OpenFreeMap Quick Start",
+      "url": "https://openfreemap.org/quick_start/",
+      "use": "道路、水系和建筑矢量瓦片"
+    },
+    {
+      "id": "maplibre-marker",
+      "publisher": "MapLibre",
+      "title": "Marker API",
+      "url": "https://www.maplibre.org/maplibre-gl-js/docs/API/classes/Marker",
+      "use": "以setLngLat设置地理位置，并用bottom anchor将自定义编号引线底点对准道路锚点"
+    },
+    {
+      "id": "esri-imagery",
+      "publisher": "Esri",
+      "title": "World Imagery",
+      "url": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+      "metadata_url": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer?f=pjson",
+      "terms_url": "https://goto.arcgisonline.com/maps/World_Imagery",
+      "runtime_attribution": "Read current copyrightText from service metadata; display Powered by Esri continuously",
+      "use": "卫星和航空影像底图，成片持续显示提供方归因"
+    }
+  ],
+  "route_method": {
+    "mode": "自驾/包车；红海滩景区内部按现场交通规定换乘或步行",
+    "geometry": "以OSM核实POI为输入，由OSRM driving profile生成道路几何和道路入口锚点；视频编号、WebGL锚点和路线共用道路锚点；10个编号到路线距离均为0米；最大POI到道路锚点距离249米",
+    "coordinate_correction": "广厦艺术街公开高德坐标由GCJ-02转换为WGS84后再与OSM/OSRM叠加",
+    "distance_km": 142.5,
+    "estimated_drive_minutes": 162,
+    "limitations": [
+      "纯驾驶时间不含拥堵、停车、等候和游览",
+      "景区开放与内部交通以当天公告为准",
+      "红海滩景观受季节、潮位和植物生长状态影响",
+      "OSM和OSRM公开数据不能替代车载导航的实时路况"
+    ]
+  }
+}

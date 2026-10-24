@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>盘锦湿地与人文经典自驾路线</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="./vendor/maplibre-gl.css" />
+  <style>
+    :root{--red:#e94e4e;--red2:#ff775e;--reed:#86b55b;--teal:#51d1c5;--sand:#f4d7a1;--panel:rgba(8,25,30,.86);--ink:#fff;--muted:rgba(255,255,255,.65)}
+    *{box-sizing:border-box}html,body,#app,#map{width:100%;height:100%;margin:0;overflow:hidden;background:#071419;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
+    #app{position:relative;color:var(--ink)}#map{position:absolute;inset:0}.shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(4,18,23,.56),transparent 42%,rgba(4,18,23,.24)),linear-gradient(0deg,rgba(4,18,23,.48),transparent 38%)}
+    .header{position:absolute;left:54px;top:46px;width:1020px;text-shadow:0 4px 20px rgba(0,0,0,.72)}
+    .eyebrow{font-size:18px;font-weight:800;letter-spacing:.17em;color:#ffd6b2;margin-bottom:10px}.title{font-size:49px;line-height:1.08;font-weight:950;letter-spacing:-.025em}.subtitle{margin-top:12px;font-size:21px;font-weight:650;color:rgba(255,255,255,.86)}
+    .chips{display:flex;gap:10px;margin-top:17px}.chip{background:rgba(6,24,28,.76);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:8px 13px;font-size:15px;backdrop-filter:blur(12px)}
+    .rail{position:absolute;right:34px;top:34px;width:446px;height:1012px;padding:22px 22px 18px;background:var(--panel);border:1px solid rgba(255,255,255,.14);border-radius:25px;box-shadow:0 22px 70px rgba(0,0,0,.42);backdrop-filter:blur(18px)}
+    .rail-head{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid rgba(255,255,255,.14);padding-bottom:14px;margin-bottom:8px}.rail-title{font-size:24px;font-weight:900}.rail-meta{font-size:13px;color:var(--muted);text-align:right}.stops{display:grid;grid-template-columns:1fr;gap:2px}.day-divider{height:31px;display:flex;align-items:center;gap:10px;color:#ffd6b2;font-size:12px;font-weight:900;letter-spacing:.11em}.day-divider:after{content:"";height:1px;flex:1;background:rgba(255,255,255,.14)}
+    .stop{display:grid;grid-template-columns:42px 1fr 54px;align-items:center;min-height:65px;padding:5px 7px;border-radius:14px;color:rgba(255,255,255,.68)}.stop .n{width:31px;height:31px;display:grid;place-items:center;border-radius:50%;font-weight:900;font-size:13px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.13)}.stop .name{font-size:16px;font-weight:780;white-space:nowrap}.stop .day{font-size:11px;color:rgba(255,255,255,.44);text-align:right}.stop.done{color:#fff}.stop.done .n{background:var(--reed);border-color:#d9efc4}.stop.active{background:linear-gradient(90deg,rgba(233,78,78,.62),rgba(81,209,197,.1));color:#fff}.stop.active .n{background:#fff;color:#bf2f37;box-shadow:0 0 0 5px rgba(255,119,94,.25)}
+    .active-card{position:absolute;left:54px;bottom:72px;width:700px;padding:19px 24px;background:linear-gradient(135deg,rgba(34,18,18,.94),rgba(5,35,38,.9));border:1px solid rgba(255,255,255,.17);border-radius:20px;box-shadow:0 18px 55px rgba(0,0,0,.4);backdrop-filter:blur(14px)}
+    .active-row{display:flex;align-items:center;gap:14px}.active-num{width:49px;height:49px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--red),var(--teal));font-size:21px;font-weight:950}.active-name{font-size:29px;font-weight:950}.day-pill{margin-left:auto;border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:6px 11px;color:#ffd6b2;font-size:13px;font-weight:850}.active-note{margin-top:7px;margin-left:63px;color:rgba(255,255,255,.66);font-size:16px}.active-caption{margin-top:11px;margin-left:63px;max-width:590px;color:#fff;font-size:22px;line-height:1.45;font-weight:730;text-shadow:0 2px 6px rgba(0,0,0,.58)}.progress-wrap{position:absolute;left:54px;right:518px;bottom:32px;height:8px;border-radius:8px;background:rgba(255,255,255,.18);overflow:hidden}.progress{height:100%;width:0;background:linear-gradient(90deg,var(--reed),var(--sand),var(--red));box-shadow:0 0 18px rgba(233,78,78,.58)}
+    .attribution{position:absolute;left:16px;bottom:8px;font-size:10px;color:rgba(255,255,255,.74);text-shadow:0 1px 3px #000;background:rgba(0,0,0,.46);padding:3px 7px;border-radius:4px}.notice{position:absolute;right:500px;top:42px;font-size:13px;color:rgba(255,255,255,.72);background:rgba(0,0,0,.42);padding:8px 12px;border-radius:999px}
+    .pin{position:absolute;width:120px;height:88px;pointer-events:none;overflow:visible}.pin svg{position:absolute;inset:0;width:120px;height:88px;overflow:visible;filter:drop-shadow(0 3px 5px rgba(0,0,0,.65))}.pin line{stroke:rgba(255,255,255,.92);stroke-width:3}.pin .anchor-dot{position:absolute;left:55px;bottom:0;width:10px;height:10px;border-radius:50%;background:#fff;border:3px solid #153d3f;box-shadow:0 0 0 3px rgba(81,209,197,.34)}.pin .badge{position:absolute;top:0;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:rgba(9,42,46,.97);border:3px solid #fff;box-shadow:0 7px 20px rgba(0,0,0,.62);font-size:23px;line-height:1;font-weight:950;color:#fff}.pin.day2 .badge{background:rgba(128,34,42,.97)}.pin.done .badge{background:var(--reed)}.pin.active .badge{width:64px;height:64px;margin-left:-4px;margin-top:-4px;background:linear-gradient(135deg,var(--red),var(--teal));font-size:27px;box-shadow:0 0 0 8px rgba(255,119,94,.26),0 9px 26px rgba(0,0,0,.66)}.pin.active .anchor-dot{background:var(--red);border-color:#fff;box-shadow:0 0 0 6px rgba(255,119,94,.28)}.maplibregl-marker{z-index:2}.maplibregl-marker.active-wrap{z-index:20}
+    .final-view .active-card,.final-view .progress-wrap{opacity:0}
+  </style>
+</head>
+<body>
+<div id="app">
+  <div id="map"></div><div class="shade"></div>
+  <div class="header">
+    <div class="eyebrow">PANJIN WETLAND & CULTURE DRIVE</div>
+    <div class="title">盘锦湿地与人文经典自驾路线</div>
+    <div class="subtitle">从辽河书法与城市记忆，一路驶向红滩、绿苇和最北海岸线</div>
+    <div class="chips"><span class="chip">10 个停靠点</span><span class="chip">约 143 km</span><span class="chip">纯驾驶约 2小时42分</span><span class="chip">建议 2 天</span></div>
+  </div>
+  <div class="notice">大号编号引线底点 = 道路入口锚点</div>
+  <aside class="rail"><div class="rail-head"><div class="rail-title">两日路线</div><div class="rail-meta">盘锦站出发<br>红海滩收束</div></div><div id="stops" class="stops"></div></aside>
+  <section class="active-card"><div class="active-row"><div id="activeNum" class="active-num">1</div><div id="activeName" class="active-name">盘锦站</div><div id="dayPill" class="day-pill">DAY 1</div></div><div id="activeNote" class="active-note">抵达盘锦，开启湿地与人文之旅</div><div id="activeCaption" class="active-caption"></div></section>
+  <div class="progress-wrap"><div id="progress" class="progress"></div></div>
+  <div id="attribution" class="attribution">Powered by Esri · Source: Esri, Vantor, Earthstar Geographics, and the GIS User Community · OpenFreeMap / OpenMapTiles · © OpenStreetMap contributors · ODbL: openstreetmap.org/copyright · Routing: OSRM</div>
+</div>
+<script src="./vendor/maplibre-gl.js"></script>
+<script>
+(async()=>{
+  const esriMetadataUrl='https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer?f=pjson';
+  const [routeFC,itinerary,narration,esriMetadata]=await Promise.all([fetch('../data/route.geojson').then(r=>r.json()),fetch('../data/itinerary.json').then(r=>r.json()),fetch('../data/narration-schedule.json').then(r=>r.json()),fetch(esriMetadataUrl).then(r=>r.ok?r.json():Promise.reject(new Error(`Esri metadata ${r.status}`))).catch(()=>({copyrightText:'Source: Esri, Vantor, Earthstar Geographics, and the GIS User Community'}))]);
+  document.getElementById('attribution').textContent=`Powered by Esri · ${esriMetadata.copyrightText} · OpenFreeMap / OpenMapTiles · © OpenStreetMap contributors · ODbL: openstreetmap.org/copyright · Routing: OSRM`;
+  const route=routeFC.features.find(f=>f.geometry.type==='LineString'),stops=itinerary.stops,coords=route.geometry.coordinates;
+  const totalDuration=narration.total_duration_s;
+  const overview=[122.07,40.94];
+  const rail=document.getElementById('stops');
+  let html='';stops.forEach((s,i)=>{if(i===0||stops[i-1].day!==s.day)html+=`<div class="day-divider">DAY ${s.day}</div>`;html+=`<div class="stop" data-i="${i}"><div class="n">${s.id}</div><div class="name">${s.short}</div><div class="day">D${s.day}</div></div>`});rail.innerHTML=html;
+  const style={version:8,sources:{
+    satellite:{type:'raster',tiles:['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],tileSize:256,attribution:'Source: Esri, Vantor, Earthstar Geographics, and the GIS User Community'},
+    openmaptiles:{type:'vector',url:'https://tiles.openfreemap.org/planet'}
+  },layers:[
+    {id:'satellite',type:'raster',source:'satellite',paint:{'raster-saturation':-.08,'raster-contrast':.14,'raster-brightness-min':.1,'raster-brightness-max':.88}},
+    {id:'water',type:'fill',source:'openmaptiles','source-layer':'water',paint:{'fill-color':'#3b8f99','fill-opacity':.28}},
+    {id:'main-roads',type:'line',source:'openmaptiles','source-layer':'transportation',minzoom:8,filter:['match',['get','class'],['motorway','trunk','primary','secondary','tertiary'],true,false],paint:{'line-color':'rgba(255,244,222,.58)','line-width':['interpolate',['linear'],['zoom'],8,.35,13,2.2],'line-opacity':.7}},
+    {id:'buildings',type:'fill-extrusion',source:'openmaptiles','source-layer':'building',minzoom:12.5,paint:{'fill-extrusion-color':'#d8c8b6','fill-extrusion-height':['coalesce',['to-number',['get','render_height']],['*',['coalesce',['to-number',['get','levels']],3],3],10],'fill-extrusion-base':['coalesce',['to-number',['get','render_min_height']],0],'fill-extrusion-opacity':.42}}
+  ]};
+  const map=new maplibregl.Map({container:'map',style,center:overview,zoom:9.35,pitch:31,bearing:-7,interactive:false,attributionControl:false,preserveDrawingBuffer:true,fadeDuration:0,maxPitch:65});
+  await new Promise(resolve=>map.once('load',resolve));
+  map.addSource('route-base',{type:'geojson',data:route});
+  map.addLayer({id:'route-glow',type:'line',source:'route-base',layout:{'line-cap':'round','line-join':'round'},paint:{'line-color':'#102c2d','line-width':12,'line-opacity':.78}});
+  map.addLayer({id:'route-dim',type:'line',source:'route-base',layout:{'line-cap':'round','line-join':'round'},paint:{'line-color':'#f4d7a1','line-width':4.5,'line-opacity':.66,'line-dasharray':[1.1,1.1]}});
+  map.addSource('route-progress',{type:'geojson',lineMetrics:true,data:{type:'Feature',properties:{},geometry:{type:'LineString',coordinates:[coords[0],coords[0]]}}});
+  map.addLayer({id:'route-progress-glow',type:'line',source:'route-progress',layout:{'line-cap':'round','line-join':'round'},paint:{'line-color':'#ff5a51','line-width':14,'line-blur':7,'line-opacity':.48}});
+  map.addLayer({id:'route-progress-line',type:'line',source:'route-progress',layout:{'line-cap':'round','line-join':'round'},paint:{'line-width':6,'line-gradient':['interpolate',['linear'],['line-progress'],0,'#86b55b',.55,'#f4d7a1',1,'#e94e4e']}});
+  const stopPoints={type:'FeatureCollection',features:stops.map(s=>({type:'Feature',properties:{id:s.id,day:s.day},geometry:{type:'Point',coordinates:s.coordinates}}))};
+  map.addSource('stop-anchors',{type:'geojson',data:stopPoints});
+  map.addLayer({id:'stop-anchor-halo',type:'circle',source:'stop-anchors',paint:{'circle-radius':9,'circle-color':'rgba(255,255,255,.92)','circle-stroke-width':2,'circle-stroke-color':'rgba(5,25,29,.85)'}});
+  map.addLayer({id:'stop-anchor-core',type:'circle',source:'stop-anchors',paint:{'circle-radius':4,'circle-color':['match',['get','day'],1,'#86b55b','#e94e4e']}});
+  const markerDx=[52,-50,0,-48,28,38,0,0,34,-34];
+  const markerEls=[];stops.forEach((s,i)=>{const dx=markerDx[i];const el=document.createElement('div');el.className='pin'+(s.day===2?' day2':'');el.dataset.stopId=String(s.id);el.innerHTML=`<svg viewBox="0 0 120 88" aria-hidden="true"><line x1="60" y1="82" x2="${60+dx}" y2="54"/></svg><div class="badge" style="left:${32+dx}px">${s.id}</div><div class="anchor-dot"></div>`;new maplibregl.Marker({element:el,anchor:'bottom',pitchAlignment:'viewport',rotationAlignment:'viewport',subpixelPositioning:true}).setLngLat(s.coordinates).addTo(map);markerEls.push(el)});
+  const seg=[];let total=0;for(let i=1;i<coords.length;i++){const a=coords[i-1],b=coords[i],x=(b[0]-a[0])*Math.cos((a[1]+b[1])*Math.PI/360),y=b[1]-a[1],d=Math.hypot(x,y);seg.push(d);total+=d}
+  function projectProgress(pt){let best={d:Infinity,p:0},run=0;for(let i=0;i<seg.length;i++){const a=coords[i],b=coords[i+1],lat=(a[1]+b[1]+pt[1])/3*Math.PI/180,sx=Math.cos(lat),vx=(b[0]-a[0])*sx,vy=b[1]-a[1],wx=(pt[0]-a[0])*sx,wy=pt[1]-a[1],vv=vx*vx+vy*vy,q=vv?Math.max(0,Math.min(1,(wx*vx+wy*vy)/vv)):0,dx=wx-q*vx,dy=wy-q*vy,d=dx*dx+dy*dy;if(d<best.d)best={d,p:(run+seg[i]*q)/total};run+=seg[i]}return best.p}
+  const stopProgress=stops.map(s=>projectProgress(s.coordinates));
+  function along(p){p=Math.max(0,Math.min(1,p));let target=p*total,run=0;for(let i=0;i<seg.length;i++){if(run+seg[i]>=target){const q=seg[i]?((target-run)/seg[i]):0;return {point:[coords[i][0]+(coords[i+1][0]-coords[i][0])*q,coords[i][1]+(coords[i+1][1]-coords[i][1])*q],index:i};}run+=seg[i]}return {point:coords.at(-1),index:coords.length-2}}
+  function partial(p){const a=along(p);return coords.slice(0,a.index+1).concat([a.point])}
+  function smooth(x){x=Math.max(0,Math.min(1,x));return x*x*x*(x*(x*6-15)+10)}
+  function mix(a,b,t){return a+(b-a)*t}function mix2(a,b,t){return [mix(a[0],b[0],t),mix(a[1],b[1],t)]}
+  const overviewCamera={center:overview,zoom:9.15,pitch:25,bearing:-7};
+  const regionCameras={
+    north:{center:[122.05,41.28],zoom:11.2,pitch:38,bearing:-7},
+    central:{center:[122.11,41.12],zoom:11.1,pitch:38,bearing:-7},
+    south:{center:[122.16,40.79],zoom:10.9,pitch:38,bearing:-7},
+    redbeach:{center:[121.84,40.91],zoom:11.3,pitch:38,bearing:-7}
+  };
+  function regionForStop(id){return id<=3?'north':id<=6?'central':id<=8?'south':'redbeach'}
+  function segmentAt(t){let found=narration.segments[0];for(const s of narration.segments)if(t>=s.start_s)found=s;return found}
+  function targetFor(seg){if(seg.id==='intro'||seg.id==='outro')return overviewCamera;return regionCameras[regionForStop(seg.stop_id)]}
+  function transitionSeconds(a,b){if(a===b)return 1;const lat=(a.center[1]+b.center[1])/2*Math.PI/180,d=Math.hypot((b.center[0]-a.center[0])*Math.cos(lat),(b.center[1]-a.center[1]))*111320;return Math.max(5.5,Math.min(8.5,5.5+d/12000))}
+  function cameraAt(t){const index=Math.max(0,narration.segments.findLastIndex(s=>t>=s.start_s)),seg=narration.segments[index],target=targetFor(seg),prev=index?targetFor(narration.segments[index-1]):target;if(prev===target)return target;const span=transitionSeconds(prev,target),q=smooth((t-seg.start_s)/span),zoomDip=Math.sin(Math.PI*q)*.4;return {center:mix2(prev.center,target.center,q),zoom:mix(prev.zoom,target.zoom,q)-zoomDip,pitch:mix(prev.pitch,target.pitch,q)-Math.sin(Math.PI*q)*2,bearing:-7}}
+  function progressAt(t){const seg=segmentAt(t);if(seg.id==='intro'||seg.id==='stop-1')return 0;if(seg.id==='outro')return 1;const i=seg.stop_id-1,from=stopProgress[Math.max(0,i-1)],to=stopProgress[i],q=smooth((t-seg.start_s)/Math.min(4.2,seg.duration_s*.45));return mix(from,to,q)}
+  let lastActive=-1;function setActive(i){if(i===lastActive)return;lastActive=i;document.getElementById('activeNum').textContent=stops[i].id;document.getElementById('activeName').textContent=stops[i].name;document.getElementById('activeNote').textContent=stops[i].note;document.getElementById('dayPill').textContent=`DAY ${stops[i].day}`;document.querySelectorAll('.stop').forEach((el,j)=>el.className='stop'+(j<i?' done':j===i?' active':''));markerEls.forEach((el,j)=>{el.className='pin'+(stops[j].day===2?' day2':'')+(j<i?' done':j===i?' active':'');el.parentElement?.classList.toggle('active-wrap',j===i)})}
+  window.renderAt=async function(t){const seg=segmentAt(t),active=Math.max(0,seg.stop_id-1),p=progressAt(t);map.jumpTo(cameraAt(t));map.getSource('route-progress').setData({type:'Feature',properties:{},geometry:{type:'LineString',coordinates:partial(p)}});document.getElementById('progress').style.width=`${p*100}%`;setActive(active);document.getElementById('activeCaption').textContent=(t>=seg.start_s&&t<=seg.speech_end_s)?seg.text:'';document.getElementById('app').classList.toggle('final-view',seg.id==='outro'&&t>seg.speech_end_s);map.triggerRepaint();await new Promise(r=>setTimeout(r,26));return {t,p,active,segment:seg.id,camera:cameraAt(t)}};
+  window.prewarm=async function(){const cameras=[overviewCamera,...Object.values(regionCameras)];for(const c of cameras){map.jumpTo(c);await new Promise(r=>{let done=false;const finish=()=>{if(!done){done=true;r()}};map.once('idle',finish);setTimeout(finish,4000)})}map.jumpTo(cameraAt(0));await new Promise(r=>setTimeout(r,160));return true};
+  window.__MAP__=map;window.__STOPS__=stops;window.__NARRATION__=narration;window.stopProgress=stopProgress;window.cameraAt=cameraAt;window.progressAt=progressAt;window.TOTAL_DURATION=totalDuration;window.__TOUR_READY__=true;setActive(0);await window.renderAt(0);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+{
+  "tested": 11,
+  "passed": 11,
+  "results": [
+    {
+      "path": "history/tsinghua-mem-3d-book-opening/deliverables/Tsinghua-MEM-3D-Book-Opening.html",
+      "title": "Tsinghua MEM · Hinged Book Assembly",
+      "ready": true,
+      "durations": [
+        12
+      ],
+      "hasRenderAt": true,
+      "externalRequests": [],
+      "errors": [],
+      "visuallyChanges": true,
+      "passed": true
+    },
+    {
+      "path": "history/tsinghua-mem-3d-starlight/deliverables/Tsinghua-MEM-3D-Starlight.html",
+      "title": "Tsinghua MEM · 3D Starlight",
+      "ready": true,
+      "durations": [
+        6
+      ],
+      "hasRenderAt": true,
+      "externalRequests": [],
+      "errors": [],
+      "visuallyChanges": true,
+      "passed": true
+    },
+    {
+      "path": "history/tsinghua-mem-awakening-wide/deliverables/Tsinghua-MEM-Awakening-Wide.html",
+      "title": "Tsinghua MEM · Awakening · Flowing Galaxy",
+      "ready": true,
+      "durations": [
+        12
+      ],
+      "hasRenderAt": true,
+      "externalRequests": [],
+      "errors": [],
+      "visuallyChanges": true,
+      "passed": true
+    },
+    {
+      "path": "history/tsinghua-mem-badge-motion/deliverables/Tsinghua-MEM-Light-Studies.html",
+      "title": "Tsinghua MEM · Light Studies",
+      "ready": true,
+      "durations": [
+        18
+      ],
+      "hasRenderAt": true,
+      "externalRequests": [],
+      "errors": [],
+      "visuallyChanges": true,
+      "passed": true
+    },
+    {
+      "path": "history/tsinghua-mem-open-world/deliverables/Tsinghua-MEM-Open-World.html",
+      "title": "开卷见天地 · Tsinghua MEM",
+      "ready": true,
+      "durations": [
+        12
+      ],
+      "hasRenderAt": true,
+      "externalRequests": [],
+      "errors": [],
+      "visuallyChanges": true,
+      "passed": true
+    },
+    {
+      "path": "history/tsinghua-mem-seven-studies/deliverables/Seven-Studies.html",
+      "title": "MEM · Seven material studies",
+      "ready": true,
+      "durations": [
+        42
+      ],
+      "hasRenderAt": true,
+      "externalRequests": [],
+      "errors": [],
+      "visuallyChanges": true,
+      "passed": true
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/01/deliverables/Tsinghua-MEM-01.html",
+      "title": "Tsinghua MEM · 星际穿越",
+      "ready": true,
+      "durations": [
+        5
+      ],
+      "hasRenderAt": true,
+      "externalRequests": [],
+      "errors": [],
+      "visuallyChanges": true,
+      "passed": true
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/02/deliverables/Tsinghua-MEM-02.html",
+      "title": "Tsinghua MEM · 极光织带",
+      "ready": true,
+      "durations": [
+        5
+      ],
+      "hasRenderAt": true,
+      "externalRequests": [],
+      "errors": [],
+      "visuallyChanges": true,
+      "passed": true
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/03/deliverables/Tsinghua-MEM-03.html",
+      "title": "清华MEM 03 星尘凝徽",
+      "ready": true,
+      "durations": [
+        5
+      ],
+      "hasRenderAt": true,
+      "externalRequests": [],
+      "errors": [],
+      "visuallyChanges": true,
+      "passed": true
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/04/deliverables/Tsinghua-MEM-04.html",
+      "title": "清华MEM 04 折光涟漪",
+      "ready": true,
+      "durations": [
+        5
+      ],
+      "hasRenderAt": true,
+      "externalRequests": [],
+      "errors": [],
+      "visuallyChanges": true,
+      "passed": true
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/deliverables/05-Blue-Sky-Cloud-Opening.html",
+      "title": "05 · 清华MEM · 蓝天云启",
+      "ready": true,
+      "durations": [
+        5
+      ],
+      "hasRenderAt": true,
+      "externalRequests": [],
+      "errors": [],
+      "visuallyChanges": true,
+      "passed": true
+    }
+  ],
+  "sceneBundleBuilds": [
+    {
+      "path": "history/tsinghua-mem-3d-book-opening",
+      "passed": true
+    },
+    {
+      "path": "history/tsinghua-mem-3d-starlight",
+      "passed": true
+    },
+    {
+      "path": "history/tsinghua-mem-awakening-wide",
+      "passed": true
+    },
+    {
+      "path": "history/tsinghua-mem-open-world",
+      "passed": true
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/01",
+      "passed": true
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/02",
+      "passed": true
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/03",
+      "passed": true
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/04",
+      "passed": true
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud",
+      "passed": true
+    }
+  ],
+  "scope": "Archive smoke tests only: offline loading, no HTTP requests, no page errors, timeline seeking changes pixels; 3D entrypoints compile. No full video re-render or portability claim for historical helper scripts.",
+  "frozenInputChecks": [
+    {
+      "path": "history/tsinghua-mem-3d-book-opening/qa/render-input-freeze.json",
+      "verifiedFiles": 21,
+      "passed": true
+    },
+    {
+      "path": "history/tsinghua-mem-awakening-wide/qa/render-input-freeze.json",
+      "verifiedFiles": 17,
+      "passed": true
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/01/qa/render-input-freeze.json",
+      "verifiedFiles": 15,
+      "passed": true
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-a/02/qa/render-input-freeze.json",
+      "verifiedFiles": 15,
+      "passed": true
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/03/qa/render-input-freeze.json",
+      "verifiedFiles": 15,
+      "passed": true
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-b/04/qa/render-input-freeze.json",
+      "verifiedFiles": 15,
+      "passed": true
+    },
+    {
+      "path": "latest/tsinghua-mem-five-effects-cloud/qa/render-input-freeze.json",
+      "verifiedFiles": 23,
+      "passed": true
+    },
+    {
+      "path": "history/tsinghua-mem-open-world/qa/render-input-freeze.json",
+      "verifiedFiles": 21,
+      "passed": true
+    }
+  ],
+  "sourceArt": {
+    "originalRasterExists": false,
+    "revectorizationTested": false
+  }
+}

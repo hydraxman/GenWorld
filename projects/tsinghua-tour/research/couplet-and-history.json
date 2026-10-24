@@ -1,0 +1,405 @@
+{
+  "schema_version": "1.0",
+  "scope": "北京清华大学校园导览V3：楹联与八站事实核实；不生成音频或动画，不修改地图。",
+  "verified_at_utc": "2026-09-09T06:09:33.385507+00:00",
+  "v2_manifest": "photos/all-manifest.json",
+  "couplet": {
+    "location": "工字厅北侧水木清华正廊，水木清华匾额两旁的朱柱",
+    "canonical_source_url": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+    "additional_official_url": "https://www.tsinghua.edu.cn/info/1360/1396.htm",
+    "source_citation_ids": [
+      1,
+      2
+    ],
+    "official_full_text": "槛外山光历春夏秋冬万千变幻都非凡境，窗中云影任东西南北去来澹荡洵是仙居。",
+    "upper": "槛外山光历春夏秋冬万千变幻都非凡境",
+    "lower": "窗中云影任东西南北去来澹荡洵是仙居",
+    "line_character_counts": [
+      17,
+      17
+    ],
+    "total_character_count": 34,
+    "orientation": {
+      "viewpoint": "站在挂匾一面，面向水木清华匾额/正廊；按观者视角，不按建筑自身左右。",
+      "upper_position": "观者右侧",
+      "lower_position": "观者左侧",
+      "within_each_line": "由上向下",
+      "reading_order": "先读右侧上联，再读左侧下联",
+      "plaque_reading": "从右向左读水木清華；照片视觉左到右为華清木水。",
+      "evidence_citation_ids": [
+        7
+      ],
+      "evidence_photos": [
+        "research/evidence/shuimu-front.png",
+        "research/evidence/shuimu-close.png"
+      ]
+    },
+    "recitation": {
+      "voice_target": "晓晓；本任务仅提供文本和读音，不生成或验证音频。",
+      "text": "槛外山光，历春夏秋冬，万千变幻，都非凡境；\n窗中云影，任东西南北，去来澹荡，洵是仙居。",
+      "upper_segments": [
+        "槛外山光",
+        "历春夏秋冬",
+        "万千变幻",
+        "都非凡境"
+      ],
+      "lower_segments": [
+        "窗中云影",
+        "任东西南北",
+        "去来澹荡",
+        "洵是仙居"
+      ],
+      "phrase_character_pattern": [
+        4,
+        5,
+        4,
+        4
+      ],
+      "punctuation_status": "现代编辑断句，非声称原木联刻有标点。与新湖南现场报道断句一致；仅添标点，不改一个原文字。",
+      "pause_advice": "每联四个意群，逗号短停，上下联之间稍长停；春夏秋冬和东西南北各连贯朗读，不在词内断开。",
+      "source_citation_ids": [
+        1,
+        7
+      ]
+    },
+    "calligraphy_display": {
+      "default_script": "规范简体，逐字文本以清华官网转录为准，不声称复制原匾行书笔迹。",
+      "upper_no_punctuation": "槛外山光历春夏秋冬万千变幻都非凡境",
+      "lower_no_punctuation": "窗中云影任东西南北去来澹荡洵是仙居",
+      "upper_characters": [
+        "槛",
+        "外",
+        "山",
+        "光",
+        "历",
+        "春",
+        "夏",
+        "秋",
+        "冬",
+        "万",
+        "千",
+        "变",
+        "幻",
+        "都",
+        "非",
+        "凡",
+        "境"
+      ],
+      "lower_characters": [
+        "窗",
+        "中",
+        "云",
+        "影",
+        "任",
+        "东",
+        "西",
+        "南",
+        "北",
+        "去",
+        "来",
+        "澹",
+        "荡",
+        "洵",
+        "是",
+        "仙",
+        "居"
+      ],
+      "traditional_standard_optional": {
+        "note": "若需与实物传统字形呼应，可用以下规范繁体字；这是文字规范转写而非笔迹摹本，不自动替换默认简体底稿。",
+        "upper": "檻外山光歷春夏秋冬萬千變幻都非凡境",
+        "lower": "窗中雲影任東西南北去來澹蕩洵是仙居"
+      },
+      "layout": "右列上联，左列下联，各列从上往下。若逐字出现，按先上联后下联的朗诵顺序。"
+    },
+    "pronunciation": [
+      {
+        "character": "槛",
+        "traditional": "檻",
+        "pinyin": "jiàn",
+        "tone_number": "jian4",
+        "context": "槛外",
+        "meaning_here": "栏杆外；此处采用栏杆义，不按门槛的kǎn读。",
+        "evidence_citation_ids": [
+          8
+        ],
+        "note": "汉典列jiàn、kǎn；按本联栏杆语义选jiàn。"
+      },
+      {
+        "character": "澹",
+        "pinyin": "dàn",
+        "tone_number": "dan4",
+        "context": "澹荡",
+        "word_pinyin": "dàn dàng",
+        "meaning_here": "舒缓自在地荡漾、飘动；这里写云影往来。",
+        "evidence_citation_ids": [
+          9,
+          7
+        ],
+        "note": "不是复姓澹台的tán；不要把原联的澹改成淡。"
+      },
+      {
+        "character": "洵",
+        "pinyin": "xún",
+        "tone_number": "xun2",
+        "context": "洵是仙居",
+        "meaning_here": "确实、诚然。",
+        "evidence_citation_ids": [
+          10
+        ],
+        "note": "三点水加旬；不是询、徇、恂，不读xùn。"
+      }
+    ],
+    "pronunciation_implementation_note": "朗读引擎如需消歧，应使用其已验证支持的读音标注或词典设置；不要把书法正文改成剑、淡、寻等同音字。尚未实测晓晓合成。",
+    "authorship": {
+      "official_description": "清华大学校园景观页称殷兆镛撰书。",
+      "official_verbatim_fragment": "殷兆镛撰书的名联",
+      "official_citation_ids": [
+        1,
+        2
+      ],
+      "recommended_precise_credit": "殷兆镛书；联语源自沈斌题扬州贺园杏轩旧联。",
+      "recommended_tour_narration": "两旁长联由殷兆镛书写，把四时山色与往来云影都写进了清华园。",
+      "original_text_author": "沈斌",
+      "original_setting": "扬州贺园杏轩",
+      "historical_trace": "苗日新考证文指出原联见李斗《扬州画舫录》，梁章钜《楹联丛话》又有收录；清华本有都、东西南北、澹荡等差异。",
+      "historical_citation_ids": [
+        6,
+        7
+      ],
+      "important_distinction": "作者、题写者、现挂木联实物年代不是同一问题。不称殷兆镛凭空原创，不称所核照片中的木联为清代原件。",
+      "source_disagreement": "2007年苗日新文将总→都及南北东西→东西南北归于《楹联丛话》转录变化；2025年报道概括为殷兆镛借鉴改写。稳定结论为源自沈斌旧联、清华本通常归殷兆镛书；本任务不裁定每处字差首次产生的环节。",
+      "historical_source_limit": "清华校友总会页16899前端含“此文档已删除”，但公开HTTP HTML仍保留完整署名正文，已保存原HTML。作为署名研究佐证而非无争议官方定论；2025年记者现场采访金兼斌的报道交叉支持旧联来源。未直接校勘《扬州画舫录》古籍原版。"
+    },
+    "do_not_change": [
+      "都非凡境不可改为总非凡境",
+      "东西南北不可改为南北东西",
+      "任不可误作在",
+      "去来不可倒作来去",
+      "澹荡不可改作淡荡或荡漾",
+      "洵不可改成询或恂"
+    ],
+    "plaque_authorship_warning": "官网用“有记载说”介绍康熙御笔；苗日新考证文持否定意见。普通导览只讲四字出自谢混诗，不把康熙题写作为确定事实。",
+    "photo_cross_check": [
+      {
+        "file": "research/evidence/shuimu-front.png",
+        "original_url": "https://img2.voc.com.cn/9/2025/06/23/92ae7bd5d058c6283ebe34e368ba705edcdf6acc1750680432051.png?pid=26506932",
+        "source_page_url": "https://m.voc.com.cn/xhn/news/202506/29766577.html",
+        "source_citation_id": 7,
+        "sha256": "b6dee5e7f4663800c177c45f84f4ef89f91f2772fea1979b69c6d4cd9afbe86c",
+        "visual_observation": "正面全景：匾额视觉左到右为華清木水，应从右向左读水木清華；观者右侧联起于檻外，左侧联起于窗中。",
+        "method": "vision_analyze实际加载原图及局部区域；不使用生成图，不用OCR推测替代原文。",
+        "limitations": "下联字较小、斜视，不能把照片当作所有行书笔画及落款的独立鉴定；标准全文以清华官网转录为准，照片用于字序、主要字词、上下联位置交叉核对。",
+        "credit": "湖南日报·新湖南，摄影摄像/徐行（报道整体署名）",
+        "license": "文章声明版权作品，未经授权严禁转载；此次保存仅作核验依据，不自动加入视频素材，不宣称公开复用授权。"
+      },
+      {
+        "file": "research/evidence/shuimu-close.png",
+        "original_url": "https://img2.voc.com.cn/9/2025/06/23/9af18e8bd40ee50f976142806d739a7c662632e31750680503345.png?pid=26507012",
+        "source_page_url": "https://m.voc.com.cn/xhn/news/202506/29766577.html",
+        "source_citation_id": 7,
+        "sha256": "51c42d060cba13badddd8c7c16cda23cc68136c6060c7159d908dbd1a4c55615",
+        "visual_observation": "现场采访近景：观者右侧上联可读至都非凡境；左侧下联从窗中起，按任東西南北、去來澹蕩、洵是仙居排列。与官网全文及同篇记者转录相符。",
+        "method": "vision_analyze实际加载原图及局部区域；不使用生成图，不用OCR推测替代原文。",
+        "limitations": "下联字较小、斜视，不能把照片当作所有行书笔画及落款的独立鉴定；标准全文以清华官网转录为准，照片用于字序、主要字词、上下联位置交叉核对。",
+        "credit": "湖南日报·新湖南，摄影摄像/徐行（报道整体署名）",
+        "license": "文章声明版权作品，未经授权严禁转载；此次保存仅作核验依据，不自动加入视频素材，不宣称公开复用授权。"
+      }
+    ],
+    "v2_photo_assessment": "V2水木清华照片为临池远景，虽可核景点身份，但楹联太小，不能据此逐字核验。新增两张有来源的实景照片仅存research/evidence。"
+  },
+  "station_count": 8,
+  "stations": [
+    {
+      "order": 1,
+      "name": "舜德楼",
+      "tour_fact": "舜德楼于2000年奠基，2003年投入使用。",
+      "narration_text": "舜德楼于2000年奠基，2003年投入使用。",
+      "official_url": "https://yuanqing.sem.tsinghua.edu.cn/sem30/info/1033/1310.htm",
+      "citation_id": 3,
+      "verbatim_evidence": "舜德楼于2000年奠基，2003年投入使用。",
+      "reuse_basis": "优先复用V2既有官方事实来源，并重新读取相同官方页面核对。",
+      "v2_photo_path": "photos/08-shundelou.jpg",
+      "photo_caveat": "V2舜德楼外景为2021年院庆文章所用历史照片，拍摄时间未知，来自搜狐承载文章，不是2026年现状照片，不冒称官网直出照片。",
+      "identity_verification_url": "https://www.ie.tsinghua.edu.cn/lxwm.htm",
+      "identity_verification_quote": "北京市海淀区清华大学舜德楼"
+    },
+    {
+      "order": 2,
+      "name": "二校门",
+      "tour_fact": "1933年校园扩建后，原来的主校门便被称为“二校门”。",
+      "narration_text": "1933年校园扩建后，原来的主校门便被称为“二校门”。",
+      "official_url": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+      "citation_id": 1,
+      "verbatim_evidence": "1933年，校园扩建，园墙外移，有了新的大门(今日的西校门)。此后，这座最早的校门就被称之为\"二校门\"。",
+      "reuse_basis": "优先复用V2既有官方事实来源，并重新读取相同官方页面核对。",
+      "v2_photo_path": "photos/01-erkxiaomen.png"
+    },
+    {
+      "order": 3,
+      "name": "日晷",
+      "tour_fact": "大礼堂草坪前的日晷，底座刻着清华校风“行胜于言”。",
+      "narration_text": "大礼堂草坪前的日晷，底座刻着清华校风“行胜于言”。",
+      "official_url": "https://www.tsinghua.edu.cn/info/1182/46741.htm",
+      "citation_id": 4,
+      "verbatim_evidence": "其底座上镌刻的‘行胜于言’作为清华大学的校风",
+      "reuse_basis": "优先复用V2既有官方事实来源，并重新读取相同官方页面核对。",
+      "v2_photo_path": "photos/03-sundial.jpg"
+    },
+    {
+      "order": 4,
+      "name": "清华学堂",
+      "tour_fact": "清华学堂位于工字厅东侧，建筑带有德国古典风格。",
+      "narration_text": "清华学堂位于工字厅东侧，建筑带有德国古典风格。",
+      "official_url": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+      "citation_id": 1,
+      "verbatim_evidence": "清华学堂带着浓郁的德国古典风格，在工字厅东边落成",
+      "reuse_basis": "优先复用V2既有官方事实来源，并重新读取相同官方页面核对。",
+      "v2_photo_path": "photos/02-qinghua-xuetang.jpg",
+      "avoid": "本处指清华学堂，不是百年校庆建成的新清华学堂。"
+    },
+    {
+      "order": 5,
+      "name": "大礼堂",
+      "tour_fact": "大礼堂与老图书馆、西体育馆、科学馆，并称清华早期“四大建筑”。",
+      "narration_text": "大礼堂与老图书馆、西体育馆、科学馆，并称清华早期“四大建筑”。",
+      "official_url": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+      "citation_id": 1,
+      "verbatim_evidence": "大礼堂与老图书馆、西体育馆和科学馆，并称\"四大建筑\"",
+      "reuse_basis": "优先复用V2既有官方事实来源，并重新读取相同官方页面核对。",
+      "v2_photo_path": "photos/04-auditorium.jpg"
+    },
+    {
+      "order": 6,
+      "name": "水木清华",
+      "tour_fact": "“水木清华”四字，出自晋人谢混诗中的“水木湛清华”。",
+      "narration_text": "“水木清华”四字，出自晋人谢混诗中的“水木湛清华”。",
+      "official_url": "https://www.tsinghua.edu.cn/info/1360/1396.htm",
+      "citation_id": 2,
+      "verbatim_evidence": "\"水木清华\"四字，出自晋人谢混诗：\"惠风荡繁囿，白云屯曾阿，景昃鸣禽集，水木湛清华。\"",
+      "reuse_basis": "优先复用V2既有官方事实来源，并重新读取相同官方页面核对。",
+      "v2_photo_path": "photos/05-shuimu-qinghua.png",
+      "avoid": "水木清华荷花池不是近春园荷塘；不把水木清华匾额书者确定说成康熙。"
+    },
+    {
+      "order": 7,
+      "name": "工字厅",
+      "tour_fact": "工字厅的前后两殿以短廊相连，俯视像一个“工”字，因此得名。",
+      "narration_text": "工字厅的前后两殿以短廊相连，俯视像一个“工”字，因此得名。",
+      "official_url": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+      "citation_id": 1,
+      "verbatim_evidence": "因其前、后两大殿中间以短廊相接，俯视恰似一\"工\"字，故得名。",
+      "reuse_basis": "优先复用V2既有官方事实来源，并重新读取相同官方页面核对。",
+      "v2_photo_path": "photos/06-gongziting.jpg"
+    },
+    {
+      "order": 8,
+      "name": "近春园",
+      "tour_fact": "近春园荷塘环绕的小岛，通过一座汉白玉拱桥与岸边相连。",
+      "narration_text": "近春园荷塘环绕的小岛，通过一座汉白玉拱桥与岸边相连。",
+      "official_url": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+      "citation_id": 1,
+      "verbatim_evidence": "此岛通过一座汉白玉拱桥与岸边相连。",
+      "reuse_basis": "优先复用V2既有官方事实来源，并重新读取相同官方页面核对。",
+      "v2_photo_path": "photos/07-jinchunyuan.jpg"
+    }
+  ],
+  "sources": [
+    {
+      "name": "campus",
+      "url": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+      "title": "校园景观-清华大学",
+      "status": 200,
+      "retrieved_at": "2026-09-09T06:06:37.771550+00:00",
+      "citation_label": "[1] https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+      "citation_id": 1,
+      "supporting_quote": "槛外山光历春夏秋冬万千变幻都非凡境，窗中云影任东西南北去来澹荡洵是仙居。"
+    },
+    {
+      "name": "shuimu",
+      "url": "https://www.tsinghua.edu.cn/info/1360/1396.htm",
+      "title": "水木清华-清华大学",
+      "status": 200,
+      "retrieved_at": "2026-09-09T06:06:37.756460+00:00",
+      "citation_label": "[2] https://www.tsinghua.edu.cn/info/1360/1396.htm",
+      "citation_id": 2,
+      "supporting_quote": "殷兆镛撰书的名联"
+    },
+    {
+      "name": "shunde-history",
+      "url": "https://yuanqing.sem.tsinghua.edu.cn/sem30/info/1033/1310.htm",
+      "title": "经管家园变迁记-清华大学经济管理学院",
+      "status": 200,
+      "retrieved_at": "2026-09-09T06:06:38.076005+00:00",
+      "citation_label": "[3] https://yuanqing.sem.tsinghua.edu.cn/sem30/info/1033/1310.htm",
+      "citation_id": 3,
+      "supporting_quote": "舜德楼于2000年奠基，2003年投入使用。"
+    },
+    {
+      "name": "sundial",
+      "url": "https://www.tsinghua.edu.cn/info/1182/46741.htm",
+      "title": "清华大学日晷被刻字 校方：学校已修复并呼吁爱护校园环境-清华大学",
+      "status": 200,
+      "retrieved_at": "2026-09-09T06:06:37.762607+00:00",
+      "citation_label": "[4] https://www.tsinghua.edu.cn/info/1182/46741.htm",
+      "citation_id": 4,
+      "supporting_quote": "其底座上镌刻的‘行胜于言’作为清华大学的校风"
+    },
+    {
+      "name": "ie-contact",
+      "url": "https://www.ie.tsinghua.edu.cn/lxwm.htm",
+      "title": "联系我们-清华大学工业工程系",
+      "status": 200,
+      "retrieved_at": "2026-09-09T06:06:37.753613+00:00",
+      "citation_label": "[5] https://www.ie.tsinghua.edu.cn/lxwm.htm",
+      "citation_id": 5,
+      "supporting_quote": "北京市海淀区清华大学舜德楼"
+    },
+    {
+      "name": "alumni-history",
+      "url": "https://www.tsinghua.org.cn/info/1952/16899.htm",
+      "title": "康乾盛世的熙春园（今清华园）之五-清华校友总会",
+      "status": 200,
+      "retrieved_at": "2026-09-09T06:06:37.882927+00:00",
+      "citation_label": "[6] https://www.tsinghua.org.cn/info/1952/16899.htm",
+      "citation_id": 6,
+      "supporting_quote": "楹联原作者是震泽（吴江名镇）沈斌，乾隆年间题于扬州贺园里的杏轩。"
+    },
+    {
+      "name": "reportage",
+      "url": "https://m.voc.com.cn/xhn/news/202506/29766577.html",
+      "title": "楹联中国行⑧丨在水木清华，寻找俯仰自如的坐标",
+      "status": 200,
+      "retrieved_at": "2026-09-09T06:06:38.122563+00:00",
+      "citation_label": "[7] https://m.voc.com.cn/xhn/news/202506/29766577.html",
+      "citation_id": 7,
+      "supporting_quote": "槛外山光，历春夏秋冬，万千变幻，都非凡境；"
+    },
+    {
+      "citation_id": 8,
+      "name": "dictionary-槛",
+      "url": "https://www.zdic.net/hans/槛",
+      "title": "汉典：槛",
+      "supporting_quote": "槛 jiàn、kǎn - 汉典"
+    },
+    {
+      "citation_id": 9,
+      "name": "dictionary-澹",
+      "url": "https://www.zdic.net/hans/澹",
+      "title": "汉典：澹",
+      "supporting_quote": "澹 dàn、tán - 汉典"
+    },
+    {
+      "citation_id": 10,
+      "name": "dictionary-洵",
+      "url": "https://www.zdic.net/hans/洵",
+      "title": "汉典：洵",
+      "supporting_quote": "诚然，确实"
+    }
+  ],
+  "limitations": [
+    "CDP预检未连接；全部研究使用公开HTTP或网页提取，不请求登录、不操作DSX。",
+    "汉典部分现代释义在提取结果中缺漏；页面标题保留读音，结合字义和上下文选读。",
+    "舜德楼官网首次文本提取失败，直接公开HTTP重试取得完整官方历史正文。",
+    "不推定教学楼、工字厅室内或任何景点无需预约即可进入；不提供未经当日核实的开放时间。"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "name": "tsinghua-mem-seven-studies",
+  "private": true,
+  "scripts": {
+    "check": "npx hyperframes@0.8.38 check",
+    "render": "npx hyperframes@0.8.38 render --fps 30 --quality delivery -o renders/seven-master.mp4"
+  }
+}

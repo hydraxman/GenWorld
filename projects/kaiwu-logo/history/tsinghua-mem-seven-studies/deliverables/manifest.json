@@ -1,0 +1,53 @@
+{
+  "items": [
+    {
+      "id": "01",
+      "name": "Starfield / Metal",
+      "mp4": "deliverables/01-starfield.mp4",
+      "duration": 6
+    },
+    {
+      "id": "02",
+      "name": "Nebula / Iridescence",
+      "mp4": "deliverables/02-nebula.mp4",
+      "duration": 6
+    },
+    {
+      "id": "03",
+      "name": "Aurora / Glass",
+      "mp4": "deliverables/03-aurora.mp4",
+      "duration": 6
+    },
+    {
+      "id": "04",
+      "name": "Milky Way / Transmission",
+      "mp4": "deliverables/04-milky-way.mp4",
+      "duration": 6
+    },
+    {
+      "id": "05",
+      "name": "Star Trails / Contour",
+      "mp4": "deliverables/05-star-trails.mp4",
+      "duration": 6
+    },
+    {
+      "id": "06",
+      "name": "Meteors / Glint",
+      "mp4": "deliverables/06-meteors.mp4",
+      "duration": 6
+    },
+    {
+      "id": "07",
+      "name": "Dawn / Pearl",
+      "mp4": "deliverables/07-dawn.mp4",
+      "duration": 6
+    }
+  ],
+  "comparison": "deliverables/01-07-comparison.mp4",
+  "selector": "deliverables/Seven-Studies.html",
+  "source_sha256": "89bdad7d41062bf6b2cf4ed340d79ba62499126fb1f785b725ed4c76813c038c",
+  "verified": true,
+  "verification": "proof/video-verification.json",
+  "master": "renders/seven-master.mp4",
+  "source_archive": "deliverables/Seven-Studies-source.zip"
+}

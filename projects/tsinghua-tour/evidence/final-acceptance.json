@@ -1,0 +1,206 @@
+{
+  "sha256": "0152e1cb27e1d71a00ff8f60c669f9de57877895306a0f185c6b434dbfe5ed9e",
+  "bytes": 26904371,
+  "duration_seconds": 355.208333,
+  "width": 1280,
+  "height": 720,
+  "frames": 8525,
+  "strict_decode": true,
+  "route_length_m": 4618.486599312919,
+  "photo_count": 12,
+  "stop_count": 12,
+  "audio_count": 15,
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "audio_verified": [
+    {
+      "id": "intro",
+      "name": "开场",
+      "style": "friendly",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "correlation": 0.9997250234899391,
+      "offset_samples": 0,
+      "verified_range_seconds": [
+        0.05,
+        17.9740625
+      ]
+    },
+    {
+      "id": "main",
+      "name": "新主楼",
+      "style": "friendly",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "correlation": 0.9997263211378705,
+      "offset_samples": 16,
+      "verified_range_seconds": [
+        0.05,
+        19.3258125
+      ]
+    },
+    {
+      "id": "shunde",
+      "name": "舜德楼",
+      "style": "friendly",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "correlation": 0.9840262290812968,
+      "offset_samples": -16,
+      "verified_range_seconds": [
+        0.05,
+        15.074229166666667
+      ]
+    },
+    {
+      "id": "gate",
+      "name": "二校门",
+      "style": "friendly",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "correlation": 0.9997210193623168,
+      "offset_samples": -16,
+      "verified_range_seconds": [
+        0.05,
+        16.911833333333334
+      ]
+    },
+    {
+      "id": "sundial",
+      "name": "日晷",
+      "style": "gentle",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "correlation": 0.9997475863716784,
+      "offset_samples": -16,
+      "verified_range_seconds": [
+        0.05,
+        17.0125
+      ]
+    },
+    {
+      "id": "school",
+      "name": "清华学堂",
+      "style": "friendly",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "correlation": 0.9997850482875363,
+      "offset_samples": -16,
+      "verified_range_seconds": [
+        0.05,
+        17.588083333333334
+      ]
+    },
+    {
+      "id": "auditorium",
+      "name": "大礼堂",
+      "style": "friendly",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "correlation": 0.9997695199795893,
+      "offset_samples": 16,
+      "verified_range_seconds": [
+        0.05,
+        18.600291666666667
+      ]
+    },
+    {
+      "id": "shuimu",
+      "name": "水木清华",
+      "style": "gentle",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "correlation": 0.999682555587547,
+      "offset_samples": -16,
+      "verified_range_seconds": [
+        0.05,
+        21.104125
+      ]
+    },
+    {
+      "id": "couplet",
+      "name": "水木清华对联",
+      "style": "poetry-reading",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "correlation": 0.9998781965750339,
+      "offset_samples": 0,
+      "verified_range_seconds": [
+        0.05,
+        17.366229166666667
+      ]
+    },
+    {
+      "id": "gongzi",
+      "name": "工字厅",
+      "style": "gentle",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "correlation": 0.9998032217554922,
+      "offset_samples": -16,
+      "verified_range_seconds": [
+        0.05,
+        17.3125
+      ]
+    },
+    {
+      "id": "jinchun",
+      "name": "近春园",
+      "style": "gentle",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "correlation": 0.9997582216130151,
+      "offset_samples": -16,
+      "verified_range_seconds": [
+        0.05,
+        16.745416666666667
+      ]
+    },
+    {
+      "id": "gym",
+      "name": "西体育馆",
+      "style": "friendly",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "correlation": 0.9997718859880714,
+      "offset_samples": 0,
+      "verified_range_seconds": [
+        0.05,
+        18.653125
+      ]
+    },
+    {
+      "id": "library",
+      "name": "老图书馆",
+      "style": "gentle",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "correlation": 0.9996947063679961,
+      "offset_samples": 0,
+      "verified_range_seconds": [
+        0.05,
+        18.9125
+      ]
+    },
+    {
+      "id": "canteen",
+      "name": "紫荆园食堂",
+      "style": "friendly",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "correlation": 0.9825684701382199,
+      "offset_samples": 0,
+      "verified_range_seconds": [
+        0.05,
+        19.490125
+      ]
+    },
+    {
+      "id": "outro",
+      "name": "收尾",
+      "style": "friendly",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "correlation": 0.9996944079789023,
+      "offset_samples": 16,
+      "verified_range_seconds": [
+        0.05,
+        22.1125
+      ]
+    }
+  ],
+  "audio_peak": 0.72979736328125,
+  "couplet_characters": 34,
+  "booking_reminder_preserved": true,
+  "map_basemap": "EOxCloudless 2025 Sentinel-2 (10m) plus OSM road/building overlays",
+  "starfield": "deterministic decorative SVG; not an astronomical survey",
+  "original_audio_bitstream_unchanged": true,
+  "original_audio_bitstream_hash": "SHA256=c9f1d281848659a4bd51018cfb3e86dc566f1fad930e84df13df341b1dc18548",
+  "v4_nonlinear_intro_preserved": true,
+  "artifact": "final/tsinghua-v5-satellite-stars.mp4",
+  "kind": "verification of frozen delivered artifact; not a claim that a future rerender has identical pixels"
+}
