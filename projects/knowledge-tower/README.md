@@ -30,6 +30,6 @@ npm --prefix projects/knowledge-tower run qa
 npm run build:pages
 ```
 
-浏览器检查需要 Chrome 或 Edge，可通过 `CHROME_PATH` 指定。它使用临时服务与独立档案，不修改实际学习记录。Pages 构建只打包演示必需文件，不包含源码、测试、缓存或其他项目素材。
+浏览器检查需要 Chrome 或 Edge，可通过 `CHROME_PATH` 指定。它使用临时服务与独立档案，不修改实际学习记录。Pages 将知识学院与其他精选场景整合到统一导航站点，仅打包各场景运行必需文件与许可说明，不包含测试、缓存或参考照片。
 
 原创代码采用仓库 [MIT 许可](../../LICENSE)。演示使用的公共模型为 CC0，固定来源及必要贴图见 [模型来源](assets/models/SOURCES.md)。课程与模型均为学习原型，不代替教材或专业认证。

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f6f5ef">
+  <meta name="description" content="探索 GenWorld 的交互式三维场景：知识学院、清华园、舜德楼与庭院建筑。">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="site.css">
+  <title>GenWorld · 在三维中探索</title>
+</head>
+<body>
+  <header class="site-header">
+    <a class="wordmark" href="./" aria-label="GenWorld 首页"><span class="brand-symbol" aria-hidden="true">G</span>GENWORLD<span class="wordmark-note">空间实验室</span></a>
+    <nav aria-label="主导航"><a href="#explore">探索场景</a><a href="credits.html">关于与许可</a><a href="https://github.com/hydraxman/GenWorld">GitHub ↗</a></nav>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="status-dot"></span>AN OPEN WORLD OF IDEAS</p>
+        <h1>把好奇心，<br>放进<span>三维空间。</span></h1>
+        <p class="hero-description">知识可以是一座大楼，建筑可以是一段探索。<br>从一个入口开始，换个角度看世界。</p>
+        <a class="primary-link" href="scene.html?scene=knowledge">走进知识学院 <span aria-hidden="true">↗</span></a>
+        <div class="hero-meta"><span><b>04</b>探索入口</span><span><b>3D</b>实时交互</span><span><b>OPEN</b>开源实验</span></div>
+      </div>
+      <a class="hero-art" href="scene.html?scene=knowledge" aria-label="预览知识学院">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <span class="art-label art-label-top">KNOWLEDGE HAS DIMENSION</span>
+        <div class="tower-art" aria-hidden="true"><div class="tower-crown"></div><div class="tower-body"></div><div class="tower-base"></div><i class="tower-tree tree-one"></i><i class="tower-tree tree-two"></i></div>
+        <span class="art-label art-label-bottom">16 FLOORS / ONE LEARNING JOURNEY <span>↗</span></span>
+      </a>
+    </section>
+    <section class="explore" id="explore" aria-labelledby="explore-title">
+      <div class="section-title"><div><p class="eyebrow">CHOOSE YOUR PERSPECTIVE</p><h2 id="explore-title">从这里，进入场景。</h2></div><p>无需安装 · 浏览器内直接探索</p></div>
+      <div class="scene-grid"><!-- SCENE_CARDS --></div>
+    </section>
+    <section class="site-note"><span class="note-symbol" aria-hidden="true">↗</span><p>这不是一组视频，而是可以走进去的空间。<br><span>拖动旋转、缩放观察；各场景保留自己的探索工具。需要支持 WebGL 的现代浏览器。</span></p></section>
+  </main>
+  <footer class="site-footer"><span>GENWORLD <span class="muted">/ 空间里的想法</span></span><span>建筑为近似重建，学习测评不代表认证。</span><a href="credits.html">来源与许可 ↗</a></footer>
+</body>
+</html>

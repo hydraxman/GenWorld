@@ -1,12 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readdir, readFile } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
+import { readdir, readFile, mkdtemp, rm } from 'node:fs/promises';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+import { tmpdir } from 'node:os';
 import path from 'node:path';
+import { buildKnowledgePages } from '../scripts/build-pages.mjs';
 
-test('Pages contains only the public demo, its licensed models and license notices', async () => {
-  await import('../scripts/build-pages.mjs');
-  const root = new URL('../../../output/pages/', import.meta.url);
+test('Pages contains only the public demo, its licensed models and license notices', async t => {
+  const output = await mkdtemp(path.join(tmpdir(), 'genworld-knowledge-pages-'));
+  t.after(() => rm(output, { recursive: true, force: true }));
+  await buildKnowledgePages(output);
+  const root = pathToFileURL(output + path.sep);
   const files = (await readdir(root, { recursive: true, withFileTypes: true }))
     .filter(entry => entry.isFile())
     .map(entry => path.relative(fileURLToPath(root), path.join(entry.parentPath, entry.name)).split(path.sep).join('/'))

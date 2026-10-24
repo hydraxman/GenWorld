@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="site.css">
+  <title>场景预览 · GenWorld</title>
+  <script defer src="preview.js"></script>
+</head>
+<body class="preview-page">
+  <header class="site-header preview-header">
+    <a class="wordmark" href="./" aria-label="返回 GenWorld 首页"><span class="brand-symbol" aria-hidden="true">G</span>GENWORLD</a>
+    <nav id="scene-navigation" aria-label="切换三维场景"><!-- SCENE_LINKS --></nav>
+    <a class="preview-home" href="./">← 返回首页</a>
+  </header>
+  <main class="preview-main">
+    <div id="preview-status" class="preview-status" role="status">正在打开场景…</div>
+    <iframe id="scene-frame" title="三维场景" allow="fullscreen" allowfullscreen hidden></iframe>
+    <noscript><p class="preview-status">请启用 JavaScript，或<a href="./#explore">返回首页</a>直接打开场景文件。</p></noscript>
+  </main>
+  <footer class="preview-footer"><span id="scene-caption">GENWORLD / INTERACTIVE EXPLORER</span><a id="direct-link" hidden>独立打开场景 ↗</a><a href="credits.html">来源与许可</a></footer>
+</body>
+</html>
