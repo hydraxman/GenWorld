@@ -14,7 +14,7 @@ if (!scene) {
   direct.href = scene.source;
   direct.hidden = false;
   const frame = document.getElementById('scene-frame');
-  frame.title = `${scene.title} · 交互式三维预览`;
+  frame.title = `${scene.title} · 交互预览`;
   frame.addEventListener('load', () => {
     if (!frame.contentDocument?.querySelector('canvas')) {
       status.setAttribute('role', 'alert');
@@ -31,8 +31,8 @@ if (!scene) {
       else if (error || Date.now() - started > 90000) {
         status.setAttribute('role', 'alert');
         status.textContent = error
-          ? '三维场景初始化失败。请确认浏览器支持 WebGL，或独立打开场景查看提示。'
-          : '三维场景载入超时。请检查网络与浏览器的图形加速，或独立打开重试。';
+          ? '场景初始化失败。请独立打开查看提示；三维场景需要浏览器支持 WebGL。'
+          : '场景载入超时。请检查网络，或独立打开重试。';
       } else return;
       clearInterval(timer);
     }, 250);

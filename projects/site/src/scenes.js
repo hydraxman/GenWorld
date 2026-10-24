@@ -23,4 +23,10 @@ export const scenes = [
     detail: '视角切换 · 分层展开 · 模型导出',
     source: 'scenes/courtyard/', number: '04',
   },
+  {
+    id: 'wind-print', title: '风向印刷所', english: 'WIND PRINT STUDIO',
+    category: '风场 × 生成艺术', description: '拨动 WIND 线条，拖动种下叶片，用一阵风的时间，印一张自己的海报。',
+    detail: 'p5.js 交互 · 种子构图 · PNG 导出',
+    source: 'scenes/wind-print/', number: '05',
+  },
 ];

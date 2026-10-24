@@ -23,6 +23,8 @@ test('publishes an exact allowlist, with no research media, private files or sou
       'data/source-footprint.json', 'data/campus-context.json'].map(file => `scenes/campus/${file}`),
     ...['index.html', 'assets/scene.js', 'assets/leaves/maple-color.png', 'assets/leaves/Normal.png',
       'assets/leaves/Roughness.png', 'assets/leaves/SOURCE.json'].map(file => `scenes/courtyard/${file}`),
+    ...['index.html', 'style.css', 'studio.js', 'vendor/p5.min.js', 'vendor/p5.js',
+      'vendor/LICENSE.txt'].map(file => `scenes/wind-print/${file}`),
   ].sort();
   assert.deepEqual(actual, expected);
 });
@@ -31,8 +33,8 @@ test('every entry opens a distinct route under the repository subpath', async ()
   const home = await read('index.html');
   const preview = await read('scene.html');
   const base = new URL('https://example.test/GenWorld/');
-  assert.equal(new Set(scenes.map(scene => scene.id)).size, 4);
-  assert.equal(new Set(scenes.map(scene => scene.source)).size, 4);
+  assert.equal(new Set(scenes.map(scene => scene.id)).size, 5);
+  assert.equal(new Set(scenes.map(scene => scene.source)).size, 5);
   for (const scene of scenes) {
     assert.ok(home.includes(`href="scene.html?scene=${scene.id}"`));
     assert.ok(preview.includes(`data-scene="${scene.id}"`));
@@ -45,7 +47,7 @@ test('every entry opens a distinct route under the repository subpath', async ()
 
 test('all local links and scripts in published HTML resolve', async () => {
   for (const file of ['index.html', 'scene.html', 'credits.html', 'scenes/knowledge/index.html',
-    'scenes/campus/index.html', 'scenes/courtyard/index.html']) {
+    'scenes/campus/index.html', 'scenes/courtyard/index.html', 'scenes/wind-print/index.html']) {
     const base = new URL(file, 'https://example.test/GenWorld/');
     for (const [, link] of (await read(file)).matchAll(/(?:href|src)="([^"]+)"/g)) {
       const url = new URL(link, base);
@@ -68,4 +70,6 @@ test('retains third-party attribution and downloadable map databases', async () 
   assert.equal(JSON.parse(await read('scenes/courtyard/assets/leaves/SOURCE.json')).license, 'CC0');
   assert.equal(JSON.parse(await read('scenes/campus/data/campus.json')).type, 'FeatureCollection');
   assert.match(await read('credits.html'), /ODbL 1\.0/);
+  assert.match(await read('scenes/wind-print/vendor/LICENSE.txt'), /GNU LESSER GENERAL PUBLIC LICENSE/);
+  assert.match(await read('credits.html'), /LGPL 2\.1/);
 });

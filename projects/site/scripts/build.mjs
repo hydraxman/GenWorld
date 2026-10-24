@@ -27,7 +27,8 @@ export async function buildSite() {
     `<a data-scene="${scene.id}" href="scene.html?scene=${scene.id}">${scene.title}</a>`).join('');
   for (const file of ['index.html', 'scene.html']) {
     const html = (await readFile(path.join(site, file), 'utf8'))
-      .replace('<!-- SCENE_CARDS -->', cards).replace('<!-- SCENE_LINKS -->', links);
+      .replace('<!-- SCENE_CARDS -->', cards).replace('<!-- SCENE_LINKS -->', links)
+      .replace('<!-- SCENE_COUNT -->', String(scenes.length).padStart(2, '0'));
     await writeFile(path.join(output, file), html);
   }
   for (const file of ['site.css', 'credits.html']) await copy(path.join(site, file), path.join(output, file));
@@ -45,6 +46,11 @@ export async function buildSite() {
     ['projects/tsinghua-campus/style.css', 'scenes/campus/style.css'],
     ['projects/tsinghua-campus/src/second-gate-font-OFL.txt', 'scenes/campus/LICENSE-font.txt'],
     ['projects/courtyard/viewer.html', 'scenes/courtyard/index.html'],
+    ['projects/wind-print/index.html', 'scenes/wind-print/index.html'],
+    ['projects/wind-print/style.css', 'scenes/wind-print/style.css'],
+    ['node_modules/p5/lib/p5.min.js', 'scenes/wind-print/vendor/p5.min.js'],
+    ['node_modules/p5/lib/p5.js', 'scenes/wind-print/vendor/p5.js'],
+    ['node_modules/p5/license.txt', 'scenes/wind-print/vendor/LICENSE.txt'],
   ]) await copy(path.join(repository, source), path.join(output, destination));
   for (const file of ['campus.json', 'provenance.json', 'gongzi-source.json', 'second-gate-anchor.json', 'old-library-match.json']) {
     await copy(path.join(repository, 'projects', 'tsinghua-campus', 'data', file),
@@ -74,6 +80,11 @@ export async function buildSite() {
   }
   await build({
     entryPoints: [path.join(site, 'src', 'preview.js')], outfile: path.join(output, 'preview.js'),
+    bundle: true, minify: true, format: 'iife', target: 'chrome120',
+  });
+  await build({
+    entryPoints: [path.join(repository, 'projects', 'wind-print', 'src', 'main.js')],
+    outfile: path.join(output, 'scenes', 'wind-print', 'studio.js'),
     bundle: true, minify: true, format: 'iife', target: 'chrome120',
   });
   const courtyard = path.join(output, 'scenes', 'courtyard', 'index.html');

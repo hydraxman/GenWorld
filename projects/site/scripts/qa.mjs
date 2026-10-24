@@ -5,6 +5,7 @@ import path from 'node:path';
 import puppeteer from 'puppeteer-core';
 import { output } from './build.mjs';
 import { scenes } from '../src/scenes.js';
+import { checkWindPrint } from '../../wind-print/scripts/browser-check.mjs';
 
 const screenshots = path.resolve(import.meta.dirname, '..', 'qa');
 const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript',
@@ -53,7 +54,7 @@ try {
   page.on('response', response => { if (response.status() >= 400) errors.push(`${response.status()}: ${response.url()}`); });
   await page.setViewport({ width: 1440, height: 1000 });
   assert.equal((await page.goto(base, { waitUntil: 'networkidle0' })).status(), 200);
-  assert.equal(await page.$$eval('.scene-card', cards => cards.length), 4);
+  assert.equal(await page.$$eval('.scene-card', cards => cards.length), scenes.length);
   await page.screenshot({ path: path.join(screenshots, 'home-desktop.png'), fullPage: true });
   for (const width of [390, 320]) {
     await page.setViewport({ width, height: 844 });
@@ -61,12 +62,16 @@ try {
   }
   await page.screenshot({ path: path.join(screenshots, 'home-mobile.png'), fullPage: true });
   await page.setViewport({ width: 1440, height: 1000 });
-  for (const scene of scenes) {
+  const selected = process.env.PAGES_SCENE ? scenes.filter(scene => scene.id === process.env.PAGES_SCENE) : scenes;
+  assert.ok(selected.length, 'PAGES_SCENE must identify a registered scene');
+  for (const scene of selected) {
     await page.goto(new URL(`scene.html?scene=${scene.id}`, base).href, { waitUntil: 'networkidle0' });
     await page.waitForFunction(() => document.getElementById('preview-status').hidden
       || document.getElementById('preview-status').getAttribute('role') === 'alert');
-    assert.equal(await page.$eval('#preview-status', element => element.hidden), true, `${scene.id} did not initialize`);
     const frame = await (await page.$('#scene-frame')).contentFrame();
+    assert.equal(await page.$eval('#preview-status', element => element.hidden), true,
+      `${scene.id} did not initialize: ${JSON.stringify({ errors, status: await page.$eval('#preview-status', element => element.textContent),
+        engine: await frame.evaluate(() => ({ error: window.__sceneError, ready: window.__sceneReady, p5: typeof window.p5 })) })}`);
     assert.ok(frame.url().startsWith(new URL(scene.source, base).href));
     assert.equal(await page.$eval(`[data-scene="${scene.id}"]`, element => element.getAttribute('aria-current')), 'page');
     if (scene.id === 'knowledge') {
@@ -86,6 +91,8 @@ try {
     } else if (scene.id === 'shunde') {
       assert.match(await frame.$eval('#selection-name', element => element.textContent), /舜德/);
       assert.equal(await frame.$eval('#selected-references', element => element.hidden), true);
+    } else if (scene.id === 'wind-print') {
+      await checkWindPrint({ page, frame, browser, screenshots });
     } else {
       assert.ok(await frame.evaluate(() => window.__modelStats.triangles > 0));
       await frame.click('[data-shot="40.5"]');
@@ -106,7 +113,7 @@ try {
   await page.goto(new URL('credits.html', base).href, { waitUntil: 'networkidle0' });
   assert.match(await page.$eval('main', element => element.textContent), /ODbL/);
   assert.deepEqual(errors, []);
-  console.log('Pages browser checks passed: all four entries, real 3D interactions, subpath assets, mobile navigation, unknown route and credits.');
+  console.log('Pages browser checks passed: all entries, 3D interactions, p5 print tools and PNG export, subpath assets, mobile navigation, unknown route and credits.');
 } finally {
   if (browser) await browser.close();
   if (server.listening) await new Promise((resolve, reject) => server.close(error => error ? reject(error) : resolve()));

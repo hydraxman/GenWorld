@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f4f3ee">
+  <meta name="description" content="用风塑造文字，用拖动种下叶片。一张可交互、可导出的 p5.js 生成海报。">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+  <title>风向印刷所 · WIND PRINT STUDIO</title>
+  <script defer src="vendor/p5.min.js"></script>
+  <script defer src="studio.js"></script>
+</head>
+<body>
+  <header class="masthead">
+    <a class="studio-brand" href="../../" aria-label="返回 GenWorld 首页"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M3 11h22c9 0 9-9 1-8M3 18h28M3 25h16c9 0 9 9 1 8"/></svg><span>风向印刷所<small>WIND PRINT STUDIO</small></span></a>
+    <div class="masthead-meta"><span class="live-dot"></span>一间关于风的生成艺术工坊 <span class="divider">/</span> p5.js</div>
+    <a class="back-link" href="../../">所有探索 ↗</a>
+  </header>
+  <main>
+    <section class="intro"><div><p class="eyebrow">A LITTLE WIND. A NEW IMPRESSION.</p><h1>让风，<span>留下形状。</span></h1></div><p>文字随风散开，叶片循迹生长。<br>没有两阵完全相同的风，也没有两张相同的印迹。</p></section>
+    <div class="studio">
+      <aside class="controls" aria-label="海报制作工具">
+        <section class="control-section">
+          <div class="section-label"><span>01 / 风的方向</span><span>WIND</span></div>
+          <div class="segmented" role="group" aria-label="文字风场"><button data-mode="push" aria-pressed="true"><span aria-hidden="true">↗</span> 推开</button><button data-mode="attract" aria-pressed="false"><span aria-hidden="true">↙</span> 吸引</button><button data-mode="restore" aria-pressed="false"><span aria-hidden="true">↺</span> 复原</button></div>
+          <p class="control-note">在 WIND 上移动鼠标或手指，<br>看看风经过文字的样子。</p>
+        </section>
+        <section class="control-section">
+          <div class="section-label"><label for="density">02 / 生长密度</label><output id="density-value" for="density">60%</output></div>
+          <input id="density" type="range" min="15" max="100" step="1" value="60">
+          <div class="range-labels"><span>疏朗</span><span>繁茂</span></div>
+          <p class="control-note">在纸张下半部按住拖动，种下一枝叶片。<br>每一次停留，都会慢慢生长。</p>
+          <div class="drawing-actions"><button id="add-branch">＋ 添一枝</button><button id="undo" disabled>撤销</button><button id="clear" disabled>清空手绘</button></div>
+        </section>
+        <section class="control-section">
+          <div class="section-label"><span>03 / 印刷配色</span><span>INK</span></div>
+          <div class="palettes" role="group" aria-label="印刷配色">
+            <button data-palette="teal" aria-pressed="true"><span class="swatches"><i style="--ink:#27695f"></i><i style="--ink:#87aaa0"></i><i style="--ink:#d87a65"></i></span><span>青绿<span class="palette-en">TEAL</span></span><span class="palette-check" aria-hidden="true">✓</span></button>
+            <button data-palette="coral" aria-pressed="false"><span class="swatches"><i style="--ink:#c56d5b"></i><i style="--ink:#e5ae90"></i><i style="--ink:#586e9a"></i></span><span>珊瑚<span class="palette-en">CORAL</span></span><span class="palette-check" aria-hidden="true">✓</span></button>
+          </div>
+        </section>
+        <section class="control-section seed-section">
+          <div class="section-label"><label for="seed">04 / 随机种子</label><span>SEED</span></div>
+          <div class="seed-row"><span aria-hidden="true">#</span><input id="seed" type="number" min="1" max="999999999" step="1" value="240724" aria-describedby="seed-help"><button id="seed-lock" aria-pressed="false" aria-label="锁定随机种子">锁定</button></div>
+          <p id="seed-help" class="control-note">锁定后，重新生成会重现同一幅构图。</p>
+          <button id="regenerate" class="regenerate"><span aria-hidden="true">⤨</span> 重新生成 <span class="key-hint">NEW PRINT</span></button>
+        </section>
+        <button id="export" class="export-button"><span aria-hidden="true">↓</span> 导出 PNG <span>↗</span></button>
+        <p class="export-note">1000 × 1000 px · 无水印 · 本地导出</p>
+        <p id="status" class="status" role="status">正在准备纸张与油墨…</p>
+      </aside>
+      <section class="preview" aria-label="交互海报预览">
+        <div class="preview-heading"><span><i class="live-dot"></i> LIVE CANVAS</span><span>1 : 1 <b>/</b> 1000 × 1000</span></div>
+        <div class="paper-mount"><div class="crop crop-tl"></div><div class="crop crop-tr"></div><div class="crop crop-bl"></div><div class="crop crop-br"></div><div id="poster"></div><div id="load-error" role="alert" hidden>画布载入失败，请检查网络并刷新页面。</div></div>
+        <div class="preview-caption"><span><i class="hint-line"></i> 上方拨动风，下方种下叶。</span><span id="composition-count">GENERATIVE BOTANICAL PRINT</span></div>
+      </section>
+    </div>
+  </main>
+  <footer><span>GENWORLD <b>/</b> CREATIVE CODING</span><span>用一阵风的时间，印下一点自然。</span><a href="../../credits.html">关于与许可 ↗</a></footer>
+  <noscript><p class="noscript">本页面需要启用 JavaScript 才能绘制与导出海报。</p></noscript>
+</body>
+</html>
