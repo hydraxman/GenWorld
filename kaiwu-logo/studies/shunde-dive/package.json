@@ -1,0 +1,18 @@
+{
+  "name": "kaiwu-shunde-dive-study",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test scripts/*.test.mjs",
+    "proof": "node scripts/capture.mjs",
+    "check": "npx hyperframes@0.8.58 check",
+    "preview": "npx hyperframes@0.8.58 preview --foreground",
+    "render:background": "npx hyperframes@0.8.58 render -c passes/scene.html --variables \"{\\\"renderPass\\\":\\\"background\\\"}\" --fps 30 --quality high --browser-gpu --workers 1 --output output/background-v3-clean.mp4",
+    "render:badge": "npx hyperframes@0.8.58 render -c passes/scene.html --variables \"{\\\"renderPass\\\":\\\"badge\\\"}\" --format mov --fps 30 --quality high --browser-gpu --workers 1 --output output/badge-v3-alpha.mov",
+    "render:comparison": "python scripts/compose-comparison.py",
+    "render:comparison:browser": "npx hyperframes@0.8.58 render --batch scripts/comparison-variants.json --output output/comparison-v4/browser-composites/{name}-final.mp4 --batch-concurrency 1 --strict-variables --fps 30 --quality high --video-frame-format png --browser-gpu --workers 1",
+    "verify:comparison": "python scripts/verify-layered.py --comparison",
+    "render": "npx hyperframes@0.8.58 render --fps 30 --quality high --video-frame-format png --browser-gpu --workers 1"
+  }
+}

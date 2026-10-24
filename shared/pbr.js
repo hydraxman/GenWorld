@@ -1,5 +1,5 @@
 /** V6 PBR extraction: never consume seeded rand during construction. */
-export function createPBRTools(THREE,{rand,stats,materials,textureWorld}){
+export function createPBRTools(THREE,{rand,stats,materials,textureWorld,textured=true}){
   const between = (a,b) => a + rand() * (b-a);
   const clamp = n => Math.max(0, Math.min(255, n));
   const color = (r,g,b) => `rgb(${clamp(r)|0},${clamp(g)|0},${clamp(b)|0})`;
@@ -15,6 +15,10 @@ export function createPBRTools(THREE,{rand,stats,materials,textureWorld}){
     return t;
   }
   function pbr(name, kind, rgb, world, size = 512) {
+    if(!textured) {
+      const mat=new THREE.MeshStandardMaterial({name,color:new THREE.Color(...rgb.map(v=>v/255)),roughness:1,metalness:0});
+      materials[name]=mat;textureWorld.set(mat,world);return mat;
+    }
     const [c,ctx] = canvas(size), [h,hx] = canvas(size), [r,rx] = canvas(size);
     ctx.fillStyle = color(...rgb); ctx.fillRect(0,0,size,size);
     hx.fillStyle = '#858585'; hx.fillRect(0,0,size,size);

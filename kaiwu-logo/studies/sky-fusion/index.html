@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>开悟 · 云光凝徽 · 2026 · 4秒快版</title>
+  <link rel="icon" href="data:,">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; height: 100%; background: #86bbdc; }
+    #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
+    .clip, canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+  <div data-hf-id="hf-3rtn" id="root" data-composition-id="kaiwu-sky-fusion" data-duration="4" data-width="1920" data-height="1080" data-fps="30">
+    <canvas data-hf-id="hf-2liy" class="clip" id="three-layer" data-start="0" data-duration="4" data-track-index="1" width="1920" height="1080" aria-label="蓝天白云中粒子凝聚成平整金属徽章"></canvas>
+    <audio data-hf-id="hf-jo5i" id="rhythm-study" class="clip" src="assets/study-music.wav" data-start="0" data-duration="4" data-media-start="0" data-playback-rate="2" data-track-index="2" data-volume="0.85"
+      data-automation="{&quot;version&quot;:1,&quot;lanes&quot;:[{&quot;target&quot;:&quot;volume&quot;,&quot;points&quot;:[{&quot;t&quot;:0,&quot;v&quot;:1},{&quot;t&quot;:3.275,&quot;v&quot;:1},{&quot;t&quot;:3.45,&quot;v&quot;:0.8},{&quot;t&quot;:3.65,&quot;v&quot;:0.4},{&quot;t&quot;:3.85,&quot;v&quot;:0.08},{&quot;t&quot;:3.98,&quot;v&quot;:0},{&quot;t&quot;:4,&quot;v&quot;:0}]}]}"></audio>
+  </div>
+  <script src="assets/gsap.min.js"></script>
+  <script>
+    const clock = {value: 0};
+    const timeline = gsap.timeline({paused: true});
+    timeline.to(clock, {value: 4, duration: 4, ease: 'none',
+      onUpdate() { if (window.renderAt) window.renderAt(clock.value); }}, 0);
+    window.__timelines = {'kaiwu-sky-fusion': timeline};
+  </script>
+  <script src="assets/scene.bundle.js"></script>
+</body>
+</html>

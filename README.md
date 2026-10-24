@@ -4,6 +4,7 @@
 
 ## 项目入口
 
+- [软件工程知识学院](projects/knowledge-tower/README.md)：16 层、64 展厅、学科展品、学习者、个人掌握度热力图与楼层试炼；本机保存的真实档案与示例隔离。根目录执行 `npm run build:knowledge`、`npm run dev:knowledge`，访问 http://127.0.0.1:8785。
 - [开悟 Logo 特效](kaiwu-logo/README.md)：五版最新效果及历史效果源码、必要素材和离线播放器。
 - [清华园十二站视频 / 普通地图与卫星图切换](projects/tsinghua-tour/README.md)：最终星空卫星版、核心素材、原速晓晓与 SSML、可复现捕获/导出命令及制作调度 skill。默认卫星底图，`--basemap standard` 切普通地图。
 - [相机精细模型 V3 / xiaoxiao2](projects/canon5d/README.md)：已交付45秒成片、Blender工程、核心参数、代码、建模来源/许可和相关skills。

@@ -4,9 +4,11 @@
 
 ## 当前入口
 
+- `projects/knowledge-tower/`：软件工程知识学院，16 层、64 展厅、192 个知识点；学科展品、楼层人物、独立区域掌握度热力图、64 道概念测评和楼层徽章。本机档案与虚构示例隔离，CC0 公共模型冻结并附来源。`npm run build:knowledge`、`npm run dev:knowledge`，入口 http://127.0.0.1:8785；按需运行，不注册计划任务。
+- `projects/tsinghua-campus/`：清华北京主校区 Three.js 重建工作台，650个 OpenFreeMap 建筑轮廓；逐批接入舜德、经管、大礼堂、主楼、学堂、二校门、西体育馆、老馆历史入口、工字厅／水木清华、1919年科学馆、同方部西门及1932年老化学馆入口。包含逐栋替换、GLB 导出、实景参考与实际截图汇总及待重建清单；照片模型、局部重建和基模明确区分，全校园尚未完整复刻。产物只保存在当前工程；独立于旧导览与徽章工程。
 - `kaiwu-logo/`：开悟 Logo 最新五版与历史特效源码、离线播放器、渲染前置清单。
 - `projects/tsinghua-tour/`：清华园十二站导览，独立 Node/MapLibre/Python/FFmpeg 子项目；普通与卫星底图共用时间线、原速配音及星空背景。按本次要求将审核后的核心素材和最终卫星视频纳入私有仓库，其余渲染帧、缓存和凭据排除。运行与切换见该目录 README。
-- `projects/courtyard/`：庭院旧楼的当前反射更新版。
+- `projects/courtyard/`：楼前有三段石池、两侧廊架的旧庭院建筑，独立模型入口为 `src/model.js`。支持 `createModel(THREE, {architectureOnly: true})` 复用建筑与石池、跳过植物，不改变旧查看器默认模型；与清华老馆的具体馆翼及地图对应关系需核实，不能混同东翼拱窗入口。
 - `projects/shunde/`：舜德楼庭院重建版；`blender/` 单独标注为旧版楔形模型的冻结交付快照，不冒充当前几何。
 - `projects/canon5d/`：相机精细模型V3的工作入口，包含成片、Blender模型、代码、参数、建模来源及相关skills；见该目录README。原桌面Canon5D-Cutaway仅保留为旧快照。
 - `projects/panjin-map-tour/`：盘锦MapLibre道路导览，包含冻结路线、道路锚点、Azure SSML旁白、确定性相机、验证脚本和项目内skill；生成音频、逐帧缓存与MP4不进入Git。

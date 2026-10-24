@@ -17,6 +17,10 @@ qa/
 review/
 .cache/
 .hyperframes/
+.thumbnails/
+.waveform-cache/
+.media/
+projects/tsinghua-campus/data/diagnostics.json
 *.log
 *.mp4
 *.mov

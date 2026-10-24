@@ -4,7 +4,7 @@ import {SHUNDE} from './spec.js';
 
 
 /** Actual geometry; the user photograph calibrates ratios, never used as a facade map. */
-export function createNorthFacade(THREE,{textured=true,foliage=true,signGlyphs=null}={}){
+export function createNorthFacade(THREE,{textured=true,foliage=true,signGlyphs=null,refined=false}={}){
  const B=createBuilder(THREE),{box,cylinder}=B,S=SHUNDE,F=S.facade,E=S.entrance,W=S.width,D=S.depth;
  const group=new THREE.Group();group.name='North entrance — photo-informed proportions';group.userData={component:'north photo facade in local coordinates',dimensionsStatus:'estimated-from-photo-proportions'};
  const part=(name,parent=group,data={})=>{const g=new THREE.Group();g.name=name;g.userData=data;parent.add(g);return g;};
@@ -24,6 +24,9 @@ export function createNorthFacade(THREE,{textured=true,foliage=true,signGlyphs=n
  const paving=pbr('Gray forecourt paving','paving',[127,132,130],[4,4]);
  const concrete=pbr('Inferred thin concrete slabs','grain',[163,164,158],[2,2]);
  const glass=plain('Unified sky-reflecting architectural glass','#567e91',.09,.65);
+ const layeredGlass=refined?new THREE.MeshPhysicalMaterial({name:'Refined north glazing',color:'#91b1c0',roughness:.16,metalness:.12,transparent:true,opacity:.55,depthWrite:false,clearcoat:.8,clearcoatRoughness:.1}):glass;
+ const curtains=refined?plain('Off-white interior blinds - illustrative, not a room survey','#c7c5b6',.95):null;
+ const rooms=refined?plain('Setback interior shadow','#303b3d',1):null;
  const frame=plain('Warm silver anodized aluminium','#aeb3ac',.38,.54);
  const dark=plain('Deep window and entrance shadows','#15252b',.94);
  const grass=pbr('Muted campus lawn','grain',[84,99,65],[3,3]);
@@ -31,9 +34,25 @@ export function createNorthFacade(THREE,{textured=true,foliage=true,signGlyphs=n
  const gold=plain('Sign brass','#c4a763',.28,.6);
  const stats=B.stats;Object.assign(stats,{porticoColumns:2,portals:1,hallIntermediateSlabs:0,arcClosedCircle:false,arcPlacement:'not-applicable-local-front-component',dimensionsStatus:S.dimensionsStatus,facadeBands:S.facadeBands,facadePierWidth:F.pierWidth,openCasements:0});
  const pane=(g,x,y,z,w,h,open=false)=>{
-  box(g,'window reveal',x,y,z-.12,w+.10,h+.12,.24,dark);
-  box(g,'glass',x,y,z+.04,w,h,.08,glass);stats.windows++;
-  for(const yy of [-h/2,h/2,h*.27])box(g,'window horizontal aluminium',x,y+yy,z+.12,w+.08,.065,.11,frame);
+  const detailed=refined&&z>4&&w>2;
+  if(detailed){
+   const room=part('Recessed window with illustrative interior blinds',g,{role:'refined-window',interiorStatus:'illustrative curtain arrangement, not observed room contents'});
+   box(room,'dark room back',x,y,z-.58,w+.10,h+.12,.08,rooms);
+   for(const sign of [-1,1]){
+    box(room,'reveal jamb',x+sign*(w/2+.025),y,z-.23,.10,h+.12,.65,tile);
+    box(room,'reveal soffit and sill',x,y+sign*(h/2+.02),z-.23,w+.12,.09,.65,tile);
+   }
+   const bay=Math.round((x+W/2)/F.bayWidth),row=Math.round(y/4.3);
+   const coverage=[.08,.28,.14,.46,.05][((bay*3+row*2)%5+5)%5];
+   const blindHeight=h*coverage;
+   box(room,'blind panel',x,y+h/2-blindHeight/2-.025,z-.22,w-.10,blindHeight,.022,curtains);
+   for(let slat=0;slat<Math.floor(blindHeight/.11);slat++){
+    box(room,'fine blind slat',x,y+h/2-.06-slat*.11,z-.195,w-.12,.016,.03,frame);
+   }
+   box(room,'projecting stone sill',x,y-h/2-.045,z+.12,w+.20,.085,.30,limestone);
+  }else box(g,'window reveal',x,y,z-.12,w+.10,h+.12,.24,dark);
+  box(g,'glass',x,y,z+.04,w,h,.08,detailed?layeredGlass:glass);stats.windows++;
+  for(const yy of [-h/2,h/2,h*.27])box(g,'window horizontal aluminium',x,y+yy,z+.12,w+.08,detailed&&yy===h*.27?.14:.065,.11,frame);
   for(const xx of [-w/2,0,w/2])box(g,'window vertical aluminium',x+xx,y,z+.12,.064,h,.11,frame);
   if(open){
    const sash=part('Partly outward-open casement',g),sw=w*.23,sh=h*.70;
@@ -71,6 +90,7 @@ export function createNorthFacade(THREE,{textured=true,foliage=true,signGlyphs=n
    const x=-2*F.bayWidth,support=part('Short round wing support',g,{role:'short-round-wing-support',placement:'photo-informed, grid-estimated'});
    cylinder(support,[x,y,4.68],[x,y+h,4.68],.57,.57,limestone,40);
   }
+  if(refined&&l<3)box(g,'entrance-left grid return',-2*F.bayWidth,y+h/2,5.04,F.pierWidth,h,.46,tile);
   // Rear/side walls and cut floor outlines are authored together in addRear below.
  }
  const R=S.roofBand;

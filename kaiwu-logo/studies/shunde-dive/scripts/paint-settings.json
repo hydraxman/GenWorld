@@ -1,0 +1,30 @@
+{
+  "intensity": 1,
+  "adjust": {
+    "exposure": -0.30,
+    "contrast": 0.06,
+    "highlights": -0.12,
+    "shadows": 0.04,
+    "saturation": 0.03
+  },
+  "details": {
+    "grain": 0.025,
+    "grainSize": 0.2,
+    "grainRoughness": 0.32
+  },
+  "effects": {
+    "kuwahara": 1,
+    "kuwaharaRadius": 0.95,
+    "kuwaharaSharpness": 0.5,
+    "kuwaharaSaturation": 0.55,
+    "crosshatch": 0.12,
+    "crosshatchSpacing": 0.36,
+    "crosshatchThickness": 0.03,
+    "crosshatchAngle": 0.25,
+    "crosshatchContrast": 0.3333333333333333,
+    "crosshatchEdges": 0.85,
+    "crosshatchLineWeight": 0,
+    "crosshatchWave": 0.5,
+    "crosshatchWaveFrequency": 0.2222222222222222
+  }
+}

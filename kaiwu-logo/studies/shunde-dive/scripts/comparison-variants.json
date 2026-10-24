@@ -1,0 +1,14 @@
+[
+  {
+    "name": "01-gmic",
+    "backgroundSource": "output/comparison-v4/01-gmic-background.mp4"
+  },
+  {
+    "name": "02-pytorch",
+    "backgroundSource": "output/comparison-v4/02-pytorch-background.mp4"
+  },
+  {
+    "name": "03-reconet",
+    "backgroundSource": "output/comparison-v4/03-reconet-background.mp4"
+  }
+]

@@ -1,0 +1,26 @@
+{
+  "name": "tsinghua-campus-base-model",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "data": "node scripts/fetch-campus.mjs",
+    "build": "node scripts/build.mjs",
+    "build:references": "node scripts/build.mjs --references",
+    "test": "node --test tests/*.test.mjs",
+    "test:references": "node scripts/test-references.mjs",
+    "dev": "node scripts/serve.mjs",
+    "qa": "node scripts/qa.mjs"
+  },
+  "dependencies": {
+    "@mapbox/vector-tile": "2.0.4",
+    "fast-xml-parser": "5.11.2",
+    "pbf": "4.0.1",
+    "polygon-clipping": "0.15.7",
+    "three": "0.181.2"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.12",
+    "puppeteer-core": "25.3.0"
+  }
+}

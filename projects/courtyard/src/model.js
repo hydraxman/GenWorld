@@ -4,8 +4,8 @@ import {createLeafGeometry,createLeafMaterial} from './leaves.js';
 /** Photo-informed courtyard reconstruction. Y up, facade +Z; metres.
  * Only geometry/materials: no renderer, lights, cameras, network, or clock.
  */
-export function createModel(THREE) {
-  if (typeof document === 'undefined') throw new Error('createModel requires a browser canvas document.');
+export function createModel(THREE, {architectureOnly = false, textured = true} = {}) {
+  if (textured && typeof document === 'undefined') throw new Error('createModel requires a browser canvas document for textures.');
   const group = new THREE.Group();
   group.name = 'Photo-informed brick building and dry courtyard';
   const stats = { seed: 41827, basins: 3, pergolas: 2, pillars: 0, windows: 0, trees: 0, leafInstances: 0, textures: 0, batches: 0 };
@@ -20,7 +20,7 @@ export function createModel(THREE) {
   const textureWorld = new Map();
   let current = 'Architecture';
 
-  const {pbr,worldUV,texture}=createPBRTools(THREE,{rand,stats,materials,textureWorld});
+  const {pbr,worldUV,texture}=createPBRTools(THREE,{rand,stats,materials,textureWorld,textured});
   const buff=pbr('Weathered deep brick red','brick',[137,76,61],[1.08,1.16],1024);
   buff.normalScale.set(.68,.68);
   const red=pbr('Red brown pergola brick','brick',[112,66,54],[1.08,1.16]);
@@ -42,8 +42,8 @@ export function createModel(THREE) {
   const bench=plain('Dark oiled bench timber','#39382d',.83);
   const metal=plain('Graphite bench legs','#323a37',.57,.4);
   const grass=plain('Muted lawn green','#687550',1);
-  const leaf=createLeafMaterial(THREE,'CC0 photographed green maple leaves');
-  const vineLeaf=createLeafMaterial(THREE,'CC0 lobed pergola leaves');
+  const leaf=architectureOnly?null:createLeafMaterial(THREE,'CC0 photographed green maple leaves');
+  const vineLeaf=architectureOnly?null:createLeafMaterial(THREE,'CC0 lobed pergola leaves');
   const flower=plain('Small pale seasonal flowers','#c4b786',.95);
 
   function section(name) {current=name;}
@@ -267,6 +267,8 @@ export function createModel(THREE) {
     }
   }
 
+  if(architectureOnly)return finish([]);
+
   // Leaf blade instances are small, individually oriented low-poly lenticular leaves.
   // This preserves a broken silhouette, unlike solid green sphere canopies.
   const leafGeo=createLeafGeometry(THREE);
@@ -362,6 +364,9 @@ export function createModel(THREE) {
   }
   for(const x of [-4,0,4])leafCluster(shrubFoliage,x,8.55,2.75,.57,.32,.29,100,.16);
 
+  return finish(foliageBatches);
+
+  function finish(foliage) {
   // Merge only like-material static geometry within semantic groups: low draw-call
   // count, ordinary MeshStandardMaterial primitives and portable GLTF export.
   for(const {section:label,mat,list} of buckets.values()) {
@@ -379,7 +384,7 @@ export function createModel(THREE) {
     geo.computeBoundingBox();geo.computeBoundingSphere();
     const mesh=new THREE.Mesh(geo,mat);mesh.name=label+' — '+mat.name;mesh.castShadow=!label.includes('paving');mesh.receiveShadow=true;sections[label].add(mesh);stats.batches++;
   }
-  for(const batch of foliageBatches) {
+  for(const batch of foliage) {
     const inst=new THREE.InstancedMesh(leafGeo,batch.mat,batch.transforms.length);inst.name=batch.name;
     batch.transforms.forEach((m,i)=>{inst.setMatrixAt(i,m);inst.setColorAt(i,batch.colors[i]);});
     inst.instanceMatrix.needsUpdate=true;if(inst.instanceColor)inst.instanceColor.needsUpdate=true;
@@ -391,5 +396,15 @@ export function createModel(THREE) {
   stats.meshes=0;stats.triangles=0;stats.materials=Object.keys(materials).length;
   group.traverse(o=>{if(o.isMesh){stats.meshes++;stats.triangles+=(o.geometry.index?o.geometry.index.count:o.geometry.attributes.position.count)/3*(o.isInstancedMesh?o.count:1);}});
   group.userData={description:'Approximate photo-derived brick architecture; dry basins; inferred concealed rear and roof.',units:'metres',front:'+Z',seed:stats.seed};
+  if(architectureOnly) {
+    group.userData.architectureOnly=true;
+    const used=new Set();
+    group.traverse(o=>{if(o.isMesh)for(const material of(Array.isArray(o.material)?o.material:[o.material]))used.add(material);});
+    for(const material of Object.values(materials))if(!used.has(material)) {
+      for(const value of Object.values(material))if(value?.isTexture)value.dispose();
+      material.dispose();
+    }
+  }
   return {group,stats};
+  }
 }

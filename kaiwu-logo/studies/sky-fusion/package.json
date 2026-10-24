@@ -1,0 +1,15 @@
+{
+  "name": "kaiwu-sky-fusion-study",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "music": "python scripts/music.py",
+    "test": "node --test scripts/*.test.mjs",
+    "study": "node scripts/capture.mjs --study",
+    "proof": "node scripts/capture.mjs",
+    "check": "npx hyperframes@0.8.58 check",
+    "preview": "npx hyperframes@0.8.58 preview --foreground",
+    "render": "npx hyperframes@0.8.58 render --fps 30 --quality high --browser-gpu --workers 1 --output output/kaiwu-sky-fusion-2026-4s-soft-ending.mp4"
+  }
+}

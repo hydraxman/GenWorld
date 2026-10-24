@@ -1,0 +1,14 @@
+# Windows CPython 3.13; all wheels are from the official PyTorch distribution host.
+# Explicit archived dependency URLs avoid this machine's failing PyPI CDN TLS route.
+--extra-index-url https://download.pytorch.org/whl/cu128
+torch==2.8.0+cu128
+numpy @ https://download.pytorch.org/whl/numpy-2.3.3-cp313-cp313-win_amd64.whl
+Pillow @ https://download.pytorch.org/whl/pillow-11.3.0-cp313-cp313-win_amd64.whl
+filelock @ https://download.pytorch.org/whl/filelock-3.19.1-py3-none-any.whl
+typing_extensions @ https://download.pytorch.org/whl/typing_extensions-4.14.0-py3-none-any.whl
+sympy @ https://download.pytorch.org/whl/sympy-1.14.0-py3-none-any.whl
+mpmath @ https://download.pytorch.org/whl/mpmath-1.3.0-py3-none-any.whl
+networkx @ https://download.pytorch.org/whl/networkx-3.5-py3-none-any.whl
+Jinja2 @ https://download.pytorch.org/whl/jinja2-3.1.6-py3-none-any.whl
+fsspec @ https://download.pytorch.org/whl/fsspec-2025.9.0-py3-none-any.whl
+MarkupSafe @ https://download.pytorch.org/whl/MarkupSafe-3.0.2-cp313-cp313-win_amd64.whl

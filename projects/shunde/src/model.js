@@ -6,7 +6,7 @@ import {addPines} from './pine.js';
 /** Combined source-plan complex. Shunde north/west/cylinder is the photo focus.
  * Curvature, heights, openings, landscaping and wing partition are interpretations.
  * All architecture uses x=E, z=-N. Never an isolated surveyed Shunde outline. */
-export function createShundeModel(THREE,{textured=true,foliage=true,signGlyphs=null}={}){
+export function createShundeModel(THREE,{textured=true,foliage=true,signGlyphs=null,refinedFront=false}={}){
  const B=createBuilder(THREE),{box,cylinder}=B;
  const group=new THREE.Group();group.name='Weilun + Shunde source-plan context — photo-informed reconstruction';
  group.userData={scope:'combined Weilun + Shunde; exact partition unknown',coordinates:'x=East,y=estimated height,z=-North',horizontalSource:'OSM way 84653293 v9',license:'ODbL 1.0',dimensionsStatus:'source-plan context; details and heights estimated'};
@@ -170,7 +170,7 @@ export function createShundeModel(THREE,{textured=true,foliage=true,signGlyphs=n
   for(const z of [.35,3.6])strip(g,L/2,L+.04,15.35,.19,tile,z,.22);
   for(let x=.2;x<L;x+=1.45){strip(g,x,.16,15.37,.17,tile,2.0,3.65);if(x%5<1.5)strip(g,x,.18,14.72,1.35,tile,.35,.18);}
  }
- const front=createNorthFacade(THREE,{textured,foliage:false,signGlyphs});
+ const front=createNorthFacade(THREE,{textured,foliage:false,signGlyphs,refined:refinedFront});
  const a=FOOTPRINT[1],b=FOOTPRINT[2],dx=b[0]-a[0],dz=b[1]-a[1],angle=Math.atan2(dz,dx);
  // Local +z of old FRONT surface becomes geographic north; this component alone
  // is transformed, NOT an old solid or rear cylinder.
