@@ -3,80 +3,62 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#101a27">
-  <meta name="description" content="一座可探索的软件工程知识大楼：16 层、64 个展厅，连接基础、算法、系统、工程、数学与 AI。">
-  <title>知识学院 · 你的软件工程学习地图</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23152131'/%3E%3Cpath d='M9 6v20M23 6L10 16l13 10' fill='none' stroke='%235ee2ba' stroke-width='3'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="styles.css">
-  <script defer src="assets/scene.js"></script>
+  <meta name="theme-color" content="#f6f5ef">
+  <meta name="description" content="探索 GenWorld 的交互式三维场景：知识学院、清华园、舜德楼与庭院建筑。">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="site.css">
+  <title>GenWorld · 在三维中探索</title>
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="./" aria-label="知识学院首页"><span class="brand-mark" aria-hidden="true">K</span><span>知识学院<small>THE KNOWLEDGE ATELIER</small></span></a>
-    <div class="header-meta"><span class="live-dot"></span>软件工程 · 个人学习空间<span class="version">ATELIER / 02</span></div>
-    <div class="header-actions"><button id="open-learning" class="primary-button">我的学习地图</button><button id="open-plan" class="text-button">建筑规划 ↗</button></div>
+  <header class="site-header">
+    <a class="wordmark" href="./" aria-label="GenWorld 首页"><span class="brand-symbol" aria-hidden="true">G</span>GENWORLD<span class="wordmark-note">空间实验室</span></a>
+    <nav aria-label="主导航"><a href="#explore">探索场景</a><a href="credits.html">关于与许可</a><a href="https://github.com/hydraxman/GenWorld">GitHub ↗</a></nav>
   </header>
-
-  <main class="workspace">
-    <aside class="navigator" aria-label="楼层与学习路线">
-      <div class="intro"><span class="eyebrow">A PLACE TO GROW</span><h1>知识有空间，<br>成长有痕迹。</h1><p>每一个展厅，都是一块能力拼图。<br>不必按楼层，走自己的路线。</p></div>
-      <div class="profile-switch" role="group" aria-label="学习档案"><button data-profile="own" aria-pressed="true">我的档案</button><button data-profile="demo" aria-pressed="false">示例访客</button></div>
-      <div class="profile-mini"><div><span id="profile-name">我的学习空间</span><span id="profile-badge">仅本机保存</span></div><p id="profile-caption">从一次探索，或一次测评开始。</p><div class="profile-metrics"><span><b id="visited-count">0</b>已探索</span><span><b id="known-count">0</b>已评估</span><span><b id="weak-count">0</b>待加强</span></div></div>
-      <div class="search-wrap"><label class="sr-only" for="search">检索知识、展厅或楼层</label><input id="search" type="search" placeholder="搜索知识 · 例如 动态规划" autocomplete="off"><span class="search-icon" aria-hidden="true">⌕</span></div>
-      <div id="search-results" class="search-results" aria-live="polite" hidden></div>
-      <div class="route-picker"><label for="route">学习路线 <span>LEARNING PATH</span></label><select id="route"><option value="">自由探索 · 不设顺序</option></select></div>
-      <div class="directory-heading"><span>楼层目录</span><span>16F → 01F</span></div>
-      <nav id="floor-nav" class="floor-nav" aria-label="知识楼层"></nav>
-      <p class="navigator-note">16 个学科楼层 / 64 个展厅 / 192 个知识点<br>楼层不是等级，未评估也不等于薄弱。</p>
-    </aside>
-
-    <section class="scene-panel" aria-label="交互式三维知识大楼">
-      <div class="scene-heading"><span class="eyebrow">THE KNOWLEDGE ATELIER</span><p id="scene-heading">整楼 · 软件工程知识体系</p></div>
-      <div class="view-switch" role="group" aria-label="查看模式">
-        <button data-mode="tower" aria-pressed="true">整楼</button><button data-mode="exploded" aria-pressed="false">分层展开</button><button data-mode="floor" aria-pressed="false">单层查看</button>
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="status-dot"></span>AN OPEN WORLD OF IDEAS</p>
+        <h1>把好奇心，<br>放进<span>三维空间。</span></h1>
+        <p class="hero-description">知识可以是一座大楼，建筑可以是一段探索。<br>从一个入口开始，换个角度看世界。</p>
+        <a class="primary-link" href="scene.html?scene=knowledge">走进知识学院 <span aria-hidden="true">↗</span></a>
+        <div class="hero-meta"><span><b>04</b>探索入口</span><span><b>3D</b>实时交互</span><span><b>OPEN</b>开源实验</span></div>
       </div>
-      <div class="scene-tools"><button id="heatmap-toggle" aria-pressed="false">◈ 掌握度热力图</button><button id="locate-me">◎ 我的位置</button></div>
-      <div id="heatmap-legend" class="heatmap-legend" hidden><span><i style="--key:#65778d"></i>未评估</span><span><i style="--key:#e77b78"></i>薄弱</span><span><i style="--key:#e8b96a"></i>巩固中</span><span><i style="--key:#59cdb7"></i>熟悉</span><span><i style="--key:#7baff5"></i>熟练</span></div>
-      <div id="viewport" class="viewport">
-        <canvas id="scene" aria-label="软件工程知识大楼三维视图；也可通过楼层导航和展厅按钮查看全部内容">你的浏览器不支持 Canvas；请使用楼层导航查看知识内容。</canvas>
-        <div id="floor-labels" class="spatial-labels"></div><div id="room-labels" class="spatial-labels"></div>
-        <div class="spatial-labels"><button id="checkpoint-label" class="spatial-label checkpoint-label" hidden>本层试炼 · 4 题</button></div>
-        <div id="loading" class="loading"><span class="loading-ring"></span><b>正在构建知识空间</b><span>连接 16 层的工程与数学</span></div>
-        <div id="scene-error" class="scene-error" role="alert" hidden></div>
-      </div>
-      <div class="scene-bottom"><span><i class="legend-dot"></i> <span id="selection-caption">选择楼层，进入知识展厅</span></span><button id="reset-view" class="text-button">重置视角 ⟲</button></div>
-      <p class="interaction-hint">拖动旋转 · 滚轮 / 双指缩放 · 点选展品查看知识</p>
-      <div id="learner-roster" class="learner-roster" aria-label="空间内的学习者"></div>
-      <div class="compass" aria-hidden="true"><span>N</span><span class="compass-lines">╱╲</span><span>3D / ORBIT</span></div>
+      <a class="hero-art" href="scene.html?scene=knowledge" aria-label="预览知识学院">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <span class="art-label art-label-top">KNOWLEDGE HAS DIMENSION</span>
+        <div class="tower-art" aria-hidden="true"><div class="tower-crown"></div><div class="tower-body"></div><div class="tower-base"></div><i class="tower-tree tree-one"></i><i class="tower-tree tree-two"></i></div>
+        <span class="art-label art-label-bottom">16 FLOORS / ONE LEARNING JOURNEY <span>↗</span></span>
+      </a>
     </section>
-
-    <aside class="inspector" aria-label="当前楼层与知识详情">
-      <div class="inspector-heading"><span class="eyebrow">INSIDE THE KNOWLEDGE</span><span id="floor-counter">01 / 16</span></div>
-      <div class="floor-title"><span id="floor-english"></span><h2 id="floor-title"></h2><p id="floor-summary"></p></div>
-      <div class="floor-progress"><div><span id="floor-mastery">本层尚未评估</span><button id="start-exam" class="text-button">挑战本层 →</button></div><div id="floor-heat-strip" class="floor-heat-strip" aria-label="本层四个展厅掌握度"></div><p id="floor-exam-note">关卡是反馈，不是通行限制。</p></div>
-      <div class="section-label"><span>本层展厅</span><span>EXPLORE THE ROOMS</span></div>
-      <div id="room-nav" class="room-nav"></div>
-      <section id="floor-overview" class="floor-overview"><span class="eyebrow">FLOOR BRIEF</span><h3>从这里开始</h3><p id="floor-brief"></p><p class="muted">选择一个展厅，查看概念解释、实践任务和先修入口。三维场景中的展品也可以直接点选。</p></section>
-      <section id="room-detail" class="room-detail" hidden>
-        <div class="section-label"><span id="room-name"></span><span>KNOWLEDGE NOTES</span></div>
-        <div class="exhibit-note"><span class="eyebrow">THE EXHIBIT TELLS A STORY</span><h4 id="exhibit-title"></h4><p id="exhibit-summary"></p></div>
-        <div class="mastery-editor"><div><span id="room-mastery"></span><span id="mastery-source"></span></div><label for="self-rating">我的自评</label><select id="self-rating"><option value="">未自评</option><option value="0">0 · 目前薄弱</option><option value="25">25 · 了解一点</option><option value="50">50 · 正在巩固</option><option value="75">75 · 比较熟悉</option><option value="100">100 · 能独立运用</option></select><p id="self-rating-note">自评与测评分别保存；浏览不等于掌握。</p></div>
-        <h3 id="room-question"></h3><div id="topic-tabs" class="topic-tabs" role="group" aria-label="展厅知识点"></div>
-        <article class="topic-content" aria-live="polite"><span class="eyebrow">CONCEPT</span><h4 id="topic-title"></h4><p id="topic-summary"></p></article>
-        <div class="practice"><span class="eyebrow">BUILD TO UNDERSTAND</span><h4>动手验证</h4><p id="room-challenge"></p></div>
-        <div class="prerequisite-section"><div class="section-label"><span>先修连接</span><span>PREREQUISITES</span></div><div id="prerequisites"></div></div>
-      </section>
-      <section id="route-progress" class="route-progress" hidden><span class="eyebrow">YOUR LEARNING PATH</span><h3 id="route-name"></h3><p id="route-summary"></p><div id="route-stops" class="route-stops"></div><div class="route-controls"><button id="route-prev">← 上一站</button><span id="route-position"></span><button id="route-next">下一站 →</button></div></section>
-      <p class="scope-note">学习地图原型 · 测评仅作概念检查，不代表认证。<br>个人记录只在当前浏览器保存；示例访客不是在线用户。</p>
-    </aside>
+    <section class="explore" id="explore" aria-labelledby="explore-title">
+      <div class="section-title"><div><p class="eyebrow">CHOOSE YOUR PERSPECTIVE</p><h2 id="explore-title">从这里，进入场景。</h2></div><p>无需安装 · 浏览器内直接探索</p></div>
+      <div class="scene-grid"><a class="scene-card knowledge" href="scene.html?scene=knowledge">
+    <div class="card-art" data-number="01" aria-hidden="true"><div class="mini-model"></div></div>
+    <div class="card-copy"><span class="card-category">知识 × 空间</span>
+    <div class="card-heading"><h3>知识学院</h3><span aria-hidden="true">↗</span></div>
+    <span class="card-english">THE KNOWLEDGE ATELIER</span><p class="card-description">在十六层知识大楼里，探索软件工程、算法与数学，留下自己的学习足迹。</p>
+    <span class="card-detail">楼层探索 · 学习热力图 · 概念测评</span></div></a>
+<a class="scene-card campus" href="scene.html?scene=campus">
+    <div class="card-art" data-number="02" aria-hidden="true"><div class="mini-model"></div></div>
+    <div class="card-copy"><span class="card-category">地图 × 建筑</span>
+    <div class="card-heading"><h3>清华园</h3><span aria-hidden="true">↗</span></div>
+    <span class="card-english">CAMPUS ATLAS</span><p class="card-description">从全校地图走近一栋建筑，在三维和平面之间，发现校园的空间关系。</p>
+    <span class="card-detail">校园总览 · 建筑搜索 · 地标视角</span></div></a>
+<a class="scene-card shunde" href="scene.html?scene=shunde">
+    <div class="card-art" data-number="03" aria-hidden="true"><div class="mini-model"></div></div>
+    <div class="card-copy"><span class="card-category">建筑 × 细节</span>
+    <div class="card-heading"><h3>舜德楼</h3><span aria-hidden="true">↗</span></div>
+    <span class="card-english">SHUNDE COURTYARD</span><p class="card-description">走近开放院落、圆体与入口，查看照片参照的建筑重建及其校园位置。</p>
+    <span class="card-detail">校园内定位 · 建筑细化 · 自由观察</span></div></a>
+<a class="scene-card courtyard" href="scene.html?scene=courtyard">
+    <div class="card-art" data-number="04" aria-hidden="true"><div class="mini-model"></div></div>
+    <div class="card-copy"><span class="card-category">结构 × 光影</span>
+    <div class="card-heading"><h3>庭院建筑</h3><span aria-hidden="true">↗</span></div>
+    <span class="card-english">THE COURTYARD</span><p class="card-description">旋转观察建筑、玻璃与水景，展开楼层，理解外观之下的空间结构。</p>
+    <span class="card-detail">视角切换 · 分层展开 · 模型导出</span></div></a></div>
+    </section>
+    <section class="site-note"><span class="note-symbol" aria-hidden="true">↗</span><p>这不是一组视频，而是可以走进去的空间。<br><span>拖动旋转、缩放观察；各场景保留自己的探索工具。需要支持 WebGL 的现代浏览器。</span></p></section>
   </main>
-
-  <footer class="footer"><span>GENWORLD <b>/</b> KNOWLEDGE TOWER</span><span>理解 → 构建 → 验证 → 演进</span><span>基础 · 算法 · 系统 · 工程 · 数学 · AI</span></footer>
-  <dialog id="plan-dialog"><div class="dialog-heading"><div><span class="eyebrow">ARCHITECTURE & CURRICULUM</span><h2>软件工程知识大楼 · 规划文本</h2></div><button id="close-plan" aria-label="关闭规划文本">×</button></div><a href="DESIGN.md" download>下载完整 Markdown 文本 ↗</a><pre id="plan-text">正在读取规划文本…</pre></dialog>
-  <dialog id="learning-dialog"><div class="dialog-heading"><div><span class="eyebrow">YOUR KNOWLEDGE, NOT YOUR FLOOR</span><h2 id="learning-title">我的学习地图</h2></div><button id="close-learning" class="close-dialog" aria-label="关闭学习地图">×</button></div><p id="learning-disclaimer" class="dialog-intro"></p><div id="learning-summary" class="learning-summary"></div><div class="map-heading"><span>16 层 × 4 个知识区域</span><span>点击色块进入展厅</span></div><div id="mastery-grid" class="mastery-grid"></div><p class="map-footnote">灰色为未评估，不计为薄弱。测评优先于自评；本层四题各对应一个展厅，只提供粗粒度线索。</p><div class="history-columns"><section><h3>最近探索</h3><div id="visit-history"></div></section><section><h3>试炼记录</h3><div id="exam-history"></div></section></div><div class="data-actions"><button id="export-profile">导出我的记录</button><button id="reset-profile">清空我的记录</button><span>无账号 · 无上传 · 当前浏览器</span></div></dialog>
-  <dialog id="exam-dialog"><div class="dialog-heading"><div><span class="eyebrow">CHECKPOINT / LEARN BY CHALLENGE</span><h2 id="exam-title">楼层试炼</h2></div><button id="close-exam" class="close-dialog" aria-label="关闭试炼">×</button></div><p class="dialog-intro">每个展厅一道概念题，四题答对三题即可获得本层徽章。所有楼层始终开放；错题是下一步的路标。</p><form id="exam-form"><div id="exam-questions"></div><button type="submit" id="submit-exam" class="primary-button">提交本次试炼</button></form><div id="exam-result" class="exam-result" aria-live="polite" hidden></div><div id="exam-next-actions" class="exam-next-actions" hidden><button id="retry-exam">再挑战一次</button><button id="next-floor" class="primary-button">探索下一层 →</button></div></dialog>
-  <div id="storage-warning" class="storage-warning" role="alert" hidden></div>
-  <div id="ui-error" class="ui-error" role="alert" hidden></div>
-  <noscript>请启用 JavaScript 查看三维场景；完整的知识规划仍可通过 <a href="DESIGN.md">规划文本</a> 阅读。</noscript>
+  <footer class="site-footer"><span>GENWORLD <span class="muted">/ 空间里的想法</span></span><span>建筑为近似重建，学习测评不代表认证。</span><a href="credits.html">来源与许可 ↗</a></footer>
 </body>
 </html>

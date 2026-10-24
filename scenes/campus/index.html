@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>清华园 · 三维重建工作台</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="workspace">
+    <canvas id="scene" aria-label="清华主校区三维建筑基模，鼠标拖动旋转、右键平移、滚轮缩放"></canvas>
+    <header>
+      <span class="eyebrow">TSINGHUA / CAMPUS ATLAS</span>
+      <h1>清华园<span>三维重建工作台</span></h1>
+      <p>从真实轮廓开始，逐栋还原校园。</p>
+    </header>
+    <aside id="sidebar">
+      <div class="section-heading"><span class="dot"></span>第六批 · 扩展历史馆舍</div>
+      <div class="stats"><div><strong id="building-count">—</strong><span>建筑轮廓体块</span></div><div><strong id="named-count">—</strong><span>已关联名称</span></div></div>
+      <p class="muted">已替换 <b id="refined-count">—</b> 个建筑轮廓，新增 <b id="landmark-count">—</b> 个独立地标 · 仅保存在当前工程</p>
+      <p id="coverage-note" class="muted"></p>
+      <label class="search-label" for="search">查找建筑或地标</label>
+      <input id="search" type="search" placeholder="名称或稳定编号…" autocomplete="off">
+      <label class="reconstruction-filter"><input id="only-refined" type="checkbox">只看已重建建筑与地标</label>
+      <div id="result-count" class="muted"></div>
+      <div id="results" aria-label="建筑与地标搜索结果"></div>
+      <section id="selection" aria-live="polite">
+        <h2 id="selection-name">选择建筑或地标</h2>
+        <p id="selection-help">点击地图上的体块，或在上方搜索。每栋建筑都保留轮廓与编号，后续精模在原位置替换。</p>
+        <dl id="selection-fields"></dl>
+        <button id="focus" hidden>靠近选中对象</button>
+        <button id="export-building" hidden>导出选中 GLB</button>
+        <a id="selected-references" hidden target="_blank" rel="noreferrer">查看参考来源</a>
+      </section>
+    </aside>
+    <nav class="toolbar" aria-label="视图控制">
+      <button id="view-3d" class="active" aria-pressed="true">三维</button>
+      <button id="view-plan" aria-pressed="false">平面</button>
+      <span class="divider"></span>
+      <button id="view-all">全校</button>
+      <button id="view-north">紫荆片区</button>
+      <button id="view-south">教学片区</button>
+      <button id="references" hidden>参考来源</button>
+      <button id="export-all">导出校园 GLB</button>
+    </nav>
+    <nav class="sitebar" aria-label="已重建建筑快捷视角">
+      <button id="view-shunde">舜德楼</button>
+      <button id="view-sem">经管红楼</button>
+      <button id="view-auditorium">大礼堂</button>
+      <button id="view-main-building">主楼组团</button>
+      <button id="view-school">清华学堂</button>
+      <button id="view-second-gate">二校门</button>
+      <button id="view-west-gym">西体育馆</button>
+      <button id="view-old-library">老图书馆</button>
+      <button id="view-gongzi">工字厅</button>
+      <button id="view-shuimu">水木清华</button>
+      <button id="view-science-hall">科学馆</button>
+      <button id="view-tongfang">同方部</button>
+      <button id="view-chemistry-hall">老化学馆</button>
+    </nav>
+    <section class="legend">
+      <label><input type="checkbox" data-layer="building" checked><i class="swatch buildings"></i>建筑</label>
+      <label><input type="checkbox" data-layer="landmark" checked><i class="swatch buildings"></i>地标</label>
+      <label><input type="checkbox" data-layer="road" checked><i class="swatch roads"></i>道路</label>
+      <label><input type="checkbox" data-layer="green" checked><i class="swatch greens"></i>绿地</label>
+      <label><input type="checkbox" data-layer="water" checked><i class="swatch waters"></i>水系</label>
+      <span id="north">N ↑ 北</span>
+    </section>
+    <footer>
+      <span id="source-note">正在加载冻结的校园数据…</span>
+      <span>拖动旋转 · 右键平移 · 滚轮缩放</span>
+      <div><a href="https://openfreemap.org/" target="_blank" rel="noreferrer">OpenFreeMap</a> · <a href="https://openmaptiles.org/" target="_blank" rel="noreferrer">© OpenMapTiles</a> · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">© OpenStreetMap contributors / ODbL</a></div>
+    </footer>
+    <div id="message" role="status">正在建立校园基模…</div>
+  </main>
+  <script src="assets/scene.js"></script>
+</body>
+</html>

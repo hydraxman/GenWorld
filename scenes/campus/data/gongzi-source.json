@@ -1,0 +1,64 @@
+{
+  "referencePage": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+  "verification": "Official page/image association and north rear-hall identity supplied by parent; page fetch blocked in this implementation session. Both local photographs viewed; gate way/node coordinates checked against parent's downloaded OSM XML. No new live-page verification claimed.",
+  "photos": {
+    "gate": {
+      "localPath": "projects/tsinghua-campus/references/gongzi-entrance.jpg",
+      "url": "https://www.tsinghua.edu.cn/__local/6/EE/80/9A065A38DF72F3F9F59F642B3BD_50D53E6D_1CB05C.jpg",
+      "sha256": "beedb2c36506279decd69edb82081326f9a06102950ecdf87ded1692cc8d083e",
+      "pixels": [1920, 900],
+      "view": "South entrance gate; NOT the main I-shaped hall"
+    },
+    "northRearHall": {
+      "localPath": "projects/tsinghua-campus/references/shuimu-pond-facade.png",
+      "url": "https://www.tsinghua.edu.cn/__local/D/AA/A5/A74F70F8B9CC639E5E2A3D1107B_5E7C943D_E7C63.png",
+      "sha256": "2308899a5680e1bd5a7342cbec37caa03e3954efeb499a8bfa89be9f17afada9",
+      "pixels": [1920, 900],
+      "view": "North pond facade of 工字厅 后厦; 水木清华 is an associated place label, not a second building"
+    }
+  },
+  "main": {
+    "id": "building:6598261612",
+    "nameSourceFeatureId": "osm:way:659826161",
+    "frozenRingSha256": "85ad579d4d8e8d9507d5bce4b9d0eeaf3fa673bb99aa366df41e8949acee0305",
+    "ring": [
+      [116.316686869,40.00185006], [116.316697598,40.001755547],
+      [116.316820979,40.001763766], [116.316826344,40.001689799],
+      [116.316708326,40.00168158], [116.316719055,40.001591176],
+      [116.317024827,40.001607613], [116.317014098,40.001702126],
+      [116.316917539,40.001698017], [116.316912174,40.001767875],
+      [116.317014098,40.001776093], [116.317008734,40.001870607],
+      [116.316686869,40.00185006]
+    ],
+    "shuimuPoi": {
+      "id": "osm:node:2354348604",
+      "version": 4,
+      "coordinates": [116.3168682,40.0019264],
+      "verification": "Parent direct OSM API verification; approx 6m north of hall edge; NOT a building polygon"
+    }
+  },
+  "gate": {
+    "id": "building:geometry:1a6c5da45bceef88407b194f",
+    "frozenRingSha256": "dd4e7237863a9245812d82a780e492a6b3bfc077a40eab548e5dd03c2232614a",
+    "ring": [
+      [116.316740513,40.001414476], [116.316745877,40.001344618],
+      [116.317019463,40.001356946], [116.317014098,40.001430913],
+      [116.316740513,40.001414476]
+    ],
+    "osmMatch": {
+      "id": "osm:way:1059165164",
+      "version": 1,
+      "tags": {"building":"office"},
+      "ring": [
+        [116.3167384,40.0014137], [116.3167455,40.0013426],
+        [116.3170215,40.0013587], [116.3170144,40.0014298],
+        [116.3167384,40.0014137]
+      ],
+      "polygonIoU": 0.9663509490462833,
+      "xmlPath": "data/gongzi-entrance-osm.xml",
+      "xmlSha256": "96e3d941fe472a4d08cc042b8f3d09a6cb737ebf557cc40647a3f428b4be8b3b",
+      "verification": "Parent direct OSM map API; way and referenced nodes checked locally",
+      "labelStatus": "工字厅门房 is photo/map interpretation; no OSM name tag; matched coordinates DO NOT replace frozen outline"
+    }
+  }
+}

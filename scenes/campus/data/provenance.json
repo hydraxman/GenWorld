@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "acquiredAt": "2026-10-09T11:13:13.524Z",
+  "tileSnapshot": "20261004_113936_pt",
+  "tilejsonURL": "https://tiles.openfreemap.org/planet",
+  "tilejsonSHA256": "89433520bac4ce0cac9013a05d0f448f9e1bfa5fa2adb4610848ec5cf7dff005",
+  "boundaryURL": "https://api.openstreetmap.org/api/0.6/relation/7469216/full.json",
+  "boundaryRawSHA256": "9c5d67f91bb0e3eecbbb1dd586791ba8cd880916a6c3c241c026faf930f0ab13",
+  "boundaryVersion": 13,
+  "boundarySourceTimestamp": "2025-11-22T07:58:11Z",
+  "tileTemplate": "https://tiles.openfreemap.org/planet/20261004_113936_pt/{z}/{x}/{y}.pbf",
+  "cacheSHA256": "fe74c5f483f57258c454360a46b228551d81935a3ca50ce192efc2aaf21b4a8e",
+  "namesSHA256": "8302c6bbb6a4c3147837b01828adf68fe1c0f865281217b8c137dca569cb9d86",
+  "tiles": [
+    {
+      "id": "14/13485/6201",
+      "url": "https://tiles.openfreemap.org/planet/20261004_113936_pt/14/13485/6201.pbf",
+      "sha256": "97513f0c50246c6292079aefc0d17a11d4754efeeb7d208aa67e79ac4b64c9ca",
+      "bytes": 67026,
+      "layers": {
+        "building": 4,
+        "landuse": 49,
+        "landcover": 27,
+        "water": 12,
+        "waterway": 7,
+        "transportation": 155,
+        "poi": 573
+      }
+    },
+    {
+      "id": "14/13485/6202",
+      "url": "https://tiles.openfreemap.org/planet/20261004_113936_pt/14/13485/6202.pbf",
+      "sha256": "0003f693350ed50d3242bbcb59261c9e7fce66f993c69d539e62f987dc1c65ba",
+      "bytes": 137868,
+      "layers": {
+        "building": 8,
+        "landuse": 72,
+        "landcover": 89,
+        "water": 31,
+        "waterway": 18,
+        "transportation": 104,
+        "poi": 1250
+      }
+    },
+    {
+      "id": "14/13485/6203",
+      "url": "https://tiles.openfreemap.org/planet/20261004_113936_pt/14/13485/6203.pbf",
+      "sha256": "dca131117d3eb1b932d219ad9e6c1ecca8a26a0b2c5175333d2e15e1a4f7054e",
+      "bytes": 139691,
+      "layers": {
+        "building": 16,
+        "landuse": 93,
+        "landcover": 88,
+        "water": 5,
+        "waterway": 0,
+        "transportation": 211,
+        "poi": 1158
+      }
+    },
+    {
+      "id": "14/13486/6201",
+      "url": "https://tiles.openfreemap.org/planet/20261004_113936_pt/14/13486/6201.pbf",
+      "sha256": "aaff4500509e1e2b800baa631534fe3ba66d188c3eb26d3dfa1e05250cb3e396",
+      "bytes": 69918,
+      "layers": {
+        "building": 5,
+        "landuse": 37,
+        "landcover": 43,
+        "water": 8,
+        "waterway": 6,
+        "transportation": 133,
+        "poi": 595
+      }
+    },
+    {
+      "id": "14/13486/6202",
+      "url": "https://tiles.openfreemap.org/planet/20261004_113936_pt/14/13486/6202.pbf",
+      "sha256": "f0b2fc53a2c9bbc442f5da1fcf78222d65ce129ec86042b60833896bc1a94404",
+      "bytes": 133566,
+      "layers": {
+        "building": 20,
+        "landuse": 103,
+        "landcover": 111,
+        "water": 2,
+        "waterway": 0,
+        "transportation": 131,
+        "poi": 1416
+      }
+    },
+    {
+      "id": "14/13486/6203",
+      "url": "https://tiles.openfreemap.org/planet/20261004_113936_pt/14/13486/6203.pbf",
+      "sha256": "24770d14de6e30cc0242e96097314400080c6531c368fcf6816ba607d84fef42",
+      "bytes": 124705,
+      "layers": {
+        "building": 22,
+        "landuse": 95,
+        "landcover": 96,
+        "water": 5,
+        "waterway": 0,
+        "transportation": 230,
+        "poi": 1194
+      }
+    }
+  ],
+  "attribution": "OpenFreeMap · © OpenMapTiles · © OpenStreetMap contributors (ODbL 1.0)",
+  "licenses": [
+    "https://openfreemap.org/",
+    "https://openmaptiles.org/",
+    "https://www.openstreetmap.org/copyright",
+    "https://opendatacommons.org/licenses/odbl/1-0/"
+  ]
+}
