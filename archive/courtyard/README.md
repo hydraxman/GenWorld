@@ -6,4 +6,4 @@
 - `source-snapshots.json`：五个版本的逐文件恢复清单；`archive_file` 指向仓库相对路径，`git_blob` 用 `git cat-file blob <oid>`读取，`local_only_asset` 指向被忽略的本地参考图。恢复到单独临时目录后逐项检查 SHA-256。
 - `archive-manifest.json`：本次导入文本的指纹。
 
-旧版相机、池底结构和叶片方案均不代表当前批准版本。V4 的36秒原编码片段仍被根目录历史 `finalize-video.py` 使用，放在 `local-assets/courtyard/legacy-v4/`；V5已交付GLB放在 `local-assets/courtyard/deliverables/`。这些媒体和用户参考图只留本地，不进入Git。
+庭院对照实现位于 `projects/courtyard-baseline/`。历史媒体与参考图不随源码分发，旧版模型不代表当前实现。

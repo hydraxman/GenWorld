@@ -1,16 +1,18 @@
 {
-  "name": "courtyard-photo-reconstruction",
+  "name": "genworld",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "build": "npm --prefix projects/courtyard run build && npm --prefix projects/shunde run build && npm run build:knowledge",
     "test": "npm --prefix projects/panjin-map-tour test && npm --prefix projects/courtyard test && npm --prefix projects/shunde test && npm run test:knowledge",
     "build:knowledge": "npm --prefix projects/knowledge-tower run build",
+    "build:pages": "node projects/knowledge-tower/scripts/build-pages.mjs",
     "test:knowledge": "npm --prefix projects/knowledge-tower test",
     "dev:knowledge": "npm --prefix projects/knowledge-tower run dev",
     "dev": "python3 -m http.server 8773 --bind 127.0.0.1",
-    "check": "npx hyperframes@0.8.24 check",
-    "render": "npx hyperframes@0.8.24 render --fps 30 --quality high --browser-gpu --workers 1 --output output/Courtyard3D.mp4"
+    "check": "npm --prefix projects/courtyard-baseline run check",
+    "render": "npm --prefix projects/courtyard-baseline run render"
   },
   "dependencies": {
     "gsap": "3.14.2",

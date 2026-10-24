@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 const shared=new URL('../../../shared/',import.meta.url);
-const original=new URL('../../../',import.meta.url);
+const original=new URL('../../courtyard-baseline/',import.meta.url);
 const digest=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 test('repository V6 parity baseline remains immutable',()=>{
  // Initial commit f4f30eb48fe2f4266f5730aba3354485f4d32bd9; all six files

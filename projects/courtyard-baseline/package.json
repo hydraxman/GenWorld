@@ -1,0 +1,11 @@
+{
+  "name": "courtyard-baseline",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/main.js --bundle --format=iife --outfile=assets/scene.js",
+    "test": "node --test src/*.test.js",
+    "check": "npx hyperframes@0.8.24 check",
+    "render": "npx hyperframes@0.8.24 render --fps 30 --quality high --browser-gpu --workers 1 --output output/Courtyard3D.mp4"
+  }
+}
