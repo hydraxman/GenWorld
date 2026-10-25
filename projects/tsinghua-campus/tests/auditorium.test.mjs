@@ -240,7 +240,7 @@ test('procedural materials contain no photo pixel data or environment dependency
     const materials = Array.isArray(object.material) ? object.material : [object.material];
     for (const material of materials) if (material.map) maps.add(material.map);
   });
-  assert.equal(maps.size, 2);
+  assert.equal(maps.size, 3);
   for (const map of maps) {
     assert.ok(map.isDataTexture);
     assert.equal(map.image.width, 256);
@@ -248,4 +248,45 @@ test('procedural materials contain no photo pixel data or environment dependency
     assert.match(map.name, /not photograph/);
   }
   assert.equal(detail.userData.noReferencePhotoTextures, true);
+});
+
+test('dome patina is deterministic and exportable, and seams stop beneath the apex cap', () => {
+  const a = makeDetail(), b = makeDetail();
+  const domeA = a.getObjectByName('shallow green-grey metal dome');
+  const domeB = b.getObjectByName('shallow green-grey metal dome');
+  const texture = domeA.material.map;
+  assert.ok(texture.isDataTexture);
+  assert.match(texture.name, /not photograph/);
+  assert.deepEqual(texture.image.data, domeB.material.map.image.data);
+  assert.ok(new Set(texture.image.data).size > 20, 'Metal panels should not be uniformly coloured');
+  assert.equal(domeA.material.map.colorSpace, THREE.SRGBColorSpace);
+  assert.equal(domeA.material.roughnessMap, null, 'GLTFExporter cannot pack a raw DataTexture roughness map');
+  assert.equal(domeA.receiveShadow, false, 'A convex cap has no overhead occluders; avoid dotted self-shadow acne');
+  const ribs = a.getObjectByName('64 batched radial dome standing seams');
+  assert.equal(ribs.castShadow, false);
+  assert.equal(ribs.receiveShadow, false);
+  const positions = ribs.geometry.attributes.position;
+  for (let i = 0; i < positions.count; i++) {
+    assert.ok(Math.hypot(positions.getX(i), positions.getZ(i)) > .32,
+      'All radial seams converging on the pole causes a visible spiked apex');
+  }
+  const cap = new THREE.Box3().setFromObject(a.getObjectByName('small dome apex cap'));
+  assert.ok(cap.max.x - cap.min.x >= .79);
+});
+
+test('the south gable window is a facade estimate, aligned behind the open portico and beneath its roof', () => {
+  const detail = makeDetail();
+  const window = detail.getObjectByName('south gable tripartite segmental window');
+  assert.ok(window);
+  assert.equal(window.userData.status, 'photo-informed-estimate');
+  assert.match(window.userData.limitations, /not surveyed/);
+  const box = new THREE.Box3().setFromObject(window);
+  assert.ok(box.min.y > 9.8 && box.max.y < 13, 'Window must remain within the gable, not above the ridge');
+  assert.equal(window.children.filter(child => child.name === 'gable window mullion').length, 4);
+  const pane = window.getObjectByName('segmental gable glazing panel');
+  const center = pane.getWorldPosition(new THREE.Vector3());
+  const [east, south] = detail.userData.frontNormalXZ;
+  assert.ok(center.x * east + center.z * south > 15, 'Gable window must face the southern lawn');
+  assert.match(detail.userData.limits, /山墙窗分格/);
+  assert.match(detail.userData.limits, /程序表面示意/);
 });

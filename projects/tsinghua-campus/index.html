@@ -16,9 +16,9 @@
       <p>从真实轮廓开始，逐栋还原校园。</p>
     </header>
     <aside id="sidebar">
-      <div class="section-heading"><span class="dot"></span>第六批 · 扩展历史馆舍</div>
+      <div class="section-heading"><span class="dot"></span>校园建筑与地标</div>
       <div class="stats"><div><strong id="building-count">—</strong><span>建筑轮廓体块</span></div><div><strong id="named-count">—</strong><span>已关联名称</span></div></div>
-      <p class="muted">已替换 <b id="refined-count">—</b> 个建筑轮廓，新增 <b id="landmark-count">—</b> 个独立地标 · 仅保存在当前工程</p>
+      <p class="muted">已重建 <b id="refined-count">—</b> 个建筑轮廓、<b id="landmark-count">—</b> 个独立地标。快捷视角可查看各处细节。</p>
       <p id="coverage-note" class="muted"></p>
       <label class="search-label" for="search">查找建筑或地标</label>
       <input id="search" type="search" placeholder="名称或稳定编号…" autocomplete="off">
@@ -35,6 +35,8 @@
       </section>
     </aside>
     <nav class="toolbar" aria-label="视图控制">
+      <button id="toggle-inspector" aria-controls="sidebar" aria-expanded="true">建筑目录</button>
+      <button id="toggle-layers" aria-controls="layers" aria-expanded="true">图层</button>
       <button id="view-3d" class="active" aria-pressed="true">三维</button>
       <button id="view-plan" aria-pressed="false">平面</button>
       <span class="divider"></span>
@@ -59,7 +61,7 @@
       <button id="view-tongfang">同方部</button>
       <button id="view-chemistry-hall">老化学馆</button>
     </nav>
-    <section class="legend">
+    <section id="layers" class="legend" aria-label="地图图层">
       <label><input type="checkbox" data-layer="building" checked><i class="swatch buildings"></i>建筑</label>
       <label><input type="checkbox" data-layer="landmark" checked><i class="swatch buildings"></i>地标</label>
       <label><input type="checkbox" data-layer="road" checked><i class="swatch roads"></i>道路</label>

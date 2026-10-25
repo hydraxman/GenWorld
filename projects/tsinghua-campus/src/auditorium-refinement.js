@@ -136,6 +136,27 @@ function masonryTexture(roof = false) {
   return texture;
 }
 
+function domeFinish() {
+  const width = 256, height = 128, pixels = new Uint8Array(width * height * 4);
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+    const panel = Math.floor(x / 4);
+    const streak = Math.sin(panel * 2.73) * 7 + Math.sin(y * .085 + panel * 1.3) * 5;
+    const grain = (((x * 17 + y * 29) % 11) - 5) * .25;
+    const base = [112, 137, 124];
+    const offset = (y * width + x) * 4;
+    for (let channel = 0; channel < 3; channel++) pixels[offset + channel] = base[channel] + streak + grain;
+    pixels[offset + 3] = 255;
+  }
+  const texture = new THREE.DataTexture(pixels, width, height);
+  texture.name = 'procedural dome patina (not photograph)';
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.generateMipmaps = true;
+  texture.minFilter = THREE.LinearMipmapLinearFilter;
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.needsUpdate = true;
+  return texture;
+}
+
 function solid(group, geometry, material, name, x = 0, y = 0, z = 0) {
   const mesh = new THREE.Mesh(geometry, material);
   mesh.name = name;
@@ -237,8 +258,8 @@ export function createAuditoriumDetail(feature, center, localOriginMeters) {
     tile: new THREE.MeshStandardMaterial({color: '#ffffff', map: masonryTexture(true), roughness: 0.9, side: THREE.DoubleSide}),
     stone: new THREE.MeshStandardMaterial({color: '#d5cfc0', roughness: 0.87}),
     ring: new THREE.MeshStandardMaterial({color: '#77756d', roughness: 0.84}),
-    dome: new THREE.MeshStandardMaterial({color: '#738b83', metalness: 0.32, roughness: 0.72}),
-    rib: new THREE.MeshStandardMaterial({color: '#abb3a4', metalness: 0.3, roughness: 0.68}),
+    dome: new THREE.MeshStandardMaterial({color: '#ffffff', map: domeFinish(), metalness: 0.24, roughness: 0.78}),
+    rib: new THREE.MeshStandardMaterial({color: '#8b9b8a', metalness: 0.3, roughness: 0.74}),
     frame: new THREE.MeshStandardMaterial({color: '#665548', roughness: 0.92}),
     glass: new THREE.MeshStandardMaterial({color: '#303c38', metalness: 0.08, roughness: 0.68, side: THREE.DoubleSide}),
   };
@@ -308,6 +329,32 @@ export function createAuditoriumDetail(feature, center, localOriginMeters) {
   }
   for (const x of [-5.6, 0, 5.6]) arch(architecture, cx + x, entryWall + 0.035, 0,
     2.4, 0.55, 6.6, materials, 'inferred front arched doorway');
+  const gableWindow = new THREE.Group();
+  gableWindow.name = 'south gable tripartite segmental window';
+  gableWindow.position.set(cx, 10.0, entryWall + .055);
+  const halfWindow = 3.0, windowHeight = 2.65, spring = 1.25;
+  const opening = new THREE.Shape();
+  opening.moveTo(-halfWindow, 0); opening.lineTo(halfWindow, 0); opening.lineTo(halfWindow, spring);
+  opening.bezierCurveTo(halfWindow * .65, windowHeight, -halfWindow * .65, windowHeight, -halfWindow, spring);
+  opening.closePath();
+  solid(gableWindow, new THREE.ShapeGeometry(opening, 20), materials.glass,
+    'segmental gable glazing panel').userData.isFacadePanel = true;
+  const archCurve = new THREE.CubicBezierCurve3(new THREE.Vector3(-halfWindow, spring, .045),
+    new THREE.Vector3(-halfWindow * .65, windowHeight, .045),
+    new THREE.Vector3(halfWindow * .65, windowHeight, .045), new THREE.Vector3(halfWindow, spring, .045));
+  solid(gableWindow, new THREE.TubeGeometry(archCurve, 28, .085, 6, false),
+    materials.frame, 'segmental gable arch moulding');
+  const archPoints = archCurve.getPoints(100);
+  const topAt = x => archPoints.reduce((best, point) =>
+    Math.abs(point.x - x) < Math.abs(best.x - x) ? point : best).y;
+  for (const x of [-halfWindow, -1, 1, halfWindow]) {
+    beam(gableWindow, [x, 0, .05], [x, topAt(x), .05], .055, materials.frame, 'gable window mullion');
+  }
+  beam(gableWindow, [-halfWindow, .75, .05], [halfWindow, .75, .05], .04, materials.frame, 'gable window transom');
+  solid(gableWindow, new THREE.BoxGeometry(6.3, .15, .25), materials.stone, 'gable window stone sill', 0, -.06, .025);
+  gableWindow.userData = {source: REFERENCE_IMAGE, status: 'photo-informed-estimate',
+    limitations: 'South gable arched glazing is visible; divisions, profile and dimensions are estimated facade panels, not surveyed openings.'};
+  architecture.add(gableWindow);
   // Window faces are placed on actual side edges (including their slight skew).
   for (const [aIndex, bIndex, facing] of [[0, 1, -1], [7, 6, 1]]) {
     const a = ring[aIndex], b = ring[bIndex], angle = Math.atan2(b[0] - a[0], b[1] - a[1]);
@@ -366,20 +413,40 @@ export function createAuditoriumDetail(feature, center, localOriginMeters) {
   });
   const dome = solid(architecture, new THREE.LatheGeometry(profile, 96), materials.dome,
     'shallow green-grey metal dome', cx, 0, cz);
+  dome.receiveShadow = false;
   dome.userData = {shape: 'shallow spherical cap', radius, rise, springY, riseToDiameter: rise / (2 * radius)};
   const ribs = [];
   for (let i = 0; i < 64; i++) {
     const angle = i * Math.PI * 2 / 64;
-    const points = Array.from({length: 19}, (_, j) => {
-      const r = radius * (1 - j / 19);
-      return new THREE.Vector3(Math.sin(angle) * r, capY(r) + 0.04, Math.cos(angle) * r);
-    });
-    ribs.push(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points), 24, 0.034, 5, false));
+    const vertices = [];
+    function section(j) {
+      const r = radius - (radius - .36) * j / 24;
+      return [-.004, .004].map(offset =>
+        [Math.sin(angle + offset) * r, capY(r), Math.cos(angle + offset) * r]);
+    }
+    function face(a, b, c, d) {
+      for (const point of [a, b, c, a, c, d]) vertices.push(...point);
+    }
+    const raised = (point, height) => [point[0], point[1] + height, point[2]];
+    for (let j = 0; j < 24; j++) {
+      const [a, b] = section(j), [d, c] = section(j + 1);
+      face(raised(a, .06), raised(b, .06), raised(c, .06), raised(d, .06));
+      face(raised(a, .015), raised(a, .06), raised(d, .06), raised(d, .015));
+      face(raised(b, .06), raised(b, .015), raised(c, .015), raised(c, .06));
+    }
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+    geometry.computeVertexNormals();
+    ribs.push(geometry);
   }
-  solid(architecture, mergeGeometries(ribs), materials.rib, '64 batched radial dome standing seams', cx, 0, cz);
+  const seams = solid(architecture, mergeGeometries(ribs), materials.rib,
+    '64 batched radial dome standing seams', cx, 0, cz);
+  // Thin seams should not stamp dotted self-shadows onto the metal cap.
+  seams.castShadow = seams.receiveShadow = false;
   ribs.forEach(geometry => geometry.dispose());
-  solid(architecture, new THREE.SphereGeometry(0.16, 12, 6), materials.rib,
-    'small dome apex cap', cx, springY + rise - 0.06, cz);
+  solid(architecture, new THREE.LatheGeometry([[.40, 0], [.40, .03], [.32, .07], [0, .1]]
+    .map(p => new THREE.Vector2(...p)), 24), materials.rib,
+    'small dome apex cap', cx, springY + rise - .02, cz);
   detail.updateMatrixWorld(true);
   const bounds = new THREE.Box3().setFromObject(detail);
   detail.userData = {
@@ -397,8 +464,8 @@ export function createAuditoriumDetail(feature, center, localOriginMeters) {
       domeRise: rise, frontPorticoWidth: porchWidth, openPorticoDepth: front - entryWall,
       meshLocalYMin: bounds.min.y, meshLocalYMax: bounds.max.y,
     },
-    observed: ['十字形红砖体量与交叉红色坡屋顶', '低矮灰绿色肋纹穹顶', '砖鼓座与多层环檐', '白色柱廊、横向额枋和中央高起矩形栏板'],
-    limits: '轮廓为冻结地图数据；高度与屋顶坡度按单张斜俯照片比例推定，非测绘。入口朝南略偏东由南侧草坪与凸出边推定；背面、门窗间距、柱槽、穹顶肋数及细部简化。窗为立面嵌板外观，不是布尔开洞；不建内部空间。照片仅本地参照，未作纹理。',
+    observed: ['十字形红砖体量与交叉红色坡屋顶', '灰绿金属穹顶与径向咬边', '砖鼓座与多层环檐', '白色柱廊、横向额枋和中央高起矩形栏板', '入口后方山墙上的分格弧顶窗'],
+    limits: '轮廓为冻结地图数据；高度与屋顶坡度按单张斜俯照片比例推定，非测绘。入口朝南略偏东由南侧草坪与凸出边推定；背面、门窗间距、山墙窗分格、柱槽、穹顶肋数及细部简化。金属色差为程序表面示意，不是实测锈蚀分布。窗为立面嵌板外观，不是布尔开洞；不建内部空间。照片仅本地参照，未作纹理。',
     noReferencePhotoTextures: true,
   };
   return detail;
@@ -427,7 +494,7 @@ export function refineAuditorium(campus, data) {
     name: '大礼堂', baseRenderHeight,
     renderHeight: Number(detail.userData.estimatedDimensionsMeters.meshLocalYMax.toFixed(3)),
     heightSource: '照片比例推定，非测绘',
-    refinementSummary: '依据官方斜俯照片重建十字形红砖外壳、交叉红色坡屋顶、砖鼓座、多层环檐、浅灰绿肋纹穹顶与南向白色四柱廊；保留冻结轮廓，隐蔽面和尺寸为估算。',
+    refinementSummary: '依据官方斜俯照片重建十字形红砖外壳、交叉坡屋顶、砖鼓座与多层环檐；细化灰绿金属穹顶咬边、南向四柱廊及后方山墙弧顶分格窗。保留冻结轮廓，色差、隐蔽面和尺寸为估算。',
     referenceSite: 'auditorium', referencePages: detail.userData.referencePages,
     referenceImages: detail.userData.referenceImages, limits: detail.userData.limits,
     refinementSource: '官方照片参照 + 冻结 OpenFreeMap 轮廓',

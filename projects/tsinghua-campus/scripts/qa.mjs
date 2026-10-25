@@ -6,6 +6,7 @@ import puppeteer from 'puppeteer-core';
 import {createProjectServer} from './serve.mjs';
 import {REFINEMENT_SITES, REFINEMENT_VIEWS} from '../src/refinements.js';
 import {LANDMARK_SITES} from '../src/landmarks.js';
+import {checkCampusInspection} from './browser-check.mjs';
 
 const root = resolve(import.meta.dirname, '..'), output = join(root, 'output');
 await mkdir(output, {recursive: true});
@@ -40,6 +41,7 @@ try {
   assert.equal(stats.invalid, 0);
   assert.equal(stats.refined, REFINEMENT_SITES.length);
   assert.equal(stats.landmarks, LANDMARK_SITES.length);
+  await checkCampusInspection({page, frame: page, screenshots: output});
   const coverage = await page.evaluate(() => window.campusApp.coverage);
   assert.equal(coverage.counts.mapBuildingObjects, stats.buildings);
   assert.equal(coverage.counts.photoModelBuildingObjects, stats.refined);

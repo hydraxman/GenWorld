@@ -8,6 +8,7 @@ import {applyCampusLandmarks, LANDMARK_SITES} from './landmarks.js';
 import {createCoverage} from './coverage.js';
 import catalog from '../reference-catalog.json';
 import {viewBounds} from './view-bounds.js';
+import {fitInspectionView, fitInspectionShadow} from './inspection-view.js';
 
 const $ = id => document.getElementById(id);
 const outputPrefix = location.pathname.endsWith('/tsinghua-campus-offline.html') ? '' : 'output/';
@@ -41,16 +42,9 @@ function main() {
   const scene = new THREE.Scene();
   scene.add(new THREE.HemisphereLight('#ffffff', '#a1b195', 1.2));
   const sun = new THREE.DirectionalLight('#fff7e8', 2);
-  sun.position.set(-1100, 1800, -700);
   sun.castShadow = true;
   sun.shadow.mapSize.set(4096, 4096);
-  sun.shadow.camera.left = sun.shadow.camera.bottom = -1900;
-  sun.shadow.camera.right = sun.shadow.camera.top = 1900;
-  sun.shadow.camera.near = 100;
-  sun.shadow.camera.far = 6000;
-  sun.shadow.normalBias = 1.2;
-  sun.shadow.bias = -0.0001;
-  scene.add(sun);
+  scene.add(sun, sun.target);
   const campus = createCampusModel(data);
   const refinedIds = applyCampusRefinements(campus, data);
   const landmarkIds = applyCampusLandmarks(campus, data);
@@ -88,6 +82,25 @@ function main() {
   const originalMaterials = new Map();
   const buildings = [...campus.buildings.entries()];
   const objects = [...campus.objects.entries()];
+  let framedBounds = null, framedPadding = 1.3;
+  const compact = window.matchMedia('(max-width: 850px)');
+  const inspector = $('sidebar'), legend = $('layers');
+  function panel(element, toggle, open) {
+    element.hidden = !open;
+    toggle.setAttribute('aria-expanded', String(open));
+  }
+  panel(inspector, $('toggle-inspector'), !compact.matches);
+  panel(legend, $('toggle-layers'), !compact.matches);
+  function inspectionRegion() {
+    const width = $('workspace').clientWidth, height = $('workspace').clientHeight;
+    const margin = compact.matches ? 14 : 24;
+    const top = Math.max(...['.toolbar', '.sitebar', 'header'].map(selector =>
+      document.querySelector(selector).getBoundingClientRect().bottom)) + 16;
+    const left = !compact.matches && !inspector.hidden ? inspector.getBoundingClientRect().right + 24 : margin;
+    const bottom = !legend.hidden ? legend.getBoundingClientRect().top - 16 : height - 70;
+    const y = Math.min(top, height - 100);
+    return {x: left, y, width: Math.max(1, width - left - margin), height: Math.max(1, bottom - y)};
+  }
 
   function resize() {
     const width = $('workspace').clientWidth, height = $('workspace').clientHeight;
@@ -102,27 +115,27 @@ function main() {
     plan.updateProjectionMatrix();
     const sitebar = document.querySelector('.sitebar');
     $('message').style.top = `${sitebar.offsetTop + sitebar.offsetHeight + 12}px`;
+    if (framedBounds) frame(framedBounds, framedPadding, camera.position.clone().sub(controls.target).normalize().toArray());
     dirty = true;
   }
-  function frame(targetBounds, padding = 1.3, direction = [0.33, 0.92, 1.1]) {
-    const middle = targetBounds.getCenter(new THREE.Vector3());
-    const dimensions = targetBounds.getSize(new THREE.Vector3());
-    const radius = Math.max(dimensions.x, dimensions.z, dimensions.y, 8);
-    controls.target.copy(middle);
+  function frame(targetBounds, padding = 1.15, direction = [0.33, 0.92, 1.1]) {
+    const damping = controls.enableDamping;
+    controls.enableDamping = false;
+    controls.update();
+    controls.enableDamping = damping;
+    framedBounds = targetBounds.clone();
+    framedPadding = padding;
     if (planMode) {
-      camera.position.set(middle.x, 6000, middle.z);
       camera.up.set(0, 0, -1);
-      camera.zoom = Math.min((plan.right - plan.left) / Math.max(dimensions.x, 50),
-        (plan.top - plan.bottom) / Math.max(dimensions.z, 50)) / padding;
     } else {
       controls.maxPolarAngle = direction[1] < 0 ? Math.PI * 0.61 : Math.PI / 2.05;
       camera.up.set(0, 1, 0);
-      const distance = radius / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2))) * padding
-        / Math.min(camera.aspect, 1);
-      camera.position.copy(middle).add(new THREE.Vector3(...direction).normalize().multiplyScalar(distance));
     }
-    camera.lookAt(middle);
-    camera.updateProjectionMatrix();
+    const middle = fitInspectionView(camera, targetBounds, {width: $('workspace').clientWidth,
+      height: $('workspace').clientHeight, region: inspectionRegion(), padding,
+      direction: planMode ? [0, 1, 0] : direction});
+    controls.target.copy(middle);
+    fitInspectionShadow(sun, targetBounds);
     controls.update();
     dirty = true;
   }
@@ -144,6 +157,7 @@ function main() {
     for (const [mesh, material] of originalMaterials) mesh.material = material;
     originalMaterials.clear();
     selected = building;
+    if (compact.matches) panel(inspector, $('toggle-inspector'), false);
     building.traverse(object => {
       if (object.isMesh && building.userData.refinementStatus !== 'detailed') {
         originalMaterials.set(object, object.material);
@@ -151,7 +165,8 @@ function main() {
       }
     });
     highlight.box.setFromObject(building);
-    highlight.visible = building.visible && campus.layers[building.userData.kind].visible;
+    highlight.visible = building.userData.refinementStatus !== 'detailed' && building.visible &&
+      campus.layers[building.userData.kind].visible;
     const p = building.userData;
     $('selection-name').textContent = p.name || '未命名建筑';
     $('selection-help').textContent = building.userData.refinementStatus === 'detailed'
@@ -179,7 +194,7 @@ function main() {
       $('selected-references').href = outputPrefix
         + `reference-photos.html#${encodeURIComponent(p.referenceSite)}`;
     }
-    if (focus) frame(viewBounds(building), 2.6);
+    if (focus) frame(viewBounds(building), 1.2);
     dirty = true;
     return building;
   }
@@ -262,7 +277,8 @@ function main() {
       $('selection-help').textContent = '基模已暂时隐藏；点击已重建对象或使用上方快捷视角。';
       $('selection-fields').replaceChildren();
       $('focus').hidden = $('export-building').hidden = $('selected-references').hidden = true;
-    } else if (selected) highlight.visible = campus.layers[selected.userData.kind].visible;
+    } else if (selected) highlight.visible = selected.userData.refinementStatus !== 'detailed' &&
+      campus.layers[selected.userData.kind].visible;
     else {
       $('selection-name').textContent = '选择建筑或地标';
       $('selection-help').textContent = '点击地图上的对象，或搜索名称与编号。未重建对象仍保留原轮廓基模。';
@@ -273,7 +289,13 @@ function main() {
   $('view-3d').addEventListener('click', () => mode(false));
   $('view-plan').addEventListener('click', () => mode(true));
   $('view-all').addEventListener('click', () => frame(bounds));
-  $('focus').addEventListener('click', () => selected && frame(viewBounds(selected), 2.6));
+  for (const [toggle, element] of [[$('toggle-inspector'), inspector], [$('toggle-layers'), legend]]) {
+    toggle.addEventListener('click', () => {
+      panel(element, toggle, element.hidden);
+      frame(framedBounds, framedPadding, camera.position.clone().sub(controls.target).normalize().toArray());
+    });
+  }
+  $('focus').addEventListener('click', () => selected && frame(viewBounds(selected), 1.2));
   $('view-north').addEventListener('click', () => {
     const region = bounds.clone(); region.max.z = bounds.min.z + size.z * 0.43; frame(region, 1.2);
   });
@@ -287,7 +309,7 @@ function main() {
       const target = select(site.featureId);
       const box = viewBounds(target);
       for (const id of site.groupFeatureIds || []) box.union(viewBounds(campus.objects.get(id)));
-      frame(box, 1.45, site.viewDirection);
+      frame(box, 1.12, site.viewDirection);
     });
   }
   if (__PHOTO_SITE_COUNT__ > 0) {
@@ -301,7 +323,8 @@ function main() {
   $('export-building').addEventListener('click', () => { void exportModel(false).catch(error => console.error('Building export failed', error)); });
   document.querySelectorAll('[data-layer]').forEach(input => input.addEventListener('change', () => {
     campus.layers[input.dataset.layer].visible = input.checked;
-    if (selected?.userData.kind === input.dataset.layer) highlight.visible = input.checked && selected.visible;
+    if (selected?.userData.kind === input.dataset.layer) highlight.visible =
+      selected.userData.refinementStatus !== 'detailed' && input.checked && selected.visible;
     dirty = true;
   }));
   $('building-count').textContent = buildings.length.toLocaleString();
@@ -314,6 +337,11 @@ function main() {
   $('source-note').textContent = '北京主校区 · OSM 校园范围，非测绘边界。多数地图楼高仅为显示值，待逐栋重建。'
     + `已接入 ${siteCount} 处照片参照重建（${refinedIds.length} 个轮廓、${landmarkIds.length} 个独立地标）；隐藏立面及部分尺寸含推定。`;
   window.addEventListener('resize', resize);
+  compact.addEventListener('change', () => {
+    panel(inspector, $('toggle-inspector'), !compact.matches);
+    panel(legend, $('toggle-layers'), !compact.matches);
+    resize();
+  });
   renderer.domElement.addEventListener('webglcontextlost', event => {
     event.preventDefault();
     message('显卡上下文已中断，请刷新页面重新加载。', true);
@@ -340,8 +368,10 @@ function main() {
     stats: {buildings: buildings.length, features: data.features.length, refined: refinedIds.length,
       refinedSites: refinedSiteCount, landmarks: landmarkIds.length, reconstructedSites: siteCount},
     render: () => renderer.render(scene, camera),
+    inspection: () => ({region: inspectionRegion(), camera, bounds: framedBounds.clone(),
+      shadowTexelMeters: (sun.shadow.camera.right - sun.shadow.camera.left) / sun.shadow.mapSize.x}),
   };
-  message(`已加载 ${buildings.length} 个建筑体块、${siteCount} 处照片参照重建。本批产物仅保存在当前工程。`);
+  message(`已加载 ${buildings.length} 个建筑体块、${siteCount} 处照片参照重建。点击地标查看细节；尺寸与隐蔽面仍为估算。`);
 }
 
 try { main(); }
