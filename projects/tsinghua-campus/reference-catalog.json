@@ -422,9 +422,66 @@
         "license": "清华官方照片，未查得自由再发布许可；仅本地参考。",
         "view": "公寓组团高位斜视，不是紫荆园食堂室内",
         "downloadedAt": "2026-10-09"
+      }, {
+        "path": "references\\zijing-high-rise-official.png",
+        "pageUrl": "https://www.tsinghua.edu.cn/en/Campus/Student_Life/Housing___Dining.htm",
+        "imageUrl": "https://www.tsinghua.edu.cn/__local/1/04/88/40D809D18C7FA5B0E4B4490C5F9_6896CFF7_E3684.png",
+        "width": 1024, "height": 468,
+        "sha256": "593ab29b1a5047b37e9d65dd8d85535ccab6d15f1a937ffb8cfd8b3b52aa4d88",
+        "license": "清华大学官方住宿页面，未明摄影者、未查得开放许可；仅本地参考，不作为纹理。",
+        "view": "19–23国际学生公寓组团外景，淡色横向墙带、重复凹窗与端部竖向体量；各栋未单独标号。",
+        "downloadedAt": "2026-10-25"
+      }, {
+        "path": "references\\zijing-w-official.jpg",
+        "pageUrl": "https://www.tsinghua.edu.cn/info/1708/70290.htm",
+        "imageUrl": "https://www.tsinghua.edu.cn/_mediafile/qh2021b/publish/thunews/9658/20190423101508247661875/1555986664346.jpg",
+        "width": 650, "height": 420,
+        "sha256": "88a06af40ee38544035b156a6d45c14d292b28f8388052bc8d3a0a97f6d5b82d",
+        "license": "清华大学新闻中心版权所有；资料提供修缮中心园林科，未明确本图摄影者。题图何名暖署名不转用于本图；仅本地参考。",
+        "view": "官方明确标注14–17号W楼的庭院外景，高层淡色立面与密集窗列；树木遮挡，不能据此确认完整楼层数。",
+        "downloadedAt": "2026-10-25"
       }],
       "observations": ["近景为多排灰蓝坡屋顶宿舍，立面有重复凸出的阳台窗间体量", "左后方部分宿舍为红色坡屋顶，后方高层有密集阳台、白色竖向体块及顶层构架", "运动场和树带分隔组团"],
-      "unknowns": ["各栋具体楼号与照片朝向、测量高度、遮挡的地面连接"]
+      "unknowns": ["组团照片未逐栋标号；1–13单栋窗位、红灰屋顶分配与隐蔽面为类型推定", "14–17在冻结地图中共用一个根；分区取独立OSM共同边界，外景未提供楼层数或米制标高", "18/20楼层缺独立官方确认；1–23为已找到来源的范围，不证明不存在更新楼号"],
+      "identityEvidence": "data/zijing-evidence.json"
+    },
+    {
+      "id": "zijing-dining",
+      "name": "紫荆园餐厅",
+      "aliases": ["紫荆园食堂"],
+      "coordinates": null,
+      "status": "reference-ready",
+      "images": [{
+        "path": "references\\zijing-dining-official.png",
+        "pageUrl": "https://www.tsinghua.edu.cn/ysfwzx/info/1004/1007.htm",
+        "imageUrl": "https://www.tsinghua.edu.cn/__local/E/F2/39/31CF8CF6D736EEE08D7FC4D85F9_B14674D7_23CC0.png",
+        "width": 294, "height": 406,
+        "sha256": "7bb5ba997925ccb5ac07d7fe7e24013bd103b3b551ace99010160720782c16d3",
+        "license": "清华大学饮食服务中心版权所有；未查得开放许可，仅本地参考，不作为纹理。",
+        "view": "紫荆园识别卡内的食堂外景：水平弧形分带、浅色竖向楼梯体与顶部框架；不是室内照片。",
+        "downloadedAt": "2026-10-25"
+      }],
+      "observations": ["圆弧形横向分层、连续窗带、浅色竖向楼梯体与顶部透空框架", "官方五层含地下一层，因此地上四层；绝对高度未实测"],
+      "unknowns": ["小幅裁切图不能约束完整弧线与后立面；入口方向、分格、后屋顶和高度推定"]
+    },
+    {
+      "id": "taoli-dining",
+      "name": "桃李园餐厅",
+      "aliases": ["桃李园食堂"],
+      "coordinates": null,
+      "status": "reference-ready",
+      "images": [{
+        "path": "references\\taoli-dining-official.png",
+        "pageUrl": "https://www.tsinghua.edu.cn/ysfwzx/info/1004/1007.htm",
+        "imageUrl": "https://www.tsinghua.edu.cn/__local/F/99/FC/654E6DBFE7F3D3BDA100D2BE5E9_EA2CE88A_1EB3C.png",
+        "width": 283, "height": 422,
+        "sha256": "b50977f44a242b5a0605c3ef44d8e962e2a05064d9f97ef718b68cb583ad5f09",
+        "license": "清华大学饮食服务中心版权所有；未查得开放许可，仅本地参考，不作为纹理。",
+        "view": "桃李园识别卡内的外景：弧形层带、前部大圆窗与竖向窗列；不是餐厅内部。",
+        "downloadedAt": "2026-10-25"
+      }],
+      "observations": ["弧形层带与水平遮阳、入口前部大圆形构图和竖向窄窗", "官方四层含地下一层，因此地上三层；绝对高度未实测"],
+      "unknowns": ["圆窗内部构造、弧形两端、朝向和后立面从裁切图不能完全核实；构件尺寸和高度推定"]
     }
   ]
 }

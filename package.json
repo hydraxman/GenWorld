@@ -4,6 +4,9 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
+    "skills:install:3d": "node shared/agent-tools/img2threejs.mjs install",
+    "skills:check:3d": "node shared/agent-tools/img2threejs.mjs check",
+    "test:agent-tools": "node --test shared/agent-tools/*.test.mjs",
     "build": "npm --prefix projects/courtyard run build && npm --prefix projects/shunde run build && npm run build:knowledge",
     "test": "npm --prefix projects/panjin-map-tour test && npm --prefix projects/courtyard test && npm --prefix projects/shunde test && npm run test:knowledge",
     "build:knowledge": "npm --prefix projects/knowledge-tower run build",

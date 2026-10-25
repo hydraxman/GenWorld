@@ -6,7 +6,7 @@ import puppeteer from 'puppeteer-core';
 import {createProjectServer} from './serve.mjs';
 import {REFINEMENT_SITES, REFINEMENT_VIEWS} from '../src/refinements.js';
 import {LANDMARK_SITES} from '../src/landmarks.js';
-import {checkCampusInspection, checkCampusExpansion} from './browser-check.mjs';
+import {checkCampusInspection, checkCampusExpansion, checkCampusZijing} from './browser-check.mjs';
 
 const root = resolve(import.meta.dirname, '..'), output = join(root, 'output');
 await mkdir(output, {recursive: true});
@@ -43,6 +43,7 @@ try {
   assert.equal(stats.landmarks, LANDMARK_SITES.length);
   await checkCampusInspection({page, frame: page, screenshots: output});
   const appearance = await checkCampusExpansion({page, frame: page, screenshots: output});
+  const zijing = await checkCampusZijing({page, frame: page, screenshots: output});
   const coverage = await page.evaluate(() => window.campusApp.coverage);
   assert.equal(coverage.counts.mapBuildingObjects, stats.buildings);
   assert.equal(coverage.counts.photoModelBuildingObjects, stats.refined);
@@ -166,6 +167,23 @@ try {
     assert.deepEqual(rootNode.translation || [0, 0, 0], [0, 0, 0], 'Standalone geometry must export at its local origin');
     record.glbBytes = model.length;
   }
+  const apartmentOutput = join(output, 'apartments');
+  await mkdir(apartmentOutput, {recursive: true});
+  for (let number = 1; number <= 23; number++) {
+    await page.evaluate(number => window.campusApp.selectApartment(number), number);
+    await downloadModel(false, apartmentOutput);
+    const bytes = await readFile(join(apartmentOutput, `tsinghua-zijing-${number}.glb`));
+    assert.equal(bytes.toString('ascii', 0, 4), 'glTF');
+    assert.equal(bytes.readUInt32LE(8), bytes.length);
+    const single = JSON.parse(bytes.toString('utf8', 20, 20 + bytes.readUInt32LE(12)).trim());
+    const identities = single.nodes.filter(node => node.extras?.featureId);
+    assert.equal(identities.length, 1, 'A logical-apartment export retains exactly one original frozen root');
+    assert.equal(identities[0].extras.selectedApartmentNumber, number);
+    const apartmentNodes = single.nodes.filter(node => node.extras?.apartmentNumber);
+    assert.deepEqual(apartmentNodes.map(node => node.extras.apartmentNumber), [number],
+      'A per-apartment export must not contain siblings from the W group');
+    assert.deepEqual(identities[0].translation || [0, 0, 0], [0, 0, 0]);
+  }
   const offline = await browser.newPage();
   await offline.setViewport({width: 1440, height: 900});
   const external = [];
@@ -177,8 +195,12 @@ try {
   assert.ok((await offline.$eval('#selection-name', element => element.textContent)).includes('老图书馆'));
   assert.equal(await offline.$eval('#selected-references', link => link.getAttribute('href')), 'reference-photos.html#old-library');
   assert.deepEqual(external, [], 'Offline viewer must not request network assets');
+  await offline.goto(pathToFileURL(join(output, 'tsinghua-campus-offline.html')).href + '?view=zijing-17', {waitUntil: 'load'});
+  await offline.waitForFunction(() => window.campusApp?.ready || window.campusError, {timeout: 90000});
+  assert.equal(await offline.evaluate(() => window.campusApp.selectedApartment()), 17);
+  assert.deepEqual(external, [], 'A direct W-apartment deep link must remain entirely offline');
   assert.deepEqual(errors, []);
-  const report = {stats, glbBytes: glb.length, offlineNetworkRequests: external.length, errors, appearance};
+  const report = {stats, glbBytes: glb.length, offlineNetworkRequests: external.length, errors, appearance, zijing};
   await writeFile(join(output, 'smoke-check.json'), JSON.stringify(report, null, 2));
   await writeFile(join(output, 'campus-coverage.json'), JSON.stringify(coverage, null, 2));
   const csv = value => `"${String(value ?? '').replace(/"/g, '""')}"`;

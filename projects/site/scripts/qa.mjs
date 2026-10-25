@@ -6,7 +6,7 @@ import puppeteer from 'puppeteer-core';
 import { output } from './build.mjs';
 import { scenes } from '../src/scenes.js';
 import { checkWindPrint } from '../../wind-print/scripts/browser-check.mjs';
-import { checkCampusInspection, checkCampusExpansion } from '../../tsinghua-campus/scripts/browser-check.mjs';
+import { checkCampusInspection, checkCampusExpansion, checkCampusZijing } from '../../tsinghua-campus/scripts/browser-check.mjs';
 
 const screenshots = path.resolve(import.meta.dirname, '..', 'qa');
 const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript',
@@ -87,6 +87,8 @@ try {
       assert.equal(await frame.$eval('#references', element => element.hidden), true);
       await checkCampusInspection({page, frame, screenshots});
       const appearance = await checkCampusExpansion({page, frame, screenshots});
+      const zijing = await checkCampusZijing({page, frame, screenshots});
+      await writeFile(path.join(screenshots, 'campus-zijing.json'), JSON.stringify(zijing, null, 2));
       await writeFile(path.join(screenshots, 'campus-appearance.json'), JSON.stringify(appearance, null, 2));
       await frame.click('#view-plan');
       assert.equal(await frame.$eval('#view-plan', element => element.getAttribute('aria-pressed')), 'true');

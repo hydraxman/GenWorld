@@ -166,3 +166,15 @@ export function replaceBuilding(buildings, id, detail) {
   building.userData.refinementStatus = 'detailed';
   return building;
 }
+
+export function disposeOwnedDetail(detail) {
+  const geometries = new Set(), materials = new Set(), textures = new Set();
+  detail.traverse(object => {
+    if (object.geometry) geometries.add(object.geometry);
+    if (object.isMesh) for (const material of Array.isArray(object.material) ? object.material : [object.material]) {
+      materials.add(material);
+      for (const value of Object.values(material)) if (value?.isTexture) textures.add(value);
+    }
+  });
+  geometries.forEach(g => g.dispose()); materials.forEach(m => m.dispose()); textures.forEach(t => t.dispose());
+}

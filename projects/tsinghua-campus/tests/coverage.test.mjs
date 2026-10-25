@@ -29,8 +29,10 @@ test('coverage separates frozen footprints, estimated reconstructions and indepe
   assert.deepEqual(report.counts, {
     mapBuildingObjects: 3, photoModelBuildingObjects: 1, remainingBaseBuildingObjects: 2,
     partialPhotoModelBuildingObjects: 0, remainingWorkBuildingObjects: 2,
+    groupTypologyBuildingObjects: 0,
     independentLandmarks: 1, photoModelSites: 2, surveyedBuildingObjects: 0,
   });
+
   assert.equal(report.completeFaithfulReplication, false);
   assert.equal(report.allFootprintsHavePhotoModels, false);
   assert.equal(report.buildings[0].mapHeight, 5);
@@ -38,6 +40,20 @@ test('coverage separates frozen footprints, estimated reconstructions and indepe
   assert.deepEqual(report.references[0].buildingIds, ['building:1']);
   assert.deepEqual(report.references[1].landmarkIds, ['landmark:1']);
   assert.equal(report.references[2].stage, 'photos-ready-identity-or-model-pending');
+});
+
+test('group-photo apartment estimates keep logical numbers separate from frozen map-root coverage', () => {
+  const {campus, data, catalog} = fixture();
+  Object.assign(campus.buildings.get('building:1').userData, {
+    referenceBasis: 'group-photo-typology-estimate', apartmentNumbers: [14, 15, 16, 17],
+  });
+  const report = createCoverage(campus, data, catalog);
+  assert.equal(report.counts.photoModelBuildingObjects, 1);
+  assert.equal(report.counts.groupTypologyBuildingObjects, 1);
+  assert.equal(report.counts.remainingWorkBuildingObjects, 3);
+  assert.equal(report.buildings[0].stage, 'group-photo-typology-estimate');
+  assert.deepEqual(report.logicalApartmentNumbers, [14, 15, 16, 17]);
+  assert.equal(report.completeFaithfulReplication, false);
 });
 
 test('partly rebuilt merged complexes remain in the work backlog', () => {

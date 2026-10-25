@@ -45,6 +45,9 @@ jobs:
           projects/tsinghua-campus/tests/inspection-view.test.mjs
           projects/tsinghua-campus/tests/model.test.mjs
           projects/tsinghua-campus/tests/surface-materials.test.mjs
+          projects/tsinghua-campus/tests/zijing.test.mjs
+          projects/tsinghua-campus/tests/zijing-dining.test.mjs
+          projects/tsinghua-campus/tests/coverage.test.mjs
       - run: npm run test:pages
       - run: npm run build:pages
       - name: Update Pages branch

@@ -13,6 +13,7 @@ header{position:absolute;top:30px;left:32px;pointer-events:none}header .eyebrow{
 footer{position:absolute;bottom:20px;left:32px;right:32px;font-size:10px;color:#6f7d6c;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;line-height:1.8}footer>span:first-child{max-width:440px}footer a{color:inherit}#message{position:absolute;top:97px;right:32px;max-width:480px;background:#fffdf5f2;border:1px solid #d5dfcb;border-radius:9px;padding:13px 17px;font-size:12px;line-height:1.7;box-shadow:0 5px 25px #253d3510}#message.error{color:#983c38;border-color:#d99f98;background:#fff5f1}
 .sitebar{position:absolute;right:30px;left:346px;top:90px;display:flex;gap:6px;padding:7px;background:#fffdf4ed;border:1px solid #d9dfd2;border-radius:12px;overflow:auto;scrollbar-width:thin}
 .sitebar button{font-size:12px;padding:8px 13px;white-space:nowrap}
+.apartment-picker{display:flex;align-items:center;gap:6px;white-space:nowrap;font-size:12px}.apartment-picker select{font:inherit;max-width:155px;min-height:34px;border:1px solid #cbd3c8;border-radius:7px;padding:5px;color:#294039;background:#fffdf7}
 #message{top:153px;pointer-events:none}
 .reconstruction-filter{display:flex;align-items:center;gap:7px;font-size:11px;margin-top:10px;color:#687467}
 .reconstruction-filter input{accent-color:#634377}

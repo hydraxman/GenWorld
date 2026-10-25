@@ -8,3 +8,4 @@
 - 构建、渲染与验收输出留在项目的忽略目录中。
 - 只提交必要的运行素材、冻结测试输入及其来源；凭据和受限参考素材不得提交。
 - 版本与依赖以包清单和锁文件为准，文档只保留使用方法、设计取舍和已知限制。
+- 3D 构建技能见 [.github/skills/genworld-3d/SKILL.md](.github/skills/genworld-3d/SKILL.md)；`npm run skills:install:3d` 安装固定来源的 img2threejs 资源，`npm run skills:check:3d` 离线校验。上游检出不入库，不自动更新，不要求图片或在线模型服务。

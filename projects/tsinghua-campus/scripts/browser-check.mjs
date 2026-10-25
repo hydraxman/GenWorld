@@ -19,15 +19,20 @@ async function snapshot(frame) {
   });
 }
 
-export async function measureCampusAppearance(frame, site) {
-  return frame.evaluate(site => {
+export async function measureCampusAppearance(frame, site, apartmentNumber = null) {
+  return frame.evaluate(({site, apartmentNumber}) => {
     const app = window.campusApp, {camera} = app.inspection();
     const roots = [...app.campus.buildings.values()];
-    const root = roots.find(object => object.userData.referenceSite === site);
-    const detail = root.children.find(child => child.userData.campusDetail);
+    const root = roots.find(object => object.userData.referenceSite === site &&
+      (apartmentNumber === null || object.userData.apartmentNumbers?.includes(apartmentNumber)));
+    const completeDetail = root.children.find(child => child.userData.campusDetail);
+    const detail = apartmentNumber === null ? completeDetail
+      : completeDetail.children.find(child => child.userData.apartmentNumber === apartmentNumber);
     const p = detail.userData.estimatedDimensionsMeters;
     let glazing, masonry;
-    if (site === 'art-museum') {
+    if (site === 'zijing-dormitories') {
+      ({glazing, masonry} = detail.userData.facadeSample);
+    } else if (site === 'art-museum') {
       glazing = [7, 7, -6.65]; masonry = [-50, 7, .02];
     } else if (site === 'sports-center') {
       const angle = Math.PI / 64, x = p.radiusX * Math.sin(angle), z = p.arenaCenterZ + p.radiusZ * Math.cos(angle);
@@ -55,7 +60,7 @@ export async function measureCampusAppearance(frame, site) {
       .flatMap(object => object.getObjectByName('base').children.filter(mesh => mesh.isMesh && Array.isArray(mesh.material)));
     return {glazing: luminance(glazing), masonry: luminance(masonry), rendering: app.inspection().rendering,
       baseMeshes: baseMeshes.length, windowlessBases: baseMeshes.filter(mesh => !mesh.material[1].map).length};
-  }, site);
+  }, {site, apartmentNumber});
 }
 
 function assertFramed(state) {
@@ -240,5 +245,82 @@ export async function checkCampusExpansion({page, frame, screenshots}) {
   await snapshot(frame);
   await page.mouse.move(viewport.width - 5, viewport.height - 5);
   await page.screenshot({path: path.join(screenshots, 'campus-baseline-windows-desktop.png')});
+  return report;
+}
+
+export async function checkCampusZijing({page, frame, screenshots}) {
+  const viewport = page.viewport(), report = [];
+  assert.equal(await frame.$$eval('#zijing-apartment option', options => options.length), 24);
+  assert.deepEqual(await frame.evaluate(() => window.campusApp.coverage.logicalApartmentNumbers),
+    Array.from({length: 23}, (_, i) => i + 1));
+  assert.equal(await frame.evaluate(() => window.campusApp.coverage.counts.groupTypologyBuildingObjects), 20);
+  await frame.click('#view-zijing');
+  assertFramed(await snapshot(frame));
+  await frame.$eval('#message', element => {element.hidden = true;});
+  await page.screenshot({path: path.join(screenshots, 'campus-zijing-group-desktop.png')});
+  for (let number = 1; number <= 23; number++) {
+    await frame.select('#zijing-apartment', String(number));
+    const state = await snapshot(frame);
+    assertFramed(state);
+    assert.equal(await frame.evaluate(() => window.campusApp.selectedApartment()), number);
+    assert.equal(await frame.$eval('#selection-name', element => element.textContent), `紫荆学生公寓${number}号楼`);
+    assert.match(await frame.$eval('#selection-fields', element => element.textContent), /组团类型推定/);
+    assert.equal(await frame.$eval('#export-building', element => element.hidden), false);
+    const model = await frame.evaluate(number => {
+      const root = [...window.campusApp.campus.buildings.values()].find(root => root.userData.apartmentNumbers?.includes(number));
+      const part = root.children.find(child => child.userData.campusDetail).children.find(child => child.userData.apartmentNumber === number);
+      return {rootId: root.userData.featureId, family: part.userData.family,
+        windows: part.userData.windowCount, height: root.userData.renderHeight};
+    }, number);
+    const appearance = [1, 8, 14, 18, 23].includes(number)
+      ? await measureCampusAppearance(frame, 'zijing-dormitories', number) : null;
+    if (appearance) {
+      assert.ok(appearance.glazing >= 25 && appearance.glazing <= 130,
+        `Dormitory glazing must remain readable in the actual canvas: ${JSON.stringify({number, appearance})}`);
+      assert.ok(appearance.masonry - appearance.glazing >= 20,
+        `Dormitory windows must contrast with their surrounding masonry: ${JSON.stringify({number, appearance})}`);
+    }
+    report.push({number, ...model, ...(appearance ? {appearance} : {})});
+    await page.screenshot({path: path.join(screenshots, `campus-zijing-${number}-desktop.png`)});
+  }
+  for (const number of [1, 14, 17, 23]) {
+    await frame.select('#zijing-apartment', String(number));
+    await snapshot(frame);
+    const point = await frame.evaluate(number => {
+      const app = window.campusApp, {camera} = app.inspection();
+      const root = [...app.campus.buildings.values()].find(root => root.userData.apartmentNumbers?.includes(number));
+      const part = root.children.find(child => child.userData.campusDetail).children.find(child => child.userData.apartmentNumber === number);
+      const point = camera.position.clone().set(...part.userData.facadeSample.glazing).applyMatrix4(part.matrixWorld).project(camera);
+      const canvas = document.getElementById('scene'), rect = canvas.getBoundingClientRect();
+      app.select([...app.campus.buildings.keys()].find(id => id !== root.userData.featureId));
+      return {x: rect.left + (point.x + 1) * rect.width / 2, y: rect.top + (1 - point.y) * rect.height / 2};
+    }, number);
+    const offset = frame === page ? {x: 0, y: 0} : await (await frame.frameElement()).boundingBox();
+    assert.ok(offset, 'The embedded scene must have a visible frame for real pointer input');
+    await page.mouse.click(point.x + offset.x, point.y + offset.y);
+    assert.equal(await frame.evaluate(() => window.campusApp.selectedApartment()), number,
+      `Actual scene ray picking must identify logical apartment ${number}, including W sub-buildings`);
+  }
+  await frame.$eval('#search', element => {element.value = '紫荆14号楼'; element.dispatchEvent(new Event('input'));});
+  assert.equal(await frame.$$eval('#results button', buttons => buttons.length), 1);
+  await frame.click('#results button');
+  assert.equal(await frame.evaluate(() => window.campusApp.selectedApartment()), 14);
+  await frame.$eval('#search', element => {element.value = ''; element.dispatchEvent(new Event('input'));});
+  for (const dimensions of [{width: 390, height: 844}, {width: 320, height: 568}]) {
+    await page.setViewport(dimensions);
+    for (const number of [1, 14, 23]) {
+      await frame.select('#zijing-apartment', String(number));
+      assertFramed(await snapshot(frame));
+      assert.equal(await frame.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+      await page.screenshot({path: path.join(screenshots, `campus-zijing-${number}-mobile-${dimensions.width}.png`)});
+    }
+  }
+  await page.setViewport(viewport);
+  await snapshot(frame);
+  for (const view of ['zijing-dining', 'taoli-dining']) {
+    await frame.click(`#view-${view}`);
+    assertFramed(await snapshot(frame));
+    await page.screenshot({path: path.join(screenshots, `campus-${view}-desktop.png`)});
+  }
   return report;
 }

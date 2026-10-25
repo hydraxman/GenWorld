@@ -8,7 +8,7 @@ export const scenes = [
   {
     id: 'campus', title: '清华园', english: 'CAMPUS ATLAS',
     category: '地图 × 建筑', description: '从全校地图走近一栋建筑，在三维和平面之间，发现校园的空间关系。',
-    detail: '校园总览 · 建筑搜索 · 地标视角',
+    detail: '紫荆1–23号楼 · 建筑搜索 · 地标视角',
     source: 'scenes/campus/', number: '02',
   },
   {

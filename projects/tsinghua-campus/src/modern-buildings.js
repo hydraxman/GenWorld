@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import {createBuilder} from '../../shunde/src/builder.js';
 import {footprintMetrics} from './geo.js';
-import {replaceBuilding} from './model.js';
+import {replaceBuilding, disposeOwnedDetail} from './model.js';
 import sources from '../data/modern-building-sources.json' with {type: 'json'};
 import catalog from '../reference-catalog.json' with {type: 'json'};
 import {createMasonryMaterial, createGlazingMaterial} from './surface-materials.js';
@@ -355,18 +355,6 @@ export function createModernBuildingDetail(feature, center, origin) {
     limits: LIMITS[source.referenceSite], localAxes: 'X east, Y up, Z south',
   };
   return C.detail;
-}
-
-function disposeOwnedDetail(detail) {
-  const geometries = new Set(), materials = new Set(), textures = new Set();
-  detail.traverse(object => {
-    if (object.geometry) geometries.add(object.geometry);
-    if (object.isMesh) for (const material of Array.isArray(object.material) ? object.material : [object.material]) {
-      materials.add(material);
-      for (const value of Object.values(material)) if (value?.isTexture) textures.add(value);
-    }
-  });
-  geometries.forEach(g => g.dispose()); materials.forEach(m => m.dispose()); textures.forEach(t => t.dispose());
 }
 
 export function refineModernBuilding(campus, data, featureId) {

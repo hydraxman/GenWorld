@@ -10,6 +10,9 @@ import {refineScienceHall, SCIENCE_HALL_ID} from './science-hall-refinement.js';
 import {refineTongfang, TONGFANG_ID} from './tongfang-refinement.js';
 import {refineChemistryHall, CHEMISTRY_HALL_ID} from './chemistry-hall-refinement.js';
 import {refineModernBuilding, MODERN_BUILDINGS} from './modern-buildings.js';
+import {refineZijing} from './zijing.js';
+import {ZIJING_SOURCES, ZIJING_IDS} from './zijing-sources.js';
+import {refineDining, DINING_SOURCES} from './zijing-dining.js';
 
 export const REFINEMENT_SITES = [
   {
@@ -89,6 +92,25 @@ export const REFINEMENT_SITES = [
     reconstructionExtent: source.referenceSite === 'music-hall' ? 'partial' : 'whole-footprint-estimate',
     apply: (campus, data) => refineModernBuilding(campus, data, source.featureId),
   })),
+  ...ZIJING_SOURCES.map((source, index) => ({
+    featureId: source.featureId, referenceSite: source.referenceSite,
+    buttonId: index === 0 ? 'view-zijing' : null, label: `紫荆公寓${source.numbers.join('–')}号楼`,
+    groupFeatureIds: ZIJING_IDS, viewDirection: [.15, .7, 1.1],
+    referenceBasis: 'group-photo-typology-estimate',
+    ...(source.numbers.length > 1 ? {
+      displayName: '紫荆学生公寓14–17号楼 · W楼组团',
+      displayNameSource: 'Frozen footprint POI labels and independent named OSM way shared boundaries; official W-building group caption. Not a replacement upstream map-name tag.',
+    } : {}),
+    aliases: source.numbers.flatMap(number => [`紫荆${number}号楼`, `紫荆公寓${number}`, `紫荆学生公寓${number}号楼`, `Zijing ${number}`]),
+    apply: (campus, data) => refineZijing(campus, data, source.featureId),
+  })),
+  ...DINING_SOURCES.map(source => ({
+    featureId: source.featureId, referenceSite: source.referenceSite, buttonId: `view-${source.referenceSite}`,
+    label: source.name, viewDirection: source.referenceSite === 'taoli-dining' ? [-1.1, .65, .7] : [-.4, .8, 1.1],
+    reconstructionExtent: 'partial',
+    aliases: [source.name.replace('餐厅', '食堂')],
+    apply: (campus, data) => refineDining(campus, data, source.featureId),
+  })),
 ];
 
 export const REFINEMENT_VIEWS = REFINEMENT_SITES.flatMap(site => [
@@ -110,7 +132,9 @@ export function applyCampusRefinements(campus, data, options = {}) {
     if (!target.userData.refinementSummary || target.userData.referenceSite !== site.referenceSite) {
       throw new Error(`${site.label} refinement needs its own description and reference-site identity.`);
     }
-    target.userData.reconstructionLevel = 'photo-informed-estimate-not-surveyed';
+    target.userData.referenceBasis = site.referenceBasis || 'building-photo-informed';
+    target.userData.reconstructionLevel = site.referenceBasis === 'group-photo-typology-estimate'
+      ? 'group-photo-typology-estimate-not-surveyed' : 'photo-informed-estimate-not-surveyed';
     target.userData.reconstructionExtent = site.reconstructionExtent || 'whole-footprint-estimate';
     if (site.displayName) {
       if (!site.displayNameSource) throw new Error(`${site.label} display name needs its own source.`);

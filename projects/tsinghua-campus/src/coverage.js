@@ -10,8 +10,10 @@ export function createCoverage(campus, data, catalog) {
     return {
       featureId: feature.id, name: p.name || null, mapName: feature.properties.name || null,
       stage: p.refinementStatus === 'detailed'
-        ? p.reconstructionExtent === 'partial' ? 'photo-informed-partial' : 'photo-informed-estimate'
+        ? p.referenceBasis === 'group-photo-typology-estimate' ? 'group-photo-typology-estimate'
+          : p.reconstructionExtent === 'partial' ? 'photo-informed-partial' : 'photo-informed-estimate'
         : 'footprint-base',
+      referenceBasis: p.referenceBasis || null, apartmentNumbers: p.apartmentNumbers || [],
       referenceSite: p.referenceSite || null,
       coordinates: feature.properties.localOrigin || null,
       mapHeight: feature.properties.renderHeight, mapHeightSource: feature.properties.heightSource,
@@ -22,6 +24,7 @@ export function createCoverage(campus, data, catalog) {
   });
   const reconstructed = records.filter(record => record.stage !== 'footprint-base');
   const partial = reconstructed.filter(record => record.stage === 'photo-informed-partial');
+  const typology = reconstructed.filter(record => record.stage === 'group-photo-typology-estimate');
   const landmarks = [...campus.landmarks.values()].map(object => ({
     featureId: object.userData.featureId, name: object.userData.name,
     referenceSite: object.userData.referenceSite,
@@ -38,18 +41,20 @@ export function createCoverage(campus, data, catalog) {
   });
   return {
     schemaVersion: 1, scope: data.metadata.name,
-    limitations: 'Stage coverage, not a fidelity score. Photo-informed geometry still includes estimated scale, hidden facades and unverified details. Map outlines can merge connected buildings.',
+    limitations: 'Stage coverage, not a fidelity score. Group-photo typology models are not per-building photo verification. Geometry includes estimated scale, hidden facades and unverified details. Map outlines can merge connected buildings.',
     counts: {
       mapBuildingObjects: records.length, photoModelBuildingObjects: reconstructed.length,
       remainingBaseBuildingObjects: records.length - reconstructed.length,
       partialPhotoModelBuildingObjects: partial.length,
-      remainingWorkBuildingObjects: records.length - reconstructed.length + partial.length,
+      groupTypologyBuildingObjects: typology.length,
+      remainingWorkBuildingObjects: records.length - reconstructed.length + partial.length + typology.length,
       independentLandmarks: landmarks.length,
       photoModelSites: new Set([...reconstructed, ...landmarks].map(record => record.referenceSite)).size,
       surveyedBuildingObjects: 0,
     },
     allFootprintsHavePhotoModels: reconstructed.length === records.length,
     completeFaithfulReplication: false,
+    logicalApartmentNumbers: [...new Set(records.flatMap(record => record.apartmentNumbers))].sort((a, b) => a - b),
     buildings: records, landmarks, references,
   };
 }

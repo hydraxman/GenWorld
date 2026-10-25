@@ -1,0 +1,54 @@
+{
+  "scope": "Documented Zijing student-apartment numbers 1–23; not an independently certified current inventory or proof that later numbers do not exist.",
+  "mapIdentity": {
+    "mapRootCount": 20,
+    "logicalApartmentCount": 23,
+    "mergedFeatureId": "building:geometry:b2d1efe7e37b0570b0979197",
+    "mergedNumbers": [14, 15, 16, 17],
+    "independentOsmWays": [84644281, 79698971, 84644276, 84644273],
+    "method": "Frozen map POI labels plus local osm-names.json named-way boundaries. Three shared named-way boundary lines partition the original map polygon; no source root, footprint, hole or origin is replaced."
+  },
+  "sources": [
+    {
+      "url": "https://www.tsinghua.edu.cn/info/1181/52386.htm",
+      "title": "清华加快建设学生公寓学术交流空间",
+      "published": "2014-06-17",
+      "author": "记者 王冰冰",
+      "supports": "Historical occupancy: 1–13 undergraduate; 14–17 and half of 18 doctoral. W connecting portions contain glass triangular exchange halls.",
+      "limits": "Historical occupancy is not a current allocation guarantee. Inline photo is indoors, not an exterior reference. No metre heights or authoritative floor count."
+    },
+    {
+      "url": "https://www.tsinghua.edu.cn/info/1708/70290.htm",
+      "title": "校园景观换新颜：更美的清华等你回家！",
+      "published": "2019-04-23",
+      "author": "记者 吕婷；资料提供：修缮中心园林科",
+      "supports": "The exterior is explicitly captioned 改造后的W楼（紫荆公寓14-17号楼）景观.",
+      "limits": "Trees obscure the facades. Group identification only; does not establish individual seams, floor counts or glass-hall dimensions. Title-image photographer credit is not assigned to this image."
+    },
+    {
+      "url": "https://www.tsinghua.edu.cn/en/Campus/Student_Life/Housing___Dining.htm",
+      "title": "Housing & Dining",
+      "supports": "19–23 international-apartment group; repetitive pale high-rise exteriors.",
+      "limits": "Individual visible buildings are not numbered in the photo."
+    },
+    {
+      "url": "https://is.tsinghua.edu.cn/gongyujianjie.pdf",
+      "title": "公寓简介",
+      "supports": "19–23 group caption; 19,21,22,23 explicitly have eleven floors.",
+      "limits": "20 is included in the introduction but omitted from the detailed selector. The separate six-floor 学生公寓6号楼/亚洲青年交流中心 is not 紫荆6号楼. PDF creation metadata is not treated as publication date."
+    },
+    {
+      "url": "https://www.tsinghua.edu.cn/ysfwzx/info/1004/1007.htm",
+      "title": "学生食堂",
+      "supports": "Zijing dining: five floors including one basement; Taoli dining: four including one basement. Exterior identification-card insets.",
+      "limits": "Four/three above-ground floors follow arithmetically. Insets are small and cropped; curved facade spans, metre dimensions and rear surfaces remain estimates."
+    }
+  ],
+  "constructionContract": {
+    "lowRise": "1–13: seven-floor OSM annotation; group-photo pitched roofs, repeated projecting balcony piers and pale gables. Roof colour assigned by group location is explicitly estimated.",
+    "doctoralW": "14–17: W-shaped frozen footprint and official group-labelled exterior. Fourteen visible-floor rhythm and 3.18m storeys are modeling estimates, not verified measured heights/floor counts.",
+    "otherHighRise": "18: separate identity, eleven-floor family estimate only. 19/21/22/23: officially stated eleven floors. 20: eleven-floor local OSM annotation, not independently verified in the accommodation guide.",
+    "facades": "Real holes between masonry piers, recessed glass, frames, slab edges and open rails. Repeated bays/entrances and hidden faces are typology estimates, not per-building photo verification.",
+    "rights": "Reference images remain unbundled and are never used as facade textures. All materials and number glyphs are original procedural geometry."
+  }
+}

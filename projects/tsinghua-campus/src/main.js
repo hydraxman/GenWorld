@@ -11,6 +11,7 @@ import {viewBounds} from './view-bounds.js';
 import {fitInspectionView, fitInspectionShadow} from './inspection-view.js';
 import {createCampusDaylight} from './daylight.js';
 import {createCampusRenderPipeline} from './render-pipeline.js';
+import {ZIJING_APARTMENTS} from './zijing-sources.js';
 
 const $ = id => document.getElementById(id);
 const outputPrefix = location.pathname.endsWith('/tsinghua-campus-offline.html') ? '' : 'output/';
@@ -57,7 +58,7 @@ function main() {
   scene.add(ground);
   const perspective = new THREE.PerspectiveCamera(40, 1, 1, 30000);
   const plan = new THREE.OrthographicCamera(-1000, 1000, 1000, -1000, 1, 30000);
-  let camera = perspective, planMode = false, selected = null;
+  let camera = perspective, planMode = false, selected = null, selectedPart = null;
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
   controls.dampingFactor = 0.12;
@@ -152,18 +153,25 @@ function main() {
   function focusSelected() {
     if (!selected) return;
     const view = [...REFINEMENT_VIEWS, ...LANDMARK_SITES].find(site => site.featureId === selected.userData.featureId);
-    frame(viewBounds(selected), 1.2, view?.viewDirection);
+    frame(viewBounds(selectedPart || selected), 1.2, selectedPart?.userData.viewDirection || view?.viewDirection);
   }
-  function select(id, focus = false) {
+  function select(id, focus = false, apartmentNumber = null) {
     const building = campus.objects.get(id);
     if (!building) throw new Error(`Campus object not found: ${id}`);
+    const numbers = building.userData.apartmentNumbers || [];
+    const number = apartmentNumber ?? (numbers.length === 1 ? numbers[0] : null);
+    const part = number === null ? null
+      : building.children.find(child => child.userData.campusDetail)?.children.find(child => child.userData.apartmentNumber === number);
+    if (number !== null && !part) throw new Error(`Apartment ${number} is not part of ${id}`);
     selected = building;
+    selectedPart = part;
+    $('zijing-apartment').value = part ? String(number) : '';
     if (compact.matches) panel(inspector, $('toggle-inspector'), false);
     highlight.box.setFromObject(building);
     highlight.visible = building.userData.refinementStatus !== 'detailed' && building.visible &&
       campus.layers[building.userData.kind].visible;
     const p = building.userData;
-    $('selection-name').textContent = p.name || '未命名建筑';
+    $('selection-name').textContent = part?.name || p.name || '未命名建筑';
     $('selection-help').textContent = building.userData.refinementStatus === 'detailed'
       ? building.userData.refinementSummary
       : `当前为轮廓基模。${building.userData.baseFacadeSource} 楼高和屋顶亦非实测。`;
@@ -175,7 +183,12 @@ function main() {
       ['高度来源', p.heightSource || '来源未标注'],
       ['原点 X/Z', p.localOriginMeters.map(v => v.toFixed(1)).join(' / ') + ' m'],
       ...(p.kind === 'landmark' ? [['位置来源', `OSM node ${p.mapSource.id.split(':').at(-1)} · 社区地图点位，非测绘`]] : []),
-      ['重建状态', p.refinementStatus === 'detailed' ? '照片参照重建 · 非测绘' : '基模 · 待照片重建'],
+      ['重建状态', p.refinementStatus === 'detailed'
+        ? p.referenceBasis === 'group-photo-typology-estimate' ? '照片参照重建 · 组团类型推定，非逐栋照片验证' : '照片参照重建 · 非测绘'
+        : '基模 · 待照片重建'],
+      ...(numbers.length ? [['楼号', numbers.length > 1 ? `${numbers.join(' / ')} 共用一个原地图根` : `${numbers[0]}号楼`]] : []),
+      ...(part ? [['当前分楼', `${number}号楼 · ${part.userData.estimatedFloors}层外观节奏`],
+        ['楼层依据', part.userData.floorsSource]] : []),
       ...(p.refinementStatus === 'detailed'
         ? [['重建范围', p.reconstructionExtent === 'partial' ? '局部重建 · 仍需完善其他区域' : '轮廓范围内外观估算 · 细节含推定']] : []),
     ]) {
@@ -193,6 +206,12 @@ function main() {
     dirty = true;
     return building;
   }
+  function selectApartment(number) {
+    const apartment = ZIJING_APARTMENTS.find(part => part.number === number);
+    if (!apartment) throw new Error(`未知紫荆楼号：${number}`);
+    if (planMode) mode(false);
+    return select(apartment.featureId, true, number);
+  }
   const raycaster = new THREE.Raycaster(), pointer = new THREE.Vector2();
   let pointerStart;
   renderer.domElement.addEventListener('pointerdown', event => { pointerStart = [event.clientX, event.clientY]; });
@@ -208,9 +227,12 @@ function main() {
       return true;
     });
     if (!hit) return;
-    let target = hit.object;
-    while (target && !target.userData.featureId) target = target.parent;
-    if (target) select(target.userData.featureId);
+    let target = hit.object, apartmentNumber = null;
+    while (target && !target.userData.featureId) {
+      if (target.userData.apartmentNumber) apartmentNumber = target.userData.apartmentNumber;
+      target = target.parent;
+    }
+    if (target) select(target.userData.featureId, false, apartmentNumber);
   });
   function search() {
     const query = $('search').value.trim().toLocaleLowerCase();
@@ -226,7 +248,11 @@ function main() {
       const small = document.createElement('small');
       small.textContent = id;
       button.append(small);
-      button.addEventListener('click', () => select(id, true));
+      const numberMatch = query.match(/^(?:紫荆(?:(?:学生)?公寓)?)?(\d+)(?:号楼|号)?$/);
+      const number = numberMatch ? Number(numberMatch[1]) : null;
+      const partNumber = object.userData.apartmentNumbers?.includes(number) ? number : null;
+      if (partNumber) button.firstChild.textContent = `紫荆学生公寓${partNumber}号楼`;
+      button.addEventListener('click', () => select(id, true, partNumber));
       list.append(button);
     }
     $('results').replaceChildren(list);
@@ -235,12 +261,20 @@ function main() {
     message('正在导出可编辑 GLB…', false, true);
     $('export-all').disabled = $('export-building').disabled = true;
     try {
-      const object = whole ? campus.group.clone(true) : selected?.clone(true);
+      const object = whole ? campus.group.clone(true) : selected?.clone(!selectedPart);
       if (!object) throw new Error('请先选择建筑或地标。');
+      if (!whole && selectedPart) {
+        object.add(selectedPart.clone(true));
+        Object.assign(object.userData, {selectedApartmentNumber: selectedPart.userData.apartmentNumber,
+          exportScope: 'Logical apartment within original frozen map root; source footprint identity is preserved.',
+          sourceRootFootprintArea: object.userData.footprintArea,
+          footprintArea: selectedPart.userData.footprintArea,
+          apartmentNumbers: [selectedPart.userData.apartmentNumber]});
+      }
       if (!whole) object.position.set(0, 0, 0);
       object.updateMatrixWorld(true);
       const bytes = await new GLTFExporter().parseAsync(object, {binary: true, onlyVisible: true});
-      save(bytes, whole ? 'tsinghua-campus-refined.glb' : selected.userData.exportFilename
+      save(bytes, whole ? 'tsinghua-campus-refined.glb' : selectedPart ? `tsinghua-zijing-${selectedPart.userData.apartmentNumber}.glb` : selected.userData.exportFilename
         || `tsinghua-${selected.userData.featureId.replace(/[^a-z0-9_-]/gi, '-')}.glb`, 'model/gltf-binary');
       message('GLB 已导出。使用米制坐标；校园导出包含当前开启图层及筛选后可见对象。');
       return bytes.byteLength;
@@ -253,12 +287,22 @@ function main() {
     }
   }
   $('search').addEventListener('input', search);
+  for (const apartment of ZIJING_APARTMENTS) {
+    const option = document.createElement('option'); option.value = apartment.number;
+    option.textContent = `${apartment.number}号楼${apartment.family === 'w-doctoral' ? ' · W楼' : ''}`;
+    $('zijing-apartment').append(option);
+  }
+  $('zijing-apartment').addEventListener('change', event => {
+    if (event.target.value) selectApartment(Number(event.target.value));
+  });
   $('only-refined').addEventListener('change', () => {
     for (const object of campus.buildings.values()) {
       object.visible = !$('only-refined').checked || object.userData.refinementStatus === 'detailed';
     }
     if (selected && !selected.visible) {
       selected = null;
+      selectedPart = null;
+      $('zijing-apartment').value = '';
       highlight.visible = false;
       $('selection-name').textContent = '选择已重建建筑或地标';
       $('selection-help').textContent = '基模已暂时隐藏；点击已重建对象或使用上方快捷视角。';
@@ -325,6 +369,7 @@ function main() {
   $('refined-count').textContent = refinedIds.length;
   $('landmark-count').textContent = landmarkIds.length;
   $('coverage-note').textContent = `${refinedIds.length} / ${buildings.length} 个地图轮廓已有照片参照模型；`
+    + `其中${coverage.counts.groupTypologyBuildingObjects}个是组团类型推定，涵盖紫荆1–23号楼（14–17共用一个地图根）。`
     + `${coverage.counts.remainingBaseBuildingObjects} 个仍为基模，窗格仅示意；${coverage.counts.partialPhotoModelBuildingObjects} 个仅做了局部。不代表完整复刻。`;
   $('source-note').textContent = '北京主校区 · OSM 校园范围，非测绘边界。多数地图楼高仅为显示值，待逐栋重建。'
     + `已接入 ${siteCount} 处照片参照重建（${refinedIds.length} 个轮廓、${landmarkIds.length} 个独立地标）；隐藏立面及部分尺寸含推定。`;
@@ -342,9 +387,12 @@ function main() {
   resize(); frame(bounds); search();
   const requestedView = new URLSearchParams(location.search).get('view');
   if (requestedView) {
-    const view = [...REFINEMENT_VIEWS, ...LANDMARK_SITES].find(site => site.buttonId === `view-${requestedView}`);
-    if (!view) throw new Error(`未知重建视角：${requestedView}`);
-    $(view.buttonId).click();
+    if (/^zijing-(?:[1-9]|1\d|2[0-3])$/.test(requestedView)) selectApartment(Number(requestedView.slice(7)));
+    else {
+      const view = [...REFINEMENT_VIEWS, ...LANDMARK_SITES].find(site => site.buttonId === `view-${requestedView}`);
+      if (!view) throw new Error(`未知重建视角：${requestedView}`);
+      $(view.buttonId).click();
+    }
   }
   function render() {
     controls.update();
@@ -357,7 +405,8 @@ function main() {
   }
   render();
   window.campusApp = {
-    ready: true, campus, data, coverage, select, mode, exportModel,
+    ready: true, campus, data, coverage, select, selectApartment, mode, exportModel,
+    selectedApartment: () => selectedPart?.userData.apartmentNumber ?? null,
     stats: {buildings: buildings.length, features: data.features.length, refined: refinedIds.length,
       refinedSites: refinedSiteCount, landmarks: landmarkIds.length, reconstructedSites: siteCount},
     render: draw,

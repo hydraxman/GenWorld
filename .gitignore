@@ -3,6 +3,8 @@
 
 # Dependencies and generated browser bundles
 node_modules
+.agents/skills/img2threejs/
+.agents/skills/.img2threejs-*/
 **/assets/scene.js
 **/assets/scene.js.map
 __pycache__/
