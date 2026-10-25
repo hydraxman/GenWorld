@@ -4,6 +4,75 @@
   "licenseNote": "照片版权未获另行授权，仅供本地建模参考，不作纹理或在线再发布，保留原有水印。旧素材的原始下载日期未知。",
   "sites": [
     {
+      "id": "art-museum",
+      "name": "清华大学艺术博物馆",
+      "aliases": ["艺术博物馆", "艺博", "Tsinghua University Art Museum"],
+      "coordinates": [116.329475641, 40.000582338],
+      "coordinateSource": "冻结OpenFreeMap轮廓包围盒中心，名称重叠关联 OSM way451335313；非测绘中心。",
+      "status": "reference-ready",
+      "images": [{
+        "path": "references\\art-museum-official-overview.jpg",
+        "pageUrl": "https://www.artmuseum.tsinghua.edu.cn/aboutus/cgxx/jz/",
+        "imageUrl": "https://www.artmuseum.tsinghua.edu.cn/aboutus/cgxx/jz/201605/W020170622517968625488.jpg",
+        "width": 890, "height": 300,
+        "sha256": "5353ce7257410a15677dd2be06ccf86615950186849e38e9ba5edeb39b25dd02",
+        "license": "清华大学艺术博物馆官方建筑概况配图；摄影署名未明确，未查得开放再发布许可，仅本地参照，不作纹理或在线再发布。",
+        "view": "高机位完整长立面与屋顶；石材水平分带、上层悬挑筛墙、下部开放柱廊和成排屋顶采光构件",
+        "downloadedAt": "2026-10-25"
+      }, {
+        "path": "references\\art-museum-gallery.jpg",
+        "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+        "imageUrl": "https://www.tsinghua.edu.cn/__local/0/E9/B5/123588172AED93BD0193C0D83FA_DED4F3EB_901C6.jpg",
+        "width": 1920, "height": 900,
+        "sha256": "86e47b41e1ee3f67d35ca97c867b33a662b17f389ffa29247d05b58d90669941",
+        "license": "清华大学校园景观官方配图；摄影者及自由许可未明确，仅本地参照，不作纹理或在线再发布。",
+        "view": "长柱廊与东侧斜视；柱体下段包石、上段细钢柱，后退玻璃、上层横窗及分离石材屏板",
+        "downloadedAt": "2026-10-25"
+      }],
+      "observations": ["石材水平分带与悬挑长立面；下段粗石柱、上段细钢柱支承，柱间实际通透", "后退玻璃、上层屏板和屋顶采光阵列有照片依据；冻结东侧凹口保留"],
+      "unknowns": ["背面、柱与采光器精确数量、构件尺寸及标高是估算；未复刻雕塑、书法和室内", "朝向由南侧长边与照片关系推定，未做摄影测量外参校正"]
+    },
+    {
+      "id": "sports-center",
+      "name": "综合体育馆",
+      "aliases": ["综合馆", "Comprehensive Gymnasium"],
+      "coordinates": [116.326275766, 40.003099267],
+      "coordinateSource": "冻结OpenFreeMap轮廓包围盒中心，名称重叠关联 OSM way83799756；不是西体育馆或陈明游泳馆，非测绘中心。",
+      "status": "reference-ready",
+      "images": [{
+        "path": "references\\sports-center-official.jpg",
+        "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+        "imageUrl": "https://www.tsinghua.edu.cn/__local/F/F9/68/A5A677B7D9B84F28D44A2452AFF_D369F59E_17F17B.jpg",
+        "width": 1920, "height": 900,
+        "sha256": "7f1f55674dc0c5fce1e65e877be68b141e7cf53f1819e57a8a894b219aca4856",
+        "license": "清华大学校园景观官方配图；摄影者及自由许可未明确，仅本地参照，不作纹理或在线再发布。",
+        "view": "南侧入口正面高机位；椭圆馆体、灰色浅穹顶、白色大跨拱架与通透桁架、分层窗带、抬高平台和两侧阶梯",
+        "downloadedAt": "2026-10-25"
+      }],
+      "observations": ["椭圆馆体与肋纹浅穹顶位于矩形平台内，不改写社区地图为圆形轮廓", "白色拱架下有通透三角腹杆，上层环窗和低处入口玻璃、雨棚、分段阶梯"],
+      "unknowns": ["后立面、拱架剖面及连接、屋面曲线、入口平台标高和尺度为估算，不是结构设计", "南向入口依据地图与照片关系推定，未做摄影测量校正"]
+    },
+    {
+      "id": "music-hall",
+      "name": "蒙民伟音乐厅",
+      "aliases": ["Mong Man Wai Concert Hall", "音乐厅"],
+      "coordinates": [116.322367787, 40.000617268],
+      "coordinateSource": "冻结OpenFreeMap轮廓包围盒中心，名称重叠关联 OSM way226671400；不混用蒙民伟人文楼或学生活动中心，非测绘中心。",
+      "status": "reference-ready",
+      "images": [{
+        "path": "references\\music-hall-official.jpg",
+        "pageUrl": "https://www.hall.tsinghua.edu.cn/column/cdzl_mmwyyt",
+        "imageUrl": "https://www.hall.tsinghua.edu.cn/upload_files/image/1396753073355_3F.jpg",
+        "width": 750, "height": 335,
+        "sha256": "80f960d006131ff74740acf5b3d34ab92a0952b939b5157d01ef33dbf43728ee",
+        "license": "清华大学艺术教育中心演出官网标注为外景的配图；摄影署名未明确，未查得自由许可，仅本地参照，不作纹理或在线再发布。",
+        "view": "红砖长立面、顶部倒三角高窗与竖向折面、底层成组玻璃门、浅缓弧檐口；右侧为相邻新清华学堂，不并入音乐厅",
+        "downloadedAt": "2026-10-25"
+      }],
+      "observations": ["红砖外墙、倒三角高窗、竖向折面和成组落地门，而非普通均匀窗格", "原轮廓含西侧附属体；仅南侧照片支持立面作细化"],
+      "unknowns": ["背面、主厅后屋面、窗格数量、曲率与绝对尺寸为估算，标为局部重建", "南向由主厅源边及照片右侧相邻学堂关系推定；不复刻馆名书法、广场灯具或相邻建筑"]
+    },
+    {
       "id": "chemistry-hall",
       "name": "化学馆（1932年老馆）",
       "aliases": ["化学馆", "老化学馆", "Old Chemistry Hall"],

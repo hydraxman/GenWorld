@@ -9,6 +9,7 @@ import {refineGongzi, GONGZI_IDS} from './gongzi-refinement.js';
 import {refineScienceHall, SCIENCE_HALL_ID} from './science-hall-refinement.js';
 import {refineTongfang, TONGFANG_ID} from './tongfang-refinement.js';
 import {refineChemistryHall, CHEMISTRY_HALL_ID} from './chemistry-hall-refinement.js';
+import {refineModernBuilding, MODERN_BUILDINGS} from './modern-buildings.js';
 
 export const REFINEMENT_SITES = [
   {
@@ -79,6 +80,14 @@ export const REFINEMENT_SITES = [
     viewDirection: [0.063163, 0.28, 0.998003], reconstructionExtent: 'partial',
     apply: (campus, data) => refineChemistryHall(campus, data),
   },
+  ...MODERN_BUILDINGS.map(source => ({
+    featureId: source.featureId, referenceSite: source.referenceSite,
+    buttonId: `view-${source.referenceSite}`,
+    label: {'art-museum': '艺术博物馆', 'sports-center': '综合体育馆', 'music-hall': '蒙民伟音乐厅'}[source.referenceSite],
+    viewDirection: source.referenceSite === 'art-museum' ? [.55, .45, 1.1] : [.18, .25, 1.1],
+    reconstructionExtent: source.referenceSite === 'music-hall' ? 'partial' : 'whole-footprint-estimate',
+    apply: (campus, data) => refineModernBuilding(campus, data, source.featureId),
+  })),
 ];
 
 export const REFINEMENT_VIEWS = REFINEMENT_SITES.flatMap(site => [

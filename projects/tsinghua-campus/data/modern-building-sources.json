@@ -1,0 +1,52 @@
+{
+  "projectionCenter": [116.32003975, 40.00164005],
+  "limitations": "Frozen community-map outlines and name-overlap associations, not surveys. Exterior photographs constrain visible surfaces only; dimensions, hidden surfaces and front directions remain estimates.",
+  "buildings": [
+    {
+      "featureId": "building:geometry:d11079a6821d8981a3e4ef11",
+      "name": "清华大学艺术博物馆",
+      "osmWay": "451335313",
+      "nameConfidence": 0.996,
+      "referenceSite": "art-museum",
+      "frontEdge": [1, 2],
+      "directionSource": "南侧长边与校方斜俯照片的长柱廊对应；照片未作外参标定，方向推定。东侧凹口保留。",
+      "ring": [
+        [116.328558326, 40.000822735], [116.328579783, 40.000296738],
+        [116.330392957, 40.000341941], [116.330382228, 40.000584393],
+        [116.329851151, 40.000572065], [116.329845786, 40.000654252],
+        [116.330371499, 40.00066658], [116.330366135, 40.000867938],
+        [116.328558326, 40.000822735]
+      ]
+    },
+    {
+      "featureId": "building:geometry:aec5b474bfef08ec7c8b61a1",
+      "name": "综合体育馆",
+      "osmWay": "83799756",
+      "nameConfidence": 0.997,
+      "referenceSite": "sports-center",
+      "frontEdge": [1, 2],
+      "directionSource": "源南侧长边朝向主楼／运动场片区，对应校方正面照片的入口台阶；方向推定，非测绘。",
+      "ring": [
+        [116.325672269, 40.003501967], [116.325699091, 40.002663691],
+        [116.326879263, 40.002692456], [116.326852441, 40.003534841],
+        [116.325672269, 40.003501967]
+      ]
+    },
+    {
+      "featureId": "building:geometry:9f612b5eb587d9de37f8ef8f",
+      "name": "蒙民伟音乐厅",
+      "osmWay": "226671400",
+      "nameConfidence": 0.991,
+      "referenceSite": "music-hall",
+      "frontEdge": [3, 4],
+      "directionSource": "南侧主厅边对应正面红砖墙；照片右侧的新清华学堂位于源轮廓东侧，支持此朝向。门窗分格及方位仍属推定。",
+      "ring": [
+        [116.322131753, 40.000674799], [116.322147846, 40.000506315],
+        [116.322206855, 40.000510425], [116.322212219, 40.000444675],
+        [116.322603822, 40.000461113], [116.322577, 40.00078986],
+        [116.322185397, 40.000773423], [116.322196126, 40.000674799],
+        [116.322131753, 40.000674799]
+      ]
+    }
+  ]
+}

@@ -151,6 +151,11 @@ function main() {
     resize();
     frame(bounds);
   }
+  function focusSelected() {
+    if (!selected) return;
+    const view = [...REFINEMENT_VIEWS, ...LANDMARK_SITES].find(site => site.featureId === selected.userData.featureId);
+    frame(viewBounds(selected), 1.2, view?.viewDirection);
+  }
   function select(id, focus = false) {
     const building = campus.objects.get(id);
     if (!building) throw new Error(`Campus object not found: ${id}`);
@@ -194,7 +199,7 @@ function main() {
       $('selected-references').href = outputPrefix
         + `reference-photos.html#${encodeURIComponent(p.referenceSite)}`;
     }
-    if (focus) frame(viewBounds(building), 1.2);
+    if (focus) focusSelected();
     dirty = true;
     return building;
   }
@@ -295,7 +300,7 @@ function main() {
       frame(framedBounds, framedPadding, camera.position.clone().sub(controls.target).normalize().toArray());
     });
   }
-  $('focus').addEventListener('click', () => selected && frame(viewBounds(selected), 1.2));
+  $('focus').addEventListener('click', focusSelected);
   $('view-north').addEventListener('click', () => {
     const region = bounds.clone(); region.max.z = bounds.min.z + size.z * 0.43; frame(region, 1.2);
   });

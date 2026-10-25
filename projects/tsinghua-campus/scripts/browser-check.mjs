@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import path from 'node:path';
+import modernSources from '../data/modern-building-sources.json' with {type: 'json'};
 
 async function snapshot(frame) {
   await frame.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
@@ -12,6 +13,7 @@ async function snapshot(frame) {
         return [(point.x + 1) * width / 2, (1 - point.y) * height / 2];
       })));
     return {width, height, region, points, shadowTexelMeters,
+      direction: bounds.min.clone().set(0, 0, -1).applyQuaternion(camera.quaternion).toArray(),
       inspector: !document.getElementById('sidebar').hidden,
       layers: !document.getElementById('layers').hidden};
   });
@@ -79,4 +81,51 @@ export async function checkCampusInspection({page, frame, screenshots}) {
   await frame.$eval('#search', element => { element.value = ''; element.dispatchEvent(new Event('input')); });
   await frame.click('#view-auditorium');
   assertFramed(await snapshot(frame));
+}
+
+export async function checkCampusExpansion({page, frame, screenshots}) {
+  const viewport = page.viewport();
+  for (const source of modernSources.buildings) {
+    await frame.goto(new URL(`?view=${source.referenceSite}`, frame.url()).href, {waitUntil: 'load'});
+    await frame.waitForFunction(() => window.campusApp?.ready || window.campusError);
+    assert.equal(await frame.evaluate(() => window.campusError), undefined);
+    assert.equal(await frame.$eval('#selection-name', element => element.textContent), source.name);
+    const model = await frame.evaluate(id => {
+      const app = window.campusApp, root = app.campus.buildings.get(id);
+      let meshes = 0;
+      root.children.find(child => child.userData.campusDetail).traverse(object => {if (object.isMesh) meshes++;});
+      return {buildings: app.stats.buildings, status: root.userData.refinementStatus, meshes,
+        site: root.userData.referenceSite, hiddenBase: !root.getObjectByName('base').visible,
+        uniqueIdentity: [...app.campus.objects.keys()].filter(key => key === id).length,
+        exportAvailable: !document.getElementById('export-building').hidden};
+    }, source.featureId);
+    assert.equal(model.buildings, 650);
+    assert.equal(model.status, 'detailed');
+    assert.equal(model.site, source.referenceSite);
+    assert.equal(model.hiddenBase, true);
+    assert.equal(model.exportAvailable, true);
+    assert.equal(model.uniqueIdentity, 1);
+    assert.ok(model.meshes >= 5 && model.meshes <= 24);
+    await frame.$eval('#message', element => {element.hidden = true;});
+    const initial = await snapshot(frame);
+    assertFramed(initial);
+    await page.screenshot({path: path.join(screenshots, `campus-${source.referenceSite}-desktop.png`)});
+    await page.setViewport({width: 390, height: 844});
+    assertFramed(await snapshot(frame));
+    await frame.click('#toggle-inspector');
+    await frame.$eval('#search', (element, name) => {
+      element.value = name; element.dispatchEvent(new Event('input'));
+    }, source.name);
+    assert.equal(await frame.$$eval('#results button', buttons => buttons.length), 1);
+    await frame.click('#results button');
+    assert.equal((await snapshot(frame)).inspector, false);
+    const refocused = await snapshot(frame);
+    assertFramed(refocused);
+    assert.ok(initial.direction.reduce((sum, value, axis) => sum + value * refocused.direction[axis], 0) > .999,
+      'Search focus must retain the registered facade view instead of switching to a roof-heavy generic camera');
+    await page.screenshot({path: path.join(screenshots, `campus-${source.referenceSite}-mobile.png`)});
+    await page.setViewport(viewport);
+    await snapshot(frame);
+  }
+  await frame.$eval('#search', element => {element.value = ''; element.dispatchEvent(new Event('input'));});
 }

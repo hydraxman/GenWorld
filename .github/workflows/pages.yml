@@ -37,6 +37,12 @@ jobs:
       - run: npm ci
       - run: npm run test:knowledge
       - run: npm run test:wind
+      - name: Check campus reconstruction invariants
+        run: >-
+          node --test
+          projects/tsinghua-campus/tests/modern-buildings.test.mjs
+          projects/tsinghua-campus/tests/refinements.test.mjs
+          projects/tsinghua-campus/tests/inspection-view.test.mjs
       - run: npm run test:pages
       - run: npm run build:pages
       - name: Update Pages branch

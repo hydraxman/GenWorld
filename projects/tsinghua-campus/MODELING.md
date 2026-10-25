@@ -31,6 +31,9 @@
 | 科学馆 | 指中心草坪西侧的历史科学馆，不是生命科学馆或科学博物馆。东向长立面照片支持入口、组合窗与屋面；背面、端墙和被遮窗列为估算。全轮廓外壳不等于逐面照片验证。 |
 | 同方部 | 两张照片均是西侧匾额门，不是朝南主门廊。[校档案](https://dag.tsinghua.edu.cn/info/1062/2581.htm)支持西部单层、东部两层及南入口关系；分界、南廊形式、东屋顶与隐蔽面仍为推定，属局部重建。 |
 | 老化学馆 | 不是新化学馆或何添楼；历史／合影与近年入口照片互证身份，拍摄点支持南向入口。仅中央入口有细节依据，两翼、背面及女儿墙后屋顶未知；中性封盖不证明平屋顶，属局部重建。竣工时间不等于照片拍摄时间。 |
+| 艺术博物馆 | 原东侧凹口与独立根不变；校方高机位和斜视支持开放柱廊、分带石材、上层筛墙及屋顶采光阵列。柱数、采光器数量和尺度估算，背面未逐面核实；不复刻雕塑与题字。 |
+| 综合体育馆 | 不是西体育馆或游泳馆；矩形原轮廓作平台，内部椭圆馆体、浅穹顶和白色拱架受正面照片约束。后面、屋面曲线、拱架截面和平台标高估算，不是可用于施工的结构模型。 |
+| 蒙民伟音乐厅 | 不是蒙民伟人文楼或学生活动中心；保留西侧附属体，只细化照片可见南侧红砖折面、倒三角高窗和成组玻璃门。朝向、门窗分格与后屋面估算，属局部重建。 |
 | 紫荆公寓参考 | 来源索引有组团照片，不代表逐栋照片模型已完成；单栋身份和朝向仍需核对，不混用食堂室内照片。 |
 
 ## 可追溯证据
@@ -39,6 +42,7 @@
 - [data/provenance.json](data/provenance.json)、冻结边界、TileJSON、名称提取和 `source-cache.json` 保留地图来源与离线重放依据；哈希输入不是可随意清理的缓存。
 - [data/old-library-match.json](data/old-library-match.json) 保存原轮廓、独立 relation、路线点、标签与重叠证据；[data/gongzi-source.json](data/gongzi-source.json) 保存主殿／门房身份、方向解释和来源核验限制。工字厅的 [OSM XML](data/gongzi-entrance-osm.xml) 是默认测试必需的 ODbL 输入，不是可选照片。
 - [科学馆](data/science-hall-references.json)、[同方部](data/tongfang-references.json)、[老化学馆](data/chemistry-hall-references.json) 的独立记录有额外身份、字节数、版权及审阅证据。名称关联置信度不等于独立计算的 IoU；来源核验限制不能因文档精简而抹去。
+- [现代建筑身份](data/modern-building-sources.json) 固定艺术博物馆、综合体育馆和音乐厅的原轮廓、名称关联与朝向解释；与照片索引共同约束模型替换，不包含照片像素。
 - 化学馆原 JPEG 的编码尺寸与 EXIF 转正显示尺寸不同；审阅图有自己的哈希与派生说明，不重复计为原发布照片。Commons 作者 **葉又嘉**、**HoweyYuan** 的图像适用 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)；同方部原图保留摄影 **李派** 等署名，章节作者不能代作未明摄影者。
 - 字形来源和近似边界见 [src/second-gate-wenkai.json](src/second-gate-wenkai.json)，完整上游版权与 SIL OFL 1.1 见 [src/second-gate-font-OFL.txt](src/second-gate-font-OFL.txt)。不需分发完整字体。
 

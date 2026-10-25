@@ -6,7 +6,7 @@ import puppeteer from 'puppeteer-core';
 import { output } from './build.mjs';
 import { scenes } from '../src/scenes.js';
 import { checkWindPrint } from '../../wind-print/scripts/browser-check.mjs';
-import { checkCampusInspection } from '../../tsinghua-campus/scripts/browser-check.mjs';
+import { checkCampusInspection, checkCampusExpansion } from '../../tsinghua-campus/scripts/browser-check.mjs';
 
 const screenshots = path.resolve(import.meta.dirname, '..', 'qa');
 const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript',
@@ -86,6 +86,7 @@ try {
       assert.ok(await frame.evaluate(() => window.campusApp.stats.buildings > 100));
       assert.equal(await frame.$eval('#references', element => element.hidden), true);
       await checkCampusInspection({page, frame, screenshots});
+      await checkCampusExpansion({page, frame, screenshots});
       await frame.click('#view-plan');
       assert.equal(await frame.$eval('#view-plan', element => element.getAttribute('aria-pressed')), 'true');
       await frame.click('#view-shunde');
