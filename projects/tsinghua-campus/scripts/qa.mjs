@@ -42,7 +42,7 @@ try {
   assert.equal(stats.refined, REFINEMENT_SITES.length);
   assert.equal(stats.landmarks, LANDMARK_SITES.length);
   await checkCampusInspection({page, frame: page, screenshots: output});
-  await checkCampusExpansion({page, frame: page, screenshots: output});
+  const appearance = await checkCampusExpansion({page, frame: page, screenshots: output});
   const coverage = await page.evaluate(() => window.campusApp.coverage);
   assert.equal(coverage.counts.mapBuildingObjects, stats.buildings);
   assert.equal(coverage.counts.photoModelBuildingObjects, stats.refined);
@@ -178,7 +178,7 @@ try {
   assert.equal(await offline.$eval('#selected-references', link => link.getAttribute('href')), 'reference-photos.html#old-library');
   assert.deepEqual(external, [], 'Offline viewer must not request network assets');
   assert.deepEqual(errors, []);
-  const report = {stats, glbBytes: glb.length, offlineNetworkRequests: external.length, errors};
+  const report = {stats, glbBytes: glb.length, offlineNetworkRequests: external.length, errors, appearance};
   await writeFile(join(output, 'smoke-check.json'), JSON.stringify(report, null, 2));
   await writeFile(join(output, 'campus-coverage.json'), JSON.stringify(coverage, null, 2));
   const csv = value => `"${String(value ?? '').replace(/"/g, '""')}"`;

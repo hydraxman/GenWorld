@@ -90,3 +90,41 @@ test('a replacement does not duplicate the exported building identity', () => {
   assert.equal(detail.userData.featureId, undefined);
   assert.equal(detail.userData.buildingFeatureId, feature.id);
 });
+
+test('unreconstructed buildings have readable estimated window bays, not featureless walls or window-covered roofs', () => {
+  const {buildings} = createCampusModel(dataset());
+  const root = buildings.get(feature.id), mesh = root.getObjectByName('base').children.find(child => child.isMesh);
+  const [roof, wall] = mesh.material;
+  assert.ok(wall.map?.isDataTexture, 'Baseline facade is windowless: no generated facade texture');
+  assert.equal(wall.map.colorSpace, THREE.SRGBColorSpace);
+  assert.ok(wall.map.generateMipmaps && wall.map.anisotropy >= 4);
+  assert.notEqual(roof.map, wall.map, 'Window patterns must not appear on the roof');
+  const pixels = wall.map.image.data;
+  const luminance = Array.from({length: pixels.length / 4}, (_, i) =>
+    .2126 * pixels[i * 4] + .7152 * pixels[i * 4 + 1] + .0722 * pixels[i * 4 + 2]);
+  assert.ok(Math.max(...luminance) - Math.min(...luminance) > 70, 'Glazing and masonry must remain visually distinct');
+  assert.equal(root.userData.refinementStatus, 'base');
+  assert.match(root.userData.baseFacadeSource, /示意.*非.*照片/);
+  const positions = mesh.geometry.attributes.position, uv = mesh.geometry.attributes.uv;
+  for (const group of mesh.geometry.groups.filter(group => group.materialIndex === 1)) {
+    for (let i = group.start; i < group.start + group.count; i++) {
+      assert.ok(Math.abs(uv.getY(i) - (positions.getY(i) - 4) / 4) < 1e-5,
+        'Window floors must use a stable meter-scale vertical mapping, including raised buildings');
+    }
+  }
+});
+
+test('estimated facades can be disabled without hiding buildings or affecting reconstruction status', () => {
+  const campus = createCampusModel(dataset());
+  const root = campus.buildings.get(feature.id), mesh = root.getObjectByName('base').children.find(child => child.isMesh);
+  const material = mesh.material[1], originalMap = material.map, originalNormal = material.normalMap;
+  campus.showEstimatedFacades(false);
+  assert.equal(material.map, null);
+  assert.equal(material.normalMap, null);
+  assert.equal(root.visible, true);
+  assert.equal(root.userData.refinementStatus, 'base');
+  campus.showEstimatedFacades(true);
+  assert.equal(material.map, originalMap);
+  assert.equal(material.normalMap, originalNormal);
+  assert.throws(() => campus.showEstimatedFacades(undefined), /boolean/);
+});

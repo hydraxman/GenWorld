@@ -19,6 +19,45 @@ async function snapshot(frame) {
   });
 }
 
+export async function measureCampusAppearance(frame, site) {
+  return frame.evaluate(site => {
+    const app = window.campusApp, {camera} = app.inspection();
+    const roots = [...app.campus.buildings.values()];
+    const root = roots.find(object => object.userData.referenceSite === site);
+    const detail = root.children.find(child => child.userData.campusDetail);
+    const p = detail.userData.estimatedDimensionsMeters;
+    let glazing, masonry;
+    if (site === 'art-museum') {
+      glazing = [7, 7, -6.65]; masonry = [-50, 7, .02];
+    } else if (site === 'sports-center') {
+      const angle = Math.PI / 64, x = p.radiusX * Math.sin(angle), z = p.arenaCenterZ + p.radiusZ * Math.cos(angle);
+      glazing = [x, (p.upperBandBottom + p.eave) / 2, z + .04];
+      masonry = [x, (p.lowerBandTop + p.upperBandBottom) / 2, z + .04];
+    } else if (site === 'music-hall') {
+      const x = p.windowCenters[8], y = p.windowHead - (p.windowHead - p.windowTip) * .2;
+      glazing = [x, y, -1.04]; masonry = [(x + p.windowCenters[9]) / 2, y, .02];
+    } else throw new Error(`No facade meter for ${site}`);
+    app.render();
+    const canvas = document.getElementById('scene'), copy = document.createElement('canvas');
+    copy.width = canvas.width; copy.height = canvas.height;
+    const context = copy.getContext('2d', {willReadFrequently: true});
+    context.drawImage(canvas, 0, 0);
+    function luminance(local) {
+      const point = camera.position.clone().set(...local).applyMatrix4(detail.matrixWorld).project(camera);
+      const x = Math.round((point.x + 1) / 2 * canvas.width), y = Math.round((1 - point.y) / 2 * canvas.height);
+      if (x < 2 || y < 2 || x >= canvas.width - 2 || y >= canvas.height - 2) throw new Error('Facade sample outside canvas');
+      const pixels = context.getImageData(x - 1, y - 1, 3, 3).data;
+      let total = 0;
+      for (let i = 0; i < pixels.length; i += 4) total += .2126 * pixels[i] + .7152 * pixels[i + 1] + .0722 * pixels[i + 2];
+      return +(total / 9).toFixed(2);
+    }
+    const baseMeshes = roots.filter(object => object.getObjectByName('base').visible)
+      .flatMap(object => object.getObjectByName('base').children.filter(mesh => mesh.isMesh && Array.isArray(mesh.material)));
+    return {glazing: luminance(glazing), masonry: luminance(masonry), rendering: app.inspection().rendering,
+      baseMeshes: baseMeshes.length, windowlessBases: baseMeshes.filter(mesh => !mesh.material[1].map).length};
+  }, site);
+}
+
 function assertFramed(state) {
   const {region, points, width, height} = state;
   assert.ok(region.width > width / 2 && region.height > height / 4, 'Controls must leave a usable model viewport');
@@ -29,6 +68,40 @@ function assertFramed(state) {
       y >= region.y - 1 && y <= region.y + region.height + 1,
     `Focus clipped by viewport or controls: ${JSON.stringify({x, y, region})}`);
   }
+
+}
+
+async function flatRoofLuminanceRange(frame) {
+  return frame.evaluate(() => {
+    const app = window.campusApp, {camera} = app.inspection();
+    const root = [...app.campus.buildings.values()].find(object => object.name === '西体育馆');
+    let roof;
+    root.traverse(object => {
+      if (object.isMesh && !Array.isArray(object.material) && object.material.name.includes('inferred addition roof')) roof = object;
+    });
+    if (!roof || !roof.receiveShadow) throw new Error('Flat-roof regression requires real receive shadows');
+    const positions = roof.geometry.attributes.position, index = roof.geometry.index;
+    let largest = 0, center;
+    for (let i = 0; i < (index?.count ?? positions.count); i += 3) {
+      const vertices = [0, 1, 2].map(j => camera.position.clone().fromBufferAttribute(positions, index ? index.getX(i + j) : i + j));
+      const area = vertices[1].clone().sub(vertices[0]).cross(vertices[2].clone().sub(vertices[0])).lengthSq();
+      if (area > largest) {
+        largest = area;
+        center = vertices[0].add(vertices[1]).add(vertices[2]).divideScalar(3);
+      }
+    }
+    if (!center) throw new Error('Flat-roof regression requires a triangulated surface');
+    center.applyMatrix4(roof.matrixWorld).project(camera);
+    app.render();
+    const canvas = document.getElementById('scene'), copy = document.createElement('canvas');
+    copy.width = canvas.width; copy.height = canvas.height;
+    const context = copy.getContext('2d', {willReadFrequently: true});
+    context.drawImage(canvas, 0, 0);
+    const x = Math.round((center.x + 1) / 2 * canvas.width), y = Math.round((1 - center.y) / 2 * canvas.height);
+    const pixels = context.getImageData(x - 20, y - 10, 40, 20).data, values = [];
+    for (let i = 0; i < pixels.length; i += 4) values.push(.2126 * pixels[i] + .7152 * pixels[i + 1] + .0722 * pixels[i + 2]);
+    return Math.max(...values) - Math.min(...values);
+  });
 }
 
 export async function checkCampusInspection({page, frame, screenshots}) {
@@ -79,12 +152,16 @@ export async function checkCampusInspection({page, frame, screenshots}) {
   await page.setViewport(viewport);
   await snapshot(frame);
   await frame.$eval('#search', element => { element.value = ''; element.dispatchEvent(new Event('input')); });
+  await frame.click('#view-west-gym');
+  await snapshot(frame);
+  assert.ok(await flatRoofLuminanceRange(frame) < 3, 'Uniform roof must not develop self-shadow ripple patterns');
+  await page.screenshot({path: path.join(screenshots, 'campus-flat-roof-shadow-detail.png')});
   await frame.click('#view-auditorium');
   assertFramed(await snapshot(frame));
 }
 
 export async function checkCampusExpansion({page, frame, screenshots}) {
-  const viewport = page.viewport();
+  const viewport = page.viewport(), report = [];
   for (const source of modernSources.buildings) {
     await frame.goto(new URL(`?view=${source.referenceSite}`, frame.url()).href, {waitUntil: 'load'});
     await frame.waitForFunction(() => window.campusApp?.ready || window.campusError);
@@ -109,6 +186,25 @@ export async function checkCampusExpansion({page, frame, screenshots}) {
     await frame.$eval('#message', element => {element.hidden = true;});
     const initial = await snapshot(frame);
     assertFramed(initial);
+    const appearance = await measureCampusAppearance(frame, source.referenceSite);
+    assert.ok(appearance.rendering?.environment, 'Exterior glazing needs an actual reflection environment');
+    assert.equal(appearance.rendering.contactShadows, true, 'Desktop detailed views should receive contact shadows');
+    assert.ok(appearance.baseMeshes > 600 && appearance.windowlessBases === 0, 'Baseline walls must not be featureless blocks');
+    assert.ok(appearance.glazing >= 35 && appearance.glazing <= 110,
+      `Glazing is crushed black or washed out at ${source.referenceSite}: ${JSON.stringify(appearance)}`);
+    assert.ok(appearance.masonry - appearance.glazing >= 25,
+      `Windows must remain distinct from masonry at ${source.referenceSite}: ${JSON.stringify(appearance)}`);
+    await frame.$eval('#contact-shadows', element => {element.checked = false; element.dispatchEvent(new Event('change'));});
+    const withoutAO = await measureCampusAppearance(frame, source.referenceSite);
+    assert.equal(withoutAO.rendering.contactShadows, false);
+    assert.ok(Math.abs(withoutAO.glazing - appearance.glazing) < 25, 'Contact shadows must not darken entire windows');
+    report.push({site: source.referenceSite, ...appearance, glazingWithoutAO: withoutAO.glazing});
+    await frame.$eval('#contact-shadows', element => {element.checked = true; element.dispatchEvent(new Event('change'));});
+    await frame.$eval('#base-facades', element => {element.checked = false; element.dispatchEvent(new Event('change'));});
+    const plain = await measureCampusAppearance(frame, source.referenceSite);
+    assert.equal(plain.windowlessBases, plain.baseMeshes);
+    await frame.$eval('#base-facades', element => {element.checked = true; element.dispatchEvent(new Event('change'));});
+    await snapshot(frame);
     await page.screenshot({path: path.join(screenshots, `campus-${source.referenceSite}-desktop.png`)});
     await page.setViewport({width: 390, height: 844});
     assertFramed(await snapshot(frame));
@@ -119,6 +215,8 @@ export async function checkCampusExpansion({page, frame, screenshots}) {
     assert.equal(await frame.$$eval('#results button', buttons => buttons.length), 1);
     await frame.click('#results button');
     assert.equal((await snapshot(frame)).inspector, false);
+    assert.equal((await measureCampusAppearance(frame, source.referenceSite)).rendering.contactShadows, false,
+      'Mobile must default to the lighter raster path');
     const refocused = await snapshot(frame);
     assertFramed(refocused);
     assert.ok(initial.direction.reduce((sum, value, axis) => sum + value * refocused.direction[axis], 0) > .999,
@@ -128,4 +226,19 @@ export async function checkCampusExpansion({page, frame, screenshots}) {
     await snapshot(frame);
   }
   await frame.$eval('#search', element => {element.value = ''; element.dispatchEvent(new Event('input'));});
+  assert.equal(await frame.evaluate(() => {
+    const root = [...window.campusApp.campus.buildings.values()].find(object =>
+      object.userData.refinementStatus !== 'detailed' && object.userData.renderHeight >= 20);
+    if (!root) throw new Error('Missing baseline building to inspect');
+    const material = root.getObjectByName('base').children.find(mesh => mesh.isMesh).material;
+    const before = material[1].map;
+    window.campusApp.select(root.userData.featureId, true);
+    const after = root.getObjectByName('base').children.find(mesh => mesh.isMesh).material;
+    return Array.isArray(after) && after[1].map === before;
+  }), true, 'Selecting a base building must preserve the visible window material');
+  assert.match(await frame.$eval('#selection-help', element => element.textContent), /窗格示意.*非照片/);
+  await snapshot(frame);
+  await page.mouse.move(viewport.width - 5, viewport.height - 5);
+  await page.screenshot({path: path.join(screenshots, 'campus-baseline-windows-desktop.png')});
+  return report;
 }

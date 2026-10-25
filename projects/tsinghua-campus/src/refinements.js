@@ -84,7 +84,8 @@ export const REFINEMENT_SITES = [
     featureId: source.featureId, referenceSite: source.referenceSite,
     buttonId: `view-${source.referenceSite}`,
     label: {'art-museum': '艺术博物馆', 'sports-center': '综合体育馆', 'music-hall': '蒙民伟音乐厅'}[source.referenceSite],
-    viewDirection: source.referenceSite === 'art-museum' ? [.55, .45, 1.1] : [.18, .25, 1.1],
+    viewDirection: source.referenceSite === 'art-museum' ? [.55, .45, 1.1]
+      : source.referenceSite === 'music-hall' ? [.08, .02, 1.1] : [.12, .02, 1.1],
     reconstructionExtent: source.referenceSite === 'music-hall' ? 'partial' : 'whole-footprint-estimate',
     apply: (campus, data) => refineModernBuilding(campus, data, source.featureId),
   })),

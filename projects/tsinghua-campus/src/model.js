@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
 import {footprintMetrics, lines, polygons, project} from './geo.js';
+import {createEstimatedFacade} from './surface-materials.js';
 
 function shapeFromRings(rings, origin = [0, 0]) {
   const path = ring => ring.map(([x, z]) => new THREE.Vector2(x - origin[0], -z + origin[1]));
@@ -67,13 +68,14 @@ export function createCampusModel(data) {
     layers[name].name = name;
     group.add(layers[name]);
   }
+  const facade = createEstimatedFacade();
   const materials = {
-    wall: new THREE.MeshStandardMaterial({color: '#f6f2e9', roughness: 0.88}),
+    wall: facade.material,
     roof: new THREE.MeshStandardMaterial({color: '#dedbd1', roughness: 0.94}),
-    campus: new THREE.MeshStandardMaterial({color: '#ccd8c4', roughness: 1, side: THREE.DoubleSide}),
-    green: new THREE.MeshStandardMaterial({color: '#91b080', roughness: 1, side: THREE.DoubleSide}),
+    campus: new THREE.MeshStandardMaterial({color: '#bcc5ad', roughness: 1, side: THREE.DoubleSide}),
+    green: new THREE.MeshStandardMaterial({color: '#71935e', roughness: 1, side: THREE.DoubleSide}),
     water: new THREE.MeshStandardMaterial({color: '#62a2b2', roughness: 0.62, side: THREE.DoubleSide}),
-    road: new THREE.MeshStandardMaterial({color: '#ded6c7', roughness: 1, side: THREE.DoubleSide}),
+    road: new THREE.MeshStandardMaterial({color: '#b7b3ab', roughness: 1, side: THREE.DoubleSide}),
     edge: new THREE.LineBasicMaterial({color: '#656960', transparent: true, opacity: 0.38}),
   };
   const buildings = new Map();
@@ -101,6 +103,7 @@ export function createCampusModel(data) {
     building.position.set(origin[0], 0, origin[1]);
     building.userData = {
       ...p, featureId: feature.id, footprintArea: area, bounds,
+      baseFacadeSource: '程序窗格示意，非照片重建；窗位、楼层与材质未经逐栋核实。',
       localOriginMeters: origin, localAxes: 'X east, Y up, Z south',
     };
     const body = new THREE.Group();
@@ -109,6 +112,7 @@ export function createCampusModel(data) {
       const shape = shapeFromRings(rings, origin);
       const geometry = p.extrude === false ? new THREE.ShapeGeometry(shape) : new THREE.ExtrudeGeometry(shape, {
         depth: top - bottom, bevelEnabled: false, steps: 1, curveSegments: 1,
+        UVGenerator: facade.uvGenerator(bottom, top),
       });
       geometry.rotateX(-Math.PI / 2);
       geometry.translate(0, p.extrude === false ? 0.3 : bottom, 0);
@@ -138,7 +142,8 @@ export function createCampusModel(data) {
   }
   if (!buildings.size) throw new Error('Campus dataset contains no buildings.');
   group.updateMatrixWorld(true);
-  return {group, layers, buildings, landmarks: new Map(), objects: new Map(buildings)};
+  return {group, layers, buildings, landmarks: new Map(), objects: new Map(buildings),
+    showEstimatedFacades: visible => facade.setVisible(visible)};
 }
 
 export function replaceBuilding(buildings, id, detail) {

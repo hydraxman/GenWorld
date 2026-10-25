@@ -90,7 +90,7 @@ for (const source of MODERN_BUILDINGS) {
     assert.ok(detail.userData.frontNormalXZ[1] > .99);
     assert.match(detail.userData.directionSource, /推定/);
     const size = new THREE.Box3().setFromObject(detail).getSize(new THREE.Vector3());
-    assert.ok(size.y > 15 && size.y < 35);
+    assert.ok(size.y > (source.referenceSite === 'music-hall' ? 10 : 15) && size.y < 35);
   });
 
   test(`${source.referenceSite}: repeated application disposes only its own old resources and preserves local height`, () => {
@@ -101,7 +101,8 @@ for (const source of MODERN_BUILDINGS) {
     first.traverse(object => {
       if (object.geometry) resources.add(object.geometry);
       if (object.isMesh) for (const mat of Array.isArray(object.material) ? object.material : [object.material]) {
-        resources.add(mat); if (mat.map) resources.add(mat.map);
+        resources.add(mat);
+        for (const value of Object.values(mat)) if (value?.isTexture) resources.add(value);
       }
     });
     const disposed = new Set();
@@ -172,28 +173,35 @@ test('sports center retains a rectangular map platform but has an elliptical are
   const detail = make(forSite('sports-center')), p = detail.userData.estimatedDimensionsMeters;
   assert.ok(p.archCrown > p.eave + p.roofRise);
   assert.ok(p.roofRise / (2 * p.radiusX) < .18);
+  assert.ok(p.roofRise / (p.eave - 2) > .7 && p.roofRise / (p.eave - 2) < .9,
+    'Photo proportions require a taller facade rather than a squat UFO-shaped arena');
+  assert.ok(p.archHalfSpan / p.radiusX > 1.2 && p.archHalfSpan / p.radiusX < 1.3);
   const roof = detail.getObjectByName('Shallow elliptical ribbed metal roof');
   assert.ok(roof.children.every(mesh => !mesh.receiveShadow), 'Convex roof must not show dotted self-shadow acne');
-  const seams = roof.children.find(mesh => mesh.material.name.endsWith(':metal'));
+  const seams = roof.children.find(mesh => mesh.material.name.endsWith(':roof-seam'));
   const normals = seams.geometry.attributes.normal;
   assert.ok(Array.from({length: normals.count}, (_, i) => normals.getY(i)).every(y => y > 0),
     'Roof seam winding must face up, otherwise the front-sided metal disappears');
   const bounds = new THREE.Box3().setFromObject(roof);
-  assert.ok(bounds.max.y - bounds.min.y > 12);
+  assert.ok(bounds.max.y - bounds.min.y >= p.roofRise && bounds.max.y - bounds.min.y < p.roofRise + .15);
   assert.ok(detail.getObjectByName('Open white parabolic arch and triangulated steel web').children.length >= 1);
+  assert.ok(detail.getObjectByName('Upper clerestory stone piers and open balcony rails').children.length >= 1);
   const hit = ray(detail, [p.radiusX * .95, 15, p.arenaCenterZ + p.radiusZ * .95], [0, 1, 0]);
   assert.equal(hit.length, 0, 'The roof must not be a box filling the map footprint corners');
   assert.match(detail.userData.limits, /不是工程结构/);
 });
 
 test('music hall triangular windows and grouped doors are apertures with recessed glazing, not dark decals', () => {
-  const detail = make(forSite('music-hall')), {frontWidth: w, triangularWindowCount: count} = detail.userData.estimatedDimensionsMeters;
-  const spacing = (w - 4) / count, x = -w / 2 + 2 + spacing * .5;
-  const windowHit = ray(detail, [x, 14.2, 2], [0, 0, -1])[0];
+  const detail = make(forSite('music-hall')), p = detail.userData.estimatedDimensionsMeters;
+  assert.ok(p.height / p.frontWidth > .38 && p.height / p.frontWidth < .44,
+    'Official facade photo does not support the previously over-tall wall');
+  assert.ok((p.windowHead - p.windowTip) / p.frontWidth > .05 && (p.windowHead - p.windowTip) / p.frontWidth < .065);
+  const x = p.windowCenters[0], y = p.windowHead - (p.windowHead - p.windowTip) * .2;
+  const windowHit = ray(detail, [x, y, 2], [0, 0, -1])[0];
   assert.ok(windowHit);
   assert.match(windowHit.object.parent.name, /Recessed inverted triangular/);
   assert.ok(windowHit.distance > 2.9, 'Glass must be recessed behind a genuine triangular aperture');
-  const doorX = -w * .34 - 1.18;
+  const doorX = p.doorCenters[0] - p.doorLeafSpacing;
   const doorHit = ray(detail, [doorX, 2, 2], [0, 0, -1])[0];
   assert.match(doorHit.object.parent.name, /Four groups/);
   assert.ok(doorHit.distance > 2.8);
@@ -201,6 +209,14 @@ test('music hall triangular windows and grouped doors are apertures with recesse
     .children.find(mesh => mesh.material.name.endsWith(':masonry'));
   folds.geometry.computeBoundingBox();
   assert.ok(folds.geometry.boundingBox.max.z > .7, 'Brick facets must project out of the wall, not be hidden inside it');
+  assert.ok(folds.geometry.attributes.uv, 'A mapped brick material without UVs still renders as an untextured facet');
+  const facade = detail.getObjectByName('South brick facade with genuine inverted triangle and door apertures').children[0].geometry;
+  const positions = facade.attributes.position, normals = facade.attributes.normal, uv = facade.attributes.uv;
+  for (let i = 0; i < positions.count; i++) if (Math.abs(normals.getZ(i)) > .99) {
+    close(uv.getX(i), positions.getX(i), 1e-4);
+    close(uv.getY(i), positions.getY(i) / .64, 1e-4);
+  }
+  assert.ok(detail.getObjectByName('Triangular metal window frames and recessed door frames').children.length >= 1);
   assert.match(detail.userData.limits, /仅南立面/);
 });
 

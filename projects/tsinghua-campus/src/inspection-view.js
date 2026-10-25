@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {DAYLIGHT_DIRECTION} from './daylight.js';
 
 function corners(box) {
   if (box.isEmpty() || ![...box.min.toArray(), ...box.max.toArray()].every(Number.isFinite)) {
@@ -52,13 +53,14 @@ export function fitInspectionShadow(light, box) {
   const extent = Math.max(24, size.length() * .7);
   const center = box.getCenter(new THREE.Vector3());
   light.target.position.copy(center);
-  light.position.copy(center).addScaledVector(new THREE.Vector3(-.55, .9, -.35).normalize(), extent * 3);
+  light.position.copy(center).addScaledVector(new THREE.Vector3(...DAYLIGHT_DIRECTION).normalize(), extent * 3);
   Object.assign(light.shadow.camera, {
     left: -extent, right: extent, top: extent, bottom: -extent,
     near: extent * .1, far: extent * 6,
   });
   light.shadow.normalBias = Math.max(.012, Math.min(.6, extent / light.shadow.mapSize.x * .65));
-  light.shadow.bias = -.00005;
+  // Cover the soft-shadow filter footprint without inflating the local normal bias.
+  light.shadow.bias = -.6 / light.shadow.mapSize.x;
   light.shadow.camera.updateProjectionMatrix();
   light.target.updateMatrixWorld(true);
   light.shadow.needsUpdate = true;

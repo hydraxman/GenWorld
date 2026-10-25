@@ -56,6 +56,9 @@ test('inspection shadows contain the focus and resolve sub-three-centimeter deta
   const focus = fitInspectionShadow(sun, closeup);
   assert.ok(focus.texelMeters < .03);
   assert.ok(sun.shadow.normalBias < .02, 'A meter-scale normal bias erases shallow moulding shadows');
+  const depthOffset = -sun.shadow.bias * (sun.shadow.camera.far - sun.shadow.camera.near);
+  assert.ok(depthOffset >= focus.texelMeters && depthOffset <= focus.texelMeters * 2,
+    'Depth bias must cover the PCF filter footprint without excessive shadow detachment');
   sun.updateMatrixWorld(true);
   sun.shadow.updateMatrices(sun);
   assertContained(sun.shadow.camera, closeup, 4096, 4096, {x: 0, y: 0, width: 4096, height: 4096});

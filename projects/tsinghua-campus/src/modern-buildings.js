@@ -4,6 +4,7 @@ import {footprintMetrics} from './geo.js';
 import {replaceBuilding} from './model.js';
 import sources from '../data/modern-building-sources.json' with {type: 'json'};
 import catalog from '../reference-catalog.json' with {type: 'json'};
+import {createMasonryMaterial, createGlazingMaterial} from './surface-materials.js';
 
 export const MODERN_BUILDINGS = sources.buildings;
 const LIMITS = {
@@ -45,26 +46,6 @@ function clip(ring, axis, limit, keepBelow = true) {
   return result;
 }
 
-function courseTexture(rgb, stone = false) {
-  const width = 128, height = 128, pixels = new Uint8Array(width * height * 4);
-  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
-    const row = Math.floor(y / 16), joint = y % 16 < 1 || (x + row % 2 * 32) % 64 < 1;
-    const delta = stone ? (row % 2 ? 9 : -5) + (joint ? -6 : 0) : joint ? -8 : ((x * 7 + y * 11) % 5) - 2;
-    const offset = (y * width + x) * 4;
-    for (let c = 0; c < 3; c++) pixels[offset + c] = rgb[c] + delta;
-    pixels[offset + 3] = 255;
-  }
-  const texture = new THREE.DataTexture(pixels, width, height);
-  texture.name = `Generated ${stone ? 'stone bands' : 'brick courses'}; no photograph`;
-  texture.colorSpace = THREE.SRGBColorSpace;
-  texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-  texture.generateMipmaps = true;
-  texture.minFilter = THREE.LinearMipmapLinearFilter;
-  texture.anisotropy = 4;
-  texture.needsUpdate = true;
-  return texture;
-}
-
 function buildContext(source, metrics, origin) {
   const projected = metrics.projected[0][0].slice(0, -1);
   const [a, b] = source.frontEdge.map(index => projected[index]);
@@ -85,15 +66,18 @@ function buildContext(source, metrics, origin) {
     name: `${source.referenceSite}:${name}`, roughness: .88, ...options,
   });
   const M = {
-    wall: material('masonry', {color: '#ffffff', map: courseTexture(
-      source.referenceSite === 'art-museum' ? [172, 142, 127] : [171, 93, 52], source.referenceSite === 'art-museum')}),
-    stone: material('paving', {color: '#c9c3b5'}),
+    wall: createMasonryMaterial(`${source.referenceSite}:masonry`,
+      source.referenceSite === 'art-museum' ? [188, 155, 136] : [174, 96, 56], source.referenceSite === 'art-museum'),
+    stone: createMasonryMaterial(`${source.referenceSite}:paving`, [193, 185, 171], true),
     metal: material('metal', {color: '#d9dbd8', metalness: .25, roughness: .64}),
+    arch: material('painted-arch', {color: '#fffefa', metalness: 0, roughness: .6}),
     dark: material('frame', {color: '#515a58', metalness: .2, roughness: .7}),
-    glass: material('glass', {color: '#41666b', metalness: .18, roughness: .38, side: THREE.DoubleSide}),
-    roof: material('roof', {color: '#aaa99b', metalness: .25, roughness: .76, side: THREE.DoubleSide}),
+    glass: createGlazingMaterial(`${source.referenceSite}:glass`),
+    roof: material('roof', {color: '#b6b0a0', metalness: .3, roughness: .68, side: THREE.DoubleSide}),
+    roofSeam: material('roof-seam', {color: '#827c70', metalness: .3, roughness: .7}),
   };
-  B.textureWorld.set(M.wall.uuid, [source.referenceSite === 'art-museum' ? 9 : 2, source.referenceSite === 'art-museum' ? 4 : 1]);
+  B.textureWorld.set(M.wall, [source.referenceSite === 'art-museum' ? 9 : 1, source.referenceSite === 'art-museum' ? 4 : .64]);
+  B.textureWorld.set(M.stone, [6, 3]);
   function extrude(group, polygon, bottom, top, mat) {
     if (polygon.length < 3 || top <= bottom) throw new Error('Invalid modern building prism.');
     const shape = new THREE.Shape(polygon.map(([x, z]) => new THREE.Vector2(x, -z)));
@@ -165,25 +149,49 @@ function sportsCenter(C) {
       w * .38, (10 - i) * .174, .27, M.stone);
   }
   const body = group('Elliptical arena with continuous clerestory and stone spandrels');
-  const rx = w * .43, rz = d * .38, cz = -d * .50, eave = 12.4, rise = 12.4;
+  const piers = group('Upper clerestory stone piers and open balcony rails');
+  const rx = w * .43, rz = d * .38, cz = -d * .50;
+  const photo = {bodyWidthPixels: 1200, groundY: 518, eaveY: 310, roofPeakY: 148,
+    archPeakY: 94, archBeamBottomY: 122, archWebBottomY: 146,
+    lowerBandTopY: 443, upperBandBottomY: 383,
+    caveat: 'Approximate official-photo landmarks, not calibrated camera coordinates or surveyed heights.'};
+  const scale = 2 * rx / photo.bodyWidthPixels, atY = y => 2 + (photo.groundY - y) * scale;
+  const archCenterY = (photo.archPeakY + photo.archBeamBottomY) / 2;
+  const eave = atY(photo.eaveY), rise = atY(photo.roofPeakY) - eave, archCrown = atY(archCenterY);
+  const archBeamHalfHeight = (photo.archBeamBottomY - photo.archPeakY) * scale / 2;
+  const archWebDepth = (photo.archWebBottomY - archCenterY) * scale;
+  const lowerTop = atY(photo.lowerBandTopY), upperBottom = atY(photo.upperBandBottomY);
   function ellipseWall(bottom, top, material) {
     const geo = new THREE.CylinderGeometry(1, 1, top - bottom, 96, 1, true);
-    geo.scale(rx, 1, rz); geo.translate(0, (bottom + top) / 2, cz); B.add(body, geo, material);
+    geo.scale(rx, 1, rz); geo.translate(0, (bottom + top) / 2, cz);
+    if (material.map) {
+      const uv = geo.attributes.uv, perimeter = Math.PI * (3 * (rx + rz) - Math.sqrt((3 * rx + rz) * (rx + 3 * rz)));
+      for (let i = 0; i < uv.count; i++) uv.setXY(i, uv.getX(i) * perimeter / 6, (bottom + uv.getY(i) * (top - bottom)) / 3);
+    }
+    B.add(body, geo, material);
   }
-  ellipseWall(2.0, 5.6, M.glass);
-  ellipseWall(5.6, 9.1, M.stone);
-  ellipseWall(9.1, 12.35, M.glass);
-  for (const y of [2.1, 5.6, 9.1, 12.35]) {
+  ellipseWall(2.0, lowerTop, M.glass);
+  ellipseWall(lowerTop, upperBottom, M.stone);
+  ellipseWall(upperBottom, eave - .05, M.glass);
+  for (const y of [2.1, lowerTop, upperBottom, eave - .05]) {
     const points = Array.from({length: 97}, (_, i) => new THREE.Vector3(rx * Math.sin(i * Math.PI / 48), y,
       cz + rz * Math.cos(i * Math.PI / 48)));
     for (let i = 0; i < points.length - 1; i++) beam(body, points[i].toArray(), points[i + 1].toArray(), .11);
   }
   for (let i = 0; i < 64; i++) {
     const theta = i * Math.PI / 32, x = rx * Math.sin(theta), z = cz + rz * Math.cos(theta);
-    beam(body, [x, 2.05, z], [x, 12.4, z], i % 2 ? .12 : .24);
-    if (i % 2 === 0) for (const y of [9.5, 10.1]) {
+    beam(body, [x, 2.05, z], [x, eave, z], .09, M.dark);
+    const outward = new THREE.Vector2(Math.sin(theta) / rx, Math.cos(theta) / rz).normalize();
+    const yaw = Math.atan2(outward.x, outward.y);
+    box(piers, x + outward.x * .25, (upperBottom + eave) / 2, z + outward.y * .25,
+      .95, eave - upperBottom, .8, M.stone, yaw);
+    box(piers, x + outward.x * .45, upperBottom - .1, z + outward.y * .45, 1.5, .22, 1.1, M.stone, yaw);
+    if (i % 8 === 0) box(piers, x, (2 + lowerTop) / 2, z, 1.1, lowerTop - 2, 1.0, M.stone, yaw);
+    for (const y of [upperBottom + .35, upperBottom + .8, upperBottom + 1.25]) {
       const next = theta + Math.PI / 32;
-      beam(body, [x, y, z], [rx * Math.sin(next), y, cz + rz * Math.cos(next)], .055);
+      const nextOutward = new THREE.Vector2(Math.sin(next) / rx, Math.cos(next) / rz).normalize();
+      beam(piers, [x + outward.x * .8, y, z + outward.y * .8],
+        [rx * Math.sin(next) + nextOutward.x * .8, y, cz + rz * Math.cos(next) + nextOutward.y * .8], .055);
     }
   }
   const roof = group('Shallow elliptical ribbed metal roof');
@@ -209,73 +217,100 @@ function sportsCenter(C) {
   const seams = new THREE.BufferGeometry();
   seams.setAttribute('position', new THREE.Float32BufferAttribute(seamVertices, 3));
   seams.computeVertexNormals();
-  B.worldUV(seams, M.metal); B.add(roof, seams, M.metal);
+  B.worldUV(seams, M.roofSeam); B.add(roof, seams, M.roofSeam);
   const arch = group('Open white parabolic arch and triangulated steel web');
-  const archZ = cz - d * .10, archX = w * .485;
-  const outer = t => new THREE.Vector3(t * archX, 2.3 + 28 * (1 - t * t), archZ);
+  const archZ = cz + d * .18, archX = w * .53;
+  const outer = t => new THREE.Vector3(t * archX, 2.3 + (archCrown - 2.3) * (1 - t * t), archZ);
   const outerCurve = new THREE.CatmullRomCurve3(Array.from({length: 65}, (_, i) => outer(-1 + i / 32)));
   const shape = new THREE.Shape();
-  shape.moveTo(-.75, -.6); shape.lineTo(.75, -.6); shape.lineTo(.75, .6); shape.lineTo(-.75, .6); shape.closePath();
-  B.add(arch, new THREE.ExtrudeGeometry(shape, {extrudePath: outerCurve, steps: 64, bevelEnabled: false}), M.metal);
+  shape.moveTo(-.75, -archBeamHalfHeight); shape.lineTo(.75, -archBeamHalfHeight);
+  shape.lineTo(.75, archBeamHalfHeight); shape.lineTo(-.75, archBeamHalfHeight); shape.closePath();
+  B.add(arch, new THREE.ExtrudeGeometry(shape, {extrudePath: outerCurve, steps: 64, bevelEnabled: false}), M.arch);
   for (let i = 0; i < 32; i++) {
     const a = outer(-.94 + i * 1.88 / 32), b = outer(-.94 + (i + 1) * 1.88 / 32);
-    const lowA = a.clone().add(new THREE.Vector3(0, -1.85, 0)), lowB = b.clone().add(new THREE.Vector3(0, -1.85, 0));
-    beam(arch, lowA.toArray(), lowB.toArray(), .10);
-    beam(arch, (i % 2 ? a : lowA).toArray(), (i % 2 ? lowB : b).toArray(), .09);
+    const lowA = a.clone().add(new THREE.Vector3(0, -archWebDepth, 0)), lowB = b.clone().add(new THREE.Vector3(0, -archWebDepth, 0));
+    beam(arch, lowA.toArray(), lowB.toArray(), .10, M.arch);
+    beam(arch, (i % 2 ? a : lowA).toArray(), (i % 2 ? lowB : b).toArray(), .09, M.arch);
   }
   const entry = group('South entrance glazing canopy and posts');
   const frontZ = cz + rz;
-  box(entry, 0, 5.75, frontZ + 1.3, w * .40, .15, 3.5, M.glass);
-  for (const x of [-w * .18, 0, w * .18]) beam(entry, [x, 2.1, frontZ + 2.6], [x, 5.7, frontZ + 2.6], .18);
-  C.dimensions = {radiusX: rx, radiusZ: rz, arenaCenterZ: cz, eave, roofRise: rise, archCrown: 30.3,
+  const canopyY = lowerTop + .2;
+  box(entry, 0, canopyY, frontZ + 1.3, w * .40, .15, 3.5, M.glass);
+  for (const x of [-w * .18, 0, w * .18]) beam(entry, [x, 2.1, frontZ + 2.6], [x, canopyY - .05, frontZ + 2.6], .18);
+  C.dimensions = {radiusX: rx, radiusZ: rz, arenaCenterZ: cz, eave, roofRise: rise, archCrown,
+    archHalfSpan: archX, archBeamHalfHeight, archWebDepth,
+    upperBandBottom: upperBottom, lowerBandTop: lowerTop, photoLandmarks: photo,
     status: 'photo-proportion-estimate'};
 }
 
 function musicHall(C) {
   const {M, ring, width: w, group, box, extrude, B} = C;
+  const photo = {frontX: [202, 706], groundY: 272, parapetY: 70, windowHeadY: 108, windowTipY: 136,
+    foldTipY: 219, doorHeadY: 232, endWindowCentersX: [278, 661], doorCentersX: [302, 405, 507, 610],
+    caveat: 'Approximate official-photo landmarks; perspective is not a camera calibration or survey.'};
+  const scale = w / (photo.frontX[1] - photo.frontX[0]), atY = y => .28 + (photo.groundY - y) * scale;
+  const atX = x => -w / 2 + (x - photo.frontX[0]) * scale;
+  const eave = atY(photo.parapetY), windowHead = atY(photo.windowHeadY), windowTip = atY(photo.windowTipY);
+  const foldTip = atY(photo.foldTipY), doorHead = atY(photo.doorHeadY), doorHeight = doorHead - .28;
   const core = group('Frozen hall and western annex shell; rear estimated');
-  extrude(core, clip(ring, 1, -1.1), .28, 16.5, M.wall);
+  extrude(core, clip(ring, 1, -1.1), .28, eave - .7, M.wall);
   const facade = group('South brick facade with genuine inverted triangle and door apertures');
   const shape = new THREE.Shape();
   shape.moveTo(-w / 2, .28); shape.lineTo(w / 2, .28);
   for (let i = 0; i <= 32; i++) {
     const x = w / 2 - w * i / 32;
-    shape.lineTo(x, 17.2 - .35 * Math.sin(Math.PI * i / 32));
+    shape.lineTo(x, eave - .18 * Math.sin(Math.PI * i / 32));
   }
   shape.closePath();
   const windows = group('Recessed inverted triangular glazing and tapered brick reveals');
-  const count = 16, spacing = (w - 4) / count;
+  const frames = group('Triangular metal window frames and recessed door frames');
+  const count = 16, windowCenters = Array.from({length: count}, (_, i) =>
+    atX(photo.endWindowCentersX[0] + i * (photo.endWindowCentersX[1] - photo.endWindowCentersX[0]) / (count - 1)));
+  const spacing = windowCenters[1] - windowCenters[0];
   for (let i = 0; i < count; i++) {
-    const x = -w / 2 + 2 + spacing * (i + .5), half = spacing * .35, top = 14.8, low = 11.7;
+    const x = windowCenters[i], half = spacing * .32, top = windowHead, low = windowTip;
     const hole = new THREE.Path();
     hole.moveTo(x - half, top); hole.lineTo(x + half, top); hole.lineTo(x, low); hole.closePath(); shape.holes.push(hole);
     const pane = new THREE.Shape();
     pane.moveTo(x - half, top); pane.lineTo(x, low); pane.lineTo(x + half, top); pane.closePath();
     const geo = new THREE.ShapeGeometry(pane); geo.translate(0, 0, -1.04); B.add(windows, geo, M.glass);
-    const vertices = [x - half, top, .03, x, 6.0, .75, x, low, .03,
-      x + half, top, .03, x, low, .03, x, 6.0, .75];
+    const vertices = [x - half, top, .03, x, foldTip, .75, x, low, .03,
+      x + half, top, .03, x, low, .03, x, foldTip, .75];
     const reveals = new THREE.BufferGeometry();
     reveals.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
     reveals.computeVertexNormals(); B.worldUV(reveals, M.wall); B.add(windows, reveals, M.wall);
+    const perimeter = [[x - half, top, -.12], [x + half, top, -.12], [x, low, -.12]];
+    for (let edge = 0; edge < 3; edge++) C.beam(frames, perimeter[edge], perimeter[(edge + 1) % 3], .045, M.dark);
   }
   const doors = group('Four groups of three recessed glazed doors');
+  const doorCenters = photo.doorCentersX.map(atX), doorLeafSpacing = 1.18;
   for (let bay = 0; bay < 4; bay++) for (let leaf = 0; leaf < 3; leaf++) {
-    const x = -w * .34 + bay * w * .225 + (leaf - 1) * 1.18, half = .46;
+    const x = doorCenters[bay] + (leaf - 1) * doorLeafSpacing, half = .46;
     const hole = new THREE.Path();
-    hole.moveTo(x - half, .28); hole.lineTo(x + half, .28); hole.lineTo(x + half, 3.4);
-    hole.lineTo(x - half, 3.4); hole.closePath(); shape.holes.push(hole);
-    box(doors, x, 1.85, -.94, .90, 3.12, .08, M.glass);
-    box(doors, x, 1.85, -.83, .035, 3.12, .06, M.dark);
+    hole.moveTo(x - half, .28); hole.lineTo(x + half, .28); hole.lineTo(x + half, doorHead);
+    hole.lineTo(x - half, doorHead); hole.closePath(); shape.holes.push(hole);
+    const centerY = (.28 + doorHead) / 2;
+    box(doors, x, centerY, -.94, .90, doorHeight, .08, M.glass);
+    box(doors, x, centerY, -.83, .035, doorHeight, .06, M.dark);
+    for (const side of [-1, 1]) box(frames, x + side * .49, centerY, -.14, .065, doorHeight + .08, .1, M.dark);
+    box(frames, x, doorHead + .03, -.14, 1.04, .07, .1, M.dark);
+    box(doors, x + .25, centerY, -.77, .025, .55, .04, M.metal);
   }
   const wall = new THREE.ExtrudeGeometry(shape, {depth: .85, bevelEnabled: false, curveSegments: 1});
   wall.translate(0, 0, -.85); B.worldUV(wall, M.wall); B.add(facade, wall, M.wall);
   const parapet = group('Shallow curved parapet coping and quiet roof');
-  extrude(parapet, clip(ring, 1, -1.15), 16.5, 16.65, M.roof);
-  for (let i = 0; i < 32; i++) {
-    const x = -w / 2 + w * (i + .5) / 32, y = 17.2 - .35 * Math.sin(Math.PI * (i + .5) / 32);
-    box(parapet, x, y + .03, -.36, w / 32 + .01, .1, .95, M.wall);
+  extrude(parapet, clip(ring, 1, -1.15), eave - .7, eave - .55, M.roof);
+  const coping = new THREE.Shape();
+  for (let i = 0; i <= 32; i++) {
+    const x = -w / 2 + w * i / 32, y = eave - .18 * Math.sin(Math.PI * i / 32) + .1;
+    if (i === 0) coping.moveTo(x, y); else coping.lineTo(x, y);
   }
-  C.dimensions = {frontWidth: w, height: 17.3, triangularWindowCount: count, doorGroups: 4,
+  for (let i = 32; i >= 0; i--) coping.lineTo(-w / 2 + w * i / 32, eave - .18 * Math.sin(Math.PI * i / 32));
+  coping.closePath();
+  const copingGeometry = new THREE.ExtrudeGeometry(coping, {depth: .95, bevelEnabled: false, curveSegments: 1});
+  copingGeometry.translate(0, 0, -.835); B.worldUV(copingGeometry, M.wall); B.add(parapet, copingGeometry, M.wall);
+  C.dimensions = {frontWidth: w, height: eave + .1, triangularWindowCount: count, doorGroups: 4,
+    windowCenters, windowHead, windowTip, doorCenters, doorLeafSpacing, doorHead, photoLandmarks: photo,
     status: 'photo-proportion-estimate'};
 }
 
@@ -298,12 +333,13 @@ export function createModernBuildingDetail(feature, center, origin) {
     if (!object.isMesh) return;
     // Convex metal and sub-texel seams need no self-shadowing; it produces dotted acne.
     object.receiveShadow = false;
-    if (object.material === C.M.metal) object.castShadow = false;
+    if (object.material === C.M.roofSeam) object.castShadow = false;
   });
   const usedMaterials = new Set();
   C.detail.traverse(object => {if (object.isMesh) usedMaterials.add(object.material);});
   for (const mat of Object.values(C.M)) if (!usedMaterials.has(mat)) {
-    mat.map?.dispose(); mat.dispose();
+    for (const value of Object.values(mat)) if (value?.isTexture) value.dispose();
+    mat.dispose();
   }
   C.detail.updateMatrixWorld(true);
   const bounds = new THREE.Box3().setFromObject(C.detail);

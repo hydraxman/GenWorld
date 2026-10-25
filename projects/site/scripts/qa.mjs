@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { createServer } from 'node:http';
-import { access, mkdir, readFile } from 'node:fs/promises';
+import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import puppeteer from 'puppeteer-core';
 import { output } from './build.mjs';
@@ -86,7 +86,8 @@ try {
       assert.ok(await frame.evaluate(() => window.campusApp.stats.buildings > 100));
       assert.equal(await frame.$eval('#references', element => element.hidden), true);
       await checkCampusInspection({page, frame, screenshots});
-      await checkCampusExpansion({page, frame, screenshots});
+      const appearance = await checkCampusExpansion({page, frame, screenshots});
+      await writeFile(path.join(screenshots, 'campus-appearance.json'), JSON.stringify(appearance, null, 2));
       await frame.click('#view-plan');
       assert.equal(await frame.$eval('#view-plan', element => element.getAttribute('aria-pressed')), 'true');
       await frame.click('#view-shunde');
