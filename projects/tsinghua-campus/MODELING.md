@@ -53,6 +53,7 @@
 - [现代建筑身份](data/modern-building-sources.json) 固定艺术博物馆、综合体育馆和音乐厅的原轮廓、名称关联与朝向解释；与照片索引共同约束模型替换，不包含照片像素。
 - [紫荆证据](data/zijing-evidence.json) 区分历史住宿分配、当前官方住宿说明、具名W楼外景与楼层估算；`src/zijing-sources.js` 固定20个轮廓签名和23个逻辑楼号。覆盖报告单列组团类型推定，分楼导航、拾取及GLB导出仍保留原地图根身份。
 - [全轮廓建筑类型证据](data/architecture-evidence.json) 保存冻结输入SHA-256、逐轮廓漂移签名、单一OSM way交并比及建筑标签白名单；来源是历史本地OSM提取，不是实地勘察。不能把社区类型标签、展示层高或程序窗格解释为照片已核实。默认模型只增加可读建筑结构，不承诺未知真实屋顶、精确窗位与材质。
+- 冻结JSON和校园OSM提取通过 `.gitattributes` 固定LF，结构证据的SHA-256校验实际提交字节，不在测试中忽略换行差异。历史名称缓存仍保留当时读取的CRLF哈希，不将其伪称为当前LF文件哈希；未刷新名称、地图或OSM记录。
 - [对应照片外观档案](data/appearance-profiles.json) 增加15处官方来源的18张照片和16个具名轮廓映射，原照片只在忽略的本地目录审阅。所有名称、来源、角色和几何签名在建模前核验；默认测试从冻结具名OSM多边形重放对应关系。六教A来源way位于合并根内，不表示整根均为A；法律馆为廖凯原楼、人文馆为凯风楼，不能将后者室内金色书架当成外墙颜色。`src/reference-catalog.js` 合并为33处／50张的元数据索引，不改变照片许可。
 - 化学馆原 JPEG 的编码尺寸与 EXIF 转正显示尺寸不同；审阅图有自己的哈希与派生说明，不重复计为原发布照片。Commons 作者 **葉又嘉**、**HoweyYuan** 的图像适用 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)；同方部原图保留摄影 **李派** 等署名，章节作者不能代作未明摄影者。
 - 字形来源和近似边界见 [src/second-gate-wenkai.json](src/second-gate-wenkai.json)，完整上游版权与 SIL OFL 1.1 见 [src/second-gate-font-OFL.txt](src/second-gate-font-OFL.txt)。不需分发完整字体。

@@ -7,7 +7,8 @@
     },
     "architecture": {
       "path": "../tsinghua-tour/campus.osm",
-      "sha256": "794ed3f644f27d0979c55302b76c0742c7e0c11b540b7d490d71bf0d0dfce50e",
+      "sha256": "7bbb28745ef1b0517046ea1839260b7c83872457d5f8714e9bd392f796ced82e",
+      "byteRepresentation": "LF line endings as committed; SHA-256 covers the exact file bytes.",
       "license": "ODbL 1.0; © OpenStreetMap contributors",
       "scope": "Historical local extract; not a current survey."
     }

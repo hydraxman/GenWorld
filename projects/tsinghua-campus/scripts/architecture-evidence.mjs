@@ -20,6 +20,9 @@ export async function architectureEvidence() {
     readFile(resolve(root, 'data', 'campus.json')),
     readFile(resolve(root, '..', 'tsinghua-tour', 'campus.osm')),
   ]);
+  if (campusBytes.includes(Buffer.from('\r\n')) || osmBytes.includes(Buffer.from('\r\n'))) {
+    throw new Error('Frozen architecture inputs require committed LF line endings; preserve the repository .gitattributes.');
+  }
   const campus = JSON.parse(campusBytes);
   const xml = new XMLParser({ignoreAttributes: false, attributeNamePrefix: '', parseAttributeValue: false}).parse(osmBytes).osm;
   const nodes = new Map(list(xml.node).map(node => [node.id, [Number(node.lon), Number(node.lat)]]));
@@ -54,6 +57,7 @@ export async function architectureEvidence() {
     sources: {
       footprints: {path: 'data/campus.json', sha256: hash(campusBytes)},
       architecture: {path: '../tsinghua-tour/campus.osm', sha256: hash(osmBytes),
+        byteRepresentation: 'LF line endings as committed; SHA-256 covers the exact file bytes.',
         license: 'ODbL 1.0; © OpenStreetMap contributors', scope: 'Historical local extract; not a current survey.'},
     },
     matching: 'Single closed OSM building way, projected polygon IoU >= 0.8; reject near-tied matches. Tags only, never substitute source footprints. No tags borrowed from contained POIs or nearest buildings.',

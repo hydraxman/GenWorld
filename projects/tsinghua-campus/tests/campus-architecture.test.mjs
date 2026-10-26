@@ -19,6 +19,8 @@ const nearGroup = root => root.children.find(child => child.userData.architectur
 
 test('architectural evidence is an exact offline replay, not nearest-name or POI borrowing', async () => {
   assert.deepEqual(await architectureEvidence(), evidence);
+  assert.equal(evidence.sources.architecture.byteRepresentation,
+    'LF line endings as committed; SHA-256 covers the exact file bytes.');
   assert.equal(evidence.buildings.length, 650);
   assert.equal(new Set(evidence.buildings.map(record => record.featureId)).size, 650);
   for (const record of evidence.buildings) {

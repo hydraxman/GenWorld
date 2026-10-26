@@ -6,3 +6,5 @@
 projects/courtyard/src/*.js text eol=lf
 shared/illumination.js text eol=lf
 projects/shunde/src/spec.js text eol=lf
+projects/tsinghua-campus/data/*.json text eol=lf
+projects/tsinghua-tour/campus.osm text eol=lf
