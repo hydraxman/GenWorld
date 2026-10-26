@@ -2,13 +2,13 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
 import test from 'node:test';
-import catalog from '../reference-catalog.json' with {type: 'json'};
+import catalog from '../src/reference-catalog.js';
 import {referenceTest} from './reference-mode.mjs';
 
 test('all reference sites retain distributable provenance without requiring local photographs', () => {
-  assert.equal(catalog.sites.length, 18);
-  assert.equal(new Set(catalog.sites.map(site => site.id)).size, 18);
-  assert.equal(catalog.sites.flatMap(site => site.images).length, 32);
+  assert.equal(catalog.sites.length, 33);
+  assert.equal(new Set(catalog.sites.map(site => site.id)).size, 33);
+  assert.equal(catalog.sites.flatMap(site => site.images).length, 50);
   for (const site of catalog.sites) {
     assert.ok(site.name && site.observations.length && site.unknowns.length);
     for (const image of site.images) {

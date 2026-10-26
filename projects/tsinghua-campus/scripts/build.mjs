@@ -3,6 +3,7 @@ import {mkdir, readFile, writeFile} from 'node:fs/promises';
 import {join, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {writeReferencePage} from './reference-pages.mjs';
+import references from '../src/reference-catalog.js';
 
 const root = resolve(import.meta.dirname, '..');
 const args = process.argv.slice(2);
@@ -12,7 +13,6 @@ if (args.some(arg => arg !== '--references') || args.length > 1) {
 const includeImages = args.includes('--references');
 await mkdir(join(root, 'assets'), {recursive: true});
 await mkdir(join(root, 'output'), {recursive: true});
-const references = JSON.parse(await readFile(join(root, 'reference-catalog.json'), 'utf8'));
 await build({
   entryPoints: [join(root, 'src', 'main.js')],
   outfile: join(root, 'assets', 'scene.js'),

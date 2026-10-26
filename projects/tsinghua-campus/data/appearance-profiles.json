@@ -1,0 +1,242 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-26",
+  "license": "清华大学及院系官方配图，未明确摄影者或开放再发布许可；仅本地参照，不作纹理、在线再发布或去水印。程序表面不含照片像素。",
+  "scope": "对应建筑的照片配色与有限可见特征，叠加在估算外壳上，不是逐面照片重建。高度、窗列、朝向及照片外表面仍含推定；不增加照片模型完成数。",
+  "sites": [
+    {
+      "id": "appearance-teaching-1", "name": "第一教学楼",
+      "observations": ["校方教室导览标注第一教学楼；浅乳白墙、灰色勒脚、深色窗框，树木遮挡部分立面", "不是清华学堂、主楼或工字厅"],
+      "unknowns": ["小图仅约束可见墙面配色；背面、屋顶和遮挡窗位未核实"],
+      "images": [{
+        "path": "references\\appearance-class-1122-official.jpg",
+        "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1122.jhtml",
+        "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/17102249arr3.jpg",
+        "width": 574, "height": 432, "bytes": 80552,
+        "sha256": "5fd7f682650356cf76d9e0e7258b93ab7ce9ad1eccaf8fadb9a00b02ed9bc947",
+        "view": "正面低机位，浅色墙身、灰勒脚与深色窗框；树木遮挡，屋面不可辨"
+      }]
+    },
+    {
+      "id": "appearance-teaching-2", "name": "第二教学楼",
+      "observations": ["红砖墙、浅石三联拱廊与细柱、深色高窗、宽石阶和深出檐", "可见两层入口构图；不是三层均匀玻璃盒子"],
+      "unknowns": ["比例、窗列、廊深和隐藏面为估算；屋脊位置和雕花未复刻"],
+      "images": [{
+        "path": "references\\appearance-class-1115-official.jpg",
+        "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1115.jhtml",
+        "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/1511255831l1.jpg",
+        "width": 1920, "height": 1281, "bytes": 453524,
+        "sha256": "f483007591f60923b8ff70f6bf88c11c911433775a9e2d7918a7d5cdcfefe281",
+        "view": "入口正面：红砖、浅石三联拱、双层通高柱廊与灰色檐口"
+      }]
+    },
+    {
+      "id": "appearance-teaching-3-12", "name": "第三教学楼一、二段",
+      "observations": ["校方一段、二段入口配图相近；浅米色门廊、白石阶、深框玻璃门和局部红砖"],
+      "unknowns": ["入口裁切图不能验证整栋层数；其余外壳配色延伸、窗列与屋面保持估算"],
+      "images": [{
+        "path": "references\\appearance-class-1165-official.png",
+        "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1165.jhtml",
+        "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/171042175wky.png",
+        "width": 1425, "height": 569, "bytes": 1174013,
+        "sha256": "ff5947bca3503df4bd49df7c602dc2c655b5e1e8548ff22b4b931921585e451f",
+        "view": "二段入口裁切，仅局部门廊和台阶，不证明全楼颜色或楼层"
+      }]
+    },
+    {
+      "id": "appearance-teaching-3-3", "name": "第三教学楼三段",
+      "observations": ["校方三段入口图：浅灰米色、粗方柱、宽门廊、深框横窗和白石阶"],
+      "unknowns": ["可见范围有限；屋顶、背面、完整窗列与遮挡部位未核实"],
+      "images": [{
+        "path": "references\\appearance-class-1163-official.png",
+        "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1163.jhtml",
+        "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/05155200blxg.png",
+        "width": 1808, "height": 835, "bytes": 2053894,
+        "sha256": "ab02276f5a83d19a6c29339b562bbb8b57866536c3a5690dc2f7cec8be943efe",
+        "view": "入口与上方横窗、方柱及平台；不是完整立面"
+      }]
+    },
+    {
+      "id": "appearance-teaching-4", "name": "第四教学楼",
+      "observations": ["灰粉色竖向端墙、浅褐色水平墙带和深蓝灰横向窗带", "校方改造文章明确外立面保留建造初期形态，第三至第五层有研讨室"],
+      "unknowns": ["端部与长翼高度差、立面逐窗和屋面未知；五层节奏与17.5米是估算，不是测绘"],
+      "images": [{
+        "path": "references\\appearance-class-1118-official.jpg",
+        "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1118.jhtml",
+        "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/15112240nal2.jpg",
+        "width": 1920, "height": 1281, "bytes": 365857,
+        "sha256": "6f71380fc444e618e70a62aa2694310dd477710379c4d812116e6cdde79affed",
+        "view": "端部入口、上方横窗和左侧长翼；有树木遮挡"
+      }]
+    },
+    {
+      "id": "appearance-teaching-5", "name": "第五教学楼",
+      "observations": ["赭黄色砖墙、厚浅色顶边、深色窗框与入口上方凸出玻璃窗体"],
+      "unknowns": ["局部入口照片不能验证整栋层数；高差、背面、全楼窗列与屋面为估算"],
+      "images": [{
+        "path": "references\\appearance-class-1157-official.jpg",
+        "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1157.jhtml",
+        "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/012001390upe.jpg",
+        "width": 1200, "height": 800, "bytes": 240137,
+        "sha256": "f0fd85f581123ba7b074ef368a29bb6e976135c8963be966fbeec5de20e770b0",
+        "view": "入口近景：赭黄砖、白色顶边、凸窗和浅色雨棚"
+      }]
+    },
+    {
+      "id": "appearance-teaching-6", "name": "第六教学楼组团",
+      "observations": ["校方校园景观照片明确六教；陶红墙面、深框大窗、银灰外遮阳和连廊", "教室导览A／B／C三项使用同一张外景，不能据此认定三个独立立面；只作组团材料与节奏参照"],
+      "unknowns": ["A区地图根合并部分相邻体量；只保留原根、不借用旁楼身份", "A区六层节奏、完整窗列、连廊与屋面分区未逐翼核实；共用照片不足以判断C区高度，C区保留原地图显示高度", "查看方向为避免邻楼遮挡的展示取景，不是照片相机标定"],
+      "images": [{
+        "path": "references\\appearance-sixth-teaching-official.jpg",
+        "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+        "imageUrl": "https://www.tsinghua.edu.cn/__local/F/95/58/C5BEF6F156647FDA67D23E093CA_F1B1226E_1940E1.jpg",
+        "width": 1920, "height": 900, "bytes": 1655009,
+        "sha256": "c54826f6a780c5abbb860c10d7b518bb3af9262c0014e4cfc4b36aff04f46eb5",
+        "view": "组团内庭：陶红墙、窗带、外置银色遮阳与连廊"
+      }, {
+        "path": "references\\appearance-class-1137-official.jpg",
+        "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1137.jhtml",
+        "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202504/14110640xhsk.jpg",
+        "width": 1200, "height": 771, "bytes": 405445,
+        "sha256": "af4f466fa46ae9b08734487a5b01f2452b133bdec84aa5a6967b4c1903d157b6",
+        "view": "多楼项共用的六教外景：陶红横带、蓝灰玻璃和转角；不认作逐翼照片"
+      }]
+    },
+    {
+      "id": "appearance-law-library", "name": "法律图书馆／廖凯原楼",
+      "observations": ["两处官方外景互证：乳白竖向石材屏板、亮蓝玻璃、错位竖带和中段贯通横窗", "官文明确法律图书馆在廖凯原楼；不是凯风楼的人文社科图书馆"],
+      "unknowns": ["照片窗格不等于楼层；七层外壳节奏和26.6米为比例估算，横窗带标高与交错石板仍近似，具体层数、背面和屋顶未核实"],
+      "images": [{
+        "path": "references\\appearance-law-library-official.jpg",
+        "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+        "imageUrl": "https://www.tsinghua.edu.cn/__local/1/95/79/BE6722693B3BC46415290CC514C_60689166_C4100.jpg",
+        "width": 1920, "height": 900, "bytes": 803072,
+        "sha256": "14a2e17e37cc61d11771c46cae827ec5108149aab477cf12715e252bb135e9bd",
+        "view": "完整正面：白石竖带、蓝玻璃、通长横窗和低入口雨棚"
+      }, {
+        "path": "references\\appearance-class-1116-official.jpg",
+        "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1116.jhtml",
+        "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/15112527f3vl.jpg",
+        "width": 1920, "height": 1281, "bytes": 463319,
+        "sha256": "1831e5e1795fd17e0274dc8062d2daa92df2830715c9079cbe785475fa264ea0",
+        "view": "导览虽为地下一层，封面是完整外立面；不推算地下结构"
+      }]
+    },
+    {
+      "id": "appearance-humanities-library", "name": "人文社科图书馆／凯风楼",
+      "observations": ["本馆官网外景显示暖红褐砖、曲面连续窄高窗与三层可见窗列", "官网主校园图是室内圆厅，不能用金色书架推断室外墙色；只用馆舍风貌中的两张室外图"],
+      "unknowns": ["外景只有300×200，窗数、材质真实色度、屋顶和背面未核实；保留地图曲线，不用圆柱替代原平面"],
+      "images": [{
+        "path": "references\\appearance-humanities-exterior-3-official.png",
+        "pageUrl": "https://lib.tsinghua.edu.cn/hs/gk/gsfm.htm",
+        "imageUrl": "https://lib.tsinghua.edu.cn/__local/F/8F/6D/5E6F0D168A6B4B87249EEA6B3CA_2CBA6BBF_22C55.png",
+        "width": 300, "height": 200, "bytes": 142421,
+        "sha256": "83430a483c29986f745b693f07cc71b59a182f06336740101431f37772701ce0",
+        "view": "室外侧墙近景：暖砖、后退玻璃和横向挑板；金黄色来自树叶，不是墙色"
+      }, {
+        "path": "references\\appearance-humanities-exterior-4-official.png",
+        "pageUrl": "https://lib.tsinghua.edu.cn/hs/gk/gsfm.htm",
+        "imageUrl": "https://lib.tsinghua.edu.cn/__local/4/52/79/F84CA0E03623A00BEE2CBC3B6B1_F36C260F_1DC07.png",
+        "width": 300, "height": 200, "bytes": 121863,
+        "sha256": "c9bdd1f975978bfcfc803dfe82499345693545913ff2502edd615155c660c946",
+        "view": "曲面外立面全景：三层窄高窗、暖红褐砖墙；屋面不可见"
+      }]
+    },
+    {
+      "id": "appearance-mingli", "name": "明理楼／法学院",
+      "observations": ["浅灰石色墙面、对称组合小窗、入口高柱廊、顶层开口构架和中间浅弧顶"],
+      "unknowns": ["屋顶构架位置、尺度、隐蔽立面和逐窗为估算，不建院徽、人物或室内"],
+      "images": [{
+        "path": "references\\appearance-class-1126-official.jpg",
+        "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1126.jhtml",
+        "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/17135453t4fg.jpg",
+        "width": 1920, "height": 1281, "bytes": 542122,
+        "sha256": "206e65e1f0fe1e357c4418dfe924589b97da0d176873231dd731adb366ba7082",
+        "view": "正面远景：浅灰立面、入口柱廊、组合窗和顶部构架"
+      }]
+    },
+    {
+      "id": "appearance-new-hydraulic", "name": "新水利馆",
+      "observations": ["明确标注的新水利馆正面，红砖、暖灰石带、四层高窗与三联拱形入口构图", "同2005年校园介绍图相符，但采用较新的教室导览原图"],
+      "unknowns": ["屋面、后立面、窗数和绝对尺度仍估算；不是何善衡土木馆或旧水利馆"],
+      "images": [{
+        "path": "references\\appearance-class-1125-official.jpg",
+        "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1125.jhtml",
+        "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/17133002xdnl.jpg",
+        "width": 1920, "height": 1281, "bytes": 576077,
+        "sha256": "0508f68b64f57799429bde35af67bb15f146dc81794d7277c6c656e6f1b08dff",
+        "view": "正面入口与四层窗列：红砖、灰石竖带、三联拱和深檐"
+      }]
+    },
+    {
+      "id": "appearance-old-hydraulic", "name": "旧水利馆",
+      "observations": ["灰褐砖墙、浅色线脚、端部双坡山墙和深框组合窗"],
+      "unknowns": ["照片植被遮挡较多，不复制藤蔓来掩盖未知立面；完整屋脊、背面和三层外壳节奏仍估算"],
+      "images": [{
+        "path": "references\\appearance-class-1124-official.jpg",
+        "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1124.jhtml",
+        "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/17132554zipe.jpg",
+        "width": 1920, "height": 1281, "bytes": 541598,
+        "sha256": "fc941fa1b55fa35f019055dcdb558b5fb447ee9e74cb7bc39b5f43cb61b88a31",
+        "view": "院内斜视：灰褐砖、山墙、石门额与被藤蔓遮挡的侧翼"
+      }]
+    },
+    {
+      "id": "appearance-mingzhai", "name": "明斋",
+      "observations": ["社会科学学院具名文章与正面照片：暖红砖、灰褐石材竖带、中央凸出入口和阶梯女儿墙", "官方文章明确三层；不是用窗格数量猜测层数"],
+      "unknowns": ["首图为2018年文章，不能证明当前维护状态；完整屋面、院内和两翼窗列未核实"],
+      "images": [{
+        "path": "references\\appearance-mingzhai-official.jpg",
+        "pageUrl": "https://www.sss.tsinghua.edu.cn/info/1223/3363.htm",
+        "imageUrl": "https://www.sss.tsinghua.edu.cn/__local/3/85/89/D66255E301EB4138F8CC8493945_36B6AD2C_1E922.jpg?e=.jpg",
+        "width": 675, "height": 900, "bytes": 125218,
+        "sha256": "ce390d344a09211fb41bc048ec8af84f6a74342a5dd0c93d81cc21769fc3df74",
+        "view": "2018年文章入口照片：暖红砖、灰褐石材、阶梯女儿墙与三层构图"
+      }]
+    },
+    {
+      "id": "appearance-guyue", "name": "古月堂",
+      "observations": ["具名官方照片显示红柱门扇、绿色几何窗棂、灰砖勒脚和红褐瓦檐"],
+      "unknowns": ["仅门房近景；整根屋脊、背面、院内与尺度是估算，不复刻题字或彩绘纹样"],
+      "images": [{
+        "path": "references\\appearance-guyue-hall-official.jpg",
+        "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+        "imageUrl": "https://www.tsinghua.edu.cn/__local/5/97/6F/584D8F3F4F3A8D802F9BE8AA707_A2D69FD8_156341.jpg",
+        "width": 1920, "height": 900, "bytes": 1401665,
+        "sha256": "4dfcd21de01e4446f8eaed963c598ef0ff858f106f4ca65f8d712d10bd5588a3",
+        "view": "门房近景：朱红、墨绿窗棂、灰砖与红褐瓦檐；屋脊不可见"
+      }]
+    },
+    {
+      "id": "appearance-architecture-lecture", "name": "建筑馆报告厅",
+      "observations": ["具名官方外景：浅粉灰石材框、整面后退玻璃、宽石阶与屋顶薄片构架"],
+      "unknowns": ["照片左侧是邻馆，不将其计为报告厅；屋顶曲率、薄片数量、立面朝向和尺度仍估算"],
+      "images": [{
+        "path": "references\\appearance-class-1120-official.jpg",
+        "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1120.jhtml",
+        "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/15112048mwo3.jpg",
+        "width": 1920, "height": 1281, "bytes": 308574,
+        "sha256": "5a48cc3260e1deedb73bb995a3009306973a603ccb694285dc459214f90c3e0d",
+        "view": "报告厅外景：浅粉灰石框、整面玻璃与屋顶薄片，不把左侧邻馆并入"
+      }]
+    }
+  ],
+  "buildings": [
+    {"id": "teaching-1", "featureId": "building:geometry:8d50d66ac6d7a56614137662", "name": "第一教学楼", "sourceId": "osm:way:79701306", "signature": "220:61872522", "site": "appearance-teaching-1", "palette": {"wall": "#e5e0cd", "plinth": "#adb1aa", "trim": "#e9e7da", "frame": "#53635f", "glass": "#487183", "roof": "#8c9696"}, "surface": "render", "windows": "regular", "entry": "plain"},
+    {"id": "teaching-2", "featureId": "building:geometry:b2de2c891f54956b19bc3f3c", "name": "第二教学楼", "sourceId": "osm:way:79701309", "signature": "274:30fc21d1", "site": "appearance-teaching-2", "palette": {"wall": "#bb7961", "plinth": "#b0806c", "trim": "#d7ceba", "frame": "#585748", "glass": "#456271", "roof": "#777976"}, "surface": "brick", "windows": "tall", "entry": "triple-arch", "floors": 2, "estimatedHeight": 8.8},
+    {"id": "teaching-3-12", "featureId": "building:geometry:8fef63cf09e47b30d47bbb86", "name": "第三教学楼一、二段", "sourceId": "osm:way:79701125", "signature": "333:17651a7f", "site": "appearance-teaching-3-12", "palette": {"wall": "#d6c9a6", "plinth": "#c8b994", "trim": "#e6ddc4", "frame": "#4e5750", "glass": "#48636c", "roof": "#8c9696"}, "surface": "render", "windows": "regular", "entry": "plain"},
+    {"id": "teaching-3-3", "featureId": "building:geometry:972afbec67d4c40ba5ccbf43", "name": "第三教学楼三段", "sourceId": "osm:way:79701097", "signature": "216:a2c8fd51", "site": "appearance-teaching-3-3", "palette": {"wall": "#c9beb0", "plinth": "#bfb3a2", "trim": "#e2dacb", "frame": "#4d5151", "glass": "#435d6c", "roof": "#8c9696"}, "surface": "render", "windows": "ribbon", "entry": "colonnade"},
+    {"id": "teaching-4", "featureId": "building:geometry:1aae1ceeafb8ce144652512b", "name": "第四教学楼", "sourceId": "osm:way:79700261", "signature": "334:08752549", "site": "appearance-teaching-4", "palette": {"wall": "#baa59a", "plinth": "#a68b83", "trim": "#c5b7a2", "frame": "#464d51", "glass": "#456e86", "roof": "#8c9696"}, "surface": "render", "windows": "ribbon", "entry": "plain", "floors": 5, "estimatedHeight": 17.5},
+    {"id": "teaching-5", "featureId": "building:geometry:51195c4d7a2c277f45b29024", "name": "第五教学楼", "sourceId": "osm:way:79701105", "signature": "940:842191a8", "site": "appearance-teaching-5", "palette": {"wall": "#b88a53", "plinth": "#b58a61", "trim": "#e3ded1", "frame": "#655447", "glass": "#387391", "roof": "#8c9696"}, "surface": "brick", "windows": "regular", "entry": "glazed-bay"},
+    {"id": "teaching-6-a", "featureId": "building:geometry:597181594775205de28f99fa", "name": "第六教学楼A区", "sourceId": "osm:way:79701106", "signature": "420:5748d126", "site": "appearance-teaching-6", "match": "named-way-contained-in-merged-root", "palette": {"wall": "#b66b5b", "plinth": "#a26053", "trim": "#cfa092", "frame": "#85959b", "glass": "#40738c", "roof": "#889392"}, "surface": "render", "windows": "sunshade", "entry": "plain", "floors": 6, "estimatedHeight": 21.6},
+    {"id": "teaching-6-c", "featureId": "building:geometry:24ebd40af48ff01716740d99", "name": "第六教学楼C区", "sourceId": "osm:way:79701107", "signature": "393:68ae697d", "site": "appearance-teaching-6", "palette": {"wall": "#b66b5b", "plinth": "#a26053", "trim": "#cfa092", "frame": "#85959b", "glass": "#40738c", "roof": "#889392"}, "surface": "render", "windows": "sunshade", "entry": "plain", "inspectionDirection": [-1.1, 0.75, -0.5]},
+    {"id": "law-library", "featureId": "building:geometry:34dbbe25ea1a78c030668634", "name": "法律图书馆", "sourceId": "osm:way:817157928", "signature": "219:9f89aba3", "site": "appearance-law-library", "palette": {"wall": "#e2dfce", "plinth": "#d7dacd", "trim": "#eee9d8", "frame": "#526774", "glass": "#2381b4", "roof": "#939b97"}, "surface": "render", "windows": "vertical", "entry": "plain", "floors": 7, "estimatedHeight": 26.6, "glazedBandLevel": 3},
+    {"id": "humanities-library", "featureId": "building:geometry:30ab7fbafac9ec7cf1297b84", "name": "人文社科图书馆（凯风楼）", "sourceId": "osm:way:226671429", "signature": "590:59a7ffcd", "site": "appearance-humanities-library", "palette": {"wall": "#b66d44", "plinth": "#8e563e", "trim": "#bd875d", "frame": "#4c4941", "glass": "#374d53", "roof": "#8c9696"}, "surface": "brick", "windows": "slit", "entry": "plain", "floors": 3, "estimatedHeight": 12.6},
+    {"id": "mingli", "featureId": "building:geometry:1b4f6c87a4fa43edda36180e", "name": "明理楼 （法学院）", "sourceId": "osm:way:80341983", "signature": "391:fff3ded7", "site": "appearance-mingli", "palette": {"wall": "#c7c5bc", "plinth": "#c1b8a3", "trim": "#dedaca", "frame": "#676c6b", "glass": "#537389", "roof": "#929a9c"}, "surface": "render", "windows": "regular", "entry": "colonnade", "floors": 4, "estimatedHeight": 17.2, "roofFeatureRise": 1.5},
+    {"id": "new-hydraulic", "featureId": "building:geometry:9a8f49f91f485c76b1cc6049", "name": "新水利馆", "sourceId": "osm:way:85379557", "signature": "332:192aa760", "site": "appearance-new-hydraulic", "palette": {"wall": "#b57d63", "plinth": "#a57968", "trim": "#bfa28c", "frame": "#53544c", "glass": "#416472", "roof": "#757770"}, "surface": "brick", "windows": "tall", "entry": "triple-arch", "floors": 4, "estimatedHeight": 16.4},
+    {"id": "old-hydraulic", "featureId": "building:geometry:f37393f231faeaf35fbe1c4d", "name": "旧水利馆", "sourceId": "osm:way:83990425", "signature": "218:77f0ffd2", "site": "appearance-old-hydraulic", "palette": {"wall": "#9e9480", "plinth": "#958976", "trim": "#c2b79d", "frame": "#66665d", "glass": "#657a78", "roof": "#818477"}, "surface": "brick", "windows": "regular", "entry": "plain", "floors": 3, "estimatedHeight": 12.8, "roofRise": 1.8},
+    {"id": "mingzhai", "featureId": "building:geometry:42f57cc957befa6757c04294", "name": "明斋", "sourceId": "osm:way:83810503", "signature": "447:2b08134e", "site": "appearance-mingzhai", "palette": {"wall": "#a67960", "plinth": "#9f8e76", "trim": "#bbae94", "frame": "#555c54", "glass": "#536e78", "roof": "#8c9696"}, "surface": "brick", "windows": "regular", "entry": "stepped-portal", "floors": 3, "estimatedHeight": 11.8},
+    {"id": "guyue", "featureId": "building:geometry:fc726bc885a93d06627b8cef", "name": "古月堂", "sourceId": "osm:way:856849934", "signature": "216:c7da9cdc", "site": "appearance-guyue", "palette": {"wall": "#9c3e35", "plinth": "#707b7d", "trim": "#9b322c", "frame": "#265e4d", "glass": "#57847a", "roof": "#a85b50"}, "surface": "render", "windows": "lattice", "entry": "plain", "floors": 1, "estimatedHeight": 5.4, "roofRise": 1.8},
+    {"id": "architecture-lecture", "featureId": "building:geometry:9661ac06cbf111f5229e0b5a", "name": "建筑馆报告厅", "sourceId": "osm:way:1113711563", "signature": "216:6df32d21", "site": "appearance-architecture-lecture", "palette": {"wall": "#d0bfb2", "plinth": "#b7ada0", "trim": "#e0d3be", "frame": "#697779", "glass": "#497784", "roof": "#b3a18c"}, "surface": "render", "windows": "curtain", "entry": "roof-fins", "floors": 1, "estimatedHeight": 7.4, "roofFeatureRise": 1.4, "inspectionDirection": [1.1, 0.6, -0.75]}
+  ]
+}

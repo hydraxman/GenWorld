@@ -1,0 +1,5871 @@
+{
+  "schemaVersion": 1,
+  "sources": {
+    "footprints": {
+      "path": "data/campus.json",
+      "sha256": "c4b403dacb0e952a583237a337b14d70737d13e2814b09f625aabf494077bc2e"
+    },
+    "architecture": {
+      "path": "../tsinghua-tour/campus.osm",
+      "sha256": "794ed3f644f27d0979c55302b76c0742c7e0c11b540b7d490d71bf0d0dfce50e",
+      "license": "ODbL 1.0; © OpenStreetMap contributors",
+      "scope": "Historical local extract; not a current survey."
+    }
+  },
+  "matching": "Single closed OSM building way, projected polygon IoU >= 0.8; reject near-tied matches. Tags only, never substitute source footprints. No tags borrowed from contained POIs or nearest buildings.",
+  "limitations": "Community building types and levels are not verified current architecture. Absent tags remain unknown. No contact, occupancy, address or other nonarchitectural fields are copied.",
+  "buildings": [
+    {
+      "featureId": "building:6598261612",
+      "footprintSignature": "448:a3e18c2b",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:659826161",
+      "intersectionOverUnion": 0.984022,
+      "tags": {
+        "building": "university",
+        "building:levels": "1"
+      }
+    },
+    {
+      "featureId": "building:geometry:0028cb547bf4efd190f4d597",
+      "footprintSignature": "217:03031feb",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668709",
+      "intersectionOverUnion": 0.980442,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:003a35fd28f4aa06cc3a497e",
+      "footprintSignature": "563:64299115",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:004997d1d71c905ee6194ed8",
+      "footprintSignature": "446:53d709f1",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:009191e3b2fdf34bdef18340",
+      "footprintSignature": "217:dab9de3d",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668723",
+      "intersectionOverUnion": 0.987168,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:00ac5eb28382a99ed0900dbe",
+      "footprintSignature": "217:20f687cb",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:00d4433f2e2204198cbb6f68",
+      "footprintSignature": "217:c8316a4e",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:00e48c14e0dabcdaf66d8058",
+      "footprintSignature": "217:3360da78",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:451306291",
+      "intersectionOverUnion": 0.981898,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:01211fa3dce98e4f927ac22d",
+      "footprintSignature": "333:e9a6d6cc",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:298030524",
+      "intersectionOverUnion": 0.975864,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:017efd5ac706f602ad99bfb9",
+      "footprintSignature": "217:a0642fd6",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:01bbeee9bed686b2312e4733",
+      "footprintSignature": "219:41a4c823",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:02416e2f874956ea4bcf7132",
+      "footprintSignature": "218:29fcd707",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:915703011",
+      "intersectionOverUnion": 0.987169,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:026cac5696b4ba7093124f68",
+      "footprintSignature": "219:304a6f6f",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:453690535",
+      "intersectionOverUnion": 0.955901,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:02ef17a68939f43f870d043c",
+      "footprintSignature": "448:65f42fa5",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1478832601",
+      "intersectionOverUnion": 0.989844,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:034f58d878ae8445662f459b",
+      "footprintSignature": "1367:bf691895",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:046e279a897ca43000b03ea1",
+      "footprintSignature": "217:42f00042",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:055fc88b9b2216ae326398f5",
+      "footprintSignature": "478:e59d8224",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:84653292",
+      "intersectionOverUnion": 0.98771,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:05693168652faf559d6ad4da",
+      "footprintSignature": "216:f6729b8f",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:80916524",
+      "intersectionOverUnion": 0.995529,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:0588916bc8d10a1a7f0df418",
+      "footprintSignature": "447:18e4aaf0",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226936439",
+      "intersectionOverUnion": 0.98238,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:059b851b38b5466b9a446796",
+      "footprintSignature": "276:05f92999",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:408817713",
+      "intersectionOverUnion": 0.979087,
+      "tags": {
+        "building": "office"
+      }
+    },
+    {
+      "featureId": "building:geometry:068400a6090c1682ddc4f49d",
+      "footprintSignature": "218:4fbdfac7",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1376099633",
+      "intersectionOverUnion": 0.974541,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:0767e987344227334fde6753",
+      "footprintSignature": "216:c664d89f",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226936293",
+      "intersectionOverUnion": 0.99004,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:07e1b854ca7fd4aab1d1f2ce",
+      "footprintSignature": "219:3b88e556",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:08dd026477322f6f825e7256",
+      "footprintSignature": "218:4df6ae1d",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1060946456",
+      "intersectionOverUnion": 0.969139,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:090ad76f5f787371b1d246ac",
+      "footprintSignature": "217:f9da709c",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:937833953",
+      "intersectionOverUnion": 0.990812,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:09716976357083e6e3d4b19f",
+      "footprintSignature": "449:9ab8f666",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1377427394",
+      "intersectionOverUnion": 0.961398,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:0a3a6e1207891367e5d12d13",
+      "footprintSignature": "504:a7450ce7",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1337326786",
+      "intersectionOverUnion": 0.975186,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:0a92996d83a9e852c568e5d5",
+      "footprintSignature": "217:f67e5523",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668656",
+      "intersectionOverUnion": 0.982762,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:0ab5ab8b0e34d5919dbf7ba5",
+      "footprintSignature": "219:938acd3e",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:85379553",
+      "intersectionOverUnion": 0.993833,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:0ac3d4d60b5bd5b74d3fda7b",
+      "footprintSignature": "219:1cd9130a",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:0b6f349ee4dfe55ba9df51ff",
+      "footprintSignature": "676:a315d412",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:80320310",
+      "intersectionOverUnion": 0.985986,
+      "tags": {
+        "building": "university",
+        "building:levels": "5"
+      }
+    },
+    {
+      "featureId": "building:geometry:0ba68ea0395e53b57ec509e2",
+      "footprintSignature": "336:237dc2a2",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79696955",
+      "intersectionOverUnion": 0.986619,
+      "tags": {
+        "building": "dormitory",
+        "building:levels": "7"
+      }
+    },
+    {
+      "featureId": "building:geometry:0bbca1131140144d856991a4",
+      "footprintSignature": "277:6761a029",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:937833952",
+      "intersectionOverUnion": 0.990448,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:0bd8956175806abbd656d486",
+      "footprintSignature": "216:9355996c",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:0c2c49e045c76ca0ab180dcf",
+      "footprintSignature": "219:638b1cf3",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1379298796",
+      "intersectionOverUnion": 0.931063,
+      "tags": {
+        "building": "bungalow"
+      }
+    },
+    {
+      "featureId": "building:geometry:0ccb2569a24d2fa54056bb95",
+      "footprintSignature": "219:2970d812",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:0cd2e1cf389eb7d399d308c6",
+      "footprintSignature": "216:7118bf29",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:0cd7084e4265b7a73a3245e2",
+      "footprintSignature": "218:a77551c8",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1378009802",
+      "intersectionOverUnion": 0.973864,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:0ce1a8536057a10f3e8832e5",
+      "footprintSignature": "331:2a27931f",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:83810378",
+      "intersectionOverUnion": 0.986739,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:0cfa31eea3a25a4ec0be73de",
+      "footprintSignature": "1027:076d6603",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:0d0795874d37a563033fc1f5",
+      "footprintSignature": "449:b54f048a",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:0da35e57c549e68e7eb40ba8",
+      "footprintSignature": "449:ec2d313a",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1316913394",
+      "intersectionOverUnion": 0.969931,
+      "tags": {
+        "building": "school"
+      }
+    },
+    {
+      "featureId": "building:geometry:0ea892d33bd4e70a87d9a605",
+      "footprintSignature": "445:9a28c8fa",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:80341564",
+      "intersectionOverUnion": 0.983094,
+      "tags": {
+        "building": "retail",
+        "building:levels": "2"
+      }
+    },
+    {
+      "featureId": "building:geometry:0ead0ddd5e579cc53513b911",
+      "footprintSignature": "219:7f379579",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:451306296",
+      "intersectionOverUnion": 0.992565,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:0ee81f3013b5b3a5260a6719",
+      "footprintSignature": "219:fd428432",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:451306293",
+      "intersectionOverUnion": 0.990201,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:0f37a944d17eb13fd2c5180b",
+      "footprintSignature": "620:ff7c2573",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:80716519",
+      "intersectionOverUnion": 0.990526,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:0f85931611d86822761e4bb9",
+      "footprintSignature": "217:6c2d14f6",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668659",
+      "intersectionOverUnion": 0.981367,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:0facf2e605ef504aa4803370",
+      "footprintSignature": "333:f20890bc",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:817157929",
+      "intersectionOverUnion": 0.992606,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:10064bb5f08c8a6e0faf44f4",
+      "footprintSignature": "219:b868c59f",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1378009801",
+      "intersectionOverUnion": 0.975901,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:111e2c799a9872b4c088d25e",
+      "footprintSignature": "327:8522723a",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:85632228",
+      "intersectionOverUnion": 0.98147,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:1158b39f6f1010fb0c543d11",
+      "footprintSignature": "217:260586bd",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668728",
+      "intersectionOverUnion": 0.987545,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:117d8f99e833ee418c028ad3",
+      "footprintSignature": "218:0cc04417",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1527971832",
+      "intersectionOverUnion": 0.969434,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:119b69f7c8d93b7585f692ff",
+      "footprintSignature": "216:d73c5594",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1070554930",
+      "intersectionOverUnion": 0.961029,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:11f8976cb3fc865dafc6baf1",
+      "footprintSignature": "218:c151cf02",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:1245d617c0439dfb1aed1c81",
+      "footprintSignature": "219:e194604a",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1378009811",
+      "intersectionOverUnion": 0.972071,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:126b146d8e9fe78b1a80d110",
+      "footprintSignature": "218:c1d1f07b",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1378009824",
+      "intersectionOverUnion": 0.955756,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:12b011fe47b5a8513f86efca",
+      "footprintSignature": "333:33717016",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:81140528",
+      "intersectionOverUnion": 0.975912,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:12ef49f3a19f5a8b004f8f01",
+      "footprintSignature": "248:24d519f5",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:453690537",
+      "intersectionOverUnion": 0.967764,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:1327c2ec8b4b85d92a033f15",
+      "footprintSignature": "217:d23d2a0b",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:83810434",
+      "intersectionOverUnion": 0.979665,
+      "tags": {
+        "building": "university",
+        "building:levels": "2"
+      }
+    },
+    {
+      "featureId": "building:geometry:13288d4b9659be8ce1c371a5",
+      "footprintSignature": "219:336dc39c",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:219072644",
+      "intersectionOverUnion": 0.975806,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:13487b173640949ef40ba7e1",
+      "footprintSignature": "217:db47fb87",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226669858",
+      "intersectionOverUnion": 0.990006,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:14740c3caa0c25f85cf8a9f4",
+      "footprintSignature": "218:fa71e6b5",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1150459878",
+      "intersectionOverUnion": 0.94548,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:14b2bea7f0149ea2ae50d5b9",
+      "footprintSignature": "451:88be2ab9",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1378009823",
+      "intersectionOverUnion": 0.978927,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:14b553cc0f464b0929399c23",
+      "footprintSignature": "277:acddfa3a",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79696973",
+      "intersectionOverUnion": 0.986878,
+      "tags": {
+        "building": "dormitory",
+        "building:levels": "7"
+      }
+    },
+    {
+      "featureId": "building:geometry:1571838c032edc6e529a9736",
+      "footprintSignature": "450:d03344bf",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:15ccb810d680210fe04fa0bf",
+      "footprintSignature": "358:83bde248",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:85480383",
+      "intersectionOverUnion": 0.988405,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:15e1746de3400fb19866d059",
+      "footprintSignature": "219:28fc95e0",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1337334021",
+      "intersectionOverUnion": 0.97852,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:15ee41fb377b9318e901f1c1",
+      "footprintSignature": "276:25d3a264",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:84112040",
+      "intersectionOverUnion": 0.983084,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:1620ac1aa3b6031622fceff3",
+      "footprintSignature": "218:e979d2ac",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226669018",
+      "intersectionOverUnion": 0.981369,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:16246b1cb7e189e8ef653a8e",
+      "footprintSignature": "216:04329d57",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:453690529",
+      "intersectionOverUnion": 0.979838,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:164ac4d59110e3cb87d948f1",
+      "footprintSignature": "561:199948dc",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:757329007",
+      "intersectionOverUnion": 0.992204,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:16500d090c5889f8dd5b3911",
+      "footprintSignature": "219:d260298d",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226669017",
+      "intersectionOverUnion": 0.98512,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:166b7f7fd4c7718ce53e1482",
+      "footprintSignature": "215:358c5857",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:16fdb6e17ee49bdad722b6c7",
+      "footprintSignature": "219:b4a62ce7",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1059165157",
+      "intersectionOverUnion": 0.961119,
+      "tags": {
+        "building": "office"
+      }
+    },
+    {
+      "featureId": "building:geometry:177cb140465e36e889fa0006",
+      "footprintSignature": "219:0a5d9b7c",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226669016",
+      "intersectionOverUnion": 0.980835,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:17b4cb182075f5812c5fb6af",
+      "footprintSignature": "219:aefbbc15",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1378009809",
+      "intersectionOverUnion": 0.968537,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:17fc8c11ab4e94a0473c4f07",
+      "footprintSignature": "219:0af7ddde",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1316917848",
+      "intersectionOverUnion": 0.962114,
+      "tags": {
+        "building": "school"
+      }
+    },
+    {
+      "featureId": "building:geometry:1831e231308785c7b74270e1",
+      "footprintSignature": "218:6d2ebb5e",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1376099630",
+      "intersectionOverUnion": 0.965643,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:188309021741d5b8f06bcb5c",
+      "footprintSignature": "218:d3573b0f",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668647",
+      "intersectionOverUnion": 0.976077,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:18fbc83c222c1f63fa16fc5f",
+      "footprintSignature": "217:37b92607",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668638",
+      "intersectionOverUnion": 0.984967,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:1901e73b14ce536de5cdf42a",
+      "footprintSignature": "449:b709464e",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1378009815",
+      "intersectionOverUnion": 0.975218,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:191143bb15e6ddccae8e993f",
+      "footprintSignature": "217:2b4888b1",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668697",
+      "intersectionOverUnion": 0.982887,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:1964d79aa7c0f78d0a892fb3",
+      "footprintSignature": "219:8c9ba8fd",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:1a6c5da45bceef88407b194f",
+      "footprintSignature": "219:3702f6eb",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1059165164",
+      "intersectionOverUnion": 0.966351,
+      "tags": {
+        "building": "office"
+      }
+    },
+    {
+      "featureId": "building:geometry:1aae1ceeafb8ce144652512b",
+      "footprintSignature": "334:08752549",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79700261",
+      "intersectionOverUnion": 0.987647,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:1b4f6c87a4fa43edda36180e",
+      "footprintSignature": "391:fff3ded7",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:80341983",
+      "intersectionOverUnion": 0.988854,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:1bd7995f9d0628361f56513d",
+      "footprintSignature": "623:ea2d43d4",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79699845",
+      "intersectionOverUnion": 0.994264,
+      "tags": {
+        "building": "university",
+        "building:levels": "11"
+      }
+    },
+    {
+      "featureId": "building:geometry:1c5c486235aa27a815b35c96",
+      "footprintSignature": "219:2554851a",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:451335318",
+      "intersectionOverUnion": 0.994614,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:1cc23411ddec6219a8069e51",
+      "footprintSignature": "277:69710f86",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:84110336",
+      "intersectionOverUnion": 0.983948,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:1dc0168383a01f363f97bf82",
+      "footprintSignature": "218:1314fcf7",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:1dedc901b3fe3a5b88e96775",
+      "footprintSignature": "331:e2bdaf5b",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:1e17f772f0c81ca6553269de",
+      "footprintSignature": "219:5b48f7ed",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1378009812",
+      "intersectionOverUnion": 0.972388,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:1e18e76c697076432ba7ac4d",
+      "footprintSignature": "219:1fb45f72",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668706",
+      "intersectionOverUnion": 0.971633,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:1e1bc44bfb52ada08c2947bf",
+      "footprintSignature": "277:a872c116",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1060190344",
+      "intersectionOverUnion": 0.984926,
+      "tags": {
+        "building": "kindergarten"
+      }
+    },
+    {
+      "featureId": "building:geometry:1e57754cec622e73292ce7df",
+      "footprintSignature": "219:1e7630d1",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:1e619460e62bbbc0f8ca0f12",
+      "footprintSignature": "218:82d6d411",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1337334015",
+      "intersectionOverUnion": 0.977192,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:1eb0c81b0bebf585b762c9e2",
+      "footprintSignature": "566:f24e5892",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1378009800",
+      "intersectionOverUnion": 0.973289,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:1f002ac1d26cff4e77b40671",
+      "footprintSignature": "219:c30257cb",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1059165161",
+      "intersectionOverUnion": 0.961241,
+      "tags": {
+        "building": "office"
+      }
+    },
+    {
+      "featureId": "building:geometry:1f6b37fb0ffa281fc937e29c",
+      "footprintSignature": "219:4450519d",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:1fb7b07ac44301e8e4c82566",
+      "footprintSignature": "219:889c0a25",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:915707510",
+      "intersectionOverUnion": 0.971882,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:209e3332de08b7e3d66741b7",
+      "footprintSignature": "218:a8ae5bce",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668674",
+      "intersectionOverUnion": 0.971039,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:2114db66066ee5cc87ebad9d",
+      "footprintSignature": "218:cd8bb9b2",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:83805169",
+      "intersectionOverUnion": 0.987015,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:2153a70581e39c8508a4b429",
+      "footprintSignature": "217:dfe08f45",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1524720772",
+      "intersectionOverUnion": 0.982257,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:21b32ba4eac32e911dbdf38e",
+      "footprintSignature": "709:f5476d81",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:21d0183bd99192000c340c3c",
+      "footprintSignature": "218:e57b0173",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:23070734d08edc5bbddc23d9",
+      "footprintSignature": "220:b6e844bd",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79698952",
+      "intersectionOverUnion": 0.984713,
+      "tags": {
+        "building": "dormitory",
+        "building:levels": "11"
+      }
+    },
+    {
+      "featureId": "building:geometry:2316fbcce309da20a6c1a673",
+      "footprintSignature": "219:fe57a74e",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668677",
+      "intersectionOverUnion": 0.977626,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:231efa56818a0d878c688e98",
+      "footprintSignature": "450:b32c0818",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1376099628",
+      "intersectionOverUnion": 0.978274,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:23533be977a23c31e0b55881",
+      "footprintSignature": "563:d30c9404",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1378009799",
+      "intersectionOverUnion": 0.965658,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:2395d210511fb39cfd615cad",
+      "footprintSignature": "219:aadb287b",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:23d2b6d3833865e896982bf2",
+      "footprintSignature": "277:213c7a67",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79696972",
+      "intersectionOverUnion": 0.992051,
+      "tags": {
+        "building": "dormitory",
+        "building:levels": "7"
+      }
+    },
+    {
+      "featureId": "building:geometry:24b15495d27f0c5ec97cc55a",
+      "footprintSignature": "449:dfd32176",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226669472",
+      "intersectionOverUnion": 0.982472,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:24ebd40af48ff01716740d99",
+      "footprintSignature": "393:68ae697d",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79701107",
+      "intersectionOverUnion": 0.897427,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:26f898e482da603ab7987308",
+      "footprintSignature": "449:4170d4ac",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:84653294",
+      "intersectionOverUnion": 0.987459,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:2744d6e990a95d9f93a9974d",
+      "footprintSignature": "361:f8747fcc",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:219072645",
+      "intersectionOverUnion": 0.979337,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:275af54f123e4f17dbe02c99",
+      "footprintSignature": "218:0703caa8",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1060943345",
+      "intersectionOverUnion": 0.977588,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:2765d0ae88046a7595e4b396",
+      "footprintSignature": "448:f27b2b34",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1377427393",
+      "intersectionOverUnion": 0.969819,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:2802ba471bf377633df34f57",
+      "footprintSignature": "218:f4dfe3bd",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1337334023",
+      "intersectionOverUnion": 0.977396,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:288364d2fe7277db1ac463c7",
+      "footprintSignature": "217:2af844d7",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1316913395",
+      "intersectionOverUnion": 0.978728,
+      "tags": {
+        "building": "school"
+      }
+    },
+    {
+      "featureId": "building:geometry:292f2799723b184e43b71ca0",
+      "footprintSignature": "450:a7f0572a",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:84112055",
+      "intersectionOverUnion": 0.986634,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:29708ccab6041c46fe6c6b31",
+      "footprintSignature": "217:0a248cc5",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:298ac49159141cd1e9df389e",
+      "footprintSignature": "219:35969b03",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1378009806",
+      "intersectionOverUnion": 0.972732,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:2c4c55e93dd8879fa1106aca",
+      "footprintSignature": "219:81793b5a",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1377419085",
+      "intersectionOverUnion": 0.968196,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:2cb1fd87b8d8fb5d23727774",
+      "footprintSignature": "216:4ac02346",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79699858",
+      "intersectionOverUnion": 0.980347,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:2d898d42e8c1fab68aa1270b",
+      "footprintSignature": "275:b56f87eb",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79696965",
+      "intersectionOverUnion": 0.990719,
+      "tags": {
+        "building": "dormitory",
+        "building:levels": "7"
+      }
+    },
+    {
+      "featureId": "building:geometry:2e2ee1625f15911b7e00f605",
+      "footprintSignature": "563:8a83849e",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226623363",
+      "intersectionOverUnion": 0.992159,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:2e501f456b60bb5445b7da6f",
+      "footprintSignature": "219:3a7d9433",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1348056238",
+      "intersectionOverUnion": 0.975401,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:2eb5ff7722534936d9224f82",
+      "footprintSignature": "219:0c454aae",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:2eee37c336c9cca534c7c006",
+      "footprintSignature": "447:cc368bd7",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1524720746",
+      "intersectionOverUnion": 0.9701,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:2ef21ae897ee927d6ed3bffd",
+      "footprintSignature": "276:7cad6ede",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:2fdef392d2887d29d23de389",
+      "footprintSignature": "504:2db9f5b2",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79696970",
+      "intersectionOverUnion": 0.991959,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:3065e70be1ca6052ab77a739",
+      "footprintSignature": "2463:05d0f2ce",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:308b60e3d8a474c4e989e875",
+      "footprintSignature": "277:15ab4578",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:82714383",
+      "intersectionOverUnion": 0.983901,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:309cc25de48dce78900872c0",
+      "footprintSignature": "219:f06d5c3a",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:453690532",
+      "intersectionOverUnion": 0.98818,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:30a33f76a5ed279ba6926fc8",
+      "footprintSignature": "217:06c2fece",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1059165165",
+      "intersectionOverUnion": 0.974129,
+      "tags": {
+        "building": "office"
+      }
+    },
+    {
+      "featureId": "building:geometry:30ab7fbafac9ec7cf1297b84",
+      "footprintSignature": "590:59a7ffcd",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226671429",
+      "intersectionOverUnion": 0.991716,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:30cad5fea6e60a29143ca362",
+      "footprintSignature": "450:3bcfa91e",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1378009814",
+      "intersectionOverUnion": 0.969396,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:30d856ec83d081c319ee9f84",
+      "footprintSignature": "273:babf4d26",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:84100851",
+      "intersectionOverUnion": 0.992299,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:3120a53a26887e5bf10e39ba",
+      "footprintSignature": "998:2c7d0031",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:313e493de69755ec7a386dd8",
+      "footprintSignature": "276:dfa462f3",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:80916617",
+      "intersectionOverUnion": 0.988358,
+      "tags": {
+        "building": "office"
+      }
+    },
+    {
+      "featureId": "building:geometry:3152675604b4e2c732ebfe38",
+      "footprintSignature": "218:71c541cc",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226669007",
+      "intersectionOverUnion": 0.982705,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:315cbf418bfed2a7a29d58c9",
+      "footprintSignature": "217:372edf63",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:451306307",
+      "intersectionOverUnion": 0.988553,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:320d02492aa0fa405b5fdf0a",
+      "footprintSignature": "390:d102e9c2",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226936506",
+      "intersectionOverUnion": 0.982004,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:321eb6e44c8548793004e4db",
+      "footprintSignature": "332:56c84212",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:84720894",
+      "intersectionOverUnion": 0.986816,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:32d48ef169a276fc6c0f45d1",
+      "footprintSignature": "276:4dbc708f",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:336305647f341728a69da875",
+      "footprintSignature": "621:c4824301",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:81151484",
+      "intersectionOverUnion": 0.990664,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:33cca97e1e482d03ed5a3f1e",
+      "footprintSignature": "218:777da8b0",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1337334020",
+      "intersectionOverUnion": 0.979032,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:34671cd591d30e335dccec29",
+      "footprintSignature": "219:f7ae94c5",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1060959370",
+      "intersectionOverUnion": 0.981675,
+      "tags": {
+        "building": "office"
+      }
+    },
+    {
+      "featureId": "building:geometry:34812056dbb7ffc370db52fc",
+      "footprintSignature": "217:b2baf281",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226669062",
+      "intersectionOverUnion": 0.983206,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:34c2e0ce9b2b52e49becc837",
+      "footprintSignature": "214:c2ac46ba",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1378009830",
+      "intersectionOverUnion": 0.975175,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:34dbbe25ea1a78c030668634",
+      "footprintSignature": "219:9f89aba3",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:817157928",
+      "intersectionOverUnion": 0.995777,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:362523d221fac007b3f794d0",
+      "footprintSignature": "219:ad8118dd",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668698",
+      "intersectionOverUnion": 0.985219,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:366ccf40eba1fe97cc73f0dc",
+      "footprintSignature": "219:a4f8341d",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:409381514",
+      "intersectionOverUnion": 0.975849,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:36a366cafe89d2190b657efe",
+      "footprintSignature": "477:4381dd64",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:544328791",
+      "intersectionOverUnion": 0.99271,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:36e046b86254f98fb119d67f",
+      "footprintSignature": "217:d9e5f345",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1150459900",
+      "intersectionOverUnion": 0.97103,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:3719c577df96612af93fefab",
+      "footprintSignature": "219:0c2f9798",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1526557805",
+      "intersectionOverUnion": 0.95807,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:372caf937d6451b65bdf8a53",
+      "footprintSignature": "219:f628c3fa",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1061664025",
+      "intersectionOverUnion": 0.987632,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:37463e4d28e145d20a8fa72d",
+      "footprintSignature": "275:bed4ca79",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79696964",
+      "intersectionOverUnion": 0.990207,
+      "tags": {
+        "building": "dormitory",
+        "building:levels": "7"
+      }
+    },
+    {
+      "featureId": "building:geometry:37cb1bcb19c36cd5757173b4",
+      "footprintSignature": "219:251ea292",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668725",
+      "intersectionOverUnion": 0.982867,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:38000cd687ef9850341d2370",
+      "footprintSignature": "447:33076fa0",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1086339221",
+      "intersectionOverUnion": 0.989302,
+      "tags": {
+        "building": "school",
+        "building:levels": "5"
+      }
+    },
+    {
+      "featureId": "building:geometry:3800e61f48d2813a5736d4be",
+      "footprintSignature": "218:89cb52c5",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:453690533",
+      "intersectionOverUnion": 0.990472,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:388e12c02298bc66659ccf4b",
+      "footprintSignature": "218:d7a6697e",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1150469990",
+      "intersectionOverUnion": 0.975642,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:38c15cbe48dc9a7390c0978b",
+      "footprintSignature": "217:642e3523",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:395523dd99ecedfec4ba7a52",
+      "footprintSignature": "219:2f4623f8",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1526557810",
+      "intersectionOverUnion": 0.974052,
+      "tags": {
+        "building": "service"
+      }
+    },
+    {
+      "featureId": "building:geometry:3985607d29189bd16eb7f826",
+      "footprintSignature": "216:e9862be1",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226669060",
+      "intersectionOverUnion": 0.978552,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:39b9581f58cafea9c48e449d",
+      "footprintSignature": "277:fb9d3d80",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1312433512",
+      "intersectionOverUnion": 0.987065,
+      "tags": {
+        "building:part": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:3ac5052f0ee01ee9119d5c9c",
+      "footprintSignature": "218:c504fdf3",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:3aebb8f19da24cdaddc97a21",
+      "footprintSignature": "216:6a498275",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79698958",
+      "intersectionOverUnion": 0.988989,
+      "tags": {
+        "building": "dormitory",
+        "building:levels": "11"
+      }
+    },
+    {
+      "featureId": "building:geometry:3b558f393ffc2c02ede8b139",
+      "footprintSignature": "218:c0008873",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:3c1dacd74f1a826190e8e367",
+      "footprintSignature": "218:40eacd01",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226669058",
+      "intersectionOverUnion": 0.973496,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:3cc4a2cdcaaf61c6ed5b405c",
+      "footprintSignature": "216:4fbb82f1",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:3d75d76b50caec7510c1289b",
+      "footprintSignature": "220:51730df6",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79698956",
+      "intersectionOverUnion": 0.989915,
+      "tags": {
+        "building": "dormitory",
+        "building:levels": "11"
+      }
+    },
+    {
+      "featureId": "building:geometry:3dc35d7f5e343ff641c43956",
+      "footprintSignature": "215:221d3682",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1377419089",
+      "intersectionOverUnion": 0.976926,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:3e27cee58644c34d60b4cabd",
+      "footprintSignature": "334:18adc7bd",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1061382587",
+      "intersectionOverUnion": 0.978192,
+      "tags": {
+        "building": "school"
+      }
+    },
+    {
+      "featureId": "building:geometry:3e3f4bd982ac5e5f474e1500",
+      "footprintSignature": "334:dbcb9a27",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:84273994",
+      "intersectionOverUnion": 0.983055,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:3ee05663e8212b498a33a67b",
+      "footprintSignature": "334:d4b6240a",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:84106845",
+      "intersectionOverUnion": 0.985281,
+      "tags": {
+        "building": "university",
+        "building:levels": "3"
+      }
+    },
+    {
+      "featureId": "building:geometry:3f05c49ea1739df2c1e2aa1f",
+      "footprintSignature": "217:0e63afd9",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:3f0e749b18f34dd7758f366e",
+      "footprintSignature": "335:e83cf2a6",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:451335316",
+      "intersectionOverUnion": 0.980666,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:3f0f404774cf29f6d86ae91a",
+      "footprintSignature": "219:caca5cc4",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79696974",
+      "intersectionOverUnion": 0.98926,
+      "tags": {
+        "building": "dormitory",
+        "building:levels": "7"
+      }
+    },
+    {
+      "featureId": "building:geometry:3f200422477daac15be01518",
+      "footprintSignature": "277:be8ac5fe",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1527971829",
+      "intersectionOverUnion": 0.973854,
+      "tags": {
+        "building": "service"
+      }
+    },
+    {
+      "featureId": "building:geometry:408be32134821a232b72f373",
+      "footprintSignature": "218:3cf95070",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:4108ddb5567c888bbb4f3ee1",
+      "footprintSignature": "217:27f4a679",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:298030528",
+      "intersectionOverUnion": 0.982511,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:411344e0a252f76b958e237c",
+      "footprintSignature": "504:154ce120",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:83785990",
+      "intersectionOverUnion": 0.987722,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:4148d17cf02a4d8d470ae690",
+      "footprintSignature": "217:10bc3834",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:80716852",
+      "intersectionOverUnion": 0.992319,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:42745fa73430b73d20a61dfe",
+      "footprintSignature": "331:552d977f",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:42f57cc957befa6757c04294",
+      "footprintSignature": "447:2b08134e",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:83810503",
+      "intersectionOverUnion": 0.981136,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:43355e223b86cb61c620d448",
+      "footprintSignature": "220:6a5bfb1f",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:83805172",
+      "intersectionOverUnion": 0.983495,
+      "tags": {
+        "building": "dormitory",
+        "building:levels": "6"
+      }
+    },
+    {
+      "featureId": "building:geometry:435b8971ee8a401e61a018c2",
+      "footprintSignature": "218:7f12b017",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668679",
+      "intersectionOverUnion": 0.982972,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:4362279ae12f68d7b1204c58",
+      "footprintSignature": "215:b610c0c9",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:43ad76df005c92f86e765ae9",
+      "footprintSignature": "218:382f0024",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:445a27063b8bcfb725396804",
+      "footprintSignature": "218:32d14264",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:44cb97203ede006c04e59ba6",
+      "footprintSignature": "332:26deecdc",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1060190346",
+      "intersectionOverUnion": 0.983207,
+      "tags": {
+        "building": "kindergarten"
+      }
+    },
+    {
+      "featureId": "building:geometry:452a4f984a20657d2796e6a5",
+      "footprintSignature": "219:b682cddd",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:452ea1bbc6ef4e9e5372e555",
+      "footprintSignature": "622:4cccfc63",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:4592167cdf7b8f97e454893e",
+      "footprintSignature": "216:68dd1de4",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668700",
+      "intersectionOverUnion": 0.990231,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:45fefefa0c9d2c2dae8c7c8d",
+      "footprintSignature": "219:0bf81a71",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:460aa6f74b5a4e1bd6efee74",
+      "footprintSignature": "445:1fa6d11b",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:46a274650f77a480ee75dc73",
+      "footprintSignature": "215:3d33a935",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:471d9d7863357c7dcfebb968",
+      "footprintSignature": "218:ae5a7c2e",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:298030529",
+      "intersectionOverUnion": 0.980888,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:47301e53fc9530e772ee2af5",
+      "footprintSignature": "219:d4e528ea",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226936388",
+      "intersectionOverUnion": 0.983401,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:47a73bbd02c9aef8727760c7",
+      "footprintSignature": "736:b3d9d631",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:47e25dc46fe044975ae55078",
+      "footprintSignature": "217:4d792b62",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:48aa355960f0b286f5c841cf",
+      "footprintSignature": "362:5867cca1",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:451306299",
+      "intersectionOverUnion": 0.987781,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:48b69ea84c8aa5c9f4f808c3",
+      "footprintSignature": "219:f29db265",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1376099632",
+      "intersectionOverUnion": 0.953063,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:48f39ec6117c1ccc2c590b26",
+      "footprintSignature": "333:0fa13c51",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:298030533",
+      "intersectionOverUnion": 0.977925,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:49e131d01f153aac104b513d",
+      "footprintSignature": "217:6e049264",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:4a8f8f97a9664eb44e34900f",
+      "footprintSignature": "218:be4b0acd",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1527971831",
+      "intersectionOverUnion": 0.962468,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:4ac8468df2d1048c7e8f7bba",
+      "footprintSignature": "216:abf769e2",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1316913387",
+      "intersectionOverUnion": 0.988114,
+      "tags": {
+        "building": "school"
+      }
+    },
+    {
+      "featureId": "building:geometry:4b1feaa25bcfce5bd4270932",
+      "footprintSignature": "219:a5edeb32",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668695",
+      "intersectionOverUnion": 0.984206,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:4b4462dfc25c95fc1a4d56f9",
+      "footprintSignature": "478:8e896d41",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:4c3c82f7e2f1769cc2423312",
+      "footprintSignature": "218:bb8fb4be",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226936383",
+      "intersectionOverUnion": 0.987456,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:4cf4ff44945c3303360a8556",
+      "footprintSignature": "219:d38906cc",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1060943346",
+      "intersectionOverUnion": 0.981678,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:4f644c7539727a259ff1ef80",
+      "footprintSignature": "306:22359407",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:451306308",
+      "intersectionOverUnion": 0.988536,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:4f8390276835cc636e49b689",
+      "footprintSignature": "216:ec867f42",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1376099631",
+      "intersectionOverUnion": 0.974404,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:4fdbcd1eb01741a39d51773c",
+      "footprintSignature": "446:ab10275d",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:84112067",
+      "intersectionOverUnion": 0.988285,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:50d911959fe65d2441117bdf",
+      "footprintSignature": "276:c2e6518a",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1379298800",
+      "intersectionOverUnion": 0.984563,
+      "tags": {
+        "building": "bungalow"
+      }
+    },
+    {
+      "featureId": "building:geometry:51195c4d7a2c277f45b29024",
+      "footprintSignature": "940:842191a8",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79701105",
+      "intersectionOverUnion": 0.984831,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:5180233fe9fb65c84f698182",
+      "footprintSignature": "276:26f3c55e",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1128051495",
+      "intersectionOverUnion": 0.95265,
+      "tags": {
+        "building": "university",
+        "building:levels": "1"
+      }
+    },
+    {
+      "featureId": "building:geometry:51e08bbda452d78527c875c8",
+      "footprintSignature": "219:f3c71361",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:5232a250cf36cd34b7f474b8",
+      "footprintSignature": "851:a60da3d2",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:937833947",
+      "intersectionOverUnion": 0.983602,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:52664e926e6d0e4d860f22bc",
+      "footprintSignature": "276:39e9fe10",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:530e344b2cfa12434d8bdb28",
+      "footprintSignature": "448:d53d482a",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:937833950",
+      "intersectionOverUnion": 0.980878,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:5408dfb4815e548154fe7d26",
+      "footprintSignature": "275:2f9304bb",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:54a1a4b9e0401afddee4ae89",
+      "footprintSignature": "277:355a2790",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226936599",
+      "intersectionOverUnion": 0.993845,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:5524e077945a058220ba55c9",
+      "footprintSignature": "218:3e5df8c1",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1378009826",
+      "intersectionOverUnion": 0.962403,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:5538be2a29bf0bc9fde6cddd",
+      "footprintSignature": "391:ca1f21dd",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:80341870",
+      "intersectionOverUnion": 0.995359,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:5544474ba4fd150370cc7aab",
+      "footprintSignature": "219:0d083a06",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:55949981e28df728f1db2915",
+      "footprintSignature": "218:178096e3",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:5605847d8332c0e59f455a67",
+      "footprintSignature": "219:c97a3fb5",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1066880985",
+      "intersectionOverUnion": 0.984901,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:5645eff3067b20bf63f69bd7",
+      "footprintSignature": "218:952e09a8",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1115143047",
+      "intersectionOverUnion": 0.990565,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:56b87f01b685204f1ed7d7b5",
+      "footprintSignature": "219:71f8d57b",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:56e7e65e37ad9fbfc6447a15",
+      "footprintSignature": "333:86b2e2c3",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:83799497",
+      "intersectionOverUnion": 0.991165,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:57543736db6e45473896e7b9",
+      "footprintSignature": "505:2c49599d",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:937833948",
+      "intersectionOverUnion": 0.978054,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:57da416697fe5cea1b1e430c",
+      "footprintSignature": "332:e5c00543",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:298030521",
+      "intersectionOverUnion": 0.985072,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:57e35fe6db3fa153672da8f4",
+      "footprintSignature": "219:6ec6d647",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:5851897c1f6c5748c6277014",
+      "footprintSignature": "332:dfe49a8e",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:451306295",
+      "intersectionOverUnion": 0.98389,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:58b08fd4a6d8d7ffd979d25d",
+      "footprintSignature": "217:1ee27434",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:58db78ac48207335fdbc3a4c",
+      "footprintSignature": "218:7eaac1e3",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:597181594775205de28f99fa",
+      "footprintSignature": "420:5748d126",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:5972b332d48bab85c709bf27",
+      "footprintSignature": "217:c3f7fc25",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226669005",
+      "intersectionOverUnion": 0.979271,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:59748b5556f0acc0307b51ad",
+      "footprintSignature": "217:1b638b2d",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1377419090",
+      "intersectionOverUnion": 0.97713,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:5980388415579b1c43822754",
+      "footprintSignature": "335:28fa145c",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:5ab344f1ac9ee8df199d9cae",
+      "footprintSignature": "590:ea620306",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:743595593",
+      "intersectionOverUnion": 0.847007,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:5ab4b212f18c867ae0264faf",
+      "footprintSignature": "218:6ff37f39",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:453690527",
+      "intersectionOverUnion": 0.988747,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:5c026d96d0b4507a9075fe65",
+      "footprintSignature": "216:9ee7e2b6",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:298030520",
+      "intersectionOverUnion": 0.978665,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:5c7a019a4a44c188e2514fa4",
+      "footprintSignature": "218:cf25f9a2",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:5ca322aefa55a364d6879f56",
+      "footprintSignature": "335:a105ca88",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:5d461caec7324a0e1ee61f52",
+      "footprintSignature": "218:93f45f63",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:451306297",
+      "intersectionOverUnion": 0.985502,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:5d7a15097f33f813bd5f7d6a",
+      "footprintSignature": "218:2eb20118",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:5dac33b502be94a445a45c46",
+      "footprintSignature": "217:9942f93b",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:5e325d398020fa2ff9a19f6a",
+      "footprintSignature": "218:56b8bef3",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:84273996",
+      "intersectionOverUnion": 0.981432,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:5e4949fe452092db2a48d354",
+      "footprintSignature": "219:355970c8",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:5f3aea6cf0b76be9cb13f033",
+      "footprintSignature": "219:51fdb3d3",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:83811714",
+      "intersectionOverUnion": 0.983557,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:5f685fdd89fa21adeedc143b",
+      "footprintSignature": "216:c2853913",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79699868",
+      "intersectionOverUnion": 0.972554,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:5f89004ba4fc63f4bcef4742",
+      "footprintSignature": "1620:15517d6a",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:60041b7dbd38fe7e381d0c8f",
+      "footprintSignature": "277:f05bde7d",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:451338305",
+      "intersectionOverUnion": 0.987212,
+      "tags": {
+        "building": "commercial"
+      }
+    },
+    {
+      "featureId": "building:geometry:604527dd5df5ac40ac2b5229",
+      "footprintSignature": "218:c468c66c",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:60496e3830d14b1f5ee29c8e",
+      "footprintSignature": "219:e7367ed0",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:60a52927e3e8b4de401cf692",
+      "footprintSignature": "275:253ffc65",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1312433511",
+      "intersectionOverUnion": 0.990642,
+      "tags": {
+        "building:part": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:60ec1a9ed581f4971bf15828",
+      "footprintSignature": "274:c8b8dcdd",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1524720770",
+      "intersectionOverUnion": 0.955521,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:628940447da84e625fdd1190",
+      "footprintSignature": "445:d7abb6cd",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1378009813",
+      "intersectionOverUnion": 0.971432,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:62d3ed181227f777a3fc0e1f",
+      "footprintSignature": "451:24ce92d1",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:937482182",
+      "intersectionOverUnion": 0.994432,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:6393d6ce5f7a8e2698b050df",
+      "footprintSignature": "219:87bcc1e8",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:354312341",
+      "intersectionOverUnion": 0.98498,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:639fae3bdbca516b47b96c01",
+      "footprintSignature": "335:27e9b1a1",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1070554922",
+      "intersectionOverUnion": 0.961927,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:63ef8ffbaeb0602a72792bf2",
+      "footprintSignature": "449:38e45965",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:640304f82978a03a35d76f71",
+      "footprintSignature": "214:d5404b6a",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:640356e14bcb51ae2b2f9dde",
+      "footprintSignature": "561:7b194441",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79696971",
+      "intersectionOverUnion": 0.989215,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:64744f7c8749dd59ea319b30",
+      "footprintSignature": "275:5c8dfffc",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:80716851",
+      "intersectionOverUnion": 0.990593,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:64fc109bef837644de925166",
+      "footprintSignature": "275:50080169",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:937833949",
+      "intersectionOverUnion": 0.976477,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:654f4780b3041e40ac08f0a9",
+      "footprintSignature": "218:30403394",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226666911",
+      "intersectionOverUnion": 0.988437,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:65977aba20c628428aa81772",
+      "footprintSignature": "219:f51a1732",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1316917847",
+      "intersectionOverUnion": 0.980091,
+      "tags": {
+        "building": "school"
+      }
+    },
+    {
+      "featureId": "building:geometry:65f13da4a96afdc7421aed89",
+      "footprintSignature": "332:2202cdfc",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:158134858",
+      "intersectionOverUnion": 0.98991,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:6610901bb9609c712369c704",
+      "footprintSignature": "218:4df6ebf1",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668636",
+      "intersectionOverUnion": 0.977545,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:666ba31f5a86fb763187ae76",
+      "footprintSignature": "217:559dcb44",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:6697e24706bc4aebdab22596",
+      "footprintSignature": "909:caa808fb",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79697037",
+      "intersectionOverUnion": 0.988843,
+      "tags": {
+        "building": "university",
+        "building:levels": "4"
+      }
+    },
+    {
+      "featureId": "building:geometry:66a21fce23d130af31d6a31c",
+      "footprintSignature": "218:b4b0b20d",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:80716732",
+      "intersectionOverUnion": 0.982961,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:66e0fcfc582217b7a6ecfde6",
+      "footprintSignature": "219:16f3cf1e",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1060946455",
+      "intersectionOverUnion": 0.968456,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:67c722278ce42f32786eb346",
+      "footprintSignature": "219:9f3b37a1",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:451335317",
+      "intersectionOverUnion": 0.996404,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:68031225f23e27e37abb6147",
+      "footprintSignature": "277:eb22d368",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:451306309",
+      "intersectionOverUnion": 0.979626,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:685f047817e4939da5595084",
+      "footprintSignature": "218:a43c563a",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1059165153",
+      "intersectionOverUnion": 0.967345,
+      "tags": {
+        "building": "office"
+      }
+    },
+    {
+      "featureId": "building:geometry:6869f965bef3d9333f88a25f",
+      "footprintSignature": "390:02b357a2",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:937833951",
+      "intersectionOverUnion": 0.981313,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:69a3dd018249c59511b1dbff",
+      "footprintSignature": "219:089f60a0",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1060190348",
+      "intersectionOverUnion": 0.983071,
+      "tags": {
+        "building": "kindergarten",
+        "building:levels": "2"
+      }
+    },
+    {
+      "featureId": "building:geometry:6a242b39bfadd40b1f2a4230",
+      "footprintSignature": "219:8965d9d5",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:6a29042e61da6b18fcbadbb5",
+      "footprintSignature": "389:e1cd7436",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1377419091",
+      "intersectionOverUnion": 0.982175,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:6a34df2a1fa1fabae249813a",
+      "footprintSignature": "332:f21654e1",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:6a5b97300c53563f53c15b01",
+      "footprintSignature": "219:00defec7",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:6a735917cec4033c5e6e2788",
+      "footprintSignature": "219:2cae8e33",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226669063",
+      "intersectionOverUnion": 0.984758,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:6a761adbe4212fb29a7a2abb",
+      "footprintSignature": "217:cb8ff9b0",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1377419081",
+      "intersectionOverUnion": 0.96811,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:6af98653a89924a83aa630c7",
+      "footprintSignature": "303:70826720",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:757329008",
+      "intersectionOverUnion": 0.993616,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:6b370c20a1f8a82b11163026",
+      "footprintSignature": "335:64df30a8",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:6bc8b047367cc1fcce0a39cb",
+      "footprintSignature": "219:7738f518",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:83811670",
+      "intersectionOverUnion": 0.973455,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:6bd0154b26cfe7cf654cdd3b",
+      "footprintSignature": "768:1c621334",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:84653293",
+      "intersectionOverUnion": 0.993034,
+      "tags": {
+        "building": "university",
+        "building:levels": "6"
+      }
+    },
+    {
+      "featureId": "building:geometry:6bf26502b7d2618c0c6cb231",
+      "footprintSignature": "219:126a929d",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:6c15954fb56ec61b4428adbb",
+      "footprintSignature": "276:c464e27c",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1316917843",
+      "intersectionOverUnion": 0.986752,
+      "tags": {
+        "building": "school"
+      }
+    },
+    {
+      "featureId": "building:geometry:6c2e0d8db4afc40888e04149",
+      "footprintSignature": "218:ef40ddfe",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1337334026",
+      "intersectionOverUnion": 0.976718,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:6ced1d9b38ce7e6d1768d150",
+      "footprintSignature": "333:84541f33",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1070554929",
+      "intersectionOverUnion": 0.966111,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:6ceda43b70d75c3f125367c4",
+      "footprintSignature": "219:849b6b36",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:451306292",
+      "intersectionOverUnion": 0.98925,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:6d6e996b51da8852fa239bfd",
+      "footprintSignature": "509:a8970b18",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:80342017",
+      "intersectionOverUnion": 0.990561,
+      "tags": {
+        "building": "university",
+        "building:levels": "5"
+      }
+    },
+    {
+      "featureId": "building:geometry:6e5f630a99ba9e96424582c7",
+      "footprintSignature": "218:7450cf59",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:6ef291347b7e1af3a35a8581",
+      "footprintSignature": "363:32c71537",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:6f0958bf6eb6f983d2f8a6f6",
+      "footprintSignature": "219:46d4f13e",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:743595594",
+      "intersectionOverUnion": 0.993614,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:6f4650ed042b201364344805",
+      "footprintSignature": "216:fb0cc903",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1378009829",
+      "intersectionOverUnion": 0.962929,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:6f9c5216da71593186804fc7",
+      "footprintSignature": "219:2e6a1f26",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1377428496",
+      "intersectionOverUnion": 0.994627,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:700e8048cdc9d7726761bf39",
+      "footprintSignature": "275:ef80bbb6",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:7058ee4ad1d9cd4cae7e6e30",
+      "footprintSignature": "217:6c5f2d60",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1113711571",
+      "intersectionOverUnion": 0.975042,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:72bbe76c2e48b676a39e78c4",
+      "footprintSignature": "562:264e6373",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:83892807",
+      "intersectionOverUnion": 0.988017,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:73ea93e0cf9b2ab95c475db4",
+      "footprintSignature": "275:b694f8d9",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226666792",
+      "intersectionOverUnion": 0.981135,
+      "tags": {
+        "building": "office"
+      }
+    },
+    {
+      "featureId": "building:geometry:74316babcb24e60d06b1738b",
+      "footprintSignature": "219:8a913637",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:7465f45957ab610e5a1a4c19",
+      "footprintSignature": "219:e766920c",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226669002",
+      "intersectionOverUnion": 0.97875,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:7467d4abd4f36f1a355e6712",
+      "footprintSignature": "219:12d4527a",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:74731657a55e4fb7813a988b",
+      "footprintSignature": "216:0ba2ea97",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226669004",
+      "intersectionOverUnion": 0.978044,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:74aca7ce4d177dff20b5d740",
+      "footprintSignature": "275:d2357728",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1128051496",
+      "intersectionOverUnion": 0.968849,
+      "tags": {
+        "building": "university",
+        "building:levels": "1"
+      }
+    },
+    {
+      "featureId": "building:geometry:74b9f8919bee7d22021d3003",
+      "footprintSignature": "219:fe0c8a0a",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:915707511",
+      "intersectionOverUnion": 0.979614,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:75cc5515872283ee7a5de4d6",
+      "footprintSignature": "218:1054082a",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:451304710",
+      "intersectionOverUnion": 0.981043,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:765b452ac798bdf9e4726c0c",
+      "footprintSignature": "217:d717c490",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668676",
+      "intersectionOverUnion": 0.973935,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:767c29087b14fbf65879f219",
+      "footprintSignature": "219:c5a285d6",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226633636",
+      "intersectionOverUnion": 0.975903,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:767c5d153b456101cfff87c6",
+      "footprintSignature": "217:56550aa9",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226669019",
+      "intersectionOverUnion": 0.974417,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:76ca0cdb38cc9b44a56ac4ad",
+      "footprintSignature": "219:2b0143b5",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668727",
+      "intersectionOverUnion": 0.969095,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:77fbe9e39aeb45abc006d6ed",
+      "footprintSignature": "218:300b0325",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668660",
+      "intersectionOverUnion": 0.985241,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:782cf627b66a78c3828d9b01",
+      "footprintSignature": "218:92de5760",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668703",
+      "intersectionOverUnion": 0.984116,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:7888b93e87763c0cd9f509b0",
+      "footprintSignature": "218:76447915",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:78a3c9b30faeaad33af6a457",
+      "footprintSignature": "218:3df950a7",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1378009827",
+      "intersectionOverUnion": 0.974963,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:78ca61a3890a2771b6d9a201",
+      "footprintSignature": "219:735fcff7",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:78e3e6c56fb5f3ca71573968",
+      "footprintSignature": "219:8913bea8",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:915703018",
+      "intersectionOverUnion": 0.979687,
+      "tags": {
+        "building": "retail"
+      }
+    },
+    {
+      "featureId": "building:geometry:78e51a7811aa1bc5cd9f7d68",
+      "footprintSignature": "219:c82e4d89",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1378009807",
+      "intersectionOverUnion": 0.971756,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:78ec43f1677733d935f30535",
+      "footprintSignature": "277:0fbbed49",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:453690534",
+      "intersectionOverUnion": 0.975555,
+      "tags": {
+        "building": "grandstand"
+      }
+    },
+    {
+      "featureId": "building:geometry:78f892614bffc4837d653302",
+      "footprintSignature": "217:753e1212",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:792d0c5d8b14f133a2f85000",
+      "footprintSignature": "217:45a3d3cf",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1378009805",
+      "intersectionOverUnion": 0.972298,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:793ceb6bff01234ae7f7f474",
+      "footprintSignature": "219:54568196",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1359847314",
+      "intersectionOverUnion": 0.969859,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:79c15388686919a5c642b3c8",
+      "footprintSignature": "276:023df324",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79696966",
+      "intersectionOverUnion": 0.990381,
+      "tags": {
+        "building": "dormitory",
+        "building:levels": "7"
+      }
+    },
+    {
+      "featureId": "building:geometry:7a634bfec6b927434d9f3136",
+      "footprintSignature": "218:ee151490",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668696",
+      "intersectionOverUnion": 0.986716,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:7b742c833952b7ace2356091",
+      "footprintSignature": "449:add24bd0",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:7bab53384e4bd379c23f1948",
+      "footprintSignature": "334:f910dadb",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:85632230",
+      "intersectionOverUnion": 0.981071,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:7bff5e25466c19f7e18bb4b2",
+      "footprintSignature": "219:e71800cf",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226670893",
+      "intersectionOverUnion": 0.98291,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:7c3536fc8e791ef37959ce78",
+      "footprintSignature": "219:1a5d9f65",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:83689881",
+      "intersectionOverUnion": 0.96571,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:7c580168dfba3631d4584a42",
+      "footprintSignature": "274:5cb9537b",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:7cb052ac338e829639033698",
+      "footprintSignature": "219:5a88ff13",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1113711587",
+      "intersectionOverUnion": 0.936959,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:7e564e1d5a36b3b6c6d70cb8",
+      "footprintSignature": "219:6af1a563",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1337334019",
+      "intersectionOverUnion": 0.973755,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:7eda8a792829e49a6e8a2833",
+      "footprintSignature": "708:d61d2be8",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226666846",
+      "intersectionOverUnion": 0.984553,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:7f54d42fac1991d7fb171a6f",
+      "footprintSignature": "215:e17b4d9c",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:7f7affb24f23a4e3d8df86f6",
+      "footprintSignature": "219:125a11f8",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:7f98b51981b5571a4898946d",
+      "footprintSignature": "219:a29d4daa",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:7fdec010b26a04ced90fabe8",
+      "footprintSignature": "215:faf169c2",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:800e3b2564f4b99a934ebd2e",
+      "footprintSignature": "332:1099c7da",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:409381512",
+      "intersectionOverUnion": 0.990073,
+      "tags": {
+        "building": "pavilion"
+      }
+    },
+    {
+      "featureId": "building:geometry:8159226458b681ad2b2a7d2a",
+      "footprintSignature": "219:bc6de2e5",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:817a1008370fb3945f0ebf35",
+      "footprintSignature": "846:059968e0",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:818ee7e7e93371aab8125364",
+      "footprintSignature": "335:0b47cf62",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1059165156",
+      "intersectionOverUnion": 0.967671,
+      "tags": {
+        "building": "office"
+      }
+    },
+    {
+      "featureId": "building:geometry:81b9b63673f98719c1669598",
+      "footprintSignature": "219:fa27e350",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:824a8052a48965a031205972",
+      "footprintSignature": "849:e189b796",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:831606e71fb3064cf3263266",
+      "footprintSignature": "333:98731c8b",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:8338921106de5979c8071686",
+      "footprintSignature": "219:3fd43d65",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:453690539",
+      "intersectionOverUnion": 0.991268,
+      "tags": {
+        "building": "retail"
+      }
+    },
+    {
+      "featureId": "building:geometry:838ebc4174c48ebde057c6d2",
+      "footprintSignature": "219:ea91ef92",
+      "match": "ambiguous",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:83f628510c0a6f249364483d",
+      "footprintSignature": "219:83df923a",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:841ed5c639de53ad4a542c32",
+      "footprintSignature": "219:209dc85d",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:848d2d05ad3de89a836192db",
+      "footprintSignature": "218:2ec85ee7",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1379298798",
+      "intersectionOverUnion": 0.975785,
+      "tags": {
+        "building": "bungalow"
+      }
+    },
+    {
+      "featureId": "building:geometry:8559443cb2bb8332ad0207bc",
+      "footprintSignature": "619:4fded771",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:856d1e979f3621065eaba14c",
+      "footprintSignature": "218:4b3a3c65",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668655",
+      "intersectionOverUnion": 0.980976,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:85b285b7827ed3804404e915",
+      "footprintSignature": "450:ec0c7acd",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1337326785",
+      "intersectionOverUnion": 0.959489,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:8681c82219cc6b29809724d0",
+      "footprintSignature": "218:e14acace",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:915703016",
+      "intersectionOverUnion": 0.987897,
+      "tags": {
+        "building": "commercial"
+      }
+    },
+    {
+      "featureId": "building:geometry:86a78762b09717a817943ac6",
+      "footprintSignature": "332:b49d018b",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:85632231",
+      "intersectionOverUnion": 0.974266,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:873afcf0f70ac8c64d1bcd26",
+      "footprintSignature": "218:375fef38",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1059165166",
+      "intersectionOverUnion": 0.963475,
+      "tags": {
+        "building": "office"
+      }
+    },
+    {
+      "featureId": "building:geometry:8779bf8303f4635c3c6cde16",
+      "footprintSignature": "277:8de7e4b3",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:884aa0ec63844e41c55e35a8",
+      "footprintSignature": "217:f0beee7f",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:453690536",
+      "intersectionOverUnion": 0.974397,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:88bd940497bed1d567d806f5",
+      "footprintSignature": "330:bea032e1",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:85632232",
+      "intersectionOverUnion": 0.979374,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:88ccda3fb1d1fe0fdb68ff0a",
+      "footprintSignature": "219:43ac1057",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226669020",
+      "intersectionOverUnion": 0.98057,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:89bc530460b8b072770a1678",
+      "footprintSignature": "333:71865f15",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:915707512",
+      "intersectionOverUnion": 0.990896,
+      "tags": {
+        "building": "school"
+      }
+    },
+    {
+      "featureId": "building:geometry:8a4c5fac52f1922f38050a45",
+      "footprintSignature": "220:ca07c5e3",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79698950",
+      "intersectionOverUnion": 0.985721,
+      "tags": {
+        "building": "dormitory",
+        "building:levels": "11"
+      }
+    },
+    {
+      "featureId": "building:geometry:8a72ed476fc04419b2ed4880",
+      "footprintSignature": "216:4cc1f4d2",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1113711597",
+      "intersectionOverUnion": 0.973451,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:8b43d43dbb9c460549256ac9",
+      "footprintSignature": "392:79635e63",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1059165159",
+      "intersectionOverUnion": 0.974225,
+      "tags": {
+        "building": "office"
+      }
+    },
+    {
+      "featureId": "building:geometry:8b47f4ec1b6fe6b4b4fdd6df",
+      "footprintSignature": "219:2beebfb9",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1377419086",
+      "intersectionOverUnion": 0.969066,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:8ba2c202b8e5134bcabcb6a1",
+      "footprintSignature": "217:02b9e0c1",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1377419088",
+      "intersectionOverUnion": 0.974777,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:8be989e9a7d2559fe72d3338",
+      "footprintSignature": "215:c029d108",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668678",
+      "intersectionOverUnion": 0.982609,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:8c02517c9bd38cdcdeeda5bb",
+      "footprintSignature": "218:996b6bc7",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1378009810",
+      "intersectionOverUnion": 0.978064,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:8c0a7b6d75a68682dc51ec6d",
+      "footprintSignature": "218:f0f0632e",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1379298797",
+      "intersectionOverUnion": 0.964783,
+      "tags": {
+        "building": "bungalow"
+      }
+    },
+    {
+      "featureId": "building:geometry:8d0d9b0fea1cb947ffb26b49",
+      "footprintSignature": "650:3ba53048",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:80342091",
+      "intersectionOverUnion": 0.992107,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:8d1851d30275d961c9186583",
+      "footprintSignature": "190:6ab675ef",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:80342199",
+      "intersectionOverUnion": 0.98382,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:8d50d66ac6d7a56614137662",
+      "footprintSignature": "220:61872522",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79701306",
+      "intersectionOverUnion": 0.98863,
+      "tags": {
+        "building": "university",
+        "building:levels": "3"
+      }
+    },
+    {
+      "featureId": "building:geometry:8dc421fd99812e298f06cf50",
+      "footprintSignature": "362:591186ae",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:451306298",
+      "intersectionOverUnion": 0.985728,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:8ddc758c5394f9b8a6be94b1",
+      "footprintSignature": "275:5fd0ed35",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:8df257e4ab35533519e28098",
+      "footprintSignature": "450:bcb3df71",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226667023",
+      "intersectionOverUnion": 0.974824,
+      "tags": {
+        "building": "university",
+        "building:levels": "2"
+      }
+    },
+    {
+      "featureId": "building:geometry:8e252d4c7b150ab6fa6fbb57",
+      "footprintSignature": "303:ca64c212",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1070554931",
+      "intersectionOverUnion": 0.975939,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:8e59f4ae99cfc2c27d658979",
+      "footprintSignature": "218:33a045aa",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:8eabfc2c35411e9fdff458ff",
+      "footprintSignature": "219:16e58e9f",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:915703013",
+      "intersectionOverUnion": 0.987545,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:8ecac7470279d12a9fcf17bd",
+      "footprintSignature": "219:e72fdc89",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1059165158",
+      "intersectionOverUnion": 0.966885,
+      "tags": {
+        "building": "office"
+      }
+    },
+    {
+      "featureId": "building:geometry:8f59602d7b327f6c845cd6f1",
+      "footprintSignature": "447:25124688",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:8f5bb16c3e3a1220796ac2c7",
+      "footprintSignature": "334:70fb4f54",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1377419092",
+      "intersectionOverUnion": 0.957227,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:8fef63cf09e47b30d47bbb86",
+      "footprintSignature": "333:17651a7f",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79701125",
+      "intersectionOverUnion": 0.98393,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:90159ea198765dd0dff76041",
+      "footprintSignature": "217:2b72661b",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:83892638",
+      "intersectionOverUnion": 0.988102,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:91389b809eecdca87ae76cf0",
+      "footprintSignature": "333:ad3a807a",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:91ba4cc6c7a0d501736a0fec",
+      "footprintSignature": "219:85c80f34",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79701310",
+      "intersectionOverUnion": 0.991508,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:92560b2583e4153f14058961",
+      "footprintSignature": "211:1fc3bf71",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1059165163",
+      "intersectionOverUnion": 0.965464,
+      "tags": {
+        "building": "office"
+      }
+    },
+    {
+      "featureId": "building:geometry:92c80b5f33e2d7832fa3c735",
+      "footprintSignature": "420:f011778d",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:83805221",
+      "intersectionOverUnion": 0.979059,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:92e883c54e13bf294b8e14a5",
+      "footprintSignature": "334:6613cdef",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:83811713",
+      "intersectionOverUnion": 0.972827,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:9393e2b7d1a7435d0264b50f",
+      "footprintSignature": "218:211b8195",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:83892658",
+      "intersectionOverUnion": 0.98846,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:93d0f4d4f634f6d617a590eb",
+      "footprintSignature": "217:883a2506",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:84727245",
+      "intersectionOverUnion": 0.978694,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:93d6c7712a03d246de405492",
+      "footprintSignature": "219:20d7c98b",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1178227010",
+      "intersectionOverUnion": 0.968243,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:94167ff88aee68514bb0a08d",
+      "footprintSignature": "216:161cfeb5",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:84274080",
+      "intersectionOverUnion": 0.974185,
+      "tags": {
+        "building": "office"
+      }
+    },
+    {
+      "featureId": "building:geometry:94324f9ed7d438b5ae8619d9",
+      "footprintSignature": "277:c97c0cd5",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1524720767",
+      "intersectionOverUnion": 0.953647,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:9442243a9040d84ac47e114c",
+      "footprintSignature": "218:0ddbe22a",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:94bb15cbeaeff8b33cfb860e",
+      "footprintSignature": "448:8ecb7053",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:298030535",
+      "intersectionOverUnion": 0.974959,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:95e89899a580706cd757e4fc",
+      "footprintSignature": "218:50a23665",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226669059",
+      "intersectionOverUnion": 0.987086,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:9661ac06cbf111f5229e0b5a",
+      "footprintSignature": "216:6df32d21",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1113711563",
+      "intersectionOverUnion": 0.987535,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:9688f85c8b5e42b4a36e834a",
+      "footprintSignature": "215:41aafd87",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:96b8f2dc164898e1cd79772b",
+      "footprintSignature": "449:c6f44780",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1472764075",
+      "intersectionOverUnion": 0.980175,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:972afbec67d4c40ba5ccbf43",
+      "footprintSignature": "216:a2c8fd51",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79701097",
+      "intersectionOverUnion": 0.987009,
+      "tags": {
+        "building": "university",
+        "building:levels": "3"
+      }
+    },
+    {
+      "featureId": "building:geometry:9779acbd4b67bb44b23fd0e6",
+      "footprintSignature": "219:266dbe56",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:9784482cd1b0999e886571c6",
+      "footprintSignature": "271:7dd35c0b",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:978b768e95bd66c5298094cf",
+      "footprintSignature": "217:2ef24838",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:937833955",
+      "intersectionOverUnion": 0.992585,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:988c87f3608455a082c96d0d",
+      "footprintSignature": "331:721ceec1",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:298030522",
+      "intersectionOverUnion": 0.983154,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:995e4902b2f16e44ae96e557",
+      "footprintSignature": "333:b30ca4ef",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:81140527",
+      "intersectionOverUnion": 0.987879,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:99b22fd2cd266e5ad78d783b",
+      "footprintSignature": "333:b6b9276e",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1337329588",
+      "intersectionOverUnion": 0.980334,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:99ddbc9d13c9e32f93884abd",
+      "footprintSignature": "451:7a3ccac1",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:80341905",
+      "intersectionOverUnion": 0.985372,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:99f31a609fb08058b725d3ee",
+      "footprintSignature": "450:a00dbf15",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1377427395",
+      "intersectionOverUnion": 0.968904,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:9a7273281505ca779aebd2f9",
+      "footprintSignature": "219:23cc73bb",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1377419078",
+      "intersectionOverUnion": 0.964933,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:9a7c69a97a4958d50d740c9e",
+      "footprintSignature": "392:10d1b012",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:453690523",
+      "intersectionOverUnion": 0.983241,
+      "tags": {
+        "building": "school"
+      }
+    },
+    {
+      "featureId": "building:geometry:9a8f49f91f485c76b1cc6049",
+      "footprintSignature": "332:192aa760",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:85379557",
+      "intersectionOverUnion": 0.990996,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:9b7502ff0a9e3f2e372803cc",
+      "footprintSignature": "708:0aeb7597",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:9b9a801d95f9dc4b247a3eb8",
+      "footprintSignature": "216:577f97d7",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1379298799",
+      "intersectionOverUnion": 0.96841,
+      "tags": {
+        "building": "bungalow"
+      }
+    },
+    {
+      "featureId": "building:geometry:9ce5c0908bef6908d87c6eb6",
+      "footprintSignature": "677:9effbc2d",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79793751",
+      "intersectionOverUnion": 0.984381,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:9d643e3a2c14b0fbcc0657e8",
+      "footprintSignature": "277:bde1125a",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:451306294",
+      "intersectionOverUnion": 0.973973,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:9db17930d5af22068552a3ff",
+      "footprintSignature": "219:2a5af5b7",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:9e7cf9be083aa3e47743da24",
+      "footprintSignature": "217:651f92d1",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1196722208",
+      "intersectionOverUnion": 0.972785,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:9ea14c23f3d28013cb5053bf",
+      "footprintSignature": "218:1298fff4",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1377426184",
+      "intersectionOverUnion": 0.983685,
+      "tags": {
+        "building": "kindergarten"
+      }
+    },
+    {
+      "featureId": "building:geometry:9eeb2893c203e3699d91872a",
+      "footprintSignature": "218:8d504d28",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:937833954",
+      "intersectionOverUnion": 0.982506,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:9f583e1559e1dd7c21248789",
+      "footprintSignature": "333:be53a159",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:85553379",
+      "intersectionOverUnion": 0.994526,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:9f612b5eb587d9de37f8ef8f",
+      "footprintSignature": "331:dd7e1c35",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226671400",
+      "intersectionOverUnion": 0.988598,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:9f6b5c3732a142db5e2c02a7",
+      "footprintSignature": "277:b10a8356",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:9ff66964b157e68ad1edb5d6",
+      "footprintSignature": "218:ff82b0c0",
+      "match": "ambiguous",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:a11dc351de9486d0b847c193",
+      "footprintSignature": "335:b062dde5",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:80813584",
+      "intersectionOverUnion": 0.984006,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:a1da9923402c499737382de4",
+      "footprintSignature": "446:902ca91f",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:83892622",
+      "intersectionOverUnion": 0.984071,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:a21ad2220080cb85c21aa12d",
+      "footprintSignature": "736:cc832e1e",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:a253512bb392fe6910f5ddae",
+      "footprintSignature": "444:d9bb0b30",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:83805067",
+      "intersectionOverUnion": 0.985538,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:a25593dbbf903b359031848d",
+      "footprintSignature": "219:6dbb1743",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:a2fb1ba4e121bf8d8e88ae90",
+      "footprintSignature": "219:906584db",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226669003",
+      "intersectionOverUnion": 0.984451,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:a322077f2e3f5eb51b30e328",
+      "footprintSignature": "217:e9cb2112",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:a40c1ccd8a10d36901fc1d8f",
+      "footprintSignature": "334:fec040b0",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:a4f5b98f3900d06edbcb590e",
+      "footprintSignature": "219:2e5261f9",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1316913386",
+      "intersectionOverUnion": 0.992855,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:a53b6f169db80f151ea3ef0d",
+      "footprintSignature": "334:9ae95747",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:85553747",
+      "intersectionOverUnion": 0.990413,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:a5f1e691724fcddf1a368fea",
+      "footprintSignature": "217:4c551ec6",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226669057",
+      "intersectionOverUnion": 0.978089,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:a616c7835beae974c55f766f",
+      "footprintSignature": "219:1071149e",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668637",
+      "intersectionOverUnion": 0.985248,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:a69ebfae97d589da9d6b8433",
+      "footprintSignature": "448:9022c46f",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:83990426",
+      "intersectionOverUnion": 0.987056,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:a6cf4c853f5a19d17ffe375f",
+      "footprintSignature": "448:1e310b9f",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:a708db8a7e88ce995b20b6ff",
+      "footprintSignature": "219:94bced88",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:a77c10d5151fcc129c461504",
+      "footprintSignature": "217:17ce7800",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1316917846",
+      "intersectionOverUnion": 0.977963,
+      "tags": {
+        "building": "school"
+      }
+    },
+    {
+      "featureId": "building:geometry:a8ccda169bfa44a269c7605a",
+      "footprintSignature": "390:dcb6eb27",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:a8e9c0cf3a2cc3e00841eaea",
+      "footprintSignature": "217:477daaa7",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:a9376a6d2502b438e5dc89f5",
+      "footprintSignature": "392:4a7ae518",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:915707513",
+      "intersectionOverUnion": 0.987482,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:a956bbfbad0d7b926c4e1625",
+      "footprintSignature": "219:e1e7055d",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226936358",
+      "intersectionOverUnion": 0.984403,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:a97815fc8a21ded2d15ea28d",
+      "footprintSignature": "737:dbf3871b",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79699846",
+      "intersectionOverUnion": 0.940019,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:ab149c6c4a712445ccff683e",
+      "footprintSignature": "219:16ea7d82",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1113711599",
+      "intersectionOverUnion": 0.963217,
+      "tags": {
+        "building": "office"
+      }
+    },
+    {
+      "featureId": "building:geometry:ab84f4d6049ae8c3878e8120",
+      "footprintSignature": "220:faee0bff",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79696957",
+      "intersectionOverUnion": 0.988626,
+      "tags": {
+        "building": "dormitory",
+        "building:levels": "7"
+      }
+    },
+    {
+      "featureId": "building:geometry:ac5448bec7ea605d54146a44",
+      "footprintSignature": "217:da5cfa84",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226669863",
+      "intersectionOverUnion": 0.992001,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:ac9e3259eaa10bf5c6fb47de",
+      "footprintSignature": "216:75dde058",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:915703017",
+      "intersectionOverUnion": 0.987286,
+      "tags": {
+        "building": "retail"
+      }
+    },
+    {
+      "featureId": "building:geometry:acf87ea2043a8abb9934e482",
+      "footprintSignature": "218:830964db",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:ad7b725c774db745829afef8",
+      "footprintSignature": "360:8077bdda",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:83801034",
+      "intersectionOverUnion": 0.926747,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:ad9d65bfeca9a5cf24b6e579",
+      "footprintSignature": "219:0512d97e",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1378009808",
+      "intersectionOverUnion": 0.95984,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:adc564d5f77f7079747712fb",
+      "footprintSignature": "334:f34ee11f",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:ae4d2982cc0acaf5c2dbb224",
+      "footprintSignature": "333:e695319a",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1059165154",
+      "intersectionOverUnion": 0.966891,
+      "tags": {
+        "building": "office"
+      }
+    },
+    {
+      "featureId": "building:geometry:ae710773402b609aba7cc54a",
+      "footprintSignature": "219:ce0e2a90",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:ae7fa6e98aa283928f8e823d",
+      "footprintSignature": "1511:6428cbc4",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:aea90fd891df4decd0ee6a65",
+      "footprintSignature": "276:955ec6ee",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:451335315",
+      "intersectionOverUnion": 0.991028,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:aeb2782be56655bcda3cf749",
+      "footprintSignature": "447:8127d72c",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226936505",
+      "intersectionOverUnion": 0.978151,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:aec5b474bfef08ec7c8b61a1",
+      "footprintSignature": "219:83eb35ce",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:83799756",
+      "intersectionOverUnion": 0.995803,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:af4102c5a49ec2a3ec00129b",
+      "footprintSignature": "219:0544872b",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:af562221c3774b397ea1b332",
+      "footprintSignature": "679:6217c610",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:453690525",
+      "intersectionOverUnion": 0.985201,
+      "tags": {
+        "building": "school",
+        "building:levels": "6"
+      }
+    },
+    {
+      "featureId": "building:geometry:afcbebf1095a8f61c18970b9",
+      "footprintSignature": "219:baecaf23",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:b0cb750dc4dd5e31b0010141",
+      "footprintSignature": "275:0bf3acb4",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:451318334",
+      "intersectionOverUnion": 0.987085,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:b0fce6f56fbe9c4cd69c5f4c",
+      "footprintSignature": "217:3b85ffae",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226625358",
+      "intersectionOverUnion": 0.987923,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:b1bf4800c05a6a1481460e68",
+      "footprintSignature": "219:69f47cb0",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1059165162",
+      "intersectionOverUnion": 0.974158,
+      "tags": {
+        "building": "office"
+      }
+    },
+    {
+      "featureId": "building:geometry:b1c8f062cb655ac7ba6244c5",
+      "footprintSignature": "218:9c472c4d",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668639",
+      "intersectionOverUnion": 0.97923,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:b1d191d8d5a78c0ffcdba48e",
+      "footprintSignature": "275:13bafa98",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1059165155",
+      "intersectionOverUnion": 0.988674,
+      "tags": {
+        "building": "office"
+      }
+    },
+    {
+      "featureId": "building:geometry:b2d1efe7e37b0570b0979197",
+      "footprintSignature": "1722:b76da6a8",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:b2dc4274b760e4c248678cab",
+      "footprintSignature": "219:1c2530d5",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:83892406",
+      "intersectionOverUnion": 0.985206,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:b2de2c891f54956b19bc3f3c",
+      "footprintSignature": "274:30fc21d1",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79701309",
+      "intersectionOverUnion": 0.986958,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:b3103c1207100e156d5d87bf",
+      "footprintSignature": "218:28b41257",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:b3bbfbfe6ecfd28c39e6e494",
+      "footprintSignature": "708:ebc5258c",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79793748",
+      "intersectionOverUnion": 0.987443,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:b3d5bc287eda408e7f7e49d5",
+      "footprintSignature": "217:1719aabe",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1337334018",
+      "intersectionOverUnion": 0.975409,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:b44430933721b2664dba674d",
+      "footprintSignature": "795:b4d2e5e3",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:83810686",
+      "intersectionOverUnion": 0.971859,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:b44626bfe9831a9e0a876dfe",
+      "footprintSignature": "883:51173206",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226667035",
+      "intersectionOverUnion": 0.992191,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:b53c487fa166cdcfb05ec7eb",
+      "footprintSignature": "359:d93a3806",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79793750",
+      "intersectionOverUnion": 0.983699,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:b5f488f11c2caed2d808c951",
+      "footprintSignature": "215:31b65598",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1341538877",
+      "intersectionOverUnion": 0.934666,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:b65d1e1e871f55e88ead81ac",
+      "footprintSignature": "219:d9834db1",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:33432033",
+      "intersectionOverUnion": 0.995498,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:b68160b677028e30eb337da2",
+      "footprintSignature": "219:ea2b22bb",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226625472",
+      "intersectionOverUnion": 0.991632,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:b6d1f081125bfe08f12774c4",
+      "footprintSignature": "215:2aa37a45",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:298030531",
+      "intersectionOverUnion": 0.980068,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:b855c6be69b4896c6a1f5c91",
+      "footprintSignature": "219:fca3428f",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1059165167",
+      "intersectionOverUnion": 0.984294,
+      "tags": {
+        "building": "office"
+      }
+    },
+    {
+      "featureId": "building:geometry:ba46ccc8cc43f04fe38fc0ba",
+      "footprintSignature": "449:7628057d",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:33457842",
+      "intersectionOverUnion": 0.989981,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:bac36b5a27d9f73fda4b451e",
+      "footprintSignature": "215:b709eb5f",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668711",
+      "intersectionOverUnion": 0.976508,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:bb178a24c516bca93d08037d",
+      "footprintSignature": "219:39a6a26b",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:bbcd940d93b2bad6a83362ff",
+      "footprintSignature": "216:f5da4582",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:bca42d7df5a0c3877db4e21c",
+      "footprintSignature": "276:7e29b13c",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226667976",
+      "intersectionOverUnion": 0.988798,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:be116c248af66684c771f32b",
+      "footprintSignature": "334:941b0899",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:298030530",
+      "intersectionOverUnion": 0.980601,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:bf3f7499e546f328a793d5e2",
+      "footprintSignature": "335:d64935d1",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:bfa560fe7f2a86bde0f0b6bf",
+      "footprintSignature": "219:e815f61a",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1377419080",
+      "intersectionOverUnion": 0.965733,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:bfa578c7e484b13beeac8709",
+      "footprintSignature": "219:20a6eea2",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:84273995",
+      "intersectionOverUnion": 0.978453,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:bfe0c94b28a0fa9b6658d58d",
+      "footprintSignature": "277:e8c85bd8",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1524720765",
+      "intersectionOverUnion": 0.96166,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:c005e2ca1117543cc0dc42f5",
+      "footprintSignature": "334:124f499c",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226623627",
+      "intersectionOverUnion": 0.985313,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:c0677cc4917afc3c13903743",
+      "footprintSignature": "391:e98b1559",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:80716744",
+      "intersectionOverUnion": 0.99009,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:c11c8c5257ee542c9d2e5666",
+      "footprintSignature": "218:e5ca7e25",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:c11e85a37d69986256935302",
+      "footprintSignature": "217:3b3d4107",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1379298792",
+      "intersectionOverUnion": 0.962489,
+      "tags": {
+        "building": "bungalow"
+      }
+    },
+    {
+      "featureId": "building:geometry:c1c00c13f1c9b71926515e0e",
+      "footprintSignature": "218:53a2cd70",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:c26782dd173833d456dc58fa",
+      "footprintSignature": "218:5f8f5411",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:453690530",
+      "intersectionOverUnion": 0.985301,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:c2bfeec206222c55f0392863",
+      "footprintSignature": "332:b5b80437",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:83805170",
+      "intersectionOverUnion": 0.987333,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:c371d6143507eef5358e39fe",
+      "footprintSignature": "392:adc678e1",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:915703015",
+      "intersectionOverUnion": 0.990257,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:c38786721f0e3947c21d3fd7",
+      "footprintSignature": "219:ddfd4d9d",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:c3a34372ba051719e5dc4f13",
+      "footprintSignature": "218:ce591dac",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1337334017",
+      "intersectionOverUnion": 0.978637,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:c44dd0620e68fe5655ace43c",
+      "footprintSignature": "219:9373d689",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1377419087",
+      "intersectionOverUnion": 0.981759,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:c4e8805b6ccb8e891a471f56",
+      "footprintSignature": "334:672d87ff",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:82714858",
+      "intersectionOverUnion": 0.985198,
+      "tags": {
+        "building": "dormitory",
+        "building:levels": "6"
+      }
+    },
+    {
+      "featureId": "building:geometry:c53c12f9147eebda2769fdc6",
+      "footprintSignature": "451:ae8e4a6a",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1524720752",
+      "intersectionOverUnion": 0.967089,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:c5fe0e4d8cfad0256d47c5ed",
+      "footprintSignature": "333:f51cbbee",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:85632233",
+      "intersectionOverUnion": 0.982201,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:c63b3cb088d82f735f75c7c8",
+      "footprintSignature": "218:b1def98f",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79698948",
+      "intersectionOverUnion": 0.987461,
+      "tags": {
+        "building": "dormitory",
+        "building:levels": "11"
+      }
+    },
+    {
+      "featureId": "building:geometry:c6514da54703c15a996d1e7d",
+      "footprintSignature": "334:ef3852e7",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:453690543",
+      "intersectionOverUnion": 0.984029,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:c6a027bcb85d9d24b885f197",
+      "footprintSignature": "449:455891ea",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1524720753",
+      "intersectionOverUnion": 0.967063,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:c6ae79f6be60b585fe5a1cf3",
+      "footprintSignature": "219:bbd11dc9",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1378009828",
+      "intersectionOverUnion": 0.975954,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:c6ba126d217a9e461529ebc7",
+      "footprintSignature": "219:528252f3",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1337334016",
+      "intersectionOverUnion": 0.977115,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:c90204b51adee63734b7cdda",
+      "footprintSignature": "219:a77f849f",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1113711577",
+      "intersectionOverUnion": 0.98563,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:c90f306c449efca7c41f181a",
+      "footprintSignature": "390:9486c02d",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:cadb7f6ee24146a4adc0c3e8",
+      "footprintSignature": "219:035c47b5",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:453690528",
+      "intersectionOverUnion": 0.986714,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:caefecfc204e68abc1614270",
+      "footprintSignature": "219:b98cc598",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1316917845",
+      "intersectionOverUnion": 0.989769,
+      "tags": {
+        "building": "school"
+      }
+    },
+    {
+      "featureId": "building:geometry:cafa6bc44294f4c8a6cefa96",
+      "footprintSignature": "217:d32d0be6",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226669021",
+      "intersectionOverUnion": 0.976024,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:cb36b8e051ddbffc79e5e255",
+      "footprintSignature": "219:a4671f9d",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79698988",
+      "intersectionOverUnion": 0.989779,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:cb474aa9cf7e13e291bf0b90",
+      "footprintSignature": "219:40bdf8fe",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1177716108",
+      "intersectionOverUnion": 0.986947,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:cb7e7a7a30633884deea2b50",
+      "footprintSignature": "218:15114305",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1377419079",
+      "intersectionOverUnion": 0.975044,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:cc5a0c31b3c9e1763ed5a3c4",
+      "footprintSignature": "443:2a2c54c7",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1376099627",
+      "intersectionOverUnion": 0.969973,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:cd19740360b670553c32d317",
+      "footprintSignature": "332:6043d240",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226625357",
+      "intersectionOverUnion": 0.973072,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:cd364d3e1a4a33282e345766",
+      "footprintSignature": "218:1c7dee70",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226669006",
+      "intersectionOverUnion": 0.991898,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:cdb5fdcc426fdea6ba7c9d2d",
+      "footprintSignature": "218:f8340b9a",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:cdf14e6ec9c64912f3ef6e7d",
+      "footprintSignature": "218:71c8b582",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1060946454",
+      "intersectionOverUnion": 0.970854,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:ce8cac8b904fc509caaae5d8",
+      "footprintSignature": "219:953990a1",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1178227002",
+      "intersectionOverUnion": 0.970047,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:ced6ededc7f78d765aa2f6c6",
+      "footprintSignature": "218:ff288ade",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:82714382",
+      "intersectionOverUnion": 0.983488,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:ceed2fc8d95c5ab5546f755a",
+      "footprintSignature": "478:40440f0d",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:cfee2b4555ccb8caead33149",
+      "footprintSignature": "218:16cb0640",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668675",
+      "intersectionOverUnion": 0.979614,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:d11079a6821d8981a3e4ef11",
+      "footprintSignature": "334:ccc7bdb0",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:451335313",
+      "intersectionOverUnion": 0.994532,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:d17a1aa6f68293adff34159a",
+      "footprintSignature": "219:6ccbe040",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:d1a09abe2bc44af40d85b9ae",
+      "footprintSignature": "796:734d919f",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:80716523",
+      "intersectionOverUnion": 0.98832,
+      "tags": {
+        "building": "hotel"
+      }
+    },
+    {
+      "featureId": "building:geometry:d301afe561ac277b8da9c9ec",
+      "footprintSignature": "219:2510ef0f",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:451306302",
+      "intersectionOverUnion": 0.980652,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:d350788c777bb00bd00b3178",
+      "footprintSignature": "275:5a8f13b2",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:80717723",
+      "intersectionOverUnion": 0.995787,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:d37601b598ca68b99fb06d30",
+      "footprintSignature": "448:1ff1dee6",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1524720747",
+      "intersectionOverUnion": 0.965228,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:d3886e61292543fff23a77d6",
+      "footprintSignature": "219:c57d2220",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1067508253",
+      "intersectionOverUnion": 0.972333,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:d38aedcc3d42852388bfcb31",
+      "footprintSignature": "331:9952af45",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1059178271",
+      "intersectionOverUnion": 0.960242,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:d3bd232004f853fe50cabb6f",
+      "footprintSignature": "217:14f8778b",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668642",
+      "intersectionOverUnion": 0.986214,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:d3c8bf17983c5b2f18e512ac",
+      "footprintSignature": "219:3597c78f",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:d3cf2b56bf318f83f010369f",
+      "footprintSignature": "217:b8f2a7da",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226667897",
+      "intersectionOverUnion": 0.988784,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:d41f233c7ab0bd4642910eb3",
+      "footprintSignature": "391:2cb078db",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1178099039",
+      "intersectionOverUnion": 0.993699,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:d4735f1df7e672bf5346c0a5",
+      "footprintSignature": "218:f7ace109",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:409381513",
+      "intersectionOverUnion": 0.97088,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:d4b96dd01b51c1d2bb32babf",
+      "footprintSignature": "218:907be8c5",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:d4c0ab9d0b4bba4e1cecfb49",
+      "footprintSignature": "219:b433d666",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:d53024c8300e50cc11461110",
+      "footprintSignature": "218:3f9ef025",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:453690531",
+      "intersectionOverUnion": 0.971128,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:d5330548bb5367883c2b40f8",
+      "footprintSignature": "277:c81b3d63",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:408816988",
+      "intersectionOverUnion": 0.979196,
+      "tags": {
+        "building": "office"
+      }
+    },
+    {
+      "featureId": "building:geometry:d534b19693c5fe0dd8fe1d71",
+      "footprintSignature": "217:9a7780d4",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:d5a7e9d310678b4c96b73fcc",
+      "footprintSignature": "446:8f3f6a10",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1376099629",
+      "intersectionOverUnion": 0.967418,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:d610ac52ae6eb71aee24252d",
+      "footprintSignature": "335:e717e469",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79696956",
+      "intersectionOverUnion": 0.984024,
+      "tags": {
+        "building": "dormitory",
+        "building:levels": "7"
+      }
+    },
+    {
+      "featureId": "building:geometry:d698a9fb08199d3a9c6a5b5b",
+      "footprintSignature": "216:bc756f49",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:d6e0a17ef590cbfb729698ed",
+      "footprintSignature": "217:46f4b606",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:d7073cefc8779399cdc2d032",
+      "footprintSignature": "449:abb06528",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1376099626",
+      "intersectionOverUnion": 0.961992,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:d7174ad57afe516b242a7ebc",
+      "footprintSignature": "219:acc5ff4b",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:84652150",
+      "intersectionOverUnion": 0.993095,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:d78446d56956078b645cc1fb",
+      "footprintSignature": "219:d57c29a4",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1377419083",
+      "intersectionOverUnion": 0.966679,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:d7de62f5b8674248c5cfea8d",
+      "footprintSignature": "332:ac66580c",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226623631",
+      "intersectionOverUnion": 0.985337,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:d7ffe3bfb0a3fd4e21977277",
+      "footprintSignature": "219:61c74f3f",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:298030519",
+      "intersectionOverUnion": 0.982728,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:d80d39ce6b6032cd7cd651a9",
+      "footprintSignature": "621:f5f2e5fc",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:d84ad4ce89192c0c2b1c5758",
+      "footprintSignature": "332:27156eb6",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:937969592",
+      "intersectionOverUnion": 0.985218,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:d88fcaa45d7a2caefb490a13",
+      "footprintSignature": "219:e9c9a99a",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668699",
+      "intersectionOverUnion": 0.974366,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:d901ef87569bc93ecf98b2c6",
+      "footprintSignature": "564:5f43e8f2",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79793749",
+      "intersectionOverUnion": 0.984292,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:d979644a59332556fe7156d1",
+      "footprintSignature": "391:e482c034",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:915703010",
+      "intersectionOverUnion": 0.985496,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:d9b7226a454302f21485de4b",
+      "footprintSignature": "219:5ec5fce4",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226669008",
+      "intersectionOverUnion": 0.979205,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:da4eae971deeb81dc1f9ee7a",
+      "footprintSignature": "217:6ba7a5d7",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668646",
+      "intersectionOverUnion": 0.990667,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:db1ea1e24546b1a3598a53f9",
+      "footprintSignature": "219:20ad3eed",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:409380285",
+      "intersectionOverUnion": 0.984586,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:db2bab0b18fec9cb6f53e54c",
+      "footprintSignature": "219:8551c7b8",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:219072643",
+      "intersectionOverUnion": 0.971943,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:db937d985375c524dbcb687a",
+      "footprintSignature": "332:31be3922",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:298030539",
+      "intersectionOverUnion": 0.97945,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:dc0efee52332f0b06556226b",
+      "footprintSignature": "219:f7cb7bba",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:dc3cfb1583db04cbcd9a011c",
+      "footprintSignature": "218:379b057c",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:dcb1ed65e2a6fc15d8678b55",
+      "footprintSignature": "218:03502768",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1059165152",
+      "intersectionOverUnion": 0.968727,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:dd928bb039f60e042a866b58",
+      "footprintSignature": "1065:484c7f05",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:dde51016a6094833e44249b9",
+      "footprintSignature": "217:492d3778",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:451306300",
+      "intersectionOverUnion": 0.988508,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:de242c18da2eefd0de82f4bb",
+      "footprintSignature": "219:f496f677",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:de4ee1738e44d1dc8b6b9d30",
+      "footprintSignature": "219:4bf12990",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:debb5a177e3b358ba8776732",
+      "footprintSignature": "390:80b9de96",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:298030540",
+      "intersectionOverUnion": 0.979008,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:dfd3cef29ce7deae2840187b",
+      "footprintSignature": "218:28e1fe6b",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:dfd7dbc40aea19b856c3d88d",
+      "footprintSignature": "277:04c5d996",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:84273997",
+      "intersectionOverUnion": 0.992307,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:e0746d5eb0d04bcb89128856",
+      "footprintSignature": "448:ea6320b5",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1059885283",
+      "intersectionOverUnion": 0.974808,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:e086d4df4981a77da0dbb811",
+      "footprintSignature": "215:3e6ba6cb",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:e0fcc53827cff6777694d612",
+      "footprintSignature": "218:27277fa5",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:e1558349f00ef17ba85ad0de",
+      "footprintSignature": "334:7d14b280",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:84727246",
+      "intersectionOverUnion": 0.986283,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:e2b6b01eea506f52c196aca7",
+      "footprintSignature": "216:62d781dc",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1341538878",
+      "intersectionOverUnion": 0.947005,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:e38839f6ffe7c02f9a5ad34e",
+      "footprintSignature": "218:6608eacd",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:e3e43589597df7c9d09051e6",
+      "footprintSignature": "217:ef9ef32f",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:e3fe93776d570030a3af6505",
+      "footprintSignature": "450:80df03e7",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:e48b96d6daee4b97df9c8484",
+      "footprintSignature": "218:ea0570ab",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:e494f061a148c093eeaadd4b",
+      "footprintSignature": "219:6249d7ed",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1337334022",
+      "intersectionOverUnion": 0.988686,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:e4fea99d8611ebec49ac5e40",
+      "footprintSignature": "219:a28eb73f",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1377419084",
+      "intersectionOverUnion": 0.964287,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:e55347dd090e29560445473e",
+      "footprintSignature": "447:32a825bd",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:e60eac7e892516f85f19dff1",
+      "footprintSignature": "217:02b94d03",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1123293329",
+      "intersectionOverUnion": 0.951907,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:e6c59c6d0c67977b7b5b671a",
+      "footprintSignature": "530:ca65620b",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:e72707dccf97eae7082456ca",
+      "footprintSignature": "334:a275cfbf",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:e7c9ab9209b435ce6b63bd8e",
+      "footprintSignature": "218:00dca19b",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1316913393",
+      "intersectionOverUnion": 0.984515,
+      "tags": {
+        "building": "school"
+      }
+    },
+    {
+      "featureId": "building:geometry:e8100209f6d71c316db50e43",
+      "footprintSignature": "220:ad1b0d78",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79696959",
+      "intersectionOverUnion": 0.99113,
+      "tags": {
+        "building": "dormitory",
+        "building:levels": "7"
+      }
+    },
+    {
+      "featureId": "building:geometry:e827967f884a3dea6a0e1bd6",
+      "footprintSignature": "219:475b6200",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:e88c7e3db4a97050397acc16",
+      "footprintSignature": "216:6adc75ae",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:e967554700784899976077c9",
+      "footprintSignature": "216:bf5d2b86",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1177717915",
+      "intersectionOverUnion": 0.964491,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:eab65c4d7e4d92265e5946c1",
+      "footprintSignature": "219:0811da15",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668705",
+      "intersectionOverUnion": 0.986866,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:eb0036d85dc719b44012599a",
+      "footprintSignature": "219:098a7237",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79696958",
+      "intersectionOverUnion": 0.989003,
+      "tags": {
+        "building": "dormitory",
+        "building:levels": "7"
+      }
+    },
+    {
+      "featureId": "building:geometry:eb167b5a9f6b016cc917bbbe",
+      "footprintSignature": "218:a97b805a",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1524720771",
+      "intersectionOverUnion": 0.955477,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:ec474db580372fc6a9a3763c",
+      "footprintSignature": "216:3135d28f",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668657",
+      "intersectionOverUnion": 0.97983,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:ec96eda26cc36239d206c3f3",
+      "footprintSignature": "219:0268a0a8",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:915703012",
+      "intersectionOverUnion": 0.994124,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:ecc6252b03d118ec8803fa96",
+      "footprintSignature": "363:bc69bb25",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:ecf53403cc0fdbcc371d161f",
+      "footprintSignature": "220:cdfffab5",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79696968",
+      "intersectionOverUnion": 0.977696,
+      "tags": {
+        "building": "dormitory",
+        "building:levels": "7"
+      }
+    },
+    {
+      "featureId": "building:geometry:ee7cf14780f25a733c0cf6b5",
+      "footprintSignature": "219:883f7221",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:83805171",
+      "intersectionOverUnion": 0.983848,
+      "tags": {
+        "building": "dormitory",
+        "building:levels": "6"
+      }
+    },
+    {
+      "featureId": "building:geometry:eed07af7baf65f2c8ac7162c",
+      "footprintSignature": "304:c53eab63",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:80342046",
+      "intersectionOverUnion": 0.995965,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:eee8acc50d06efba4fd6c7bb",
+      "footprintSignature": "218:34ac15f4",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226669061",
+      "intersectionOverUnion": 0.979377,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:ef9172e19492f22e29feec3e",
+      "footprintSignature": "218:815c3bd2",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:80716195",
+      "intersectionOverUnion": 0.987683,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:eff597537b504601aa1c6309",
+      "footprintSignature": "218:b1c88e8d",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1378009803",
+      "intersectionOverUnion": 0.972404,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:f0018dbf996913d6edce7a20",
+      "footprintSignature": "276:dfa04686",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226632802",
+      "intersectionOverUnion": 0.98877,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:f072fc54bdbaa9b3230f1dd5",
+      "footprintSignature": "219:cac039b5",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1059165160",
+      "intersectionOverUnion": 0.96352,
+      "tags": {
+        "building": "office"
+      }
+    },
+    {
+      "featureId": "building:geometry:f0b97f68bd64acdf4a57fea4",
+      "footprintSignature": "219:c46adb76",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1060192245",
+      "intersectionOverUnion": 0.981556,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:f14288914cbd70d41b6ce7bd",
+      "footprintSignature": "447:ff06e766",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226936504",
+      "intersectionOverUnion": 0.979189,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:f14857d27ef532c60c6c31fa",
+      "footprintSignature": "217:34bb17ff",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1337334013",
+      "intersectionOverUnion": 0.967818,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:f18fd172c67bc94279a0fa2d",
+      "footprintSignature": "218:ca332b95",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1379298794",
+      "intersectionOverUnion": 0.98377,
+      "tags": {
+        "building": "bungalow"
+      }
+    },
+    {
+      "featureId": "building:geometry:f1f4e504642bd7884b845995",
+      "footprintSignature": "217:e4b74bc8",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1150459899",
+      "intersectionOverUnion": 0.976507,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:f20a0c3888ce68ddca58244d",
+      "footprintSignature": "443:1ad94a45",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:83892621",
+      "intersectionOverUnion": 0.983694,
+      "tags": {
+        "building": "dormitory"
+      }
+    },
+    {
+      "featureId": "building:geometry:f21b0d946164c3265a182d25",
+      "footprintSignature": "219:b001ec21",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1178227011",
+      "intersectionOverUnion": 0.988829,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:f28263a511686c100c3f2cc0",
+      "footprintSignature": "219:a2642a06",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:f2f294a2d0adca0f0f351856",
+      "footprintSignature": "219:ce7b9809",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1527971830",
+      "intersectionOverUnion": 0.971883,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:f37393f231faeaf35fbe1c4d",
+      "footprintSignature": "218:77f0ffd2",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:83990425",
+      "intersectionOverUnion": 0.994854,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:f383975546e4946066bd900a",
+      "footprintSignature": "219:727e53b3",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:f3869da8affd6a7bd0c7dcfc",
+      "footprintSignature": "219:e64ccde7",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:f398426aef241500984619fa",
+      "footprintSignature": "277:5b0039c2",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:f3e43ba15ac3ed8c463387e1",
+      "footprintSignature": "333:f0c6dfc0",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79696969",
+      "intersectionOverUnion": 0.995767,
+      "tags": {
+        "building": "dormitory",
+        "building:levels": "7"
+      }
+    },
+    {
+      "featureId": "building:geometry:f40c6d03cad4b38dd38ab81a",
+      "footprintSignature": "219:51083abb",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:80716853",
+      "intersectionOverUnion": 0.995569,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:f44fd8bab402077c2c687a28",
+      "footprintSignature": "276:96b4a879",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:915703019",
+      "intersectionOverUnion": 0.979443,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:f57dee8d88fafd107a7ea623",
+      "footprintSignature": "563:befd4ae9",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79699802",
+      "intersectionOverUnion": 0.987226,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:f60452118a1475c68aeb99c0",
+      "footprintSignature": "219:77d0b0b4",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:f61e4be635fc2e992e5a5b50",
+      "footprintSignature": "219:92255d74",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1377419082",
+      "intersectionOverUnion": 0.96554,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:f6aa06efb50706f2bb540f1b",
+      "footprintSignature": "219:5b51b6de",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1378009804",
+      "intersectionOverUnion": 0.973727,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:f7522b78479b420d0f30ecb3",
+      "footprintSignature": "216:679ab32f",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668704",
+      "intersectionOverUnion": 0.985819,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:f791a0d6aef54dc9a2f20b04",
+      "footprintSignature": "421:dbadeb3b",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:f8764023b4811c48db7cf58a",
+      "footprintSignature": "386:84f200d2",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226936600",
+      "intersectionOverUnion": 0.989358,
+      "tags": {
+        "building": "yes",
+        "building:levels": "2"
+      }
+    },
+    {
+      "featureId": "building:geometry:f8d2edfa95530c395384e654",
+      "footprintSignature": "218:c4da7cd7",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668726",
+      "intersectionOverUnion": 0.974513,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:f9185c6b6013615e23c3229a",
+      "footprintSignature": "219:4c9b917c",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1177716106",
+      "intersectionOverUnion": 0.971416,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:f963ff27b7a877b4e5f53039",
+      "footprintSignature": "329:01d04226",
+      "match": "no-unambiguous-source",
+      "tags": {}
+    },
+    {
+      "featureId": "building:geometry:f97215666dd0194d007ea295",
+      "footprintSignature": "217:6b711fb8",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668724",
+      "intersectionOverUnion": 0.977947,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:f9e591de0d353f023536f94c",
+      "footprintSignature": "447:6252dbd4",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:80341746",
+      "intersectionOverUnion": 0.991687,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:fa74fd69cd9743d69acf0ef2",
+      "footprintSignature": "332:7f075110",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:915703014",
+      "intersectionOverUnion": 0.976149,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:fac61644977c4c3514669704",
+      "footprintSignature": "449:a71220cb",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1337324769",
+      "intersectionOverUnion": 0.988069,
+      "tags": {
+        "building": "university",
+        "building:levels": "4"
+      }
+    },
+    {
+      "featureId": "building:geometry:facdf43efe7d33a95a0fa1a3",
+      "footprintSignature": "213:cab1aaf0",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1178530410",
+      "intersectionOverUnion": 0.977741,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:fad4821356b42034997a57ae",
+      "footprintSignature": "507:b8286b05",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:79700258",
+      "intersectionOverUnion": 0.985722,
+      "tags": {
+        "building": "university"
+      }
+    },
+    {
+      "featureId": "building:geometry:fb02a970aa0cfc987f07355f",
+      "footprintSignature": "219:ce55b877",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:298030523",
+      "intersectionOverUnion": 0.970152,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:fbac9ae81cac2be1f98567e7",
+      "footprintSignature": "218:c950eae8",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1379298802",
+      "intersectionOverUnion": 0.982375,
+      "tags": {
+        "building": "bungalow"
+      }
+    },
+    {
+      "featureId": "building:geometry:fc726bc885a93d06627b8cef",
+      "footprintSignature": "216:c7da9cdc",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:856849934",
+      "intersectionOverUnion": 0.988716,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:fce953ad889cb8d1ba930057",
+      "footprintSignature": "218:8b630178",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668658",
+      "intersectionOverUnion": 0.978408,
+      "tags": {
+        "building": "residential"
+      }
+    },
+    {
+      "featureId": "building:geometry:ffbeadeace2b96c35b528e85",
+      "footprintSignature": "219:9be935b7",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:1337334014",
+      "intersectionOverUnion": 0.960637,
+      "tags": {
+        "building": "yes"
+      }
+    },
+    {
+      "featureId": "building:geometry:ffd97fca48e4afdceda316c0",
+      "footprintSignature": "218:0a19f439",
+      "match": "overlap-verified",
+      "sourceId": "osm:way:226668640",
+      "intersectionOverUnion": 0.979309,
+      "tags": {
+        "building": "residential"
+      }
+    }
+  ]
+}

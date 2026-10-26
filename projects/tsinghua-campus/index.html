@@ -9,7 +9,7 @@
 </head>
 <body>
   <main id="workspace">
-    <canvas id="scene" aria-label="清华主校区三维建筑基模，鼠标拖动旋转、右键平移、滚轮缩放"></canvas>
+    <canvas id="scene" aria-label="清华主校区三维建筑，鼠标拖动旋转、右键平移、滚轮缩放"></canvas>
     <header>
       <span class="eyebrow">TSINGHUA / CAMPUS ATLAS</span>
       <h1>清华园<span>三维重建工作台</span></h1>
@@ -18,19 +18,28 @@
     <aside id="sidebar">
       <div class="section-heading"><span class="dot"></span>校园建筑与地标</div>
       <div class="stats"><div><strong id="building-count">—</strong><span>建筑轮廓体块</span></div><div><strong id="named-count">—</strong><span>已关联名称</span></div></div>
-      <p class="muted">已重建 <b id="refined-count">—</b> 个建筑轮廓、<b id="landmark-count">—</b> 个独立地标。快捷视角可查看各处细节。</p>
+      <p class="muted">建筑结构覆盖 <b id="architecture-count">—</b> 个轮廓；其中 <b id="refined-count">—</b> 个有照片参照，另有 <b id="landmark-count">—</b> 个独立地标。</p>
       <p id="coverage-note" class="muted"></p>
       <label class="search-label" for="search">查找建筑或地标</label>
       <input id="search" type="search" placeholder="名称或稳定编号…" autocomplete="off">
-      <label class="reconstruction-filter"><input id="only-refined" type="checkbox">只看已重建建筑与地标</label>
+      <label class="reconstruction-filter"><input id="only-refined" type="checkbox">只看照片参照建筑与地标</label>
+      <label class="reconstruction-filter" for="architecture-family">程序建筑类型
+        <select id="architecture-family"><option value="">全部类型与照片模型</option></select>
+      </label>
       <div id="result-count" class="muted"></div>
       <div id="results" aria-label="建筑与地标搜索结果"></div>
+      <nav class="result-pages" aria-label="建筑目录分页">
+        <button id="results-prev" disabled aria-label="上一页建筑">上一页</button>
+        <span id="results-page">1 / 1</span>
+        <button id="results-next" disabled aria-label="下一页建筑">下一页</button>
+      </nav>
       <section id="selection" aria-live="polite">
         <h2 id="selection-name">选择建筑或地标</h2>
         <p id="selection-help">点击地图上的体块，或在上方搜索。每栋建筑都保留轮廓与编号，后续精模在原位置替换。</p>
         <dl id="selection-fields"></dl>
         <button id="focus" hidden>靠近选中对象</button>
         <button id="export-building" hidden>导出选中 GLB</button>
+        <a id="selection-link" hidden>打开此建筑独立链接</a>
         <a id="selected-references" hidden target="_blank" rel="noreferrer">查看参考来源</a>
       </section>
     </aside>
@@ -47,6 +56,9 @@
       <button id="export-all">导出校园 GLB</button>
     </nav>
     <nav class="sitebar" aria-label="已重建建筑快捷视角">
+      <label class="apartment-picker" for="appearance-building">实景配色
+        <select id="appearance-building" aria-label="查看照片配色与局部特征建筑"><option value="">选择教学楼／院馆</option></select>
+      </label>
       <button id="view-zijing">紫荆公寓 · 1–23</button>
       <label class="apartment-picker" for="zijing-apartment">楼号
         <select id="zijing-apartment" aria-label="查看紫荆公寓楼号"><option value="">选择 1–23 号楼</option></select>
@@ -76,7 +88,7 @@
       <label><input type="checkbox" data-layer="road" checked><i class="swatch roads"></i>道路</label>
       <label><input type="checkbox" data-layer="green" checked><i class="swatch greens"></i>绿地</label>
       <label><input type="checkbox" data-layer="water" checked><i class="swatch waters"></i>水系</label>
-      <label><input type="checkbox" id="base-facades" checked>基模窗格（示意）</label>
+      <label title="程序建筑近景使用真实窗洞；关闭仅简化显示，GLB仍导出完整结构"><input type="checkbox" id="architecture-details" checked>建筑近景细节</label>
       <label title="近景接触阴影；桌面默认开启，手机默认关闭"><input type="checkbox" id="contact-shadows">三维细节阴影</label>
       <span id="north">N ↑ 北</span>
     </section>

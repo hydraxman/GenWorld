@@ -6,12 +6,14 @@ import {createCampusModel} from './model.js';
 import {applyCampusRefinements, REFINEMENT_VIEWS} from './refinements.js';
 import {applyCampusLandmarks, LANDMARK_SITES} from './landmarks.js';
 import {createCoverage} from './coverage.js';
-import catalog from '../reference-catalog.json';
+import catalog from './reference-catalog.js';
 import {viewBounds} from './view-bounds.js';
 import {fitInspectionView, fitInspectionShadow} from './inspection-view.js';
 import {createCampusDaylight} from './daylight.js';
 import {createCampusRenderPipeline} from './render-pipeline.js';
 import {ZIJING_APARTMENTS} from './zijing-sources.js';
+import {applyCampusArchitecture, prepareArchitectureExport, ARCHITECTURE_FAMILIES} from './campus-architecture.js';
+import {PHOTO_APPEARANCES} from './photo-appearance.js';
 
 const $ = id => document.getElementById(id);
 const outputPrefix = location.pathname.endsWith('/tsinghua-campus-offline.html') ? '' : 'output/';
@@ -41,6 +43,7 @@ function main() {
   const drawScene = createCampusRenderPipeline(renderer, scene);
   const campus = createCampusModel(data);
   const refinedIds = applyCampusRefinements(campus, data);
+  const architectureIds = applyCampusArchitecture(campus, data);
   const landmarkIds = applyCampusLandmarks(campus, data);
   const refinedSiteCount = new Set(refinedIds.map(id => campus.buildings.get(id).userData.referenceSite)).size;
   const siteCount = refinedSiteCount + landmarkIds.length;
@@ -79,6 +82,7 @@ function main() {
   $('contact-shadows').checked = !compact.matches;
   let contactShadowsActive = false;
   function draw() {
+    campus.updateArchitectureLOD(camera, $('architecture-details').checked);
     contactShadowsActive = $('contact-shadows').checked && !planMode && framedBounds &&
       framedBounds.getSize(new THREE.Vector3()).length() < 600;
     drawScene(camera, Boolean(contactShadowsActive));
@@ -153,11 +157,16 @@ function main() {
   function focusSelected() {
     if (!selected) return;
     const view = [...REFINEMENT_VIEWS, ...LANDMARK_SITES].find(site => site.featureId === selected.userData.featureId);
-    frame(viewBounds(selectedPart || selected), 1.2, selectedPart?.userData.viewDirection || view?.viewDirection);
+    frame(viewBounds(selectedPart || selected), 1.2, selectedPart?.userData.viewDirection || view?.viewDirection || selected.userData.viewDirection);
   }
   function select(id, focus = false, apartmentNumber = null) {
     const building = campus.objects.get(id);
     if (!building) throw new Error(`Campus object not found: ${id}`);
+    if (!building.visible) {
+      $('only-refined').checked = false;
+      $('architecture-family').value = '';
+      filterObjects();
+    }
     const numbers = building.userData.apartmentNumbers || [];
     const number = apartmentNumber ?? (numbers.length === 1 ? numbers[0] : null);
     const part = number === null ? null
@@ -171,8 +180,9 @@ function main() {
     highlight.visible = building.userData.refinementStatus !== 'detailed' && building.visible &&
       campus.layers[building.userData.kind].visible;
     const p = building.userData;
+    $('appearance-building').value = p.appearanceProfileId || '';
     $('selection-name').textContent = part?.name || p.name || '未命名建筑';
-    $('selection-help').textContent = building.userData.refinementStatus === 'detailed'
+    $('selection-help').textContent = building.userData.refinementStatus !== 'base'
       ? building.userData.refinementSummary
       : `当前为轮廓基模。${building.userData.baseFacadeSource} 楼高和屋顶亦非实测。`;
     $('selection-fields').replaceChildren();
@@ -185,7 +195,15 @@ function main() {
       ...(p.kind === 'landmark' ? [['位置来源', `OSM node ${p.mapSource.id.split(':').at(-1)} · 社区地图点位，非测绘`]] : []),
       ['重建状态', p.refinementStatus === 'detailed'
         ? p.referenceBasis === 'group-photo-typology-estimate' ? '照片参照重建 · 组团类型推定，非逐栋照片验证' : '照片参照重建 · 非测绘'
-        : '基模 · 待照片重建'],
+        : p.appearanceProfileId ? '程序建筑估算 · 对应照片配色／局部特征，非逐面复原'
+          : p.refinementStatus === 'procedural' ? '程序建筑估算 · 未逐栋照片验证' : '基模 · 待照片重建'],
+      ...(p.refinementStatus === 'procedural' ? [
+        ['建筑分型', ARCHITECTURE_FAMILIES[p.architectureFamily]],
+        ['类型依据', p.architectureSource.sourceId || '无可靠建筑标签，未推断用途'],
+        ['楼层节奏', `${p.estimatedFloors}层 · ${p.floorsSource}`],
+      ] : []),
+      ...(p.appearanceProfileId ? [['照片依据', p.appearanceReferencePages.join(' · ')],
+        ['外观范围', '照片约束配色与有限可见特征；全轮廓与未入镜表面仍为估算']] : []),
       ...(numbers.length ? [['楼号', numbers.length > 1 ? `${numbers.join(' / ')} 共用一个原地图根` : `${numbers[0]}号楼`]] : []),
       ...(part ? [['当前分楼', `${number}号楼 · ${part.userData.estimatedFloors}层外观节奏`],
         ['楼层依据', part.userData.floorsSource]] : []),
@@ -197,10 +215,20 @@ function main() {
       $('selection-fields').append(term, detail);
     }
     $('focus').hidden = $('export-building').hidden = false;
-    $('selected-references').hidden = !p.referenceSite || __PHOTO_SITE_COUNT__ === 0;
-    if (p.referenceSite) {
+    $('selection-link').hidden = false;
+    const permalink = new URL(location.href);
+    permalink.search = '';
+    if (part) permalink.searchParams.set('view', `zijing-${number}`);
+    else permalink.searchParams.set('building', id);
+    $('selection-link').href = permalink.href;
+    const referenceSite = p.referenceSite || p.appearanceReferenceSite;
+    $('selected-references').hidden = !referenceSite || (__PHOTO_SITE_COUNT__ === 0 && !p.appearanceReferenceSite);
+    if (referenceSite) {
       $('selected-references').href = outputPrefix
-        + `reference-photos.html#${encodeURIComponent(p.referenceSite)}`;
+        + `reference-photos.html#${encodeURIComponent(referenceSite)}`;
+      if (__PHOTO_SITE_COUNT__ === 0 && p.appearanceReferenceSite) {
+        $('selected-references').href = p.appearanceReferencePages[0];
+      }
     }
     if (focus) focusSelected();
     dirty = true;
@@ -227,6 +255,12 @@ function main() {
       return true;
     });
     if (!hit) return;
+    if (hit.object.userData.architectureFarBatch) {
+      const id = hit.object.userData.featureIds[hit.batchId];
+      if (!id) throw new Error('远景建筑拾取未关联原地图编号。');
+      select(id);
+      return;
+    }
     let target = hit.object, apartmentNumber = null;
     while (target && !target.userData.featureId) {
       if (target.userData.apartmentNumber) apartmentNumber = target.userData.apartmentNumber;
@@ -234,15 +268,22 @@ function main() {
     }
     if (target) select(target.userData.featureId, false, apartmentNumber);
   });
+  let resultPage = 0;
+  const pageSize = 40;
   function search() {
     const query = $('search').value.trim().toLocaleLowerCase();
     const matches = objects.filter(([id, object]) =>
       (!$('only-refined').checked || object.userData.refinementStatus === 'detailed') &&
+      (!$('architecture-family').value || object.userData.architectureFamily === $('architecture-family').value) &&
       `${id} ${object.userData.name || ''} ${(object.userData.aliases || []).join(' ')}`.toLocaleLowerCase().includes(query));
     matches.sort((a, b) => Number(Boolean(b[1].userData.name)) - Number(Boolean(a[1].userData.name)));
-    $('result-count').textContent = `${matches.length} 个结果${matches.length > 50 ? ' · 显示前 50 个' : ''}`;
+    resultPage = Math.max(0, Math.min(resultPage, Math.ceil(matches.length / pageSize) - 1));
+    $('result-count').textContent = `${matches.length} 个结果`;
+    $('results-page').textContent = `${resultPage + 1} / ${Math.max(1, Math.ceil(matches.length / pageSize))}`;
+    $('results-prev').disabled = resultPage === 0;
+    $('results-next').disabled = (resultPage + 1) * pageSize >= matches.length;
     const list = document.createDocumentFragment();
-    for (const [id, object] of matches.slice(0, 50)) {
+    for (const [id, object] of matches.slice(resultPage * pageSize, (resultPage + 1) * pageSize)) {
       const button = document.createElement('button');
       button.textContent = object.userData.name || '未命名建筑';
       const small = document.createElement('small');
@@ -272,6 +313,7 @@ function main() {
           apartmentNumbers: [selectedPart.userData.apartmentNumber]});
       }
       if (!whole) object.position.set(0, 0, 0);
+      prepareArchitectureExport(object);
       object.updateMatrixWorld(true);
       const bytes = await new GLTFExporter().parseAsync(object, {binary: true, onlyVisible: true});
       save(bytes, whole ? 'tsinghua-campus-refined.glb' : selectedPart ? `tsinghua-zijing-${selectedPart.userData.apartmentNumber}.glb` : selected.userData.exportFilename
@@ -286,7 +328,31 @@ function main() {
       $('export-all').disabled = $('export-building').disabled = false;
     }
   }
-  $('search').addEventListener('input', search);
+  $('search').addEventListener('input', () => {resultPage = 0; search();});
+  $('results-prev').addEventListener('click', () => {resultPage--; search();});
+  $('results-next').addEventListener('click', () => {resultPage++; search();});
+  for (const [value, label] of Object.entries(ARCHITECTURE_FAMILIES)) {
+    const option = document.createElement('option'); option.value = value; option.textContent = label;
+    $('architecture-family').append(option);
+  }
+  function filterObjects() {
+    resultPage = 0;
+    for (const object of campus.buildings.values()) object.visible =
+      (!$('only-refined').checked || object.userData.refinementStatus === 'detailed') &&
+      (!$('architecture-family').value || object.userData.architectureFamily === $('architecture-family').value);
+    for (const object of campus.landmarks.values()) object.visible = !$('architecture-family').value;
+    if (selected && !selected.visible) {
+      selected = null; selectedPart = null; highlight.visible = false;
+      $('zijing-apartment').value = '';
+      $('appearance-building').value = '';
+      $('selection-name').textContent = '选择筛选后的建筑或地标';
+      $('selection-help').textContent = '可切换类型筛选，或通过目录逐页查看全部建筑。';
+      $('selection-fields').replaceChildren();
+      $('focus').hidden = $('export-building').hidden = $('selected-references').hidden = $('selection-link').hidden = true;
+    }
+    search(); dirty = true;
+  }
+  $('architecture-family').addEventListener('change', filterObjects);
   for (const apartment of ZIJING_APARTMENTS) {
     const option = document.createElement('option'); option.value = apartment.number;
     option.textContent = `${apartment.number}号楼${apartment.family === 'w-doctoral' ? ' · W楼' : ''}`;
@@ -295,33 +361,20 @@ function main() {
   $('zijing-apartment').addEventListener('change', event => {
     if (event.target.value) selectApartment(Number(event.target.value));
   });
-  $('only-refined').addEventListener('change', () => {
-    for (const object of campus.buildings.values()) {
-      object.visible = !$('only-refined').checked || object.userData.refinementStatus === 'detailed';
-    }
-    if (selected && !selected.visible) {
-      selected = null;
-      selectedPart = null;
-      $('zijing-apartment').value = '';
-      highlight.visible = false;
-      $('selection-name').textContent = '选择已重建建筑或地标';
-      $('selection-help').textContent = '基模已暂时隐藏；点击已重建对象或使用上方快捷视角。';
-      $('selection-fields').replaceChildren();
-      $('focus').hidden = $('export-building').hidden = $('selected-references').hidden = true;
-    } else if (selected) highlight.visible = selected.userData.refinementStatus !== 'detailed' &&
-      campus.layers[selected.userData.kind].visible;
-    else {
-      $('selection-name').textContent = '选择建筑或地标';
-      $('selection-help').textContent = '点击地图上的对象，或搜索名称与编号。未重建对象仍保留原轮廓基模。';
-    }
-    search();
-    dirty = true;
+  for (const profile of PHOTO_APPEARANCES) {
+    const option = document.createElement('option'); option.value = profile.id; option.textContent = profile.name;
+    $('appearance-building').append(option);
+  }
+  $('appearance-building').addEventListener('change', event => {
+    if (!event.target.value) return;
+    const profile = PHOTO_APPEARANCES.find(profile => profile.id === event.target.value);
+    if (!profile) throw new Error(`未知实景配色建筑：${event.target.value}`);
+    if (planMode) mode(false);
+    select(profile.featureId, true);
   });
+  $('only-refined').addEventListener('change', filterObjects);
   $('view-3d').addEventListener('click', () => mode(false));
-  $('base-facades').addEventListener('change', event => {
-    campus.showEstimatedFacades(event.target.checked);
-    dirty = true;
-  });
+  $('architecture-details').addEventListener('change', () => {dirty = true;});
   $('contact-shadows').addEventListener('change', () => {dirty = true;});
   $('view-plan').addEventListener('click', () => mode(true));
   $('view-all').addEventListener('click', () => frame(bounds));
@@ -367,11 +420,14 @@ function main() {
   $('named-count').textContent = data.features.filter(feature =>
     feature.properties.kind === 'building' && feature.properties.name).length.toLocaleString();
   $('refined-count').textContent = refinedIds.length;
+  $('architecture-count').textContent = coverage.counts.architectureModelBuildingObjects;
   $('landmark-count').textContent = landmarkIds.length;
-  $('coverage-note').textContent = `${refinedIds.length} / ${buildings.length} 个地图轮廓已有照片参照模型；`
+  $('coverage-note').textContent = `${coverage.counts.architectureModelBuildingObjects} / ${buildings.length} 个地图轮廓已有建筑结构，`
+    + `${architectureIds.length}个为程序估算，${refinedIds.length}个为照片参照；`
+    + `程序外壳中${coverage.counts.photoAppearanceBuildingObjects}个新增了对应照片配色／有限特征，仍非逐面复原。`
     + `其中${coverage.counts.groupTypologyBuildingObjects}个是组团类型推定，涵盖紫荆1–23号楼（14–17共用一个地图根）。`
-    + `${coverage.counts.remainingBaseBuildingObjects} 个仍为基模，窗格仅示意；${coverage.counts.partialPhotoModelBuildingObjects} 个仅做了局部。不代表完整复刻。`;
-  $('source-note').textContent = '北京主校区 · OSM 校园范围，非测绘边界。多数地图楼高仅为显示值，待逐栋重建。'
+    + `${coverage.counts.remainingBaseBuildingObjects} 个仅有基模；${coverage.counts.partialPhotoModelBuildingObjects} 个照片模型仅做了局部。覆盖不等于真实还原。`;
+  $('source-note').textContent = '北京主校区 · 冻结地图650轮廓均有建筑结构，非测绘边界或最新建筑清单。'
     + `已接入 ${siteCount} 处照片参照重建（${refinedIds.length} 个轮廓、${landmarkIds.length} 个独立地标）；隐藏立面及部分尺寸含推定。`;
   window.addEventListener('resize', resize);
   compact.addEventListener('change', () => {
@@ -385,7 +441,10 @@ function main() {
     message('显卡上下文已中断，请刷新页面重新加载。', true);
   });
   resize(); frame(bounds); search();
+  const requestedBuilding = new URLSearchParams(location.search).get('building');
   const requestedView = new URLSearchParams(location.search).get('view');
+  if (requestedBuilding && requestedView) throw new Error('建筑编号与快捷视角不能同时指定。');
+  if (requestedBuilding) select(requestedBuilding, true);
   if (requestedView) {
     if (/^zijing-(?:[1-9]|1\d|2[0-3])$/.test(requestedView)) selectApartment(Number(requestedView.slice(7)));
     else {
@@ -407,15 +466,18 @@ function main() {
   window.campusApp = {
     ready: true, campus, data, coverage, select, selectApartment, mode, exportModel,
     selectedApartment: () => selectedPart?.userData.apartmentNumber ?? null,
-    stats: {buildings: buildings.length, features: data.features.length, refined: refinedIds.length,
+    stats: {buildings: buildings.length, features: data.features.length, refined: refinedIds.length, architecture: coverage.counts.architectureModelBuildingObjects,
+      procedural: architectureIds.length,
       refinedSites: refinedSiteCount, landmarks: landmarkIds.length, reconstructedSites: siteCount},
     render: draw,
     inspection: () => ({region: inspectionRegion(), camera, bounds: framedBounds.clone(),
       rendering: {environment: Boolean(scene.environment), contactShadows: Boolean(contactShadowsActive),
-        toneMapping: renderer.toneMapping, environmentIntensity: scene.environmentIntensity},
+        toneMapping: renderer.toneMapping, environmentIntensity: scene.environmentIntensity,
+        calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, geometries: renderer.info.memory.geometries,
+        textures: renderer.info.memory.textures},
       shadowTexelMeters: (sun.shadow.camera.right - sun.shadow.camera.left) / sun.shadow.mapSize.x}),
   };
-  message(`已加载 ${buildings.length} 个建筑体块、${siteCount} 处照片参照重建。点击地标查看细节；尺寸与隐蔽面仍为估算。`);
+  message(`已覆盖 ${buildings.length} 个冻结建筑轮廓：${architectureIds.length} 个程序估算、${refinedIds.length} 个照片参照。覆盖不等于照片级还原。`);
 }
 
 try { main(); }

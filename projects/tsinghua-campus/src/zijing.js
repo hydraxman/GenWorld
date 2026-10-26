@@ -39,10 +39,10 @@ function materials() {
   };
 }
 
-function pitchedRoof(B, roof, ring, edges, eave, M, material) {
+export function pitchedRoof(B, roof, ring, edges, eave, M, material, {rise = 3.1, edgeRadius = .055} = {}) {
   const eaves = edges.filter(edge => edge.length > 28);
   if (!eaves.length) throw new Error('A pitched dormitory roof needs long eave edges.');
-  const heightAt = p => eave + Math.min(3.1, ...eaves.map(edge => {
+  const heightAt = p => eave + Math.min(rise, ...eaves.map(edge => {
     const d = [p[0] - edge.a[0], p[1] - edge.a[1]];
     const t = Math.max(0, Math.min(edge.length, d[0] * edge.tangent[0] + d[1] * edge.tangent[1]));
     return Math.hypot(d[0] - t * edge.tangent[0], d[1] - t * edge.tangent[1]) * .32;
@@ -73,7 +73,7 @@ function pitchedRoof(B, roof, ring, edges, eave, M, material) {
         triangle(B, roof, [[a[0], eave, a[1]], [b[0], eave, b[1]], [b[0], hb, b[1]]], M.white);
         triangle(B, roof, [[a[0], eave, a[1]], [b[0], hb, b[1]], [a[0], ha, a[1]]], M.white);
       }
-      B.cylinder(roof, [a[0], ha, a[1]], [b[0], hb, b[1]], .055, .055, M.frame, 6);
+      if (edgeRadius > 0) B.cylinder(roof, [a[0], ha, a[1]], [b[0], hb, b[1]], edgeRadius, edgeRadius, M.frame, 6);
     }
   }
 }

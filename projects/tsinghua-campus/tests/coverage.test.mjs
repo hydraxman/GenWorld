@@ -28,6 +28,8 @@ test('coverage separates frozen footprints, estimated reconstructions and indepe
   const report = createCoverage(campus, data, catalog);
   assert.deepEqual(report.counts, {
     mapBuildingObjects: 3, photoModelBuildingObjects: 1, remainingBaseBuildingObjects: 2,
+    architectureModelBuildingObjects: 1, proceduralArchitectureBuildingObjects: 0,
+    photoAppearanceBuildingObjects: 0, photoAppearanceSites: 0,
     partialPhotoModelBuildingObjects: 0, remainingWorkBuildingObjects: 2,
     groupTypologyBuildingObjects: 0,
     independentLandmarks: 1, photoModelSites: 2, surveyedBuildingObjects: 0,
@@ -65,6 +67,26 @@ test('partly rebuilt merged complexes remain in the work backlog', () => {
   assert.equal(report.counts.remainingBaseBuildingObjects, 2);
   assert.equal(report.counts.remainingWorkBuildingObjects, 3);
   assert.equal(report.buildings[0].stage, 'photo-informed-partial');
+});
+
+test('complete procedural architecture coverage does not become photo coverage or erase the backlog', () => {
+  const {campus, data, catalog} = fixture();
+  for (const id of ['building:2', 'building:3']) Object.assign(campus.buildings.get(id).userData, {
+    refinementStatus: 'procedural', architectureFamily: 'neutral',
+    architectureSource: {match: 'no-unambiguous-source', tags: {}}, refinementSummary: 'No photo verification.',
+  });
+  const report = createCoverage(campus, data, catalog);
+  assert.equal(report.counts.architectureModelBuildingObjects, 3);
+  assert.equal(report.counts.proceduralArchitectureBuildingObjects, 2);
+  assert.equal(report.counts.photoModelBuildingObjects, 1);
+  assert.equal(report.counts.remainingBaseBuildingObjects, 0);
+  assert.equal(report.counts.remainingWorkBuildingObjects, 2);
+  assert.equal(report.allFootprintsHaveArchitecture, true);
+  assert.equal(report.allFootprintsHavePhotoModels, false);
+  assert.equal(report.completeFaithfulReplication, false);
+  assert.equal(report.buildings[1].referenceSite, null);
+  campus.buildings.get('building:2').userData.referenceSite = 'main';
+  assert.throws(() => createCoverage(campus, data, catalog), /misleading procedural/);
 });
 
 test('even complete photo-model stage coverage cannot claim measured faithful replication', () => {

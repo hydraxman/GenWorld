@@ -6,7 +6,7 @@ import puppeteer from 'puppeteer-core';
 import {createProjectServer} from './serve.mjs';
 import {REFINEMENT_SITES, REFINEMENT_VIEWS} from '../src/refinements.js';
 import {LANDMARK_SITES} from '../src/landmarks.js';
-import {checkCampusInspection, checkCampusExpansion, checkCampusZijing} from './browser-check.mjs';
+import {checkCampusInspection, checkCampusExpansion, checkCampusZijing, checkCampusArchitecture, checkCampusPhotoAppearances} from './browser-check.mjs';
 
 const root = resolve(import.meta.dirname, '..'), output = join(root, 'output');
 await mkdir(output, {recursive: true});
@@ -16,7 +16,7 @@ let browser;
 try {
   browser = await puppeteer.launch({
     executablePath: process.env.CHROME_PATH || 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
-    headless: true, args: ['--use-gl=angle', '--use-angle=d3d11'],
+    headless: true, protocolTimeout: 240000, args: ['--use-gl=angle', '--use-angle=d3d11'],
   });
   const page = await browser.newPage();
   await page.setViewport({width: 1600, height: 1000, deviceScaleFactor: 1});
@@ -44,13 +44,17 @@ try {
   await checkCampusInspection({page, frame: page, screenshots: output});
   const appearance = await checkCampusExpansion({page, frame: page, screenshots: output});
   const zijing = await checkCampusZijing({page, frame: page, screenshots: output});
+  const architecture = await checkCampusArchitecture({page, frame: page, screenshots: output});
+  const photoAppearances = await checkCampusPhotoAppearances({page, frame: page, screenshots: output});
   const coverage = await page.evaluate(() => window.campusApp.coverage);
   assert.equal(coverage.counts.mapBuildingObjects, stats.buildings);
   assert.equal(coverage.counts.photoModelBuildingObjects, stats.refined);
-  assert.equal(coverage.counts.remainingBaseBuildingObjects, stats.buildings - stats.refined);
+  assert.equal(coverage.counts.architectureModelBuildingObjects, stats.buildings);
+  assert.equal(coverage.counts.proceduralArchitectureBuildingObjects, stats.procedural);
+  assert.equal(coverage.counts.remainingBaseBuildingObjects, 0);
   assert.equal(coverage.completeFaithfulReplication, false);
   const pendingId = await page.evaluate(() =>
-    [...window.campusApp.campus.buildings.values()].find(object => object.userData.refinementStatus === 'base')?.userData.featureId);
+    [...window.campusApp.campus.buildings.values()].find(object => object.userData.refinementStatus === 'procedural')?.userData.featureId);
   if (pendingId) await page.evaluate(id => window.campusApp.select(id), pendingId);
   await page.click('#only-refined');
   assert.equal(await page.$$eval('#results button', buttons => buttons.length), stats.refined + stats.landmarks);
@@ -88,6 +92,16 @@ try {
         referencePages: building.userData.referencePages || [],
         mapSource: building.userData.mapSource,
       })));
+  const architectureIndex = await page.evaluate(() => [...window.campusApp.campus.buildings.values()]
+    .filter(root => root.userData.refinementStatus === 'procedural').map(root => ({
+      featureId: root.userData.featureId, name: root.userData.name, kind: 'building',
+      family: root.userData.architectureFamily, exportFilename: root.userData.exportFilename,
+      source: root.userData.architectureSource,
+      appearanceProfileId: root.userData.appearanceProfileId || null,
+      appearanceReferenceSite: root.userData.appearanceReferenceSite || null,
+      appearanceReferencePages: root.userData.appearanceReferencePages || [],
+      limitations: root.userData.refinementSummary,
+    })));
   await page.type('#search', '二校门');
   await page.click('#results button');
   assert.equal(await page.$eval('#selection-name', element => element.textContent), '二校门');
@@ -148,22 +162,40 @@ try {
     assert.equal(node.extras.refinementStatus, 'detailed');
     assert.ok(!node.children?.some(index => gltf.nodes[index].name === 'base'), 'Hidden base must not be exported behind the replacement');
   }
+  for (const record of architectureIndex) {
+    const node = gltf.nodes.find(item => item.extras?.featureId === record.featureId);
+    assert.equal(node.extras.refinementStatus, 'procedural');
+    assert.equal(node.extras.referenceSite, undefined);
+    assert.ok(!node.children?.some(index => gltf.nodes[index].name === 'base'));
+    const detail = gltf.nodes.find(item => item.extras?.architectureLOD && item.extras.sourceEvidence?.featureId === record.featureId);
+    assert.ok(detail, `Full architecture missing from whole-campus export: ${record.featureId}`);
+    assert.ok(detail.children.some(index => gltf.nodes[index].extras?.architectureNear));
+    assert.ok(!detail.children.some(index => gltf.nodes[index].extras?.architectureFar), 'Do not export the far shell instead of actual window openings');
+  }
   const buildingOutput = join(output, 'buildings');
   const landmarkOutput = join(output, 'landmarks');
   await mkdir(buildingOutput, {recursive: true});
   await mkdir(landmarkOutput, {recursive: true});
-  for (const record of reconstructionIndex) {
+  const architectureOutput = join(output, 'architecture');
+  await mkdir(architectureOutput, {recursive: true});
+  for (const record of [...reconstructionIndex, ...architectureIndex]) {
     await page.evaluate(id => window.campusApp.select(id), record.featureId);
-    const directory = record.kind === 'landmark' ? landmarkOutput : buildingOutput;
+    const directory = record.family ? architectureOutput : record.kind === 'landmark' ? landmarkOutput : buildingOutput;
     await downloadModel(false, directory);
     const filename = record.exportFilename || `tsinghua-${record.featureId.replace(/[^a-z0-9_-]/gi, '-')}.glb`;
-    record.glbFile = `${record.kind === 'landmark' ? 'landmarks' : 'buildings'}\\${filename}`;
+    record.glbFile = `${record.family ? 'architecture' : record.kind === 'landmark' ? 'landmarks' : 'buildings'}\\${filename}`;
     const model = await readFile(join(output, record.glbFile));
     assert.equal(model.toString('ascii', 0, 4), 'glTF');
     assert.equal(model.readUInt32LE(8), model.length);
     const single = JSON.parse(model.toString('utf8', 20, 20 + model.readUInt32LE(12)).trim());
     const rootNode = single.nodes.find(node => node.extras?.featureId === record.featureId);
     assert.ok(rootNode);
+    assert.equal(single.nodes.filter(node => node.extras?.featureId).length, 1);
+    if (record.family) {
+      assert.ok(single.nodes.some(node => node.extras?.architectureNear));
+      assert.ok(!single.nodes.some(node => node.extras?.architectureFar));
+      assert.equal(rootNode.extras.refinementStatus, 'procedural');
+    }
     assert.deepEqual(rootNode.translation || [0, 0, 0], [0, 0, 0], 'Standalone geometry must export at its local origin');
     record.glbBytes = model.length;
   }
@@ -199,8 +231,24 @@ try {
   await offline.waitForFunction(() => window.campusApp?.ready || window.campusError, {timeout: 90000});
   assert.equal(await offline.evaluate(() => window.campusApp.selectedApartment()), 17);
   assert.deepEqual(external, [], 'A direct W-apartment deep link must remain entirely offline');
+  await offline.goto(pathToFileURL(join(output, 'tsinghua-campus-offline.html')).href
+    + `?building=${encodeURIComponent(architectureIndex[0].featureId)}`, {waitUntil: 'load'});
+  await offline.waitForFunction(() => window.campusApp?.ready || window.campusError, {timeout: 90000});
+  assert.equal(await offline.evaluate(() => window.campusError), undefined);
+  assert.match(await offline.$eval('#selection-fields', element => element.textContent), /程序建筑估算/);
+  assert.equal(await offline.evaluate(() => window.campusApp.coverage.allFootprintsHaveArchitecture), true);
+  assert.deepEqual(external, [], 'Arbitrary building deep links must remain entirely offline');
+  const photoId = photoAppearances.buildings[0].featureId;
+  await offline.goto(pathToFileURL(join(output, 'tsinghua-campus-offline.html')).href
+    + `?building=${encodeURIComponent(photoId)}`, {waitUntil: 'load'});
+  await offline.waitForFunction(() => window.campusApp?.ready || window.campusError, {timeout: 90000});
+  assert.equal(await offline.evaluate(() => window.campusError), undefined);
+  assert.equal(await offline.$eval('#appearance-building', element => element.value), photoAppearances.buildings[0].id);
+  assert.match(await offline.$eval('#selection-fields', element => element.textContent), /对应照片配色/);
+  assert.deepEqual(external, [], 'Photo-guided appearance must not download or depend on the reference photograph');
   assert.deepEqual(errors, []);
-  const report = {stats, glbBytes: glb.length, offlineNetworkRequests: external.length, errors, appearance, zijing};
+  const report = {stats, glbBytes: glb.length, singleBuildingExports: reconstructionIndex.length + architectureIndex.length,
+    offlineNetworkRequests: external.length, errors, appearance, zijing, architecture, photoAppearances};
   await writeFile(join(output, 'smoke-check.json'), JSON.stringify(report, null, 2));
   await writeFile(join(output, 'campus-coverage.json'), JSON.stringify(coverage, null, 2));
   const csv = value => `"${String(value ?? '').replace(/"/g, '""')}"`;
@@ -221,17 +269,23 @@ try {
       <img loading="lazy" src="${screenshot}" alt="${escape(view.label)}模型截图"><h2>${escape(view.label)}</h2></a>
       <p>${stage} · <a href="reference-photos.html#${encodeURIComponent(source.referenceSite)}">对照实景照片</a></p></article>`;
   });
+  for (const record of photoAppearances.buildings) cards.push(`<article class="card"><a class="model"
+    href="tsinghua-campus-offline.html?building=${encodeURIComponent(record.featureId)}">
+    <img loading="lazy" src="campus-photo-${record.id}-desktop.png" alt="${escape(record.name)}照片配色估算截图">
+    <h2>${escape(record.name)}</h2></a><p>程序估算 · 对应照片配色／局部特征，非逐面复原 ·
+    <a href="reference-photos.html#${record.source}">查看照片依据与未知项</a></p></article>`);
   await writeFile(join(output, 'campus-reconstruction-gallery.html'), `<!doctype html><html lang="zh-CN">
     <meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>清华校园 · 已重建建筑</title>
     <style>body{font:15px/1.7 "Microsoft YaHei",sans-serif;background:#f1f3ee;color:#2a3d35;max-width:1500px;margin:35px auto;padding:0 24px}h1{margin:0}a{color:inherit}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin-top:24px}.card{display:block;background:white;border:1px solid #d8dfd3;border-radius:12px;overflow:hidden}.model{display:block;text-decoration:none}.card:hover{border-color:#866b96}.card img{display:block;width:100%;aspect-ratio:8/5;object-fit:contain}.card h2{font-size:18px;margin:12px 18px 0}.card p{font-size:12px;color:#6f7c6d;margin:3px 18px 17px}.note{font-size:12px;color:#75806f}</style>
     <h1>清华校园 · 已重建建筑与地标</h1><p>当前 ${stats.reconstructedSites} 处地点，${stats.refined} 个地图轮廓及 ${stats.landmarks} 个独立地标。点击图片打开该处三维视角。</p>
-    <p class="note">还有 ${coverage.counts.remainingBaseBuildingObjects} 个基模、${coverage.counts.partialPhotoModelBuildingObjects} 个局部重建对象待完善；全校园尚未完整复刻。截图来自实际工作台，具体限制见模型说明与参考图库。</p>
+    <p class="note">全部${stats.buildings}个冻结轮廓已有建筑结构，其中${stats.procedural}个为程序估算，单列${photoAppearances.count}个对应照片配色／局部特征；还有${coverage.counts.partialPhotoModelBuildingObjects}个照片模型仅做了局部。覆盖不等于完整复刻。截图来自实际工作台，具体限制见模型说明与参考图库。</p>
     <p><a href="tsinghua-campus-offline.html">打开全校园工作台</a> · <a href="reference-photos.html">本地参考照片</a> · <a href="campus-backlog.csv">剩余建筑清单</a></p>
     <div class="grid">${cards.join('')}</div></html>`);
   await writeFile(join(output, 'reconstruction-index.json'), JSON.stringify({
     batch: 6, storage: 'current project only; no OneDrive delivery',
     limitations: 'Photo-informed estimates, not surveyed geometry. Reference photos are not model textures.',
     buildings: reconstructionIndex.filter(record => record.kind === 'building'),
+    proceduralArchitecture: architectureIndex,
     landmarks: reconstructionIndex.filter(record => record.kind === 'landmark'),
   }, null, 2));
   await page.bringToFront();

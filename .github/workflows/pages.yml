@@ -35,6 +35,7 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - run: npm --prefix projects/tsinghua-campus ci --ignore-scripts
       - run: npm run test:knowledge
       - run: npm run test:wind
       - name: Check campus reconstruction invariants
@@ -48,6 +49,9 @@ jobs:
           projects/tsinghua-campus/tests/zijing.test.mjs
           projects/tsinghua-campus/tests/zijing-dining.test.mjs
           projects/tsinghua-campus/tests/coverage.test.mjs
+          projects/tsinghua-campus/tests/campus-architecture.test.mjs
+          projects/tsinghua-campus/tests/photo-appearance.test.mjs
+          projects/tsinghua-campus/tests/reference-catalog.test.mjs
       - run: npm run test:pages
       - run: npm run build:pages
       - name: Update Pages branch

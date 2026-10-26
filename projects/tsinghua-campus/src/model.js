@@ -172,6 +172,7 @@ export function disposeOwnedDetail(detail) {
   detail.traverse(object => {
     if (object.geometry) geometries.add(object.geometry);
     if (object.isMesh) for (const material of Array.isArray(object.material) ? object.material : [object.material]) {
+      if (material.userData.sharedCampusMaterial) continue;
       materials.add(material);
       for (const value of Object.values(material)) if (value?.isTexture) textures.add(value);
     }
