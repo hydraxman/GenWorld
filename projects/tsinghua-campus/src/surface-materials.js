@@ -48,6 +48,16 @@ export function createGlazingMaterial(name) {
     ior: 1.5, specularIntensity: 1, envMapIntensity: 1.2, side: THREE.DoubleSide});
 }
 
+export function createLawnMaterial() {
+  const textures = surfaceTextures('Original procedural lawn', (u, v) => {
+    const broad = Math.sin(u * Math.PI * 2 + Math.sin(v * Math.PI * 2));
+    const grain = Math.sin(Math.floor(u * 128) * 127.1 + Math.floor(v * 128) * 311.7);
+    return {color: [115, 147, 90].map(value => value + broad * 2 + grain * 3), height: grain * .012};
+  });
+  return new THREE.MeshStandardMaterial({name: 'Mapped green space; original non-photographic lawn surface',
+    color: '#ffffff', ...textures, roughness: .97, normalScale: new THREE.Vector2(.08, .08), side: THREE.DoubleSide});
+}
+
 export function createEstimatedFacade() {
   const textures = surfaceTextures('Estimated base facade', (u, v) => {
     const window = u > .19 && u < .81 && v > .24 && v < .82;

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import * as THREE from 'three';
-import {fitInspectionView, fitInspectionShadow} from '../src/inspection-view.js';
+import {fitInspectionView, fitInspectionShadow, updateInspectionClipping} from '../src/inspection-view.js';
 
 function assertContained(camera, box, width, height, region) {
   for (const x of [box.min.x, box.max.x]) for (const y of [box.min.y, box.max.y]) {
@@ -80,4 +80,20 @@ test('invalid framing inputs fail explicitly instead of corrupting the camera', 
   }
   assert.throws(() => fitInspectionView(camera, new THREE.Box3(), options), /nonempty/);
   assert.throws(() => fitInspectionShadow(new THREE.DirectionalLight(), new THREE.Box3()), /nonempty/);
+});
+
+test('orbit clipping preserves distant ground depth separation without cutting the focused object', () => {
+  const camera = new THREE.PerspectiveCamera(40, 1, 1, 30000);
+  for (const distance of [12, 100, 1000, 5000, 13000]) {
+    camera.position.set(0, distance * .6, distance * .8);
+    updateInspectionClipping(camera, new THREE.Vector3());
+    assert.ok(camera.near <= distance * .021);
+    assert.ok(camera.near >= .2);
+    const depthStepMeters = distance * distance / (2 ** 24 * camera.near);
+    assert.ok(depthStepMeters < .07, `Ground layers need finer-than-7cm precision at ${distance}m`);
+  }
+  const plan = new THREE.OrthographicCamera(); plan.position.set(0, 5000, 0);
+  updateInspectionClipping(plan, new THREE.Vector3());
+  assert.equal(plan.near, 1);
+  assert.throws(() => updateInspectionClipping(camera, camera.position), /focus distance/);
 });

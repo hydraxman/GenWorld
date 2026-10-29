@@ -9,6 +9,16 @@ function corners(box) {
     [box.min.y, box.max.y].flatMap(y => [box.min.z, box.max.z].map(z => new THREE.Vector3(x, y, z))));
 }
 
+export function updateInspectionClipping(camera, target) {
+  const distance = camera.position.distanceTo(target);
+  if (!Number.isFinite(distance) || distance <= 0) throw new Error('Inspection clipping requires a finite focus distance.');
+  const near = camera.isPerspectiveCamera ? Math.max(.1, Math.min(200, distance * .02)) : 1;
+  if (camera.near !== near) {
+    camera.near = near;
+    camera.updateProjectionMatrix();
+  }
+}
+
 export function fitInspectionView(camera, box, {width, height, region, padding = 1.15, direction = [0.33, 0.92, 1.1]}) {
   if (![width, height, padding].every(v => Number.isFinite(v) && v > 0) ||
       !region || ![region.x, region.y, region.width, region.height].every(Number.isFinite) ||
@@ -42,6 +52,7 @@ export function fitInspectionView(camera, box, {width, height, region, padding =
   // Shift the optical centre, not the model, into the unobstructed canvas region.
   camera.setViewOffset(width, height,
     width / 2 - region.x - region.width / 2, height / 2 - region.y - region.height / 2, width, height);
+  updateInspectionClipping(camera, center);
   camera.updateProjectionMatrix();
   camera.updateMatrixWorld(true);
   return center;

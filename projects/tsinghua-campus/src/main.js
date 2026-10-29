@@ -1,19 +1,19 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
-import {GLTFExporter} from 'three/addons/exporters/GLTFExporter.js';
 import data from '../data/campus.json';
 import {createCampusModel} from './model.js';
-import {applyCampusRefinements, REFINEMENT_VIEWS} from './refinements.js';
+import {buildCampusRefinements, REFINEMENT_SITES, REFINEMENT_VIEWS} from './refinements.js';
 import {applyCampusLandmarks, LANDMARK_SITES} from './landmarks.js';
 import {createCoverage} from './coverage.js';
 import catalog from './reference-catalog.js';
 import {viewBounds} from './view-bounds.js';
-import {fitInspectionView, fitInspectionShadow} from './inspection-view.js';
+import {fitInspectionView, fitInspectionShadow, updateInspectionClipping} from './inspection-view.js';
 import {createCampusDaylight} from './daylight.js';
 import {createCampusRenderPipeline} from './render-pipeline.js';
 import {ZIJING_APARTMENTS} from './zijing-sources.js';
 import {applyCampusArchitecture, prepareArchitectureExport, ARCHITECTURE_FAMILIES} from './campus-architecture.js';
 import {PHOTO_APPEARANCES} from './photo-appearance.js';
+import {buildCampusLandscape} from './landscape.js';
 
 const $ = id => document.getElementById(id);
 const outputPrefix = location.pathname.endsWith('/tsinghua-campus-offline.html') ? '' : 'output/';
@@ -35,26 +35,71 @@ function save(bytes, name, type) {
   setTimeout(() => URL.revokeObjectURL(url), 60000);
 }
 
-function main() {
-  const renderer = new THREE.WebGLRenderer({canvas: $('scene'), antialias: true, preserveDrawingBuffer: true});
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75));
+const nextPaint = () => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+function loading(text, progress) {
+  $('loading-text').textContent = text;
+  $('loading-progress').value = progress;
+}
+
+async function main() {
+  performance.mark('campus-start');
+  await nextPaint();
+  const renderer = new THREE.WebGLRenderer({canvas: $('scene'), antialias: true});
+  const compact = window.matchMedia('(max-width: 850px)');
+  renderer.setPixelRatio(Math.min(devicePixelRatio, compact.matches ? 1.5 : 1.75));
   const scene = new THREE.Scene();
   const sun = createCampusDaylight(renderer, scene);
   const drawScene = createCampusRenderPipeline(renderer, scene);
   const campus = createCampusModel(data);
-  const refinedIds = applyCampusRefinements(campus, data);
-  const architectureIds = applyCampusArchitecture(campus, data);
+  scene.add(campus.group);
+  const previewCamera = new THREE.PerspectiveCamera(40, 1, 1, 30000);
+  const width = $('workspace').clientWidth, height = $('workspace').clientHeight;
+  renderer.setSize(width, height, false);
+  fitInspectionView(previewCamera, new THREE.Box3().setFromObject(campus.group), {width, height,
+    region: {x: 0, y: 0, width, height}});
+  sun.castShadow = false;
+  renderer.render(scene, previewCamera);
+  performance.mark('campus-map-visible');
+  loading('地图已显示，正在构建照片参照建筑…', 20);
+  await nextPaint();
+  const refinedIds = [];
+  let sliceStarted = performance.now();
+  for (const id of buildCampusRefinements(campus, data)) {
+    refinedIds.push(id);
+    if (performance.now() - sliceStarted > 32) {
+      loading(`正在构建照片参照建筑 ${refinedIds.length} / ${REFINEMENT_SITES.length}`, 20 + 55 * refinedIds.length / REFINEMENT_SITES.length);
+      await nextPaint();
+      sliceStarted = performance.now();
+    }
+  }
+  performance.mark('campus-photo-models-built');
+  loading('正在准备完整目录与轻量远景；近景细节按需构建…', 80);
+  await nextPaint();
+  const architectureIds = applyCampusArchitecture(campus, data, {deferNear: true});
   const landmarkIds = applyCampusLandmarks(campus, data);
+  loading('正在铺设地图操场、草坪与树木…', 90);
+  await nextPaint();
+  const landscapeStages = buildCampusLandscape(campus, data);
+  let landscapeStage = landscapeStages.next(), landscapeBuilt = 0;
+  sliceStarted = performance.now();
+  while (!landscapeStage.done) {
+    landscapeBuilt++;
+    if (performance.now() - sliceStarted > 32) {
+      loading(`正在铺设地图运动场 ${landscapeBuilt}，准备草坪与树木…`, 90 + Math.min(7, landscapeBuilt / 6));
+      await nextPaint(); sliceStarted = performance.now();
+    }
+    landscapeStage = landscapeStages.next();
+  }
+  const landscapeStats = landscapeStage.value;
   const refinedSiteCount = new Set(refinedIds.map(id => campus.buildings.get(id).userData.referenceSite)).size;
   const siteCount = refinedSiteCount + landmarkIds.length;
   const coverage = createCoverage(campus, data, catalog);
-  scene.add(campus.group);
   const bounds = new THREE.Box3().setFromObject(campus.group);
   const center = bounds.getCenter(new THREE.Vector3());
   const size = bounds.getSize(new THREE.Vector3());
   const span = Math.max(size.x, size.z);
   const ground = new THREE.Mesh(new THREE.PlaneGeometry(span * 5, span * 5),
-    new THREE.MeshStandardMaterial({color: '#e7ecde', roughness: 1}));
+    new THREE.MeshStandardMaterial({color: '#edf0e3', roughness: 1}));
   ground.rotation.x = -Math.PI / 2;
   ground.position.set(center.x, -0.4, center.z);
   ground.receiveShadow = true;
@@ -78,11 +123,12 @@ function main() {
   const buildings = [...campus.buildings.entries()];
   const objects = [...campus.objects.entries()];
   let framedBounds = null, framedPadding = 1.3;
-  const compact = window.matchMedia('(max-width: 850px)');
   $('contact-shadows').checked = !compact.matches;
   let contactShadowsActive = false;
   function draw() {
+    updateInspectionClipping(camera, controls.target);
     campus.updateArchitectureLOD(camera, $('architecture-details').checked);
+    sun.castShadow = !planMode && framedBounds && framedBounds.getSize(new THREE.Vector3()).length() < 600;
     contactShadowsActive = $('contact-shadows').checked && !planMode && framedBounds &&
       framedBounds.getSize(new THREE.Vector3()).length() < 600;
     drawScene(camera, Boolean(contactShadowsActive));
@@ -162,6 +208,7 @@ function main() {
   function select(id, focus = false, apartmentNumber = null) {
     const building = campus.objects.get(id);
     if (!building) throw new Error(`Campus object not found: ${id}`);
+    if (campus.buildings.has(id)) campus.ensureArchitectureDetail(id);
     if (!building.visible) {
       $('only-refined').checked = false;
       $('architecture-family').value = '';
@@ -174,6 +221,7 @@ function main() {
     if (number !== null && !part) throw new Error(`Apartment ${number} is not part of ${id}`);
     selected = building;
     selectedPart = part;
+    $('sports-ground').value = '';
     $('zijing-apartment').value = part ? String(number) : '';
     if (compact.matches) panel(inspector, $('toggle-inspector'), false);
     highlight.box.setFromObject(building);
@@ -299,25 +347,44 @@ function main() {
     $('results').replaceChildren(list);
   }
   async function exportModel(whole = true) {
+    const exportSelection = selected, exportPart = selectedPart;
+    const layerVisibility = new Map(Object.values(campus.layers).map(layer => [layer.name, layer.visible]));
+    const rootVisibility = new Map([...campus.objects].map(([id, object]) => [id, object.visible]));
     message('正在导出可编辑 GLB…', false, true);
     $('export-all').disabled = $('export-building').disabled = true;
     try {
-      const object = whole ? campus.group.clone(true) : selected?.clone(!selectedPart);
+      const ids = whole ? architectureIds.filter(id => campus.layers.building.visible && rootVisibility.get(id))
+        : exportSelection ? [exportSelection.userData.featureId] : [];
+      let sliceStarted = performance.now();
+      for (const [index, id] of ids.entries()) {
+        if (campus.buildings.has(id)) campus.ensureArchitectureDetail(id);
+        if (performance.now() - sliceStarted > 32) {
+          message(`正在准备完整导出细节 ${index + 1} / ${ids.length}…`, false, true);
+          await nextPaint();
+          sliceStarted = performance.now();
+        }
+      }
+      const {GLTFExporter} = await import('three/addons/exporters/GLTFExporter.js');
+      const object = whole ? campus.group.clone(true) : exportSelection?.clone(!exportPart);
       if (!object) throw new Error('请先选择建筑或地标。');
-      if (!whole && selectedPart) {
-        object.add(selectedPart.clone(true));
-        Object.assign(object.userData, {selectedApartmentNumber: selectedPart.userData.apartmentNumber,
+      if (whole) {
+        for (const layer of object.children) if (layerVisibility.has(layer.name)) layer.visible = layerVisibility.get(layer.name);
+        object.traverse(root => {if (rootVisibility.has(root.userData.featureId)) root.visible = rootVisibility.get(root.userData.featureId);});
+      }
+      if (!whole && exportPart) {
+        object.add(exportPart.clone(true));
+        Object.assign(object.userData, {selectedApartmentNumber: exportPart.userData.apartmentNumber,
           exportScope: 'Logical apartment within original frozen map root; source footprint identity is preserved.',
           sourceRootFootprintArea: object.userData.footprintArea,
-          footprintArea: selectedPart.userData.footprintArea,
-          apartmentNumbers: [selectedPart.userData.apartmentNumber]});
+          footprintArea: exportPart.userData.footprintArea,
+          apartmentNumbers: [exportPart.userData.apartmentNumber]});
       }
       if (!whole) object.position.set(0, 0, 0);
       prepareArchitectureExport(object);
       object.updateMatrixWorld(true);
       const bytes = await new GLTFExporter().parseAsync(object, {binary: true, onlyVisible: true});
-      save(bytes, whole ? 'tsinghua-campus-refined.glb' : selectedPart ? `tsinghua-zijing-${selectedPart.userData.apartmentNumber}.glb` : selected.userData.exportFilename
-        || `tsinghua-${selected.userData.featureId.replace(/[^a-z0-9_-]/gi, '-')}.glb`, 'model/gltf-binary');
+      save(bytes, whole ? 'tsinghua-campus-refined.glb' : exportPart ? `tsinghua-zijing-${exportPart.userData.apartmentNumber}.glb` : exportSelection.userData.exportFilename
+        || `tsinghua-${exportSelection.userData.featureId.replace(/[^a-z0-9_-]/gi, '-')}.glb`, 'model/gltf-binary');
       message('GLB 已导出。使用米制坐标；校园导出包含当前开启图层及筛选后可见对象。');
       return bytes.byteLength;
     } catch (error) {
@@ -372,6 +439,40 @@ function main() {
     if (planMode) mode(false);
     select(profile.featureId, true);
   });
+  function selectGround(id) {
+    const ground = campus.sports.get(id);
+    if (!ground) throw new Error(`Unknown mapped sports ground: ${id}`);
+    if (planMode) mode(false);
+    campus.layers.sports.visible = true;
+    document.querySelector('[data-layer="sports"]').checked = true;
+    selected = null; selectedPart = null; highlight.visible = false;
+    $('appearance-building').value = ''; $('zijing-apartment').value = '';
+    $('sports-ground').value = id;
+    $('selection-name').textContent = ground.name || '地图运动场';
+    $('selection-help').textContent = ground.limitations;
+    $('selection-fields').replaceChildren();
+    for (const [label, value] of [['地图来源', ground.id], ['运动类型', ground.sport || '未标注'],
+      ['范围依据', '冻结OSM多边形，裁切至校园边界；不新增建筑身份']]) {
+      const term = document.createElement('dt'), detail = document.createElement('dd');
+      term.textContent = label; detail.textContent = value; $('selection-fields').append(term, detail);
+    }
+    $('focus').hidden = $('export-building').hidden = true;
+    $('selected-references').hidden = false;
+    $('selected-references').href = `https://www.openstreetmap.org/way/${id.split(':').at(-1)}`;
+    const link = new URL(location.href); link.search = ''; link.searchParams.set('ground', id);
+    $('selection-link').hidden = false; $('selection-link').href = link.href;
+    if (compact.matches) panel(inspector, $('toggle-inspector'), false);
+    const [x0, z0, x1, z1] = ground.bounds;
+    frame(new THREE.Box3(new THREE.Vector3(x0, 0, z0), new THREE.Vector3(x1, 4, z1)), 1.15, [.2, 1.2, 1]);
+  }
+  const primaryGrounds = ['osm:way:32954674', 'osm:way:32954848', 'osm:way:32954864'];
+  for (const id of primaryGrounds) {
+    const ground = campus.sports.get(id);
+    if (!ground) throw new Error(`Required playground missing from frozen evidence: ${id}`);
+    const option = document.createElement('option'); option.value = id; option.textContent = ground.name;
+    $('sports-ground').append(option);
+  }
+  $('sports-ground').addEventListener('change', event => {if (event.target.value) selectGround(event.target.value);});
   $('only-refined').addEventListener('change', filterObjects);
   $('view-3d').addEventListener('click', () => mode(false));
   $('architecture-details').addEventListener('change', () => {dirty = true;});
@@ -429,6 +530,9 @@ function main() {
     + `${coverage.counts.remainingBaseBuildingObjects} 个仅有基模；${coverage.counts.partialPhotoModelBuildingObjects} 个照片模型仅做了局部。覆盖不等于真实还原。`;
   $('source-note').textContent = '北京主校区 · 冻结地图650轮廓均有建筑结构，非测绘边界或最新建筑清单。'
     + `已接入 ${siteCount} 处照片参照重建（${refinedIds.length} 个轮廓、${landmarkIds.length} 个独立地标）；隐藏立面及部分尺寸含推定。`;
+  $('landscape-note').textContent = `${landscapeStats.grounds}处地图运动场；${landscapeStats.mappedTrees}株地图树位`
+    + `＋${landscapeStats.illustrativeTrees}株绿地内示意种植。场内线、树种和冠幅非测绘；`
+    + `${landscapeStats.excludedMappedTrees}处与建筑／通行范围冲突的地图树位未展示。`;
   window.addEventListener('resize', resize);
   compact.addEventListener('change', () => {
     $('contact-shadows').checked = !compact.matches;
@@ -443,8 +547,10 @@ function main() {
   resize(); frame(bounds); search();
   const requestedBuilding = new URLSearchParams(location.search).get('building');
   const requestedView = new URLSearchParams(location.search).get('view');
-  if (requestedBuilding && requestedView) throw new Error('建筑编号与快捷视角不能同时指定。');
+  const requestedGround = new URLSearchParams(location.search).get('ground');
+  if ([requestedBuilding, requestedView, requestedGround].filter(Boolean).length > 1) throw new Error('建筑编号、操场与快捷视角不能同时指定。');
   if (requestedBuilding) select(requestedBuilding, true);
+  if (requestedGround) selectGround(requestedGround);
   if (requestedView) {
     if (/^zijing-(?:[1-9]|1\d|2[0-3])$/.test(requestedView)) selectApartment(Number(requestedView.slice(7)));
     else {
@@ -464,11 +570,11 @@ function main() {
   }
   render();
   window.campusApp = {
-    ready: true, campus, data, coverage, select, selectApartment, mode, exportModel,
+    ready: true, campus, data, coverage, select, selectApartment, selectGround, mode, exportModel,
     selectedApartment: () => selectedPart?.userData.apartmentNumber ?? null,
     stats: {buildings: buildings.length, features: data.features.length, refined: refinedIds.length, architecture: coverage.counts.architectureModelBuildingObjects,
       procedural: architectureIds.length,
-      refinedSites: refinedSiteCount, landmarks: landmarkIds.length, reconstructedSites: siteCount},
+      refinedSites: refinedSiteCount, landmarks: landmarkIds.length, reconstructedSites: siteCount, landscape: landscapeStats},
     render: draw,
     inspection: () => ({region: inspectionRegion(), camera, bounds: framedBounds.clone(),
       rendering: {environment: Boolean(scene.environment), contactShadows: Boolean(contactShadowsActive),
@@ -477,12 +583,17 @@ function main() {
         textures: renderer.info.memory.textures},
       shadowTexelMeters: (sun.shadow.camera.right - sun.shadow.camera.left) / sun.shadow.mapSize.x}),
   };
+  draw();
+  performance.mark('campus-ready');
+  $('loading').hidden = true;
+  $('workspace').setAttribute('aria-busy', 'false');
   message(`已覆盖 ${buildings.length} 个冻结建筑轮廓：${architectureIds.length} 个程序估算、${refinedIds.length} 个照片参照。覆盖不等于照片级还原。`);
 }
 
-try { main(); }
-catch (error) {
+main().catch(error => {
   console.error(error);
   window.campusError = String(error);
+  $('loading').hidden = true;
+  $('workspace').setAttribute('aria-busy', 'false');
   message(`校园模型加载失败：${error.message}。请确认数据与构建步骤已完成。`, true);
-}
+});

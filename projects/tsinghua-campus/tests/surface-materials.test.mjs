@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import * as THREE from 'three';
-import {createMasonryMaterial, createGlazingMaterial, createEstimatedFacade} from '../src/surface-materials.js';
+import {createMasonryMaterial, createGlazingMaterial, createEstimatedFacade, createLawnMaterial} from '../src/surface-materials.js';
 
 test('procedural masonry separates sRGB color from unit-vector normal data and remains deterministic', () => {
   for (const stone of [false, true]) {
@@ -33,6 +33,20 @@ test('exterior glazing uses dielectric physical reflections without pretending t
   assert.equal(glass.transparent, false);
   assert.equal(glass.transmission, 0);
   assert.equal(glass.map, null);
+});
+
+test('original lawn texture is muted, mipmapped, independently normal-mapped and avoids a strong repeated checker', () => {
+  const material = createLawnMaterial(), rgb = material.map.image.data;
+  assert.ok(material.roughness > .9);
+  assert.equal(material.map.colorSpace, THREE.SRGBColorSpace);
+  assert.equal(material.normalMap.colorSpace, THREE.NoColorSpace);
+  assert.equal(material.map.wrapS, THREE.RepeatWrapping);
+  assert.equal(material.map.minFilter, THREE.LinearMipmapLinearFilter);
+  assert.ok(material.normalScale.length() < .15);
+  for (const channel of [0, 1, 2]) {
+    const values = Array.from({length: rgb.length / 4}, (_, i) => rgb[i * 4 + channel]);
+    assert.ok(Math.max(...values) - Math.min(...values) <= 11);
+  }
 });
 
 test('estimated bays avoid cropped windows at corners and do not put windows on narrow wall fragments', () => {

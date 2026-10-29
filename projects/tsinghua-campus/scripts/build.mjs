@@ -29,7 +29,7 @@ const [html, css, bundle] = await Promise.all([
   readFile(join(root, 'assets', 'scene.js'), 'utf8'),
 ]);
 const offline = html.replace('<link rel="stylesheet" href="style.css">', () => `<style>${css}</style>`)
-  .replace('<script src="assets/scene.js"></script>', () => `<script>${bundle.replace(/<\/script/gi, '<\\/script')}</script>`);
+  .replace('<script defer src="assets/scene.js"></script>', () => `<script>${bundle.replace(/<\/script/gi, '<\\/script')}</script>`);
 await writeFile(join(root, 'output', 'tsinghua-campus-offline.html'), offline);
 await writeReferencePage(root, references, {includeImages});
 console.log(includeImages

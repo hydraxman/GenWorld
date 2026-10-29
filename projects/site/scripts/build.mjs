@@ -8,6 +8,7 @@ import { scenes } from '../src/scenes.js';
 const site = path.resolve(import.meta.dirname, '..');
 const repository = path.resolve(site, '..', '..');
 export const output = path.join(repository, 'output', 'pages');
+export let publishedCampusChunks = [];
 
 async function copy(source, destination) {
   await mkdir(path.dirname(destination), { recursive: true });
@@ -52,7 +53,7 @@ export async function buildSite() {
     ['node_modules/p5/lib/p5.js', 'scenes/wind-print/vendor/p5.js'],
     ['node_modules/p5/license.txt', 'scenes/wind-print/vendor/LICENSE.txt'],
   ]) await copy(path.join(repository, source), path.join(output, destination));
-  for (const file of ['campus.json', 'provenance.json', 'gongzi-source.json', 'second-gate-anchor.json', 'old-library-match.json']) {
+  for (const file of ['campus.json', 'provenance.json', 'gongzi-source.json', 'second-gate-anchor.json', 'old-library-match.json', 'landscape-evidence.json']) {
     await copy(path.join(repository, 'projects', 'tsinghua-campus', 'data', file),
       path.join(output, 'scenes', 'campus', 'data', file));
   }
@@ -66,10 +67,13 @@ export async function buildSite() {
   }
   await buildKnowledgePages(path.join(output, 'scenes', 'knowledge'));
   for (const project of ['courtyard', 'tsinghua-campus']) {
-    await build({
+    const campus = project === 'tsinghua-campus';
+    const result = await build({
       entryPoints: [path.join(repository, 'projects', project, 'src', 'main.js')],
-      outfile: path.join(output, 'scenes', project === 'tsinghua-campus' ? 'campus' : project, 'assets', 'scene.js'),
-      bundle: true, minify: true, format: 'iife', target: 'chrome120',
+      outfile: campus ? undefined : path.join(output, 'scenes', project, 'assets', 'scene.js'),
+      outdir: campus ? path.join(output, 'scenes', 'campus', 'assets') : undefined, entryNames: 'scene',
+      bundle: true, minify: true, format: campus ? 'esm' : 'iife', splitting: campus,
+      chunkNames: 'chunks/[name]-[hash]', metafile: campus, target: 'chrome120',
       define: { __PHOTO_SITE_COUNT__: '0' },
       legalComments: 'inline',
       plugins: [{ name: 'published-runtime-dependencies', setup(context) {
@@ -77,6 +81,13 @@ export async function buildSite() {
           ({ path: fileURLToPath(import.meta.resolve(args.path)) }));
       } }],
     });
+    if (campus) {
+      publishedCampusChunks = Object.keys(result.metafile.outputs).map(file => path.relative(output, path.resolve(file)).split(path.sep).join('/'))
+        .filter(file => file !== 'scenes/campus/assets/scene.js').sort();
+      const html = path.join(output, 'scenes', 'campus', 'index.html');
+      await writeFile(html, (await readFile(html, 'utf8')).replace(
+        '<script defer src="assets/scene.js"></script>', '<script type="module" src="assets/scene.js"></script>'));
+    }
   }
   await build({
     entryPoints: [path.join(site, 'src', 'preview.js')], outfile: path.join(output, 'preview.js'),

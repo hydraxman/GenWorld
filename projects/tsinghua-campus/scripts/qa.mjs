@@ -6,7 +6,7 @@ import puppeteer from 'puppeteer-core';
 import {createProjectServer} from './serve.mjs';
 import {REFINEMENT_SITES, REFINEMENT_VIEWS} from '../src/refinements.js';
 import {LANDMARK_SITES} from '../src/landmarks.js';
-import {checkCampusInspection, checkCampusExpansion, checkCampusZijing, checkCampusArchitecture, checkCampusPhotoAppearances} from './browser-check.mjs';
+import {checkCampusInspection, checkCampusExpansion, checkCampusZijing, checkCampusArchitecture, checkCampusPhotoAppearances, checkCampusLandscape} from './browser-check.mjs';
 
 const root = resolve(import.meta.dirname, '..'), output = join(root, 'output');
 await mkdir(output, {recursive: true});
@@ -41,6 +41,7 @@ try {
   assert.equal(stats.invalid, 0);
   assert.equal(stats.refined, REFINEMENT_SITES.length);
   assert.equal(stats.landmarks, LANDMARK_SITES.length);
+  const landscape = await checkCampusLandscape({page, frame: page, screenshots: output});
   await checkCampusInspection({page, frame: page, screenshots: output});
   const appearance = await checkCampusExpansion({page, frame: page, screenshots: output});
   const zijing = await checkCampusZijing({page, frame: page, screenshots: output});
@@ -248,7 +249,7 @@ try {
   assert.deepEqual(external, [], 'Photo-guided appearance must not download or depend on the reference photograph');
   assert.deepEqual(errors, []);
   const report = {stats, glbBytes: glb.length, singleBuildingExports: reconstructionIndex.length + architectureIndex.length,
-    offlineNetworkRequests: external.length, errors, appearance, zijing, architecture, photoAppearances};
+    offlineNetworkRequests: external.length, errors, appearance, zijing, architecture, photoAppearances, landscape};
   await writeFile(join(output, 'smoke-check.json'), JSON.stringify(report, null, 2));
   await writeFile(join(output, 'campus-coverage.json'), JSON.stringify(coverage, null, 2));
   const csv = value => `"${String(value ?? '').replace(/"/g, '""')}"`;

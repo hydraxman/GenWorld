@@ -21,6 +21,26 @@ test('local projection uses meters, east +X and north -Z', () => {
   assert.throws(() => project([NaN, 40], center), /finite/);
 });
 
+test('mapped lawn uses meter-scaled world UVs while semantic surface depth offsets remain ordered', () => {
+  const data = dataset();
+  for (const kind of ['campus', 'green', 'water', 'road']) data.features.push({
+    ...structuredClone(feature), id: `surface:${kind}`, properties: {kind}, geometry: {type: 'Polygon', coordinates: [outer, hole]},
+  });
+  const campus = createCampusModel(data), lawn = campus.layers.green.children[0];
+  assert.ok(lawn.material.map && lawn.material.normalMap);
+  const {position, uv} = lawn.geometry.attributes;
+  for (let i = 0; i < position.count; i++) {
+    assert.ok(Math.abs(uv.getX(i) - position.getX(i) / 12) < 1e-4);
+    assert.ok(Math.abs(uv.getY(i) - position.getZ(i) / 12) < 1e-4);
+  }
+  for (const [index, kind] of ['campus', 'green', 'water', 'road'].entries()) {
+    const surface = campus.layers[kind].children[0];
+    assert.equal(surface.renderOrder, index + 1);
+    assert.equal(surface.material.polygonOffset, true);
+    assert.equal(surface.material.polygonOffsetUnits, -(index + 1) * 4);
+  }
+});
+
 test('extrusions preserve courtyard holes and raised base height', () => {
   const data = dataset();
   const original = JSON.stringify(data);

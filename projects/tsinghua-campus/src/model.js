@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
 import {footprintMetrics, lines, polygons, project} from './geo.js';
-import {createEstimatedFacade} from './surface-materials.js';
+import {createEstimatedFacade, createLawnMaterial} from './surface-materials.js';
 
 function shapeFromRings(rings, origin = [0, 0]) {
   const path = ring => ring.map(([x, z]) => new THREE.Vector2(x - origin[0], -z + origin[1]));
@@ -72,12 +72,16 @@ export function createCampusModel(data) {
   const materials = {
     wall: facade.material,
     roof: new THREE.MeshStandardMaterial({color: '#dedbd1', roughness: 0.94}),
-    campus: new THREE.MeshStandardMaterial({color: '#bcc5ad', roughness: 1, side: THREE.DoubleSide}),
-    green: new THREE.MeshStandardMaterial({color: '#71935e', roughness: 1, side: THREE.DoubleSide}),
-    water: new THREE.MeshStandardMaterial({color: '#62a2b2', roughness: 0.62, side: THREE.DoubleSide}),
-    road: new THREE.MeshStandardMaterial({color: '#b7b3ab', roughness: 1, side: THREE.DoubleSide}),
+    campus: new THREE.MeshStandardMaterial({color: '#d3dac3', roughness: 1, side: THREE.DoubleSide}),
+    green: createLawnMaterial(),
+    water: new THREE.MeshStandardMaterial({color: '#62a2b2', roughness: .4, metalness: 0, side: THREE.DoubleSide}),
+    road: new THREE.MeshStandardMaterial({color: '#d4cfc1', roughness: 1, side: THREE.DoubleSide}),
     edge: new THREE.LineBasicMaterial({color: '#656960', transparent: true, opacity: 0.38}),
   };
+  for (const [index, kind] of ['campus', 'green', 'water', 'road'].entries()) {
+    Object.assign(materials[kind], {polygonOffset: true, polygonOffsetFactor: -1,
+      polygonOffsetUnits: -(index + 1) * 4});
+  }
   const buildings = new Map();
   const surfacePieces = {campus: [], green: [], water: [], road: []};
   const ids = new Set();
@@ -132,10 +136,20 @@ export function createCampusModel(data) {
     if (!pieces.length) continue;
     // Use non-indexed geometry because roads and triangulated polygons differ.
     const normalized = pieces.map(piece => piece.index ? piece.toNonIndexed() : piece);
-    for (const geometry of normalized) geometry.deleteAttribute('uv');
+    for (const geometry of normalized) {
+      if (kind !== 'green') geometry.deleteAttribute('uv');
+      else {
+        const position = geometry.attributes.position, uv = new Float32Array(position.count * 2);
+        for (let i = 0; i < position.count; i++) {
+          uv[i * 2] = position.getX(i) / 12; uv[i * 2 + 1] = position.getZ(i) / 12;
+        }
+        geometry.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
+      }
+    }
     const geometry = mergeGeometries(normalized);
     if (!geometry) throw new Error(`Cannot merge ${kind} surface geometry.`);
     const mesh = new THREE.Mesh(geometry, materials[kind]);
+    mesh.renderOrder = ['campus', 'green', 'water', 'road'].indexOf(kind) + 1;
     mesh.receiveShadow = true;
     layers[kind].add(mesh);
     new Set([...pieces, ...normalized]).forEach(piece => piece.dispose());

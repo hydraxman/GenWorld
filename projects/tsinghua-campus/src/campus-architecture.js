@@ -189,7 +189,7 @@ function photoEntrance(B, group, edge, center, spec, M, roof) {
   }
 }
 
-export function createArchitectureDetail(feature, center, origin, palette) {
+export function createArchitectureDetail(feature, center, origin, palette, {deferNear = false} = {}) {
   const metrics = footprintMetrics(feature.geometry, center), spec = architectureSpec(feature), profile = spec.appearance;
   const M = profile ? palette.forProfile(profile) : palette.M;
   if (!origin?.every((value, i) => Number.isFinite(value) && Math.abs(value - metrics.origin[i]) < 1e-6)) {
@@ -229,14 +229,16 @@ export function createArchitectureDetail(feature, center, origin, palette) {
     ? new THREE.Vector2(profile.inspectionDirection[0], profile.inspectionDirection[2]).normalize().toArray()
     : entranceEdge?.normal;
   for (const [polygonIndex, rings] of polygons.entries()) {
-    prism(B, structure, rings, bottom, baseY, M.plinth);
-    prism(B, roof, rings, roofY - .14, roofY, M.roof);
-    if (profile?.roofRise) {
+    if (!deferNear) {
+      prism(B, structure, rings, bottom, baseY, M.plinth);
+      prism(B, roof, rings, roofY - .14, roofY, M.roof);
+    }
+    if (!deferNear && profile?.roofRise) {
       if (rings.length !== 1) throw new Error('Photo-guided pitched roof cannot close an unknown courtyard.');
       pitchedRoof(B, roof, rings[0], edgeSets[polygonIndex][0], roofY,
         {white: M.trim, frame: M.frame}, M.roof, {rise: profile.roofRise, edgeRadius: 0});
     }
-    if (spec.family === 'grandstand') {
+    if (!deferNear && spec.family === 'grandstand') {
       const front = edgeSets[polygonIndex][0].reduce((a, b) => a.length > b.length ? a : b);
       const {a, tangent: t, normal: n} = front;
       const depth = Math.max(...rings[0].map(p => -((p[0] - a[0]) * n[0] + (p[1] - a[1]) * n[1])));
@@ -249,18 +251,20 @@ export function createArchitectureDetail(feature, center, origin, palette) {
         for (const polygon of pieces) prism(B, structure, polygon, baseY, baseY + (roofY - baseY) * .55 * (tier + 1) / 6, M.trim);
       }
     }
-    for (let level = 1; level < floors && !open; level++) {
+    for (let level = 1; level < floors && !open && !deferNear; level++) {
       prism(B, structure, rings, baseY + level * storey - .12, baseY + level * storey, M.trim);
     }
     for (const [ringIndex, edges] of edgeSets[polygonIndex].entries()) for (const edge of edges) {
       const {a, tangent: t, normal: n, length: L, yaw} = edge;
       const p = (x, y, depth = 0) => [a[0] + t[0] * x + n[0] * depth, y, a[1] + t[1] * x + n[1] * depth];
       const face = (g, mat, x0, x1, y0, y1, depth = 0, normal = [n[0], 0, n[1]]) => {
-        if (x1 - x0 > .0001 && y1 - y0 > .0001) panels.quad(g, mat,
+        if (!deferNear && x1 - x0 > .0001 && y1 - y0 > .0001) panels.quad(g, mat,
           [p(x0, y0, depth), p(x1, y0, depth), p(x1, y1, depth), p(x0, y1, depth)], normal);
       };
-      const box = (g, mat, x, y, depth, width, height, thickness) => B.box(g, '',
-        ...[p(x, y, depth)[0], y, p(x, y, depth)[2]], width, height, thickness, mat, yaw);
+      const box = (g, mat, x, y, depth, width, height, thickness) => {
+        if (!deferNear) B.box(g, '', ...[p(x, y, depth)[0], y, p(x, y, depth)[2]],
+          width, height, thickness, mat, yaw);
+      };
       if (open) {
         const count = Math.max(1, Math.floor(L / 5));
         for (let i = 0; i < count; i++) box(structure, M.trim, (i + .5) * L / count, (baseY + roofY) / 2, -.25,
@@ -320,31 +324,33 @@ export function createArchitectureDetail(feature, center, origin, palette) {
               if (normal.dot(new THREE.Vector3(n[0], 0, n[1])) < 0) points.reverse();
               farWindow(points);
             }
-            for (const [y, sign] of [[y0, 1], [y1, -1]]) panels.quad(windows, mat,
-              [p(x0, y), p(x1, y), p(x1, y, -.24), p(x0, y, -.24)], [0, sign, 0]);
-            for (const [xEdge, sign] of [[x0, 1], [x1, -1]]) panels.quad(windows, mat,
-              [p(xEdge, y0), p(xEdge, y1), p(xEdge, y1, -.24), p(xEdge, y0, -.24)], [t[0] * sign, 0, t[1] * sign]);
-            for (const [left, right, low, high] of [
-              [x0, x0 + .065, y0, y1], [x1 - .065, x1, y0, y1],
-              [x - .025, x + .025, y0, y1],
-            ]) face(windows, M.frame, left, right, low, high, -.05);
-            if (door) face(windows, M.frame, x0, x1, y0, y0 + .065, -.05);
-            if (style === 'lattice') for (const fraction of [.33, .67]) {
-              const y = y0 + (y1 - y0) * fraction;
-              face(windows, M.frame, x0, x1, y - .025, y + .025, -.04);
-            }
-            if (style === 'sunshade' && !door) {
-              box(windows, M.frame, x, y1 + .08, .23, width + .2, .065, .55);
-            }
-            if (!door) {
-              const a = p(x0 - .05, y0 - .005, -.20), b = p(x1 + .05, y0 - .005, -.20);
-              const c = p(x1 + .05, y0 - .005, .14), d = p(x0 - .05, y0 - .005, .14);
-              const e = p(x0 - .05, y0 - .075, .14), f = p(x1 + .05, y0 - .075, .14);
-              panels.quad(windows, M.trim, [a, b, c, d], [0, 1, 0]);
-              panels.quad(windows, M.trim, [d, c, f, e], [n[0], 0, n[1]]);
-              panels.quad(windows, M.trim, [a, e, f, b], [0, -1, 0]);
-              panels.quad(windows, M.trim, [a, d, e], [-t[0], 0, -t[1]]);
-              panels.quad(windows, M.trim, [b, f, c], [t[0], 0, t[1]]);
+            if (!deferNear) {
+              for (const [y, sign] of [[y0, 1], [y1, -1]]) panels.quad(windows, mat,
+                [p(x0, y), p(x1, y), p(x1, y, -.24), p(x0, y, -.24)], [0, sign, 0]);
+              for (const [xEdge, sign] of [[x0, 1], [x1, -1]]) panels.quad(windows, mat,
+                [p(xEdge, y0), p(xEdge, y1), p(xEdge, y1, -.24), p(xEdge, y0, -.24)], [t[0] * sign, 0, t[1] * sign]);
+              for (const [left, right, low, high] of [
+                [x0, x0 + .065, y0, y1], [x1 - .065, x1, y0, y1],
+                [x - .025, x + .025, y0, y1],
+              ]) face(windows, M.frame, left, right, low, high, -.05);
+              if (door) face(windows, M.frame, x0, x1, y0, y0 + .065, -.05);
+              if (style === 'lattice') for (const fraction of [.33, .67]) {
+                const y = y0 + (y1 - y0) * fraction;
+                face(windows, M.frame, x0, x1, y - .025, y + .025, -.04);
+              }
+              if (style === 'sunshade' && !door) {
+                box(windows, M.frame, x, y1 + .08, .23, width + .2, .065, .55);
+              }
+              if (!door) {
+                const a = p(x0 - .05, y0 - .005, -.20), b = p(x1 + .05, y0 - .005, -.20);
+                const c = p(x1 + .05, y0 - .005, .14), d = p(x0 - .05, y0 - .005, .14);
+                const e = p(x0 - .05, y0 - .075, .14), f = p(x1 + .05, y0 - .075, .14);
+                panels.quad(windows, M.trim, [a, b, c, d], [0, 1, 0]);
+                panels.quad(windows, M.trim, [d, c, f, e], [n[0], 0, n[1]]);
+                panels.quad(windows, M.trim, [a, e, f, b], [0, -1, 0]);
+                panels.quad(windows, M.trim, [a, d, e], [-t[0], 0, -t[1]]);
+                panels.quad(windows, M.trim, [b, f, c], [t[0], 0, t[1]]);
+              }
             }
             const probe = {outside: p(x + width * .23, (y0 + y1) / 2, 1),
               normal: [n[0], 0, n[1]], center: p(x + width * .23, (y0 + y1) / 2, -.20)};
@@ -391,7 +397,7 @@ export function createArchitectureDetail(feature, center, origin, palette) {
     far.add(mesh);
   }
   if (profile) {
-    if (profile.entry !== 'plain') {
+    if (!deferNear && profile.entry !== 'plain') {
       const entrance = group('Photo-supported projecting entrance; dimensions and orientation estimated');
       entrance.userData.photoAppearanceEntrance = true;
       photoEntrance(B, entrance, entranceEdge, entrancePoint, spec, M, roof);
@@ -407,9 +413,10 @@ export function createArchitectureDetail(feature, center, origin, palette) {
   }
   panels.finish(); B.finish();
   roof.traverse(object => {if (object.isMesh) object.receiveShadow = false;});
-  const box = new THREE.Box3().setFromObject(near), sphere = box.getBoundingSphere(new THREE.Sphere());
+  const box = new THREE.Box3().setFromObject(deferNear ? far : near), sphere = box.getBoundingSphere(new THREE.Sphere());
+  if (deferNear) {near.visible = false; far.visible = true;}
   detail.userData = {
-    architectureLOD: true, family: spec.family, estimatedFloors: floors, floorsSource: spec.floorsSource,
+    architectureLOD: true, architectureNearPending: deferNear, family: spec.family, estimatedFloors: floors, floorsSource: spec.floorsSource,
     footprintArea: metrics.area, polygonCount: polygons.length, holeCount: polygons.reduce((sum, rings) => sum + rings.length - 1, 0),
     windowCount: windowsProbes.length, doorwayCount: doorProbes.length,
     windowProbes: windowsProbes, doorProbes, facadeSample: sample || null,
@@ -469,7 +476,7 @@ function buildFarBatches(campus, ids) {
   return {batches, instances};
 }
 
-export function applyCampusArchitecture(campus, data) {
+export function applyCampusArchitecture(campus, data, {deferNear = false} = {}) {
   const features = data.features.filter(feature => feature.properties.kind === 'building');
   if (features.length !== campus.buildings.size) throw new Error('Architecture must account for every frozen map root.');
   for (const feature of features) {
@@ -495,7 +502,7 @@ export function applyCampusArchitecture(campus, data) {
     if (!root || root.userData.featureId !== feature.id) throw new Error(`Architecture identity mismatch: ${feature.id}`);
     if (root.userData.refinementStatus === 'detailed') continue;
     if (!['base', 'procedural'].includes(root.userData.refinementStatus)) throw new Error(`Unknown architecture stage: ${feature.id}`);
-    const detail = createArchitectureDetail(feature, data.metadata.center, [root.position.x, root.position.z], state.palette);
+    const detail = createArchitectureDetail(feature, data.metadata.center, [root.position.x, root.position.z], state.palette, {deferNear});
     const previous = root.children.find(child => child.userData.campusDetail);
     if (!state.originals.has(feature.id)) state.originals.set(feature.id, {...root.userData});
     const spec = architectureSpec(feature);
@@ -519,6 +526,19 @@ export function applyCampusArchitecture(campus, data) {
   }
   for (const batch of state.far?.batches || []) {batch.mesh.removeFromParent(); batch.mesh.dispose();}
   state.far = buildFarBatches(campus, ids);
+  const featuresById = new Map(features.map(feature => [feature.id, feature]));
+  campus.ensureArchitectureDetail = id => {
+    const root = campus.buildings.get(id);
+    if (!root) throw new Error(`Unknown architecture detail: ${id}`);
+    const previous = root.children.find(child => child.userData.architectureLOD);
+    if (!previous?.userData.architectureNearPending) return previous;
+    const detail = createArchitectureDetail(featuresById.get(id), data.metadata.center,
+      [root.position.x, root.position.z], state.palette);
+    detail.userData.campusDetail = true;
+    detail.children.find(child => child.userData.architectureFar).children.forEach(mesh => {mesh.visible = false;});
+    root.remove(previous); root.add(detail); disposeOwnedDetail(previous);
+    return detail;
+  };
   campus.group.userData.proceduralBuildingIds = ids;
   campus.group.userData.levelOfDetail = 'All frozen footprints have architectural geometry; photo-informed models and unverified procedural envelopes are separate stages, not a fidelity score.';
   campus.updateArchitectureLOD = (camera, details = true) => {
@@ -527,10 +547,12 @@ export function applyCampusArchitecture(campus, data) {
     const eye = camera.getWorldPosition(new THREE.Vector3());
     for (const batch of state.far.batches) batch.visibleCount = 0;
     for (const id of ids) {
-      const root = campus.buildings.get(id), detail = root.children.find(child => child.userData.architectureLOD);
+      const root = campus.buildings.get(id);
+      let detail = root.children.find(child => child.userData.architectureLOD);
       if (!detail) continue;
       const center = new THREE.Vector3(...detail.userData.localSphere.center).add(root.position);
       const near = details && eye.distanceTo(center) - detail.userData.localSphere.radius < detail.userData.nearDistance;
+      if (near && root.visible && campus.layers.building.visible) detail = campus.ensureArchitectureDetail(id);
       detail.children.find(child => child.userData.architectureNear).visible = near;
       detail.children.find(child => child.userData.architectureFar).visible = !near;
       for (const {batch, instance} of state.far.instances.get(id)) {
@@ -549,6 +571,10 @@ export function prepareArchitectureExport(object) {
   object.traverse(detail => {
     if (detail.userData.architectureFarBatch) batches.push(detail);
     if (!detail.userData.architectureLOD) return;
+    if (detail.userData.architectureNearPending) {
+      for (let ancestor = detail; ancestor; ancestor = ancestor.parent) if (!ancestor.visible) return;
+      throw new Error('Load complete architectural details before exporting.');
+    }
     detail.children.find(child => child.userData.architectureNear).visible = true;
     detail.children.find(child => child.userData.architectureFar).visible = false;
   });
@@ -571,4 +597,5 @@ export function disposeCampusArchitecture(campus) {
   delete campus.group.userData.proceduralBuildingIds;
   campus.group.userData.levelOfDetail = state.originalLevelOfDetail;
   delete campus.updateArchitectureLOD;
+  delete campus.ensureArchitectureDetail;
 }

@@ -6,7 +6,7 @@ export const DAYLIGHT_DIRECTION = [.55, .9, .75];
 export function createCampusDaylight(renderer, scene) {
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.AgXToneMapping;
-  renderer.toneMappingExposure = .95;
+  renderer.toneMappingExposure = 1.05;
   renderer.setClearColor('#dce7ed');
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;

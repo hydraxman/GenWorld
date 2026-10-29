@@ -6,7 +6,7 @@ import puppeteer from 'puppeteer-core';
 import { output } from './build.mjs';
 import { scenes } from '../src/scenes.js';
 import { checkWindPrint } from '../../wind-print/scripts/browser-check.mjs';
-import { checkCampusInspection, checkCampusExpansion, checkCampusZijing, checkCampusArchitecture, checkCampusPhotoAppearances } from '../../tsinghua-campus/scripts/browser-check.mjs';
+import { checkCampusInspection, checkCampusExpansion, checkCampusZijing, checkCampusArchitecture, checkCampusPhotoAppearances, checkCampusLandscape } from '../../tsinghua-campus/scripts/browser-check.mjs';
 
 const screenshots = path.resolve(import.meta.dirname, '..', 'qa');
 const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript',
@@ -44,7 +44,8 @@ try {
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
   const base = process.env.PAGES_URL ?? `http://127.0.0.1:${server.address().port}/GenWorld/`;
   browser = await puppeteer.launch({ executablePath, headless: true, protocolTimeout: 180000,
-    args: ['--enable-webgl', '--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
+    args: ['--enable-webgl', '--use-gl=angle', `--use-angle=${process.env.CAMPUS_QA_ANGLE || 'swiftshader'}`,
+      '--enable-unsafe-swiftshader', '--no-proxy-server', '--disable-quic'] });
   const page = await browser.newPage();
   page.setDefaultTimeout(120000);
   page.setDefaultNavigationTimeout(120000);
@@ -85,6 +86,8 @@ try {
     } else if (scene.id === 'campus') {
       assert.ok(await frame.evaluate(() => window.campusApp.stats.buildings > 100));
       assert.equal(await frame.$eval('#references', element => element.hidden), true);
+      const landscape = await checkCampusLandscape({page, frame, screenshots});
+      await writeFile(path.join(screenshots, 'campus-landscape.json'), JSON.stringify(landscape, null, 2));
       await checkCampusInspection({page, frame, screenshots});
       const appearance = await checkCampusExpansion({page, frame, screenshots});
       const zijing = await checkCampusZijing({page, frame, screenshots});

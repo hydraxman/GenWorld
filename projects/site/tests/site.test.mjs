@@ -2,7 +2,7 @@ import test, { before } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile, readdir, access } from 'node:fs/promises';
 import path from 'node:path';
-import { buildSite, output } from '../scripts/build.mjs';
+import { buildSite, output, publishedCampusChunks } from '../scripts/build.mjs';
 import { scenes } from '../src/scenes.js';
 
 before(buildSite);
@@ -13,6 +13,7 @@ test('publishes an exact allowlist, with no research media, private files or sou
     .filter(entry => entry.isFile())
     .map(entry => path.relative(output, path.join(entry.parentPath, entry.name)).split(path.sep).join('/')).sort();
   const expected = [
+    ...publishedCampusChunks,
     '.nojekyll', 'index.html', 'scene.html', 'credits.html', 'site.css', 'preview.js', 'LICENSE', 'LICENSE-three.txt', 'LICENSE-geometry.txt',
     ...['.nojekyll', 'index.html', 'styles.css', 'DESIGN.md', 'LICENSE', 'LICENSE-three.txt', 'assets/scene.js',
       'assets/models/SOURCES.md', 'assets/models/kenney-assistant/character.glb',
@@ -20,12 +21,14 @@ test('publishes an exact allowlist, with no research media, private files or sou
       'assets/models/kenney-fountain/Textures/colormap.png'].map(file => `scenes/knowledge/${file}`),
     ...['index.html', 'style.css', 'assets/scene.js', 'LICENSE-font.txt', 'data/campus.json', 'data/provenance.json',
       'data/gongzi-source.json', 'data/second-gate-anchor.json', 'data/old-library-match.json',
-      'data/source-footprint.json', 'data/campus-context.json'].map(file => `scenes/campus/${file}`),
+      'data/source-footprint.json', 'data/campus-context.json', 'data/landscape-evidence.json'].map(file => `scenes/campus/${file}`),
     ...['index.html', 'assets/scene.js', 'assets/leaves/maple-color.png', 'assets/leaves/Normal.png',
       'assets/leaves/Roughness.png', 'assets/leaves/SOURCE.json'].map(file => `scenes/courtyard/${file}`),
     ...['index.html', 'style.css', 'studio.js', 'vendor/p5.min.js', 'vendor/p5.js',
       'vendor/LICENSE.txt'].map(file => `scenes/wind-print/${file}`),
   ].sort();
+  assert.equal(publishedCampusChunks.length, 2, 'Only the deferred exporter and shared runtime are separate chunks');
+  for (const file of publishedCampusChunks) assert.match(file, /^scenes\/campus\/assets\/chunks\/(?:chunk|GLTFExporter)-[A-Z0-9]{8}\.js$/);
   assert.deepEqual(actual, expected);
 });
 
@@ -69,6 +72,7 @@ test('retains third-party attribution and downloadable map databases', async () 
   assert.match(await read('scenes/knowledge/assets/models/SOURCES.md'), /CC0/);
   assert.equal(JSON.parse(await read('scenes/courtyard/assets/leaves/SOURCE.json')).license, 'CC0');
   assert.equal(JSON.parse(await read('scenes/campus/data/campus.json')).type, 'FeatureCollection');
+  assert.equal(JSON.parse(await read('scenes/campus/data/landscape-evidence.json')).source.sha256.length, 64);
   assert.match(await read('credits.html'), /ODbL 1\.0/);
   assert.match(await read('scenes/wind-print/vendor/LICENSE.txt'), /GNU LESSER GENERAL PUBLIC LICENSE/);
   assert.match(await read('credits.html'), /LGPL 2\.1/);

@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main id="workspace">
+  <main id="workspace" aria-busy="true">
     <canvas id="scene" aria-label="清华主校区三维建筑，鼠标拖动旋转、右键平移、滚轮缩放"></canvas>
     <header>
       <span class="eyebrow">TSINGHUA / CAMPUS ATLAS</span>
@@ -18,8 +18,11 @@
     <aside id="sidebar">
       <div class="section-heading"><span class="dot"></span>校园建筑与地标</div>
       <div class="stats"><div><strong id="building-count">—</strong><span>建筑轮廓体块</span></div><div><strong id="named-count">—</strong><span>已关联名称</span></div></div>
-      <p class="muted">建筑结构覆盖 <b id="architecture-count">—</b> 个轮廓；其中 <b id="refined-count">—</b> 个有照片参照，另有 <b id="landmark-count">—</b> 个独立地标。</p>
-      <p id="coverage-note" class="muted"></p>
+      <details class="coverage-details">
+        <summary>建模来源与覆盖范围</summary>
+        <p class="muted">建筑结构覆盖 <b id="architecture-count">—</b> 个轮廓；其中 <b id="refined-count">—</b> 个有照片参照，另有 <b id="landmark-count">—</b> 个独立地标。</p>
+        <p id="coverage-note" class="muted"></p>
+      </details>
       <label class="search-label" for="search">查找建筑或地标</label>
       <input id="search" type="search" placeholder="名称或稳定编号…" autocomplete="off">
       <label class="reconstruction-filter"><input id="only-refined" type="checkbox">只看照片参照建筑与地标</label>
@@ -56,6 +59,9 @@
       <button id="export-all">导出校园 GLB</button>
     </nav>
     <nav class="sitebar" aria-label="已重建建筑快捷视角">
+      <label class="apartment-picker" for="sports-ground">操场
+        <select id="sports-ground"><option value="">选择运动场</option></select>
+      </label>
       <label class="apartment-picker" for="appearance-building">实景配色
         <select id="appearance-building" aria-label="查看照片配色与局部特征建筑"><option value="">选择教学楼／院馆</option></select>
       </label>
@@ -88,6 +94,9 @@
       <label><input type="checkbox" data-layer="road" checked><i class="swatch roads"></i>道路</label>
       <label><input type="checkbox" data-layer="green" checked><i class="swatch greens"></i>绿地</label>
       <label><input type="checkbox" data-layer="water" checked><i class="swatch waters"></i>水系</label>
+      <label title="地图运动场边界；跑道和场内标线为展示估算"><input type="checkbox" data-layer="sports" checked>操场</label>
+      <label title="地图树位及绿地内示意种植；树种和冠幅未测绘"><input type="checkbox" data-layer="trees" checked>树木</label>
+      <small id="landscape-note"></small>
       <label title="程序建筑近景使用真实窗洞；关闭仅简化显示，GLB仍导出完整结构"><input type="checkbox" id="architecture-details" checked>建筑近景细节</label>
       <label title="近景接触阴影；桌面默认开启，手机默认关闭"><input type="checkbox" id="contact-shadows">三维细节阴影</label>
       <span id="north">N ↑ 北</span>
@@ -98,7 +107,16 @@
       <div><a href="https://openfreemap.org/" target="_blank" rel="noreferrer">OpenFreeMap</a> · <a href="https://openmaptiles.org/" target="_blank" rel="noreferrer">© OpenMapTiles</a> · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">© OpenStreetMap contributors / ODbL</a></div>
     </footer>
     <div id="message" role="status">正在建立校园基模…</div>
+    <section id="loading" class="loading" aria-label="校园加载进度">
+      <div class="loading-card" role="status">
+        <span class="eyebrow">TSINGHUA / CAMPUS ATLAS</span>
+        <h2>正在展开清华园</h2>
+        <p id="loading-text">准备校园地图与渲染环境…</p>
+        <progress id="loading-progress" max="100" value="0">0%</progress>
+        <p class="muted">保留全部建筑；近景细节按需构建，导出仍包含完整结构。</p>
+      </div>
+    </section>
   </main>
-  <script src="assets/scene.js"></script>
+  <script defer src="assets/scene.js"></script>
 </body>
 </html>

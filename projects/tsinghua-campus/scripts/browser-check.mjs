@@ -3,6 +3,90 @@ import path from 'node:path';
 import modernSources from '../data/modern-building-sources.json' with {type: 'json'};
 import {PHOTO_APPEARANCES} from '../src/photo-appearance.js';
 
+export async function checkCampusGroundStability(frame) {
+  const result = await frame.evaluate(() => {
+    const app = window.campusApp, {camera} = app.inspection();
+    const visibility = new Map(Object.values(app.campus.layers).map(layer => [layer, layer.visible]));
+    const position = camera.position.clone();
+    const canvas = document.getElementById('scene'), copy = document.createElement('canvas');
+    copy.width = canvas.width; copy.height = canvas.height;
+    const context = copy.getContext('2d', {willReadFrequently: true});
+    const pixels = () => {
+      app.render(); context.drawImage(canvas, 0, 0);
+      return context.getImageData(0, 0, copy.width, copy.height).data;
+    };
+    try {
+      app.campus.layers.building.visible = false; app.campus.layers.landmark.visible = false;
+      app.campus.layers.trees.visible = false;
+      const original = pixels(), fractions = [];
+      for (const displacement of [.001, -.001, .003, -.003]) {
+        camera.position.copy(position); camera.position.x += displacement; camera.updateMatrixWorld(true);
+        const moved = pixels();
+        let changed = 0;
+        for (let i = 0; i < original.length; i += 4) {
+          if (Math.abs(original[i] - moved[i]) + Math.abs(original[i + 1] - moved[i + 1]) +
+              Math.abs(original[i + 2] - moved[i + 2]) > 30) changed++;
+        }
+        fractions.push(changed / (copy.width * copy.height));
+      }
+      camera.position.copy(position); camera.updateMatrixWorld(true);
+      const returned = pixels();
+      let returnChanges = 0;
+      for (let i = 0; i < original.length; i += 4) {
+        if (Math.abs(original[i] - returned[i]) + Math.abs(original[i + 1] - returned[i + 1]) +
+            Math.abs(original[i + 2] - returned[i + 2]) > 30) returnChanges++;
+      }
+      return {fractions, returnChanges, width: copy.width, height: copy.height, near: camera.near};
+    } finally {
+      camera.position.copy(position); camera.updateMatrixWorld(true);
+      for (const [layer, visible] of visibility) layer.visible = visible;
+      app.render();
+    }
+  });
+  assert.ok(result.fractions.every(fraction => fraction < .002), `Orbit ground z-fighting: ${JSON.stringify(result)}`);
+  assert.equal(result.returnChanges, 0, 'Returning to an identical pose must not retain ghost pixels');
+  return result;
+}
+
+export async function checkCampusLandscape({page, frame, screenshots}) {
+  const states = [];
+  for (const id of ['osm:way:32954674', 'osm:way:32954848', 'osm:way:32954864']) {
+    await frame.evaluate(id => {window.campusApp.selectGround(id); document.getElementById('message').hidden = true;}, id);
+    await snapshot(frame);
+    const state = await frame.evaluate(id => {
+      const app = window.campusApp, ground = app.campus.sports.get(id);
+      app.render();
+      return {id, name: document.getElementById('selection-name').textContent,
+        groundName: ground.name, sportsVisible: app.campus.layers.sports.visible,
+        buildingCount: app.campus.buildings.size, stats: app.stats.landscape,
+        limitations: document.getElementById('selection-help').textContent,
+        selectionLink: document.getElementById('selection-link').href};
+    }, id);
+    assert.equal(state.name, state.groundName); assert.equal(state.sportsVisible, true);
+    assert.equal(state.buildingCount, 650); assert.ok(state.stats.trees >= 300);
+    assert.match(state.limitations, /估算/); assert.ok(new URL(state.selectionLink).searchParams.get('ground') === id);
+    if (screenshots) await page.screenshot({path: path.join(screenshots, `campus-playground-${id.split(':').at(-1)}.png`)});
+    states.push(state);
+  }
+  await frame.evaluate(() => document.getElementById('view-all').click());
+  await snapshot(frame);
+  const flicker = await checkCampusGroundStability(frame);
+  const rect = await (await frame.$('#scene')).boundingBox();
+  const region = await frame.evaluate(() => window.campusApp.inspection().region);
+  const x = rect.x + region.x + region.width * .6, y = rect.y + region.y + region.height * .5;
+  await page.mouse.move(x, y); await page.mouse.down(); await page.mouse.move(x + 75, y + 24, {steps: 12}); await page.mouse.up();
+  await frame.evaluate(() => new Promise(resolve => {
+    let remaining = 30;
+    const tick = () => --remaining ? requestAnimationFrame(tick) : resolve();
+    requestAnimationFrame(tick);
+  }));
+  const afterRealOrbit = await checkCampusGroundStability(frame);
+  await frame.evaluate(() => document.getElementById('view-auditorium').click());
+  await snapshot(frame);
+  const focusedFlicker = await checkCampusGroundStability(frame);
+  return {grounds: states, flicker, afterRealOrbit, focusedFlicker};
+}
+
 async function snapshot(frame) {
   await frame.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
   return frame.evaluate(() => {

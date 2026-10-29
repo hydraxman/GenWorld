@@ -119,7 +119,7 @@ export const REFINEMENT_VIEWS = REFINEMENT_SITES.flatMap(site => [
   ...(site.additionalViews || []).map(view => ({featureId: site.featureId, ...view})),
 ]).filter(view => view.buttonId);
 
-export function applyCampusRefinements(campus, data, options = {}) {
+export function* buildCampusRefinements(campus, data, options = {}) {
   const ids = [];
   for (const site of REFINEMENT_SITES) {
     if (!campus.buildings.has(site.featureId)) {
@@ -143,8 +143,12 @@ export function applyCampusRefinements(campus, data, options = {}) {
     }
     if (site.aliases) target.userData.aliases = [...new Set([...(target.userData.aliases || []), ...site.aliases])];
     ids.push(site.featureId);
+    yield site.featureId;
   }
   campus.group.userData.levelOfDetail = 'Map base with registered photo-informed reconstructions; not surveyed.';
   campus.group.userData.refinedBuildingIds = ids;
-  return ids;
+}
+
+export function applyCampusRefinements(campus, data, options = {}) {
+  return [...buildCampusRefinements(campus, data, options)];
 }

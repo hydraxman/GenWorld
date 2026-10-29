@@ -16,6 +16,11 @@ const photoIds = new Set(REFINEMENT_SITES.map(site => site.featureId));
 const plainFeatures = data.features.filter(feature => feature.properties.kind === 'building' && !photoIds.has(feature.id));
 const subset = (features = plainFeatures.slice(0, 3)) => ({...data, features});
 const nearGroup = root => root.children.find(child => child.userData.architectureLOD)?.children.find(child => child.userData.architectureNear);
+const nearMeshes = root => {
+  const meshes = [];
+  nearGroup(root).traverse(object => {if (object.isMesh) meshes.push(object);});
+  return meshes;
+};
 
 test('architectural evidence is an exact offline replay, not nearest-name or POI borrowing', async () => {
   assert.deepEqual(await architectureEvidence(), evidence);
@@ -177,6 +182,56 @@ test('near/far display is exclusive, while exports always contain full architect
   camera.position.copy(root.position); campus.updateArchitectureLOD(camera, false);
   assert.equal(near.visible, false); assert.equal(far.visible, true);
   disposeCampusArchitecture(campus);
+});
+
+test('lazy architecture restores exactly the eager geometry without changing identity or duplicating far batches', () => {
+  const d = subset(), campus = createCampusModel(d), eager = createCampusModel(d);
+  applyCampusArchitecture(campus, d, {deferNear: true});
+  applyCampusArchitecture(eager, d);
+  const geometrySignature = root => {
+    const result = [];
+    nearGroup(root).traverse(object => {
+      if (!object.isMesh) return;
+      result.push({name: object.name, materials: (Array.isArray(object.material) ? object.material : [object.material]).map(material => material.name),
+        groups: object.geometry.groups, index: object.geometry.index?.array,
+        attributes: Object.fromEntries(Object.entries(object.geometry.attributes).map(([key, attribute]) => [key, attribute.array]))});
+    });
+    return result;
+  };
+  for (const [id, root] of campus.buildings) {
+    assert.equal(nearMeshes(root).length, 0);
+    const metadata = structuredClone(root.userData);
+    assert.throws(() => prepareArchitectureExport(root.clone(true)), /complete architectural details/);
+    const detail = campus.ensureArchitectureDetail(id);
+    assert.equal(detail.userData.architectureNearPending, false);
+    assert.deepEqual(root.userData, metadata);
+    assert.deepEqual(geometrySignature(root), geometrySignature(eager.buildings.get(id)));
+    assert.equal(campus.ensureArchitectureDetail(id), detail);
+    assert.ok(detail.children.find(child => child.userData.architectureFar).children.every(mesh => !mesh.visible));
+    assert.doesNotThrow(() => prepareArchitectureExport(root.clone(true)));
+  }
+  disposeCampusArchitecture(campus); disposeCampusArchitecture(eager);
+});
+
+test('lazy geometry is not constructed for hidden roots, hidden layers or disabled details, and filtered export skips them', () => {
+  const d = subset(), campus = createCampusModel(d);
+  applyCampusArchitecture(campus, d, {deferNear: true});
+  const [first, second] = [...campus.buildings.values()];
+  const camera = new THREE.PerspectiveCamera();
+  camera.position.copy(first.position);
+  first.visible = false;
+  campus.layers.building.visible = false;
+  campus.updateArchitectureLOD(camera);
+  assert.ok([...campus.buildings.values()].every(root => nearMeshes(root).length === 0));
+  assert.doesNotThrow(() => prepareArchitectureExport(campus.group.clone(true)));
+  campus.layers.building.visible = true;
+  campus.updateArchitectureLOD(camera, false);
+  assert.equal(nearMeshes(first).length, 0); assert.equal(nearMeshes(second).length, 0);
+  first.visible = true; campus.updateArchitectureLOD(camera);
+  assert.ok(nearMeshes(first).length > 0);
+  disposeCampusArchitecture(campus);
+  assert.equal(campus.ensureArchitectureDetail, undefined);
+  assert.equal(first.getObjectByName('base').visible, true);
 });
 
 test('raised multipolygon architecture preserves disconnected components and courtyard holes', () => {
