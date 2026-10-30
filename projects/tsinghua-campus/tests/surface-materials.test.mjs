@@ -40,6 +40,12 @@ test('original lawn texture is muted, mipmapped, independently normal-mapped and
   assert.ok(material.roughness > .9);
   assert.equal(material.map.colorSpace, THREE.SRGBColorSpace);
   assert.equal(material.normalMap.colorSpace, THREE.NoColorSpace);
+  assert.equal(material.roughnessMap.colorSpace, THREE.NoColorSpace);
+  assert.equal(material.roughnessMap.minFilter, THREE.LinearMipmapLinearFilter);
+  assert.equal(material.metalnessMap, material.roughnessMap, 'Shared ORM texture avoids incompatible raw DataTexture repacking in GLB');
+  assert.equal(material.metalness, 0);
+  assert.ok(material.roughnessMap.image.data.every((v, i) => i % 4 !== 2 || v === 0));
+  assert.equal(material.map.image.width, 256);
   assert.equal(material.map.wrapS, THREE.RepeatWrapping);
   assert.equal(material.map.minFilter, THREE.LinearMipmapLinearFilter);
   assert.ok(material.normalScale.length() < .15);

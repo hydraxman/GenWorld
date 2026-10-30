@@ -9,6 +9,7 @@ import {createCampusModel, disposeOwnedDetail} from '../src/model.js';
 import {applyCampusRefinements, REFINEMENT_SITES} from '../src/refinements.js';
 import {createCoverage} from '../src/coverage.js';
 import {footprintMetrics} from '../src/geo.js';
+import {PHOTO_APPEARANCES} from '../src/photo-appearance.js';
 import {applyCampusArchitecture, disposeCampusArchitecture, prepareArchitectureExport, architectureSpec,
   createArchitectureResources, createArchitectureDetail} from '../src/campus-architecture.js';
 
@@ -43,7 +44,7 @@ test('all650 frozen buildings have architectural geometry without increasing pho
   applyCampusRefinements(campus, data, {textured: false});
   const originals = new Map([...photoIds].map(id => [id, campus.buildings.get(id).children.find(child => child.userData.campusDetail)]));
   const ids = applyCampusArchitecture(campus, data);
-  assert.equal(ids.length, 611);
+  assert.equal(ids.length, 610);
   assert.deepEqual(new Set(ids), new Set(plainFeatures.map(feature => feature.id)));
   let triangles = 0, bytes = 0, windows = 0;
   const textures = new Set(), families = new Set();
@@ -95,11 +96,11 @@ test('all650 frozen buildings have architectural geometry without increasing pho
     near.updateMatrixWorld(true);
     if (!['pavilion', 'grandstand'].includes(d.family)) {
       assert.ok(d.windowCount > 0, `Windowless envelope at ${id}`);
-      assert.equal(d.doorwayCount, 1, `Missing entrance at ${id}`);
+      assert.equal(d.doorwayCount, d.photoFacade?.doorwayCount ?? 1, `Missing entrance at ${id}`);
       windows += d.windowCount;
       for (const probe of [...d.windowProbes.filter((v, i) => i % Math.max(1, Math.floor(d.windowCount / 5)) === 0), ...d.doorProbes]) {
         const hits = new THREE.Raycaster(new THREE.Vector3(...probe.outside),
-          new THREE.Vector3(...probe.normal).negate(), 0, 1.5).intersectObject(near, true)
+          new THREE.Vector3(...probe.normal).negate(), 0, d.photoFacade ? 3 : 1.5).intersectObject(near, true)
           .filter(hit => !hit.object.parent.userData.photoAppearanceEntrance);
         assert.ok(hits.length, `Missing physical window/door at ${id}`);
         assert.match(hits[0].object.material.name, /glass/, `Opening blocked by opaque material at ${id}`);
@@ -117,11 +118,11 @@ test('all650 frozen buildings have architectural geometry without increasing pho
   assert.ok(windows > 5000);
   assert.ok(triangles < 1000000, `Procedural triangle budget exceeded: ${triangles}`);
   assert.ok(bytes < 100000000, `Procedural geometry memory exceeded: ${bytes}`);
-  assert.ok(textures.size <= 16, `Textures must be shared across611 roots, not copied per window/building: ${textures.size}`);
+  assert.ok(textures.size <= 16, `Textures must be shared across610 roots, not copied per window/building: ${textures.size}`);
   const report = createCoverage(campus, data, catalog);
   assert.equal(report.counts.architectureModelBuildingObjects, 650);
-  assert.equal(report.counts.proceduralArchitectureBuildingObjects, 611);
-  assert.equal(report.counts.photoModelBuildingObjects, 39);
+  assert.equal(report.counts.proceduralArchitectureBuildingObjects, 610);
+  assert.equal(report.counts.photoModelBuildingObjects, 40);
   assert.equal(report.counts.photoAppearanceBuildingObjects, 16);
   assert.equal(report.counts.photoAppearanceSites, 15);
   assert.equal(report.counts.remainingBaseBuildingObjects, 0);
@@ -185,7 +186,10 @@ test('near/far display is exclusive, while exports always contain full architect
 });
 
 test('lazy architecture restores exactly the eager geometry without changing identity or duplicating far batches', () => {
-  const d = subset(), campus = createCampusModel(d), eager = createCampusModel(d);
+  const facadeIds = new Set(PHOTO_APPEARANCES.filter(profile => profile.facade).map(profile => profile.featureId));
+  assert.equal(facadeIds.size, 5);
+  const d = subset([...plainFeatures.slice(0, 3), ...plainFeatures.filter(feature => facadeIds.has(feature.id))]);
+  const campus = createCampusModel(d), eager = createCampusModel(d);
   applyCampusArchitecture(campus, d, {deferNear: true});
   applyCampusArchitecture(eager, d);
   const geometrySignature = root => {

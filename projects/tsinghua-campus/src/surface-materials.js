@@ -3,11 +3,17 @@ import * as THREE from 'three';
 function surfaceTextures(name, sample, size = 128) {
   const colors = new Uint8Array(size * size * 4), normals = new Uint8Array(colors.length);
   const heights = new Float32Array(size * size);
+  let roughness;
   for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
-    const {color, height} = sample(x / size, y / size);
+    const {color, height, roughness: value} = sample(x / size, y / size);
     const i = y * size + x;
     colors.set([...color, 255], i * 4);
     heights[i] = height;
+    if (value !== undefined) {
+      roughness ||= new Uint8Array(size * size * 4);
+      const channel = Math.round(value * 255);
+      roughness.set([255, channel, 0, 255], i * 4);
+    }
   }
   const heightAt = (x, y) => heights[((y + size) % size) * size + (x + size) % size];
   for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
@@ -27,7 +33,8 @@ function surfaceTextures(name, sample, size = 128) {
     return map;
   }
   return {map: texture(colors, 'base color', THREE.SRGBColorSpace),
-    normalMap: texture(normals, 'normal', THREE.NoColorSpace)};
+    normalMap: texture(normals, 'normal', THREE.NoColorSpace),
+    ...(roughness ? {roughnessMap: texture(roughness, 'roughness', THREE.NoColorSpace)} : {})};
 }
 
 export function createMasonryMaterial(name, rgb, stone = false) {
@@ -51,11 +58,17 @@ export function createGlazingMaterial(name) {
 export function createLawnMaterial() {
   const textures = surfaceTextures('Original procedural lawn', (u, v) => {
     const broad = Math.sin(u * Math.PI * 2 + Math.sin(v * Math.PI * 2));
-    const grain = Math.sin(Math.floor(u * 128) * 127.1 + Math.floor(v * 128) * 311.7);
-    return {color: [115, 147, 90].map(value => value + broad * 2 + grain * 3), height: grain * .012};
-  });
+    const cell = Math.floor(u * 64), row = Math.floor(v * 32);
+    const seed = Math.sin(cell * 127.1 + row * 311.7);
+    const blade = Math.max(0, 1 - Math.abs(u * 64 % 1 - .5 - Math.sin(v * Math.PI * 64) * .16) * 7)
+      * Math.sin((v * 32 % 1) * Math.PI);
+    const grain = Math.sin(Math.floor(u * 256) * 127.1 + Math.floor(v * 256) * 311.7);
+    return {color: [115, 147, 90].map(value => value + broad * 1.5 + grain * 2 + blade * seed * 2),
+      height: grain * .035 + blade * .24, roughness: .94 + Math.abs(seed) * .06};
+  }, 256);
   return new THREE.MeshStandardMaterial({name: 'Mapped green space; original non-photographic lawn surface',
-    color: '#ffffff', ...textures, roughness: .97, normalScale: new THREE.Vector2(.08, .08), side: THREE.DoubleSide});
+    color: '#ffffff', ...textures, metalnessMap: textures.roughnessMap, metalness: 0,
+    roughness: .97, normalScale: new THREE.Vector2(.1, .1), side: THREE.DoubleSide});
 }
 
 export function createEstimatedFacade() {

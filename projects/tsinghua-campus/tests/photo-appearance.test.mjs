@@ -91,7 +91,7 @@ test('photo palettes, window styles and bounded entrance features survive near/f
     direction.y = 0; direction.normalize();
     for (const [part, expected] of [['glazing', 'glass'], ['masonry', 'wall']]) {
       const point = new THREE.Vector3(...sample[part]);
-      const hits = new THREE.Raycaster(point.clone().addScaledVector(direction, 1), direction.clone().negate(), 0, 1.5)
+      const hits = new THREE.Raycaster(point.clone().addScaledVector(direction, 1), direction.clone().negate(), 0, 3)
         .intersectObject(near, true).filter(hit => !hit.object.parent.userData.photoAppearanceEntrance);
       assert.ok(hits[0]?.object.material.name.includes(`${profile.id} ${expected}`),
         `${profile.id} ${part} pixel sample must be on its real ${expected} surface`);
@@ -108,6 +108,38 @@ test('photo palettes, window styles and bounded entrance features survive near/f
   assert.ok(report.references.filter(record => record.appearanceBuildingIds.length)
     .every(record => record.stage === 'photo-appearance-only-estimated-envelope' && !record.buildingIds.length));
   assert.equal(JSON.stringify(data), frozen);
+  disposeCampusArchitecture(campus);
+});
+
+test('five evidence-bound facades have physical recessed openings, distinct portal forms and unchanged map heights', () => {
+  const d = {...data, features}, campus = createCampusModel(d);
+  applyCampusArchitecture(campus, d);
+  const refined = PHOTO_APPEARANCES.filter(profile => profile.facade);
+  assert.equal(refined.length, 5);
+  assert.equal(new Set(refined.map(p => p.facade.style)).size, 5);
+  for (const profile of refined) {
+    const root = campus.buildings.get(profile.featureId), detail = root.children.find(child => child.userData.architectureLOD);
+    const near = detail.children.find(child => child.userData.architectureNear), facade = detail.userData.photoFacade;
+    assert.equal(facade.image, profile.facade.image);
+    assert.ok(facade.observed.length >= 3 && facade.limitations);
+    assert.ok(facade.openingProbes.length >= 6);
+    assert.equal(facade.doorwayCount, profile.id === 'mingli' ? 1 : 3);
+    near.updateMatrixWorld(true);
+    for (const probe of facade.openingProbes) {
+      const ray = new THREE.Raycaster(new THREE.Vector3(...probe.outside), new THREE.Vector3(...probe.normal).negate(), 0, 3);
+      const hits = ray.intersectObject(near, true).filter(hit => !hit.object.parent.userData.photoAppearanceEntrance);
+      assert.match(hits[0]?.object.material.name || '', /recessed glass/, `${profile.id}: real opening, not an opaque facade overlay`);
+      assert.ok(hits[0].distance > 1.2);
+    }
+    if (profile.id.startsWith('teaching-3')) {
+      assert.equal(root.userData.renderHeight, architectureSpec(features.find(f => f.id === profile.featureId)).top);
+      assert.equal(profile.estimatedHeight, undefined, 'Cropped entrance photographs cannot add a whole-building height override');
+    }
+    const bounds = facade.bounds;
+    assert.ok(bounds.max.every((v, i) => v > bounds.min[i]));
+    const clone = prepareArchitectureExport(root.clone(true));
+    assert.deepEqual(clone.children.find(child => child.userData.architectureLOD).userData.photoFacade, facade);
+  }
   disposeCampusArchitecture(campus);
 });
 

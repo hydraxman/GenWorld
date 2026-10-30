@@ -47,6 +47,8 @@ jobs:
           projects/tsinghua-campus/tests/model.test.mjs
           projects/tsinghua-campus/tests/surface-materials.test.mjs
           projects/tsinghua-campus/tests/landscape.test.mjs
+          projects/tsinghua-campus/tests/campus-trees.test.mjs
+          projects/tsinghua-campus/tests/biology-hall.test.mjs
           projects/tsinghua-campus/tests/zijing.test.mjs
           projects/tsinghua-campus/tests/zijing-dining.test.mjs
           projects/tsinghua-campus/tests/coverage.test.mjs

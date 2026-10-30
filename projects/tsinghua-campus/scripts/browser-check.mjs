@@ -347,8 +347,8 @@ export async function checkCampusArchitecture({page, frame, screenshots}) {
   assert.equal(roots.length, 650);
   const coverage = await frame.evaluate(() => window.campusApp.coverage);
   assert.equal(coverage.counts.architectureModelBuildingObjects, 650);
-  assert.equal(coverage.counts.proceduralArchitectureBuildingObjects, 611);
-  assert.equal(coverage.counts.photoModelBuildingObjects, 39);
+  assert.equal(coverage.counts.proceduralArchitectureBuildingObjects, 610);
+  assert.equal(coverage.counts.photoModelBuildingObjects, 40);
   assert.equal(coverage.counts.remainingBaseBuildingObjects, 0);
   assert.equal(coverage.counts.remainingWorkBuildingObjects, 638, 'Unverified architecture must remain in the fidelity backlog');
   assert.equal(coverage.allFootprintsHaveArchitecture, true);
@@ -444,8 +444,8 @@ export async function checkCampusArchitecture({page, frame, screenshots}) {
       near: details.filter(detail => detail.children.find(child => child.userData.architectureNear).visible).length,
       far: details.filter(detail => detail.children.find(child => child.userData.architectureFar).visible).length};
   });
-  assert.equal(overview.near + overview.far, 611);
-  assert.equal(overview.far, 611, 'Overview should not draw all detailed window geometry');
+  assert.equal(overview.near + overview.far, 610);
+  assert.equal(overview.far, 610, 'Overview should not draw all detailed window geometry');
   assert.ok(overview.rendering.calls < 2500, `Overview draw-call budget exceeded: ${JSON.stringify(overview)}`);
   await page.screenshot({path: path.join(screenshots, 'campus-all-architecture-overview.png')});
   await frame.click('#view-plan');

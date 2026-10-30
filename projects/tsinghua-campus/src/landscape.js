@@ -4,6 +4,7 @@ import polygonClipping from 'polygon-clipping';
 import evidence from '../data/landscape-evidence.json' with {type: 'json'};
 import {footprintMetrics, lines, project, ringArea} from './geo.js';
 import {outlineEdges} from './architecture.js';
+import {createCampusTrees} from './campus-trees.js';
 
 export const SPORTS_GROUNDS = evidence.grounds;
 const primary = new Set(['osm:way:32954674', 'osm:way:32954848', 'osm:way:32954864']);
@@ -198,31 +199,12 @@ export function* buildCampusLandscape(campus, data) {
     sports.add(mesh); geometries.forEach(geometry => geometry.dispose());
   }
   const placements = treePlacements(data);
-  const trunkMaterial = new THREE.MeshStandardMaterial({name: 'Estimated tree bark', color: '#71634a', roughness: .98});
-  const leafMaterial = new THREE.MeshStandardMaterial({name: 'Original procedural foliage; species unverified', color: '#ffffff', roughness: .9});
-  const trunks = new THREE.InstancedMesh(new THREE.CylinderGeometry(.13, .23, 1, 6), trunkMaterial, placements.trees.length);
-  const crowns = new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1, 1), leafMaterial, placements.trees.length * 3);
-  const transform = new THREE.Object3D();
-  for (const [index, tree] of placements.trees.entries()) {
-    const [x, z] = tree.position, phase = (index * 1.61803398875) % 1;
-    const height = 6 + phase * 4, radius = 2.1 + phase * .8;
-    transform.position.set(x, height * .32, z); transform.scale.set(1, height * .64, 1); transform.rotation.set(0, phase * 6.28, 0);
-    transform.updateMatrix(); trunks.setMatrixAt(index, transform.matrix);
-    for (let part = 0; part < 3; part++) {
-      transform.position.set(x + Math.sin(part * 2.1 + phase) * radius * .4,
-        height * (.62 + part * .07), z + Math.cos(part * 2.1 + phase) * radius * .4);
-      transform.scale.set(radius * .85, radius * (part === 2 ? 1 : .8), radius * .85);
-      transform.updateMatrix(); crowns.setMatrixAt(index * 3 + part, transform.matrix);
-      crowns.setColorAt(index * 3 + part, new THREE.Color().setHSL(.24 + phase * .055, .23 + part * .025, .28 + phase * .11 + part * .018));
-    }
-  }
-  for (const mesh of [trunks, crowns]) {
-    mesh.castShadow = true; mesh.receiveShadow = false; mesh.computeBoundingSphere(); trees.add(mesh);
-  }
-  trees.userData = {...placements, limitations: evidence.limitations};
+  const treeRenderer = createCampusTrees(trees, placements.trees);
+  Object.assign(trees.userData, placements, {limitations: evidence.limitations});
+  campus.updateTreeLOD = (camera, mobile) => treeRenderer.update(camera, mobile);
   sports.userData = {source: evidence.source, limitations: evidence.limitations, grounds: [...grounds.values()]};
   campus.sports = grounds;
-  states.set(campus, {sports, trees, materials: [...Object.values(materials), trunkMaterial, leafMaterial]});
+  states.set(campus, {sports, trees, treeRenderer, materials: [...Object.values(materials), ...treeRenderer.materials]});
   return {grounds: grounds.size, trees: placements.trees.length, mappedTrees: placements.mappedCount,
     illustrativeTrees: placements.illustrativeCount, excludedMappedTrees: placements.excludedMappedCount};
 }
@@ -242,6 +224,7 @@ export function disposeCampusLandscape(campus) {
     group.removeFromParent();
   }
   state.materials.forEach(material => material.dispose());
-  delete campus.layers.sports; delete campus.layers.trees; delete campus.sports;
+  state.treeRenderer.extraGeometry.dispose();
+  delete campus.layers.sports; delete campus.layers.trees; delete campus.sports; delete campus.updateTreeLOD;
   states.delete(campus);
 }

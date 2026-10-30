@@ -58,7 +58,14 @@ try {
     [...window.campusApp.campus.buildings.values()].find(object => object.userData.refinementStatus === 'procedural')?.userData.featureId);
   if (pendingId) await page.evaluate(id => window.campusApp.select(id), pendingId);
   await page.click('#only-refined');
-  assert.equal(await page.$$eval('#results button', buttons => buttons.length), stats.refined + stats.landmarks);
+  const filteredIds = [];
+  do {
+    filteredIds.push(...await page.$$eval('#results button small', rows => rows.map(row => row.textContent)));
+    if (await page.$eval('#results-next', button => button.disabled)) break;
+    await page.click('#results-next');
+  } while (true);
+  assert.equal(filteredIds.length, stats.refined + stats.landmarks);
+  assert.equal(new Set(filteredIds).size, filteredIds.length, 'Photo-model pagination must expose every root once');
   assert.equal(await page.evaluate(() => [...window.campusApp.campus.buildings.values()].filter(object => object.visible).length),
     stats.refined);
   if (pendingId) assert.equal(await page.$eval('#export-building', button => button.hidden), true);
@@ -151,6 +158,14 @@ try {
   assert.equal(glb.toString('ascii', 0, 4), 'glTF');
   assert.equal(glb.readUInt32LE(8), glb.length);
   const gltf = JSON.parse(glb.toString('utf8', 20, 20 + glb.readUInt32LE(12)).trim());
+  assert.ok(!gltf.nodes.some(node => node.extras?.campusTreeDisplayOnly), 'Do not export camera-selected close-up leaves');
+  const canopy = gltf.nodes.find(node => node.extras?.campusTreeCanopy);
+  assert.ok(canopy, 'The full-campus GLB must retain all canonical tree canopies');
+  const instance = canopy.extensions?.EXT_mesh_gpu_instancing;
+  assert.ok(instance);
+  assert.equal(gltf.accessors[instance.attributes.TRANSLATION].count, stats.landscape.trees);
+  assert.ok(gltf.materials.find(material => material.name === 'Mapped green space; original non-photographic lawn surface')
+    ?.pbrMetallicRoughness.metallicRoughnessTexture, 'The generated lawn ORM texture must survive actual GLB export');
   const addressable = gltf.nodes.filter(node => node.extras?.featureId);
   assert.equal(addressable.length, stats.buildings + stats.landmarks);
   assert.equal(new Set(addressable.map(node => node.extras.featureId)).size, addressable.length);

@@ -1,0 +1,23 @@
+{
+  "featureId": "building:geometry:3ee05663e8212b498a33a67b",
+  "name": "生物学馆",
+  "sourceId": "osm:way:84106845",
+  "signature": "334:d4b6240a",
+  "center": [116.32003975, 40.00164005],
+  "originalModel": "projects/courtyard/src/model.js",
+  "identity": "用户将原庭院识别为近春园对面的生命科学相关建筑；冻结具名轮廓和三段石池的校友会史料对应老生物学馆，而非北侧1998年伟伦馆（生命科学馆）。不覆盖后者原编号。",
+  "orientation": "原模型+Z庭院按用户近春园侧说明、冻结南侧中央凸出边与校友会南侧水池记述绑定至南面；用户指定对桥入口为北面。北侧照片未独立定位摄影机，不将此说明当作测绘外参。",
+  "height": 11.78,
+  "reusePolicy": "Directly instantiate the original Courtyard architecture, original joinery, terrace, three basins and twin pergolas. Preserve original geometry, materials and unit scale; apply campus translation and rotation only. No replacement north shell or invented wing extensions.",
+  "limitations": [
+    "原Courtyard建筑、原窗框、屋顶、露台栏杆、三段干石池与双廊架直接复用；没有重新生成主体，没有补写翼楼，也没有在原模型北面覆盖一层新立面。",
+    "保留原模型米制尺寸、比例、几何和材质，仅平移与旋转到校园。原模型约34米宽，与冻结约70米宽轮廓并不完全一致；原地图身份、轮廓和原点不变，不为填满它而拉伸、续建或宣称整轮廓还原。",
+    "北面沿用原模型已有背面，尚未按新照片重建北入口。照片保留为后续独立补充细节的参照，不将现有背面宣称为照片核实后的北门。",
+    "三段石池与廊架同样保留原比例，并核对不越过地图南侧河岸3米退让线；不声称水位、现状或尺度已核实。校友会文献说明旧喷泉已经改动，模型保持干池，不添加历史喷泉或题刻。",
+    "以局部照片参照模型计数，未完成逐面还原；新生命科学馆、1919年科学馆和老生物学馆保持独立身份。"
+  ],
+  "documents": [
+    {"url": "https://www.tsinghua.org.cn/upload/file/1474439774114.pdf", "title": "高冀生《1933级喷水池设计回忆》", "evidence": "第185–186页明确为老生物馆南侧，记载三叠泉、藤萝架与休息廊及旧物后来的改动；不从此文推断模型为现状测绘。"},
+    {"url": "https://life.tsinghua.edu.cn/xygk/lsyg/sztp.htm", "title": "生命学院历史沿革·三张图片", "evidence": "栏目将生物学馆与伟伦馆分列，支持名称区别，不提供可校准摄影机或完整立面图。"}
+  ]
+}

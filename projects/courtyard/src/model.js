@@ -1,6 +1,7 @@
 import {createPBRTools} from '../../../shared/pbr.js';
 import {POOLS,poolSupport} from './pools.js';
 import {createLeafGeometry,createLeafMaterial} from './leaves.js';
+import {buildCourtyardTree,scatterTreeLeaves} from './trees.js';
 /** Photo-informed courtyard reconstruction. Y up, facade +Z; metres.
  * Only geometry/materials: no renderer, lights, cameras, network, or clock.
  */
@@ -282,10 +283,8 @@ export function createModel(THREE, {architectureOnly = false, textured = true} =
     stats.leafInstances++;
   }
   function leafCluster(batch,cx,cy,cz,rx,ry,rz,count,size) {
-    for(let i=0;i<count;i++) {
-      const u=rand()*Math.PI*2,v=between(-1,1),r=Math.cbrt(rand()),q=Math.sqrt(1-v*v);
-      addLeaf(batch,cx+Math.cos(u)*q*r*rx,cy+v*r*ry,cz+Math.sin(u)*q*r*rz,size*between(.7,1.25));
-    }
+    scatterTreeLeaves(rand,between,cx,cy,cz,rx,ry,rz,count,size,
+      (x,y,z,s)=>addLeaf(batch,x,y,z,s));
   }
   section('Pergola vines');
   for(const s of [-1,1]) {
@@ -320,30 +319,9 @@ export function createModel(THREE, {architectureOnly = false, textured = true} =
   }
   function tree(x,z,height,spread,style='broad') {
     stats.trees++;
-    const base=.12,trunk=height*.53;
-    cylinder([x,base,z],[x+.14,trunk,z-.11],height*.039,height*.021,bark,9);
-    // Surface roots and non-uniform boughs connect every leaf cluster to wood.
-    for(let i=0;i<5;i++) {
-      const a=rand()*Math.PI*2;
-      cylinder([x+Math.cos(a)*.85,.08,z+Math.sin(a)*.85],[x,.6,z],.045,.12,bark,6);
-    }
-    const tiers=style==='conifer'?5:3;
-    for(let tier=0;tier<tiers;tier++) {
-      const yc=height*(style==='conifer'?(.4+tier*.115):(.56+tier*.13));
-      const radius=spread*(style==='conifer'?(1-tier*.16):(.88-tier*.14));
-      for(let b=0;b<(style==='conifer'?7:6);b++) {
-        const a=b*Math.PI*2/(style==='conifer'?7:6)+tier*.72+between(-.17,.17);
-        const rr=radius*between(.6,1.0),cx=x+Math.cos(a)*rr,cz=z+Math.sin(a)*rr,cy=yc+between(-.2,.35);
-        cylinder([x+.08,yc-.8,z],[cx,cy,cz],.09*(height/7),.025,bark,6);
-        const cr=spread*(style==='conifer'?.33:.44);
-        leafCluster(treeFoliage,cx,cy,cz,cr,style==='conifer'?.38:spread*.37,cr,style==='conifer'?180:275,style==='conifer'?.31:.37);
-        for(let j=0;j<3;j++) {
-          const aa=a+between(-.9,.9),tx=cx+Math.cos(aa)*cr*.7,tz=cz+Math.sin(aa)*cr*.7;
-          cylinder([cx,cy,cz],[tx,cy+.45,tz],.023,.009,bark,5);
-        }
-      }
-    }
-    leafCluster(treeFoliage,x+.1,height*.94,z-.1,spread*.52,spread*.45,spread*.5,430,.36);
+    buildCourtyardTree({x,z,height,spread,style,rand,between,
+      cylinder:(a,b,r1,r2,sides)=>cylinder(a,b,r1,r2,bark,sides),
+      cluster:(...args)=>leafCluster(treeFoliage,...args)});
   }
   for(const t of [[-20,1,11,3.8],[-22,13,9.5,3.7],[-22,26,9,3.2],[-24,37,10,3.7],[20,-.5,12,4.2],[22,14,10,3.8],[23,28,9,3.5],[25,39,10,3.3],[-14,-13,10,3.6],[0,-15,10.5,3.8],[13,-13,11,3.7]])tree(...t);
   tree(18.5,4.5,11.5,3.5,'conifer');tree(-19.2,-6,11.2,3.1,'conifer');

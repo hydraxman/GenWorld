@@ -13,8 +13,18 @@ import {refineModernBuilding, MODERN_BUILDINGS} from './modern-buildings.js';
 import {refineZijing} from './zijing.js';
 import {ZIJING_SOURCES, ZIJING_IDS} from './zijing-sources.js';
 import {refineDining, DINING_SOURCES} from './zijing-dining.js';
+import {refineBiologyHall, BIOLOGY_HALL_ID} from './biology-hall.js';
 
 export const REFINEMENT_SITES = [
+  {
+    featureId: BIOLOGY_HALL_ID, referenceSite: 'biology-hall',
+    buttonId: 'view-biology-hall', label: '生物学馆 · 原庭院',
+    viewDirection: [.24, .5, 1.1], reconstructionExtent: 'partial',
+    aliases: ['老生物馆', '原Courtyard', '庭院模型'],
+    additionalViews: [{buttonId: 'view-biology-north', label: '生物学馆北侧·原模型', viewDirection: [-.2, .38, -1.1],
+      focusObject: 'Building shell'}],
+    apply: refineBiologyHall,
+  },
   {
     featureId: 'building:geometry:6bd0154b26cfe7cf654cdd3b',
     referenceSite: 'shunde-building',

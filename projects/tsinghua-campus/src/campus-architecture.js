@@ -9,6 +9,7 @@ import evidence from '../data/architecture-evidence.json' with {type: 'json'};
 import {architectureSignature} from './architecture-contract.js';
 import {appearanceProfile, appearanceSource, appearanceLimitations} from './photo-appearance.js';
 import {pitchedRoof} from './zijing.js';
+import {createPhotoFacade} from './photo-facades.js';
 
 export const ARCHITECTURE_FAMILIES = {
   academic: '教学／科研类型', residential: '住宅／宿舍类型', commercial: '办公／商业类型',
@@ -220,11 +221,18 @@ export function createArchitectureDetail(feature, center, origin, palette, {defe
   const farWindow = points => {
     for (const i of [0, 1, 2, 0, 2, 3]) {farWindowPositions.push(...points[i]); farWindowColors.push(...farColor);}
   };
-  let sample, entranceEdge, entrancePoint, totalBays = 0, sampleScore = -Infinity;
+  let sample, entranceEdge, entrancePoint, photoFacade, totalBays = 0, sampleScore = -Infinity;
   const edgeSets = polygons.map(polygon => polygon.map((ring, i) => outlineEdges(ring)
     .map(edge => i ? {...edge, normal: edge.normal.map(v => -v)} : edge)));
   const candidates = edgeSets.flatMap(rings => rings[0]).filter(edge => edge.length >= 2.8);
   entranceEdge = candidates.sort((a, b) => (open ? 0 : (b.normal[1] > .3) - (a.normal[1] > .3)) || b.length - a.length)[0];
+  if (profile?.facade) {
+    entranceEdge = edgeSets[profile.facade.polygon]?.[0]?.[profile.facade.edge];
+    if (!entranceEdge || profile.facade.width + 5 > entranceEdge.length) throw new Error(`Photo facade edge changed: ${profile.id}`);
+  }
+  const entrance = profile && (profile.facade || profile.entry !== 'plain')
+    ? group('Photo-supported projecting entrance; dimensions and orientation estimated') : null;
+  if (entrance) entrance.userData.photoAppearanceEntrance = true;
   const sampleDirection = profile?.inspectionDirection
     ? new THREE.Vector2(profile.inspectionDirection[0], profile.inspectionDirection[2]).normalize().toArray()
     : entranceEdge?.normal;
@@ -252,7 +260,14 @@ export function createArchitectureDetail(feature, center, origin, palette, {defe
       }
     }
     for (let level = 1; level < floors && !open && !deferNear; level++) {
-      prism(B, structure, rings, baseY + level * storey - .12, baseY + level * storey, M.trim);
+      let pieces = [rings];
+      if (profile?.facade && polygonIndex === profile.facade.polygon) {
+        const {a, tangent: t, normal: n, length} = entranceEdge;
+        const p = (x, depth) => [a[0] + t[0] * x + n[0] * depth, a[1] + t[1] * x + n[1] * depth];
+        const strip = [p(-.05, .1), p(length + .05, .1), p(length + .05, -2), p(-.05, -2)];
+        pieces = polygonClipping.difference([rings.map(r => [...r, r[0]])], [[[...strip, strip[0]]]]);
+      }
+      for (const piece of pieces) prism(B, structure, piece, baseY + level * storey - .12, baseY + level * storey, M.trim);
     }
     for (const [ringIndex, edges] of edgeSets[polygonIndex].entries()) for (const edge of edges) {
       const {a, tangent: t, normal: n, length: L, yaw} = edge;
@@ -265,6 +280,16 @@ export function createArchitectureDetail(feature, center, origin, palette, {defe
         if (!deferNear) B.box(g, '', ...[p(x, y, depth)[0], y, p(x, y, depth)[2]],
           width, height, thickness, mat, yaw);
       };
+      if (profile?.facade && edge === entranceEdge) {
+        const facade = createPhotoFacade({profile, edge, spec, roofY, B, panels, structure, windows, roof,
+          entrance, M, wall, deferNear, farWindow});
+        photoFacade = facade.metadata; entrancePoint = facade.entrancePoint;
+        windowsProbes.push(...facade.windowProbes); doorProbes.push(...facade.doorProbes);
+        sample = facade.sample; sampleScore = Infinity;
+        const copingTop = profile.roofFeatureRise ? roofY + .12 : top;
+        box(roof, M.trim, L / 2, (roofY + copingTop) / 2, -.08, L, copingTop - roofY, .16);
+        continue;
+      }
       if (open) {
         const count = Math.max(1, Math.floor(L / 5));
         for (let i = 0; i < count; i++) box(structure, M.trim, (i + .5) * L / count, (baseY + roofY) / 2, -.25,
@@ -397,9 +422,7 @@ export function createArchitectureDetail(feature, center, origin, palette, {defe
     far.add(mesh);
   }
   if (profile) {
-    if (!deferNear && profile.entry !== 'plain') {
-      const entrance = group('Photo-supported projecting entrance; dimensions and orientation estimated');
-      entrance.userData.photoAppearanceEntrance = true;
+    if (!deferNear && !profile.facade && profile.entry !== 'plain') {
       photoEntrance(B, entrance, entranceEdge, entrancePoint, spec, M, roof);
     }
     const geometry = new THREE.BufferGeometry();
@@ -419,7 +442,7 @@ export function createArchitectureDetail(feature, center, origin, palette, {defe
     architectureLOD: true, architectureNearPending: deferNear, family: spec.family, estimatedFloors: floors, floorsSource: spec.floorsSource,
     footprintArea: metrics.area, polygonCount: polygons.length, holeCount: polygons.reduce((sum, rings) => sum + rings.length - 1, 0),
     windowCount: windowsProbes.length, doorwayCount: doorProbes.length,
-    windowProbes: windowsProbes, doorProbes, facadeSample: sample || null,
+    windowProbes: windowsProbes, doorProbes, facadeSample: sample || null, photoFacade: photoFacade || null,
     nearDistance: Math.max(180, sphere.radius * 5),
     localSphere: {center: sphere.center.toArray(), radius: sphere.radius},
     sourceEvidence: spec.source, limitations: profile ? appearanceLimitations(profile) : ARCHITECTURE_LIMITS,

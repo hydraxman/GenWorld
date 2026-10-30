@@ -14,6 +14,7 @@ import {ZIJING_APARTMENTS} from './zijing-sources.js';
 import {applyCampusArchitecture, prepareArchitectureExport, ARCHITECTURE_FAMILIES} from './campus-architecture.js';
 import {PHOTO_APPEARANCES} from './photo-appearance.js';
 import {buildCampusLandscape} from './landscape.js';
+import {prepareTreeExport} from './campus-trees.js';
 
 const $ = id => document.getElementById(id);
 const outputPrefix = location.pathname.endsWith('/tsinghua-campus-offline.html') ? '' : 'output/';
@@ -128,6 +129,7 @@ async function main() {
   function draw() {
     updateInspectionClipping(camera, controls.target);
     campus.updateArchitectureLOD(camera, $('architecture-details').checked);
+    campus.updateTreeLOD(camera, compact.matches);
     sun.castShadow = !planMode && framedBounds && framedBounds.getSize(new THREE.Vector3()).length() < 600;
     contactShadowsActive = $('contact-shadows').checked && !planMode && framedBounds &&
       framedBounds.getSize(new THREE.Vector3()).length() < 600;
@@ -205,6 +207,18 @@ async function main() {
     const view = [...REFINEMENT_VIEWS, ...LANDMARK_SITES].find(site => site.featureId === selected.userData.featureId);
     frame(viewBounds(selectedPart || selected), 1.2, selectedPart?.userData.viewDirection || view?.viewDirection || selected.userData.viewDirection);
   }
+  function focusFacade() {
+    if (!selected) return;
+    const detail = selected.children.find(child => child.userData.architectureLOD);
+    const facade = detail?.userData.photoFacade;
+    if (!facade) throw new Error('Selected building has no photo-supported facade view.');
+    if (planMode) mode(false);
+    selected.updateWorldMatrix(true, true);
+    const box = new THREE.Box3(new THREE.Vector3(...facade.bounds.min), new THREE.Vector3(...facade.bounds.max))
+      .applyMatrix4(detail.matrixWorld);
+    const direction = new THREE.Vector3(...facade.viewDirection).transformDirection(detail.matrixWorld).toArray();
+    frame(box, 1.15, direction);
+  }
   function select(id, focus = false, apartmentNumber = null) {
     const building = campus.objects.get(id);
     if (!building) throw new Error(`Campus object not found: ${id}`);
@@ -263,6 +277,7 @@ async function main() {
       $('selection-fields').append(term, detail);
     }
     $('focus').hidden = $('export-building').hidden = false;
+    $('focus-facade').hidden = !building.children.some(child => child.userData.photoFacade);
     $('selection-link').hidden = false;
     const permalink = new URL(location.href);
     permalink.search = '';
@@ -381,6 +396,7 @@ async function main() {
       }
       if (!whole) object.position.set(0, 0, 0);
       prepareArchitectureExport(object);
+      prepareTreeExport(object);
       object.updateMatrixWorld(true);
       const bytes = await new GLTFExporter().parseAsync(object, {binary: true, onlyVisible: true});
       save(bytes, whole ? 'tsinghua-campus-refined.glb' : exportPart ? `tsinghua-zijing-${exportPart.userData.apartmentNumber}.glb` : exportSelection.userData.exportFilename
@@ -415,7 +431,7 @@ async function main() {
       $('selection-name').textContent = '选择筛选后的建筑或地标';
       $('selection-help').textContent = '可切换类型筛选，或通过目录逐页查看全部建筑。';
       $('selection-fields').replaceChildren();
-      $('focus').hidden = $('export-building').hidden = $('selected-references').hidden = $('selection-link').hidden = true;
+      $('focus-facade').hidden = $('focus').hidden = $('export-building').hidden = $('selected-references').hidden = $('selection-link').hidden = true;
     }
     search(); dirty = true;
   }
@@ -456,7 +472,7 @@ async function main() {
       const term = document.createElement('dt'), detail = document.createElement('dd');
       term.textContent = label; detail.textContent = value; $('selection-fields').append(term, detail);
     }
-    $('focus').hidden = $('export-building').hidden = true;
+    $('focus-facade').hidden = $('focus').hidden = $('export-building').hidden = true;
     $('selected-references').hidden = false;
     $('selected-references').href = `https://www.openstreetmap.org/way/${id.split(':').at(-1)}`;
     const link = new URL(location.href); link.search = ''; link.searchParams.set('ground', id);
@@ -486,6 +502,7 @@ async function main() {
     });
   }
   $('focus').addEventListener('click', focusSelected);
+  $('focus-facade').addEventListener('click', focusFacade);
   $('view-north').addEventListener('click', () => {
     const region = bounds.clone(); region.max.z = bounds.min.z + size.z * 0.43; frame(region, 1.2);
   });
@@ -497,7 +514,9 @@ async function main() {
     $(site.buttonId).addEventListener('click', () => {
       if (planMode) mode(false);
       const target = select(site.featureId);
-      const box = viewBounds(target);
+      const focus = site.focusObject ? target.getObjectByName(site.focusObject) : target;
+      if (!focus) throw new Error(`Missing registered inspection component: ${site.focusObject}`);
+      const box = viewBounds(focus);
       for (const id of site.groupFeatureIds || []) box.union(viewBounds(campus.objects.get(id)));
       frame(box, 1.12, site.viewDirection);
     });
