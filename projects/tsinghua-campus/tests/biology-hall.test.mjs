@@ -6,6 +6,7 @@ import {createCampusModel} from '../src/model.js';
 import {refineBiologyHall, BIOLOGY_HALL_ID} from '../src/biology-hall.js';
 import {createCourtyardReuse} from '../src/courtyard-reuse.js';
 import {disposeOwnedDetail} from '../src/model.js';
+import {isOriginalRearTriangle} from '../src/biology-north.js';
 
 test('old biology hall reuses the actual courtyard without taking the modern life-sciences identity', () => {
   const campus = createCampusModel(data), ids = [...campus.buildings.keys()], frozen = JSON.stringify(data);
@@ -54,13 +55,13 @@ test('old biology hall reuses the actual courtyard without taking the modern lif
   }
 });
 
-test('direct transplant preserves every original vertex, window, roof, frame, material and courtyard proportion', () => {
+test('north-only adaptation preserves every other source triangle, material, roof and courtyard proportion', () => {
   const campus = createCampusModel(data), root = refineBiologyHall(campus, data);
   const detail = root.children.find(child => child.userData.campusDetail);
   const original = createCourtyardReuse({textured: false});
   const imported = detail.children[0];
-  assert.equal(imported.children.length, original.group.children.length);
-  for (let i = 0; i < imported.children.length; i++) {
+  assert.equal(imported.children.length, original.group.children.length + 1);
+  for (let i = 0; i < original.group.children.length; i++) {
     const a = imported.children[i], b = original.group.children[i];
     assert.equal(a.name, b.name);
     assert.deepEqual(a.scale.toArray(), b.scale.toArray());
@@ -68,10 +69,26 @@ test('direct transplant preserves every original vertex, window, roof, frame, ma
     assert.equal(a.children.length, b.children.length);
     for (let j = 0; j < a.children.length; j++) {
       const mesh = a.children[j], source = b.children[j];
-      assert.deepEqual(mesh.geometry.index?.array, source.geometry.index?.array);
       assert.deepEqual(Object.keys(mesh.geometry.attributes), Object.keys(source.geometry.attributes));
+      const geometry = source.geometry.index ? source.geometry.toNonIndexed() : source.geometry;
+      const keep = [];
+      for (let offset = 0; offset < geometry.attributes.position.count; offset += 3) {
+        if (!isOriginalRearTriangle(b.name, geometry.attributes.position, geometry.attributes.normal, offset)) {
+          keep.push(offset, offset + 1, offset + 2);
+        } else {
+          assert.ok(['Building shell', 'Windows and facade joinery'].includes(b.name));
+          for (let vertex = offset; vertex < offset + 3; vertex++) {
+            assert.ok(geometry.attributes.position.getZ(vertex) < -8.98, 'No southern, side or courtyard triangle may be removed');
+            if (b.name === 'Building shell') assert.ok(geometry.attributes.position.getY(vertex) < 9.12,
+              'Original roof and clerestory shell must remain intact');
+          }
+        }
+      }
       for (const [name, attribute] of Object.entries(mesh.geometry.attributes)) {
-        assert.deepEqual(attribute.array, source.geometry.attributes[name].array);
+        const expected = new attribute.array.constructor(keep.length * attribute.itemSize), sourceValues = geometry.attributes[name].array;
+        for (const [index, from] of keep.entries()) expected.set(
+          sourceValues.subarray(from * attribute.itemSize, (from + 1) * attribute.itemSize), index * attribute.itemSize);
+        assert.deepEqual(attribute.array, expected);
       }
       assert.equal(mesh.material.name, source.material.name);
       assert.equal(mesh.material.color.getHex(), source.material.color.getHex());
@@ -80,6 +97,25 @@ test('direct transplant preserves every original vertex, window, roof, frame, ma
     }
   }
   disposeOwnedDetail(original.group);
+});
+
+test('photographed north has actual recessed openings, bounded stairs and a joined stepped crown', () => {
+  const campus = createCampusModel(data), root = refineBiologyHall(campus, data);
+  const source = root.children.find(child => child.userData.campusDetail).children[0];
+  source.position.set(0, 0, 0); source.parent.rotation.set(0, 0, 0); source.parent.position.set(0, 0, 0);
+  root.position.set(0, 0, 0); root.updateMatrixWorld(true);
+  const north = source.getObjectByName('Photo-refined north bridge entrance');
+  assert.equal(north.userData.openings.length, 39);
+  assert.ok(north.userData.removedOriginalRearTriangles > 100);
+  for (const opening of north.userData.openings) {
+    const hits = new THREE.Raycaster(new THREE.Vector3(...opening.outside), new THREE.Vector3(0, 0, 1), 0, 2)
+      .intersectObject(source, true);
+    assert.ok(hits.length, 'Every real aperture leads to a glass/door plane');
+    assert.match(hits[0].object.material.name, /glass/, JSON.stringify(opening));
+    assert.ok(hits[0].distance >= 1.25, 'Glazing lies behind a genuine wall opening, not a painted panel');
+  }
+  const bounds = new THREE.Box3().setFromObject(north);
+  assert.ok(bounds.max.y <= 11.61 && bounds.min.z >= -13.41 && bounds.max.z <= -7.93);
 });
 
 test('source drift fails before replacement, and repeated application releases owned resources', () => {

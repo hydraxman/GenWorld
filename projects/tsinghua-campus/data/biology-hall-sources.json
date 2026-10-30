@@ -8,11 +8,11 @@
   "identity": "用户将原庭院识别为近春园对面的生命科学相关建筑；冻结具名轮廓和三段石池的校友会史料对应老生物学馆，而非北侧1998年伟伦馆（生命科学馆）。不覆盖后者原编号。",
   "orientation": "原模型+Z庭院按用户近春园侧说明、冻结南侧中央凸出边与校友会南侧水池记述绑定至南面；用户指定对桥入口为北面。北侧照片未独立定位摄影机，不将此说明当作测绘外参。",
   "height": 11.78,
-  "reusePolicy": "Directly instantiate the original Courtyard architecture, original joinery, terrace, three basins and twin pergolas. Preserve original geometry, materials and unit scale; apply campus translation and rotation only. No replacement north shell or invented wing extensions.",
+  "reusePolicy": "Directly instantiate original Courtyard at unit scale. Preserve every triangle except explicitly classified original north-wall and north-joinery triangles. Replace only those with photo-informed recessed north entrance and windows using original materials. No invented wing extensions.",
   "limitations": [
-    "原Courtyard建筑、原窗框、屋顶、露台栏杆、三段干石池与双廊架直接复用；没有重新生成主体，没有补写翼楼，也没有在原模型北面覆盖一层新立面。",
-    "保留原模型米制尺寸、比例、几何和材质，仅平移与旋转到校园。原模型约34米宽，与冻结约70米宽轮廓并不完全一致；原地图身份、轮廓和原点不变，不为填满它而拉伸、续建或宣称整轮廓还原。",
-    "北面沿用原模型已有背面，尚未按新照片重建北入口。照片保留为后续独立补充细节的参照，不将现有背面宣称为照片核实后的北门。",
+    "原Courtyard南立面、两翼体量、屋顶、露台栏杆、三段干石池与双廊架直接复用。仅移除旧北墙及北窗三角面并重建北入口，避免实墙遮住新增门窗洞；其余源几何逐三角面保持不变。",
+    "原模型约34米宽，与冻结约70米宽轮廓并不完全一致；原地图身份、轮廓和原点不变，不为填满它而拉伸、续建或宣称整轮廓还原。",
+    "北入口依Commons照片可见的浅石门厅、深门洞、台阶、分层长窗及阶梯式中央女儿墙细化。尺寸适配原模型、侧回墙及原屋顶衔接为推定；保留原南向屋顶导致轮廓仍不同于完整照片测绘。遮挡处、题字、空调和室内不作猜测复刻。",
     "三段石池与廊架同样保留原比例，并核对不越过地图南侧河岸3米退让线；不声称水位、现状或尺度已核实。校友会文献说明旧喷泉已经改动，模型保持干池，不添加历史喷泉或题刻。",
     "以局部照片参照模型计数，未完成逐面还原；新生命科学馆、1919年科学馆和老生物学馆保持独立身份。"
   ],

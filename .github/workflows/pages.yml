@@ -55,6 +55,8 @@ jobs:
           projects/tsinghua-campus/tests/campus-architecture.test.mjs
           projects/tsinghua-campus/tests/photo-appearance.test.mjs
           projects/tsinghua-campus/tests/reference-catalog.test.mjs
+          projects/courtyard/src/glass-reflections.test.js
+          projects/courtyard/src/leaves.test.js
       - run: npm run test:pages
       - run: npm run build:pages
       - name: Update Pages branch

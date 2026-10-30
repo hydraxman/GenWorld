@@ -5,6 +5,7 @@ import {outlineEdges} from './architecture.js';
 import {architectureSignature} from './architecture-contract.js';
 import {disposeOwnedDetail, replaceBuilding} from './model.js';
 import evidence from '../data/biology-hall-sources.json' with {type: 'json'};
+import {refineBiologyNorth} from './biology-north.js';
 
 export const BIOLOGY_HALL_ID = evidence.featureId;
 export const BIOLOGY_HALL_SOURCE = evidence;
@@ -37,7 +38,7 @@ export function refineBiologyHall(campus, data) {
     placementStatus: 'old-biology-hall-source-root-bound',
     sourceFrontWorld: [n[0], 0, n[1]],
     role: 'direct-original-courtyard-model',
-    geometryPolicy: 'Unmodified original geometry, materials and unit scale; placement only. No added wings or facade shell.',
+    geometryPolicy: 'Original south facade, wings, roof and courtyard at unit scale. Only north-facing wall/joinery triangles replaced by the photographed entrance.',
   });
   const forecourt = source.children.filter(child => child.userData.role === 'legacy-library-forecourt');
   source.updateMatrixWorld(true);
@@ -68,13 +69,14 @@ export function refineBiologyHall(campus, data) {
   }
   const detail = new THREE.Group(); detail.name = '生物学馆 · Courtyard原模型直接放置';
   detail.position.set(center[0], 0, center[1]); detail.rotation.y = -Math.atan2(t[1], t[0]);
+  const north = refineBiologyNorth(source);
   detail.add(source);
-  const modelHeight = reused.architectureBounds.max.y;
+  const modelHeight = Math.max(reused.architectureBounds.max.y, north.userData.dimensions.top);
   const focusBounds = new THREE.Box3().setFromObject(detail);
   detail.userData = {referenceSite: 'biology-hall', evidence, reusedSource: evidence.originalModel,
     sourceStats: reused.stats, placement: {scaleX: 1, scaleY: 1, scaleZ: 1, shoreline, shorelineSetback: 3,
       sourceOffsetZ: source.position.z, southTangent: t, southNormal: n},
-    modelHeight, noPhotoTextures: true, directOriginalGeometry: true,
+    modelHeight, noPhotoTextures: true, directOriginalGeometry: true, northFacadeRefined: true,
     limitations: evidence.limitations, entranceOrientationBasis: evidence.orientation};
   const previous = root.children.find(child => child.userData.campusDetail);
   const target = replaceBuilding(campus.buildings, BIOLOGY_HALL_ID, detail);
@@ -85,9 +87,9 @@ export function refineBiologyHall(campus, data) {
   ],
     focusBoundsLocal: {min: focusBounds.min.toArray(), max: focusBounds.max.toArray()},
     refinementSummary: '老生物学馆（非伟伦生命科学馆）：直接使用Courtyard原有建筑、窗框、屋顶、三段干石池和双廊架，'
-      + '只改变校园位置和朝向；未拉伸主体、未补写两翼、未覆盖北面外壳。'
+      + '主体未拉伸、未补写两翼；仅北面替换旧背墙窗列，按照片加入石质门厅、深门洞、台阶、分层长窗及阶梯式女儿墙。'
       + evidence.limitations.join(' '),
-    renderHeight: modelHeight, heightSource: 'Courtyard原模型原尺寸，未按北面照片改高；原地图顶部11m保留于来源。',
+    renderHeight: modelHeight, heightSource: 'Courtyard主体原尺寸；北门细节适配其高度，非照片测绘；原地图顶部11m保留于来源。',
     viewDirection: [n[0] * 1.1 + t[0] * .18, .5, n[1] * 1.1 + t[1] * .18]});
   return target;
 }

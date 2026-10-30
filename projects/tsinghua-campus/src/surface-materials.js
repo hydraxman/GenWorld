@@ -1,4 +1,6 @@
 import * as THREE from 'three';
+import {createPBRTools} from '../../../shared/pbr.js';
+const masonryAtlases = new Map();
 
 function surfaceTextures(name, sample, size = 128) {
   const colors = new Uint8Array(size * size * 4), normals = new Uint8Array(colors.length);
@@ -38,6 +40,37 @@ function surfaceTextures(name, sample, size = 128) {
 }
 
 export function createMasonryMaterial(name, rgb, stone = false) {
+  if (typeof document !== 'undefined') {
+    const kind = stone ? 'granite' : 'brick';
+    if (!masonryAtlases.has(kind)) {
+      let seed = 41827;
+      const tools = createPBRTools(THREE, {rand: () => {
+        seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296;
+      }, stats: {textures: 0}, materials: {}, textureWorld: new Map()});
+      const template = tools.pbr(`Shared ${kind}`, kind, [242, 242, 242], [4, 4], 256);
+      for (const key of ['map', 'normalMap', 'roughnessMap']) {
+        template[key].repeat.set(stone ? 2 : 3.7, stone ? 2 : 3.45);
+        template[key].name = `Shared ${kind}: generated Courtyard ${key}; no photograph`;
+        template[key].userData.sharedCampusSurface = true;
+      }
+      masonryAtlases.set(kind, {template, references: 0});
+    }
+    const atlas = masonryAtlases.get(kind), material = atlas.template.clone();
+    material.name = name;
+    material.color.setRGB(rgb[0] / 242, rgb[1] / 242, rgb[2] / 242, THREE.SRGBColorSpace);
+    material.normalScale.set(.28, .28);
+    material.userData.courtyardSurface = kind;
+    atlas.references++;
+    const release = () => {
+      material.removeEventListener('dispose', release);
+      if (--atlas.references === 0) {
+        for (const key of ['map', 'normalMap', 'roughnessMap']) atlas.template[key].dispose();
+        atlas.template.dispose(); masonryAtlases.delete(kind);
+      }
+    };
+    material.addEventListener('dispose', release);
+    return material;
+  }
   const textures = surfaceTextures(name, (u, v) => {
     const row = Math.floor(v * 8), seam = v * 8 % 1 < .065 ||
       (u * (stone ? 2 : 4) + row % 2 * .5) % 1 < .035;

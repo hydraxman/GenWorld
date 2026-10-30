@@ -3,10 +3,8 @@ import {POOLS,waterLevel} from './pools.js';
 export const WATER_COLOR='#4d8586';
 export const WATER_OPACITY=1;
 export const WATER_REFLECTION_MODE='planar-reflection';
-export function createWater(THREE){
- const group=new THREE.Group();group.name='Live planar reflection water';
- const reflectors=[];
- const shader={name:'Blue green water with real planar building reflection',uniforms:{
+export function createWaterShader(THREE){
+ return {name:'Blue green water with real planar building reflection',uniforms:{
   color:{value:new THREE.Color(WATER_COLOR)},tDiffuse:{value:null},textureMatrix:{value:new THREE.Matrix4()},time:{value:0},eye:{value:new THREE.Vector3()},reflectionEnabled:{value:1}
  },vertexShader:`
  uniform mat4 textureMatrix;varying vec4 reflectionUv;varying vec3 worldPosition;
@@ -35,6 +33,11 @@ export function createWater(THREE){
   #include <colorspace_fragment>
  }
  `};
+}
+export function createWater(THREE){
+ const group=new THREE.Group();group.name='Live planar reflection water';
+ const reflectors=[];
+ const shader=createWaterShader(THREE);
  const exportMat=new THREE.MeshPhysicalMaterial({name:'Blue-green water (planar reflection provided by viewer)',color:WATER_COLOR,roughness:.12,metalness:.15,clearcoat:1,clearcoatRoughness:.15,transparent:false,opacity:WATER_OPACITY});
  for(const pool of POOLS){
   const reflector=new Reflector(new THREE.PlaneGeometry(pool.w-.025,pool.d-.025),{color:WATER_COLOR,textureWidth:1024,textureHeight:1024,clipBias:.002,multisample:2,shader});

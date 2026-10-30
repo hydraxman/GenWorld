@@ -23,3 +23,26 @@ test('local scene cube capture is cached, excludes glass/water, skips AO and res
  const live=pane.material,restore=api.beginExport();assert.equal(pane.material,original);revision++;api.update();assert.equal(captures,3);restore();assert.equal(pane.material,live);
  throws=true;assert.throws(()=>api.update(),/capture failure/);assert.equal(pane.visible,true);assert.equal(water.visible,true);assert.equal(renderer.shadowMap.autoUpdate,true);assert.equal(renderer.shadowMap.enabled,true);assert.equal(renderer.info.autoReset,true);
 });
+
+test('lazy meshes share one probe, export clones restore originals, and disposal releases owned resources', async () => {
+ const {installGlassReflections}=await import(moduleUrl);
+ const scene=new THREE.Scene(),root=new THREE.Group();scene.add(root);
+ const original=new THREE.MeshPhysicalMaterial({name:'Window glazing',metalness:0});
+ const first=new THREE.Mesh(new THREE.BoxGeometry(),original);root.add(first);
+ let captures=0;
+ const renderer={shadowMap:{enabled:true,autoUpdate:true,needsUpdate:false},info:{autoReset:true,render:{calls:0}},
+  getRenderTarget(){return null;},setRenderTarget(){},xr:{enabled:false}};
+ const T={...THREE,CubeCamera:class extends THREE.Object3D{update(){captures++;}}};
+ const api=installGlassReflections(T,renderer,scene,root,{metalness:0,resolution:64});
+ api.update();const live=first.material;
+ const lazy=new THREE.Mesh(new THREE.BoxGeometry(),original);root.add(lazy);
+ api.refresh();api.update();
+ assert.equal(captures,1);assert.equal(lazy.material,live);assert.equal(api.stats.glassMaterials,1);
+ assert.equal(live.metalness,0);assert.ok(live.envMap.isCubeTexture);
+ const copy=root.clone(true);api.prepareExport(copy);
+ assert.equal(copy.children[0].material,original);assert.equal(first.material,live);
+ api.invalidate();api.update();assert.equal(captures,2);
+ api.setPosition(new THREE.Vector3(20,6,5));api.update();assert.equal(captures,3);
+ let disposed=0;live.addEventListener('dispose',()=>disposed++);
+ api.dispose();assert.equal(disposed,1);assert.equal(first.material,original);assert.equal(lazy.material,original);
+});

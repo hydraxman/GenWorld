@@ -151,6 +151,28 @@ export async function measureCampusAppearance(frame, site, apartmentNumber = nul
   }, {site, apartmentNumber, featureId});
 }
 
+async function assertGlazingReadability(frame, appearance, readFallback, minimum, maximum, contrast) {
+  const reflective = appearance.rendering.reflections?.glass.enabled;
+  if (reflective) {
+    // Reflected sky may be brighter than masonry. Check its color separation,
+    // then retain the stricter luminance test for the original PBR fallback.
+    assert.ok(appearance.glazing >= minimum && appearance.glazing <= 185,
+      `Reflected glazing is clipped: ${JSON.stringify(appearance)}`);
+    assert.ok(appearance.colorDistance >= 35, `Reflected windows lose material separation: ${JSON.stringify(appearance)}`);
+    await frame.$eval('#scene-reflections', element => {element.checked = false; element.dispatchEvent(new Event('change'));});
+  }
+  try {
+    const fallback = reflective ? await readFallback() : appearance;
+    assert.ok(fallback.glazing >= minimum && fallback.glazing <= maximum,
+      `Fallback glazing is crushed black or washed out: ${JSON.stringify(fallback)}`);
+    assert.ok(fallback.masonry - fallback.glazing >= contrast,
+      `Fallback windows must remain distinct from masonry: ${JSON.stringify(fallback)}`);
+    return fallback;
+  } finally {
+    if (reflective) await frame.$eval('#scene-reflections', element => {element.checked = true; element.dispatchEvent(new Event('change'));});
+  }
+}
+
 function assertFramed(state) {
   const {region, points, width, height} = state;
   assert.ok(region.width > width / 2 && region.height > height / 4, 'Controls must leave a usable model viewport');
@@ -283,15 +305,14 @@ export async function checkCampusExpansion({page, frame, screenshots}) {
     assert.ok(appearance.rendering?.environment, 'Exterior glazing needs an actual reflection environment');
     assert.equal(appearance.rendering.contactShadows, true, 'Desktop detailed views should receive contact shadows');
     assert.equal(appearance.baseMeshes, 0, 'Every frozen footprint should now have architectural geometry, not a visible baseline');
-    assert.ok(appearance.glazing >= 35 && appearance.glazing <= 110,
-      `Glazing is crushed black or washed out at ${source.referenceSite}: ${JSON.stringify(appearance)}`);
-    assert.ok(appearance.masonry - appearance.glazing >= 25,
-      `Windows must remain distinct from masonry at ${source.referenceSite}: ${JSON.stringify(appearance)}`);
+    await page.screenshot({path: path.join(screenshots, `campus-${source.referenceSite}-reflected.png`)});
+    const fallback = await assertGlazingReadability(frame, appearance,
+      () => measureCampusAppearance(frame, source.referenceSite), 35, 110, 25);
     await frame.$eval('#contact-shadows', element => {element.checked = false; element.dispatchEvent(new Event('change'));});
     const withoutAO = await measureCampusAppearance(frame, source.referenceSite);
     assert.equal(withoutAO.rendering.contactShadows, false);
     assert.ok(Math.abs(withoutAO.glazing - appearance.glazing) < 25, 'Contact shadows must not darken entire windows');
-    report.push({site: source.referenceSite, ...appearance, glazingWithoutAO: withoutAO.glazing});
+    report.push({site: source.referenceSite, ...appearance, fallbackGlazing: fallback.glazing, glazingWithoutAO: withoutAO.glazing});
     await frame.$eval('#contact-shadows', element => {element.checked = true; element.dispatchEvent(new Event('change'));});
     await snapshot(frame);
     await page.screenshot({path: path.join(screenshots, `campus-${source.referenceSite}-desktop.png`)});
@@ -414,10 +435,7 @@ export async function checkCampusArchitecture({page, frame, screenshots}) {
     let appearance;
     if (sample) {
       appearance = await measureCampusAppearance(frame, 'procedural', null, root.id);
-      assert.ok(appearance.glazing >= 20 && appearance.glazing <= 145,
-        `Actual near glazing is unreadable: ${JSON.stringify({root, appearance})}`);
-      assert.ok(appearance.masonry - appearance.glazing >= 20,
-        `Near window/masonry contrast is unreadable: ${JSON.stringify({root, appearance})}`);
+      await assertGlazingReadability(frame, appearance, () => measureCampusAppearance(frame, 'procedural', null, root.id), 20, 145, 20);
     }
     await page.screenshot({path: path.join(screenshots, `campus-architecture-${root.family}-desktop.png`)});
     await frame.$eval('#architecture-details', element => {element.checked = false; element.dispatchEvent(new Event('change'));});
@@ -615,10 +633,7 @@ export async function checkCampusZijing({page, frame, screenshots}) {
     const appearance = [1, 8, 14, 18, 23].includes(number)
       ? await measureCampusAppearance(frame, 'zijing-dormitories', number) : null;
     if (appearance) {
-      assert.ok(appearance.glazing >= 25 && appearance.glazing <= 130,
-        `Dormitory glazing must remain readable in the actual canvas: ${JSON.stringify({number, appearance})}`);
-      assert.ok(appearance.masonry - appearance.glazing >= 20,
-        `Dormitory windows must contrast with their surrounding masonry: ${JSON.stringify({number, appearance})}`);
+      await assertGlazingReadability(frame, appearance, () => measureCampusAppearance(frame, 'zijing-dormitories', number), 25, 130, 20);
     }
     report.push({number, ...model, ...(appearance ? {appearance} : {})});
     await page.screenshot({path: path.join(screenshots, `campus-zijing-${number}-desktop.png`)});

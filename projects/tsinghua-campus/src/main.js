@@ -15,6 +15,7 @@ import {applyCampusArchitecture, prepareArchitectureExport, ARCHITECTURE_FAMILIE
 import {PHOTO_APPEARANCES} from './photo-appearance.js';
 import {buildCampusLandscape} from './landscape.js';
 import {prepareTreeExport} from './campus-trees.js';
+import {installCampusReflections} from './campus-reflections.js';
 
 const $ = id => document.getElementById(id);
 const outputPrefix = location.pathname.endsWith('/tsinghua-campus-offline.html') ? '' : 'output/';
@@ -126,13 +127,16 @@ async function main() {
   let framedBounds = null, framedPadding = 1.3;
   $('contact-shadows').checked = !compact.matches;
   let contactShadowsActive = false;
-  function draw() {
+  const reflections = installCampusReflections(renderer, scene, campus, {compact: compact.matches});
+  function draw(forceReflections = false) {
     updateInspectionClipping(camera, controls.target);
     campus.updateArchitectureLOD(camera, $('architecture-details').checked);
     campus.updateTreeLOD(camera, compact.matches);
     sun.castShadow = !planMode && framedBounds && framedBounds.getSize(new THREE.Vector3()).length() < 600;
     contactShadowsActive = $('contact-shadows').checked && !planMode && framedBounds &&
       framedBounds.getSize(new THREE.Vector3()).length() < 600;
+    reflections.update(camera, !planMode && framedBounds &&
+      framedBounds.getSize(new THREE.Vector3()).length() < 380, forceReflections);
     drawScene(camera, Boolean(contactShadowsActive));
   }
   const inspector = $('sidebar'), legend = $('layers');
@@ -379,6 +383,7 @@ async function main() {
           sliceStarted = performance.now();
         }
       }
+      reflections.refresh();
       const {GLTFExporter} = await import('three/addons/exporters/GLTFExporter.js');
       const object = whole ? campus.group.clone(true) : exportSelection?.clone(!exportPart);
       if (!object) throw new Error('请先选择建筑或地标。');
@@ -397,6 +402,7 @@ async function main() {
       if (!whole) object.position.set(0, 0, 0);
       prepareArchitectureExport(object);
       prepareTreeExport(object);
+      reflections.prepareExport(object);
       object.updateMatrixWorld(true);
       const bytes = await new GLTFExporter().parseAsync(object, {binary: true, onlyVisible: true});
       save(bytes, whole ? 'tsinghua-campus-refined.glb' : exportPart ? `tsinghua-zijing-${exportPart.userData.apartmentNumber}.glb` : exportSelection.userData.exportFilename
@@ -433,7 +439,7 @@ async function main() {
       $('selection-fields').replaceChildren();
       $('focus-facade').hidden = $('focus').hidden = $('export-building').hidden = $('selected-references').hidden = $('selection-link').hidden = true;
     }
-    search(); dirty = true;
+    search(); reflections.invalidate(); dirty = true;
   }
   $('architecture-family').addEventListener('change', filterObjects);
   for (const apartment of ZIJING_APARTMENTS) {
@@ -491,8 +497,11 @@ async function main() {
   $('sports-ground').addEventListener('change', event => {if (event.target.value) selectGround(event.target.value);});
   $('only-refined').addEventListener('change', filterObjects);
   $('view-3d').addEventListener('click', () => mode(false));
-  $('architecture-details').addEventListener('change', () => {dirty = true;});
+  $('architecture-details').addEventListener('change', () => {reflections.invalidate(); dirty = true;});
   $('contact-shadows').addEventListener('change', () => {dirty = true;});
+  $('scene-reflections').addEventListener('change', () => {
+    reflections.setEnabled($('scene-reflections').checked); dirty = true;
+  });
   $('view-plan').addEventListener('click', () => mode(true));
   $('view-all').addEventListener('click', () => frame(bounds));
   for (const [toggle, element] of [[$('toggle-inspector'), inspector], [$('toggle-layers'), legend]]) {
@@ -532,6 +541,7 @@ async function main() {
   $('export-building').addEventListener('click', () => { void exportModel(false).catch(error => console.error('Building export failed', error)); });
   document.querySelectorAll('[data-layer]').forEach(input => input.addEventListener('change', () => {
     campus.layers[input.dataset.layer].visible = input.checked;
+    reflections.invalidate();
     if (selected?.userData.kind === input.dataset.layer) highlight.visible =
       selected.userData.refinementStatus !== 'detailed' && input.checked && selected.visible;
     dirty = true;
@@ -580,7 +590,7 @@ async function main() {
   }
   function render() {
     controls.update();
-    if (dirty) {
+    if (dirty || reflections.pending()) {
       draw();
       $('north').textContent = planMode ? 'N ↑ 北' : 'N · -Z';
       dirty = false;
@@ -599,7 +609,7 @@ async function main() {
       rendering: {environment: Boolean(scene.environment), contactShadows: Boolean(contactShadowsActive),
         toneMapping: renderer.toneMapping, environmentIntensity: scene.environmentIntensity,
         calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, geometries: renderer.info.memory.geometries,
-        textures: renderer.info.memory.textures},
+        textures: renderer.info.memory.textures, reflections: reflections.stats()},
       shadowTexelMeters: (sun.shadow.camera.right - sun.shadow.camera.left) / sun.shadow.mapSize.x}),
   };
   draw();

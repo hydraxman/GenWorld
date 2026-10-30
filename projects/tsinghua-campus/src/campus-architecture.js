@@ -89,7 +89,7 @@ export function createArchitectureResources() {
   }, dispose() {
     const textures = new Set();
     for (const material of materials) {
-      for (const value of Object.values(material)) if (value?.isTexture) textures.add(value);
+      for (const value of Object.values(material)) if (value?.isTexture && !value.userData.sharedCampusSurface) textures.add(value);
       material.dispose();
     }
     textures.forEach(texture => texture.dispose());
@@ -549,6 +549,7 @@ export function applyCampusArchitecture(campus, data, {deferNear = false} = {}) 
   }
   for (const batch of state.far?.batches || []) {batch.mesh.removeFromParent(); batch.mesh.dispose();}
   state.far = buildFarBatches(campus, ids);
+  campus.architectureRevision = (campus.architectureRevision || 0) + 1;
   const featuresById = new Map(features.map(feature => [feature.id, feature]));
   campus.ensureArchitectureDetail = id => {
     const root = campus.buildings.get(id);
@@ -560,6 +561,7 @@ export function applyCampusArchitecture(campus, data, {deferNear = false} = {}) 
     detail.userData.campusDetail = true;
     detail.children.find(child => child.userData.architectureFar).children.forEach(mesh => {mesh.visible = false;});
     root.remove(previous); root.add(detail); disposeOwnedDetail(previous);
+    campus.architectureRevision++;
     return detail;
   };
   campus.group.userData.proceduralBuildingIds = ids;
@@ -621,4 +623,5 @@ export function disposeCampusArchitecture(campus) {
   campus.group.userData.levelOfDetail = state.originalLevelOfDetail;
   delete campus.updateArchitectureLOD;
   delete campus.ensureArchitectureDetail;
+  delete campus.architectureRevision;
 }

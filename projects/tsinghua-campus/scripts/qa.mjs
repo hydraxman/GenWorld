@@ -166,6 +166,20 @@ try {
   assert.equal(gltf.accessors[instance.attributes.TRANSLATION].count, stats.landscape.trees);
   assert.ok(gltf.materials.find(material => material.name === 'Mapped green space; original non-photographic lawn surface')
     ?.pbrMetallicRoughness.metallicRoughnessTexture, 'The generated lawn ORM texture must survive actual GLB export');
+  const mappedWater = gltf.nodes.find(node => node.extras?.campusPlanarWater);
+  assert.ok(mappedWater, 'Export retains the exact mapped water surface');
+  const waterPrimitive = gltf.meshes[mappedWater.mesh].primitives[0];
+  assert.equal(gltf.accessors[waterPrimitive.indices ?? waterPrimitive.attributes.POSITION].count / 3, 597,
+    'Frozen water triangles survive the reflector coordinate transform');
+  const waterMaterial = gltf.materials[waterPrimitive.material];
+  assert.match(waterMaterial.name, /Mapped blue-green water/);
+  assert.ok(waterMaterial.extensions?.KHR_materials_clearcoat);
+  assert.ok(!gltf.materials.some(material => material.extras?.liveReflection), 'Runtime reflection materials must not leak into GLB');
+  const sharedMasonry = gltf.materials.filter(material => material.extras?.courtyardSurface);
+  assert.ok(sharedMasonry.length >= 25);
+  assert.ok(sharedMasonry.every(material => material.pbrMetallicRoughness.baseColorTexture
+    && material.pbrMetallicRoughness.metallicRoughnessTexture && material.normalTexture),
+  'Reused brick/stone albedo, independent roughness and normals survive actual GLB');
   const addressable = gltf.nodes.filter(node => node.extras?.featureId);
   assert.equal(addressable.length, stats.buildings + stats.landmarks);
   assert.equal(new Set(addressable.map(node => node.extras.featureId)).size, addressable.length);

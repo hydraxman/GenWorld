@@ -188,7 +188,7 @@ export function disposeOwnedDetail(detail) {
     if (object.isMesh) for (const material of Array.isArray(object.material) ? object.material : [object.material]) {
       if (material.userData.sharedCampusMaterial) continue;
       materials.add(material);
-      for (const value of Object.values(material)) if (value?.isTexture) textures.add(value);
+      for (const value of Object.values(material)) if (value?.isTexture && !value.userData.sharedCampusSurface) textures.add(value);
     }
   });
   geometries.forEach(g => g.dispose()); materials.forEach(m => m.dispose()); textures.forEach(t => t.dispose());

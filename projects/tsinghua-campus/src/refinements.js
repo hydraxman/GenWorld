@@ -21,8 +21,8 @@ export const REFINEMENT_SITES = [
     buttonId: 'view-biology-hall', label: '生物学馆 · 原庭院',
     viewDirection: [.24, .5, 1.1], reconstructionExtent: 'partial',
     aliases: ['老生物馆', '原Courtyard', '庭院模型'],
-    additionalViews: [{buttonId: 'view-biology-north', label: '生物学馆北侧·原模型', viewDirection: [-.2, .38, -1.1],
-      focusObject: 'Building shell'}],
+    additionalViews: [{buttonId: 'view-biology-north', label: '生物学馆北门', viewDirection: [-.22, .23, -1.1],
+      focusObject: 'Photo-refined north bridge entrance'}],
     apply: refineBiologyHall,
   },
   {
