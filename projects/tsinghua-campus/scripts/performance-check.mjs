@@ -10,16 +10,17 @@ await mkdir(output, {recursive: true});
 const server = createProjectServer();
 await new Promise(done => server.listen(0, '127.0.0.1', done));
 let browser;
+const launchBrowser = () => puppeteer.launch({
+  executablePath: process.env.CHROME_PATH || 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
+  headless: true, protocolTimeout: 180000, args: ['--use-gl=angle', '--use-angle=d3d11', '--no-proxy-server', '--disable-quic'],
+});
 try {
-  browser = await puppeteer.launch({
-    executablePath: process.env.CHROME_PATH || 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
-    headless: true, protocolTimeout: 180000, args: ['--use-gl=angle', '--use-angle=d3d11', '--no-proxy-server', '--disable-quic'],
-  });
   const report = {};
   for (const [device, viewport] of Object.entries({
     desktop: {width: 1600, height: 1000, deviceScaleFactor: 1},
     mobile: {width: 390, height: 844, deviceScaleFactor: 2},
   })) {
+    browser = await launchBrowser();
     const context = await browser.createBrowserContext(), page = await context.newPage(), errors = [], requests = [];
     await page.setViewport(viewport);
     page.on('pageerror', error => errors.push(String(error)));
@@ -106,6 +107,8 @@ try {
     report[device] = {startup, drawTimes, flicker, focusedFlicker, grounds, firstExportBytes: exportedBytes, errors};
     console.log(JSON.stringify({device, startup, flicker, focusedFlicker, errors}));
     await context.close();
+    await browser.close();
+    browser = undefined;
   }
   await writeFile(resolve(output, 'performance-after.json'), JSON.stringify(report, null, 2) + '\n');
 } finally {
