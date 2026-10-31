@@ -30,11 +30,37 @@ test('red SEM replaces the correct mapped building and retains its identity and 
   assert.ok(Math.abs(bounds.max.x - outline[2]) < 1);
   assert.ok(Math.abs(bounds.min.z - outline[1]) < 1);
   assert.ok(Math.abs(bounds.max.z - outline[3]) < 1);
-  assert.ok(detail.userData.meshStats.archedWindows > 25);
+  assert.equal(detail.userData.meshStats.archedWindows, 24);
+  assert.equal(detail.userData.meshStats.northAtrium.archHeight, 17);
   assert.ok(detail.userData.meshStats.windows > 100);
   architecture.traverse(object => {
     if (object.geometry) assert.ok(object.geometry.attributes.position.array.every(Number.isFinite));
   });
+
+});
+
+test('SEM refuses frozen footprint/origin drift and releases the previous detail on reapplication', () => {
+  for (const mutate of [
+    source => {source.features.find(f => f.id === SEM_ID).geometry.coordinates[0][0][0] += .00001;},
+    source => {source.metadata.center = [116.32, 40];},
+  ]) {
+    const source = structuredClone(subset()); mutate(source);
+    const campus = createCampusModel(source);
+    assert.throws(() => refineSEM(campus, source, {textured: false}), /re-match/);
+  }
+  const source = subset(), campus = createCampusModel(source), root = refineSEM(campus, source, {textured: false});
+  const geometries = new Set(), materials = new Set();
+  root.children.find(c => c.userData.campusDetail).traverse(o => {
+    if (o.geometry) geometries.add(o.geometry);
+    if (o.isMesh) materials.add(o.material);
+  });
+  let disposed = 0;
+  for (const resource of [...geometries, ...materials]) resource.addEventListener('dispose', () => disposed++);
+  refineSEM(campus, source, {textured: false});
+  assert.equal(disposed, geometries.size + materials.size);
+  assert.equal(root.children.filter(c => c.userData.campusDetail).length, 1);
+  root.userData.localOriginMeters[0] += 1;
+  assert.throws(() => refineSEM(campus, source, {textured: false}), /origin changed/);
 });
 
 test('the same-coordinate-frame corridor is suspended between SEM and Shunde', () => {

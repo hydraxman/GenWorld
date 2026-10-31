@@ -27,6 +27,8 @@ npm run render
 
 校园和 [Logo 俯冲研究](../kaiwu-logo/studies/shunde-dive/README.md)复用此模型。立面细化需显式开启 `refinedFront`；周边建筑、硬地前场、树林与悬空连廊由独立模块装配，不改变原查看器的默认行为。连廊的位置及高度仍为示意。
 
+`src/sem-building.js` 是西侧经管建华／李华组团与校园共用的照片参照模型：保留原ENU轮廓，北面通透门厅内有17m白拱，局部拱窗、陶板实墙、玻璃翼和圆柱依据清华校方及Gensler照片。来源与未知项见[校园照片索引](../tsinghua-campus/reference-catalog.json)；高低区分界、门厅宽厚、背面和通舜德连廊仍为推定。无参考照片纹理或外部字体请求。
+
 [Blender 工具](blender/README.md)保留的是独立历史模型，不应与当前庭院几何混同。GLB 保存几何与材质，不包含查看器的全部灯光及屏幕空间效果。
 
 ## 许可

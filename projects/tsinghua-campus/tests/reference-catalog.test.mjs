@@ -8,7 +8,7 @@ import {referenceTest} from './reference-mode.mjs';
 test('all reference sites retain distributable provenance without requiring local photographs', () => {
   assert.equal(catalog.sites.length, 34);
   assert.equal(new Set(catalog.sites.map(site => site.id)).size, 34);
-  assert.equal(catalog.sites.flatMap(site => site.images).length, 51);
+  assert.equal(catalog.sites.flatMap(site => site.images).length, 55);
   for (const site of catalog.sites) {
     assert.ok(site.name && site.observations.length && site.unknowns.length);
     for (const image of site.images) {

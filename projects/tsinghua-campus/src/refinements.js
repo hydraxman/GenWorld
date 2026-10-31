@@ -32,7 +32,9 @@ export const REFINEMENT_SITES = [
     apply: (campus, data) => refineShunde(campus, data, 'building:geometry:6bd0154b26cfe7cf654cdd3b'),
   },
   {
-    featureId: SEM_ID, referenceSite: 'sem-complex', buttonId: 'view-sem', label: '经管红楼', viewDirection: [0.6, 0.7, -1.1],
+    featureId: SEM_ID, referenceSite: 'sem-complex', buttonId: 'view-sem', label: '经管 · 建华组团', viewDirection: [0.6, 0.5, -1.1],
+    additionalViews: [{buttonId: 'view-jianhua', label: '建华楼北门', viewDirection: [-.05, .08, -1.1],
+      focusObject: 'Jianhua north glazed entrance and interior arch'}],
     apply: refineSEM,
   },
   {

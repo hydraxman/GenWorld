@@ -38,6 +38,8 @@ npm run dev
 
 `?view=biology-hall` 查看直接复用的原南向庭院，`?view=biology-north` 查看同一建筑经照片细化的北侧桥向入口；非北面源几何不变。
 
+`?view=sem` 查看经管建华／李华组团，`?view=jianhua` 直达建华楼北门。清华官文与Gensler照片支持玻璃后方17m白拱、点支幕墙、局部高拱窗、大板陶板端墙、薄檐玻璃翼及悬挑圆柱；共用Shunde源模型同步更新。北门沿边位置、宽厚、内部侧廊、玻璃翼退距和隐藏面仍为推定，不拆分原合并地图根；通舜德示意连廊不冒称官方“知识之桥”。
+
 所有地图轮廓均可通过目录分页访问，包括未命名对象；支持程序类型筛选和“只看照片参照”筛选。选中对象后“打开此建筑独立链接”生成 `?building=<稳定编号>`，可直接打开任意建筑，也适用于离线单文件。不能与 `?view=` 同时指定。
 
 操场直达参数为 `?ground=osm:way:32954674`（东）、`?ground=osm:way:32954848`（西）、`?ground=osm:way:32954864`（紫荆）；不能与建筑／快捷视角参数同时指定。
@@ -57,6 +59,7 @@ npm run dev
 - `npm run qa` 是可选浏览器／GLB 验收，检查实际渲染的窗墙明暗差与外观开关，生成截图汇总、覆盖报告和待完善清单；需要本地 Edge，或通过 `CHROME_PATH` 指定浏览器。明暗指标、几何测试和导出成功均不能代替照片对照。
 - `node scripts/performance-check.mjs` 使用同一Edge ANGLE D3D11驱动测量桌面／手机冷页面首图、就绪、最长主线程任务和实际绘制时间，结果与截图留在忽略的`output/`；同时复测毫米级相机移动的真实像素变化，超过0.2%即失败。它不是跨机器跑分；`CAMPUS_QA_URL` 可指定已构建／发布的入口。
 - `node scripts/look-check.mjs` 固定北门、门厅和水岸相机，捕获展示／中性／掠射光对照；验证实际水面倒影像素、玻璃共享探针、18张共享表面纹理、纹理所有权释放和静止缓存。`LOOK_CAPTURE=before` 可对旧发布页记录同机位基线，`CAMPUS_QA_URL` 可指向新发布页；照片与生成截图均不入库。
+- `node scripts/jianhua-check.mjs` 在构建后捕获经管全景、北门三种光线及玻璃翼；检查桌面／手机的白拱可读性、合批与纹理限额、实际北门导航。`JIANHUA_CAPTURE=before` 与 `CAMPUS_QA_URL` 可记录旧发布页同机位对照；比较图不入库。
 
 仅在合法持有所需本地参考文件时，显式运行：
 
@@ -73,7 +76,7 @@ npm run build:references
 
 - `data/` 保存冻结地图与匹配证据；`source-cache.json` 是必要的离线输入，不是可删临时缓存。保留原字节、哈希和 `.gitattributes` 的 LF 规则。
 - `npm run data -- --offline` 从冻结输入重建数据，不依赖原始 PBF 或网络；只有明确更新来源时才使用 `--refresh`，并重新审核身份匹配。
-- `src/reference-catalog.js` 合并原 `reference-catalog.json` 与 `data/appearance-profiles.json` 的来源元数据，共34处、51张；独立 `data/*-references.json` 还保留补充证据及审阅图记录，不能按图库数量删减。收录照片不等于已按它重建。
+- `src/reference-catalog.js` 合并原 `reference-catalog.json` 与 `data/appearance-profiles.json` 的来源元数据，共34处、55张；独立 `data/*-references.json` 还保留补充证据及审阅图记录，不能按图库数量删减。收录照片不等于已按它重建。
 - `src/model.js` 提供地图模型与替换接口，`src/refinements.js` 注册建筑，`src/landmarks.js` 注册独立地标。新增模型遵循 [建模约束](MODELING.md#建模约束)。
 - `src/campus-architecture.js` 只补齐仍无照片模型的轮廓，不覆盖已有照片参照模型。`data/architecture-evidence.json` 保存650个原轮廓的核验签名与建筑标签来源；`node scripts/architecture-evidence.mjs` 从冻结校园和兄弟项目的原始OSM离线重建证据。匹配要求单一闭合建筑way、投影交并比不低于0.8，并拒绝近似并列；不替换轮廓、不沿用最近名称。当前478个轮廓有明确匹配，其余172个不借用邻楼标签。明确地上层数标签可按估算3.2m层高调整显示高度；另有显式记录的照片比例估高，均标为非实测。无上述依据继续保留原地图显示值。
 - `data/appearance-profiles.json` 保存16个外观档案的原编号、具名OSM来源、几何签名、照片哈希、配色与可见／未知项。`src/photo-appearance.js` 在替换前核验身份；照片不跨楼借用，六教A的具名way只覆盖合并根的一部分，单独声明并回放重叠。来源照片只供本地对照，不打包为材质。

@@ -300,9 +300,49 @@
         "license": "清华教育基金会官方照片，未查得自由再发布许可；仅本地参考，不作为纹理。",
         "view": "地面斜视，可见砖红拱窗体量、上部玻璃与灰色连接",
         "downloadedAt": "2026-10-09"
+      }, {
+        "path": "references\\sem-tour-567.jpg",
+        "pageUrl": "https://www.thepaper.cn/newsDetail_forward_28552771",
+        "imageUrl": "https://imagepphcloud.thepaper.cn/pph/image/319/808/567.jpg",
+        "width": 386,
+        "height": 582,
+        "sha256": "48699b72c41b1c467f67ade2427f2fbf415a055822331999e97736d6bfb5d93d",
+        "license": "清华大学官方频道文章，摄影李宙；未查得自由再发布许可，仅本地研究，不作为纹理。",
+        "view": "文章明确为正北面：通高点支玻璃、后方白拱、薄门篷和门头。17米高度另由新清华2336期文字确认。",
+        "downloadedAt": "2026-10-31"
+      }, {
+        "path": "references\\sem-gensler-02.jpg",
+        "pageUrl": "https://www.gensler.com/projects/tsinghua-university-school-of-economics-management",
+        "imageUrl": "https://static2.gensler.com/uploads/image/76195/project-tsinghua-university-school-of-economics-management-02-2000x1125_1656356457.jpg",
+        "width": 2000,
+        "height": 1125,
+        "sha256": "43863be004c8f1d4223caf754b0503d92d3e18b4305eaa8ce959b880e227a767",
+        "license": "Gensler设计方项目页；摄影署名未标明，未查得自由再发布许可，仅本地研究。",
+        "view": "拐角斜视：局部上层拱窗、两层尺度下窗、完整陶板端墙及玻璃悬挑；照片本身无方位标注。",
+        "downloadedAt": "2026-10-31"
+      }, {
+        "path": "references\\sem-gensler-04.jpg",
+        "pageUrl": "https://www.gensler.com/projects/tsinghua-university-school-of-economics-management",
+        "imageUrl": "https://static1.gensler.com/uploads/image/76197/project-tsinghua-university-school-of-economics-management-04-2000x_1656356545.jpg",
+        "width": 2000,
+        "height": 1334,
+        "sha256": "7c8bbfdb0fc89370fa4b5aba99089e4cd5740438b4a447ea8b78c11e3f60e41a",
+        "license": "Gensler设计方项目页；摄影署名未标明，未查得自由再发布许可，仅本地研究。",
+        "view": "悬挑下方近景：浅色圆柱、后退的玻璃与陶板竖片、深色平整底面；位置及尺寸不是测绘。",
+        "downloadedAt": "2026-10-31"
+      }, {
+        "path": "references\\sem-gensler-05.jpg",
+        "pageUrl": "https://www.gensler.com/projects/tsinghua-university-school-of-economics-management",
+        "imageUrl": "https://static1.gensler.com/uploads/image/76198/project-tsinghua-university-school-of-economics-management-05-2000x_1656356668.jpg",
+        "width": 2000,
+        "height": 1334,
+        "sha256": "6e6fc3450ea95b633e27f424988ff7d2fde496ca2fe3af11c02bd954b5a7c4f5",
+        "license": "Gensler设计方项目页；摄影署名未标明，未查得自由再发布许可，仅本地研究。",
+        "view": "玻璃翼正视：细竖框、横向层间带、间隔深色开启扇及薄檐。照片本身无方位标注。",
+        "downloadedAt": "2026-10-31"
       }],
-      "observations": ["砖红陶板、大板拼缝、上部高拱窗和底层玻璃", "后部上层玻璃幕墙、深色细框、薄檐和竖向砖红翼片", "照片可见灰框架空连接，但不据此确认它是通向舜德的那一条"],
-      "unknowns": ["低区与高区内部体量分界、未见立面、逐窗室内布置", "通舜德的连廊位置和高度按用户描述作示意；不冒称官方建华—李华知识之桥"]
+      "observations": ["正北面宽玻璃门厅内有17米白拱；新清华 https://qhbk.tsinghua.edu.cn/xqh/2024-09/06/content_99183263.html 明确方位和高度，不能把拱门做成外露陶板门洞", "平整砖红大板拼缝、局部高拱窗和双层尺度下窗；端部有完整实墙，不是全立面同一窗列", "玻璃翼有连续细幕墙、层间带、窄开启扇、薄檐、悬挑底面和浅色圆柱", "官方资料总高30米、地上六层地下三层；模型不复原地下层", "照片可见灰框架空连接，但不据此确认它是通向舜德的那一条"],
+      "unknowns": ["北门在长边上的精确位置、拱门宽度和厚度、室内侧廊深度为照片比例估算；门头用系统字体示意，不复制原书法", "低高区内部体量分界与玻璃翼退距未取得施工平面，按多视照片与冻结L轮廓解释；两座楼仍共享原根，不虚构独立测绘边界", "未见立面、逐窗室内布置、柱数和屋顶设备未核实", "通舜德的连廊位置和高度按用户描述作示意；不冒称官方建华—李华知识之桥"]
     },
     {
       "id": "main-building",
