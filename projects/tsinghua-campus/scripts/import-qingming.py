@@ -60,7 +60,7 @@ rgba = Image.open(io.BytesIO(png)).convert("RGBA")
 result = {"source": "https://github.com/mike007jd/qingming", "revision": revision,
           "sourceAssetSha256": expected, "parts": parts,
           "texture": {"width": rgba.width, "height": rgba.height, "rgba": base64.b64encode(rgba.tobytes()).decode()}}
-(destination / "willow.json").write_text(json.dumps(result, separators=(",", ":")) + "\n", encoding="utf-8")
+(destination / "willow.json").write_text(json.dumps(result, separators=(",", ":")) + "\n", encoding="utf-8", newline="\n")
 for target, content in originals.items():
     (destination / target).write_bytes(content)
 print(f"Extracted {len(parts)} original willow mesh parts and {rgba.width}x{rgba.height} leaf texture")
