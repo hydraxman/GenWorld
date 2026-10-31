@@ -35,7 +35,7 @@ export function shundePlacement(center, localOrigin) {
 export function refineShunde(campus, data, featureId) {
   const target = campus.buildings.get(featureId);
   if (!target) throw new Error(`Matched Shunde footprint is missing: ${featureId}`);
-  const built = createShundeModel(THREE, {textured: false, foliage: false, refinedFront: true});
+  const built = createShundeModel(THREE, {textured: false, foliage: false, refinedFront: true, visitorLabels: typeof document !== 'undefined'});
   built.group.remove(built.building);
   const detail = new THREE.Group();
   detail.name = 'Shunde pilot - existing photo-informed architecture, plain materials';

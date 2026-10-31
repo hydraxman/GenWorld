@@ -19,7 +19,7 @@ test('publishes an exact allowlist, with no research media, private files or sou
       'assets/models/SOURCES.md', 'assets/models/kenney-assistant/character.glb',
       'assets/models/kenney-assistant/Textures/colormap.png', 'assets/models/kenney-fountain/pavement-fountain.glb',
       'assets/models/kenney-fountain/Textures/colormap.png'].map(file => `scenes/knowledge/${file}`),
-    ...['index.html', 'style.css', 'assets/scene.js', 'LICENSE-font.txt', 'data/campus.json', 'data/provenance.json',
+    ...['index.html', 'style.css', 'assets/scene.js', 'LICENSE-font.txt', 'LICENSE-qingming.txt', 'data/campus.json', 'data/provenance.json',
       'data/gongzi-source.json', 'data/second-gate-anchor.json', 'data/old-library-match.json',
       'data/source-footprint.json', 'data/campus-context.json', 'data/landscape-evidence.json'].map(file => `scenes/campus/${file}`),
     ...['index.html', 'assets/scene.js', 'assets/leaves/maple-color.png', 'assets/leaves/Normal.png',
@@ -69,6 +69,8 @@ test('retains third-party attribution and downloadable map databases', async () 
   assert.match(await read('LICENSE-geometry.txt'), /Alexander Milevski/);
   assert.match(await read('LICENSE-geometry.txt'), /public domain/);
   assert.match(await read('scenes/campus/LICENSE-font.txt'), /SIL OPEN FONT LICENSE/);
+  assert.match(await read('scenes/campus/LICENSE-qingming.txt'), /Copyright \(c\) 2026 BubuAi/);
+  assert.match(await read('scenes/campus/assets/scene.js'), /Copyright \(c\) 2026 BubuAi/);
   assert.match(await read('scenes/knowledge/assets/models/SOURCES.md'), /CC0/);
   assert.equal(JSON.parse(await read('scenes/courtyard/assets/leaves/SOURCE.json')).license, 'CC0');
   assert.equal(JSON.parse(await read('scenes/campus/data/campus.json')).type, 'FeatureCollection');

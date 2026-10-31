@@ -1,6 +1,7 @@
 import {createBuilder} from './builder.js';
 import {createSkyCorridor} from './sky-corridor.js';
 import {FOOTPRINT} from './footprint.js';
+import {addVisitorLobby} from './visitor-lobby.js';
 
 export const SEM_WAY = 937482182;
 export const SEM_HEIGHT = 30;
@@ -194,9 +195,15 @@ export function createSEMBuilding(THREE, source, {textured = true} = {}) {
       box(portal, 'visible side gallery', sign * 8.7, y, -4, 3.3, .28, 6.5, white);
     }
     curtain(portal, -width / 2, width / 2, 3.2, 21, true);
-    curtain(portal, -width / 2, width / 2, .5, 3.05, true, .16);
+    curtain(portal, -width / 2, -2.2, .5, 3.05, true, .16);
+    curtain(portal, 2.2, width / 2, .5, 3.05, true, .16);
     box(portal, 'entrance canopy', 0, 3.15, .25, width + .7, .19, 1.25, frames);
-    for (const x of [-2.2, 0, 2.2]) box(portal, 'door stile', x, 1.72, .28, .07, 2.45, .12, frames);
+    for (const x of [-2.2, 2.2]) {
+      box(portal, 'door stile', x, 1.72, .28, .07, 2.45, .12, frames);
+      box(portal, 'inward-open atrium door leaf', x, 1.72, -.78, .04, 2.45, 2.05, atriumGlass);
+      for (const y of [.5, 2.95]) box(portal, 'open leaf rail', x, y, -.78, .07, .06, 2.05, frames);
+    }
+    addVisitorLobby(THREE, B, portal, {floor: sill, wall: white, frame: frames}, 'jianhua', {textured});
     northAtrium = {archHeight: 17, openingHeight: 16.375, archWidth, archBase: base, glazingWidth: width, glazingTop: 21,
       archDepth: -1.45, facade: face, component: portal};
   }

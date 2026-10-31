@@ -174,7 +174,7 @@ try {
               if (value instanceof Blob && value.type === 'model/gltf-binary') blob = value;
               return original.call(URL, value);
             };
-            app.select(id); await app.exportModel(false);
+            app.select(id); await app.exportSelectedModel();
           } finally {URL.createObjectURL = original;}
           if (!blob) throw new Error('Actual selected-building GLB was not captured.');
           const loaded = await new T.GLTFLoader().parseAsync(await blob.arrayBuffer(), '');

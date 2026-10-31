@@ -221,6 +221,9 @@ async function flatRoofLuminanceRange(frame) {
 
 export async function checkCampusInspection({page, frame, screenshots}) {
   const viewport = page.viewport();
+  assert.equal(await frame.$('#export-all'), null, 'Whole-campus export must be removed, not hidden');
+  assert.equal(await frame.evaluate(() => typeof window.campusApp.exportModel), 'undefined');
+  assert.equal(await frame.evaluate(() => typeof window.campusApp.exportSelectedModel), 'function');
   await frame.click('#view-all');
   const overview = await snapshot(frame);
   await frame.click('#view-auditorium');
@@ -249,6 +252,8 @@ export async function checkCampusInspection({page, frame, screenshots}) {
     assert.equal(mobile.layers, false);
     assertFramed(mobile);
     assert.equal(await frame.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+    assert.equal(await frame.$('#export-all'), null);
+    assert.equal(await frame.$eval('#export-building', element => element.hidden), false);
     await frame.click('#toggle-inspector');
     assert.equal(await frame.$eval('#toggle-inspector', element => element.getAttribute('aria-expanded')), 'true');
     await frame.$eval('#search', element => { element.value = '大礼堂'; element.dispatchEvent(new Event('input')); });

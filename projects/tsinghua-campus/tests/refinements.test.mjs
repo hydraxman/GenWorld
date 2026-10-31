@@ -75,3 +75,13 @@ test('changed map geometry cannot silently remove a registered reconstruction', 
   const campus = createCampusModel(dataset);
   assert.throws(() => applyCampusRefinements(campus, dataset, {textured: false}), /footprint ID changed/);
 });
+
+test('workbench only exposes selected-object export, with no whole-campus entry or clone path', () => {
+  const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+  const main = readFileSync(new URL('../src/main.js', import.meta.url), 'utf8');
+  assert.doesNotMatch(html, /export-all|导出校园\s*GLB/);
+  assert.match(html, /id="export-building"/);
+  assert.doesNotMatch(main, /export-all|campus\.group\.clone|tsinghua-campus-refined\.glb|async function exportModel/);
+  assert.match(main, /async function exportSelectedModel\(\)/);
+  assert.match(main, /exportSelection\.clone\(!exportPart\)/);
+});

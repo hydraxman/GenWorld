@@ -27,6 +27,11 @@ try {
   await page.goto(`http://127.0.0.1:${server.address().port}`, {waitUntil: 'load'});
   await page.waitForFunction(() => window.campusApp?.ready || window.campusError, {timeout: 90000});
   assert.equal(await page.evaluate(() => window.campusError), undefined);
+  assert.equal(await page.$('#export-all'), null);
+  assert.equal(await page.evaluate(() => typeof window.campusApp.exportModel), 'undefined');
+  await assert.rejects(page.evaluate(() => window.campusApp.exportSelectedModel()), /请先选择建筑或地标/);
+  assert.equal(await page.$eval('#export-building', element => element.disabled), false);
+  assert.match(await page.$eval('#message', element => element.textContent), /导出失败：请先选择建筑或地标/);
   const stats = await page.evaluate(() => {
     const app = window.campusApp;
     let invalid = 0;
@@ -125,7 +130,7 @@ try {
   assert.ok(selected.includes(firstId));
   const cdp = await page.createCDPSession();
   await page.click('#view-all');
-  async function downloadModel(whole, directory = output) {
+  async function downloadModel(directory) {
     await cdp.send('Browser.setDownloadBehavior', {behavior: 'allowAndName', downloadPath: directory, eventsEnabled: true});
     let timer, onProgress, onBegin, started;
     const completed = new Promise((resolve, reject) => {
@@ -141,7 +146,7 @@ try {
     });
     try {
       const [, result] = await Promise.all([
-        page.evaluate(full => window.campusApp.exportModel(full), whole),
+        page.evaluate(() => window.campusApp.exportSelectedModel()),
         completed,
       ]);
       assert.match(result.suggestedFilename, /^tsinghua-[a-z0-9_-]+\.glb$/i);
@@ -153,55 +158,6 @@ try {
       cdp.off('Browser.downloadProgress', onProgress);
     }
   }
-  await downloadModel(true);
-  const glb = await readFile(join(output, 'tsinghua-campus-refined.glb'));
-  assert.equal(glb.toString('ascii', 0, 4), 'glTF');
-  assert.equal(glb.readUInt32LE(8), glb.length);
-  const gltf = JSON.parse(glb.toString('utf8', 20, 20 + glb.readUInt32LE(12)).trim());
-  assert.ok(!gltf.nodes.some(node => node.extras?.campusTreeDisplayOnly), 'Do not export camera-selected close-up leaves');
-  const canopy = gltf.nodes.find(node => node.extras?.campusTreeCanopy);
-  assert.ok(canopy, 'The full-campus GLB must retain all canonical tree canopies');
-  const instance = canopy.extensions?.EXT_mesh_gpu_instancing;
-  assert.ok(instance);
-  assert.equal(gltf.accessors[instance.attributes.TRANSLATION].count, stats.landscape.trees);
-  assert.ok(gltf.materials.find(material => material.name === 'Mapped green space; original non-photographic lawn surface')
-    ?.pbrMetallicRoughness.metallicRoughnessTexture, 'The generated lawn ORM texture must survive actual GLB export');
-  const mappedWater = gltf.nodes.find(node => node.extras?.campusPlanarWater);
-  assert.ok(mappedWater, 'Export retains the exact mapped water surface');
-  const waterPrimitive = gltf.meshes[mappedWater.mesh].primitives[0];
-  assert.equal(gltf.accessors[waterPrimitive.indices ?? waterPrimitive.attributes.POSITION].count / 3, 597,
-    'Frozen water triangles survive the reflector coordinate transform');
-  const waterMaterial = gltf.materials[waterPrimitive.material];
-  assert.match(waterMaterial.name, /Mapped blue-green water/);
-  assert.ok(waterMaterial.extensions?.KHR_materials_clearcoat);
-  assert.ok(!gltf.materials.some(material => material.extras?.liveReflection), 'Runtime reflection materials must not leak into GLB');
-  const sharedMasonry = gltf.materials.filter(material => material.extras?.courtyardSurface);
-  assert.ok(sharedMasonry.length >= 25);
-  assert.ok(sharedMasonry.every(material => material.pbrMetallicRoughness.baseColorTexture
-    && material.pbrMetallicRoughness.metallicRoughnessTexture && material.normalTexture),
-  'Reused brick/stone albedo, independent roughness and normals survive actual GLB');
-  const addressable = gltf.nodes.filter(node => node.extras?.featureId);
-  assert.equal(addressable.length, stats.buildings + stats.landmarks);
-  assert.equal(new Set(addressable.map(node => node.extras.featureId)).size, addressable.length);
-  const frozenBuildingIds = await page.evaluate(() => [...window.campusApp.campus.buildings.keys()].sort());
-  assert.deepEqual(addressable.filter(node => node.extras.kind === 'building').map(node => node.extras.featureId).sort(),
-    frozenBuildingIds, 'All frozen map building identities must survive unchanged');
-  assert.equal(addressable.filter(node => node.extras.kind === 'landmark').length, LANDMARK_SITES.length);
-  for (const record of reconstructionIndex) {
-    const node = gltf.nodes.find(item => item.extras?.featureId === record.featureId);
-    assert.equal(node.extras.refinementStatus, 'detailed');
-    assert.ok(!node.children?.some(index => gltf.nodes[index].name === 'base'), 'Hidden base must not be exported behind the replacement');
-  }
-  for (const record of architectureIndex) {
-    const node = gltf.nodes.find(item => item.extras?.featureId === record.featureId);
-    assert.equal(node.extras.refinementStatus, 'procedural');
-    assert.equal(node.extras.referenceSite, undefined);
-    assert.ok(!node.children?.some(index => gltf.nodes[index].name === 'base'));
-    const detail = gltf.nodes.find(item => item.extras?.architectureLOD && item.extras.sourceEvidence?.featureId === record.featureId);
-    assert.ok(detail, `Full architecture missing from whole-campus export: ${record.featureId}`);
-    assert.ok(detail.children.some(index => gltf.nodes[index].extras?.architectureNear));
-    assert.ok(!detail.children.some(index => gltf.nodes[index].extras?.architectureFar), 'Do not export the far shell instead of actual window openings');
-  }
   const buildingOutput = join(output, 'buildings');
   const landmarkOutput = join(output, 'landmarks');
   await mkdir(buildingOutput, {recursive: true});
@@ -211,7 +167,7 @@ try {
   for (const record of [...reconstructionIndex, ...architectureIndex]) {
     await page.evaluate(id => window.campusApp.select(id), record.featureId);
     const directory = record.family ? architectureOutput : record.kind === 'landmark' ? landmarkOutput : buildingOutput;
-    await downloadModel(false, directory);
+    await downloadModel(directory);
     const filename = record.exportFilename || `tsinghua-${record.featureId.replace(/[^a-z0-9_-]/gi, '-')}.glb`;
     record.glbFile = `${record.family ? 'architecture' : record.kind === 'landmark' ? 'landmarks' : 'buildings'}\\${filename}`;
     const model = await readFile(join(output, record.glbFile));
@@ -221,11 +177,18 @@ try {
     const rootNode = single.nodes.find(node => node.extras?.featureId === record.featureId);
     assert.ok(rootNode);
     assert.equal(single.nodes.filter(node => node.extras?.featureId).length, 1);
+    assert.ok(!rootNode.children?.some(index => single.nodes[index].name === 'base'));
+    assert.ok(!single.materials.some(material => material.extras?.liveReflection), 'Runtime reflection materials must not leak into GLB');
+    const sharedMasonry = single.materials.filter(material => material.extras?.courtyardSurface);
+    assert.ok(sharedMasonry.every(material => material.pbrMetallicRoughness.baseColorTexture
+      && material.pbrMetallicRoughness.metallicRoughnessTexture && material.normalTexture),
+    'Shared surface channels must survive individual exports');
     if (record.family) {
       assert.ok(single.nodes.some(node => node.extras?.architectureNear));
       assert.ok(!single.nodes.some(node => node.extras?.architectureFar));
       assert.equal(rootNode.extras.refinementStatus, 'procedural');
-    }
+      assert.equal(rootNode.extras.referenceSite, undefined);
+    } else assert.equal(rootNode.extras.refinementStatus, 'detailed');
     assert.deepEqual(rootNode.translation || [0, 0, 0], [0, 0, 0], 'Standalone geometry must export at its local origin');
     record.glbBytes = model.length;
   }
@@ -233,7 +196,7 @@ try {
   await mkdir(apartmentOutput, {recursive: true});
   for (let number = 1; number <= 23; number++) {
     await page.evaluate(number => window.campusApp.selectApartment(number), number);
-    await downloadModel(false, apartmentOutput);
+    await downloadModel(apartmentOutput);
     const bytes = await readFile(join(apartmentOutput, `tsinghua-zijing-${number}.glb`));
     assert.equal(bytes.toString('ascii', 0, 4), 'glTF');
     assert.equal(bytes.readUInt32LE(8), bytes.length);
@@ -254,6 +217,8 @@ try {
   await offline.goto(pathToFileURL(join(output, 'tsinghua-campus-offline.html')).href + '?view=old-library', {waitUntil: 'load'});
   await offline.waitForFunction(() => window.campusApp?.ready || window.campusError, {timeout: 90000});
   assert.equal(await offline.evaluate(() => window.campusError), undefined);
+  assert.equal(await offline.$('#export-all'), null);
+  assert.equal(await offline.evaluate(() => typeof window.campusApp.exportModel), 'undefined');
   assert.ok((await offline.$eval('#selection-name', element => element.textContent)).includes('老图书馆'));
   assert.equal(await offline.$eval('#selected-references', link => link.getAttribute('href')), 'reference-photos.html#old-library');
   assert.deepEqual(external, [], 'Offline viewer must not request network assets');
@@ -277,7 +242,7 @@ try {
   assert.match(await offline.$eval('#selection-fields', element => element.textContent), /对应照片配色/);
   assert.deepEqual(external, [], 'Photo-guided appearance must not download or depend on the reference photograph');
   assert.deepEqual(errors, []);
-  const report = {stats, glbBytes: glb.length, singleBuildingExports: reconstructionIndex.length + architectureIndex.length,
+  const report = {stats, singleBuildingExports: reconstructionIndex.length + architectureIndex.length,
     offlineNetworkRequests: external.length, errors, appearance, zijing, architecture, photoAppearances, landscape};
   await writeFile(join(output, 'smoke-check.json'), JSON.stringify(report, null, 2));
   await writeFile(join(output, 'campus-coverage.json'), JSON.stringify(coverage, null, 2));

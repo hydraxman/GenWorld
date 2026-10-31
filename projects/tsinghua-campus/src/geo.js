@@ -23,6 +23,34 @@ export function lines(geometry) {
   throw new Error(`Expected line geometry, got ${geometry.type}`);
 }
 
+export function pointInPolygon(point, polygon) {
+  const inRing = ring => {
+    let result = false;
+    for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+      const a = ring[i], b = ring[j];
+      if ((a[1] > point[1]) !== (b[1] > point[1]) &&
+          point[0] < (b[0] - a[0]) * (point[1] - a[1]) / (b[1] - a[1]) + a[0]) result = !result;
+    }
+    return result;
+  };
+  return inRing(polygon[0]) && !polygon.slice(1).some(inRing);
+}
+
+export function segmentDistance(point, a, b) {
+  const dx = b[0] - a[0], dz = b[1] - a[1], length = dx * dx + dz * dz;
+  const t = length ? Math.max(0, Math.min(1, ((point[0] - a[0]) * dx + (point[1] - a[1]) * dz) / length)) : 0;
+  return Math.hypot(point[0] - a[0] - t * dx, point[1] - a[1] - t * dz);
+}
+
+export function roadProfile(feature) {
+  const p = feature.properties;
+  const roadClass = p.class || p.upstreamProperties?.class || p.raw?.class || p.sourceProperties?.class || '';
+  const width = p.kind === 'water' ? 3 : ['path', 'pedestrian', 'track'].includes(roadClass) ? 2.5
+    : ['primary', 'secondary', 'tertiary'].includes(roadClass) ? 9 : 5;
+  const brunnel = p.brunnel || p.upstreamProperties?.brunnel || p.raw?.brunnel;
+  return {roadClass, width, brunnel, height: brunnel === 'bridge' ? 1.1 : p.kind === 'water' ? .11 : .24};
+}
+
 export function ringArea(points) {
   return Math.abs(points.reduce((sum, a, i) => {
     const b = points[(i + 1) % points.length];

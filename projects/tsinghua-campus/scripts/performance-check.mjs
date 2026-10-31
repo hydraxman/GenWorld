@@ -99,7 +99,7 @@ try {
     assert.match(await page.$eval('#selection-name', element => element.textContent), /二校门/);
     const cdp = await page.createCDPSession();
     await cdp.send('Browser.setDownloadBehavior', {behavior: 'deny'});
-    const exportedBytes = await page.evaluate(() => window.campusApp.exportModel(false));
+    const exportedBytes = await page.evaluate(() => window.campusApp.exportSelectedModel());
     assert.ok(exportedBytes > 10000, 'A first-click landmark export must produce real geometry');
     const moduleRuntime = await page.$('script[type="module"]') !== null;
     if (moduleRuntime) assert.equal(requests.filter(url => /GLTFExporter-[A-Z0-9]+\.js/.test(url)).length, 1);

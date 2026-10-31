@@ -2,9 +2,10 @@ import * as THREE from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
 import polygonClipping from 'polygon-clipping';
 import evidence from '../data/landscape-evidence.json' with {type: 'json'};
-import {footprintMetrics, lines, project, ringArea} from './geo.js';
+import {footprintMetrics, lines, project, ringArea, pointInPolygon as inside, segmentDistance} from './geo.js';
 import {outlineEdges} from './architecture.js';
 import {createCampusTrees} from './campus-trees.js';
+import {createCampusScenery} from './campus-scenery.js';
 
 export const SPORTS_GROUNDS = evidence.grounds;
 const primary = new Set(['osm:way:32954674', 'osm:way:32954848', 'osm:way:32954864']);
@@ -37,25 +38,6 @@ function localFrame(metrics) {
   return {width: max[0] - min[0], depth: max[1] - min[1],
     world: (x, z) => [origin[0] + u[0] * (x + center[0]) + v[0] * (z + center[1]),
       origin[1] + u[1] * (x + center[0]) + v[1] * (z + center[1])]};
-}
-
-function inside(point, polygon) {
-  const inRing = ring => {
-    let result = false;
-    for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
-      const a = ring[i], b = ring[j];
-      if ((a[1] > point[1]) !== (b[1] > point[1]) &&
-          point[0] < (b[0] - a[0]) * (point[1] - a[1]) / (b[1] - a[1]) + a[0]) result = !result;
-    }
-    return result;
-  };
-  return inRing(polygon[0]) && !polygon.slice(1).some(inRing);
-}
-
-function segmentDistance(point, a, b) {
-  const dx = b[0] - a[0], dz = b[1] - a[1], length = dx * dx + dz * dz;
-  const t = length ? Math.max(0, Math.min(1, ((point[0] - a[0]) * dx + (point[1] - a[1]) * dz) / length)) : 0;
-  return Math.hypot(point[0] - a[0] - t * dx, point[1] - a[1] - t * dz);
 }
 
 export function treePlacements(data) {
@@ -202,11 +184,15 @@ export function* buildCampusLandscape(campus, data) {
   const treeRenderer = createCampusTrees(trees, placements.trees);
   Object.assign(trees.userData, placements, {limitations: evidence.limitations});
   campus.updateTreeLOD = (camera, mobile) => treeRenderer.update(camera, mobile);
+  yield 'trees';
+  const scenery = createCampusScenery(campus, data, placements.trees);
+  campus.updateSceneryLOD = (camera, mobile) => scenery.update(camera, mobile);
+  campus.scenery = scenery;
   sports.userData = {source: evidence.source, limitations: evidence.limitations, grounds: [...grounds.values()]};
   campus.sports = grounds;
-  states.set(campus, {sports, trees, treeRenderer, materials: [...Object.values(materials), ...treeRenderer.materials]});
+  states.set(campus, {sports, trees, treeRenderer, scenery, materials: [...Object.values(materials), ...treeRenderer.materials]});
   return {grounds: grounds.size, trees: placements.trees.length, mappedTrees: placements.mappedCount,
-    illustrativeTrees: placements.illustrativeCount, excludedMappedTrees: placements.excludedMappedCount};
+    illustrativeTrees: placements.illustrativeCount, excludedMappedTrees: placements.excludedMappedCount, scenery: scenery.counts};
 }
 
 export function applyCampusLandscape(campus, data) {
@@ -225,6 +211,8 @@ export function disposeCampusLandscape(campus) {
   }
   state.materials.forEach(material => material.dispose());
   state.treeRenderer.extraGeometry.dispose();
+  state.scenery.dispose();
   delete campus.layers.sports; delete campus.layers.trees; delete campus.sports; delete campus.updateTreeLOD;
+  delete campus.scenery; delete campus.updateSceneryLOD;
   states.delete(campus);
 }

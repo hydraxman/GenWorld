@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
-import {footprintMetrics, lines, polygons, project} from './geo.js';
+import {footprintMetrics, lines, polygons, project, roadProfile} from './geo.js';
 import {createEstimatedFacade, createLawnMaterial} from './surface-materials.js';
 
 function shapeFromRings(rings, origin = [0, 0]) {
@@ -24,14 +24,8 @@ function flatGeometry(geometry, center, height) {
 }
 
 function roadGeometry(feature, center) {
-  const p = feature.properties;
-  const roadClass = p.class || p.upstreamProperties?.class || p.raw?.class || p.sourceProperties?.class || '';
-  const width = feature.properties.kind === 'water' ? 3
-    : ['path', 'pedestrian', 'track'].includes(roadClass) ? 2.5
-      : ['primary', 'secondary', 'tertiary'].includes(roadClass) ? 9 : 5;
+  const {width, height} = roadProfile(feature);
   const vertices = [];
-  const bridge = (p.brunnel || p.upstreamProperties?.brunnel) === 'bridge';
-  const height = bridge ? 1.1 : feature.properties.kind === 'water' ? 0.11 : 0.24;
   for (const coordinates of lines(feature.geometry)) {
     const points = coordinates.map(point => project(point, center));
     for (let i = 1; i < points.length; i++) {

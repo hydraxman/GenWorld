@@ -14,8 +14,8 @@ import {ZIJING_APARTMENTS} from './zijing-sources.js';
 import {applyCampusArchitecture, prepareArchitectureExport, ARCHITECTURE_FAMILIES} from './campus-architecture.js';
 import {PHOTO_APPEARANCES} from './photo-appearance.js';
 import {buildCampusLandscape} from './landscape.js';
-import {prepareTreeExport} from './campus-trees.js';
 import {installCampusReflections} from './campus-reflections.js';
+import {createWalkthrough} from './walkthrough.js';
 
 const $ = id => document.getElementById(id);
 const outputPrefix = location.pathname.endsWith('/tsinghua-campus-offline.html') ? '' : 'output/';
@@ -128,10 +128,17 @@ async function main() {
   $('contact-shadows').checked = !compact.matches;
   let contactShadowsActive = false;
   const reflections = installCampusReflections(renderer, scene, campus, {compact: compact.matches});
+  const walker = createWalkthrough({camera: perspective, controls, canvas: renderer.domElement,
+    panel: $('walk-controls'), onChange: () => {dirty = true;}});
+  let sceneTime = 0, lastMotion = performance.now();
+  function setSceneTime(time) {
+    reflections.setTime(time); campus.scenery.setTime(time); sceneTime = time; dirty = true;
+  }
   function draw(forceReflections = false) {
-    updateInspectionClipping(camera, controls.target);
+    if (!walker.active) updateInspectionClipping(camera, controls.target);
     campus.updateArchitectureLOD(camera, $('architecture-details').checked);
     campus.updateTreeLOD(camera, compact.matches);
+    campus.updateSceneryLOD(camera, compact.matches);
     sun.castShadow = !planMode && framedBounds && framedBounds.getSize(new THREE.Vector3()).length() < 600;
     contactShadowsActive = $('contact-shadows').checked && !planMode && framedBounds &&
       framedBounds.getSize(new THREE.Vector3()).length() < 600;
@@ -170,10 +177,11 @@ async function main() {
     plan.updateProjectionMatrix();
     const sitebar = document.querySelector('.sitebar');
     $('message').style.top = `${sitebar.offsetTop + sitebar.offsetHeight + 12}px`;
-    if (framedBounds) frame(framedBounds, framedPadding, camera.position.clone().sub(controls.target).normalize().toArray());
+    if (framedBounds && !walker.active) frame(framedBounds, framedPadding, camera.position.clone().sub(controls.target).normalize().toArray());
     dirty = true;
   }
   function frame(targetBounds, padding = 1.15, direction = [0.33, 0.92, 1.1]) {
+    if (walker.active) walker.exit();
     const damping = controls.enableDamping;
     controls.enableDamping = false;
     controls.update();
@@ -195,6 +203,7 @@ async function main() {
     dirty = true;
   }
   function mode(usePlan) {
+    if (walker.active) walker.exit();
     planMode = usePlan;
     camera = usePlan ? plan : perspective;
     controls.object = camera;
@@ -224,6 +233,7 @@ async function main() {
     frame(box, 1.15, direction);
   }
   function select(id, focus = false, apartmentNumber = null) {
+    if (walker.active) walker.exit();
     const building = campus.objects.get(id);
     if (!building) throw new Error(`Campus object not found: ${id}`);
     if (campus.buildings.has(id)) campus.ensureArchitectureDetail(id);
@@ -311,6 +321,7 @@ async function main() {
   let pointerStart;
   renderer.domElement.addEventListener('pointerdown', event => { pointerStart = [event.clientX, event.clientY]; });
   renderer.domElement.addEventListener('pointerup', event => {
+    if (walker.active) return;
     if (event.button !== 0 || !pointerStart || Math.hypot(event.clientX - pointerStart[0], event.clientY - pointerStart[1]) > 5) return;
     const rect = renderer.domElement.getBoundingClientRect();
     pointer.set((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1);
@@ -365,33 +376,18 @@ async function main() {
     }
     $('results').replaceChildren(list);
   }
-  async function exportModel(whole = true) {
+  async function exportSelectedModel() {
     const exportSelection = selected, exportPart = selectedPart;
-    const layerVisibility = new Map(Object.values(campus.layers).map(layer => [layer.name, layer.visible]));
-    const rootVisibility = new Map([...campus.objects].map(([id, object]) => [id, object.visible]));
     message('正在导出可编辑 GLB…', false, true);
-    $('export-all').disabled = $('export-building').disabled = true;
+    $('export-building').disabled = true;
     try {
-      const ids = whole ? architectureIds.filter(id => campus.layers.building.visible && rootVisibility.get(id))
-        : exportSelection ? [exportSelection.userData.featureId] : [];
-      let sliceStarted = performance.now();
-      for (const [index, id] of ids.entries()) {
-        if (campus.buildings.has(id)) campus.ensureArchitectureDetail(id);
-        if (performance.now() - sliceStarted > 32) {
-          message(`正在准备完整导出细节 ${index + 1} / ${ids.length}…`, false, true);
-          await nextPaint();
-          sliceStarted = performance.now();
-        }
-      }
+      if (!exportSelection) throw new Error('请先选择建筑或地标。');
+      const id = exportSelection.userData.featureId;
+      if (campus.buildings.has(id)) campus.ensureArchitectureDetail(id);
       reflections.refresh();
       const {GLTFExporter} = await import('three/addons/exporters/GLTFExporter.js');
-      const object = whole ? campus.group.clone(true) : exportSelection?.clone(!exportPart);
-      if (!object) throw new Error('请先选择建筑或地标。');
-      if (whole) {
-        for (const layer of object.children) if (layerVisibility.has(layer.name)) layer.visible = layerVisibility.get(layer.name);
-        object.traverse(root => {if (rootVisibility.has(root.userData.featureId)) root.visible = rootVisibility.get(root.userData.featureId);});
-      }
-      if (!whole && exportPart) {
+      const object = exportSelection.clone(!exportPart);
+      if (exportPart) {
         object.add(exportPart.clone(true));
         Object.assign(object.userData, {selectedApartmentNumber: exportPart.userData.apartmentNumber,
           exportScope: 'Logical apartment within original frozen map root; source footprint identity is preserved.',
@@ -399,22 +395,21 @@ async function main() {
           footprintArea: exportPart.userData.footprintArea,
           apartmentNumbers: [exportPart.userData.apartmentNumber]});
       }
-      if (!whole) object.position.set(0, 0, 0);
+      object.position.set(0, 0, 0);
       prepareArchitectureExport(object);
-      prepareTreeExport(object);
       reflections.prepareExport(object);
       object.updateMatrixWorld(true);
       const bytes = await new GLTFExporter().parseAsync(object, {binary: true, onlyVisible: true});
-      save(bytes, whole ? 'tsinghua-campus-refined.glb' : exportPart ? `tsinghua-zijing-${exportPart.userData.apartmentNumber}.glb` : exportSelection.userData.exportFilename
+      save(bytes, exportPart ? `tsinghua-zijing-${exportPart.userData.apartmentNumber}.glb` : exportSelection.userData.exportFilename
         || `tsinghua-${exportSelection.userData.featureId.replace(/[^a-z0-9_-]/gi, '-')}.glb`, 'model/gltf-binary');
-      message('GLB 已导出。使用米制坐标；校园导出包含当前开启图层及筛选后可见对象。');
+      message('选中对象 GLB 已导出，使用米制坐标及自身局部原点。');
       return bytes.byteLength;
     } catch (error) {
       console.error(error);
       message(`导出失败：${error.message}`, true);
       throw error;
     } finally {
-      $('export-all').disabled = $('export-building').disabled = false;
+      $('export-building').disabled = false;
     }
   }
   $('search').addEventListener('input', () => {resultPage = 0; search();});
@@ -504,6 +499,36 @@ async function main() {
   });
   $('view-plan').addEventListener('click', () => mode(true));
   $('view-all').addEventListener('click', () => frame(bounds));
+  function visitBuilding(id) {
+    let anchor;
+    campus.group.traverse(object => {if (object.userData.walkthrough?.id === id) anchor = object;});
+    if (!anchor) throw new Error('此建筑暂未提供可进入的门厅。');
+    let root = anchor;
+    while (root && !root.userData.featureId) root = root.parent;
+    if (!root) throw new Error('Visitor lobby has no original building identity.');
+    if (planMode) mode(false);
+    campus.layers.building.visible = true;
+    document.querySelector('[data-layer="building"]').checked = true;
+    reflections.invalidate();
+    select(root.userData.featureId, true);
+    $('visit-building').value = id;
+    walker.enter(anchor);
+  }
+  $('visit-building').addEventListener('change', event => {
+    if (event.target.value) {
+      try {visitBuilding(event.target.value);}
+      catch (error) {console.error(error); message(`进入失败：${error.message}`, true);}
+    }
+  });
+  function viewScenery(name) {
+    const view = campus.scenery.views[name];
+    if (!view) throw new Error(`Unknown scenery view: ${name}`);
+    if (planMode) mode(false);
+    const center = new THREE.Vector3(...view.center), half = new THREE.Vector3(...view.size).multiplyScalar(.5);
+    frame(new THREE.Box3(center.clone().sub(half), center.clone().add(half)), 1.12, view.direction);
+    message('人物与街景为示意，垂柳和水面细节复用 Qingming。非实测现状；图层中可关闭，或开启水面／垂柳动效。');
+  }
+  for (const name of Object.keys(campus.scenery.views)) $(`view-${name}`).addEventListener('click', () => viewScenery(name));
   for (const [toggle, element] of [[$('toggle-inspector'), inspector], [$('toggle-layers'), legend]]) {
     toggle.addEventListener('click', () => {
       panel(element, toggle, element.hidden);
@@ -536,9 +561,8 @@ async function main() {
       window.open(`${outputPrefix}reference-photos.html`, '_blank', 'noopener');
     });
   }
-  // exportModel reports the failure in the UI before rejecting.
-  $('export-all').addEventListener('click', () => { void exportModel(true).catch(error => console.error('Campus export failed', error)); });
-  $('export-building').addEventListener('click', () => { void exportModel(false).catch(error => console.error('Building export failed', error)); });
+  // exportSelectedModel reports the failure in the UI before rejecting.
+  $('export-building').addEventListener('click', () => { void exportSelectedModel().catch(error => console.error('Building export failed', error)); });
   document.querySelectorAll('[data-layer]').forEach(input => input.addEventListener('change', () => {
     campus.layers[input.dataset.layer].visible = input.checked;
     reflections.invalidate();
@@ -561,7 +585,8 @@ async function main() {
     + `已接入 ${siteCount} 处照片参照重建（${refinedIds.length} 个轮廓、${landmarkIds.length} 个独立地标）；隐藏立面及部分尺寸含推定。`;
   $('landscape-note').textContent = `${landscapeStats.grounds}处地图运动场；${landscapeStats.mappedTrees}株地图树位`
     + `＋${landscapeStats.illustrativeTrees}株绿地内示意种植。场内线、树种和冠幅非测绘；`
-    + `${landscapeStats.excludedMappedTrees}处与建筑／通行范围冲突的地图树位未展示。`;
+    + `${landscapeStats.excludedMappedTrees}处冲突树位未展示。`
+    + `另有${landscapeStats.scenery.people}位静态示意行人及单车、长椅、路灯、石岸；非实测现状。`;
   window.addEventListener('resize', resize);
   compact.addEventListener('change', () => {
     $('contact-shadows').checked = !compact.matches;
@@ -577,19 +602,29 @@ async function main() {
   const requestedBuilding = new URLSearchParams(location.search).get('building');
   const requestedView = new URLSearchParams(location.search).get('view');
   const requestedGround = new URLSearchParams(location.search).get('ground');
-  if ([requestedBuilding, requestedView, requestedGround].filter(Boolean).length > 1) throw new Error('建筑编号、操场与快捷视角不能同时指定。');
+  const requestedVisit = new URLSearchParams(location.search).get('visit');
+  if ([requestedBuilding, requestedView, requestedGround, requestedVisit].filter(Boolean).length > 1) throw new Error('建筑编号、操场、室内漫游与快捷视角不能同时指定。');
   if (requestedBuilding) select(requestedBuilding, true);
   if (requestedGround) selectGround(requestedGround);
   if (requestedView) {
-    if (/^zijing-(?:[1-9]|1\d|2[0-3])$/.test(requestedView)) selectApartment(Number(requestedView.slice(7)));
+    if (Object.hasOwn(campus.scenery.views, requestedView)) viewScenery(requestedView);
+    else if (/^zijing-(?:[1-9]|1\d|2[0-3])$/.test(requestedView)) selectApartment(Number(requestedView.slice(7)));
     else {
       const view = [...REFINEMENT_VIEWS, ...LANDMARK_SITES].find(site => site.buttonId === `view-${requestedView}`);
       if (!view) throw new Error(`未知重建视角：${requestedView}`);
       $(view.buttonId).click();
     }
   }
+  if (requestedVisit) visitBuilding(requestedVisit);
+  let lastFrame = performance.now();
   function render() {
-    controls.update();
+    const now = performance.now();
+    walker.update((now - lastFrame) / 1000); lastFrame = now;
+    if (!$('scene-motion').checked || document.hidden) lastMotion = now;
+    else if (now - lastMotion >= 1000 / 30) {
+      setSceneTime(sceneTime + Math.min(.1, (now - lastMotion) / 1000)); lastMotion = now;
+    }
+    if (!walker.active) controls.update();
     if (dirty || reflections.pending()) {
       draw();
       $('north').textContent = planMode ? 'N ↑ 北' : 'N · -Z';
@@ -599,7 +634,8 @@ async function main() {
   }
   render();
   window.campusApp = {
-    ready: true, campus, data, coverage, select, selectApartment, selectGround, mode, exportModel,
+    ready: true, campus, data, coverage, select, selectApartment, selectGround, mode, exportSelectedModel, setSceneTime,
+    visitBuilding, walkthrough: {state: walker.state, exit: walker.exit},
     selectedApartment: () => selectedPart?.userData.apartmentNumber ?? null,
     stats: {buildings: buildings.length, features: data.features.length, refined: refinedIds.length, architecture: coverage.counts.architectureModelBuildingObjects,
       procedural: architectureIds.length,
@@ -609,7 +645,7 @@ async function main() {
       rendering: {environment: Boolean(scene.environment), contactShadows: Boolean(contactShadowsActive),
         toneMapping: renderer.toneMapping, environmentIntensity: scene.environmentIntensity,
         calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, geometries: renderer.info.memory.geometries,
-        textures: renderer.info.memory.textures, reflections: reflections.stats()},
+        textures: renderer.info.memory.textures, reflections: reflections.stats(), scenery: campus.scenery.stats()},
       shadowTexelMeters: (sun.shadow.camera.right - sun.shadow.camera.left) / sun.shadow.mapSize.x}),
   };
   draw();

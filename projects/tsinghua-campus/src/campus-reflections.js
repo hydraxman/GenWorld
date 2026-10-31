@@ -1,7 +1,8 @@
 import * as THREE from 'three';
 import {Reflector} from 'three/addons/objects/Reflector.js';
 import {installGlassReflections} from '../../../shared/glass-reflections.js';
-import {createWaterShader, WATER_COLOR} from '../../courtyard/src/water.js';
+import {WATER_COLOR} from '../../courtyard/src/water.js';
+import {createCampusWaterShader} from './campus-water.js';
 import {campusGlass, installCourtyardSurfaces} from './courtyard-surfaces.js';
 
 export function installCampusReflections(renderer, scene, campus, {compact = false} = {}) {
@@ -10,7 +11,7 @@ export function installCampusReflections(renderer, scene, campus, {compact = fal
   if (waterMeshes.length !== 1) throw new Error('Campus reflection expects the single merged frozen water surface.');
   const originalWater = waterMeshes[0], geometry = originalWater.geometry.clone();
   geometry.translate(0, -.12, 0); geometry.rotateX(Math.PI / 2);
-  const reflector = new Reflector(geometry, {shader: createWaterShader(THREE), color: WATER_COLOR,
+  const reflector = new Reflector(geometry, {shader: createCampusWaterShader(THREE), color: WATER_COLOR,
     textureWidth: resolution, textureHeight: resolution, multisample: 0, clipBias: .002});
   const water = new THREE.Mesh(geometry, reflector.material);
   water.isReflector = true;
@@ -48,7 +49,7 @@ export function installCampusReflections(renderer, scene, campus, {compact = fal
     close = close && enabled;
     wakeAt = Infinity;
     refresh();
-    const visible = ['building', 'trees', 'water'].map(key => campus.layers[key].visible).join();
+    const visible = ['building', 'trees', 'water', 'riverbanks', 'streetscape'].map(key => campus.layers[key].visible).join();
     const glassKey = `${Math.round(camera.position.x / 60)},${Math.round(camera.position.z / 60)},${visible},${revision}`;
     glass.setEnabled(Boolean(close));
     if (close && (force || glassKey !== lastGlassKey)) {
@@ -67,7 +68,7 @@ export function installCampusReflections(renderer, scene, campus, {compact = fal
     stats.waterEnabled = active;
     water.material.uniforms.eye.value.copy(camera.position);
     if (!active) {water.material.uniforms.reflectionEnabled.value = 0; lastWaterKey = ''; return;}
-    const key = `${camera.matrixWorld.elements.join()},${camera.projectionMatrix.elements.join()},${visible},${revision}`;
+    const key = `${camera.matrixWorld.elements.join()},${camera.projectionMatrix.elements.join()},${visible},${revision},${Math.floor(stats.waterTime * 2)}`;
     if (!force && key === lastWaterKey) return;
     if (!force && now - lastWater < 125) {wakeAt = Math.min(wakeAt, lastWater + 125); return;}
     const target = renderer.getRenderTarget(), xr = renderer.xr.enabled;
@@ -92,6 +93,10 @@ export function installCampusReflections(renderer, scene, campus, {compact = fal
     }
   }
   return {update, refresh, pending: () => performance.now() >= wakeAt,
+    setTime(time) {
+      if (!Number.isFinite(time) || time < 0) throw new RangeError('Water time must be finite and non-negative.');
+      water.material.uniforms.time.value = time; stats.waterTime = time;
+    },
     setEnabled(value) {enabled = Boolean(value); lastGlassKey = ''; lastWaterKey = '';},
     invalidate() {lastGlassKey = ''; lastWaterKey = '';},
     stats: () => ({...stats, surfaces: finishes.stats()}),
@@ -100,7 +105,8 @@ export function installCampusReflections(renderer, scene, campus, {compact = fal
       object.traverse(mesh => {if (mesh.userData.campusPlanarWater) mesh.material = exportWater;});
     },
     dispose() {
-      glass.dispose(); finishes.dispose(); reflector.dispose(); geometry.dispose(); exportWater.dispose();
+      glass.dispose(); finishes.dispose(); water.material.uniforms.microNormal.value.dispose();
+      reflector.dispose(); geometry.dispose(); exportWater.dispose();
       campus.layers.water.remove(water); campus.layers.water.add(originalWater);
     }};
 }

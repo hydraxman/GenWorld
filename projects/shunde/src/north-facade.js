@@ -1,10 +1,11 @@
 import {createBuilder} from './builder.js';
+import {addVisitorLobby} from './visitor-lobby.js';
 
 import {SHUNDE} from './spec.js';
 
 
 /** Actual geometry; the user photograph calibrates ratios, never used as a facade map. */
-export function createNorthFacade(THREE,{textured=true,foliage=true,signGlyphs=null,refined=false}={}){
+export function createNorthFacade(THREE,{textured=true,foliage=true,signGlyphs=null,refined=false,visitorLabels=textured}={}){
  const B=createBuilder(THREE),{box,cylinder}=B,S=SHUNDE,F=S.facade,E=S.entrance,W=S.width,D=S.depth;
  const group=new THREE.Group();group.name='North entrance — photo-informed proportions';group.userData={component:'north photo facade in local coordinates',dimensionsStatus:'estimated-from-photo-proportions'};
  const part=(name,parent=group,data={})=>{const g=new THREE.Group();g.name=name;g.userData=data;parent.add(g);return g;};
@@ -102,9 +103,17 @@ export function createNorthFacade(THREE,{textured=true,foliage=true,signGlyphs=n
  for(let i=0;i<17;i++)box(upper,'projecting short roof fin',-W/2+i*F.bayWidth,R.windowCenter+.13,5.13,.25,1.17,1.42,limestone);
  // The portico top aligns precisely with the bottom of the top regular facade group.
  const hallHeight=E.top-S.baseY;
- box(portico,'recessed curtain wall',0,S.baseY+hallHeight/2,1.15,E.halfWidth*2-.4,hallHeight,.18,glass);stats.windows++;
- for(let x=-7.2;x<7.3;x+=1.8)box(portico,'curtain mullion',x,S.baseY+hallHeight/2,1.27,.035,hallHeight,.06,dark);
- for(let y=1.9;y<E.top;y+=1.7)box(portico,'curtain transom',0,y,1.27,E.halfWidth*2,.035,.06,dark);
+ const clearHalf=2.35,doorHead=3.12,curtainHalf=E.halfWidth-.2;
+ box(portico,'recessed upper curtain wall',0,(doorHead+E.top)/2,1.15,curtainHalf*2,E.top-doorHead,.18,glass);stats.windows++;
+ for(const side of [-1,1])box(portico,'recessed curtain side',side*(clearHalf+curtainHalf)/2,(S.baseY+doorHead)/2,1.15,curtainHalf-clearHalf,doorHead-S.baseY,.18,glass);
+ for(let x=-7.2;x<7.3;x+=1.8){
+  const bottom=Math.abs(x)<clearHalf?doorHead:S.baseY;
+  box(portico,'curtain mullion',x,(bottom+E.top)/2,1.27,.035,E.top-bottom,.06,dark);
+ }
+ for(let y=1.9;y<E.top;y+=1.7){
+  if(y>doorHead)box(portico,'curtain transom',0,y,1.27,E.halfWidth*2,.035,.06,dark);
+  else for(const side of [-1,1])box(portico,'curtain side transom',side*(clearHalf+E.halfWidth)/2,y,1.27,E.halfWidth-clearHalf,.035,.06,dark);
+ }
  for(const side of [-1,1])box(portico,'deep ceramic return',side*(E.halfWidth-.1),S.baseY+hallHeight/2,3.3,.50,hallHeight,4.45,tile);
  box(portico,'portico soffit',0,E.top-.14,3.35,E.halfWidth*2,.28,4.5,tile);
  for(const x of [-E.columnX,E.columnX]){
@@ -116,7 +125,13 @@ export function createNorthFacade(THREE,{textured=true,foliage=true,signGlyphs=n
  const jamb=.65,doorWidth=E.portalWidth-jamb*2;
  for(const side of [-1,1])box(portico,'brown mottled portal jamb',side*(E.portalWidth-jamb)/2,(S.baseY+E.portalTop)/2,2.28,jamb,E.portalTop-S.baseY,.66,stone);
  box(portico,'brown mottled portal head',0,E.portalTop-E.portalHeadHeight/2,2.28,E.portalWidth,E.portalHeadHeight,.66,stone);
- for(let i=0;i<4;i++){const x=(i-1.5)*doorWidth/4;pane(portico,x,1.99,2.42,doorWidth/4-.045,2.16);box(portico,'door handle',x+.26,1.96,2.68,.035,.49,.06,frame);}
+ for(const i of [0,3]){const x=(i-1.5)*doorWidth/4;pane(portico,x,1.99,2.42,doorWidth/4-.045,2.16);box(portico,'door handle',x+.26,1.96,2.68,.035,.49,.06,frame);}
+ for(const side of [-1,1]){
+  const x=side*doorWidth/4;
+  box(portico,'inward-open entry leaf',x,1.99,1.86,.05,2.16,doorWidth/4-.045,glass);
+  for(const z of [1.29,2.43])box(portico,'open entry leaf stile',x,1.99,z,.07,2.22,.06,frame);
+  for(const y of [.91,3.07])box(portico,'open entry leaf rail',x,y,1.86,.07,.06,1.2,frame);
+ }
  const makeSign=(text,y,w,h,background)=>{
   const g=part(text+' — physical sign',portico,{role:'sign',text,height:y,background});
   box(g,'solid sign backing',0,y,2.69,w,h,.10,background==='white'?plain('White department plaque','#f0f0e9',.58):dark);
@@ -148,5 +163,6 @@ export function createNorthFacade(THREE,{textured=true,foliage=true,signGlyphs=n
   const strip=part('Short alternating stair-nosing warning',step,{role:'stair-warning'});
   for(let j=0;j<16;j++)box(strip,'bonded anti-slip segment',1.65+(j-7.5)*.075,top+.002,5.56+depth-.07,.075,.004,.12,j%2?warningYellow:warningBlack);
  }
+ addVisitorLobby(THREE,B,portico,{floor:paving,wall:tile,frame},'shunde',{textured:visitorLabels});
  B.finish();return {group,building,campus,tiers,portico,stats,glassMaterial:glass};
 }

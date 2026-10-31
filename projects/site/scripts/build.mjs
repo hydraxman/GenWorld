@@ -46,6 +46,7 @@ export async function buildSite() {
     ['projects/tsinghua-campus/index.html', 'scenes/campus/index.html'],
     ['projects/tsinghua-campus/style.css', 'scenes/campus/style.css'],
     ['projects/tsinghua-campus/src/second-gate-font-OFL.txt', 'scenes/campus/LICENSE-font.txt'],
+    ['projects/tsinghua-campus/src/vendor/qingming/LICENSE.txt', 'scenes/campus/LICENSE-qingming.txt'],
     ['projects/courtyard/viewer.html', 'scenes/courtyard/index.html'],
     ['projects/wind-print/index.html', 'scenes/wind-print/index.html'],
     ['projects/wind-print/style.css', 'scenes/wind-print/style.css'],
