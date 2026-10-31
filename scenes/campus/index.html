@@ -56,9 +56,13 @@
       <button id="view-north">紫荆片区</button>
       <button id="view-south">教学片区</button>
       <button id="references" hidden>参考来源</button>
-      <button id="export-all">导出校园 GLB</button>
     </nav>
     <nav class="sitebar" aria-label="已重建建筑快捷视角">
+      <label class="apartment-picker" for="visit-building">进入建筑
+        <select id="visit-building"><option value="">选择门厅漫游</option><option value="shunde">舜德楼门厅</option><option value="jianhua">建华楼北门中庭</option></select>
+      </label>
+      <button id="view-riverside" title="冻结水边上的示意石岸和植物，非实测现状">河岸近景</button>
+      <button id="view-campus-life" title="道路上的静态示意人物和街景，非实测现状">校园街景</button>
       <label class="apartment-picker" for="sports-ground">操场
         <select id="sports-ground"><option value="">选择运动场</option></select>
       </label>
@@ -101,6 +105,9 @@
       <label><input type="checkbox" data-layer="water" checked><i class="swatch waters"></i>水系</label>
       <label title="地图运动场边界；跑道和场内标线为展示估算"><input type="checkbox" data-layer="sports" checked>操场</label>
       <label title="地图树位及绿地内示意种植；树种和冠幅未测绘"><input type="checkbox" data-layer="trees" checked>树木</label>
+      <label title="原创静态示意人物、自行车、长椅和路灯；非实测位置"><input type="checkbox" data-layer="streetscape" checked>人物与街景</label>
+      <label title="沿冻结水边的示意石岸和植物；非实测河岸工程"><input type="checkbox" data-layer="riverbanks" checked>河岸细节</label>
+      <label title="播放复用的Qingming水波与垂柳风动；默认暂停以节省耗电"><input type="checkbox" id="scene-motion">动态水波与树影</label>
       <small id="landscape-note"></small>
       <label title="程序建筑近景使用真实窗洞；关闭仅简化显示，GLB仍导出完整结构"><input type="checkbox" id="architecture-details" checked>建筑近景细节</label>
       <label title="近景接触阴影；桌面默认开启，手机默认关闭"><input type="checkbox" id="contact-shadows">三维细节阴影</label>
@@ -113,6 +120,15 @@
       <div><a href="https://openfreemap.org/" target="_blank" rel="noreferrer">OpenFreeMap</a> · <a href="https://openmaptiles.org/" target="_blank" rel="noreferrer">© OpenMapTiles</a> · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">© OpenStreetMap contributors / ODbL</a></div>
     </footer>
     <div id="message" role="status">正在建立校园基模…</div>
+    <section id="walk-controls" class="walk-controls" aria-label="建筑内部漫游" hidden>
+      <div class="walk-heading"><strong id="walk-title"></strong><button id="exit-building">退出漫游</button></div>
+      <p>拖动看向 · WASD／方向键移动 · Q、E 转向 · Esc 退出</p>
+      <div class="walk-pad" aria-label="触屏移动控制">
+        <button data-walk="turn-left" aria-label="向左转">左转</button><button data-walk="forward">前进</button><button data-walk="turn-right" aria-label="向右转">右转</button>
+        <button data-walk="left">左移</button><button data-walk="back">后退</button><button data-walk="right">右移</button>
+      </div>
+      <small id="walk-note"></small>
+    </section>
     <section id="loading" class="loading" aria-label="校园加载进度">
       <div class="loading-card" role="status">
         <span class="eyebrow">TSINGHUA / CAMPUS ATLAS</span>
