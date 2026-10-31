@@ -32,11 +32,17 @@ test('red SEM replaces the correct mapped building and retains its identity and 
   assert.ok(Math.abs(bounds.max.z - outline[3]) < 1);
   assert.equal(detail.userData.meshStats.archedWindows, 24);
   assert.equal(detail.userData.meshStats.northAtrium.archHeight, 17);
+  assert.equal(detail.userData.meshStats.passage.clearHeight, 9.76);
+  for (const direction of [-1, 1]) {
+    const start = detail.localToWorld(new THREE.Vector3(direction === 1 ? -138 : -45, 1.7, 20));
+    const end = detail.localToWorld(new THREE.Vector3(direction === 1 ? -45 : -138, 1.7, 20));
+    const ray = new THREE.Raycaster(start, end.clone().sub(start).normalize(), 0, start.distanceTo(end));
+    assert.equal(ray.intersectObject(detail, true).length, 0, 'The same open passage survives campus ENU placement');
+  }
   assert.ok(detail.userData.meshStats.windows > 100);
   architecture.traverse(object => {
     if (object.geometry) assert.ok(object.geometry.attributes.position.array.every(Number.isFinite));
   });
-
 });
 
 test('SEM refuses frozen footprint/origin drift and releases the previous detail on reapplication', () => {

@@ -68,3 +68,41 @@ test('elevated corridor physically spans the gap between source building envelop
   assert.ok(corridor.length > 15 && corridor.length < 25);
   assert.equal(corridor.stats.storeyClearance, 4);
 });
+
+test('glazed wing has a genuine two-ended passage, bounded by side walls, a floor and a supporting soffit', () => {
+  const model = createSEMBuilding(THREE, source, {textured: false});
+  const {passage} = model;
+  assert.equal(passage.width, 17);
+  assert.equal(passage.clearHeight, 9.76);
+  assert.ok(passage.west[0] < passage.east[0]);
+  // Double-sided rays also detect reversed/back-facing glass or wall remnants.
+  model.group.traverse(o => {if (o.isMesh) o.material.side = THREE.DoubleSide;});
+  for (const z of [11.8, 12.5, 15, 20, 25, 27.5, 28.2]) for (const y of [.12, 1.7, 5, 9.5]) {
+    for (const direction of [-1, 1]) {
+      const start = direction === 1 ? -138 : -45;
+      const ray = new THREE.Raycaster(new THREE.Vector3(start, y, z), new THREE.Vector3(direction, 0, 0), 0, 93);
+      assert.equal(ray.intersectObject(model.group, true).length, 0, `Blocked through-passage z=${z}, y=${y}, direction=${direction}`);
+    }
+  }
+  for (const x of [-94, -82, -65]) {
+    const origin = new THREE.Vector3(x, 2, 20);
+    const up = new THREE.Raycaster(origin, new THREE.Vector3(0, 1, 0)).intersectObject(model.architecture, true)[0];
+    assert.ok(up && Math.abs(up.point.y - passage.soffit) < 1e-5, 'The glass bridge must have a real opaque underside');
+    const down = new THREE.Raycaster(origin, new THREE.Vector3(0, -1, 0)).intersectObject(model.architecture, true)[0];
+    assert.ok(down && Math.abs(down.point.y - passage.floor) < 1e-5, 'Continuous low paving, not a blocking foundation curb');
+    for (const direction of [-1, 1]) {
+      const side = new THREE.Raycaster(origin, new THREE.Vector3(0, 0, direction)).intersectObject(model.architecture, true)[0];
+      assert.ok(side && Math.abs(side.point.z - (direction === 1 ? passage.south : passage.north)) < .6,
+        'The passage is enclosed on both sides, not an empty unbuilt shell');
+    }
+  }
+  for (const z of [7, 36, 60]) {
+    const closed = new THREE.Raycaster(new THREE.Vector3(-45, 4, z), new THREE.Vector3(-1, 0, 0), 0, 90);
+    assert.ok(closed.intersectObject(model.architecture, true).length, 'Do not open the entire ground floor');
+  }
+  for (const z of [15, 20, 25]) {
+    const above = new THREE.Raycaster(new THREE.Vector3(-45, 18, z), new THREE.Vector3(-1, 0, 0), 0, 90);
+    assert.ok(above.intersectObject(model.architecture, true).some(hit => /glazing/.test(hit.object.material.name)),
+      'Preserve the glazed storeys spanning above the opening');
+  }
+});

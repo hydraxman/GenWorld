@@ -38,7 +38,7 @@ export function refineSEM(campus, data, {textured = true} = {}) {
       'https://www.thepaper.cn/newsDetail_forward_28552771',
     ],
     meshStats: built.stats,
-    limitations: 'Frozen outer footprint; north orientation and 17 m interior arch are documented. Arch width, north portal position along the edge, upper-wing setback, podium division, hidden elevations and corridor endpoints are interpreted. Corridor follows user description, not surveyed geometry or the officially named Jianhua-Lihua knowledge bridge.',
+    limitations: 'Frozen outer footprint; north orientation and 17 m interior arch are documented. The left glass wing has a photo-supported through-passage, with estimated placement, 17 m width and 9.76 m clearance. Arch width, north portal position along the edge, upper-wing setback, podium division, hidden elevations and corridor endpoints are interpreted. Corridor follows user description, not surveyed geometry or the officially named Jianhua-Lihua knowledge bridge.',
     textures: textured ? 'Locally generated cladding roughness and joints; no reference-photo textures.' : 'Plain materials.',
   };
   const previous = target.children.find(child => child.userData.campusDetail);
@@ -53,7 +53,7 @@ export function refineSEM(campus, data, {textured = true} = {}) {
     name: '新经管楼 · 建华／李华组团',
     aliases: ['经管楼', '砖红楼', '红楼', '建华楼', '李华楼'],
     heightSource: '官方组团总高30米；红色低区与隐藏立面为照片比例推定',
-    refinementSummary: '建华楼北面通透玻璃门厅与后退的17米白色拱门、局部高拱窗、大板陶板实墙及薄檐玻璃翼；侧后窗位和体量分界推定。通舜德灰色连廊下缘约13.2米，非官方“知识之桥”的核实复原。',
+    refinementSummary: '北面玻璃后17米白拱、陶板拱窗及薄檐玻璃翼。左侧玻璃翼下有真正贯通的架空通道，保留顶板、侧墙和通行净空；通道位置、17米宽和约9.76米净高为照片比例推定，不是实测。通舜德灰色连廊仍为示意。',
     referenceSite: detail.userData.referenceSite,
     referencePages: detail.userData.referencePages,
     reconstructionBatch: 2,

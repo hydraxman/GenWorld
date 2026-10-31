@@ -311,6 +311,16 @@
         "view": "文章明确为正北面：通高点支玻璃、后方白拱、薄门篷和门头。17米高度另由新清华2336期文字确认。",
         "downloadedAt": "2026-10-31"
       }, {
+        "path": "references\\sem-gensler-01.jpg",
+        "pageUrl": "https://www.gensler.com/projects/tsinghua-university-school-of-economics-management",
+        "imageUrl": "https://static2.gensler.com/uploads/image/76194/project-tsinghua-university-school-of-economics-management-01-2000x1125_1656356061.jpg",
+        "width": 2000,
+        "height": 1125,
+        "sha256": "a51676bfc46f8b4e9c9fdfee5709ce8176202b6d3ebca762ed1e670d864ab279",
+        "license": "Gensler设计方项目页；摄影署名未标明，未查得自由再发布许可，仅本地研究。",
+        "view": "左侧玻璃翼与右侧红色体量交接处下方有贯通开口，可见对面庭院、道路与远处建筑；上层楼体跨越，非透明玻璃门厅，也不是整个底层架空。",
+        "downloadedAt": "2026-10-31"
+      }, {
         "path": "references\\sem-gensler-02.jpg",
         "pageUrl": "https://www.gensler.com/projects/tsinghua-university-school-of-economics-management",
         "imageUrl": "https://static2.gensler.com/uploads/image/76195/project-tsinghua-university-school-of-economics-management-02-2000x1125_1656356457.jpg",
@@ -341,8 +351,8 @@
         "view": "玻璃翼正视：细竖框、横向层间带、间隔深色开启扇及薄檐。照片本身无方位标注。",
         "downloadedAt": "2026-10-31"
       }],
-      "observations": ["正北面宽玻璃门厅内有17米白拱；新清华 https://qhbk.tsinghua.edu.cn/xqh/2024-09/06/content_99183263.html 明确方位和高度，不能把拱门做成外露陶板门洞", "平整砖红大板拼缝、局部高拱窗和双层尺度下窗；端部有完整实墙，不是全立面同一窗列", "玻璃翼有连续细幕墙、层间带、窄开启扇、薄檐、悬挑底面和浅色圆柱", "官方资料总高30米、地上六层地下三层；模型不复原地下层", "照片可见灰框架空连接，但不据此确认它是通向舜德的那一条"],
-      "unknowns": ["北门在长边上的精确位置、拱门宽度和厚度、室内侧廊深度为照片比例估算；门头用系统字体示意，不复制原书法", "低高区内部体量分界与玻璃翼退距未取得施工平面，按多视照片与冻结L轮廓解释；两座楼仍共享原根，不虚构独立测绘边界", "未见立面、逐窗室内布置、柱数和屋顶设备未核实", "通舜德的连廊位置和高度按用户描述作示意；不冒称官方建华—李华知识之桥"]
+      "observations": ["正北面宽玻璃门厅内有17米白拱；新清华 https://qhbk.tsinghua.edu.cn/xqh/2024-09/06/content_99183263.html 明确方位和高度，不能把拱门做成外露陶板门洞", "平整砖红大板拼缝、局部高拱窗和双层尺度下窗；端部有完整实墙，不是全立面同一窗列", "玻璃翼有连续细幕墙、层间带、窄开启扇、薄檐、悬挑底面和浅色圆柱", "设计方首图清楚显示玻璃翼下的贯通架空通道，两侧是陶板竖片／玻璃侧墙，上方平整顶板，另一端视线通到室外；模型两端不设玻璃或横跨的基座", "官方资料总高30米、地上六层地下三层；模型不复原地下层", "照片可见灰框架空连接，但不据此确认它是通向舜德的那一条"],
+      "unknowns": ["北门在长边上的精确位置、拱门宽度和厚度、室内侧廊深度为照片比例估算；门头用系统字体示意，不复制原书法", "架空通道的贯通关系有照片支持；冻结玻璃翼内的位置、17米宽及约9.76米净高为估算，与有文字依据的17米北门白拱不是同一尺寸证据", "低高区内部体量分界与玻璃翼退距未取得施工平面，按多视照片与冻结L轮廓解释；两座楼仍共享原根，不虚构独立测绘边界", "未见立面、逐窗室内布置、柱数和屋顶设备未核实", "通舜德的连廊位置和高度按用户描述作示意；不冒称官方建华—李华知识之桥"]
     },
     {
       "id": "main-building",
