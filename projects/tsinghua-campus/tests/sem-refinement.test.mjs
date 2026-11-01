@@ -30,7 +30,7 @@ test('red SEM replaces the correct mapped building and retains its identity and 
   assert.ok(Math.abs(bounds.max.x - outline[2]) < 1);
   assert.ok(Math.abs(bounds.min.z - outline[1]) < 1);
   assert.ok(Math.abs(bounds.max.z - outline[3]) < 1);
-  assert.equal(detail.userData.meshStats.archedWindows, 24);
+  assert.ok(detail.userData.meshStats.archedWindows >= 10 && detail.userData.meshStats.archedWindows < 24);
   assert.equal(detail.userData.meshStats.northAtrium.archHeight, 17);
   assert.equal(detail.userData.meshStats.passage.clearHeight, 9.76);
   for (const direction of [-1, 1]) {
@@ -38,6 +38,10 @@ test('red SEM replaces the correct mapped building and retains its identity and 
     const end = detail.localToWorld(new THREE.Vector3(direction === 1 ? -45 : -138, 1.7, 20));
     const ray = new THREE.Raycaster(start, end.clone().sub(start).normalize(), 0, start.distanceTo(end));
     assert.equal(ray.intersectObject(detail, true).length, 0, 'The same open passage survives campus ENU placement');
+    const north = detail.localToWorld(new THREE.Vector3(-108, 1.7, direction === 1 ? -45 : 20));
+    const south = detail.localToWorld(new THREE.Vector3(-108, 1.7, direction === 1 ? 20 : -45));
+    assert.equal(new THREE.Raycaster(north, south.clone().sub(north).normalize(), 0, north.distanceTo(south))
+      .intersectObject(detail, true).length, 0, 'North-to-courtyard opening survives campus ENU placement');
   }
   assert.ok(detail.userData.meshStats.windows > 100);
   architecture.traverse(object => {
@@ -73,9 +77,8 @@ test('the same-coordinate-frame corridor is suspended between SEM and Shunde', (
   const source = subset(), campus = createCampusModel(source);
   refineShunde(campus, source, SHUNDE_ID);
   const target = refineSEM(campus, source, {textured: false});
-  const {startCampus, endCampus, clearance, storeyClearance} = target.userData.corridor;
-  assert.equal(clearance, 13.2);
-  assert.equal(storeyClearance, 4);
+  const {startCampus, endCampus, clearance} = target.userData.corridor;
+  assert.equal(clearance, 9.84);
   assert.equal(startCampus[1], clearance);
   assert.equal(endCampus[1], clearance);
   assert.ok(startCampus[0] < endCampus[0]);

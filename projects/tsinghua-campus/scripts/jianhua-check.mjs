@@ -196,6 +196,17 @@ try {
           let rays = 0;
           try {
             if (ids.length !== 1 || ids[0] !== id) throw new Error('The exported frozen building identity changed.');
+            if (!detail.userData.meshStats.northOpening) throw new Error('Exported north opening metadata is missing.');
+            let support;
+            detail.traverse(o => {if (o.userData.role === 'photo-supported-silver-support') support = o;});
+            if (!support || support.userData.radius !== .98) throw new Error('The exported silver cylindrical support is missing.');
+            for (const x of [-119, -114, -108, -102, -99]) for (const y of [.15, 1.7, 5, 9.5]) for (const direction of [-1, 1]) {
+              const start = new T.Vector3(x, y, direction === 1 ? -45 : 20).applyMatrix4(detail.matrixWorld);
+              const end = new T.Vector3(x, y, direction === 1 ? 20 : -45).applyMatrix4(detail.matrixWorld);
+              const ray = new T.Raycaster(start, end.clone().sub(start).normalize(), 0, start.distanceTo(end));
+              if (ray.intersectObject(loaded.scene, true).length) throw new Error(`Exported north axis blocked: ${x}/${y}/${direction}`);
+              rays++;
+            }
             for (const z of [12, 16, 20, 24, 28]) for (const y of [.15, 1.7, 5, 9.5]) for (const direction of [-1, 1]) {
               const start = new T.Vector3(direction === 1 ? -138 : -45, y, z).applyMatrix4(detail.matrixWorld);
               const end = new T.Vector3(direction === 1 ? -45 : -138, y, z).applyMatrix4(detail.matrixWorld);

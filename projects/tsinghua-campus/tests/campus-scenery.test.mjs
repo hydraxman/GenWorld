@@ -115,6 +115,12 @@ test('campus water remains deterministic and filters fine ripples rather than ad
   assert.equal(shader.uniforms.time.value, 0);
   assert.match(shader.fragmentShader, /fwidth\(q\)/);
   assert.match(shader.fragmentShader, /reflectionEnabled/);
+  assert.ok(shader.uniforms.skyHorizon.value.b > shader.uniforms.skyHorizon.value.g);
+  assert.ok(shader.uniforms.skyZenith.value.b > shader.uniforms.skyZenith.value.g);
+  assert.deepEqual(shader.uniforms.reflectionFade.value.toArray(), [220, 380]);
+  assert.match(shader.fragmentShader, /smoothstep\(reflectionFade.x, reflectionFade.y, distance\(eye, worldPosition\)\)/);
+  assert.match(shader.fragmentShader, /mix\(body, reflection, \.24 \+ \.66 \* fresnel\)/,
+    'Disabling the local reflection must retain the sky contribution');
   assert.doesNotMatch(shader.fragmentShader, /discard/);
   assert.equal(shader.uniforms.microNormal.value.image.width, 256);
   shader.uniforms.microNormal.value.dispose();

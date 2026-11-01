@@ -1,8 +1,7 @@
 import * as THREE from 'three';
 import {Reflector} from 'three/addons/objects/Reflector.js';
 import {installGlassReflections} from '../../../shared/glass-reflections.js';
-import {WATER_COLOR} from '../../courtyard/src/water.js';
-import {createCampusWaterShader} from './campus-water.js';
+import {CAMPUS_WATER_COLOR, WATER_REFLECTION_FADE, createCampusWaterShader} from './campus-water.js';
 import {campusGlass, installCourtyardSurfaces} from './courtyard-surfaces.js';
 
 export function installCampusReflections(renderer, scene, campus, {compact = false} = {}) {
@@ -11,7 +10,7 @@ export function installCampusReflections(renderer, scene, campus, {compact = fal
   if (waterMeshes.length !== 1) throw new Error('Campus reflection expects the single merged frozen water surface.');
   const originalWater = waterMeshes[0], geometry = originalWater.geometry.clone();
   geometry.translate(0, -.12, 0); geometry.rotateX(Math.PI / 2);
-  const reflector = new Reflector(geometry, {shader: createCampusWaterShader(THREE), color: WATER_COLOR,
+  const reflector = new Reflector(geometry, {shader: createCampusWaterShader(THREE), color: CAMPUS_WATER_COLOR,
     textureWidth: resolution, textureHeight: resolution, multisample: 0, clipBias: .002});
   const water = new THREE.Mesh(geometry, reflector.material);
   water.isReflector = true;
@@ -27,7 +26,7 @@ export function installCampusReflections(renderer, scene, campus, {compact = fal
   water.onBeforeRender = () => {};
   campus.layers.water.remove(originalWater); campus.layers.water.add(water);
   const exportWater = new THREE.MeshPhysicalMaterial({name: 'Mapped blue-green water; viewer adds shared planar reflection',
-    color: WATER_COLOR, roughness: .16, metalness: 0, clearcoat: 1, clearcoatRoughness: .15, side: THREE.DoubleSide});
+    color: CAMPUS_WATER_COLOR, roughness: .16, metalness: 0, clearcoat: 1, clearcoatRoughness: .15, side: THREE.DoubleSide});
   const glass = installGlassReflections(THREE, renderer, scene, campus.group, {
     isGlass: campusGlass, resolution: compact ? 64 : 128, far: 700, intensity: 2.2, roughness: .09, metalness: 0,
     physical: true, colorScale: .65,
@@ -36,12 +35,24 @@ export function installCampusReflections(renderer, scene, campus, {compact = fal
   const stats = {waterTargets: 1, waterResolution: resolution, waterCaptures: 0, waterPasses: 0,
     waterLastDrawCalls: 0, waterEnabled: false, waterTime: 0, maxWaterHz: 8, maxGlassHz: 1,
     glass: glass.stats};
-  let enabled = true, revision = campus.architectureRevision, lastWaterKey = '', lastWater = -Infinity;
+  const metalFallbacks = new Map();
+  let enabled = true, revision = -1, lastWaterKey = '', lastWater = -Infinity;
   let lastGlassKey = '', lastGlass = -Infinity, wakeAt = Infinity;
   const viewProjection = new THREE.Matrix4(), frustum = new THREE.Frustum();
   function refresh() {
     if (revision === campus.architectureRevision) return;
     finishes.refresh(); glass.refresh(); revision = campus.architectureRevision;
+    campus.group.traverse(object => {
+      if (!object.isMesh) return;
+      for (const material of [].concat(object.material)) if (material.userData.campusMetalReflection && scene.environment) {
+        if (!metalFallbacks.has(material)) metalFallbacks.set(material, material.clone());
+        // The lighting rig, not an individual building, owns the shared environment.
+        scene.environment.userData.sharedCampusSurface = true;
+        material.envMap = scene.environment;
+        material.envMapIntensity = .9;
+        material.needsUpdate = true;
+      }
+    });
   }
   function update(camera, close, force = false) {
     if (scene.overrideMaterial) return;
@@ -64,6 +75,7 @@ export function installCampusReflections(renderer, scene, campus, {compact = fal
     viewProjection.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
     frustum.setFromProjectionMatrix(viewProjection);
     const active = Boolean(close && camera.isPerspectiveCamera && camera.position.y > .13
+      && camera.position.y - water.position.y < WATER_REFLECTION_FADE[1]
       && campus.layers.water.visible && frustum.intersectsObject(water));
     stats.waterEnabled = active;
     water.material.uniforms.eye.value.copy(camera.position);
@@ -102,9 +114,19 @@ export function installCampusReflections(renderer, scene, campus, {compact = fal
     stats: () => ({...stats, surfaces: finishes.stats()}),
     prepareExport(object) {
       glass.prepareExport(object);
-      object.traverse(mesh => {if (mesh.userData.campusPlanarWater) mesh.material = exportWater;});
+      object.traverse(mesh => {
+        if (mesh.userData.campusPlanarWater) mesh.material = exportWater;
+        else if (mesh.isMesh) mesh.material = Array.isArray(mesh.material)
+          ? mesh.material.map(material => metalFallbacks.get(material) || material)
+          : metalFallbacks.get(mesh.material) || mesh.material;
+      });
     },
     dispose() {
+      for (const [material, fallback] of metalFallbacks) {
+        material.envMap = fallback.envMap; material.envMapIntensity = fallback.envMapIntensity;
+        material.needsUpdate = true; fallback.dispose();
+      }
+      metalFallbacks.clear();
       glass.dispose(); finishes.dispose(); water.material.uniforms.microNormal.value.dispose();
       reflector.dispose(); geometry.dispose(); exportWater.dispose();
       campus.layers.water.remove(water); campus.layers.water.add(originalWater);

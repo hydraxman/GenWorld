@@ -5,13 +5,14 @@ import {addVisitorLobby} from './visitor-lobby.js';
 
 export const SEM_WAY = 937482182;
 export const SEM_HEIGHT = 30;
-export const BRIDGE_Z = 2;
+export const BRIDGE_Z = -12;
 const PODIUM_HEIGHT = 22.7;
+const PODIUM_EAST = -120.544;
 const WING_X = -98;
-const WING_Z = -13;
-// Gensler's front photograph shows a two-storey through-opening, not continuous glazing.
-// The strip's dimensions/location inside the frozen wing remain photo-plan estimates.
+// The user-confirmed north photograph places the open connector west of the lower glass wing.
+// The older transverse passage remains an unverified plan estimate, not a second observed opening.
 const PASSAGE = {north: 11.5, south: 28.5, soffit: 9.84, floor: .08};
+const NORTH_RECESS = 6.5;
 
 function clipped(points, axis, value, lower) {
   const out = [];
@@ -25,7 +26,10 @@ function clipped(points, axis, value, lower) {
       out.push(a.map((v, i) => i === axis ? value : v + (b[i] - v) * u));
     }
   }
-  return out;
+  return out.filter((point, index) => {
+    const previous = out[(index + out.length - 1) % out.length];
+    return Math.hypot(point[0] - previous[0], point[1] - previous[1]) > 1e-8;
+  });
 }
 
 export function createSEMBuilding(THREE, source, {textured = true} = {}) {
@@ -56,11 +60,14 @@ export function createSEMBuilding(THREE, source, {textured = true} = {}) {
   const white = plain('Jianhua white interior arch and round supports', '#e6e5df', .65);
   const spandrel = plain('SEM curtain floor spandrel', '#71828a', .4, .15);
   const soffit = plain('Jianhua passage warm metal soffit', '#928878', .48, .25);
+  const silver = plain('Jianhua brushed silver cylindrical support', '#c4cbd0', .32, .82);
+  silver.userData.campusMetalReflection = true;
   const roof = textured ? B.pbr('SEM roof concrete', 'grain', [132, 139, 135], [2, 2], 256)
     : plain('SEM roof concrete', '#848b87');
   const windows = [];
   let northAtrium;
   let passage;
+  let northOpening;
   function slab(parent, points, base, depth, material) {
     const footprint = new THREE.Shape(points.map(([x, z]) => new THREE.Vector2(x, -z)));
     const geometry = new THREE.ExtrudeGeometry(footprint, {depth, bevelEnabled: false});
@@ -209,10 +216,28 @@ export function createSEMBuilding(THREE, source, {textured = true} = {}) {
   }
   const east = clipped(source.points, 0, WING_X, false);
   const parts = [
-    {points: clipped(source.points, 0, WING_X, true), podium: true},
-    {points: clipped(east, 1, WING_Z, true), podium: true},
-    {points: clipped(east, 1, WING_Z, false), podium: false},
+    {points: clipped(source.points, 0, PODIUM_EAST, true), podium: true},
+    {points: clipped(clipped(source.points, 0, PODIUM_EAST, false), 0, WING_X, true), connector: true},
+    {points: east},
   ];
+  function openNorthConnector(parent, points) {
+    const component = new THREE.Group();
+    component.name = 'Jianhua north elevated connector and open courtyard passage';
+    component.userData = {role: 'photo-supported-north-opening', footprint: points,
+      sourcePhoto: 'https://www.tuef.tsinghua.edu.cn/info/1072/2664.htm',
+      limitations: 'North orientation confirmed by the user; connector division, span and clearance estimated within the frozen footprint.'};
+    parent.add(component);
+    slab(component, points, .02, PASSAGE.floor - .02, sill);
+    slab(component, points, PASSAGE.soffit, .34, soffit);
+    const north = Math.min(...points.map(p => p[1])), south = Math.max(...points.map(p => p[1]));
+    for (let x = PODIUM_EAST + 1.5; x < WING_X; x += 1.5) {
+      box(component, 'recessed soffit panel seam', x, PASSAGE.soffit - .006, (north + south) / 2,
+        .018, .012, south - north - 2, frames);
+    }
+    northOpening = {component, west: PODIUM_EAST, east: WING_X, north, south,
+      floor: PASSAGE.floor, soffit: PASSAGE.soffit, clearHeight: PASSAGE.soffit - PASSAGE.floor,
+      width: WING_X - PODIUM_EAST};
+  }
   function openPassage(parent, points) {
     const strip = clipped(clipped(points, 1, PASSAGE.north, false), 1, PASSAGE.south, true);
     const at = z => {
@@ -223,9 +248,8 @@ export function createSEMBuilding(THREE, source, {textured = true} = {}) {
     const north = at(PASSAGE.north), south = at(PASSAGE.south);
     const component = new THREE.Group();
     component.name = 'Jianhua open passage below glazed wing';
-    component.userData = {role: 'photo-supported-through-passage', ...PASSAGE, footprint: strip,
-      sourcePhoto: 'https://static2.gensler.com/uploads/image/76194/project-tsinghua-university-school-of-economics-management-01-2000x1125_1656356061.jpg',
-      limitations: 'Open volume is photograph-supported; placement, 17 m strip width and clear height are estimated, not surveyed.'};
+    component.userData = {role: 'estimated-transverse-passage', ...PASSAGE, footprint: strip,
+      limitations: 'Retained transverse plan estimate; the verified north photograph supports the separate north connector, not this placement.'};
     parent.add(component);
     slab(component, strip, .02, PASSAGE.floor - .02, sill);
     slab(component, strip, PASSAGE.soffit, .34, soffit);
@@ -253,17 +277,18 @@ export function createSEMBuilding(THREE, source, {textured = true} = {}) {
       soffit: PASSAGE.soffit, clearHeight: PASSAGE.soffit - PASSAGE.floor, width: PASSAGE.south - PASSAGE.north,
       west: [(north[0] + south[0]) / 2, centerZ], east: [(north[1] + south[1]) / 2, centerZ]};
   }
-  for (const {points, podium} of parts) {
+  for (const {points, podium = false, connector = false} of parts) {
     const height = podium ? PODIUM_HEIGHT : SEM_HEIGHT;
     const part = new THREE.Group();
     part.name = podium ? 'Red arched SEM podium - estimated internal division' : 'Six-level SEM glazed wing';
     architecture.add(part);
     slab(part, points, height, .26, roof);
     if (podium) slab(part, points, .04, .26, roof);
+    else if (connector) openNorthConnector(part, points);
     else {
       for (const [boundary, lower] of [[PASSAGE.north, true], [PASSAGE.south, false]]) {
         const occupied = clipped(points, 1, boundary, lower);
-        slab(part, occupied, .04, .26, roof);
+        slab(part, occupied, .02, PASSAGE.floor - .02, sill);
         slab(part, occupied, PASSAGE.soffit, .34, soffit);
       }
       openPassage(part, points);
@@ -274,8 +299,8 @@ export function createSEMBuilding(THREE, source, {textured = true} = {}) {
     }, 0);
     for (let edge = 0; edge < points.length; edge++) {
       let a = points[edge], b = points[(edge + 1) % points.length];
-      const internal = (a[0] === WING_X && b[0] === WING_X) || (a[1] === WING_Z && b[1] === WING_Z);
-      if (internal && podium) continue;
+      const internal = (a[0] === WING_X && b[0] === WING_X) || (a[0] === PODIUM_EAST && b[0] === PODIUM_EAST);
+      const podiumJoin = a[0] === PODIUM_EAST && b[0] === PODIUM_EAST;
       // Local +Z faces outside; reversal changes traversal, never source vertices.
       if (signedArea > 0) [a, b] = [b, a];
       const dx = b[0] - a[0], dz = b[1] - a[1], length = Math.hypot(dx, dz);
@@ -285,11 +310,23 @@ export function createSEMBuilding(THREE, source, {textured = true} = {}) {
       face.rotation.y = -Math.atan2(dz, dx);
       part.add(face);
       const outwardZ = dx / length, isNorth = outwardZ < -.9;
+      const northWing = !podium && !connector && isNorth && !internal;
       const entry = podium && isNorth && length > 65;
       face.userData = {outwardZ, podium, internal, sourceEdge: [a, b]};
+      if (internal && podium) {
+        panel(face, length / 2, 0, PODIUM_HEIGHT, length, .4, -.22);
+        continue;
+      }
+      if (internal && !podiumJoin) {
+        if (!connector) {
+          curtain(face, .35, length - .35, .3, PASSAGE.soffit - .25, false, -.45);
+          for (let x = .3; x < length; x += 2.8) panel(face, x, .08, PASSAGE.soffit, .35, .4, -.2);
+        }
+        continue;
+      }
       const bays = Math.max(1, Math.round(length / 5.8)), width = length / bays;
       let cut;
-      if (!podium && !internal && Math.abs(dz) > 1e-6) {
+      if (!podium && !connector && !internal && Math.abs(dz) > 1e-6) {
         const hits = [PASSAGE.north, PASSAGE.south].map(z => (z - a[1]) / dz * length).sort((a, b) => a - b);
         if (hits[1] > 0 && hits[0] < length) cut = [Math.max(0, hits[0]), Math.min(length, hits[1])];
       }
@@ -311,7 +348,7 @@ export function createSEMBuilding(THREE, source, {textured = true} = {}) {
       }
       for (let bay = 0; bay < bays; bay++) {
         const x = (bay + .5) * width;
-        if (internal) continue;
+        if (internal || connector) continue;
         if (entry && Math.abs(x - center) < entryHalfWidth + width / 2) {
           const left = x - width / 2, right = x + width / 2;
           if (left < center - entryHalfWidth) panel(face, (left + center - entryHalfWidth) / 2, 0,
@@ -332,21 +369,37 @@ export function createSEMBuilding(THREE, source, {textured = true} = {}) {
           for (const [left, right] of occupiedIntervals(x - width / 2, x + width / 2)) {
             const span = right - left, pier = Math.min(.44, span / 3);
             if (Math.abs(span - width) < 1e-6) {
-              curtain(face, left + .65, right - .65, .5, 9.8, false, -1.5);
-              panel(face, left + .22, 0, 10, .44, .65, -1.1);
+              curtain(face, left + (northWing ? .25 : .65), right - (northWing ? .25 : .65),
+                .5, 9.8, false, northWing ? -NORTH_RECESS : -1.5);
+              panel(face, left + .22, 0, 10, .44, .65, northWing ? -NORTH_RECESS + .4 : -1.1);
             } else {
               panel(face, left + pier / 2, 0, 10, pier, .65, -1.1);
               if (span > .9) curtain(face, left + pier + .12, right - .12, .5, 9.8, false, -1.5);
               else panel(face, (left + right) / 2, 0, 10, span, .4, -1.3);
             }
-            if (bay % 3 === 1 && x > left + .4 && x < right - .4) {
+            if (!northWing && bay % 3 === 1 && x > left + .4 && x < right - .4) {
               B.cylinder(face, [x, .35, -.5], [x, 9.84, -.5], .29, .29, white, 12);
             }
           }
         }
       }
+      if (northWing) {
+        const support = new THREE.Group(), x = length * .56, radius = .98;
+        support.name = 'Jianhua north silver cylindrical support';
+        support.position.set(x, 0, -2.35);
+        support.userData = {role: 'photo-supported-silver-support', radius, floor: PASSAGE.floor,
+          soffit: PASSAGE.soffit, lowerFacadeSetback: NORTH_RECESS,
+          limitations: 'Single circular metal-clad support and horizontal seams observed in Gensler image 04; dimensions estimated.'};
+        face.add(support);
+        B.cylinder(support, [0, PASSAGE.floor, 0], [0, PASSAGE.soffit - .18, 0], radius, radius, silver, 48);
+        B.cylinder(support, [0, PASSAGE.soffit - .18, 0], [0, PASSAGE.soffit, 0], radius + .035, radius + .035, frames, 48);
+        for (let y = 1.65; y < PASSAGE.soffit - .3; y += 1.65) {
+          B.cylinder(support, [0, y - .009, 0], [0, y + .009, 0], radius + .003, radius + .003, spandrel, 48);
+        }
+        box(face, 'recessed north lower wall sill', length / 2, .18, -NORTH_RECESS, length, .2, .3, sill);
+      }
       box(face, 'thin projecting roof edge', length / 2, height + .23, .13, length + .20, .17, .8, podium ? red : frames);
-      if (!internal) for (const [left, right] of occupiedIntervals(0, length)) {
+      if (!internal && !connector && !northWing) for (const [left, right] of occupiedIntervals(0, length)) {
         box(face, 'recessed base outside passage', (left + right) / 2, .18, .12, right - left, .35, .42, frames);
       }
     }
@@ -362,11 +415,13 @@ export function createSEMBuilding(THREE, source, {textured = true} = {}) {
   group.updateMatrixWorld(true);
   if (!northAtrium) throw new Error('The source SEM outline no longer supplies the long north entrance edge.');
   if (!passage) throw new Error('The source SEM outline no longer supplies the glazed passage wing.');
+  if (!northOpening) throw new Error('The source SEM outline no longer supplies the north connector.');
   const {facade, component, ...atriumStats} = northAtrium;
   const {component: passageComponent, ...passageStats} = passage;
-  return {group, architecture, corridor, windows, northAtrium, passage,
+  const {component: northComponent, ...northStats} = northOpening;
+  return {group, architecture, corridor, windows, northAtrium, passage, northOpening,
     stats: {osmWay: source.id, height: SEM_HEIGHT, podiumHeight: PODIUM_HEIGHT,
-      northAtrium: atriumStats, passage: passageStats,
+      northAtrium: atriumStats, passage: passageStats, northOpening: northStats,
       windows: windows.length, archedWindows: windows.filter(w => w.type === 'arch').length,
       corridor: corridor.stats}};
 }

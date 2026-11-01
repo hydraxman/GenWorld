@@ -9,7 +9,8 @@ const source = campus.buildings.find(b => b.id === SEM_WAY);
 test('photo-informed red SEM retains the source footprint and has actual arched apertures', () => {
   const model = createSEMBuilding(THREE, source, {textured: false});
   assert.equal(model.stats.height, SEM_HEIGHT);
-  assert.equal(model.stats.archedWindows, 24, 'Only north/outer podium elevations use the observed tall arches');
+  assert.ok(model.stats.archedWindows >= 10 && model.stats.archedWindows < 24,
+    'No red arched podium may occupy the north glass connector');
   assert.ok(model.stats.windows > 100);
   const bounds = new THREE.Box3().setFromObject(model.architecture);
   assert.ok(bounds.max.y > 30 && bounds.max.y < 30.5);
@@ -66,7 +67,60 @@ test('elevated corridor physically spans the gap between source building envelop
   assert.ok(start[0] < xAt(source.points[3], source.points[4]));
   assert.ok(end[0] > xAt(FOOTPRINT[0], FOOTPRINT[1]));
   assert.ok(corridor.length > 15 && corridor.length < 25);
-  assert.equal(corridor.stats.storeyClearance, 4);
+  assert.equal(corridor.stats.clearance, 9.84);
+  assert.equal(BRIDGE_Z, -12, 'Attach near the north end, separately from the central courtyard connector');
+});
+
+test('north connector is truly open from plaza to courtyard and has a continuous glass volume above', () => {
+  const model = createSEMBuilding(THREE, source, {textured: false});
+  model.group.traverse(o => {if (o.isMesh) o.material.side = THREE.DoubleSide;});
+  const opening = model.northOpening;
+  assert.equal(opening.west, -120.544);
+  assert.equal(opening.east, -98);
+  assert.equal(opening.clearHeight, 9.76);
+  for (const x of [-119, -114, -108, -102, -99]) for (const y of [.12, 1.7, 5, 9.5]) {
+    for (const direction of [-1, 1]) {
+      const start = new THREE.Vector3(x, y, direction === 1 ? -45 : 20);
+      assert.equal(new THREE.Raycaster(start, new THREE.Vector3(0, 0, direction), 0, 65)
+        .intersectObject(model.group, true).length, 0, `North axis blocked: ${x}/${y}/${direction}`);
+    }
+    const origin = new THREE.Vector3(x, 2, -10);
+    for (const direction of [-1, 1]) {
+      const hit = new THREE.Raycaster(origin, new THREE.Vector3(0, direction, 0))
+        .intersectObject(model.architecture, true)[0];
+      assert.ok(hit && Math.abs(hit.point.y - (direction === 1 ? opening.soffit : opening.floor)) < .02);
+    }
+    for (const direction of [-1, 1]) {
+      assert.ok(new THREE.Raycaster(origin, new THREE.Vector3(direction, 0, 0), 0, 25)
+        .intersectObject(model.architecture, true).length, 'Side walls bound the opening');
+    }
+    const upper = new THREE.Raycaster(new THREE.Vector3(x, 18, -45), new THREE.Vector3(0, 0, 1), 0, 60);
+    assert.ok(upper.intersectObject(model.architecture, true).some(hit => /glazing/.test(hit.object.material.name)));
+  }
+});
+
+test('one large metal cylinder supports the north soffit in front of the recessed lower facade', () => {
+  const model = createSEMBuilding(THREE, source, {textured: false});
+  const support = model.group.getObjectByName('Jianhua north silver cylindrical support');
+  assert.ok(support);
+  const bounds = new THREE.Box3().setFromObject(support);
+  assert.ok(Math.abs(bounds.min.y - .08) < .001 && Math.abs(bounds.max.y - 9.84) < .001);
+  assert.equal(support.userData.radius, .98);
+  assert.ok(support.userData.lowerFacadeSetback > 6);
+  const metal = support.children.find(mesh => /brushed silver/.test(mesh.material?.name));
+  assert.ok(metal?.material.metalness >= .8 && metal.material.roughness < .4);
+  const center = support.getWorldPosition(new THREE.Vector3());
+  for (let angle = 0; angle < Math.PI * 2; angle += Math.PI / 12) {
+    const direction = new THREE.Vector3(Math.cos(angle), 0, Math.sin(angle));
+    const hit = new THREE.Raycaster(center.clone().setY(4).addScaledVector(direction, 2), direction.negate(), 0, 2)
+      .intersectObject(support, true)[0];
+    assert.ok(hit && Math.abs(Math.hypot(hit.point.x - center.x, hit.point.z - center.z) - .98) < .004,
+      'A round, not rectangular or low-sided support');
+  }
+  const overhead = new THREE.Raycaster(center.clone().setY(11), new THREE.Vector3(0, -1, 0), 0, 1)
+    .intersectObject(model.architecture, true);
+  assert.ok(overhead.length && Math.abs(overhead[0].point.y - 10.18) < .001,
+    'The column must contact a real supporting slab');
 });
 
 test('glazed wing has a genuine two-ended passage, bounded by side walls, a floor and a supporting soffit', () => {

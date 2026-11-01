@@ -35,8 +35,8 @@ export const REFINEMENT_SITES = [
     featureId: SEM_ID, referenceSite: 'sem-complex', buttonId: 'view-sem', label: '经管 · 建华组团', viewDirection: [0.6, 0.5, -1.1],
     additionalViews: [{buttonId: 'view-jianhua', label: '建华楼北门', viewDirection: [-.05, .08, -1.1],
       focusObject: 'Jianhua north glazed entrance and interior arch'},
-    {buttonId: 'view-jianhua-passage', label: '建华架空通道', viewDirection: [-1.1, .12, .02],
-      focusObject: 'Jianhua open passage below glazed wing'}],
+    {buttonId: 'view-jianhua-passage', label: '建华北侧架空', viewDirection: [.12, .12, -1.1],
+      focusObject: 'Jianhua north elevated connector and open courtyard passage'}],
     apply: refineSEM,
   },
   {
