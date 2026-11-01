@@ -200,6 +200,16 @@ try {
             let support;
             detail.traverse(o => {if (o.userData.role === 'photo-supported-silver-support') support = o;});
             if (!support || support.userData.radius !== .98) throw new Error('The exported silver cylindrical support is missing.');
+            const face = support.parent, [a, b] = face.userData.sourceEdge;
+            const span = Math.hypot(b[0] - a[0], b[1] - a[1]);
+            for (const z of [-1, -3.8, -5.7]) for (const y of [1.7, 4, 8.5]) {
+              const start = face.localToWorld(new T.Vector3(-2, y, z));
+              const end = face.localToWorld(new T.Vector3(span + 2, y, z));
+              const hits = new T.Raycaster(start, end.clone().sub(start).normalize(), 0, start.distanceTo(end))
+                .intersectObject(detail, true).filter(hit => hit.object.parent !== support);
+              if (hits.length) throw new Error(`Exported protruding window screen: ${y}/${z}`);
+              rays++;
+            }
             for (const x of [-119, -114, -108, -102, -99]) for (const y of [.15, 1.7, 5, 9.5]) for (const direction of [-1, 1]) {
               const start = new T.Vector3(x, y, direction === 1 ? -45 : 20).applyMatrix4(detail.matrixWorld);
               const end = new T.Vector3(x, y, direction === 1 ? 20 : -45).applyMatrix4(detail.matrixWorld);

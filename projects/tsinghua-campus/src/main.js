@@ -50,7 +50,7 @@ async function main() {
   const compact = window.matchMedia('(max-width: 850px)');
   renderer.setPixelRatio(Math.min(devicePixelRatio, compact.matches ? 1.5 : 1.75));
   const scene = new THREE.Scene();
-  const sun = createCampusDaylight(renderer, scene);
+  const {sun, skyTexture} = createCampusDaylight(renderer, scene);
   const drawScene = createCampusRenderPipeline(renderer, scene);
   const campus = createCampusModel(data);
   scene.add(campus.group);
@@ -127,7 +127,7 @@ async function main() {
   let framedBounds = null, framedPadding = 1.3;
   $('contact-shadows').checked = !compact.matches;
   let contactShadowsActive = false;
-  const reflections = installCampusReflections(renderer, scene, campus, {compact: compact.matches});
+  const reflections = installCampusReflections(renderer, scene, campus, {compact: compact.matches, skyTexture});
   const walker = createWalkthrough({camera: perspective, controls, canvas: renderer.domElement,
     panel: $('walk-controls'), onChange: () => {dirty = true;}});
   let sceneTime = 0, lastMotion = performance.now();

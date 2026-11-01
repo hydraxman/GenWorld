@@ -82,10 +82,20 @@ test('the same-coordinate-frame corridor is suspended between SEM and Shunde', (
   assert.equal(startCampus[1], clearance);
   assert.equal(endCampus[1], clearance);
   assert.ok(startCampus[0] < endCampus[0]);
-  const shundeBounds = campus.buildings.get(SHUNDE_ID).userData.bounds;
-  assert.ok(Math.abs(endCampus[0] - shundeBounds[0]) < 1);
   const detail = target.children.find(item => item.userData.campusDetail);
   const corridor = detail.getObjectByName('Gray enclosed elevated corridor between SEM and Shunde');
+  const shunde = campus.buildings.get(SHUNDE_ID).children.find(item => item.userData.campusDetail);
+  const length = Math.hypot(...corridor.userData.end.map((value, i) => value - corridor.userData.start[i]));
+  for (const [host, x, direction] of [[detail.getObjectByName('SEM red podium and glazed upper wing'), 0, -1],
+    [shunde, length, 1]]) {
+    host.traverse(o => {if (o.isMesh) o.material.side = THREE.DoubleSide;});
+    for (const z of [-1.88, 0, 1.88]) for (const y of [9.9, 10.25, 12, 14.8, 15.1]) {
+      const start = corridor.localToWorld(new THREE.Vector3(x - direction * 3, y, z));
+      const end = corridor.localToWorld(new THREE.Vector3(x, y, z));
+      assert.ok(new THREE.Raycaster(start, end.clone().sub(start).normalize(), 0, start.distanceTo(end))
+        .intersectObject(host, true).length, 'Full bridge landing must contact the actual host after ENU placement');
+    }
+  }
   const bounds = new THREE.Box3().setFromObject(corridor);
   assert.ok(Math.abs(bounds.min.y - clearance) < 0.01);
   const midpoint = new THREE.Vector3((startCampus[0] + endCampus[0]) / 2, 5,

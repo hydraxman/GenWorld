@@ -17,7 +17,7 @@ export function createSkyCorridor(THREE, {start, end, textured = true}) {
   group.rotation.y = -Math.atan2(end[1] - start[1], end[0] - start[0]);
   group.userData = {role: 'sky-corridor', start, end, clearance: CORRIDOR_CLEARANCE,
     source: 'user-confirmed Shunde connection visible at the left of the official north exterior photograph',
-    dimensionsStatus: 'Lower edge aligned to the elevated glass wing in the photograph; height, span and northward attachment are estimated.'};
+    dimensionsStatus: 'Lower edge aligned to the elevated glass wing; diagonal route and shallow end overlaps connect the finite Jianhua east and Shunde west facades. Height, section and route remain estimates, not surveyed junction details.'};
   const plain = (name, color, roughness = .6, metalness = .1) =>
     new THREE.MeshStandardMaterial({name, color, roughness, metalness});
   const gray = textured ? B.pbr('Gray corridor cladding', 'grain', [153, 158, 158], [1.4, 1.4], 256)

@@ -1,17 +1,18 @@
 import * as THREE from 'three';
 import {Reflector} from 'three/addons/objects/Reflector.js';
 import {installGlassReflections} from '../../../shared/glass-reflections.js';
-import {CAMPUS_WATER_COLOR, WATER_REFLECTION_FADE, createCampusWaterShader} from './campus-water.js';
+import {CAMPUS_WATER_COLOR, WATER_REFLECTION_FADE, WATER_REFLECTION_CLIP_BIAS, createCampusWaterShader} from './campus-water.js';
 import {campusGlass, installCourtyardSurfaces} from './courtyard-surfaces.js';
 
-export function installCampusReflections(renderer, scene, campus, {compact = false} = {}) {
+export function installCampusReflections(renderer, scene, campus, {compact = false, skyTexture} = {}) {
+  if (!skyTexture?.isTexture) throw new Error('Campus water requires the shared daylight sky texture.');
   const finishes = installCourtyardSurfaces(campus), resolution = compact ? 256 : 512;
   const waterMeshes = campus.layers.water.children.filter(mesh => mesh.isMesh);
   if (waterMeshes.length !== 1) throw new Error('Campus reflection expects the single merged frozen water surface.');
   const originalWater = waterMeshes[0], geometry = originalWater.geometry.clone();
   geometry.translate(0, -.12, 0); geometry.rotateX(Math.PI / 2);
   const reflector = new Reflector(geometry, {shader: createCampusWaterShader(THREE), color: CAMPUS_WATER_COLOR,
-    textureWidth: resolution, textureHeight: resolution, multisample: 0, clipBias: .002});
+    textureWidth: resolution, textureHeight: resolution, multisample: 0, clipBias: WATER_REFLECTION_CLIP_BIAS});
   const water = new THREE.Mesh(geometry, reflector.material);
   water.isReflector = true;
   water.rotation.x = -Math.PI / 2; water.position.y = .12;
@@ -20,6 +21,7 @@ export function installCampusReflections(renderer, scene, campus, {compact = fal
   water.material.polygonOffsetFactor = originalWater.material.polygonOffsetFactor;
   water.material.polygonOffsetUnits = originalWater.material.polygonOffsetUnits;
   water.material.uniforms.reflectionEnabled.value = 0;
+  water.material.uniforms.campusSky.value = skyTexture;
   const capture = reflector.onBeforeRender;
   // The one merged surface keeps every polygon/hole. Capturing is explicitly scheduled,
   // never triggered recursively by a probe, AO pass or another scene render.

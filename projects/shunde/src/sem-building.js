@@ -1,11 +1,12 @@
 import {createBuilder} from './builder.js';
-import {createSkyCorridor} from './sky-corridor.js';
+import {createSkyCorridor, CORRIDOR_WIDTH} from './sky-corridor.js';
 import {FOOTPRINT} from './footprint.js';
 import {addVisitorLobby} from './visitor-lobby.js';
 
 export const SEM_WAY = 937482182;
 export const SEM_HEIGHT = 30;
 export const BRIDGE_Z = -12;
+export const BRIDGE_END_Z = FOOTPRINT[1][1] + CORRIDOR_WIDTH / 2 + 1.5;
 const PODIUM_HEIGHT = 22.7;
 const PODIUM_EAST = -120.544;
 const WING_X = -98;
@@ -29,6 +30,27 @@ function clipped(points, axis, value, lower) {
   return out.filter((point, index) => {
     const previous = out[(index + out.length - 1) % out.length];
     return Math.hypot(point[0] - previous[0], point[1] - previous[1]) > 1e-8;
+  });
+}
+
+function lowerEnvelope(points) {
+  // Shared offset-line intersections trim both side walls to the recessed front.
+  const area = points.reduce((sum, a, i) => {
+    const b = points[(i + 1) % points.length];
+    return sum + a[0] * b[1] - b[0] * a[1];
+  }, 0);
+  const edges = points.map((a, i) => {
+    const b = points[(i + 1) % points.length], length = Math.hypot(b[0] - a[0], b[1] - a[1]);
+    const sign = area > 0 ? -1 : 1, nx = sign * (a[1] - b[1]) / length, nz = sign * (b[0] - a[0]) / length;
+    const depth = nz < -.9 ? NORTH_RECESS : a[0] === WING_X && b[0] === WING_X ? .45 : 1.5;
+    return {nx, nz, c: nx * a[0] + nz * a[1] - depth};
+  });
+  return edges.map((edge, i) => {
+    const previous = edges[(i + edges.length - 1) % edges.length];
+    const determinant = previous.nx * edge.nz - previous.nz * edge.nx;
+    if (Math.abs(determinant) < 1e-8) throw new Error('SEM lower facade cannot join parallel source edges.');
+    return [(previous.c * edge.nz - previous.nz * edge.c) / determinant,
+      (previous.nx * edge.c - previous.c * edge.nx) / determinant];
   });
 }
 
@@ -277,6 +299,30 @@ export function createSEMBuilding(THREE, source, {textured = true} = {}) {
       soffit: PASSAGE.soffit, clearHeight: PASSAGE.soffit - PASSAGE.floor, width: PASSAGE.south - PASSAGE.north,
       west: [(north[0] + south[0]) / 2, centerZ], east: [(north[1] + south[1]) / 2, centerZ]};
   }
+  function lowerFacade(face, a, b, lowerA, lowerB) {
+    const length = Math.hypot(b[0] - a[0], b[1] - a[1]), dx = (b[0] - a[0]) / length, dz = (b[1] - a[1]) / length;
+    const start = (lowerA[0] - a[0]) * dx + (lowerA[1] - a[1]) * dz;
+    const end = (lowerB[0] - a[0]) * dx + (lowerB[1] - a[1]) * dz;
+    const depth = -(lowerA[0] - a[0]) * dz + (lowerA[1] - a[1]) * dx;
+    if (end <= start) throw new Error('SEM recessed lower facade has an inverted span.');
+    face.userData.lowerEdge = [lowerA, lowerB];
+    let cut;
+    if (Math.abs(dz) > 1e-6) {
+      cut = [PASSAGE.north, PASSAGE.south].map(z => (z - a[1] - dx * depth) / dz).sort((a, b) => a - b);
+    }
+    const intervals = cut ? [[start, Math.min(end, cut[0])], [Math.max(start, cut[1]), end]]
+      .filter(([left, right]) => right - left > .01) : [[start, end]];
+    for (const [left, right] of intervals) {
+      const count = Math.max(1, Math.round((right - left) / 5.8)), width = (right - left) / count;
+      for (let bay = 0; bay < count; bay++) {
+        const x = left + bay * width, pier = Math.min(.44, width / 3);
+        panel(face, x + pier / 2, .08, 9.84, pier, .65, depth + .3);
+        curtain(face, x + pier, x + width, .5, 9.8, false, depth);
+      }
+      box(face, 'continuous recessed lower wall sill', (left + right) / 2, .18, depth,
+        right - left, .2, .3, frames);
+    }
+  }
   for (const {points, podium = false, connector = false} of parts) {
     const height = podium ? PODIUM_HEIGHT : SEM_HEIGHT;
     const part = new THREE.Group();
@@ -297,12 +343,17 @@ export function createSEMBuilding(THREE, source, {textured = true} = {}) {
       const b = points[(i + 1) % points.length];
       return sum + a[0] * b[1] - b[0] * a[1];
     }, 0);
+    const lower = !podium && !connector ? lowerEnvelope(points) : null;
     for (let edge = 0; edge < points.length; edge++) {
       let a = points[edge], b = points[(edge + 1) % points.length];
+      let lowerA = lower?.[edge], lowerB = lower?.[(edge + 1) % points.length];
       const internal = (a[0] === WING_X && b[0] === WING_X) || (a[0] === PODIUM_EAST && b[0] === PODIUM_EAST);
       const podiumJoin = a[0] === PODIUM_EAST && b[0] === PODIUM_EAST;
       // Local +Z faces outside; reversal changes traversal, never source vertices.
-      if (signedArea > 0) [a, b] = [b, a];
+      if (signedArea > 0) {
+        [a, b] = [b, a];
+        [lowerA, lowerB] = [lowerB, lowerA];
+      }
       const dx = b[0] - a[0], dz = b[1] - a[1], length = Math.hypot(dx, dz);
       const face = new THREE.Group();
       face.name = 'SEM articulated facade';
@@ -313,25 +364,15 @@ export function createSEMBuilding(THREE, source, {textured = true} = {}) {
       const northWing = !podium && !connector && isNorth && !internal;
       const entry = podium && isNorth && length > 65;
       face.userData = {outwardZ, podium, internal, sourceEdge: [a, b]};
+      if (lower) lowerFacade(face, a, b, lowerA, lowerB);
       if (internal && podium) {
         panel(face, length / 2, 0, PODIUM_HEIGHT, length, .4, -.22);
         continue;
       }
       if (internal && !podiumJoin) {
-        if (!connector) {
-          curtain(face, .35, length - .35, .3, PASSAGE.soffit - .25, false, -.45);
-          for (let x = .3; x < length; x += 2.8) panel(face, x, .08, PASSAGE.soffit, .35, .4, -.2);
-        }
         continue;
       }
       const bays = Math.max(1, Math.round(length / 5.8)), width = length / bays;
-      let cut;
-      if (!podium && !connector && !internal && Math.abs(dz) > 1e-6) {
-        const hits = [PASSAGE.north, PASSAGE.south].map(z => (z - a[1]) / dz * length).sort((a, b) => a - b);
-        if (hits[1] > 0 && hits[0] < length) cut = [Math.max(0, hits[0]), Math.min(length, hits[1])];
-      }
-      const occupiedIntervals = (left, right) => !cut ? [[left, right]]
-        : [[left, Math.min(right, cut[0])], [Math.max(left, cut[1]), right]].filter(([lo, hi]) => hi - lo > .01);
       const center = length / 2, entryHalfWidth = 11.8;
       if (entry) entrance(face, center);
       if (!podium) {
@@ -348,7 +389,7 @@ export function createSEMBuilding(THREE, source, {textured = true} = {}) {
       }
       for (let bay = 0; bay < bays; bay++) {
         const x = (bay + .5) * width;
-        if (internal || connector) continue;
+        if (internal || !podium) continue;
         if (entry && Math.abs(x - center) < entryHalfWidth + width / 2) {
           const left = x - width / 2, right = x + width / 2;
           if (left < center - entryHalfWidth) panel(face, (left + center - entryHalfWidth) / 2, 0,
@@ -365,22 +406,6 @@ export function createSEMBuilding(THREE, source, {textured = true} = {}) {
           panel(face, x - width / 2 + .26, 0, height, .52, .65, .08);
           panel(face, x + width / 2 - .26, 0, height, .52, .65, .08);
           panel(face, x, height - .5, height, width);
-        } else {
-          for (const [left, right] of occupiedIntervals(x - width / 2, x + width / 2)) {
-            const span = right - left, pier = Math.min(.44, span / 3);
-            if (Math.abs(span - width) < 1e-6) {
-              curtain(face, left + (northWing ? .25 : .65), right - (northWing ? .25 : .65),
-                .5, 9.8, false, northWing ? -NORTH_RECESS : -1.5);
-              panel(face, left + .22, 0, 10, .44, .65, northWing ? -NORTH_RECESS + .4 : -1.1);
-            } else {
-              panel(face, left + pier / 2, 0, 10, pier, .65, -1.1);
-              if (span > .9) curtain(face, left + pier + .12, right - .12, .5, 9.8, false, -1.5);
-              else panel(face, (left + right) / 2, 0, 10, span, .4, -1.3);
-            }
-            if (!northWing && bay % 3 === 1 && x > left + .4 && x < right - .4) {
-              B.cylinder(face, [x, .35, -.5], [x, 9.84, -.5], .29, .29, white, 12);
-            }
-          }
         }
       }
       if (northWing) {
@@ -396,12 +421,9 @@ export function createSEMBuilding(THREE, source, {textured = true} = {}) {
         for (let y = 1.65; y < PASSAGE.soffit - .3; y += 1.65) {
           B.cylinder(support, [0, y - .009, 0], [0, y + .009, 0], radius + .003, radius + .003, spandrel, 48);
         }
-        box(face, 'recessed north lower wall sill', length / 2, .18, -NORTH_RECESS, length, .2, .3, sill);
       }
       box(face, 'thin projecting roof edge', length / 2, height + .23, .13, length + .20, .17, .8, podium ? red : frames);
-      if (!internal && !connector && !northWing) for (const [left, right] of occupiedIntervals(0, length)) {
-        box(face, 'recessed base outside passage', (left + right) / 2, .18, .12, right - left, .35, .42, frames);
-      }
+      if (!internal && podium) box(face, 'recessed podium base', length / 2, .18, .12, length, .35, .42, frames);
     }
   }
   B.finish();
@@ -409,8 +431,10 @@ export function createSEMBuilding(THREE, source, {textured = true} = {}) {
   const eastEdge = [source.points[3], source.points[4]];
   const interpolateX = (a, b, z) => a[0] + (b[0] - a[0]) * (z - a[1]) / (b[1] - a[1]);
   const semX = interpolateX(...eastEdge, BRIDGE_Z);
-  const shundeX = interpolateX(FOOTPRINT[0], FOOTPRINT[1], BRIDGE_Z);
-  const corridor = createSkyCorridor(THREE, {start: [semX - .2, BRIDGE_Z], end: [shundeX + .2, BRIDGE_Z], textured});
+  const shundeX = interpolateX(FOOTPRINT[0], FOOTPRINT[1], BRIDGE_END_Z);
+  // Both full-width end sections embed in real facade segments; the Shunde edge
+  // stops south of BRIDGE_Z, so extending its infinite line leaves the bridge floating.
+  const corridor = createSkyCorridor(THREE, {start: [semX - 1.1, BRIDGE_Z], end: [shundeX + 1.1, BRIDGE_END_Z], textured});
   group.add(corridor.group);
   group.updateMatrixWorld(true);
   if (!northAtrium) throw new Error('The source SEM outline no longer supplies the long north entrance edge.');

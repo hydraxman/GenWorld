@@ -2,8 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
 import campus from '../docs/campus-context.json' with {type: 'json'};
-import {createSEMBuilding, SEM_WAY, SEM_HEIGHT, BRIDGE_Z} from './sem-building.js';
+import {createSEMBuilding, SEM_WAY, SEM_HEIGHT, BRIDGE_Z, BRIDGE_END_Z} from './sem-building.js';
 import {FOOTPRINT} from './footprint.js';
+import {createShundeModel} from './model.js';
 
 const source = campus.buildings.find(b => b.id === SEM_WAY);
 test('photo-informed red SEM retains the source footprint and has actual arched apertures', () => {
@@ -62,10 +63,12 @@ test('elevated corridor physically spans the gap between source building envelop
   const {corridor} = createSEMBuilding(THREE, source, {textured: false});
   const {start, end} = corridor.group.userData;
   assert.equal(start[1], BRIDGE_Z);
-  assert.equal(end[1], BRIDGE_Z);
-  const xAt = (a, b) => a[0] + (b[0] - a[0]) * (BRIDGE_Z - a[1]) / (b[1] - a[1]);
-  assert.ok(start[0] < xAt(source.points[3], source.points[4]));
-  assert.ok(end[0] > xAt(FOOTPRINT[0], FOOTPRINT[1]));
+  assert.equal(end[1], BRIDGE_END_Z);
+  const xAt = (a, b, z) => a[0] + (b[0] - a[0]) * (z - a[1]) / (b[1] - a[1]);
+  assert.ok(start[0] < xAt(source.points[3], source.points[4], start[1]));
+  assert.ok(end[0] > xAt(FOOTPRINT[0], FOOTPRINT[1], end[1]));
+  assert.ok(end[1] - corridor.stats.width / 2 > FOOTPRINT[1][1],
+    'The entire landing must lie on the finite western wall, not north of its corner');
   assert.ok(corridor.length > 15 && corridor.length < 25);
   assert.equal(corridor.stats.clearance, 9.84);
   assert.equal(BRIDGE_Z, -12, 'Attach near the north end, separately from the central courtyard connector');
@@ -121,6 +124,42 @@ test('one large metal cylinder supports the north soffit in front of the recesse
     .intersectObject(model.architecture, true);
   assert.ok(overhead.length && Math.abs(overhead[0].point.y - 10.18) < .001,
     'The column must contact a real supporting slab');
+});
+
+test('the north veranda contains no leftover side window screens or fins ahead of the recessed wall', () => {
+  const model = createSEMBuilding(THREE, source, {textured: false});
+  model.group.traverse(o => {if (o.isMesh) o.material.side = THREE.DoubleSide;});
+  const column = model.group.getObjectByName('Jianhua north silver cylindrical support'), face = column.parent;
+  const lowerEdges = [];
+  model.architecture.traverse(o => {if (o.userData.lowerEdge) lowerEdges.push(o.userData.lowerEdge);});
+  for (const edge of lowerEdges) for (const point of edge) {
+    assert.equal(lowerEdges.flat().filter(other => Math.hypot(point[0] - other[0], point[1] - other[1]) < 1e-6).length, 2,
+      'Every recessed corner is shared by exactly two lower walls');
+  }
+  const [a, b] = face.userData.sourceEdge, length = Math.hypot(b[0] - a[0], b[1] - a[1]);
+  for (const z of [-1, -3.8, -5.7]) for (const y of [1.7, 4, 8.5]) {
+    const start = face.localToWorld(new THREE.Vector3(-2, y, z));
+    const direction = new THREE.Vector3(1, 0, 0).transformDirection(face.matrixWorld);
+    const hits = new THREE.Raycaster(start, direction, 0, length + 4).intersectObject(model.architecture, true)
+      .filter(hit => hit.object.parent !== column);
+    assert.equal(hits.length, 0, `Unobserved screen in north setback: z=${z}, y=${y}`);
+  }
+});
+
+test('the complete bridge end sections overlap actual host facades, not their infinite plan-edge extensions', () => {
+  const sem = createSEMBuilding(THREE, source, {textured: false});
+  const shunde = createShundeModel(THREE, {textured: false, foliage: false});
+  for (const host of [sem.architecture, shunde.building]) host.traverse(o => {if (o.isMesh) o.material.side = THREE.DoubleSide;});
+  const {group, length, stats} = sem.corridor;
+  for (const [host, x, direction] of [[sem.architecture, 0, -1], [shunde.building, length, 1]]) {
+    for (const z of [-stats.width / 2 - .18, 0, stats.width / 2 + .18]) for (const y of [9.9, 10.25, 12, 14.8, 15.1]) {
+      const origin = group.localToWorld(new THREE.Vector3(x - direction * 3, y, z));
+      const vector = new THREE.Vector3(direction, 0, 0).transformDirection(group.matrixWorld);
+      const hit = new THREE.Raycaster(origin, vector, 0, 3).intersectObject(host, true)[0];
+      assert.ok(hit, `${host.name} must meet bridge section at ${y}/${z} before its endpoint`);
+      assert.ok(hit.distance > .5, 'Do not bury the bridge arbitrarily deep in the host');
+    }
+  }
 });
 
 test('glazed wing has a genuine two-ended passage, bounded by side walls, a floor and a supporting soffit', () => {

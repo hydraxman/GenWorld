@@ -1,10 +1,12 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import * as THREE from 'three';
+import {Reflector} from 'three/addons/objects/Reflector.js';
 import data from '../data/campus.json' with {type: 'json'};
 import {createCampusModel} from '../src/model.js';
 import {createCampusScenery, sceneryPlacements, SCENERY_REFERENCE} from '../src/campus-scenery.js';
-import {createCampusWaterShader} from '../src/campus-water.js';
+import {createCampusWaterShader, WATER_REFLECTION_CLIP_BIAS} from '../src/campus-water.js';
+import {createCampusSky, campusSkyGLSL, SKY_TEXTURE_SIZE} from '../src/campus-sky.js';
 import {createQingmingWillow} from '../src/qingming-reuse.js';
 import {footprintMetrics, lines, pointInPolygon, project, roadProfile, segmentDistance} from '../src/geo.js';
 
@@ -115,14 +117,57 @@ test('campus water remains deterministic and filters fine ripples rather than ad
   assert.equal(shader.uniforms.time.value, 0);
   assert.match(shader.fragmentShader, /fwidth\(q\)/);
   assert.match(shader.fragmentShader, /reflectionEnabled/);
-  assert.ok(shader.uniforms.skyHorizon.value.b > shader.uniforms.skyHorizon.value.g);
-  assert.ok(shader.uniforms.skyZenith.value.b > shader.uniforms.skyZenith.value.g);
+  assert.equal(shader.uniforms.campusSky.value, null, 'The viewer injects its one shared sky texture');
+  assert.ok(shader.fragmentShader.includes(campusSkyGLSL));
   assert.deepEqual(shader.uniforms.reflectionFade.value.toArray(), [220, 380]);
-  assert.match(shader.fragmentShader, /smoothstep\(reflectionFade.x, reflectionFade.y, distance\(eye, worldPosition\)\)/);
-  assert.match(shader.fragmentShader, /mix\(body, reflection, \.24 \+ \.66 \* fresnel\)/,
+  assert.match(shader.fragmentShader, /float viewDistance = distance\(eye, worldPosition\)/);
+  assert.match(shader.fragmentShader, /smoothstep\(reflectionFade.x, reflectionFade.y, viewDistance\)/);
+  assert.match(shader.fragmentShader, /smoothstep\(80\., 320\., viewDistance\)/);
+  assert.match(shader.fragmentShader, /mix\(body, reflection, \.55 \+ \.4 \* fresnel\)/,
     'Disabling the local reflection must retain the sky contribution');
   assert.doesNotMatch(shader.fragmentShader, /discard/);
   assert.equal(shader.uniforms.microNormal.value.image.width, 256);
   shader.uniforms.microNormal.value.dispose();
   assert.match(shader.vertexShader, /textureMatrix/);
+});
+
+test('one deterministic mipmapped sky panorama contains blue areas and white clouds for sky and water', () => {
+  const a = createCampusSky(THREE), b = createCampusSky(THREE), pixels = a.texture.image.data;
+  assert.deepEqual(pixels, b.texture.image.data);
+  assert.deepEqual([a.texture.image.width, a.texture.image.height], SKY_TEXTURE_SIZE);
+  assert.equal(pixels.byteLength, 2 * 1024 * 1024);
+  assert.equal(a.texture.colorSpace, THREE.SRGBColorSpace);
+  assert.equal(a.texture.generateMipmaps, true);
+  assert.equal(a.texture.wrapS, THREE.RepeatWrapping);
+  assert.ok(a.texture.userData.sharedCampusSurface);
+  assert.equal(a.sky.material.uniforms.campusSky.value, a.texture);
+  assert.ok(a.sky.material.fragmentShader.includes(campusSkyGLSL));
+  let blue = 0, white = 0;
+  for (let i = pixels.length / 2; i < pixels.length; i += 4) {
+    if (pixels[i + 2] > pixels[i] + 50) blue++;
+    if (pixels[i] > 210 && pixels[i + 2] - pixels[i] < 15) white++;
+  }
+  const count = SKY_TEXTURE_SIZE[0] * SKY_TEXTURE_SIZE[1] / 2;
+  assert.ok(blue > count * .1 && white > count * .01, `Missing blue/white sky structure: ${blue}/${white}`);
+  for (const {sky, texture} of [a, b]) {sky.geometry.dispose(); sky.material.dispose(); texture.dispose();}
+});
+
+test('planar reflection clips the ground below water rather than reflecting a dark green screen', () => {
+  const reflector = new Reflector(new THREE.PlaneGeometry(1, 1), {clipBias: WATER_REFLECTION_CLIP_BIAS});
+  reflector.rotation.x = -Math.PI / 2; reflector.position.y = .12; reflector.updateMatrixWorld(true);
+  const camera = new THREE.PerspectiveCamera(40, 1.6, .1, 30000);
+  camera.position.set(-555, 22, 275); camera.lookAt(-585, 0, 220); camera.updateMatrixWorld(true);
+  let captures = 0;
+  const renderer = {xr: {enabled: false}, shadowMap: {autoUpdate: false}, autoClear: true,
+    state: {buffers: {depth: {setMask() {}}}}, getRenderTarget: () => null, setRenderTarget() {},
+    render(scene, reflected) {
+      captures++;
+      for (const z of [220, 0, -500, -1500]) {
+        assert.ok(new THREE.Vector3(-585, .07, z).project(reflected).z < -1, `Grass at z=${z} leaked into the reflection`);
+        assert.ok(new THREE.Vector3(-585, .2, z).project(reflected).z > -1, `Above-water geometry at z=${z} was clipped`);
+      }
+    }};
+  reflector.onBeforeRender(renderer, new THREE.Scene(), camera);
+  assert.equal(captures, 1);
+  reflector.geometry.dispose(); reflector.dispose();
 });

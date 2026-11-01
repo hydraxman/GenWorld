@@ -36,31 +36,102 @@ try {
       ['north-overall', [20, 20, -155], [-114, 13, -10]],
       ['north-opening', [-104, 7, -79], [-108, 6, -8]],
       ['north-column', [-56, 6, -58], [-82, 5, -26]],
+      ['bridge-north', [-50, 18, -67], [-53, 12, -8]],
+      ['bridge-shunde-joint', [-54, 16, -24], [-43, 12, -4]],
+      ['blue-sky', [-56, 6, -58], [-56, 65, -140]],
     ]) {
       await page.$eval('#view-sem', button => button.click());
-      const capture = await page.evaluate(({eye, target, mobile}) => {
+      const capture = await page.evaluate(async ({name, eye, target, mobile}) => {
         const app = window.campusApp, camera = app.inspection().camera;
         const source = app.campus.buildings.get('building:geometry:62d3ed181227f777a3fc0e1f')
           .children.find(child => child.userData.campusDetail);
         source.updateWorldMatrix(true, true);
         const at = new NorthWaterFixture.Vector3(...target).applyMatrix4(source.matrixWorld);
         camera.position.set(...eye).applyMatrix4(source.matrixWorld);
-        if (mobile) camera.position.sub(at).multiplyScalar(2.5).add(at);
+        if (mobile && name !== 'blue-sky') camera.position.sub(at).multiplyScalar(2.5).add(at);
         camera.clearViewOffset(); camera.lookAt(at); camera.updateMatrixWorld(true);
         app.render(true);
+        const image = document.getElementById('scene').toDataURL();
         const support = source.getObjectByName('Jianhua north silver cylindrical support');
         const metal = support?.children.find(mesh => mesh.material?.userData.campusMetalReflection)?.material;
-        return {image: document.getElementById('scene').toDataURL(), stats: source.userData.meshStats,
+        let sky;
+        if (name === 'blue-sky') {
+          const canvas = document.getElementById('scene'), copy = document.createElement('canvas');
+          copy.width = canvas.width; copy.height = canvas.height;
+          const ctx = copy.getContext('2d', {willReadFrequently: true});
+          const snapshot = new Image(); snapshot.src = image; await snapshot.decode();
+          ctx.drawImage(snapshot, 0, 0);
+          const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+          let blue = 0, white = 0;
+          for (let i = 0; i < pixels.length; i += 4) {
+            if (pixels[i + 2] > pixels[i] + 45 && pixels[i + 2] > pixels[i + 1] + 10) blue++;
+            if (pixels[i] > 190 && pixels[i + 1] > 190 && pixels[i + 2] - pixels[i] < 25) white++;
+          }
+          const background = app.campus.group.parent.getObjectByName('Campus blue sky and white clouds');
+          sky = {blue: blue / (pixels.length / 4), white: white / (pixels.length / 4),
+            shared: background?.material.uniforms.campusSky.value ===
+              app.campus.layers.water.children[0].material.uniforms.campusSky?.value};
+        }
+        return {image, stats: source.userData.meshStats,
+          sky,
           silver: metal ? {metalness: metal.metalness, roughness: metal.roughness,
             sharedEnvironment: metal.envMap === app.campus.group.parent.environment,
             borrowedTexture: metal.envMap?.userData.sharedCampusSurface === true} : null};
-      }, {eye, target, mobile: device !== 'desktop'});
+      }, {name, eye, target, mobile: device !== 'desktop'});
       await writeFile(resolve(output, `north-water-${suffix}-${device}-${name}.png`), Buffer.from(capture.image.split(',')[1], 'base64'));
       delete capture.image; captures.push({name, ...capture});
       if (!before) {
+        if (name === 'blue-sky') assert.ok(capture.sky.shared && capture.sky.blue > .1 && capture.sky.white > .03,
+          `${device}: expected visible blue sky AND white clouds sharing the water's panorama: ${JSON.stringify(capture.sky)}`);
         assert.ok(capture.silver?.metalness >= .8 && capture.silver.sharedEnvironment && capture.silver.borrowedTexture,
           'Silver must use the existing environment without owning its texture or creating another probe');
       }
+    }
+    let junctions;
+    if (!before) {
+      junctions = await page.evaluate(() => {
+        const T = NorthWaterFixture, app = window.campusApp;
+        const detail = id => app.campus.buildings.get(id).children.find(child => child.userData.campusDetail);
+        const sem = detail('building:geometry:62d3ed181227f777a3fc0e1f');
+        const shunde = detail('building:geometry:6bd0154b26cfe7cf654cdd3b');
+        const architecture = sem.getObjectByName('SEM red podium and glazed upper wing');
+        const corridor = sem.getObjectByName('Gray enclosed elevated corridor between SEM and Shunde');
+        const column = sem.getObjectByName('Jianhua north silver cylindrical support'), face = column.parent;
+        const length = Math.hypot(...corridor.userData.end.map((value, i) => value - corridor.userData.start[i]));
+        const sides = new Map(), contacts = [], obstructions = [];
+        for (const host of [architecture, shunde]) {
+          host.updateWorldMatrix(true, true);
+          host.traverse(o => {
+            if (!o.isMesh) return;
+            for (const material of [].concat(o.material)) if (!sides.has(material)) {
+              sides.set(material, material.side); material.side = T.DoubleSide;
+            }
+          });
+        }
+        try {
+          for (const [host, x, direction] of [[architecture, 0, -1], [shunde, length, 1]]) {
+            for (const z of [-1.88, 0, 1.88]) for (const y of [9.9, 10.25, 12, 14.8, 15.1]) {
+              const start = corridor.localToWorld(new T.Vector3(x - direction * 3, y, z));
+              const end = corridor.localToWorld(new T.Vector3(x, y, z));
+              const hit = new T.Raycaster(start, end.clone().sub(start).normalize(), 0, start.distanceTo(end))
+                .intersectObject(host, true)[0];
+              contacts.push({host: host === shunde ? 'shunde' : 'jianhua', y, z, distance: hit?.distance ?? null});
+            }
+          }
+          const [a, b] = face.userData.sourceEdge, span = Math.hypot(b[0] - a[0], b[1] - a[1]);
+          for (const z of [-1, -3.8, -5.7]) for (const y of [1.7, 4, 8.5]) {
+            const start = face.localToWorld(new T.Vector3(-2, y, z));
+            const end = face.localToWorld(new T.Vector3(span + 2, y, z));
+            const hits = new T.Raycaster(start, end.clone().sub(start).normalize(), 0, start.distanceTo(end))
+              .intersectObject(architecture, true).filter(hit => hit.object.parent !== column);
+            obstructions.push(hits.length);
+          }
+          return {contacts, obstructions};
+        } finally {for (const [material, side] of sides) material.side = side;}
+      });
+      assert.ok(junctions.contacts.every(hit => hit.distance !== null && hit.distance > .5 && hit.distance <= 3),
+        `Actual rendered host must meet every bridge edge: ${JSON.stringify(junctions.contacts)}`);
+      assert.deepEqual(junctions.obstructions, Array(9).fill(0));
     }
     const water = [];
     for (const [name, eye, target, nearView, plan] of [
@@ -107,6 +178,7 @@ try {
         }
         colors.sort((a, b) => a[1] - b[1]);
         return {image: canvas.toDataURL(), count: colors.length, median: colors[Math.floor(colors.length / 2)],
+          greenRange: colors.length ? [colors[Math.floor(colors.length * .1)][1], colors[Math.floor(colors.length * .9)][1]] : [],
           dark: colors.filter(rgb => rgb[1] < 125 || rgb[2] < rgb[1] - 12).length,
           reflections: app.inspection().rendering.reflections};
       }, {eye, target, plan});
@@ -125,10 +197,15 @@ try {
       assert.ok(below.median.every((value, i) => Math.abs(value - above.median[i]) < 3),
         'Turning off the high-altitude reflection must not produce a color step');
       assert.ok(water.every(sample => sample.reflections.waterTargets === 1));
+      for (const sample of water.filter(sample => ['aerial', 'distant'].includes(sample.name))) {
+        assert.ok(sample.greenRange[1] - sample.greenRange[0] > 10,
+          `${device}/${sample.name} must show sky/cloud variation instead of a uniform fill: ${sample.greenRange}`);
+        assert.equal(sample.reflections.waterEnabled, false);
+      }
     }
     assert.deepEqual(errors, []);
     if (device === 'offline') assert.deepEqual(requests, []);
-    report[device] = {captures, water, errors, requests: requests.length};
+    report[device] = {captures, junctions, water, errors, requests: requests.length};
     await writeFile(resolve(output, `north-water-${suffix}.json`), JSON.stringify(report, null, 2));
     await browser.close(); browser = undefined;
   }
