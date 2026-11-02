@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <title>知序 · 知识形态实验室</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="knowledge-experiments/gallery.css">
+  <script defer src="knowledge-prototype/data.js"></script>
+  <script defer src="knowledge-experiments/gallery.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">跳到可视化</a>
+  <header class="masthead">
+    <a class="wordmark" href="./"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m16 2 13 7v14l-13 7-13-7V9Zm0 0v28M3 9l13 7 13-7M3 23l13-7 13 7"/></svg><span>知序<small>知识形态实验室</small></span></a>
+    <p>同一份知识，换一种看见的方式。</p>
+    <a class="original-link" href="knowledge-prototype.html" target="_blank" rel="noopener">打开原有三种方案 <span aria-hidden="true">↗</span></a>
+  </header>
+  <nav id="exhibit-nav" class="exhibit-nav" aria-label="六种知识展示形式"></nav>
+  <main id="main">
+    <section class="exhibit-heading"><div><h1 id="exhibit-title"></h1><p id="exhibit-description"></p></div><div class="view-facts" id="view-facts"></div></section>
+    <div class="exhibit-layout">
+      <section class="visual-area" aria-label="交互式可视化">
+        <div class="toolbar" id="toolbar"></div>
+        <div id="stage" class="stage"></div>
+        <div class="stage-caption" id="stage-caption"></div>
+      </section>
+      <aside class="inspector" id="inspector" aria-label="知识与材料详情"></aside>
+    </div>
+    <section class="reading-guide" id="reading-guide"></section>
+    <section class="knowledge-index">
+      <div class="index-heading"><h2>不用空间操作，也能探索。</h2><label>查找知识 <input id="node-search" type="search" placeholder="名称、概念或关键词" autocomplete="off"></label></div>
+      <p>下列知识按钮与画面联动，支持键盘操作。窄画布的 3D 视图只标记所选与相邻节点，避免标签拥挤；所有节点仍可点击。宽幅二维图可左右滑动。</p>
+      <div id="node-index"></div><p id="index-empty" hidden>没有匹配的知识。换个关键词或清空搜索即可。</p>
+    </section>
+    <details class="materials"><summary>材料、编码规则与使用边界</summary><div id="materials-list"></div><p>复用原方案的 24 个知识点、30 条先修关系、5 条跨域关联。知识归类、先修关系与项目映射均为人工整理建议，不是官方课程或实测能力评分。三维距离不表示语义相似度；图形中的计数不表示学习时长、学习人数或研究热度。机器学习文章包含编者补充，不能当作教师原话。</p><p>这是公开展示版：仅发布人工整理内容和交互代码，不提供教学 PDF、课程整理稿、报告截图、录音视频或论文全文。材料链接进入书目与引用边界说明；论文提供作者公开入口。页面资源由本站加载，无外部 CDN、账号、数据上传或分析追踪。本页选择、视角和实验参数只存在于内存，刷新重置；当前展项可以通过网址中的 <code>?view=</code> 分享。</p></details>
+  </main>
+  <footer><a href="../../">返回 GenWorld</a><a href="sources.html#papers">论文与可视化灵感</a><a href="knowledge-prototype.html">原有三种方案 ↗</a></footer>
+  <div class="sr-only" id="announcement" role="status" aria-live="polite"></div>
+  <noscript>请启用 JavaScript，体验九种交互可视化。无需账号，不上传个人数据。</noscript>
+</body>
+</html>
