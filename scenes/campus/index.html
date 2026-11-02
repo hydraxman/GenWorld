@@ -38,8 +38,12 @@
       </nav>
       <section id="selection" aria-live="polite">
         <h2 id="selection-name">选择建筑或地标</h2>
+        <div id="building-knowledge" hidden></div>
+        <details id="selection-model">
+          <summary>建模依据与几何信息</summary>
         <p id="selection-help">点击地图上的体块，或在上方搜索。每栋建筑都保留轮廓与编号，后续精模在原位置替换。</p>
         <dl id="selection-fields"></dl>
+        </details>
         <button id="focus" hidden>靠近选中对象</button>
         <button id="export-building" hidden>导出选中 GLB</button>
         <a id="selection-link" hidden>打开此建筑独立链接</a>
@@ -48,6 +52,7 @@
     </aside>
     <nav class="toolbar" aria-label="视图控制">
       <button id="toggle-inspector" aria-controls="sidebar" aria-expanded="true">建筑目录</button>
+      <button id="open-knowledge" aria-controls="building-knowledge" hidden>知识卡片</button>
       <button id="toggle-layers" aria-controls="layers" aria-expanded="true">图层</button>
       <button id="view-3d" class="active" aria-pressed="true">三维</button>
       <button id="view-plan" aria-pressed="false">平面</button>
