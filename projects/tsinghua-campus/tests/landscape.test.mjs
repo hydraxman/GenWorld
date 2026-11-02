@@ -7,6 +7,9 @@ import evidence from '../data/landscape-evidence.json' with {type: 'json'};
 import {landscapeEvidence} from '../scripts/landscape-evidence.mjs';
 import {createCampusModel} from '../src/model.js';
 import {applyCampusLandscape, disposeCampusLandscape} from '../src/landscape.js';
+import {prepareQingmingTextures} from '../src/qingming-reuse.js';
+
+await prepareQingmingTextures();
 
 test('sports and trees replay exactly from whitelisted frozen OSM, excluding buildings and outside school grounds', async () => {
   assert.deepEqual(await landscapeEvidence(), evidence);
@@ -29,14 +32,15 @@ test('landscape retains650 building identities with bounded finite sports batche
   assert.equal(stats.mappedTrees + stats.excludedMappedTrees, evidence.trees.length);
   assert.equal(stats.mappedTrees + stats.illustrativeTrees, stats.trees);
   assert.deepEqual(campus.buildings, originalRoots); assert.equal(campus.buildings.size, 650);
-  assert.equal(campus.layers.trees.children.length, 3);
-  assert.ok(campus.layers.trees.children.every(mesh => mesh.isInstancedMesh));
+  assert.equal(campus.layers.trees.children.length, 4);
+  assert.ok(campus.layers.trees.children.filter(mesh => mesh.isMesh).every(mesh => mesh.isInstancedMesh));
+  assert.ok(campus.layers.trees.userData.treeLOD.clusters < 60);
   assert.ok(campus.layers.sports.children.length <= 5);
   let triangles = 0;
   for (const layer of [campus.layers.trees, campus.layers.sports]) layer.traverse(object => {
     if (!object.isMesh) return;
     for (const attribute of Object.values(object.geometry.attributes)) assert.ok(attribute.array.every(Number.isFinite));
-    triangles += (object.geometry.index?.count ?? object.geometry.attributes.position.count) / 3 * (object.count ?? 1);
+    if (object.parent.visible) triangles += (object.geometry.index?.count ?? object.geometry.attributes.position.count) / 3 * (object.count ?? 1);
     if (object.count !== 0) assert.ok(new THREE.Box3().setFromObject(object).isEmpty() === false);
   });
   assert.ok(triangles < 350000, `Landscape geometry exceeds budget: ${triangles}`);
@@ -47,7 +51,8 @@ test('landscape retains650 building identities with bounded finite sports batche
   const canonical = exported.children.find(mesh => mesh.userData.campusTreeCanopy).geometry;
   let canonicalDisposals = 0;
   canonical.addEventListener('dispose', () => canonicalDisposals++);
-  const meshes = [...campus.layers.sports.children, ...campus.layers.trees.children];
+  const meshes = [];
+  for (const layer of [campus.layers.sports, campus.layers.trees]) layer.traverse(mesh => {if (mesh.isMesh) meshes.push(mesh);});
   const disposed = [];
   meshes.forEach(mesh => mesh.geometry.addEventListener('dispose', () => disposed.push(mesh)));
   disposeCampusLandscape(campus);

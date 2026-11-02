@@ -4,6 +4,7 @@ import {join, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {writeReferencePage} from './reference-pages.mjs';
 import references from '../src/reference-catalog.js';
+import {verifyPackedQingming} from './pack-qingming.mjs';
 
 const root = resolve(import.meta.dirname, '..');
 const args = process.argv.slice(2);
@@ -11,6 +12,7 @@ if (args.some(arg => arg !== '--references') || args.length > 1) {
   throw new Error('Use: node scripts\\build.mjs [--references]');
 }
 const includeImages = args.includes('--references');
+await verifyPackedQingming();
 await mkdir(join(root, 'assets'), {recursive: true});
 await mkdir(join(root, 'output'), {recursive: true});
 await build({

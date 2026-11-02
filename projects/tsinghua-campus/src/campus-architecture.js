@@ -566,18 +566,28 @@ export function applyCampusArchitecture(campus, data, {deferNear = false} = {}) 
   };
   campus.group.userData.proceduralBuildingIds = ids;
   campus.group.userData.levelOfDetail = 'All frozen footprints have architectural geometry; photo-informed models and unverified procedural envelopes are separate stages, not a fidelity score.';
-  campus.updateArchitectureLOD = (camera, details = true) => {
+  const frustum = new THREE.Frustum(), projection = new THREE.Matrix4();
+  campus.updateArchitectureLOD = (camera, details = true, {maxBuilds = Infinity} = {}) => {
     if (typeof details !== 'boolean') throw new Error('Architecture detail visibility must be a boolean.');
+    if (!(maxBuilds >= 0)) throw new RangeError('Architecture build budget must be non-negative.');
     camera.updateWorldMatrix(true, false);
     const eye = camera.getWorldPosition(new THREE.Vector3());
+    frustum.setFromProjectionMatrix(projection.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse));
+    let built = 0;
+    campus.architecturePending = false;
     for (const batch of state.far.batches) batch.visibleCount = 0;
     for (const id of ids) {
       const root = campus.buildings.get(id);
       let detail = root.children.find(child => child.userData.architectureLOD);
       if (!detail) continue;
       const center = new THREE.Vector3(...detail.userData.localSphere.center).add(root.position);
-      const near = details && eye.distanceTo(center) - detail.userData.localSphere.radius < detail.userData.nearDistance;
-      if (near && root.visible && campus.layers.building.visible) detail = campus.ensureArchitectureDetail(id);
+      let near = details && eye.distanceTo(center) - detail.userData.localSphere.radius < detail.userData.nearDistance;
+      if (near && detail.userData.architectureNearPending && root.visible && campus.layers.building.visible &&
+          frustum.intersectsSphere(new THREE.Sphere(center, detail.userData.localSphere.radius))) {
+        if (built < maxBuilds) {detail = campus.ensureArchitectureDetail(id); built++;}
+        else campus.architecturePending = true;
+      }
+      near &&= !detail.userData.architectureNearPending;
       detail.children.find(child => child.userData.architectureNear).visible = near;
       detail.children.find(child => child.userData.architectureFar).visible = !near;
       for (const {batch, instance} of state.far.instances.get(id)) {
@@ -624,4 +634,5 @@ export function disposeCampusArchitecture(campus) {
   delete campus.updateArchitectureLOD;
   delete campus.ensureArchitectureDetail;
   delete campus.architectureRevision;
+  delete campus.architecturePending;
 }

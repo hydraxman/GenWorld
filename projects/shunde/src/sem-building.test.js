@@ -5,6 +5,8 @@ import campus from '../docs/campus-context.json' with {type: 'json'};
 import {createSEMBuilding, SEM_WAY, SEM_HEIGHT, BRIDGE_Z, BRIDGE_END_Z} from './sem-building.js';
 import {FOOTPRINT} from './footprint.js';
 import {createShundeModel} from './model.js';
+import {SEM_WALL_TEXT} from './sem-lettering.js';
+import lettering from './sem-lettering.json' with {type: 'json'};
 
 const source = campus.buildings.find(b => b.id === SEM_WAY);
 test('photo-informed red SEM retains the source footprint and has actual arched apertures', () => {
@@ -55,10 +57,79 @@ test('north entrance is transparent with an actual recessed 17 m arch opening, n
     meshes++; triangles += (o.geometry.index?.count ?? o.geometry.attributes.position.count) / 3;
     for (const attribute of Object.values(o.geometry.attributes)) assert.ok(attribute.array.every(Number.isFinite));
   });
-  assert.ok(meshes < 100 && triangles < 60000);
+  const sign = model.group.getObjectByName('Jianhua north red wall bilingual raised lettering');
+  let signTriangles = 0;
+  sign.traverse(o => {if (o.isMesh) signTriangles += o.geometry.index.count / 3;});
+  assert.ok(meshes < 100 && triangles - signTriangles < 60000 && signTriangles < 20000);
   const concavity = new THREE.Raycaster(new THREE.Vector3(-150, 40, 40), new THREE.Vector3(0, -1, 0));
   assert.equal(concavity.intersectObject(model.architecture, true).length, 0, 'No slab fills the frozen L-shaped courtyard');
 });
+
+test('north red wall carries the four photo-observed lines as outward-facing raised geometry', () => {
+  const model = createSEMBuilding(THREE, source, {textured: false});
+  const sign = model.group.getObjectByName('Jianhua north red wall bilingual raised lettering');
+  assert.deepEqual(SEM_WALL_TEXT, ['清华大学', '经济管理学院', 'SCHOOL OF ECONOMICS AND MANAGEMENT', 'TSINGHUA UNIVERSITY']);
+  assert.equal(sign.parent.userData.opaqueNorthReturn, true);
+  assert.equal(sign.userData.fontLicense, 'SIL OFL 1.1');
+  assert.match(sign.userData.limitations, /not original calligraphy/);
+  assert.deepEqual(sign.children.map(line => line.userData.text), SEM_WALL_TEXT);
+  const [a, b] = sign.parent.userData.sourceEdge, width = Math.hypot(b[0] - a[0], b[1] - a[1]);
+  const normal = new THREE.Vector3(0, 0, 1).transformDirection(sign.matrixWorld);
+  assert.ok(normal.x > .99, 'Read outward from the corrected red side wall, not the north curtain glass');
+  for (const [index, line] of sign.children.entries()) {
+    assert.ok(line.userData.outlineCount > 5 && line.userData.counterCount > 0);
+    if (index) assert.ok(line.position.y < sign.children[index - 1].position.y);
+    const mesh = line.children[0], geometry = mesh.geometry;
+    geometry.computeBoundingBox();
+    const box = geometry.boundingBox;
+    assert.ok(box.min.x + sign.position.x > .7 && box.max.x + sign.position.x < width - .7);
+    assert.ok(box.min.y + line.position.y + sign.position.y > 8);
+    assert.ok(box.max.y + line.position.y + sign.position.y < 14);
+    assert.ok(Math.abs(box.min.z) < 1e-6 && Math.abs(box.max.z - .065) < 1e-6);
+    assert.ok(sign.position.z > .4 && sign.position.z + box.max.z < .5);
+    assert.equal(mesh.material.map, null, 'No photograph or runtime font texture is needed');
+    assert.ok(mesh.material.metalness >= .6);
+  }
+  assert.equal(lettering.sourceSHA256, '39ad71264b588165b469e35e6afb162a378dacd1f95348160240ba9038ac3009');
+  assert.match(lettering.license, /SIL OFL/);
+  assert.match(lettering.licenseText, /SIL OPEN FONT LICENSE Version 1.1/);
+  assert.match(lettering.licenseText, /DISCLAIMER/);
+  for (const character of new Set(SEM_WALL_TEXT.join(''))) assert.ok(lettering.glyphs[character]);
+});
+
+test('the north red-block setback belongs to the opaque podium, not a projecting glazed return', () => {
+  const model = createSEMBuilding(THREE, source, {textured: false});
+  model.group.traverse(o => {if (o.isMesh) o.material.side = THREE.DoubleSide;});
+  const edge = [source.points[5], source.points[6]], faces = [];
+  model.architecture.traverse(o => {
+    if (o.userData.sourceEdge?.every(p => edge.some(q => p[0] === q[0] && p[1] === q[1]))) faces.push(o);
+  });
+  assert.equal(faces.length, 1);
+  assert.equal(faces[0].userData.podium, true, 'Do not extrude the red-block step as a tall glass wing');
+  assert.equal(faces[0].children.some(mesh => /glazing|curtain/.test(mesh.material?.name)), false);
+  for (const mesh of faces[0].children.filter(mesh => /aluminum/.test(mesh.material?.name))) {
+    assert.ok(new THREE.Box3().setFromObject(mesh).max.y < .36, 'Only the low podium base may retain bronze trim');
+  }
+  const cast = (y, z) => new THREE.Raycaster(new THREE.Vector3(-116, y, z), new THREE.Vector3(-1, 0, 0), 0, 8)
+    .intersectObject(model.architecture, true);
+  for (const z of [-36, -34, -32, -30]) {
+    for (const y of [12, 18, 21]) assert.match(cast(y, z)[0]?.object.material.name || '', /terracotta/i);
+    for (const y of [24, 26, 29]) assert.equal(cast(y, z).length, 0, `Unexpected window, rail or wall above red return: ${y}/${z}`);
+  }
+  const overhead = new THREE.Raycaster(new THREE.Vector3(-120.4, 40, -34), new THREE.Vector3(0, -1, 0))
+    .intersectObject(model.architecture, true);
+  assert.ok(overhead.every(hit => hit.point.y < model.stats.podiumHeight + .32),
+    'Only the low podium roof and its coping may remain over the red step');
+  const roof = overhead.find(hit => /roof concrete/.test(hit.object.material.name));
+  assert.ok(roof && Math.abs(roof.point.y - (model.stats.podiumHeight + .26)) < 1e-4,
+    'No floating roof or soffit sliver may remain over the removed window strip');
+  for (const x of [-119, -110, -99]) for (const y of [11, 18, 29]) {
+    const hit = new THREE.Raycaster(new THREE.Vector3(x, y, -45), new THREE.Vector3(0, 0, 1), 0, 20)
+      .intersectObject(model.architecture, true)[0];
+    assert.match(hit?.object.material.name || '', /glazing/, 'Preserve the north-facing upper curtain wall');
+  }
+});
+
 test('elevated corridor physically spans the gap between source building envelopes', () => {
   const {corridor} = createSEMBuilding(THREE, source, {textured: false});
   const {start, end} = corridor.group.userData;
@@ -78,7 +149,7 @@ test('north connector is truly open from plaza to courtyard and has a continuous
   const model = createSEMBuilding(THREE, source, {textured: false});
   model.group.traverse(o => {if (o.isMesh) o.material.side = THREE.DoubleSide;});
   const opening = model.northOpening;
-  assert.equal(opening.west, -120.544);
+  assert.equal(opening.west, source.points[5][0]);
   assert.equal(opening.east, -98);
   assert.equal(opening.clearHeight, 9.76);
   for (const x of [-119, -114, -108, -102, -99]) for (const y of [.12, 1.7, 5, 9.5]) {

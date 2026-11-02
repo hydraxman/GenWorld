@@ -22,12 +22,30 @@
  * THE SOFTWARE.
  */
 import * as THREE from 'three';
-import willow from './vendor/qingming/willow.json' with {type: 'json'};
-import {encoded, size} from './vendor/qingming/micro.js';
+import willow from './vendor/qingming/runtime.json' with {type: 'json'};
 
 const bytes = text => Uint8Array.from(atob(text), character => character.charCodeAt(0));
+let textures, preparation;
+export function prepareQingmingTextures() {
+  preparation ||= Promise.all(Object.entries(willow.textures).map(async ([name, image]) => {
+    const stream = new Blob([bytes(image.deflate)]).stream().pipeThrough(new DecompressionStream('deflate'));
+    const data = new Uint8Array(await new Response(stream).arrayBuffer());
+    if (data.length !== image.byteLength || data.length !== image.width * image.height * 4) {
+      throw new Error(`Qingming ${name} texture has invalid decoded dimensions.`);
+    }
+    return [name, data];
+  })).then(entries => {textures = Object.fromEntries(entries);});
+  return preparation;
+}
+
+function pixels(name) {
+  if (!textures) throw new Error('Await prepareQingmingTextures() before constructing campus water or willow assets.');
+  return textures[name];
+}
+
 export function createQingmingMicroTexture() {
-  const texture = new THREE.DataTexture(bytes(encoded), size, size, THREE.RGBAFormat);
+  const {width, height} = willow.textures.micro;
+  const texture = new THREE.DataTexture(pixels('micro'), width, height, THREE.RGBAFormat);
   texture.name = 'Qingming original river micro-normal texture';
   texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
   texture.minFilter = THREE.LinearMipmapLinearFilter; texture.magFilter = THREE.LinearFilter;
@@ -52,8 +70,8 @@ vec3 qingmingWaves(vec2 p, float time) {
 }`;
 
 export function createQingmingWillow() {
-  const {texture: image} = willow;
-  const texture = new THREE.DataTexture(bytes(image.rgba), image.width, image.height, THREE.RGBAFormat);
+  const image = willow.textures.willow;
+  const texture = new THREE.DataTexture(pixels('willow'), image.width, image.height, THREE.RGBAFormat);
   texture.name = 'Qingming original baked willow leaf clusters'; texture.colorSpace = THREE.SRGBColorSpace;
   texture.generateMipmaps = true; texture.minFilter = THREE.LinearMipmapLinearFilter;
   texture.magFilter = THREE.LinearFilter; texture.anisotropy = 4; texture.needsUpdate = true;

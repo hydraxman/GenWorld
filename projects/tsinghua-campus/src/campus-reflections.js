@@ -6,6 +6,8 @@ import {campusGlass, installCourtyardSurfaces} from './courtyard-surfaces.js';
 
 export function installCampusReflections(renderer, scene, campus, {compact = false, skyTexture} = {}) {
   if (!skyTexture?.isTexture) throw new Error('Campus water requires the shared daylight sky texture.');
+  const sun = scene.children.find(object => object.isDirectionalLight);
+  if (!sun) throw new Error('Campus water requires the shared daylight sun.');
   const finishes = installCourtyardSurfaces(campus), resolution = compact ? 256 : 512;
   const waterMeshes = campus.layers.water.children.filter(mesh => mesh.isMesh);
   if (waterMeshes.length !== 1) throw new Error('Campus reflection expects the single merged frozen water surface.');
@@ -41,6 +43,7 @@ export function installCampusReflections(renderer, scene, campus, {compact = fal
   let enabled = true, revision = -1, lastWaterKey = '', lastWater = -Infinity;
   let lastGlassKey = '', lastGlass = -Infinity, wakeAt = Infinity;
   const viewProjection = new THREE.Matrix4(), frustum = new THREE.Frustum();
+  const reflectionCamera = new THREE.PerspectiveCamera();
   function refresh() {
     if (revision === campus.architectureRevision) return;
     finishes.refresh(); glass.refresh(); revision = campus.architectureRevision;
@@ -58,6 +61,9 @@ export function installCampusReflections(renderer, scene, campus, {compact = fal
   }
   function update(camera, close, force = false) {
     if (scene.overrideMaterial) return;
+    water.material.uniforms.campusSunDirection.value.copy(sun.position).sub(sun.target.position).normalize();
+    water.material.uniforms.campusSunColor.value.copy(sun.color);
+    water.material.uniforms.campusSunIntensity.value = sun.intensity;
     const now = performance.now();
     close = close && enabled;
     wakeAt = Infinity;
@@ -96,7 +102,11 @@ export function installCampusReflections(renderer, scene, campus, {compact = fal
     try {
       renderer.info.autoReset = false; renderer.shadowMap.enabled = false;
       renderer.shadowMap.autoUpdate = false; renderer.shadowMap.needsUpdate = false;
-      capture.call(reflector, renderer, scene, camera);
+      reflectionCamera.copy(camera, false);
+      // Reflector reverses the horizontal camera basis; mirror the off-axis principal point too.
+      reflectionCamera.projectionMatrix.elements[8] *= -1;
+      reflectionCamera.projectionMatrixInverse.copy(reflectionCamera.projectionMatrix).invert();
+      capture.call(reflector, renderer, scene, reflectionCamera);
       water.material.uniforms.reflectionEnabled.value = 1;
       stats.waterCaptures++; stats.waterPasses++; stats.waterLastDrawCalls = renderer.info.render.calls - oldCalls;
       lastWater = now; lastWaterKey = key;

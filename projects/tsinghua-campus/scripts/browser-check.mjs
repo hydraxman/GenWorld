@@ -105,6 +105,7 @@ async function snapshot(frame) {
 }
 
 export async function measureCampusAppearance(frame, site, apartmentNumber = null, featureId = null) {
+  await frame.waitForFunction(() => !window.campusApp.campus.architecturePending);
   return frame.evaluate(({site, apartmentNumber, featureId}) => {
     const app = window.campusApp, {camera} = app.inspection();
     const roots = [...app.campus.buildings.values()];
@@ -127,7 +128,8 @@ export async function measureCampusAppearance(frame, site, apartmentNumber = nul
       const x = p.windowCenters[8], y = p.windowHead - (p.windowHead - p.windowTip) * .2;
       glazing = [x, y, -1.04]; masonry = [(x + p.windowCenters[9]) / 2, y, .02];
     } else throw new Error(`No facade meter for ${site}`);
-    app.render();
+    // Sample completed near geometry and its current probe, not the throttled previous view.
+    app.render(true);
     const canvas = document.getElementById('scene'), copy = document.createElement('canvas');
     copy.width = canvas.width; copy.height = canvas.height;
     const context = copy.getContext('2d', {willReadFrequently: true});
@@ -258,7 +260,11 @@ export async function checkCampusInspection({page, frame, screenshots}) {
     assert.equal(await frame.$eval('#toggle-inspector', element => element.getAttribute('aria-expanded')), 'true');
     await frame.$eval('#search', element => { element.value = '大礼堂'; element.dispatchEvent(new Event('input')); });
     await frame.click('#results button');
-    assert.equal((await snapshot(frame)).inspector, false, 'Selecting a result should dismiss the mobile inspector');
+    assert.equal((await snapshot(frame)).inspector, true, 'Selecting a result should reveal its sourced knowledge card');
+    assert.match(await frame.$eval('#building-knowledge', element => element.textContent), /校史与建筑.*1920年/s);
+    assert.ok(await frame.$$eval('#building-knowledge .knowledge-citations a', links => links.length > 0));
+    await frame.click('#toggle-inspector');
+    assert.equal((await snapshot(frame)).inspector, false, 'The knowledge panel must remain dismissible');
     await frame.click('#toggle-layers');
     await frame.click('[data-layer="water"]');
     assert.equal(await frame.evaluate(() => window.campusApp.campus.layers.water.visible), false);
@@ -329,6 +335,9 @@ export async function checkCampusExpansion({page, frame, screenshots}) {
     }, source.name);
     assert.equal(await frame.$$eval('#results button', buttons => buttons.length), 1);
     await frame.click('#results button');
+    assert.equal((await snapshot(frame)).inspector, true);
+    assert.equal(await frame.$eval('#building-knowledge', element => element.hidden), false);
+    await frame.click('#toggle-inspector');
     assert.equal((await snapshot(frame)).inspector, false);
     assert.equal((await measureCampusAppearance(frame, source.referenceSite)).rendering.contactShadows, false,
       'Mobile must default to the lighter raster path');

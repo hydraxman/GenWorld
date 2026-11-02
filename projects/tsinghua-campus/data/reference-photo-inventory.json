@@ -1,0 +1,4013 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-02",
+  "pathBase": "projects/tsinghua-campus",
+  "scope": "references/下全部JPEG/PNG，包括未接入模型的研究照片与两张审阅衍生图；不包括字体、XML、自动生成截图和output/图库重复副本。",
+  "metadataFiles": [
+    "reference-catalog.json",
+    "data/appearance-profiles.json",
+    "data/biology-hall-sources.json",
+    "data/chemistry-hall-references.json",
+    "data/modern-building-sources.json",
+    "data/science-hall-references.json",
+    "data/tongfang-references.json",
+    "data/gongzi-source.json",
+    "data/zijing-evidence.json",
+    "output/appearance-classroom-downloads.json",
+    "output/appearance-extra-downloads.json",
+    "output/appearance-research-downloads.json"
+  ],
+  "siblingReferences": [
+    {
+      "path": "../shunde/references/sohu_old_2.jpg",
+      "metadata": "../shunde/docs/courtyard/photo-correspondence.json",
+      "status": "本机目录不存在；对应同SHA256照片已列为references/shunde-courtyard-oblique.jpg，未新增缺失副本。"
+    },
+    {
+      "path": null,
+      "referenceId": "user_front",
+      "metadata": "../shunde/docs/courtyard/photo-correspondence.json",
+      "status": "metadata只有user_front标识及哈希，未记录原文件名；本机邻项目references目录不存在，不臆造本地路径或来源。"
+    }
+  ],
+  "photos": [
+    {
+      "id": "appearance-arts-academy-official",
+      "localPath": "references/appearance-arts-academy-official.jpg",
+      "sha256": "9016de84b32f28e93e0b3e533856479a3b5eb17249256e781450668414565458",
+      "bytes": 915490,
+      "width": 1920,
+      "height": 900,
+      "referenceSites": [],
+      "siteName": "美术学院",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/3",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/F/88/B7/BD2CF43BDEABF3E8770B3597E82_3C826603_DF822.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-arts-academy-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-class-1115-official",
+      "localPath": "references/appearance-class-1115-official.jpg",
+      "sha256": "f483007591f60923b8ff70f6bf88c11c911433775a9e2d7918a7d5cdcfefe281",
+      "bytes": 453524,
+      "width": 1920,
+      "height": 1281,
+      "referenceSites": [
+        "appearance-teaching-2"
+      ],
+      "siteName": "第二教学楼 / 第二教学楼全景浏览",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "data/appearance-profiles.json",
+          "pointer": "/sites/1/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1115.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/1511255831l1.jpg",
+          "license": "清华大学及院系官方配图，未明确摄影者或开放再发布许可；仅本地参照，不作纹理、在线再发布或去水印。程序表面不含照片像素。",
+          "view": "入口正面：红砖、浅石三联拱、双层通高柱廊与灰色檐口",
+          "recordedPath": "references/appearance-class-1115-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-extra-downloads.json",
+          "pointer": "/6",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1115.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/1511255831l1.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1115-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-class-1116-official",
+      "localPath": "references/appearance-class-1116-official.jpg",
+      "sha256": "1831e5e1795fd17e0274dc8062d2daa92df2830715c9079cbe785475fa264ea0",
+      "bytes": 463319,
+      "width": 1920,
+      "height": 1281,
+      "referenceSites": [
+        "appearance-law-library"
+      ],
+      "siteName": "法律图书馆／廖凯原楼 / 法律图书馆地下一层全景浏览",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "data/appearance-profiles.json",
+          "pointer": "/sites/7/images/1",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1116.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/15112527f3vl.jpg",
+          "license": "清华大学及院系官方配图，未明确摄影者或开放再发布许可；仅本地参照，不作纹理、在线再发布或去水印。程序表面不含照片像素。",
+          "view": "导览虽为地下一层，封面是完整外立面；不推算地下结构",
+          "recordedPath": "references/appearance-class-1116-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-extra-downloads.json",
+          "pointer": "/5",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1116.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/15112527f3vl.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1116-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-class-1117-official",
+      "localPath": "references/appearance-class-1117-official.jpg",
+      "sha256": "ea770544050924436e51a13395d28af6f42d48201cf851476c31e40a41e8dca8",
+      "bytes": 459014,
+      "width": 1920,
+      "height": 1281,
+      "referenceSites": [],
+      "siteName": "清华学堂全景浏览",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "output/appearance-extra-downloads.json",
+          "pointer": "/4",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1117.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/15112327oanu.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1117-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-class-1118-official",
+      "localPath": "references/appearance-class-1118-official.jpg",
+      "sha256": "6f71380fc444e618e70a62aa2694310dd477710379c4d812116e6cdde79affed",
+      "bytes": 365857,
+      "width": 1920,
+      "height": 1281,
+      "referenceSites": [
+        "appearance-teaching-4"
+      ],
+      "siteName": "第四教学楼 / 第四教学楼全景浏览",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "data/appearance-profiles.json",
+          "pointer": "/sites/4/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1118.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/15112240nal2.jpg",
+          "license": "清华大学及院系官方配图，未明确摄影者或开放再发布许可；仅本地参照，不作纹理、在线再发布或去水印。程序表面不含照片像素。",
+          "view": "端部入口、上方横窗和左侧长翼；有树木遮挡",
+          "recordedPath": "references/appearance-class-1118-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-extra-downloads.json",
+          "pointer": "/3",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1118.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/15112240nal2.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1118-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-class-1119-official",
+      "localPath": "references/appearance-class-1119-official.jpg",
+      "sha256": "6b1f29d6a3e9ca03daca582d028443be706d0257fc7c6c62395297dd62380da2",
+      "bytes": 379611,
+      "width": 1920,
+      "height": 1281,
+      "referenceSites": [],
+      "siteName": "西阶梯教室全景浏览",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "output/appearance-extra-downloads.json",
+          "pointer": "/2",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1119.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/15112147caeb.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1119-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-class-1120-official",
+      "localPath": "references/appearance-class-1120-official.jpg",
+      "sha256": "5a48cc3260e1deedb73bb995a3009306973a603ccb694285dc459214f90c3e0d",
+      "bytes": 308574,
+      "width": 1920,
+      "height": 1281,
+      "referenceSites": [
+        "appearance-architecture-lecture"
+      ],
+      "siteName": "建筑馆报告厅 / 建筑馆报告厅全景浏览",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "data/appearance-profiles.json",
+          "pointer": "/sites/14/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1120.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/15112048mwo3.jpg",
+          "license": "清华大学及院系官方配图，未明确摄影者或开放再发布许可；仅本地参照，不作纹理、在线再发布或去水印。程序表面不含照片像素。",
+          "view": "报告厅外景：浅粉灰石框、整面玻璃与屋顶薄片，不把左侧邻馆并入",
+          "recordedPath": "references/appearance-class-1120-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-extra-downloads.json",
+          "pointer": "/1",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1120.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/15112048mwo3.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1120-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-class-1121-official",
+      "localPath": "references/appearance-class-1121-official.jpg",
+      "sha256": "ae3f14e61798bc620ca4b4f5772a9c79dce252a00e3008e96a37532502901cd0",
+      "bytes": 373887,
+      "width": 1920,
+      "height": 1281,
+      "referenceSites": [],
+      "siteName": "东阶梯教室全景浏览",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "output/appearance-extra-downloads.json",
+          "pointer": "/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1121.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/15112022ecz7.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1121-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-class-1122-official",
+      "localPath": "references/appearance-class-1122-official.jpg",
+      "sha256": "5fd7f682650356cf76d9e0e7258b93ab7ce9ad1eccaf8fadb9a00b02ed9bc947",
+      "bytes": 80552,
+      "width": 574,
+      "height": 432,
+      "referenceSites": [
+        "appearance-teaching-1"
+      ],
+      "siteName": "第一教学楼",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "data/appearance-profiles.json",
+          "pointer": "/sites/0/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1122.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/17102249arr3.jpg",
+          "license": "清华大学及院系官方配图，未明确摄影者或开放再发布许可；仅本地参照，不作纹理、在线再发布或去水印。程序表面不含照片像素。",
+          "view": "正面低机位，浅色墙身、灰勒脚与深色窗框；树木遮挡，屋面不可辨",
+          "recordedPath": "references/appearance-class-1122-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-classroom-downloads.json",
+          "pointer": "/15",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1122.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/17102249arr3.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1122-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/27",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1122.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/17102249arr3.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1122-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-class-1123-official",
+      "localPath": "references/appearance-class-1123-official.jpg",
+      "sha256": "77238d0dcb6a108b5ad3df6739f86fb9aa8336d9efa61a6d38929bff39813ba6",
+      "bytes": 712624,
+      "width": 1920,
+      "height": 1281,
+      "referenceSites": [],
+      "siteName": "旧经管报告厅",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "output/appearance-classroom-downloads.json",
+          "pointer": "/14",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1123.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/17132005mqv8.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1123-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/26",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1123.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/17132005mqv8.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1123-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-class-1124-official",
+      "localPath": "references/appearance-class-1124-official.jpg",
+      "sha256": "fc941fa1b55fa35f019055dcdb558b5fb447ee9e74cb7bc39b5f43cb61b88a31",
+      "bytes": 541598,
+      "width": 1920,
+      "height": 1281,
+      "referenceSites": [
+        "appearance-old-hydraulic"
+      ],
+      "siteName": "旧水利馆",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "data/appearance-profiles.json",
+          "pointer": "/sites/11/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1124.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/17132554zipe.jpg",
+          "license": "清华大学及院系官方配图，未明确摄影者或开放再发布许可；仅本地参照，不作纹理、在线再发布或去水印。程序表面不含照片像素。",
+          "view": "院内斜视：灰褐砖、山墙、石门额与被藤蔓遮挡的侧翼",
+          "recordedPath": "references/appearance-class-1124-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-classroom-downloads.json",
+          "pointer": "/13",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1124.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/17132554zipe.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1124-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/25",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1124.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/17132554zipe.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1124-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-class-1125-official",
+      "localPath": "references/appearance-class-1125-official.jpg",
+      "sha256": "0508f68b64f57799429bde35af67bb15f146dc81794d7277c6c656e6f1b08dff",
+      "bytes": 576077,
+      "width": 1920,
+      "height": 1281,
+      "referenceSites": [
+        "appearance-new-hydraulic"
+      ],
+      "siteName": "新水利馆",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "data/appearance-profiles.json",
+          "pointer": "/sites/10/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1125.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/17133002xdnl.jpg",
+          "license": "清华大学及院系官方配图，未明确摄影者或开放再发布许可；仅本地参照，不作纹理、在线再发布或去水印。程序表面不含照片像素。",
+          "view": "正面入口与四层窗列：红砖、灰石竖带、三联拱和深檐",
+          "recordedPath": "references/appearance-class-1125-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-classroom-downloads.json",
+          "pointer": "/12",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1125.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/17133002xdnl.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1125-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/24",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1125.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/17133002xdnl.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1125-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-class-1126-official",
+      "localPath": "references/appearance-class-1126-official.jpg",
+      "sha256": "206e65e1f0fe1e357c4418dfe924589b97da0d176873231dd731adb366ba7082",
+      "bytes": 542122,
+      "width": 1920,
+      "height": 1281,
+      "referenceSites": [
+        "appearance-mingli"
+      ],
+      "siteName": "明理楼／法学院 / 明理楼",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "data/appearance-profiles.json",
+          "pointer": "/sites/9/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1126.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/17135453t4fg.jpg",
+          "license": "清华大学及院系官方配图，未明确摄影者或开放再发布许可；仅本地参照，不作纹理、在线再发布或去水印。程序表面不含照片像素。",
+          "view": "正面远景：浅灰立面、入口柱廊、组合窗和顶部构架",
+          "recordedPath": "references/appearance-class-1126-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-classroom-downloads.json",
+          "pointer": "/11",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1126.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/17135453t4fg.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1126-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/23",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1126.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/17135453t4fg.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1126-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-class-1127-official",
+      "localPath": "references/appearance-class-1127-official.jpg",
+      "sha256": "496af0190b5eb694bf91dc1ade588be6321742439c2f98c8513e7dbbc2e6bbc0",
+      "bytes": 1218363,
+      "width": 1706,
+      "height": 1279,
+      "referenceSites": [],
+      "siteName": "逸夫技术科学楼",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "output/appearance-classroom-downloads.json",
+          "pointer": "/10",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1127.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/08104332uubc.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1127-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/22",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1127.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/08104332uubc.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1127-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-class-1133-official",
+      "localPath": "references/appearance-class-1133-official.jpg",
+      "sha256": "658e928f0af920c8a8a86f5aec24bd5eb956cd9dbd39b23f29e1303ad9975992",
+      "bytes": 599611,
+      "width": 1920,
+      "height": 1281,
+      "referenceSites": [
+        "shunde-building"
+      ],
+      "siteName": "舜德楼",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/12/images/0",
+          "match": "byte-identical-alias",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1133.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/23095758a7g3.jpg",
+          "license": "清华官方照片，未查得自由再发布许可；仅本地参考。",
+          "view": "北侧正门近景",
+          "recordedPath": "references/shunde-north-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-classroom-downloads.json",
+          "pointer": "/9",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1133.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/23095758a7g3.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1133-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/21",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1133.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/23095758a7g3.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1133-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-class-1136-official",
+      "localPath": "references/appearance-class-1136-official.jpg",
+      "sha256": "a2c9c055bb1ff0e7778937d6cdf67569c47d73b2f317c83cc5c5215a5caebf08",
+      "bytes": 276540,
+      "width": 1200,
+      "height": 801,
+      "referenceSites": [],
+      "siteName": "建华楼全景浏览",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "output/appearance-classroom-downloads.json",
+          "pointer": "/8",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1136.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202503/27161159omm4.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1136-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/20",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1136.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202503/27161159omm4.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1136-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-class-1137-official",
+      "localPath": "references/appearance-class-1137-official.jpg",
+      "sha256": "af4f466fa46ae9b08734487a5b01f2452b133bdec84aa5a6967b4c1903d157b6",
+      "bytes": 405445,
+      "width": 1200,
+      "height": 771,
+      "referenceSites": [
+        "appearance-teaching-6"
+      ],
+      "siteName": "第六教学楼组团 / 第六教学楼C座 / 第六教学楼B座 / 第六教学楼A座",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "data/appearance-profiles.json",
+          "pointer": "/sites/6/images/1",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1137.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202504/14110640xhsk.jpg",
+          "license": "清华大学及院系官方配图，未明确摄影者或开放再发布许可；仅本地参照，不作纹理、在线再发布或去水印。程序表面不含照片像素。",
+          "view": "多楼项共用的六教外景：陶红横带、蓝灰玻璃和转角；不认作逐翼照片",
+          "recordedPath": "references/appearance-class-1137-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-classroom-downloads.json",
+          "pointer": "/0",
+          "match": "byte-identical-alias",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1166.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/181159007g71.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1166-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-classroom-downloads.json",
+          "pointer": "/2",
+          "match": "byte-identical-alias",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1164.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/080940365xdt.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1164-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-classroom-downloads.json",
+          "pointer": "/7",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1137.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202504/14110640xhsk.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1137-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/12",
+          "match": "byte-identical-alias",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1166.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/181159007g71.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1166-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/14",
+          "match": "byte-identical-alias",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1164.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/080940365xdt.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1164-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/19",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1137.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202504/14110640xhsk.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1137-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-class-1157-official",
+      "localPath": "references/appearance-class-1157-official.jpg",
+      "sha256": "f0fd85f581123ba7b074ef368a29bb6e976135c8963be966fbeec5de20e770b0",
+      "bytes": 240137,
+      "width": 1200,
+      "height": 800,
+      "referenceSites": [
+        "appearance-teaching-5"
+      ],
+      "siteName": "第五教学楼 / 第五教学楼全景浏览",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "data/appearance-profiles.json",
+          "pointer": "/sites/5/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1157.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/012001390upe.jpg",
+          "license": "清华大学及院系官方配图，未明确摄影者或开放再发布许可；仅本地参照，不作纹理、在线再发布或去水印。程序表面不含照片像素。",
+          "view": "入口近景：赭黄砖、白色顶边、凸窗和浅色雨棚",
+          "recordedPath": "references/appearance-class-1157-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-classroom-downloads.json",
+          "pointer": "/6",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1157.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/012001390upe.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1157-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/18",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1157.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/012001390upe.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1157-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-class-1161-official",
+      "localPath": "references/appearance-class-1161-official.png",
+      "sha256": "2efe4e0763ea53c735327e07224d392ac0c1e7cf80d5e6bc3421b034e699538e",
+      "bytes": 1784270,
+      "width": 1686,
+      "height": 971,
+      "referenceSites": [],
+      "siteName": "自强楼全景浏览",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "output/appearance-classroom-downloads.json",
+          "pointer": "/5",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1161.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/08161403mwmd.png",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1161-official.png"
+        },
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/17",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1161.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/08161403mwmd.png",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1161-official.png"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-class-1162-official",
+      "localPath": "references/appearance-class-1162-official.png",
+      "sha256": "56c2003e1a6302fd2de7adc0a45e9a0e5ef5bd92c5a915a0c6e572d3400621b4",
+      "bytes": 1173504,
+      "width": 1425,
+      "height": 569,
+      "referenceSites": [],
+      "siteName": "第三教学楼一段全景浏览",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "output/appearance-classroom-downloads.json",
+          "pointer": "/4",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1162.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/06191950nexp.png",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1162-official.png"
+        },
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/16",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1162.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/06191950nexp.png",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1162-official.png"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-class-1163-official",
+      "localPath": "references/appearance-class-1163-official.png",
+      "sha256": "ab02276f5a83d19a6c29339b562bbb8b57866536c3a5690dc2f7cec8be943efe",
+      "bytes": 2053894,
+      "width": 1808,
+      "height": 835,
+      "referenceSites": [
+        "appearance-teaching-3-3"
+      ],
+      "siteName": "第三教学楼三段 / 第三教学楼三段全景浏览",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "data/appearance-profiles.json",
+          "pointer": "/sites/3/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1163.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/05155200blxg.png",
+          "license": "清华大学及院系官方配图，未明确摄影者或开放再发布许可；仅本地参照，不作纹理、在线再发布或去水印。程序表面不含照片像素。",
+          "view": "入口与上方横窗、方柱及平台；不是完整立面",
+          "recordedPath": "references/appearance-class-1163-official.png"
+        },
+        {
+          "metadataFile": "output/appearance-classroom-downloads.json",
+          "pointer": "/3",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1163.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/05155200blxg.png",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1163-official.png"
+        },
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/15",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1163.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/05155200blxg.png",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1163-official.png"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-class-1164-official",
+      "localPath": "references/appearance-class-1164-official.jpg",
+      "sha256": "af4f466fa46ae9b08734487a5b01f2452b133bdec84aa5a6967b4c1903d157b6",
+      "bytes": 405445,
+      "width": 1200,
+      "height": 771,
+      "referenceSites": [
+        "appearance-teaching-6"
+      ],
+      "siteName": "第六教学楼组团 / 第六教学楼C座 / 第六教学楼B座 / 第六教学楼A座",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "data/appearance-profiles.json",
+          "pointer": "/sites/6/images/1",
+          "match": "byte-identical-alias",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1137.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202504/14110640xhsk.jpg",
+          "license": "清华大学及院系官方配图，未明确摄影者或开放再发布许可；仅本地参照，不作纹理、在线再发布或去水印。程序表面不含照片像素。",
+          "view": "多楼项共用的六教外景：陶红横带、蓝灰玻璃和转角；不认作逐翼照片",
+          "recordedPath": "references/appearance-class-1137-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-classroom-downloads.json",
+          "pointer": "/0",
+          "match": "byte-identical-alias",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1166.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/181159007g71.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1166-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-classroom-downloads.json",
+          "pointer": "/2",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1164.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/080940365xdt.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1164-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-classroom-downloads.json",
+          "pointer": "/7",
+          "match": "byte-identical-alias",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1137.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202504/14110640xhsk.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1137-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/12",
+          "match": "byte-identical-alias",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1166.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/181159007g71.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1166-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/14",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1164.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/080940365xdt.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1164-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/19",
+          "match": "byte-identical-alias",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1137.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202504/14110640xhsk.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1137-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-class-1165-official",
+      "localPath": "references/appearance-class-1165-official.png",
+      "sha256": "ff5947bca3503df4bd49df7c602dc2c655b5e1e8548ff22b4b931921585e451f",
+      "bytes": 1174013,
+      "width": 1425,
+      "height": 569,
+      "referenceSites": [
+        "appearance-teaching-3-12"
+      ],
+      "siteName": "第三教学楼一、二段 / 第三教学楼二段全景浏览",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "data/appearance-profiles.json",
+          "pointer": "/sites/2/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1165.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/171042175wky.png",
+          "license": "清华大学及院系官方配图，未明确摄影者或开放再发布许可；仅本地参照，不作纹理、在线再发布或去水印。程序表面不含照片像素。",
+          "view": "二段入口裁切，仅局部门廊和台阶，不证明全楼颜色或楼层",
+          "recordedPath": "references/appearance-class-1165-official.png"
+        },
+        {
+          "metadataFile": "output/appearance-classroom-downloads.json",
+          "pointer": "/1",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1165.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/171042175wky.png",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1165-official.png"
+        },
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/13",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1165.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/171042175wky.png",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1165-official.png"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-class-1166-official",
+      "localPath": "references/appearance-class-1166-official.jpg",
+      "sha256": "af4f466fa46ae9b08734487a5b01f2452b133bdec84aa5a6967b4c1903d157b6",
+      "bytes": 405445,
+      "width": 1200,
+      "height": 771,
+      "referenceSites": [
+        "appearance-teaching-6"
+      ],
+      "siteName": "第六教学楼组团 / 第六教学楼C座 / 第六教学楼B座 / 第六教学楼A座",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "data/appearance-profiles.json",
+          "pointer": "/sites/6/images/1",
+          "match": "byte-identical-alias",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1137.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202504/14110640xhsk.jpg",
+          "license": "清华大学及院系官方配图，未明确摄影者或开放再发布许可；仅本地参照，不作纹理、在线再发布或去水印。程序表面不含照片像素。",
+          "view": "多楼项共用的六教外景：陶红横带、蓝灰玻璃和转角；不认作逐翼照片",
+          "recordedPath": "references/appearance-class-1137-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-classroom-downloads.json",
+          "pointer": "/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1166.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/181159007g71.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1166-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-classroom-downloads.json",
+          "pointer": "/2",
+          "match": "byte-identical-alias",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1164.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/080940365xdt.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1164-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-classroom-downloads.json",
+          "pointer": "/7",
+          "match": "byte-identical-alias",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1137.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202504/14110640xhsk.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1137-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/12",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1166.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/181159007g71.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1166-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/14",
+          "match": "byte-identical-alias",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1164.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202509/080940365xdt.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1164-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/19",
+          "match": "byte-identical-alias",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1137.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202504/14110640xhsk.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1137-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-guest-houses-official",
+      "localPath": "references/appearance-guest-houses-official.jpg",
+      "sha256": "c626d717506f51603423dd6a8a6b64023ea759bbf9408c132d69fb439503790f",
+      "bytes": 2097590,
+      "width": 1920,
+      "height": 900,
+      "referenceSites": [],
+      "siteName": "甲所、丙所及园林",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/4",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/8/3A/BB/92131D488776E063D599A283A37_BF51C7B0_2001B6.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-guest-houses-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-guyue-hall-official",
+      "localPath": "references/appearance-guyue-hall-official.jpg",
+      "sha256": "4dfcd21de01e4446f8eaed963c598ef0ff858f106f4ca65f8d712d10bd5588a3",
+      "bytes": 1401665,
+      "width": 1920,
+      "height": 900,
+      "referenceSites": [
+        "appearance-guyue"
+      ],
+      "siteName": "古月堂",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "data/appearance-profiles.json",
+          "pointer": "/sites/13/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/5/97/6F/584D8F3F4F3A8D802F9BE8AA707_A2D69FD8_156341.jpg",
+          "license": "清华大学及院系官方配图，未明确摄影者或开放再发布许可；仅本地参照，不作纹理、在线再发布或去水印。程序表面不含照片像素。",
+          "view": "门房近景：朱红、墨绿窗棂、灰砖与红褐瓦檐；屋脊不可见",
+          "recordedPath": "references/appearance-guyue-hall-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/8",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/5/97/6F/584D8F3F4F3A8D802F9BE8AA707_A2D69FD8_156341.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-guyue-hall-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-humanities-exterior-1-official",
+      "localPath": "references/appearance-humanities-exterior-1-official.png",
+      "sha256": "556e9f815559a210c6d5cbda6daafb61b346b03851d65f3bcc0e76f8d6ce53b2",
+      "bytes": 149049,
+      "width": 300,
+      "height": 200,
+      "referenceSites": [],
+      "siteName": "人文社科图书馆官方馆舍风貌图",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "output/appearance-extra-downloads.json",
+          "pointer": "/7",
+          "match": "path-and-hash",
+          "pageUrl": "https://lib.tsinghua.edu.cn/hs/gk/gsfm.htm",
+          "imageUrl": "https://lib.tsinghua.edu.cn/__local/E/9C/25/3E5E7F9F70831387D6432EE65FB_7076DA29_24639.png",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-humanities-exterior-1-official.png"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-humanities-exterior-2-official",
+      "localPath": "references/appearance-humanities-exterior-2-official.png",
+      "sha256": "54b3bfcd276fdcf4f51d4549cfc890951b79759a5bc6653669350a98c4596507",
+      "bytes": 157253,
+      "width": 300,
+      "height": 200,
+      "referenceSites": [],
+      "siteName": "人文社科图书馆官方馆舍风貌图",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "output/appearance-extra-downloads.json",
+          "pointer": "/8",
+          "match": "path-and-hash",
+          "pageUrl": "https://lib.tsinghua.edu.cn/hs/gk/gsfm.htm",
+          "imageUrl": "https://lib.tsinghua.edu.cn/__local/9/BC/E7/55F1E04B8ED172FFD9D64BF5FA8_E79D5433_26645.png",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-humanities-exterior-2-official.png"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-humanities-exterior-3-official",
+      "localPath": "references/appearance-humanities-exterior-3-official.png",
+      "sha256": "83430a483c29986f745b693f07cc71b59a182f06336740101431f37772701ce0",
+      "bytes": 142421,
+      "width": 300,
+      "height": 200,
+      "referenceSites": [
+        "appearance-humanities-library"
+      ],
+      "siteName": "人文社科图书馆／凯风楼 / 人文社科图书馆官方馆舍风貌图",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "data/appearance-profiles.json",
+          "pointer": "/sites/8/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://lib.tsinghua.edu.cn/hs/gk/gsfm.htm",
+          "imageUrl": "https://lib.tsinghua.edu.cn/__local/F/8F/6D/5E6F0D168A6B4B87249EEA6B3CA_2CBA6BBF_22C55.png",
+          "license": "清华大学及院系官方配图，未明确摄影者或开放再发布许可；仅本地参照，不作纹理、在线再发布或去水印。程序表面不含照片像素。",
+          "view": "室外侧墙近景：暖砖、后退玻璃和横向挑板；金黄色来自树叶，不是墙色",
+          "recordedPath": "references/appearance-humanities-exterior-3-official.png"
+        },
+        {
+          "metadataFile": "output/appearance-extra-downloads.json",
+          "pointer": "/9",
+          "match": "path-and-hash",
+          "pageUrl": "https://lib.tsinghua.edu.cn/hs/gk/gsfm.htm",
+          "imageUrl": "https://lib.tsinghua.edu.cn/__local/F/8F/6D/5E6F0D168A6B4B87249EEA6B3CA_2CBA6BBF_22C55.png",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-humanities-exterior-3-official.png"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-humanities-exterior-4-official",
+      "localPath": "references/appearance-humanities-exterior-4-official.png",
+      "sha256": "c9bdd1f975978bfcfc803dfe82499345693545913ff2502edd615155c660c946",
+      "bytes": 121863,
+      "width": 300,
+      "height": 200,
+      "referenceSites": [
+        "appearance-humanities-library"
+      ],
+      "siteName": "人文社科图书馆／凯风楼 / 人文社科图书馆官方馆舍风貌图",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "data/appearance-profiles.json",
+          "pointer": "/sites/8/images/1",
+          "match": "path-and-hash",
+          "pageUrl": "https://lib.tsinghua.edu.cn/hs/gk/gsfm.htm",
+          "imageUrl": "https://lib.tsinghua.edu.cn/__local/4/52/79/F84CA0E03623A00BEE2CBC3B6B1_F36C260F_1DC07.png",
+          "license": "清华大学及院系官方配图，未明确摄影者或开放再发布许可；仅本地参照，不作纹理、在线再发布或去水印。程序表面不含照片像素。",
+          "view": "曲面外立面全景：三层窄高窗、暖红褐砖墙；屋面不可见",
+          "recordedPath": "references/appearance-humanities-exterior-4-official.png"
+        },
+        {
+          "metadataFile": "output/appearance-extra-downloads.json",
+          "pointer": "/10",
+          "match": "path-and-hash",
+          "pageUrl": "https://lib.tsinghua.edu.cn/hs/gk/gsfm.htm",
+          "imageUrl": "https://lib.tsinghua.edu.cn/__local/4/52/79/F84CA0E03623A00BEE2CBC3B6B1_F36C260F_1DC07.png",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-humanities-exterior-4-official.png"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-humanities-exterior-5-official",
+      "localPath": "references/appearance-humanities-exterior-5-official.jpg",
+      "sha256": "076d3de2eb1c15ce159519b5c5959e0e0c3668e6e2c5a0e31a6a8f0581e68594",
+      "bytes": 135577,
+      "width": 1024,
+      "height": 682,
+      "referenceSites": [],
+      "siteName": "人文社科图书馆官方馆舍风貌图",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "output/appearance-extra-downloads.json",
+          "pointer": "/11",
+          "match": "path-and-hash",
+          "pageUrl": "https://lib.tsinghua.edu.cn/hs/gk/gsfm.htm",
+          "imageUrl": "https://lib.tsinghua.edu.cn/__local/7/8E/56/931CADC36DB903AA1D428423654_4C1DE4A3_21199.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-humanities-exterior-5-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-humanities-exterior-6-official",
+      "localPath": "references/appearance-humanities-exterior-6-official.jpg",
+      "sha256": "158fb66c65ac58575b1b65d7c55f64f8a6f5f72a63a45c25f4bb39f621add0c1",
+      "bytes": 155083,
+      "width": 1024,
+      "height": 719,
+      "referenceSites": [],
+      "siteName": "人文社科图书馆官方馆舍风貌图",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "output/appearance-extra-downloads.json",
+          "pointer": "/12",
+          "match": "path-and-hash",
+          "pageUrl": "https://lib.tsinghua.edu.cn/hs/gk/gsfm.htm",
+          "imageUrl": "https://lib.tsinghua.edu.cn/__local/3/EB/0C/40AEA2D74AD884EE5F5A9C48DA8_54ED5CA2_25DCB.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-humanities-exterior-6-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-humanities-library-official",
+      "localPath": "references/appearance-humanities-library-official.jpg",
+      "sha256": "c28bbad0807bb361d9838e460d0db6b6a235d8ca0fb9924062ddcb9b1a3420c5",
+      "bytes": 856195,
+      "width": 1920,
+      "height": 900,
+      "referenceSites": [],
+      "siteName": "人文社科图书馆",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/2",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/4/E4/FE/7A1B27F0E935153244D5CD631BE_0C1A44E7_D1083.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-humanities-library-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-law-library-official",
+      "localPath": "references/appearance-law-library-official.jpg",
+      "sha256": "14a2e17e37cc61d11771c46cae827ec5108149aab477cf12715e252bb135e9bd",
+      "bytes": 803072,
+      "width": 1920,
+      "height": 900,
+      "referenceSites": [
+        "appearance-law-library"
+      ],
+      "siteName": "法律图书馆／廖凯原楼 / 法律图书馆",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "data/appearance-profiles.json",
+          "pointer": "/sites/7/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/1/95/79/BE6722693B3BC46415290CC514C_60689166_C4100.jpg",
+          "license": "清华大学及院系官方配图，未明确摄影者或开放再发布许可；仅本地参照，不作纹理、在线再发布或去水印。程序表面不含照片像素。",
+          "view": "完整正面：白石竖带、蓝玻璃、通长横窗和低入口雨棚",
+          "recordedPath": "references/appearance-law-library-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/1",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/1/95/79/BE6722693B3BC46415290CC514C_60689166_C4100.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-law-library-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-lee-shau-kee-official",
+      "localPath": "references/appearance-lee-shau-kee-official.jpg",
+      "sha256": "31dc4547c0e2e9a9d86689d13a928ea2419289854945187f268e71df62782220",
+      "bytes": 1078117,
+      "width": 1920,
+      "height": 900,
+      "referenceSites": [],
+      "siteName": "李兆基科技大楼",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/8/17/A4/2492FB474A7906383B460BAEFB5_0C124750_107365.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-lee-shau-kee-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-mingzhai-official",
+      "localPath": "references/appearance-mingzhai-official.jpg",
+      "sha256": "ce390d344a09211fb41bc048ec8af84f6a74342a5dd0c93d81cc21769fc3df74",
+      "bytes": 125218,
+      "width": 675,
+      "height": 900,
+      "referenceSites": [
+        "appearance-mingzhai"
+      ],
+      "siteName": "明斋 / 明斋官方文章首图，需视觉确认外景",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "data/appearance-profiles.json",
+          "pointer": "/sites/12/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.sss.tsinghua.edu.cn/info/1223/3363.htm",
+          "imageUrl": "https://www.sss.tsinghua.edu.cn/__local/3/85/89/D66255E301EB4138F8CC8493945_36B6AD2C_1E922.jpg?e=.jpg",
+          "license": "清华大学及院系官方配图，未明确摄影者或开放再发布许可；仅本地参照，不作纹理、在线再发布或去水印。程序表面不含照片像素。",
+          "view": "2018年文章入口照片：暖红砖、灰褐石材、阶梯女儿墙与三层构图",
+          "recordedPath": "references/appearance-mingzhai-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/9",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.sss.tsinghua.edu.cn/info/1223/3363.htm",
+          "imageUrl": "https://www.sss.tsinghua.edu.cn/__local/3/85/89/D66255E301EB4138F8CC8493945_36B6AD2C_1E922.jpg?e=.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-mingzhai-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-new-tsinghua-hall-official",
+      "localPath": "references/appearance-new-tsinghua-hall-official.jpg",
+      "sha256": "1c649c4cc905b076a9b1e9d08c2e41ddfe4a76f2bc7c5df396acfecec86a4028",
+      "bytes": 866449,
+      "width": 1920,
+      "height": 900,
+      "referenceSites": [],
+      "siteName": "新清华学堂",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/6",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/E/A0/37/715D9B175FBEA3C3741CBA0776C_97CFE0CF_D3891.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-new-tsinghua-hall-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-science-complex-official",
+      "localPath": "references/appearance-science-complex-official.jpg",
+      "sha256": "9f5bd4a1c47cff2bef8034edb9319c06f3b01516502d5a5eea594b0315f2856e",
+      "bytes": 2076314,
+      "width": 1920,
+      "height": 900,
+      "referenceSites": [],
+      "siteName": "理学院楼",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/7",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/7/67/AF/E65BC413EDEF385BFFDBB1E283E_E3D43574_1FAE9A.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-science-complex-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-sixth-teaching-official",
+      "localPath": "references/appearance-sixth-teaching-official.jpg",
+      "sha256": "c54826f6a780c5abbb860c10d7b518bb3af9262c0014e4cfc4b36aff04f46eb5",
+      "bytes": 1655009,
+      "width": 1920,
+      "height": 900,
+      "referenceSites": [
+        "appearance-teaching-6"
+      ],
+      "siteName": "第六教学楼组团 / 六教",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "data/appearance-profiles.json",
+          "pointer": "/sites/6/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/F/95/58/C5BEF6F156647FDA67D23E093CA_F1B1226E_1940E1.jpg",
+          "license": "清华大学及院系官方配图，未明确摄影者或开放再发布许可；仅本地参照，不作纹理、在线再发布或去水印。程序表面不含照片像素。",
+          "view": "组团内庭：陶红墙、窗带、外置银色遮阳与连廊",
+          "recordedPath": "references/appearance-sixth-teaching-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/5",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/F/95/58/C5BEF6F156647FDA67D23E093CA_F1B1226E_1940E1.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-sixth-teaching-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-teaching-overview-official",
+      "localPath": "references/appearance-teaching-overview-official.png",
+      "sha256": "1c6c0d3cf6ae171ec3d1bd920e954c9e1368aa2795a0f5e092db498264f73da2",
+      "bytes": 3960838,
+      "width": 1920,
+      "height": 900,
+      "referenceSites": [],
+      "siteName": "教学楼官方介绍配图，未逐栋标注，需确认",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/10",
+          "match": "path-and-hash",
+          "pageUrl": "https://iiis.tsinghua.edu.cn/info/1033/4178.htm",
+          "imageUrl": "https://iiis.tsinghua.edu.cn/__local/6/15/3A/C753B107EA270C168DA6F9A62A0_40B81CD7_3C7006.png",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-teaching-overview-official.png"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "appearance-water-hall-historic-official",
+      "localPath": "references/appearance-water-hall-historic-official.jpg",
+      "sha256": "01aab2b4f036e1c5a3af952548ba269675a1416605e7b8d3c0e50b3b402d02be",
+      "bytes": 225795,
+      "width": 454,
+      "height": 303,
+      "referenceSites": [],
+      "siteName": "2005年新水利馆／电机馆／同方部配图之一，需确认",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/11",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/info/1966/76622.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/_mediafile/qh2021b/publish/news/images/upload/pic/2005/05/10/2005051018.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-water-hall-historic-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "art-museum-gallery",
+      "localPath": "references/art-museum-gallery.jpg",
+      "sha256": "86e47b41e1ee3f67d35ca97c867b33a662b17f389ffa29247d05b58d90669941",
+      "bytes": 590278,
+      "width": 1920,
+      "height": 900,
+      "referenceSites": [
+        "art-museum"
+      ],
+      "siteName": "清华大学艺术博物馆",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/1/images/1",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/0/E9/B5/123588172AED93BD0193C0D83FA_DED4F3EB_901C6.jpg",
+          "license": "清华大学校园景观官方配图；摄影者及自由许可未明确，仅本地参照，不作纹理或在线再发布。",
+          "view": "长柱廊与东侧斜视；柱体下段包石、上段细钢柱，后退玻璃、上层横窗及分离石材屏板",
+          "recordedPath": "references/art-museum-gallery.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "art-museum-official-overview",
+      "localPath": "references/art-museum-official-overview.jpg",
+      "sha256": "5353ce7257410a15677dd2be06ccf86615950186849e38e9ba5edeb39b25dd02",
+      "bytes": 326532,
+      "width": 890,
+      "height": 300,
+      "referenceSites": [
+        "art-museum"
+      ],
+      "siteName": "清华大学艺术博物馆",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/1/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.artmuseum.tsinghua.edu.cn/aboutus/cgxx/jz/",
+          "imageUrl": "https://www.artmuseum.tsinghua.edu.cn/aboutus/cgxx/jz/201605/W020170622517968625488.jpg",
+          "license": "清华大学艺术博物馆官方建筑概况配图；摄影署名未明确，未查得开放再发布许可，仅本地参照，不作纹理或在线再发布。",
+          "view": "高机位完整长立面与屋顶；石材水平分带、上层悬挑筛墙、下部开放柱廊和成排屋顶采光构件",
+          "recordedPath": "references/art-museum-official-overview.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "auditorium-oblique",
+      "localPath": "references/auditorium-oblique.jpg",
+      "sha256": "90dafe849f950eb1d3105d996e047ddeda7bbe1e60b41de41f1fbe1e718a76c7",
+      "bytes": 1645137,
+      "width": 1920,
+      "height": 900,
+      "referenceSites": [
+        "auditorium"
+      ],
+      "siteName": "大礼堂",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/13/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/E/C5/CB/171B5114C0D43E853B94AA5CE46_0BACEE5A_191A51.jpg",
+          "license": "清华官方照片，未查得自由再发布许可；仅本地参考。",
+          "view": "高位斜视，可见穹顶及周围坡屋面",
+          "recordedPath": "references/auditorium-oblique.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "biology-hall-commons",
+      "localPath": "references/biology-hall-commons.jpg",
+      "sha256": "fc73f07e93bbc2b8d84f2f4399a63fab2435a94f61f10160e59f25ae46ebc671",
+      "bytes": 453834,
+      "width": 800,
+      "height": 600,
+      "referenceSites": [
+        "biology-hall"
+      ],
+      "siteName": "生物学馆 · Courtyard原模型直接复用",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/0/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://commons.wikimedia.org/wiki/File:3_Tsinghua.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/d/db/3_Tsinghua.jpg",
+          "license": "cabbagezs / Flickr，经Wikimedia Commons转载，CC BY-SA 2.0 Generic，https://creativecommons.org/licenses/by-sa/2.0/；保留原图，仅本地参照，不作纹理或公开图库分发。",
+          "view": "标注Department of Biology, Tsinghua：石质凸出入口、阶梯、分层长窗、竖向石带和阶梯式中央女儿墙。按用户说明作为北侧桥向入口参考，照片摄影机未独立定位。",
+          "recordedPath": "references/biology-hall-commons.jpg"
+        }
+      ],
+      "author": "cabbagezs",
+      "license": "CC-BY-SA-2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": {
+        "path": "docs/reference-photos/biology-hall-commons.jpg",
+        "required": true,
+        "title": "3 Tsinghua.jpg / Department of Biology, Tsinghua",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:3_Tsinghua.jpg",
+        "sha256": "fc73f07e93bbc2b8d84f2f4399a63fab2435a94f61f10160e59f25ae46ebc671",
+        "changes": "无改动；从已保存研究原图逐字节复制，未裁切、转正、压缩或去除水印。",
+        "verifiedAt": "2026-11-02"
+      }
+    },
+    {
+      "id": "chemistry-hall-2008-official",
+      "localPath": "references/chemistry-hall-2008-official.jpg",
+      "sha256": "146551c8445e792c821973b9f7a068333219c591b577136ca38c49872dd0259a",
+      "bytes": 24190,
+      "width": 369,
+      "height": 281,
+      "referenceSites": [
+        "chemistry-hall"
+      ],
+      "siteName": "化学馆（1932年老馆）",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/4/images/1",
+          "match": "path-and-hash",
+          "pageUrl": "https://polymers.chemeng.tsinghua.edu.cn/info/1504/2656.htm",
+          "imageUrl": "https://polymers.chemeng.tsinghua.edu.cn/__local/9/20/C7/70D48804DA2F9ED8E6369706773_EBA39597_5E7E.jpg?e=.jpg",
+          "license": "清华化工高分子所官方文章配图，未查得自由再发布许可；仅本地参考，不作纹理或在线再发布。",
+          "view": "正文专节老化学馆的故事，图注2008年毕业合影于化学馆；浅石门额、砖墩、双门和石阶，下部有人群遮挡",
+          "recordedPath": "references/chemistry-hall-2008-official.jpg"
+        },
+        {
+          "metadataFile": "data/chemistry-hall-references.json",
+          "pointer": "/images/1",
+          "match": "path-and-hash",
+          "pageUrl": "https://polymers.chemeng.tsinghua.edu.cn/info/1504/2656.htm",
+          "imageUrl": "https://polymers.chemeng.tsinghua.edu.cn/__local/9/20/C7/70D48804DA2F9ED8E6369706773_EBA39597_5E7E.jpg?e=.jpg",
+          "license": "清华化工高分子所官方文章配图，未查得自由再发布许可；仅本地参考，原图保留，不作纹理或在线再发布。",
+          "view": "文章标题元旦晚会与化学馆，正文专节老化学馆的故事，图注2008年分4班毕业合影于化学馆；相同浅石门额、砖墩、双门和石阶，底部有人群遮挡。",
+          "recordedPath": "references/chemistry-hall-2008-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "chemistry-hall-2024-commons-review",
+      "localPath": "references/chemistry-hall-2024-commons-review.jpg",
+      "sha256": "c5359590e6c3b60737e2f0efdca4e666557003f8e15ea360449f7697718e144c",
+      "bytes": 1807825,
+      "width": 2400,
+      "height": 1800,
+      "referenceSites": [
+        "chemistry-hall"
+      ],
+      "siteName": "化学馆（1932年老馆）",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "data/chemistry-hall-references.json",
+          "pointer": "/images/5",
+          "match": "path-and-hash",
+          "pageUrl": "https://commons.wikimedia.org/wiki/File:Chemistry_Building_of_Tsinghua_University.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/46/Chemistry_Building_of_Tsinghua_University.jpg",
+          "license": "HoweyYuan，CC BY-SA 4.0；本地审阅衍生文件：等比缩至2400×1800并JPEG编码，无内容修补。仅本地参考，不作纹理或在线再发布。",
+          "view": "chemistry-hall-2024-commons.jpg缩小版本；hash和尺寸属于本地衍生文件，不是下载原图。",
+          "recordedPath": "references/chemistry-hall-2024-commons-review.jpg"
+        }
+      ],
+      "author": "HoweyYuan",
+      "license": "CC-BY-SA-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "optionalLocalCopy": true,
+      "derivativeOf": "references/chemistry-hall-2024-commons.jpg",
+      "changes": "本地审阅衍生图：按EXIF转正（若有）、等比缩小并以JPEG quality94编码；无内容修补，作者及CC BY-SA 4.0沿用原图。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "衍生图不重复算作新的原发布照片；这里只记录、不复制到跟踪档案。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "chemistry-hall-2024-commons",
+      "localPath": "references/chemistry-hall-2024-commons.jpg",
+      "sha256": "8c50cee3be1d46b2eedd7f64db132766bf1efbf4b09aaba8ff5c4f1697685b95",
+      "bytes": 11483733,
+      "width": 8167,
+      "height": 6125,
+      "referenceSites": [
+        "chemistry-hall"
+      ],
+      "siteName": "化学馆（1932年老馆）",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/4/images/3",
+          "match": "path-and-hash",
+          "pageUrl": "https://commons.wikimedia.org/wiki/File:Chemistry_Building_of_Tsinghua_University.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/46/Chemistry_Building_of_Tsinghua_University.jpg",
+          "license": "HoweyYuan，Own work，CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/；本项目仅本地参考，不作纹理或在线再发布。",
+          "view": "2024-07-07较完整南入口：宽石阶、低砖侧墙、木双门、门额、两层三联窗与高女儿墙；两翼、屋顶及背面不可见",
+          "recordedPath": "references/chemistry-hall-2024-commons.jpg"
+        },
+        {
+          "metadataFile": "data/chemistry-hall-references.json",
+          "pointer": "/images/3",
+          "match": "path-and-hash",
+          "pageUrl": "https://commons.wikimedia.org/wiki/File:Chemistry_Building_of_Tsinghua_University.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/46/Chemistry_Building_of_Tsinghua_University.jpg",
+          "license": "HoweyYuan，Own work，CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/；本项目仅本地建模参考，不作纹理或在线再发布。",
+          "view": "2024-07-07较完整南入口，宽石阶、低砖侧墙、双扇木门、门额、上下三联窗和高女儿墙。两翼被树和藤遮住，屋面和背面不可见。最新检得照片并非2026年现场核验。",
+          "recordedPath": "references/chemistry-hall-2024-commons.jpg"
+        }
+      ],
+      "author": "HoweyYuan",
+      "license": "CC-BY-SA-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": {
+        "path": "docs/reference-photos/chemistry-hall-2024-commons.jpg",
+        "required": true,
+        "title": "Chemistry Building of Tsinghua University.jpg",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Chemistry_Building_of_Tsinghua_University.jpg",
+        "sha256": "8c50cee3be1d46b2eedd7f64db132766bf1efbf4b09aaba8ff5c4f1697685b95",
+        "changes": "无改动；从已保存研究原图逐字节复制，未裁切、缩放、压缩或去除水印。",
+        "verifiedAt": "2026-11-02"
+      }
+    },
+    {
+      "id": "chemistry-hall-front-commons-review",
+      "localPath": "references/chemistry-hall-front-commons-review.jpg",
+      "sha256": "789927df2ccf01efdd57ce552c5a6af9787716608715b51981d2c1dc7103bb54",
+      "bytes": 1800781,
+      "width": 1800,
+      "height": 2400,
+      "referenceSites": [
+        "chemistry-hall"
+      ],
+      "siteName": "化学馆（1932年老馆）",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "data/chemistry-hall-references.json",
+          "pointer": "/images/4",
+          "match": "path-and-hash",
+          "pageUrl": "https://commons.wikimedia.org/wiki/File:%E6%B8%85%E8%8F%AF%E5%A4%A7%E5%AD%B8%E5%8C%96%E5%AD%B8%E9%A4%A8.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c3/%E6%B8%85%E8%8F%AF%E5%A4%A7%E5%AD%B8%E5%8C%96%E5%AD%B8%E9%A4%A8.jpg",
+          "license": "葉又嘉，CC BY-SA 4.0；本地审阅衍生文件：只按EXIF转正、等比缩至1800×2400并JPEG编码，无内容修补。仅本地参考，不作纹理或在线再发布。",
+          "view": "chemistry-hall-front-commons.jpg转正缩小版本；hash和尺寸属于本地衍生文件，不是下载原图。",
+          "recordedPath": "references/chemistry-hall-front-commons-review.jpg"
+        }
+      ],
+      "author": "葉又嘉",
+      "license": "CC-BY-SA-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "optionalLocalCopy": true,
+      "derivativeOf": "references/chemistry-hall-front-commons.jpg",
+      "changes": "本地审阅衍生图：按EXIF转正（若有）、等比缩小并以JPEG quality94编码；无内容修补，作者及CC BY-SA 4.0沿用原图。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "衍生图不重复算作新的原发布照片；这里只记录、不复制到跟踪档案。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "chemistry-hall-front-commons",
+      "localPath": "references/chemistry-hall-front-commons.jpg",
+      "sha256": "95589700e08e41894d02a3d099d8941741cdf64d051b470b0f885d5ccec743d8",
+      "bytes": 4005099,
+      "width": 4032,
+      "height": 3024,
+      "referenceSites": [
+        "chemistry-hall"
+      ],
+      "siteName": "化学馆（1932年老馆）",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/4/images/2",
+          "match": "path-and-hash",
+          "pageUrl": "https://commons.wikimedia.org/wiki/File:%E6%B8%85%E8%8F%AF%E5%A4%A7%E5%AD%B8%E5%8C%96%E5%AD%B8%E9%A4%A8.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c3/%E6%B8%85%E8%8F%AF%E5%A4%A7%E5%AD%B8%E5%8C%96%E5%AD%B8%E9%A4%A8.jpg",
+          "license": "葉又嘉，Own work，CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/；本项目仅本地参考，不作纹理或在线再发布。",
+          "view": "2019-08-31南入口，上下两组三联格窗、红砖肋柱、阶梯女儿墙、贝壳顶浅龛和石阶；原图4032×3024，EXIF转正显示为3024×4032",
+          "recordedPath": "references/chemistry-hall-front-commons.jpg"
+        },
+        {
+          "metadataFile": "data/chemistry-hall-references.json",
+          "pointer": "/images/2",
+          "match": "path-and-hash",
+          "pageUrl": "https://commons.wikimedia.org/wiki/File:%E6%B8%85%E8%8F%AF%E5%A4%A7%E5%AD%B8%E5%8C%96%E5%AD%B8%E9%A4%A8.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c3/%E6%B8%85%E8%8F%AF%E5%A4%A7%E5%AD%B8%E5%8C%96%E5%AD%B8%E9%A4%A8.jpg",
+          "license": "葉又嘉，Own work，CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/；本项目仅本地建模参考，不作纹理或在线再发布。",
+          "view": "2019-08-31南入口近景；中央上下两组三联格窗、红砖肋柱、阶梯式女儿墙、贝壳顶浅龛、矩形门额和石阶。原JPEG存储4032×3024，EXIF Orientation=6；显示为3024×4032，勿误用旋转后的尺寸计算hash。",
+          "recordedPath": "references/chemistry-hall-front-commons.jpg"
+        }
+      ],
+      "author": "葉又嘉",
+      "license": "CC-BY-SA-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": {
+        "path": "docs/reference-photos/chemistry-hall-front-commons.jpg",
+        "required": true,
+        "title": "清華大學化學館.jpg",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:%E6%B8%85%E8%8F%AF%E5%A4%A7%E5%AD%B8%E5%8C%96%E5%AD%B8%E9%A4%A8.jpg",
+        "sha256": "95589700e08e41894d02a3d099d8941741cdf64d051b470b0f885d5ccec743d8",
+        "changes": "无改动；保留原JPEG编码与EXIF Orientation=6。编码尺寸4032×3024，按EXIF显示为3024×4032；不是已转正的审阅衍生图。",
+        "verifiedAt": "2026-11-02"
+      }
+    },
+    {
+      "id": "chemistry-hall-historic-official",
+      "localPath": "references/chemistry-hall-historic-official.jpg",
+      "sha256": "3dfb1ef940ee652ea966b7c6d96a6c5aff27660bf09774309d4ee5a2759d1e55",
+      "bytes": 27932,
+      "width": 305,
+      "height": 235,
+      "referenceSites": [
+        "chemistry-hall"
+      ],
+      "siteName": "化学馆（1932年老馆）",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/4/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://100.chem.tsinghua.edu.cn/info/1017/1030.htm",
+          "imageUrl": "https://100.chem.tsinghua.edu.cn/__local/A/73/9C/1F8B82D313944AFD9921C54FB1D_F39A8BD6_6D1C.jpg",
+          "license": "清华化学系百年系庆官方历史照片，未查得自由再发布许可；仅本地参考，保留原图，不作纹理或在线再发布。",
+          "view": "历史斜视全馆与倒影，长矩形体量、竖向立面节奏与抬高中段；1932年为建成年份，非确认拍摄日期",
+          "recordedPath": "references/chemistry-hall-historic-official.jpg"
+        },
+        {
+          "metadataFile": "data/chemistry-hall-references.json",
+          "pointer": "/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://100.chem.tsinghua.edu.cn/info/1017/1030.htm",
+          "imageUrl": "https://100.chem.tsinghua.edu.cn/__local/A/73/9C/1F8B82D313944AFD9921C54FB1D_F39A8BD6_6D1C.jpg",
+          "license": "清华化学系百年系庆官方历史照片，未查得自由再发布许可；仅本地建模参考，保留原图，不作纹理或在线再发布。",
+          "view": "历史斜视全馆与水面倒影，长矩形体量、重复竖向立面节奏和抬高中段；网页注明1932年12月建成，不等于照片拍摄于1932年。",
+          "recordedPath": "references/chemistry-hall-historic-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "gongzi-entrance",
+      "localPath": "references/gongzi-entrance.jpg",
+      "sha256": "beedb2c36506279decd69edb82081326f9a06102950ecdf87ded1692cc8d083e",
+      "bytes": 1880156,
+      "width": 1920,
+      "height": 900,
+      "referenceSites": [
+        "gongzi-shuimu"
+      ],
+      "siteName": "工字厅 · 水木清华",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/8/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/6/EE/80/9A065A38DF72F3F9F59F642B3BD_50D53E6D_1CB05C.jpg",
+          "license": "清华官方照片，未查得自由再发布许可；仅本地建模参考，不作为纹理。",
+          "view": "南门房地面斜视，非主殿全景；灰瓦灰砖、红柱彩梁、屏风与通透入口",
+          "recordedPath": "references/gongzi-entrance.jpg"
+        },
+        {
+          "metadataFile": "data/gongzi-source.json",
+          "pointer": "/photos/gate",
+          "match": "path-and-hash",
+          "pageUrl": null,
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/6/EE/80/9A065A38DF72F3F9F59F642B3BD_50D53E6D_1CB05C.jpg",
+          "license": "未查得再分发许可",
+          "view": "South entrance gate; NOT the main I-shaped hall",
+          "recordedPath": "references/gongzi-entrance.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "library-courtyard-official",
+      "localPath": "references/library-courtyard-official.png",
+      "sha256": "d7fd42506465cebbd1303d0780b780ae705736f77afcf9612f6ab1941c0ef191",
+      "bytes": 681632,
+      "width": 1920,
+      "height": 900,
+      "referenceSites": [],
+      "siteName": "未确认；文件名仅为查找线索",
+      "provenanceStatus": "unresolved",
+      "provenance": [],
+      "author": "未确认",
+      "license": "未确认",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "来源页、原图URL、作者与许可均未匹配确认；不能从文件名中的official或commons推定授权。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "life-hall-commons",
+      "localPath": "references/life-hall-commons.jpg",
+      "sha256": "4b32af6434ec03fe74fbbd7d85482ca8255c49f4e33c94dddc5fa7ddf69da9ab",
+      "bytes": 3476353,
+      "width": 4032,
+      "height": 3024,
+      "referenceSites": [],
+      "siteName": "未确认；文件名仅为查找线索",
+      "provenanceStatus": "unresolved",
+      "provenance": [],
+      "author": "未确认",
+      "license": "未确认",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "来源页、原图URL、作者与许可均未匹配确认；不能从文件名中的official或commons推定授权。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "main-building-front",
+      "localPath": "references/main-building-front.jpg",
+      "sha256": "e744ad295f62abbee4c4c0cb2493ee3da0a375abb0a2bcea5880c7c0de9114fc",
+      "bytes": 1444530,
+      "width": 1920,
+      "height": 900,
+      "referenceSites": [
+        "main-building"
+      ],
+      "siteName": "清华主楼",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/11/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/6/CD/0C/A270492322A02D71B51E60271CA_72BC2495_160AB2.jpg",
+          "license": "清华官方照片，未查得自由再发布许可；仅本地参考。",
+          "view": "地面正面",
+          "recordedPath": "references/main-building-front.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "music-hall-official",
+      "localPath": "references/music-hall-official.jpg",
+      "sha256": "80f960d006131ff74740acf5b3d34ab92a0952b939b5157d01ef33dbf43728ee",
+      "bytes": 113415,
+      "width": 750,
+      "height": 335,
+      "referenceSites": [
+        "music-hall"
+      ],
+      "siteName": "蒙民伟音乐厅",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/3/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.hall.tsinghua.edu.cn/column/cdzl_mmwyyt",
+          "imageUrl": "https://www.hall.tsinghua.edu.cn/upload_files/image/1396753073355_3F.jpg",
+          "license": "清华大学艺术教育中心演出官网标注为外景的配图；摄影署名未明确，未查得自由许可，仅本地参照，不作纹理或在线再发布。",
+          "view": "红砖长立面、顶部倒三角高窗与竖向折面、底层成组玻璃门、浅缓弧檐口；右侧为相邻新清华学堂，不并入音乐厅",
+          "recordedPath": "references/music-hall-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "old-library-arch-snow",
+      "localPath": "references/old-library-arch-snow.jpg",
+      "sha256": "f32582e4270719e6e7c45fd2005291fbfba1728f58d0a20fc91a1c6541689b3a",
+      "bytes": 384241,
+      "width": 1600,
+      "height": 1067,
+      "referenceSites": [
+        "old-library"
+      ],
+      "siteName": "老图书馆",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/15/images/1",
+          "match": "path-and-hash",
+          "pageUrl": "https://lib.tsinghua.edu.cn/gk/gsfm/lg.htm",
+          "imageUrl": "https://lib.tsinghua.edu.cn/images/tushuguanlaoguanwaijingshuiyin.jpeg",
+          "license": "清华图书馆官方照片，保留原水印；未查得自由再发布许可，仅本地参考，不作为纹理。",
+          "view": "老馆三联拱窗与石刻局部雪景，用于核对拱圈、窗格和石框细部",
+          "recordedPath": "references/old-library-arch-snow.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "old-library-front",
+      "localPath": "references/old-library-front.jpg",
+      "sha256": "5e2e0a90bed2c98b349c92c3c3e072ba27d9a30de1aba0ae625cf10f442952f7",
+      "bytes": 290434,
+      "width": 1600,
+      "height": 1067,
+      "referenceSites": [
+        "old-library"
+      ],
+      "siteName": "老图书馆",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/15/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://lib.tsinghua.edu.cn/gk/gsfm/lg.htm",
+          "imageUrl": "https://lib.tsinghua.edu.cn/images/laoguanwaijingshuiyin.jpeg",
+          "license": "清华图书馆官方照片，保留原水印；未查得自由再发布许可，仅本地参考。",
+          "view": "入口正立面近景",
+          "recordedPath": "references/old-library-front.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "old-library-night",
+      "localPath": "references/old-library-night.jpg",
+      "sha256": "3b0ad1ad785138248ac97dd806240f6185c0d96b75c85fbae89f24bb578a8530",
+      "bytes": 252772,
+      "width": 1600,
+      "height": 1067,
+      "referenceSites": [
+        "old-library"
+      ],
+      "siteName": "老图书馆",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/15/images/2",
+          "match": "path-and-hash",
+          "pageUrl": "https://lib.tsinghua.edu.cn/gk/gsfm/lg.htm",
+          "imageUrl": "https://lib.tsinghua.edu.cn/images/laoguanyejingshuiyin.jpeg",
+          "license": "清华图书馆官方照片，保留原水印；未查得自由再发布许可，仅本地参考，不作为纹理。",
+          "view": "老馆入口与两侧低翼夜景，补证翼部窗列、坡屋面和入口台阶；夜景色温不作为白天材质色",
+          "recordedPath": "references/old-library-night.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "science-hall-official-east",
+      "localPath": "references/science-hall-official-east.png",
+      "sha256": "abebdca24686de98f168ba47ebc258d97c271f0672ad8844e4c92100936f88db",
+      "bytes": 669486,
+      "width": 1920,
+      "height": 900,
+      "referenceSites": [
+        "science-hall"
+      ],
+      "siteName": "清华科学馆（1919年）",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/6/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/C/0B/77/28AE6C8C1B44A60206B4268D9C5_F6A46B23_A372E.png",
+          "license": "清华官方校园景观配图，未查得自由再发布授权；仅本地参考，不作为纹理，保留原始完整图像。",
+          "view": "东侧中心草坪高机位长正面；三层组合窗、中央双层高圆拱与小山墙、四坡顶及两条低屋顶采光窗",
+          "recordedPath": "references/science-hall-official-east.png"
+        },
+        {
+          "metadataFile": "data/science-hall-references.json",
+          "pointer": "/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/C/0B/77/28AE6C8C1B44A60206B4268D9C5_F6A46B23_A372E.png",
+          "license": "license-local-reference-only",
+          "view": "从东侧中心草坪高机位看长正面；中央双层高圆拱及小山墙、三层非等距组合钢窗、四坡顶与两条低屋顶采光窗。两侧及远方建筑不属于本轮廓。",
+          "recordedPath": "references/science-hall-official-east.png"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "second-gate-front-official",
+      "localPath": "references/second-gate-front-official.jpg",
+      "sha256": "282d7d4d536acd7bf07a106f6dc85721cffa3789c885fe870aab4a342a9356ad",
+      "bytes": 767421,
+      "width": 1200,
+      "height": 400,
+      "referenceSites": [
+        "second-gate"
+      ],
+      "siteName": "二校门",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/9/images/3",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/info/2116/81037.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/_mediafile/qh2021b/publish/newthu/9352/20150123092401876250100/20150123092417347995313.jpg",
+          "license": "清华官方文章所配历史照片，未查得自由再发布许可；仅本地参考。",
+          "view": "历史全高斜视照片，辅助观察三拱比例、基座及顶部；不是当前1991年重建后的现貌",
+          "recordedPath": "references/second-gate-front-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "second-gate-gallery-b",
+      "localPath": "references/second-gate-gallery-b.jpg",
+      "sha256": "94b5f0cb22a8c0db86c2827ae81d205136656bb89581ca4f4372807f3c3a073b",
+      "bytes": 689531,
+      "width": 1500,
+      "height": 1000,
+      "referenceSites": [
+        "second-gate"
+      ],
+      "siteName": "二校门",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/9/images/2",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/info/1183/94394.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/1/63/BE/E6DAC008600170338C51AF67AA2_A30DA786_A857B.jpg",
+          "license": "清华官方组图，保留原有水印；未查得自由再发布许可，仅本地参考，不作为纹理。",
+          "view": "完整现貌低机位斜视，补证柱径、石基、柱墩多层檐口、侧拱白色墙面和卷涡肩部",
+          "recordedPath": "references/second-gate-gallery-b.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "second-gate-modern-complete",
+      "localPath": "references/second-gate-modern-complete.jpg",
+      "sha256": "29e1ccd497e514329881f4bc8acd3fd8a7344e323f60ffb9eea703f478a44173",
+      "bytes": 2557300,
+      "width": 3264,
+      "height": 2448,
+      "referenceSites": [
+        "second-gate"
+      ],
+      "siteName": "二校门",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/9/images/1",
+          "match": "path-and-hash",
+          "pageUrl": "https://xsg.tsinghua.edu.cn/info/1003/3153.htm",
+          "imageUrl": "https://xsg.tsinghua.edu.cn/__local/9/E9/9F/95C7625C7EEB88D4E0FAEEFB833_EB0EC5BE_270574.jpg",
+          "license": "清华大学校史馆文章配图，贾珺摄；未查得自由再发布许可，仅本地参考，不作为纹理。",
+          "view": "完整现貌正面，包含阶梯平顶、旗杆、柱基和三拱，用于校正立面比例；不是历史照片",
+          "recordedPath": "references/second-gate-modern-complete.jpg"
+        }
+      ],
+      "author": "贾珺",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "second-gate-official",
+      "localPath": "references/second-gate-official.png",
+      "sha256": "de4c267a4659bc6ad8264ee3c36ca84aac706cd8044c45c19dd2323a2171c04f",
+      "bytes": 783180,
+      "width": 1920,
+      "height": 900,
+      "referenceSites": [
+        "second-gate"
+      ],
+      "siteName": "二校门",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/9/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/8/D3/34/464269BEDDBDCE7FE229998697D_A96F2368_BF34C.png",
+          "license": "清华官方照片，未查得自由再发布许可；仅本地参考，不作为纹理。",
+          "view": "现貌南侧仰视近景，可见中拱、两侧小拱、双圆柱、砖砌柱墩和分级檐口；顶部与基座部分裁切",
+          "recordedPath": "references/second-gate-official.png"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "sem-campus-paper",
+      "localPath": "references/sem-campus-paper.jpg",
+      "sha256": "3303cf44821acabfc60772301a01813a5818be2cb9f77c93c860f885cef9ff0a",
+      "bytes": 2257427,
+      "width": 1535,
+      "height": 2087,
+      "referenceSites": [],
+      "siteName": "未确认；文件名仅为查找线索",
+      "provenanceStatus": "unresolved",
+      "provenance": [],
+      "author": "未确认",
+      "license": "未确认",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "来源页、原图URL、作者与许可均未匹配确认；不能从文件名中的official或commons推定授权。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "sem-exterior-official",
+      "localPath": "references/sem-exterior-official.jpg",
+      "sha256": "d6b25a2e7e9f13f4e33ca69f0750b1ed5f2b4fa688ede3c6aebbb9fb5a7aff9d",
+      "bytes": 41403860,
+      "width": 9588,
+      "height": 5295,
+      "referenceSites": [
+        "sem-complex"
+      ],
+      "siteName": "新经管楼 · 建华／李华组团",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/10/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tuef.tsinghua.edu.cn/info/1072/2664.htm",
+          "imageUrl": "https://www.tuef.tsinghua.edu.cn/__local/6/EF/BF/674CB4C9F380C0671EF1EAC94B1_1FF450B3_277C5D4.jpg",
+          "license": "清华教育基金会官方照片，未查得自由再发布许可；仅本地参考，不作为纹理。",
+          "view": "用户确认从北侧看，并提供桌面“经管北向楼体.jpg”，其SHA-256与本原图完全一致。左侧玻璃体量下低层退入，粗银色圆柱支撑悬挑；与右侧红楼之间为北向贯通架空，上方玻璃连接体连续；画面左端另有通舜德的玻璃连廊，连接身份由用户确认。",
+          "recordedPath": "references/sem-exterior-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "sem-gensler-01",
+      "localPath": "references/sem-gensler-01.jpg",
+      "sha256": "a51676bfc46f8b4e9c9fdfee5709ce8176202b6d3ebca762ed1e670d864ab279",
+      "bytes": 504098,
+      "width": 2000,
+      "height": 1125,
+      "referenceSites": [
+        "sem-complex"
+      ],
+      "siteName": "新经管楼 · 建华／李华组团",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/10/images/2",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.gensler.com/projects/tsinghua-university-school-of-economics-management",
+          "imageUrl": "https://static2.gensler.com/uploads/image/76194/project-tsinghua-university-school-of-economics-management-01-2000x1125_1656356061.jpg",
+          "license": "Gensler设计方项目页；摄影署名未标明，未查得自由再发布许可，仅本地研究。",
+          "view": "左侧玻璃翼与右侧红色体量交接处下方有贯通开口，可见对面庭院、道路与远处建筑；上层楼体跨越，非透明玻璃门厅，也不是整个底层架空。",
+          "recordedPath": "references/sem-gensler-01.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "sem-gensler-02",
+      "localPath": "references/sem-gensler-02.jpg",
+      "sha256": "43863be004c8f1d4223caf754b0503d92d3e18b4305eaa8ce959b880e227a767",
+      "bytes": 499590,
+      "width": 2000,
+      "height": 1125,
+      "referenceSites": [
+        "sem-complex"
+      ],
+      "siteName": "新经管楼 · 建华／李华组团",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/10/images/3",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.gensler.com/projects/tsinghua-university-school-of-economics-management",
+          "imageUrl": "https://static2.gensler.com/uploads/image/76195/project-tsinghua-university-school-of-economics-management-02-2000x1125_1656356457.jpg",
+          "license": "Gensler设计方项目页；摄影署名未标明，未查得自由再发布许可，仅本地研究。",
+          "view": "拐角斜视：局部上层拱窗、两层尺度下窗、完整陶板端墙及玻璃悬挑；照片本身无方位标注。",
+          "recordedPath": "references/sem-gensler-02.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "sem-gensler-03",
+      "localPath": "references/sem-gensler-03.jpg",
+      "sha256": "a3315ed509a25d7592ab34d688da7e9f322c89e40cc86f9d6c8b2e51f285560d",
+      "bytes": 476388,
+      "width": 2000,
+      "height": 1334,
+      "referenceSites": [],
+      "siteName": "未确认；文件名仅为查找线索",
+      "provenanceStatus": "unresolved",
+      "provenance": [],
+      "author": "未确认",
+      "license": "未确认",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "来源页、原图URL、作者与许可均未匹配确认；不能从文件名中的official或commons推定授权。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "sem-gensler-04",
+      "localPath": "references/sem-gensler-04.jpg",
+      "sha256": "7c8bbfdb0fc89370fa4b5aba99089e4cd5740438b4a447ea8b78c11e3f60e41a",
+      "bytes": 473620,
+      "width": 2000,
+      "height": 1334,
+      "referenceSites": [
+        "sem-complex"
+      ],
+      "siteName": "新经管楼 · 建华／李华组团",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/10/images/4",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.gensler.com/projects/tsinghua-university-school-of-economics-management",
+          "imageUrl": "https://static1.gensler.com/uploads/image/76197/project-tsinghua-university-school-of-economics-management-04-2000x_1656356545.jpg",
+          "license": "Gensler设计方项目页；摄影署名未标明，未查得自由再发布许可，仅本地研究。",
+          "view": "悬挑下方近景：一根粗银色圆柱，水平金属板缝、深色柱顶收口，后退的玻璃与陶板竖片、分格金属平底；位置、柱径及尺寸不是测绘。",
+          "recordedPath": "references/sem-gensler-04.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "sem-gensler-05",
+      "localPath": "references/sem-gensler-05.jpg",
+      "sha256": "6e6fc3450ea95b633e27f424988ff7d2fde496ca2fe3af11c02bd954b5a7c4f5",
+      "bytes": 530991,
+      "width": 2000,
+      "height": 1334,
+      "referenceSites": [
+        "sem-complex"
+      ],
+      "siteName": "新经管楼 · 建华／李华组团",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/10/images/5",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.gensler.com/projects/tsinghua-university-school-of-economics-management",
+          "imageUrl": "https://static1.gensler.com/uploads/image/76198/project-tsinghua-university-school-of-economics-management-05-2000x_1656356668.jpg",
+          "license": "Gensler设计方项目页；摄影署名未标明，未查得自由再发布许可，仅本地研究。",
+          "view": "玻璃翼正视：细竖框、横向层间带、间隔深色开启扇及薄檐。照片本身无方位标注。",
+          "recordedPath": "references/sem-gensler-05.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "sem-gensler-06",
+      "localPath": "references/sem-gensler-06.jpg",
+      "sha256": "08d5a0930156af20ccf008e8b7a0339943b294cac1f1767586cd6d467ee62cd5",
+      "bytes": 588926,
+      "width": 1293,
+      "height": 2000,
+      "referenceSites": [],
+      "siteName": "未确认；文件名仅为查找线索",
+      "provenanceStatus": "unresolved",
+      "provenance": [],
+      "author": "未确认",
+      "license": "未确认",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "来源页、原图URL、作者与许可均未匹配确认；不能从文件名中的official或commons推定授权。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "sem-official-2",
+      "localPath": "references/sem-official-2.jpg",
+      "sha256": "abdb3593901a1280be88ad71466f8ed3597776aa825af3f19dd1835421c996f5",
+      "bytes": 2801645,
+      "width": 3200,
+      "height": 2133,
+      "referenceSites": [],
+      "siteName": "未确认；文件名仅为查找线索",
+      "provenanceStatus": "unresolved",
+      "provenance": [],
+      "author": "未确认",
+      "license": "未确认",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "来源页、原图URL、作者与许可均未匹配确认；不能从文件名中的official或commons推定授权。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "sem-official-3",
+      "localPath": "references/sem-official-3.jpg",
+      "sha256": "9d394f35cb62e080ea77a6af7bdedb28613391c581dbc570e4aa0c09bc2c1826",
+      "bytes": 2657811,
+      "width": 3200,
+      "height": 2133,
+      "referenceSites": [],
+      "siteName": "未确认；文件名仅为查找线索",
+      "provenanceStatus": "unresolved",
+      "provenance": [],
+      "author": "未确认",
+      "license": "未确认",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "来源页、原图URL、作者与许可均未匹配确认；不能从文件名中的official或commons推定授权。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "sem-official-4",
+      "localPath": "references/sem-official-4.jpg",
+      "sha256": "a2cbba6831d51e33aa5bbf38e930378e96159f2e4560afb26420bd1b3364a252",
+      "bytes": 3704136,
+      "width": 3200,
+      "height": 2133,
+      "referenceSites": [],
+      "siteName": "未确认；文件名仅为查找线索",
+      "provenanceStatus": "unresolved",
+      "provenance": [],
+      "author": "未确认",
+      "license": "未确认",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "来源页、原图URL、作者与许可均未匹配确认；不能从文件名中的official或commons推定授权。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "sem-official-north",
+      "localPath": "references/sem-official-north.jpg",
+      "sha256": "289e10715047503904badd97629b9e0944c6cb77bd349b7eff81f23fead12676",
+      "bytes": 12367578,
+      "width": 5760,
+      "height": 3840,
+      "referenceSites": [],
+      "siteName": "未确认；文件名仅为查找线索",
+      "provenanceStatus": "unresolved",
+      "provenance": [],
+      "author": "未确认",
+      "license": "未确认",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "来源页、原图URL、作者与许可均未匹配确认；不能从文件名中的official或commons推定授权。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "sem-tour-552",
+      "localPath": "references/sem-tour-552.jpg",
+      "sha256": "a2972ba1ad2e92f57a60999bc21d8aaa00e4c73434a3eb6a2c364239630c4edb",
+      "bytes": 16580,
+      "width": 500,
+      "height": 543,
+      "referenceSites": [],
+      "siteName": "未确认；文件名仅为查找线索",
+      "provenanceStatus": "unresolved",
+      "provenance": [],
+      "author": "未确认",
+      "license": "未确认",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "来源页、原图URL、作者与许可均未匹配确认；不能从文件名中的official或commons推定授权。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "sem-tour-553",
+      "localPath": "references/sem-tour-553.jpg",
+      "sha256": "01971d387670cfaca561a3026c2a0737473c48f5ff2ff8afb3d591948a70de73",
+      "bytes": 37875,
+      "width": 506,
+      "height": 338,
+      "referenceSites": [],
+      "siteName": "未确认；文件名仅为查找线索",
+      "provenanceStatus": "unresolved",
+      "provenance": [],
+      "author": "未确认",
+      "license": "未确认",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "来源页、原图URL、作者与许可均未匹配确认；不能从文件名中的official或commons推定授权。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "sem-tour-554",
+      "localPath": "references/sem-tour-554.jpg",
+      "sha256": "d38f22ccbbd3b79c4d0e0701dff9794d14bbbafa6f3c6b50ed3653c326581502",
+      "bytes": 35381,
+      "width": 530,
+      "height": 354,
+      "referenceSites": [],
+      "siteName": "未确认；文件名仅为查找线索",
+      "provenanceStatus": "unresolved",
+      "provenance": [],
+      "author": "未确认",
+      "license": "未确认",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "来源页、原图URL、作者与许可均未匹配确认；不能从文件名中的official或commons推定授权。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "sem-tour-566",
+      "localPath": "references/sem-tour-566.jpg",
+      "sha256": "f5b1aa3781e79a17a70cae4fb65eda37dca6c693ce0dce99cb84bec6a396332a",
+      "bytes": 20966,
+      "width": 548,
+      "height": 365,
+      "referenceSites": [],
+      "siteName": "未确认；文件名仅为查找线索",
+      "provenanceStatus": "unresolved",
+      "provenance": [],
+      "author": "未确认",
+      "license": "未确认",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "来源页、原图URL、作者与许可均未匹配确认；不能从文件名中的official或commons推定授权。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "sem-tour-567",
+      "localPath": "references/sem-tour-567.jpg",
+      "sha256": "48699b72c41b1c467f67ade2427f2fbf415a055822331999e97736d6bfb5d93d",
+      "bytes": 31477,
+      "width": 386,
+      "height": 582,
+      "referenceSites": [
+        "sem-complex"
+      ],
+      "siteName": "新经管楼 · 建华／李华组团",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/10/images/1",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.thepaper.cn/newsDetail_forward_28552771",
+          "imageUrl": "https://imagepphcloud.thepaper.cn/pph/image/319/808/567.jpg",
+          "license": "清华大学官方频道文章，摄影李宙；未查得自由再发布许可，仅本地研究，不作为纹理。",
+          "view": "文章明确为正北面：通高点支玻璃、后方白拱、薄门篷和门头。17米高度另由新清华2336期文字确认。",
+          "recordedPath": "references/sem-tour-567.jpg"
+        }
+      ],
+      "author": "李宙",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "sem-tour-568",
+      "localPath": "references/sem-tour-568.jpg",
+      "sha256": "cd9e21ad1c977c10227d6ac5f79aac4197c0566cc0da6a05c45af7c78085411c",
+      "bytes": 44237,
+      "width": 551,
+      "height": 368,
+      "referenceSites": [],
+      "siteName": "未确认；文件名仅为查找线索",
+      "provenanceStatus": "unresolved",
+      "provenance": [],
+      "author": "未确认",
+      "license": "未确认",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "来源页、原图URL、作者与许可均未匹配确认；不能从文件名中的official或commons推定授权。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "sem-tour-575",
+      "localPath": "references/sem-tour-575.jpg",
+      "sha256": "b42216b4d2c1418d0df30849363aad526b658c0ce5bca8e79f905a3eeb7371f8",
+      "bytes": 202571,
+      "width": 1080,
+      "height": 1619,
+      "referenceSites": [],
+      "siteName": "未确认；文件名仅为查找线索",
+      "provenanceStatus": "unresolved",
+      "provenance": [],
+      "author": "未确认",
+      "license": "未确认",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "来源页、原图URL、作者与许可均未匹配确认；不能从文件名中的official或commons推定授权。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。",
+        "未绑定确切referenceSite；不得凭文件名自动映射到楼宇知识卡。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "shuimu-pond-facade",
+      "localPath": "references/shuimu-pond-facade.png",
+      "sha256": "2308899a5680e1bd5a7342cbec37caa03e3954efeb499a8bfa89be9f17afada9",
+      "bytes": 949347,
+      "width": 1920,
+      "height": 900,
+      "referenceSites": [
+        "gongzi-shuimu"
+      ],
+      "siteName": "工字厅 · 水木清华",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/8/images/1",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/D/AA/A5/A74F70F8B9CC639E5E2A3D1107B_5E7C943D_E7C63.png",
+          "license": "清华官方照片，未查得自由再发布许可；仅本地建模参考，不作为纹理。",
+          "view": "荷花池侧看工字厅后厦，灰色传统坡屋顶、红柱格扇和白色台阶栏杆",
+          "recordedPath": "references/shuimu-pond-facade.png"
+        },
+        {
+          "metadataFile": "data/gongzi-source.json",
+          "pointer": "/photos/northRearHall",
+          "match": "path-and-hash",
+          "pageUrl": null,
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/D/AA/A5/A74F70F8B9CC639E5E2A3D1107B_5E7C943D_E7C63.png",
+          "license": "未查得再分发许可",
+          "view": "North pond facade of 工字厅 后厦; 水木清华 is an associated place label, not a second building",
+          "recordedPath": "references/shuimu-pond-facade.png"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "shunde-courtyard-oblique",
+      "localPath": "references/shunde-courtyard-oblique.jpg",
+      "sha256": "117f7e1c42e14852089bb6bd405c23364e6689b5b3742baa90f7c29c75bce53d",
+      "bytes": 126604,
+      "width": 1080,
+      "height": 810,
+      "referenceSites": [
+        "shunde-building"
+      ],
+      "siteName": "舜德楼",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/12/images/1",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.sohu.com/a/462907673_641792",
+          "imageUrl": "https://p5.itc.cn/q_70/images03/20210425/5aa805cd596b4f3ca72eaff3450fb2dd.jpeg",
+          "license": "二次发布的学校建筑照片，不是官方域名；未查得自由许可，仅本地参考。",
+          "view": "内院曲面斜视，非外部正门",
+          "recordedPath": "references/shunde-courtyard-oblique.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "shunde-north-official",
+      "localPath": "references/shunde-north-official.jpg",
+      "sha256": "658e928f0af920c8a8a86f5aec24bd5eb956cd9dbd39b23f29e1303ad9975992",
+      "bytes": 599611,
+      "width": 1920,
+      "height": 1281,
+      "referenceSites": [
+        "shunde-building"
+      ],
+      "siteName": "舜德楼",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/12/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1133.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/23095758a7g3.jpg",
+          "license": "清华官方照片，未查得自由再发布许可；仅本地参考。",
+          "view": "北侧正门近景",
+          "recordedPath": "references/shunde-north-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-classroom-downloads.json",
+          "pointer": "/9",
+          "match": "byte-identical-alias",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1133.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/23095758a7g3.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1133-official.jpg"
+        },
+        {
+          "metadataFile": "output/appearance-research-downloads.json",
+          "pointer": "/21",
+          "match": "byte-identical-alias",
+          "pageUrl": "https://vr.tsinghua.edu.cn/jsdl1/1133.jhtml",
+          "imageUrl": "https://vr.tsinghua.edu.cn/u/cms/www/202410/23095758a7g3.jpg",
+          "license": "未查得再分发许可",
+          "view": null,
+          "recordedPath": "references/appearance-class-1133-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "sports-center-official",
+      "localPath": "references/sports-center-official.jpg",
+      "sha256": "7f1f55674dc0c5fce1e65e877be68b141e7cf53f1819e57a8a894b219aca4856",
+      "bytes": 1569147,
+      "width": 1920,
+      "height": 900,
+      "referenceSites": [
+        "sports-center"
+      ],
+      "siteName": "综合体育馆",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/2/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/F/F9/68/A5A677B7D9B84F28D44A2452AFF_D369F59E_17F17B.jpg",
+          "license": "清华大学校园景观官方配图；摄影者及自由许可未明确，仅本地参照，不作纹理或在线再发布。",
+          "view": "南侧入口正面高机位；椭圆馆体、灰色浅穹顶、白色大跨拱架与通透桁架、分层窗带、抬高平台和两侧阶梯",
+          "recordedPath": "references/sports-center-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "taoli-dining-official",
+      "localPath": "references/taoli-dining-official.png",
+      "sha256": "b50977f44a242b5a0605c3ef44d8e962e2a05064d9f97ef718b68cb583ad5f09",
+      "bytes": 125756,
+      "width": 283,
+      "height": 422,
+      "referenceSites": [
+        "taoli-dining"
+      ],
+      "siteName": "桃李园餐厅",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/18/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/ysfwzx/info/1004/1007.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/F/99/FC/654E6DBFE7F3D3BDA100D2BE5E9_EA2CE88A_1EB3C.png",
+          "license": "清华大学饮食服务中心版权所有；未查得开放许可，仅本地参考，不作为纹理。",
+          "view": "桃李园识别卡内的外景：弧形层带、前部大圆窗与竖向窗列；不是餐厅内部。",
+          "recordedPath": "references/taoli-dining-official.png"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "tongfang-history-massing",
+      "localPath": "references/tongfang-history-massing.jpg",
+      "sha256": "3d0cea9e54c8fe0c8993ad38f898a6482d5324133d80e56aa89be034e1b633d6",
+      "bytes": 103006,
+      "width": 551,
+      "height": 396,
+      "referenceSites": [
+        "tongfang"
+      ],
+      "siteName": "同方部",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/5/images/1",
+          "match": "path-and-hash",
+          "pageUrl": "https://xsg.tsinghua.edu.cn/info/1005/1128.htm",
+          "imageUrl": "https://xsg.tsinghua.edu.cn/__local/7/4B/C7/8468B9281B3B58A7D004CC38BF1_CE0CC824_1925E.jpg?e=.jpg",
+          "license": "清华校史馆《看得见的历史》配图，摄影者未明确；未查得自由许可，仅本地参考，不作纹理或在线再发布。",
+          "view": "西门山墙斜视及长侧墙：灰砖红瓦双坡、小圆通气口、高长窗和低台阶；东部有遮挡",
+          "recordedPath": "references/tongfang-history-massing.jpg"
+        },
+        {
+          "metadataFile": "data/tongfang-references.json",
+          "pointer": "/images/1",
+          "match": "path-and-hash",
+          "pageUrl": "https://xsg.tsinghua.edu.cn/info/1005/1128.htm",
+          "imageUrl": "https://xsg.tsinghua.edu.cn/__local/7/4B/C7/8468B9281B3B58A7D004CC38BF1_CE0CC824_1925E.jpg?e=.jpg",
+          "license": "清华大学校史馆《看得见的历史》原发布照片，摄影者未明确；邓浩鑫为章节作者，不认定为摄影者。网站版权声明清华大学校史馆，未查得自由许可；仅本地参考、不作纹理或在线再发布。",
+          "view": "西门山墙斜视及相邻长侧墙：灰砖、红瓦双坡、深色檐口、小圆山墙通气口、高长窗和低台阶。树木遮挡东部；不能据此读出南门廊或东部两层全貌。相邻长侧墙方位不单凭照片确认。",
+          "recordedPath": "references/tongfang-history-massing.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "tongfang-official-2018",
+      "localPath": "references/tongfang-official-2018.jpg",
+      "sha256": "01ea63bab7a5cd9a39a6537b750a486e5a3705311be30adcc688b9d565a1b04a",
+      "bytes": 2468341,
+      "width": 1920,
+      "height": 900,
+      "referenceSites": [
+        "tongfang"
+      ],
+      "siteName": "同方部",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/5/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/info/1367/81660.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/_mediafile/qh2021b/publish/thu2018/11499/20180806120755067157037/20180806120918497951616.jpg",
+          "license": "清华大学官方发布，摄影李派，素材校史馆，图片设计任帅；未查得自由许可，仅本地参考，不作纹理或在线再发布，保留水印。",
+          "view": "西门近景：灰砖浅扁券过梁、层叠砖墩、蓝灰门窗框、右起匾额、双壁灯与装饰窗棂；屋顶裁切",
+          "recordedPath": "references/tongfang-official-2018.jpg"
+        },
+        {
+          "metadataFile": "data/tongfang-references.json",
+          "pointer": "/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/info/1367/81660.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/_mediafile/qh2021b/publish/thu2018/11499/20180806120755067157037/20180806120918497951616.jpg",
+          "license": "清华大学官方发布，摄影李派，素材校史馆，图片设计任帅；网站版权所有清华大学，未查得图片自由许可；仅本地建模参考，不作纹理或在线再发布，保留水印。这是原发布文件，非可证明的相机原片。",
+          "view": "西向门口局部：灰砖、浅扁券砖过梁、层叠砖墩、蓝灰门窗框、白底右起同方部匾额、双壁灯、三列矩形装饰窗棂；屋顶和地面裁切。方向结合校档案西门说明确认，不从照片独立定方位。",
+          "recordedPath": "references/tongfang-official-2018.jpg"
+        }
+      ],
+      "author": "李派（摄影）；任帅（图片设计）；校史馆（素材）",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "tsinghua-school-oblique",
+      "localPath": "references/tsinghua-school-oblique.jpg",
+      "sha256": "17ad9410b72c3cebc938c37d8b8594523d638bdacfa1a7b1fc3de66273707da1",
+      "bytes": 803881,
+      "width": 1920,
+      "height": 900,
+      "referenceSites": [
+        "tsinghua-school"
+      ],
+      "siteName": "清华学堂",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/14/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/3/D6/43/55D1EDFDEEAC5CC4720BCF830F2_6E1BFFB2_C4429.jpg",
+          "license": "清华官方照片，未查得自由再发布许可；仅本地参考。",
+          "view": "入口及侧翼高位斜视",
+          "recordedPath": "references/tsinghua-school-oblique.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "west-gym-front",
+      "localPath": "references/west-gym-front.jpg",
+      "sha256": "5dcf310f80d92bbc95242af61a92d8866de77d990b55203f540b848a3d49d74c",
+      "bytes": 1348420,
+      "width": 1920,
+      "height": 900,
+      "referenceSites": [
+        "west-gym"
+      ],
+      "siteName": "西体育馆",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/7/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/9/1E/D7/C040DA1D46F11C38237F81F8EF8_B3CC4C54_149344.jpg",
+          "license": "清华官方照片，未查得自由再发布许可；仅本地建模参考，不作为纹理。",
+          "view": "运动场侧正面，可见三山墙拱窗、灰白柱廊、屋顶长天窗和低侧翼",
+          "recordedPath": "references/west-gym-front.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "zijing-dining-official",
+      "localPath": "references/zijing-dining-official.png",
+      "sha256": "7bb5ba997925ccb5ac07d7fe7e24013bd103b3b551ace99010160720782c16d3",
+      "bytes": 146624,
+      "width": 294,
+      "height": 406,
+      "referenceSites": [
+        "zijing-dining"
+      ],
+      "siteName": "紫荆园餐厅",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/17/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/ysfwzx/info/1004/1007.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/E/F2/39/31CF8CF6D736EEE08D7FC4D85F9_B14674D7_23CC0.png",
+          "license": "清华大学饮食服务中心版权所有；未查得开放许可，仅本地参考，不作为纹理。",
+          "view": "紫荆园识别卡内的食堂外景：水平弧形分带、浅色竖向楼梯体与顶部框架；不是室内照片。",
+          "recordedPath": "references/zijing-dining-official.png"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "zijing-dormitories-official",
+      "localPath": "references/zijing-dormitories-official.jpg",
+      "sha256": "281404088e289dc31ca8a7f7dc51b71062a374979fd3e1464a4a1388d8761e1d",
+      "bytes": 2023812,
+      "width": 1920,
+      "height": 900,
+      "referenceSites": [
+        "zijing-dormitories"
+      ],
+      "siteName": "紫荆学生公寓区",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/16/images/0",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/zjqh/xyfg/xyjg.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/F/FD/71/5EF14317EE5BA6793F7B04DF53C_A4B2B5AD_1EE184.jpg",
+          "license": "清华官方照片，未查得自由再发布许可；仅本地参考。",
+          "view": "公寓组团高位斜视，不是紫荆园食堂室内",
+          "recordedPath": "references/zijing-dormitories-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "zijing-high-rise-official",
+      "localPath": "references/zijing-high-rise-official.png",
+      "sha256": "593ab29b1a5047b37e9d65dd8d85535ccab6d15f1a937ffb8cfd8b3b52aa4d88",
+      "bytes": 931460,
+      "width": 1024,
+      "height": 468,
+      "referenceSites": [
+        "zijing-dormitories"
+      ],
+      "siteName": "紫荆学生公寓区",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/16/images/1",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/en/Campus/Student_Life/Housing___Dining.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/__local/1/04/88/40D809D18C7FA5B0E4B4490C5F9_6896CFF7_E3684.png",
+          "license": "清华大学官方住宿页面，未明摄影者、未查得开放许可；仅本地参考，不作为纹理。",
+          "view": "19–23国际学生公寓组团外景，淡色横向墙带、重复凹窗与端部竖向体量；各栋未单独标号。",
+          "recordedPath": "references/zijing-high-rise-official.png"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    },
+    {
+      "id": "zijing-w-official",
+      "localPath": "references/zijing-w-official.jpg",
+      "sha256": "88a06af40ee38544035b156a6d45c14d292b28f8388052bc8d3a0a97f6d5b82d",
+      "bytes": 279739,
+      "width": 650,
+      "height": 420,
+      "referenceSites": [
+        "zijing-dormitories"
+      ],
+      "siteName": "紫荆学生公寓区",
+      "provenanceStatus": "recorded",
+      "provenance": [
+        {
+          "metadataFile": "reference-catalog.json",
+          "pointer": "/sites/16/images/2",
+          "match": "path-and-hash",
+          "pageUrl": "https://www.tsinghua.edu.cn/info/1708/70290.htm",
+          "imageUrl": "https://www.tsinghua.edu.cn/_mediafile/qh2021b/publish/thunews/9658/20190423101508247661875/1555986664346.jpg",
+          "license": "清华大学新闻中心版权所有；资料提供修缮中心园林科，未明确本图摄影者。题图何名暖署名不转用于本图；仅本地参考。",
+          "view": "官方明确标注14–17号W楼的庭院外景，高层淡色立面与密集窗列；树木遮挡，不能据此确认完整楼层数。",
+          "recordedPath": "references/zijing-w-official.jpg"
+        }
+      ],
+      "author": "未确认",
+      "license": "未查得开放再分发许可",
+      "licenseUrl": null,
+      "optionalLocalCopy": true,
+      "derivativeOf": null,
+      "changes": "原始保存字节；是否相机原片未知。",
+      "use": "仅作合法本地观察、身份核对和可见结构比较；不作模型纹理，不随Pages或离线应用发布。",
+      "limitations": [
+        "记录来源不等于已取得像素再发布权；网页正文作者不自动等于摄影者。",
+        "照片只约束入镜部分；不证明背面、屋顶、隐藏尺度或最新现状；不代表完成三维复原。"
+      ],
+      "archive": null
+    }
+  ]
+}

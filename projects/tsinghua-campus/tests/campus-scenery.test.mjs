@@ -7,8 +7,11 @@ import {createCampusModel} from '../src/model.js';
 import {createCampusScenery, sceneryPlacements, SCENERY_REFERENCE} from '../src/campus-scenery.js';
 import {createCampusWaterShader, WATER_REFLECTION_CLIP_BIAS} from '../src/campus-water.js';
 import {createCampusSky, campusSkyGLSL, SKY_TEXTURE_SIZE} from '../src/campus-sky.js';
-import {createQingmingWillow} from '../src/qingming-reuse.js';
+import {createQingmingWillow, prepareQingmingTextures} from '../src/qingming-reuse.js';
+import {DAYLIGHT_DIRECTION} from '../src/daylight.js';
 import {footprintMetrics, lines, pointInPolygon, project, roadProfile, segmentDistance} from '../src/geo.js';
+
+await prepareQingmingTextures();
 
 test('illustrative street life is deterministic, on safe mapped paths and outside water/buildings', () => {
   const original = JSON.stringify(data), placements = sceneryPlacements(data);
@@ -115,6 +118,9 @@ test('direct willow reuse preserves original leaf atlas, source tint and shared 
 test('campus water remains deterministic and filters fine ripples rather than adding simulation targets', () => {
   const shader = createCampusWaterShader(THREE);
   assert.equal(shader.uniforms.time.value, 0);
+  assert.deepEqual(shader.uniforms.campusSunDirection.value.toArray(), new THREE.Vector3(...DAYLIGHT_DIRECTION).normalize().toArray());
+  assert.match(shader.fragmentShader, /normalize\(campusSunDirection\)/);
+  assert.doesNotMatch(shader.fragmentShader, /vec3\(-24\., 43\., 32\.\)/);
   assert.match(shader.fragmentShader, /fwidth\(q\)/);
   assert.match(shader.fragmentShader, /reflectionEnabled/);
   assert.equal(shader.uniforms.campusSky.value, null, 'The viewer injects its one shared sky texture');

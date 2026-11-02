@@ -34,6 +34,8 @@ try {
     await page.addScriptTag({content: fixture.outputFiles[0].text});
     for (const [name, eye, target] of [
       ['north-overall', [20, 20, -155], [-114, 13, -10]],
+      ['north-red-joint', [-83, 34, -66], [-120, 21, -32]],
+      ['north-wall-sign', [-99, 13.5, -40], [-120.3, 10.8, -32.85]],
       ['north-opening', [-104, 7, -79], [-108, 6, -8]],
       ['north-column', [-56, 6, -58], [-82, 5, -26]],
       ['bridge-north', [-50, 18, -67], [-53, 12, -8]],
@@ -48,12 +50,33 @@ try {
         source.updateWorldMatrix(true, true);
         const at = new NorthWaterFixture.Vector3(...target).applyMatrix4(source.matrixWorld);
         camera.position.set(...eye).applyMatrix4(source.matrixWorld);
-        if (mobile && name !== 'blue-sky') camera.position.sub(at).multiplyScalar(2.5).add(at);
+        if (mobile && name !== 'blue-sky') camera.position.sub(at).multiplyScalar(name === 'north-wall-sign' ? 1.35 : 2.5).add(at);
         camera.clearViewOffset(); camera.lookAt(at); camera.updateMatrixWorld(true);
         app.render(true);
         const image = document.getElementById('scene').toDataURL();
         const support = source.getObjectByName('Jianhua north silver cylindrical support');
         const metal = support?.children.find(mesh => mesh.material?.userData.campusMetalReflection)?.material;
+        const sign = source.getObjectByName('Jianhua north red wall bilingual raised lettering');
+        let lettering;
+        if (name === 'north-wall-sign' && sign) {
+          const canvas = document.getElementById('scene'), copy = document.createElement('canvas');
+          copy.width = canvas.width; copy.height = canvas.height;
+          const ctx = copy.getContext('2d', {willReadFrequently: true});
+          ctx.drawImage(canvas, 0, 0);
+          const pixels = () => ctx.getImageData(0, 0, copy.width, copy.height).data;
+          const original = pixels();
+          sign.visible = false;
+          try {
+            app.render(true); ctx.drawImage(canvas, 0, 0);
+            const hidden = pixels();
+            let changed = 0;
+            for (let i = 0; i < original.length; i += 4) {
+              if (Math.abs(original[i] - hidden[i]) + Math.abs(original[i + 1] - hidden[i + 1]) +
+                  Math.abs(original[i + 2] - hidden[i + 2]) > 25) changed++;
+            }
+            lettering = {lines: sign.userData.lines, changedPixels: changed};
+          } finally {sign.visible = true; app.render(true);}
+        }
         let sky;
         if (name === 'blue-sky') {
           const canvas = document.getElementById('scene'), copy = document.createElement('canvas');
@@ -73,7 +96,7 @@ try {
               app.campus.layers.water.children[0].material.uniforms.campusSky?.value};
         }
         return {image, stats: source.userData.meshStats,
-          sky,
+          sky, lettering,
           silver: metal ? {metalness: metal.metalness, roughness: metal.roughness,
             sharedEnvironment: metal.envMap === app.campus.group.parent.environment,
             borrowedTexture: metal.envMap?.userData.sharedCampusSurface === true} : null};
@@ -83,6 +106,12 @@ try {
       if (!before) {
         if (name === 'blue-sky') assert.ok(capture.sky.shared && capture.sky.blue > .1 && capture.sky.white > .03,
           `${device}: expected visible blue sky AND white clouds sharing the water's panorama: ${JSON.stringify(capture.sky)}`);
+        if (name === 'north-wall-sign') {
+          assert.deepEqual(capture.lettering?.lines,
+            ['清华大学', '经济管理学院', 'SCHOOL OF ECONOMICS AND MANAGEMENT', 'TSINGHUA UNIVERSITY']);
+          assert.ok(capture.lettering.changedPixels > (device === 'desktop' ? 600 : 100),
+            `${device}: raised wall text must be visible in actual pixels`);
+        }
         assert.ok(capture.silver?.metalness >= .8 && capture.silver.sharedEnvironment && capture.silver.borrowedTexture,
           'Silver must use the existing environment without owning its texture or creating another probe');
       }
@@ -98,7 +127,7 @@ try {
         const corridor = sem.getObjectByName('Gray enclosed elevated corridor between SEM and Shunde');
         const column = sem.getObjectByName('Jianhua north silver cylindrical support'), face = column.parent;
         const length = Math.hypot(...corridor.userData.end.map((value, i) => value - corridor.userData.start[i]));
-        const sides = new Map(), contacts = [], obstructions = [];
+        const sides = new Map(), contacts = [], obstructions = [], redReturn = [];
         for (const host of [architecture, shunde]) {
           host.updateWorldMatrix(true, true);
           host.traverse(o => {
@@ -126,12 +155,23 @@ try {
               .intersectObject(architecture, true).filter(hit => hit.object.parent !== column);
             obstructions.push(hits.length);
           }
-          return {contacts, obstructions};
+          for (const z of [-36, -34, -32, -30]) for (const y of [12, 18, 21, 24, 26, 29]) {
+            const start = sem.localToWorld(new T.Vector3(-116, y, z));
+            const end = sem.localToWorld(new T.Vector3(-124, y, z));
+            const hits = new T.Raycaster(start, end.clone().sub(start).normalize(), 0, start.distanceTo(end))
+              .intersectObject(architecture, true);
+            redReturn.push({y, z, hits: hits.length, material: hits[0]?.object.material.name || ''});
+          }
+          return {contacts, obstructions, redReturn};
         } finally {for (const [material, side] of sides) material.side = side;}
       });
       assert.ok(junctions.contacts.every(hit => hit.distance !== null && hit.distance > .5 && hit.distance <= 3),
         `Actual rendered host must meet every bridge edge: ${JSON.stringify(junctions.contacts)}`);
       assert.deepEqual(junctions.obstructions, Array(9).fill(0));
+      for (const sample of junctions.redReturn) {
+        if (sample.y < 22.7) assert.match(sample.material, /terracotta/i, 'The red return must have no window row');
+        else assert.equal(sample.hits, 0, `Unexpected tall return window or trim: ${JSON.stringify(sample)}`);
+      }
     }
     const water = [];
     for (const [name, eye, target, nearView, plan] of [

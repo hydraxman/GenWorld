@@ -16,6 +16,9 @@ import {PHOTO_APPEARANCES} from './photo-appearance.js';
 import {buildCampusLandscape} from './landscape.js';
 import {installCampusReflections} from './campus-reflections.js';
 import {createWalkthrough} from './walkthrough.js';
+import {createDetailedDisplay, prepareDetailedExport} from './display-lod.js';
+import {prepareQingmingTextures} from './qingming-reuse.js';
+import {renderKnowledgeCard} from './knowledge-card.js';
 
 const $ = id => document.getElementById(id);
 const outputPrefix = location.pathname.endsWith('/tsinghua-campus-offline.html') ? '' : 'output/';
@@ -79,8 +82,10 @@ async function main() {
   await nextPaint();
   const architectureIds = applyCampusArchitecture(campus, data, {deferNear: true});
   const landmarkIds = applyCampusLandmarks(campus, data);
+  const detailedDisplay = createDetailedDisplay(campus, {batching: renderer.extensions.has('WEBGL_multi_draw')});
   loading('正在铺设地图操场、草坪与树木…', 90);
   await nextPaint();
+  await prepareQingmingTextures();
   const landscapeStages = buildCampusLandscape(campus, data);
   let landscapeStage = landscapeStages.next(), landscapeBuilt = 0;
   sliceStarted = performance.now();
@@ -135,16 +140,22 @@ async function main() {
     reflections.setTime(time); campus.scenery.setTime(time); sceneTime = time; dirty = true;
   }
   function draw(forceReflections = false) {
-    if (!walker.active) updateInspectionClipping(camera, controls.target);
-    campus.updateArchitectureLOD(camera, $('architecture-details').checked);
-    campus.updateTreeLOD(camera, compact.matches);
-    campus.updateSceneryLOD(camera, compact.matches);
-    sun.castShadow = !planMode && framedBounds && framedBounds.getSize(new THREE.Vector3()).length() < 600;
-    contactShadowsActive = $('contact-shadows').checked && !planMode && framedBounds &&
-      framedBounds.getSize(new THREE.Vector3()).length() < 600;
-    reflections.update(camera, !planMode && framedBounds &&
-      framedBounds.getSize(new THREE.Vector3()).length() < 380, forceReflections);
-    drawScene(camera, Boolean(contactShadowsActive));
+    const autoReset = renderer.info.autoReset;
+    renderer.info.autoReset = false;
+    renderer.info.reset();
+    try {
+      if (!walker.active) updateInspectionClipping(camera, controls.target);
+      campus.updateArchitectureLOD(camera, $('architecture-details').checked, {maxBuilds: 2});
+      detailedDisplay.update(camera, renderer.domElement.height);
+      campus.updateTreeLOD(camera, compact.matches);
+      campus.updateSceneryLOD(camera, compact.matches);
+      sun.castShadow = !planMode && framedBounds && framedBounds.getSize(new THREE.Vector3()).length() < 600;
+      contactShadowsActive = $('contact-shadows').checked && !planMode && framedBounds &&
+        framedBounds.getSize(new THREE.Vector3()).length() < 600;
+      reflections.update(camera, !planMode && framedBounds &&
+        framedBounds.getSize(new THREE.Vector3()).length() < 380, forceReflections);
+      drawScene(camera, Boolean(contactShadowsActive));
+    } finally {renderer.info.autoReset = autoReset;}
   }
   const inspector = $('sidebar'), legend = $('layers');
   function panel(element, toggle, open) {
@@ -232,7 +243,16 @@ async function main() {
     const direction = new THREE.Vector3(...facade.viewDirection).transformDirection(detail.matrixWorld).toArray();
     frame(box, 1.15, direction);
   }
-  function select(id, focus = false, apartmentNumber = null) {
+  function showKnowledge() {
+    panel(inspector, $('toggle-inspector'), true);
+    inspector.scrollTop = $('selection').offsetTop - 16;
+  }
+  function clearKnowledge() {
+    $('building-knowledge').replaceChildren(); $('building-knowledge').hidden = true;
+    delete $('building-knowledge').dataset.historyId;
+    $('open-knowledge').hidden = true;
+  }
+  function select(id, focus = false, apartmentNumber = null, {revealKnowledge = false} = {}) {
     if (walker.active) walker.exit();
     const building = campus.objects.get(id);
     if (!building) throw new Error(`Campus object not found: ${id}`);
@@ -299,6 +319,8 @@ async function main() {
     else permalink.searchParams.set('building', id);
     $('selection-link').href = permalink.href;
     const referenceSite = p.referenceSite || p.appearanceReferenceSite;
+    renderKnowledgeCard($('building-knowledge'), referenceSite);
+    $('open-knowledge').hidden = false;
     $('selected-references').hidden = !referenceSite || (__PHOTO_SITE_COUNT__ === 0 && !p.appearanceReferenceSite);
     if (referenceSite) {
       $('selected-references').href = outputPrefix
@@ -308,6 +330,7 @@ async function main() {
       }
     }
     if (focus) focusSelected();
+    if (revealKnowledge) showKnowledge();
     dirty = true;
     return building;
   }
@@ -336,7 +359,13 @@ async function main() {
     if (hit.object.userData.architectureFarBatch) {
       const id = hit.object.userData.featureIds[hit.batchId];
       if (!id) throw new Error('远景建筑拾取未关联原地图编号。');
-      select(id);
+      select(id, false, null, {revealKnowledge: true});
+      return;
+    }
+    if (hit.object.userData.campusDetailedBatch) {
+      const identity = hit.object.userData.identities[hit.batchId];
+      if (!identity) throw new Error('精细显示批次缺少原始建筑身份。');
+      select(identity.featureId, false, identity.apartmentNumber, {revealKnowledge: true});
       return;
     }
     let target = hit.object, apartmentNumber = null;
@@ -344,7 +373,7 @@ async function main() {
       if (target.userData.apartmentNumber) apartmentNumber = target.userData.apartmentNumber;
       target = target.parent;
     }
-    if (target) select(target.userData.featureId, false, apartmentNumber);
+    if (target) select(target.userData.featureId, false, apartmentNumber, {revealKnowledge: true});
   });
   let resultPage = 0;
   const pageSize = 40;
@@ -371,7 +400,7 @@ async function main() {
       const number = numberMatch ? Number(numberMatch[1]) : null;
       const partNumber = object.userData.apartmentNumbers?.includes(number) ? number : null;
       if (partNumber) button.firstChild.textContent = `紫荆学生公寓${partNumber}号楼`;
-      button.addEventListener('click', () => select(id, true, partNumber));
+      button.addEventListener('click', () => select(id, true, partNumber, {revealKnowledge: true}));
       list.append(button);
     }
     $('results').replaceChildren(list);
@@ -396,6 +425,7 @@ async function main() {
           apartmentNumbers: [exportPart.userData.apartmentNumber]});
       }
       object.position.set(0, 0, 0);
+      prepareDetailedExport(object);
       prepareArchitectureExport(object);
       reflections.prepareExport(object);
       object.updateMatrixWorld(true);
@@ -432,6 +462,7 @@ async function main() {
       $('selection-name').textContent = '选择筛选后的建筑或地标';
       $('selection-help').textContent = '可切换类型筛选，或通过目录逐页查看全部建筑。';
       $('selection-fields').replaceChildren();
+      clearKnowledge();
       $('focus-facade').hidden = $('focus').hidden = $('export-building').hidden = $('selected-references').hidden = $('selection-link').hidden = true;
     }
     search(); reflections.invalidate(); dirty = true;
@@ -463,6 +494,7 @@ async function main() {
     campus.layers.sports.visible = true;
     document.querySelector('[data-layer="sports"]').checked = true;
     selected = null; selectedPart = null; highlight.visible = false;
+    clearKnowledge();
     $('appearance-building').value = ''; $('zijing-apartment').value = '';
     $('sports-ground').value = id;
     $('selection-name').textContent = ground.name || '地图运动场';
@@ -536,6 +568,7 @@ async function main() {
     });
   }
   $('focus').addEventListener('click', focusSelected);
+  $('open-knowledge').addEventListener('click', showKnowledge);
   $('focus-facade').addEventListener('click', focusFacade);
   $('view-north').addEventListener('click', () => {
     const region = bounds.clone(); region.max.z = bounds.min.z + size.z * 0.43; frame(region, 1.2);
@@ -625,7 +658,7 @@ async function main() {
       setSceneTime(sceneTime + Math.min(.1, (now - lastMotion) / 1000)); lastMotion = now;
     }
     if (!walker.active) controls.update();
-    if (dirty || reflections.pending()) {
+    if (dirty || campus.architecturePending || reflections.pending()) {
       draw();
       $('north').textContent = planMode ? 'N ↑ 北' : 'N · -Z';
       dirty = false;
@@ -634,7 +667,7 @@ async function main() {
   }
   render();
   window.campusApp = {
-    ready: true, campus, data, coverage, select, selectApartment, selectGround, mode, exportSelectedModel, setSceneTime,
+    ready: true, campus, data, coverage, select, selectApartment, selectGround, mode, exportSelectedModel, setSceneTime, detailedDisplay,
     visitBuilding, walkthrough: {state: walker.state, exit: walker.exit},
     selectedApartment: () => selectedPart?.userData.apartmentNumber ?? null,
     stats: {buildings: buildings.length, features: data.features.length, refined: refinedIds.length, architecture: coverage.counts.architectureModelBuildingObjects,
@@ -645,7 +678,8 @@ async function main() {
       rendering: {environment: Boolean(scene.environment), contactShadows: Boolean(contactShadowsActive),
         toneMapping: renderer.toneMapping, environmentIntensity: scene.environmentIntensity,
         calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, geometries: renderer.info.memory.geometries,
-        textures: renderer.info.memory.textures, reflections: reflections.stats(), scenery: campus.scenery.stats()},
+        textures: renderer.info.memory.textures, reflections: reflections.stats(), scenery: campus.scenery.stats(),
+        detailedDisplay: detailedDisplay.stats()},
       shadowTexelMeters: (sun.shadow.camera.right - sun.shadow.camera.left) / sun.shadow.mapSize.x}),
   };
   draw();

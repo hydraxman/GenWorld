@@ -33,6 +33,10 @@ npm run render
 
 下层前墙与侧墙按偏移边的交点统一收口，不在退让区留下独立窗片、栅栏状竖片或小白柱。通舜德桥从建华北部落点斜接舜德西侧的真实墙段，完整断面浅嵌入两端楼体；不得使用西墙延长线造成悬空，也不移动原楼体。路线和连接节点仍为估算，连廊内部未开放漫游。
 
+北侧玻璃翼与红楼交接的短退台边属于红色实墙，不生成侧向窗列。玻璃翼止于原轮廓内转角，其屋顶、底板和檐线同步收口，不能把红楼外转角外推成高层玻璃薄片；原地图顶点、正面幕墙、架空净高、银柱和通舜德桥不变。短边无窗由用户红圈纠正并参照既有北向照片，具体分界与高度仍非测绘。
+
+该红墙按用户特写增加四行金属立体字：`清华大学`、`经济管理学院`、`SCHOOL OF ECONOMICS AND MANAGEMENT`、`TSINGHUA UNIVERSITY`。文字为可导出的挤出几何，不是照片贴图；字形采用OFL文楷近似，不冒称原书法，尺寸、安装位置和金属色仍为估算。`src/sem-lettering.json`只保留28个所需字符及完整许可证，正常构建无需字体文件或Python。若需重新提取，用安装了fontTools的Python运行 `python projects\shunde\scripts\pack-sem-lettering.py <LXGWWenKai-Regular.ttf路径>`；脚本限定LXGW WenKai Regular v1.522的SHA-256，来源URL和哈希保留在生成文件中。
+
 舜德北门与建华北门的中央门扇向内打开，原玻璃／横档同步留出真实通道；`src/visitor-lobby.js` 共用有限门厅的地面、墙面、座椅及源坐标碰撞范围。校园工作台通过“进入建筑”或`?visit=shunde`／`?visit=jianhua`提供键盘、触屏漫游，独立查看器仍用原轨道控制。室内布置、边界和陈设明确标为示意，不是全楼室内、其他楼层或实际平面复原；室内告示也保留这一限制。
 
 [Blender 工具](blender/README.md)保留的是独立历史模型，不应与当前庭院几何混同。GLB 保存几何与材质，不包含查看器的全部灯光及屏幕空间效果。
@@ -40,3 +44,5 @@ npm run render
 ## 许可
 
 原创代码采用仓库 MIT 许可。平面数据为 © OpenStreetMap contributors，遵循 [ODbL](https://www.openstreetmap.org/copyright)。植物、字形及其他资源保留各自来源与许可；参考照片仅用于比对，不因代码开源获得再分发权。
+
+建华红墙字形来自LXGW WenKai Regular v1.522，适用SIL OFL 1.1；完整上游版权与许可见[共用字形许可证](../tsinghua-campus/src/second-gate-font-OFL.txt)，并嵌入字形子集及构建产物。

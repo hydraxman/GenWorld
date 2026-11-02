@@ -205,10 +205,12 @@ export function applyCampusLandscape(campus, data) {
 export function disposeCampusLandscape(campus) {
   const state = states.get(campus);
   if (!state) return;
+  const geometries = new Set();
   for (const group of [state.sports, state.trees]) {
-    group.traverse(object => {if (object.geometry) object.geometry.dispose(); if (object.isInstancedMesh) object.dispose();});
+    group.traverse(object => {if (object.geometry) geometries.add(object.geometry); if (object.isInstancedMesh) object.dispose();});
     group.removeFromParent();
   }
+  geometries.forEach(geometry => geometry.dispose());
   state.materials.forEach(material => material.dispose());
   state.treeRenderer.extraGeometry.dispose();
   state.scenery.dispose();

@@ -2,13 +2,15 @@ import {createBuilder} from './builder.js';
 import {createSkyCorridor, CORRIDOR_WIDTH} from './sky-corridor.js';
 import {FOOTPRINT} from './footprint.js';
 import {addVisitorLobby} from './visitor-lobby.js';
+import {addSEMWallLettering} from './sem-lettering.js';
 
 export const SEM_WAY = 937482182;
 export const SEM_HEIGHT = 30;
 export const BRIDGE_Z = -12;
 export const BRIDGE_END_Z = FOOTPRINT[1][1] + CORRIDOR_WIDTH / 2 + 1.5;
 const PODIUM_HEIGHT = 22.7;
-const PODIUM_EAST = -120.544;
+// End the glass wing at the inner north corner, not the red block's projecting corner.
+const PODIUM_EAST = -120.1343;
 const WING_X = -98;
 // The user-confirmed north photograph places the open connector west of the lower glass wing.
 // The older transverse passage remains an unverified plan estimate, not a second observed opening.
@@ -349,6 +351,8 @@ export function createSEMBuilding(THREE, source, {textured = true} = {}) {
       let lowerA = lower?.[edge], lowerB = lower?.[(edge + 1) % points.length];
       const internal = (a[0] === WING_X && b[0] === WING_X) || (a[0] === PODIUM_EAST && b[0] === PODIUM_EAST);
       const podiumJoin = a[0] === PODIUM_EAST && b[0] === PODIUM_EAST;
+      const opaqueNorthReturn = podium && [a, b].every(p =>
+        [source.points[5], source.points[6]].some(q => p[0] === q[0] && p[1] === q[1]));
       // Local +Z faces outside; reversal changes traversal, never source vertices.
       if (signedArea > 0) {
         [a, b] = [b, a];
@@ -363,7 +367,7 @@ export function createSEMBuilding(THREE, source, {textured = true} = {}) {
       const outwardZ = dx / length, isNorth = outwardZ < -.9;
       const northWing = !podium && !connector && isNorth && !internal;
       const entry = podium && isNorth && length > 65;
-      face.userData = {outwardZ, podium, internal, sourceEdge: [a, b]};
+      face.userData = {outwardZ, podium, internal, opaqueNorthReturn, sourceEdge: [a, b]};
       if (lower) lowerFacade(face, a, b, lowerA, lowerB);
       if (internal && podium) {
         panel(face, length / 2, 0, PODIUM_HEIGHT, length, .4, -.22);
@@ -375,6 +379,10 @@ export function createSEMBuilding(THREE, source, {textured = true} = {}) {
       const bays = Math.max(1, Math.round(length / 5.8)), width = length / bays;
       const center = length / 2, entryHalfWidth = 11.8;
       if (entry) entrance(face, center);
+      if (opaqueNorthReturn) {
+        panel(face, length / 2, 0, PODIUM_HEIGHT, length);
+        addSEMWallLettering(THREE, B, face, length);
+      }
       if (!podium) {
         curtain(face, .04, length - .04, internal ? PODIUM_HEIGHT + .26 : 10.2, SEM_HEIGHT - .22);
         for (let y = 15; y < SEM_HEIGHT; y += 5) {
@@ -389,7 +397,7 @@ export function createSEMBuilding(THREE, source, {textured = true} = {}) {
       }
       for (let bay = 0; bay < bays; bay++) {
         const x = (bay + .5) * width;
-        if (internal || !podium) continue;
+        if (internal || !podium || opaqueNorthReturn) continue;
         if (entry && Math.abs(x - center) < entryHalfWidth + width / 2) {
           const left = x - width / 2, right = x + width / 2;
           if (left < center - entryHalfWidth) panel(face, (left + center - entryHalfWidth) / 2, 0,

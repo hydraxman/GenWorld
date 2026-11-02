@@ -1,4 +1,8 @@
 Second Gate Kai Lettering — 園 華 清 only, three-glyph vector subset
+Jianhua Wall Lettering — four photo-observed Chinese/English lines, vector subset
+Jianhua source SHA-256: 39ad71264b588165b469e35e6afb162a378dacd1f95348160240ba9038ac3009
+Jianhua subset: projects/shunde/src/sem-lettering.json; extracted with pack-sem-lettering.py.
+Both renamed subsets approximate the lettering; neither traces original calligraphy.
 Source: LXGW WenKai Regular v1.522, LXGWWenKai-Regular.ttf.
 Parent-provided source file: 25,575,676 bytes; no full font is bundled at runtime.
 https://github.com/lxgw/LxgwWenKai/releases/download/v1.522/LXGWWenKai-Regular.ttf

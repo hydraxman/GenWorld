@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-02",
+  "policy": "仅将逐项核实开放许可的原始字节复制到文档档案；不加入Pages、离线应用或模型纹理。源码MIT不覆盖照片。",
+  "images": [
+    {
+      "localPath": "references/biology-hall-commons.jpg",
+      "archivePath": "docs/reference-photos/biology-hall-commons.jpg",
+      "title": "3 Tsinghua.jpg / Department of Biology, Tsinghua",
+      "author": "cabbagezs",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:3_Tsinghua.jpg",
+      "originalSourceUrl": "https://www.flickr.com/photos/43547763@N00/390808249",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/d/db/3_Tsinghua.jpg",
+      "license": "CC-BY-SA-2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "verifiedAt": "2026-11-02",
+      "verification": "Commons文件页将作者列为cabbagezs、授权列为CC BY-SA 2.0，并记载2011-03-21 Flickr许可复核；本次直接读取该文件页确认。",
+      "sha256": "fc73f07e93bbc2b8d84f2f4399a63fab2435a94f61f10160e59f25ae46ebc671",
+      "changes": "无改动；从已保存研究原图逐字节复制，未裁切、转正、压缩或去除水印。"
+    },
+    {
+      "localPath": "references/chemistry-hall-front-commons.jpg",
+      "archivePath": "docs/reference-photos/chemistry-hall-front-commons.jpg",
+      "title": "清華大學化學館.jpg",
+      "author": "葉又嘉",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:%E6%B8%85%E8%8F%AF%E5%A4%A7%E5%AD%B8%E5%8C%96%E5%AD%B8%E9%A4%A8.jpg",
+      "originalSourceUrl": null,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c3/%E6%B8%85%E8%8F%AF%E5%A4%A7%E5%AD%B8%E5%8C%96%E5%AD%B8%E9%A4%A8.jpg",
+      "license": "CC-BY-SA-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "verifiedAt": "2026-11-02",
+      "verification": "Commons文件页列明Own work、作者葉又嘉、拍摄日期2019-08-31及CC BY-SA 4.0；本次直接读取文件页确认。",
+      "sha256": "95589700e08e41894d02a3d099d8941741cdf64d051b470b0f885d5ccec743d8",
+      "changes": "无改动；保留原JPEG编码与EXIF Orientation=6。编码尺寸4032×3024，按EXIF显示为3024×4032；不是已转正的审阅衍生图。"
+    },
+    {
+      "localPath": "references/chemistry-hall-2024-commons.jpg",
+      "archivePath": "docs/reference-photos/chemistry-hall-2024-commons.jpg",
+      "title": "Chemistry Building of Tsinghua University.jpg",
+      "author": "HoweyYuan",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Chemistry_Building_of_Tsinghua_University.jpg",
+      "originalSourceUrl": null,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/46/Chemistry_Building_of_Tsinghua_University.jpg",
+      "license": "CC-BY-SA-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "verifiedAt": "2026-11-02",
+      "verification": "Commons文件页列明Own work、作者HoweyYuan、拍摄日期2024-07-07及CC BY-SA 4.0；本次直接读取文件页确认。",
+      "sha256": "8c50cee3be1d46b2eedd7f64db132766bf1efbf4b09aaba8ff5c4f1697685b95",
+      "changes": "无改动；从已保存研究原图逐字节复制，未裁切、缩放、压缩或去除水印。"
+    }
+  ]
+}

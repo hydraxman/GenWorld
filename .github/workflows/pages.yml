@@ -58,6 +58,10 @@ jobs:
           projects/tsinghua-campus/tests/zijing-dining.test.mjs
           projects/tsinghua-campus/tests/coverage.test.mjs
           projects/tsinghua-campus/tests/campus-architecture.test.mjs
+          projects/tsinghua-campus/tests/asset-packing.test.mjs
+          projects/tsinghua-campus/tests/display-lod.test.mjs
+          projects/tsinghua-campus/tests/building-history.test.mjs
+          projects/tsinghua-campus/tests/reference-library.test.mjs
           projects/tsinghua-campus/tests/photo-appearance.test.mjs
           projects/tsinghua-campus/tests/reference-catalog.test.mjs
           projects/courtyard/src/glass-reflections.test.js

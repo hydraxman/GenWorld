@@ -276,6 +276,24 @@ test('raised multipolygon architecture preserves disconnected components and cou
   }
 });
 
+test('visible deferred details respect the per-frame build budget and retain far geometry until ready', () => {
+  const d = subset(), campus = createCampusModel(d);
+  applyCampusArchitecture(campus, d, {deferNear: true});
+  const root = campus.buildings.values().next().value, camera = new THREE.PerspectiveCamera(60, 1, .1, 2000);
+  camera.position.copy(root.position).add(new THREE.Vector3(0, 10, 0));
+  camera.lookAt(root.position); camera.updateMatrixWorld(true);
+  campus.updateArchitectureLOD(camera, true, {maxBuilds: 0});
+  assert.equal(campus.architecturePending, true);
+  assert.equal(nearMeshes(root).length, 0);
+  assert.equal(nearGroup(root).visible, false);
+  const batches = campus.layers.building.children.filter(mesh => mesh.userData.architectureFarBatch);
+  assert.ok(batches.some(batch => batch.userData.featureIds.some((id, i) => id === root.userData.featureId && batch.getVisibleAt(i))));
+  campus.updateArchitectureLOD(camera, true, {maxBuilds: 1});
+  assert.ok(nearMeshes(root).length > 0);
+  assert.equal([...campus.buildings.values()].filter(r => nearMeshes(r).length > 0).length, 1);
+  disposeCampusArchitecture(campus);
+});
+
 test('far batches retain original per-building picking and filtering and never enter exported geometry', () => {
   const d = subset(), campus = createCampusModel(d);
   applyCampusArchitecture(campus, d);

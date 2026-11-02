@@ -5,7 +5,7 @@ import {buildCourtyardTree, scatterTreeLeaves} from '../../courtyard/src/trees.j
 import outline from '../../../shared/assets/leaves/outline.json' with {type: 'json'};
 
 const canonical = new WeakMap();
-export const TREE_LIMITS = {desktop: 12, mobile: 4, distance: 70, leavesPerTree: 684};
+export const TREE_LIMITS = {desktop: 12, mobile: 4, distance: 70, leavesPerTree: 684, clusterSize: 320};
 
 function templates() {
   let seed = 41827, branch = 0;
@@ -79,19 +79,43 @@ export function createCampusTrees(group, placements) {
   for (const mesh of [branches, crowns, leaves]) {
     mesh.castShadow = true; mesh.receiveShadow = false; if (mesh !== leaves) mesh.computeBoundingSphere(); group.add(mesh);
   }
+  const clustered = new THREE.Group(), cells = new Map(), clusterInstances = [];
+  clustered.name = 'Display-only spatial tree clusters';
+  clustered.userData.campusTreeDisplayOnly = true; clustered.visible = false;
+  for (const [index, tree] of placements.entries()) {
+    const key = tree.position.map(value => Math.floor(value / TREE_LIMITS.clusterSize)).join(':');
+    if (!cells.has(key)) cells.set(key, []);
+    cells.get(key).push(index);
+  }
+  for (const [key, indices] of cells) {
+    const wood = new THREE.InstancedMesh(geometry.branches, bark, indices.length);
+    const canopy = new THREE.InstancedMesh(geometry.far, foliage, indices.length);
+    wood.name = `Courtyard branches cell ${key}`; canopy.name = `Courtyard canopy cell ${key}`;
+    for (const [slot, index] of indices.entries()) {
+      wood.setMatrixAt(slot, matrices[index]); canopy.setMatrixAt(slot, matrices[index]);
+      canopy.setColorAt(slot, colors[index]); clusterInstances[index] = {canopy, slot};
+    }
+    for (const mesh of [wood, canopy]) {
+      mesh.castShadow = true; mesh.receiveShadow = false; mesh.computeBoundingSphere(); clustered.add(mesh);
+    }
+  }
+  group.add(clustered);
   canonical.set(geometry.far, geometry.exported);
   group.userData.treeLOD = {source: 'projects/courtyard/src/trees.js + shared/leaves.js',
     leafSource: 'cgbookcase Maple Leaf 01 outline, CC0; no downloaded textures',
     nearTrees: 0, maxNearTrees: TREE_LIMITS.desktop, leavesPerTree: TREE_LIMITS.leavesPerTree,
+    clusterSize: TREE_LIMITS.clusterSize, clusters: cells.size, clustered: false,
     exportPolicy: 'All tree instances use the same camera-independent medium-detail canopy; display-only near leaves are removed.'};
   let selected = [], last = '';
   const frustum = new THREE.Frustum(), projection = new THREE.Matrix4(), inverse = new THREE.Matrix4();
   return {materials: [bark, foliage], extraGeometry: geometry.exported,
     update(camera, mobile = false) {
       const cap = mobile ? TREE_LIMITS.mobile : TREE_LIMITS.desktop, candidates = [];
+      group.updateWorldMatrix(true, false); inverse.copy(group.matrixWorld).invert();
+      const position = camera.getWorldPosition(new THREE.Vector3()).applyMatrix4(inverse);
+      const useClusters = camera.isPerspectiveCamera && position.y < 140;
+      clustered.visible = useClusters; branches.visible = crowns.visible = !useClusters;
       if (group.visible) {
-        group.updateWorldMatrix(true, false); inverse.copy(group.matrixWorld).invert();
-        const position = camera.getWorldPosition(new THREE.Vector3()).applyMatrix4(inverse);
         projection.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse); frustum.setFromProjectionMatrix(projection);
         for (const [index, tree] of placements.entries()) {
           const center = new THREE.Vector3(tree.position[0], 5, tree.position[1]);
@@ -104,15 +128,20 @@ export function createCampusTrees(group, placements) {
       const next = candidates.sort((a, b) => a.distance - b.distance || a.index - b.index).slice(0, cap).map(v => v.index);
       const key = next.join(',');
       if (key !== last) {
-        for (const i of selected) crowns.setMatrixAt(i, matrices[i]);
+        const updateCanopy = (index, matrix) => {
+          crowns.setMatrixAt(index, matrix);
+          const {canopy, slot} = clusterInstances[index];
+          canopy.setMatrixAt(slot, matrix); canopy.instanceMatrix.needsUpdate = true;
+        };
+        for (const i of selected) updateCanopy(i, matrices[i]);
         for (const [slot, i] of next.entries()) {
-          crowns.setMatrixAt(i, zero); leaves.setMatrixAt(slot, matrices[i]); leaves.setColorAt(slot, colors[i]);
+          updateCanopy(i, zero); leaves.setMatrixAt(slot, matrices[i]); leaves.setColorAt(slot, colors[i]);
         }
         leaves.count = next.length; leaves.instanceMatrix.needsUpdate = true;
         if (leaves.instanceColor) leaves.instanceColor.needsUpdate = true;
         crowns.instanceMatrix.needsUpdate = true; selected = next; last = key;
       }
-      Object.assign(group.userData.treeLOD, {nearTrees: next.length, maxNearTrees: cap});
+      Object.assign(group.userData.treeLOD, {nearTrees: next.length, maxNearTrees: cap, clustered: Boolean(useClusters)});
     },
   };
 }
@@ -124,8 +153,10 @@ export function prepareTreeExport(object) {
     const canopy = group.children.find(child => child.userData.campusTreeCanopy), geometry = canonical.get(canopy?.geometry);
     if (!canopy || !geometry) throw new Error('Missing canonical courtyard tree export geometry.');
     canopy.geometry = geometry; canopy.instanceMatrix.copy(branches.instanceMatrix);
+    branches.visible = canopy.visible = true;
     for (const child of [...group.children]) if (child.userData.campusTreeDisplayOnly) group.remove(child);
     group.userData.treeLOD.nearTrees = 0;
+    group.userData.treeLOD.clustered = false;
   });
   return object;
 }

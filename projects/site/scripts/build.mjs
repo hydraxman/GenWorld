@@ -4,6 +4,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildKnowledgePages } from '../../knowledge-tower/scripts/build-pages.mjs';
 import { scenes } from '../src/scenes.js';
+import {verifyPackedQingming} from '../../tsinghua-campus/scripts/pack-qingming.mjs';
 
 const site = path.resolve(import.meta.dirname, '..');
 const repository = path.resolve(site, '..', '..');
@@ -16,6 +17,7 @@ async function copy(source, destination) {
 }
 
 export async function buildSite() {
+  await verifyPackedQingming();
   await rm(output, { recursive: true, force: true });
   await mkdir(output, { recursive: true });
   const cards = scenes.map(scene => `<a class="scene-card ${scene.id}" href="scene.html?scene=${scene.id}">

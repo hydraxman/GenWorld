@@ -1,6 +1,7 @@
 import {createWaterShader} from '../../courtyard/src/water.js';
 import {createQingmingMicroTexture, qingmingWavesGLSL} from './qingming-reuse.js';
 import {campusSkyGLSL} from './campus-sky.js';
+import {DAYLIGHT_DIRECTION} from './daylight.js';
 
 export const CAMPUS_WATER_COLOR = '#6da4b2';
 export const WATER_REFLECTION_FADE = [220, 380];
@@ -12,6 +13,9 @@ export function createCampusWaterShader(THREE) {
   shader.uniforms.microNormal = {value: createQingmingMicroTexture()};
   shader.uniforms.campusSky = {value: null};
   shader.uniforms.reflectionFade = {value: new THREE.Vector2(...WATER_REFLECTION_FADE)};
+  shader.uniforms.campusSunDirection = {value: new THREE.Vector3(...DAYLIGHT_DIRECTION).normalize()};
+  shader.uniforms.campusSunColor = {value: new THREE.Color('#fff4e3')};
+  shader.uniforms.campusSunIntensity = {value: 3};
   shader.name = 'Campus water: filtered multi-scale ripples and shared planar reflection';
   shader.fragmentShader = `
     uniform vec3 color;
@@ -21,6 +25,9 @@ export function createCampusWaterShader(THREE) {
     uniform vec3 eye;
     uniform float reflectionEnabled;
     uniform vec2 reflectionFade;
+    uniform vec3 campusSunDirection;
+    uniform vec3 campusSunColor;
+    uniform float campusSunIntensity;
     varying vec4 reflectionUv;
     varying vec3 worldPosition;
 
@@ -49,9 +56,9 @@ export function createCampusWaterShader(THREE) {
         }
       }
       vec3 outgoing = mix(body, reflection, .55 + .4 * fresnel);
-      vec3 sunDirection = normalize(vec3(-24., 43., 32.));
+      vec3 sunDirection = normalize(campusSunDirection);
       float sparkle = pow(max(dot(reflect(-sunDirection, normal), viewDirection), 0.), 150.);
-      outgoing += vec3(1., .94, .8) * sparkle * .38;
+      outgoing += campusSunColor * sparkle * (.38 / 3.) * campusSunIntensity;
       gl_FragColor = vec4(outgoing, 1.);
       #include <tonemapping_fragment>
       #include <colorspace_fragment>

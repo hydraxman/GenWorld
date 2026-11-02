@@ -39,11 +39,12 @@ try {
       ['wing', [-119, 22, 67], [-83, 14, 41]],
       ['passage', [-137, 9, 20], [-81, 7.5, 20]],
       ['passage-east', [-47, 5.5, 20], [-110, 4.8, 20]],
+      ['wall-sign', [-99, 13.5, -40], [-120.3, 10.8, -32.85]],
     ];
     const captures = [];
     for (const [name, eye, target] of views) {
       if (device === 'mobile' && name === 'passage-east') continue;
-      for (const lighting of name === 'north' ? ['presentation', 'neutral', 'grazing'] : ['presentation']) {
+      for (const lighting of ['north', 'wall-sign'].includes(name) ? ['presentation', 'neutral', 'grazing'] : ['presentation']) {
         const capture = await page.evaluate(({eye, target, lighting, name, mobile}) => {
           const app = window.campusApp, camera = app.inspection().camera, scene = app.campus.group.parent;
           const root = app.campus.buildings.get('building:geometry:62d3ed181227f777a3fc0e1f');
@@ -51,7 +52,8 @@ try {
           source.updateWorldMatrix(true, true);
           const at = camera.position.clone().set(...target).applyMatrix4(source.matrixWorld);
           camera.position.set(...eye).applyMatrix4(source.matrixWorld);
-          if (mobile) camera.position.sub(at).multiplyScalar(name === 'north' ? 1.65 : name === 'passage' ? 1.3 : 2.1).add(at);
+          if (mobile) camera.position.sub(at).multiplyScalar(name === 'wall-sign' ? 1.35 : name === 'north' ? 1.65 : name === 'passage' ? 1.3 : 2.1).add(at);
+          if (name === 'wall-sign') camera.clearViewOffset();
           camera.lookAt(at); camera.updateMatrixWorld(true);
           const sun = scene.children.find(o => o.isDirectionalLight), fill = scene.children.find(o => o.isHemisphereLight);
           const previous = {position: sun.position.clone(), color: sun.color.clone(), sun: sun.intensity, fill: fill.intensity};
@@ -200,6 +202,34 @@ try {
             let support;
             detail.traverse(o => {if (o.userData.role === 'photo-supported-silver-support') support = o;});
             if (!support || support.userData.radius !== .98) throw new Error('The exported silver cylindrical support is missing.');
+            let lettering;
+            detail.traverse(o => {if (o.userData.role === 'photo-supported-sem-wall-lettering') lettering = o;});
+            if (!lettering || lettering.userData.lines?.join('|') !==
+                '清华大学|经济管理学院|SCHOOL OF ECONOMICS AND MANAGEMENT|TSINGHUA UNIVERSITY') {
+              throw new Error('The exported four-line wall sign is missing.');
+            }
+            if (lettering.children.length !== 4 ||
+                lettering.children.map(line => line.userData.text).join('|') !== lettering.userData.lines.join('|')) {
+              throw new Error('The exported wall lettering changed its line order or wording.');
+            }
+            for (const line of lettering.children) {
+              const mesh = line.children.find(o => o.isMesh);
+              if (!mesh || line.userData.role !== 'raised-sign-line') throw new Error('Exported wall lettering has no geometry.');
+              mesh.geometry.computeBoundingBox();
+              if (mesh.geometry.boundingBox.max.z - mesh.geometry.boundingBox.min.z < .06) {
+                throw new Error('Exported wall letters must remain raised, not a flat texture.');
+              }
+            }
+            for (const z of [-36, -34, -32, -30]) for (const y of [12, 18, 21, 24, 26, 29]) {
+              const start = new T.Vector3(-116, y, z).applyMatrix4(detail.matrixWorld);
+              const end = new T.Vector3(-124, y, z).applyMatrix4(detail.matrixWorld);
+              const hits = new T.Raycaster(start, end.clone().sub(start).normalize(), 0, start.distanceTo(end))
+                .intersectObject(detail, true);
+              if (y < 22.7 ? !/terracotta/i.test(hits[0]?.object.material.name || '') : hits.length) {
+                throw new Error(`Exported incorrect north return window or missing red wall: ${y}/${z}`);
+              }
+              rays++;
+            }
             const face = support.parent, [a, b] = face.userData.sourceEdge;
             const span = Math.hypot(b[0] - a[0], b[1] - a[1]);
             for (const z of [-1, -3.8, -5.7]) for (const y of [1.7, 4, 8.5]) {
