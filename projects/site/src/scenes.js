@@ -29,4 +29,10 @@ export const scenes = [
     detail: 'p5.js 交互 · 种子构图 · PNG 导出',
     source: 'scenes/wind-print/', number: '05',
   },
+  {
+    id: 'knowledge-atlas', title: '知序 · 知识形态', english: 'KNOWLEDGE ATLAS',
+    category: '知识 × 多重视角', description: '把同一份知识看成星团、城市、地铁与流向，在九种交互中连接概念、项目和证据。',
+    detail: '24个知识点 · 9种交互 · 论文灵感',
+    source: 'scenes/knowledge-atlas/', number: '06',
+  },
 ];

@@ -9,6 +9,7 @@
 | 项目 | 内容 |
 | --- | --- |
 | [知识学院](projects/knowledge-tower/README.md) | 可探索的软件工程知识大楼，包含学习热力图与概念测评 |
+| [知序 · 知识形态](projects/knowledge-atlas/README.md) | 完整的24知识点体系与9种交互：图谱、学习路线、证据矩阵、3D星团与城、地铁、径向轮、知识流和机制实验 |
 | [校园重建](projects/tsinghua-campus/README.md) | 地图与照片约束的校园模型、逐栋细化与模型导出 |
 | [舜德楼](projects/shunde/README.md) | 建筑、庭院与周边环境重建 |
 | [庭院建筑](projects/courtyard/) | 建筑查看器与分层构造示意 |
@@ -40,6 +41,8 @@ npm run build
 `npm run build:pages` 生成带导航的静态预览站点，`npm run test:pages` 检查发布内容。Pages 从 `gh-pages` 分支发布，主分支相关文件更新后自动构建；只打包精选场景及必要的许可素材，不发布参考照片或视频制作素材。
 
 构建后可运行 `npm run qa:pages`，用 Chrome 或 Edge 检查场景交互与移动端导航；浏览器位置可通过 `CHROME_PATH` 指定。
+
+知序完整保留人工整理的知识说明、先修与跨域关系、项目目标、证据边界和评价问题；公开版仅不分发原始教学文件、报告截图及论文全文，相关来源在页面中保留书目和作者公开链接。
 
 风向印刷所的构图逻辑可用 `npm run test:wind` 验证。其 p5.js 库独立分发，保留 LGPL 许可与源码；浏览器无需从第三方 CDN 加载脚本。
 

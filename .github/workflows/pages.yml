@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - projects/knowledge-tower/**
+      - projects/knowledge-atlas/**
       - projects/site/**
       - projects/courtyard/**
       - projects/shunde/**

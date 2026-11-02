@@ -69,6 +69,13 @@ export async function buildSite() {
       path.join(output, 'scenes', 'courtyard', 'assets', 'leaves', file));
   }
   await buildKnowledgePages(path.join(output, 'scenes', 'knowledge'));
+  for (const file of [
+    'index.html', 'knowledge-prototype.html', 'sources.html', 'sources.css',
+    'knowledge-experiments/gallery.js', 'knowledge-experiments/gallery.css',
+    'knowledge-prototype/app.js', 'knowledge-prototype/data.js', 'knowledge-prototype/style.css',
+    'knowledge-prototype/fish.svg', 'knowledge-prototype/snake.svg', 'knowledge-prototype/framework.svg',
+  ]) await copy(path.join(repository, 'projects', 'knowledge-atlas', file),
+    path.join(output, 'scenes', 'knowledge-atlas', file));
   for (const project of ['courtyard', 'tsinghua-campus']) {
     const campus = project === 'tsinghua-campus';
     const result = await build({

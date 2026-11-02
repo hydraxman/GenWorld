@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>知序 · 知识体系的三种打开方式</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="knowledge-prototype/style.css">
+  <script defer src="knowledge-prototype/data.js"></script>
+  <script defer src="knowledge-prototype/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">跳到主要内容</a>
+  <div id="app"></div>
+  <nav class="prototype-switcher" aria-label="网页方案切换">
+    <button id="previous-variant" aria-label="上一个方案">←</button>
+    <span><small>网页原型 / PROTOTYPE</small><strong id="variant-label"></strong></span>
+    <button id="next-variant" aria-label="下一个方案">→</button>
+  </nav>
+  <dialog id="source-dialog" aria-labelledby="source-title">
+    <div class="dialog-heading"><div><span class="eyebrow">SOURCE LIBRARY</span><h2 id="source-title">每一个连接，都有来处。</h2></div><button class="icon-button" id="close-sources" aria-label="关闭来源说明">×</button></div>
+    <p>这是基于教学材料的人工整理原型，不是官方课程、自动生成的完整知识图谱或学习测评系统。知识分类、连接、先修顺序与验收问题是整理建议。公开版仅提供书目与引用说明，不发布原始教学材料；项目配图为原创示意图，不是报告截图。<a href="./">打开六种扩展展示</a> · <a href="../../">返回 GenWorld</a></p>
+    <div id="source-list"></div>
+    <div class="notice"><strong>阅读边界</strong><p>PDF 页码按文件实际页序。机器学习文章是 ASR 与领域语境校订后的编者整理，未逐句听校；其补充公式不是教师原话。两段 MP4 未做内容识别，不作为知识或项目成果的证据。网页不上传材料、不调用外部服务；勾选仅在当前页面内存中生效。</p></div>
+  </dialog>
+  <noscript>此原型需要 JavaScript。请在浏览器中启用 JavaScript 后重新打开。</noscript>
+</body>
+</html>

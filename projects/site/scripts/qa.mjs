@@ -6,11 +6,12 @@ import puppeteer from 'puppeteer-core';
 import { output } from './build.mjs';
 import { scenes } from '../src/scenes.js';
 import { checkWindPrint } from '../../wind-print/scripts/browser-check.mjs';
+import { checkKnowledgeAtlas } from '../../knowledge-atlas/scripts/browser-check.mjs';
 import { checkCampusInspection, checkCampusExpansion, checkCampusZijing, checkCampusArchitecture, checkCampusPhotoAppearances, checkCampusLandscape } from '../../tsinghua-campus/scripts/browser-check.mjs';
 
 const screenshots = path.resolve(import.meta.dirname, '..', 'qa');
 const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript',
-  '.png': 'image/png', '.json': 'application/json', '.glb': 'model/gltf-binary' };
+  '.png': 'image/png', '.svg': 'image/svg+xml', '.json': 'application/json', '.glb': 'model/gltf-binary' };
 const server = createServer(async (request, response) => {
   const pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
   const relative = pathname.slice('/GenWorld/'.length);
@@ -106,6 +107,8 @@ try {
       assert.equal(await frame.$eval('#selected-references', element => element.hidden), true);
     } else if (scene.id === 'wind-print') {
       await checkWindPrint({ page, frame, browser, screenshots });
+    } else if (scene.id === 'knowledge-atlas') {
+      await checkKnowledgeAtlas({ page, frame, screenshots });
     } else {
       assert.ok(await frame.evaluate(() => window.__modelStats.triangles > 0));
       await frame.click('[data-shot="40.5"]');
