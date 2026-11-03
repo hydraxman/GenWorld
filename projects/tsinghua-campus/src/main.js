@@ -20,6 +20,7 @@ import {createDetailedDisplay, prepareDetailedExport} from './display-lod.js';
 import {prepareQingmingTextures} from './qingming-reuse.js';
 import {renderKnowledgeCard} from './knowledge-card.js';
 import {createKnowledgeHall} from './knowledge-hall.js';
+import {createCampusSurroundings} from './surroundings.js';
 
 const $ = id => document.getElementById(id);
 const outputPrefix = location.pathname.endsWith('/tsinghua-campus-offline.html') ? '' : 'output/';
@@ -102,15 +103,10 @@ async function main() {
   const siteCount = refinedSiteCount + landmarkIds.length;
   const coverage = createCoverage(campus, data, catalog);
   const bounds = new THREE.Box3().setFromObject(campus.group);
-  const center = bounds.getCenter(new THREE.Vector3());
   const size = bounds.getSize(new THREE.Vector3());
   const span = Math.max(size.x, size.z);
-  const ground = new THREE.Mesh(new THREE.PlaneGeometry(span * 5, span * 5),
-    new THREE.MeshStandardMaterial({color: '#edf0e3', roughness: 1}));
-  ground.rotation.x = -Math.PI / 2;
-  ground.position.set(center.x, -0.4, center.z);
-  ground.receiveShadow = true;
-  scene.add(ground);
+  const surroundings = createCampusSurroundings(data, campus.layers.green.children[0].material);
+  scene.add(surroundings.group);
   const perspective = new THREE.PerspectiveCamera(40, 1, 1, 30000);
   const plan = new THREE.OrthographicCamera(-1000, 1000, 1000, -1000, 1, 30000);
   let camera = perspective, planMode = false, selected = null, selectedPart = null;
@@ -151,6 +147,7 @@ async function main() {
     renderer.info.reset();
     try {
       if (!walker.active) updateInspectionClipping(camera, controls.target);
+      surroundings.update(camera);
       campus.updateArchitectureLOD(camera, $('architecture-details').checked, {maxBuilds: 2});
       detailedDisplay.update(camera, renderer.domElement.height);
       campus.updateTreeLOD(camera, compact.matches);
@@ -646,7 +643,7 @@ async function main() {
   }
   render();
   window.campusApp = {
-    ready: true, campus, data, coverage, select, selectApartment, selectGround, mode, exportSelectedModel, setSceneTime, detailedDisplay,
+    ready: true, campus, data, coverage, select, selectApartment, selectGround, mode, exportSelectedModel, setSceneTime, detailedDisplay, surroundings,
     visitBuilding, walkthrough: {state: walker.state, exit: walker.exit},
     knowledgeHall: {state: knowledgeHall.snapshot, pickTargets: knowledgeHall.pickTargets},
     selectedApartment: () => selectedPart?.userData.apartmentNumber ?? null,
@@ -658,14 +655,14 @@ async function main() {
       rendering: {environment: Boolean(scene.environment), contactShadows: Boolean(contactShadowsActive),
         toneMapping: renderer.toneMapping, environmentIntensity: scene.environmentIntensity,
         calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, geometries: renderer.info.memory.geometries,
-        textures: renderer.info.memory.textures, reflections: reflections.stats(), scenery: campus.scenery.stats(),
+        textures: renderer.info.memory.textures, reflections: reflections.stats(), scenery: campus.scenery.stats(), surroundings: surroundings.stats,
         detailedDisplay: detailedDisplay.stats()},
       shadowTexelMeters: (sun.shadow.camera.right - sun.shadow.camera.left) / sun.shadow.mapSize.x}),
   };
   draw();
   performance.mark('campus-ready');
   window.addEventListener('pagehide', event => {
-    if (!event.persisted) {knowledgeHall.dispose(); walker.dispose();}
+    if (!event.persisted) {knowledgeHall.dispose(); walker.dispose(); surroundings.dispose();}
   });
   $('loading').hidden = true;
   $('workspace').setAttribute('aria-busy', 'false');

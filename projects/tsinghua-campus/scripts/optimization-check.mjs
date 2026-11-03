@@ -85,7 +85,8 @@ try {
         `${device}/${view}: off-axis reflection does not cover the visible water: ${JSON.stringify(comparison.reflectionFraming)}`);
       assert.ok(comparison.changedFraction < .035, `${device}/${view}: display changed too many pixels: ${comparison.changedFraction}`);
       if (view === 'all' && comparison.optimized.detailedDisplay.batching) {
-        assert.ok(comparison.optimized.calls < 600);
+        assert.ok(comparison.optimized.surroundings.drawCalls <= 20);
+        assert.ok(comparison.optimized.calls < 600 + comparison.optimized.surroundings.drawCalls);
         assert.ok(comparison.optimized.calls < comparison.canonical.calls * .4);
         assert.ok(comparison.optimized.triangles < comparison.canonical.triangles * .6);
         assert.ok(comparison.optimized.detailedDisplay.batchGeometryBytes < 12 * 1024 ** 2);
