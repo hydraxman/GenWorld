@@ -29,10 +29,11 @@ export function stepVisitor(spec, from, delta) {
   return position;
 }
 
-export function createWalkthrough({camera, controls, canvas, panel, onChange}) {
+export function createWalkthrough({camera, controls, canvas, panel, onChange, onEnter = () => {}, onExit = () => {}}) {
   const keys = new Set(), held = new Set(), listeners = new AbortController();
   const options = {signal: listeners.signal};
   let anchor = null, spec = null, position, yaw = Math.PI, pitch = 0, snapshot = null, pointer = null, drag;
+  let suspended = false, obstacles = [];
   const editable = target => target?.isContentEditable || /^(INPUT|SELECT|TEXTAREA)$/.test(target?.tagName);
   const allowed = new Set(['w', 'a', 's', 'd', 'q', 'e', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright']);
   const updateCamera = () => {
@@ -51,6 +52,7 @@ export function createWalkthrough({camera, controls, canvas, panel, onChange}) {
   };
   const exit = () => {
     if (!anchor) return;
+    onExit(); suspended = false; obstacles = [];
     release(); anchor = null; spec = null; panel.hidden = true;
     document.getElementById('workspace').classList.remove('walking');
     camera.position.copy(snapshot.position); camera.quaternion.copy(snapshot.quaternion);
@@ -67,7 +69,7 @@ export function createWalkthrough({camera, controls, canvas, panel, onChange}) {
     onChange();
   };
   document.addEventListener('keydown', event => {
-    if (!anchor || editable(event.target)) return;
+    if (!anchor || suspended || editable(event.target)) return;
     if (event.key === 'Escape') {event.preventDefault(); exit(); return;}
     const key = event.key.toLowerCase();
     if (allowed.has(key) && !event.ctrlKey && !event.metaKey && !event.altKey) {event.preventDefault(); keys.add(key);}
@@ -76,11 +78,11 @@ export function createWalkthrough({camera, controls, canvas, panel, onChange}) {
   window.addEventListener('blur', release, options);
   document.addEventListener('visibilitychange', () => {if (document.hidden) release();}, options);
   canvas.addEventListener('pointerdown', event => {
-    if (!anchor || event.button !== 0 || pointer !== null) return;
+    if (!anchor || suspended || event.button !== 0 || pointer !== null) return;
     pointer = event.pointerId; drag = [event.clientX, event.clientY]; canvas.setPointerCapture(pointer);
   }, options);
   canvas.addEventListener('pointermove', event => {
-    if (!anchor || pointer !== event.pointerId) return;
+    if (!anchor || suspended || pointer !== event.pointerId) return;
     yaw -= (event.clientX - drag[0]) * .005;
     pitch = THREE.MathUtils.clamp(pitch - (event.clientY - drag[1]) * .004, -1.05, 1.05);
     drag = [event.clientX, event.clientY]; updateCamera();
@@ -96,7 +98,7 @@ export function createWalkthrough({camera, controls, canvas, panel, onChange}) {
   }
   panel.querySelector('#exit-building').addEventListener('click', exit, options);
   function update(seconds) {
-    if (!anchor) return false;
+    if (!anchor || suspended) return false;
     const active = (...names) => names.some(name => held.has(name) || keys.has(name));
     const forward = Number(active('forward', 'w', 'arrowup')) - Number(active('back', 's', 'arrowdown'));
     const right = Number(active('right', 'd', 'arrowright')) - Number(active('left', 'a', 'arrowleft'));
@@ -104,11 +106,14 @@ export function createWalkthrough({camera, controls, canvas, panel, onChange}) {
     if (!forward && !right && !turn) return false;
     const dt = Math.min(.15, Math.max(0, seconds)), speed = 2.4 * dt / Math.max(1, Math.hypot(forward, right));
     yaw += turn * dt * 1.3;
-    position = stepVisitor(spec, position, [(Math.sin(yaw) * forward - Math.cos(yaw) * right) * speed,
+    position = stepVisitor({...spec, obstacles: [...spec.obstacles, ...obstacles]}, position, [(Math.sin(yaw) * forward - Math.cos(yaw) * right) * speed,
       (Math.cos(yaw) * forward + Math.sin(yaw) * right) * speed]);
     updateCamera(); return true;
   }
   return {get active() {return Boolean(anchor);}, update, exit,
+    suspend() {release(); suspended = true;},
+    resume() {suspended = false; if (anchor) updateCamera();},
+    setObstacles(value) {obstacles = value;},
     enter(object) {
       if (!object?.userData.walkthrough) throw new Error('This building has no authored visitor lobby.');
       exit();
@@ -123,8 +128,9 @@ export function createWalkthrough({camera, controls, canvas, panel, onChange}) {
       panel.querySelector('#walk-title').textContent = spec.title;
       panel.querySelector('#walk-note').textContent = spec.limitations;
       panel.hidden = false; document.getElementById('workspace').classList.add('walking');
+      onEnter(object);
       panel.querySelector('#exit-building').focus({preventScroll: true}); updateCamera();
     },
-    state: () => ({active: Boolean(anchor), id: spec?.id ?? null, position: position ? [...position] : null, yaw, pitch}),
+    state: () => ({active: Boolean(anchor), suspended, id: spec?.id ?? null, position: position ? [...position] : null, yaw, pitch}),
     dispose() {exit(); listeners.abort();}};
 }

@@ -122,7 +122,7 @@ try {
   await page.screenshot({ path: path.join(root, 'qa', '04-algorithms.png'), fullPage: true });
 
   await page.click('#open-plan');
-  await page.waitForFunction(() => document.getElementById('plan-text').textContent.includes('192'));
+  await page.waitForFunction(() => document.getElementById('plan-text').textContent.includes('软件工程知识大楼'));
   assert.equal(await page.$eval('#plan-dialog', element => element.open), true);
   await page.keyboard.press('Escape');
   assert.equal(await page.$eval('#plan-dialog', element => element.open), false);

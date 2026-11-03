@@ -38,6 +38,7 @@ jobs:
       - run: npm ci
       - run: npm --prefix projects/tsinghua-campus ci --ignore-scripts
       - run: npm run test:knowledge
+      - run: npm run test:labs
       - run: npm run test:wind
       - name: Check campus reconstruction invariants
         run: >-

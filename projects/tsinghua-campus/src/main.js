@@ -19,6 +19,7 @@ import {createWalkthrough} from './walkthrough.js';
 import {createDetailedDisplay, prepareDetailedExport} from './display-lod.js';
 import {prepareQingmingTextures} from './qingming-reuse.js';
 import {renderKnowledgeCard} from './knowledge-card.js';
+import {createKnowledgeHall} from './knowledge-hall.js';
 
 const $ = id => document.getElementById(id);
 const outputPrefix = location.pathname.endsWith('/tsinghua-campus-offline.html') ? '' : 'output/';
@@ -133,8 +134,12 @@ async function main() {
   $('contact-shadows').checked = !compact.matches;
   let contactShadowsActive = false;
   const reflections = installCampusReflections(renderer, scene, campus, {compact: compact.matches, skyTexture});
+  let knowledgeHall;
   const walker = createWalkthrough({camera: perspective, controls, canvas: renderer.domElement,
-    panel: $('walk-controls'), onChange: () => {dirty = true;}});
+    panel: $('walk-controls'), onChange: () => {dirty = true;},
+    onEnter: object => knowledgeHall.enter(object), onExit: () => knowledgeHall.exit()});
+  knowledgeHall = createKnowledgeHall({scene, camera: perspective, canvas: renderer.domElement,
+    host: $('workspace'), walker, onChange: () => {dirty = true;}});
   let sceneTime = 0, lastMotion = performance.now();
   function setSceneTime(time) {
     reflections.setTime(time); campus.scenery.setTime(time); sceneTime = time; dirty = true;
@@ -189,6 +194,7 @@ async function main() {
     const sitebar = document.querySelector('.sitebar');
     $('message').style.top = `${sitebar.offsetTop + sitebar.offsetHeight + 12}px`;
     if (framedBounds && !walker.active) frame(framedBounds, framedPadding, camera.position.clone().sub(controls.target).normalize().toArray());
+    if (knowledgeHall.active) knowledgeHall.focus();
     dirty = true;
   }
   function frame(targetBounds, padding = 1.15, direction = [0.33, 0.92, 1.1]) {
@@ -344,10 +350,10 @@ async function main() {
   let pointerStart;
   renderer.domElement.addEventListener('pointerdown', event => { pointerStart = [event.clientX, event.clientY]; });
   renderer.domElement.addEventListener('pointerup', event => {
-    if (walker.active) return;
     if (event.button !== 0 || !pointerStart || Math.hypot(event.clientX - pointerStart[0], event.clientY - pointerStart[1]) > 5) return;
     const rect = renderer.domElement.getBoundingClientRect();
     pointer.set((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1);
+    if (walker.active) {knowledgeHall.pick(pointer); return;}
     raycaster.setFromCamera(pointer, camera);
     const pickable = ['building', 'landmark'].filter(kind => campus.layers[kind].visible).map(kind => campus.layers[kind]);
     const hit = raycaster.intersectObjects(pickable, true).find(result => {
@@ -552,6 +558,10 @@ async function main() {
       catch (error) {console.error(error); message(`进入失败：${error.message}`, true);}
     }
   });
+  $('enter-knowledge-hall').addEventListener('click', () => {
+    try {visitBuilding('shunde');}
+    catch (error) {console.error(error); message(`进入知识门厅失败：${error.message}`, true);}
+  });
   function viewScenery(name) {
     const view = campus.scenery.views[name];
     if (!view) throw new Error(`Unknown scenery view: ${name}`);
@@ -669,6 +679,7 @@ async function main() {
   window.campusApp = {
     ready: true, campus, data, coverage, select, selectApartment, selectGround, mode, exportSelectedModel, setSceneTime, detailedDisplay,
     visitBuilding, walkthrough: {state: walker.state, exit: walker.exit},
+    knowledgeHall: {state: knowledgeHall.snapshot, pickTargets: knowledgeHall.pickTargets},
     selectedApartment: () => selectedPart?.userData.apartmentNumber ?? null,
     stats: {buildings: buildings.length, features: data.features.length, refined: refinedIds.length, architecture: coverage.counts.architectureModelBuildingObjects,
       procedural: architectureIds.length,
@@ -684,6 +695,9 @@ async function main() {
   };
   draw();
   performance.mark('campus-ready');
+  window.addEventListener('pagehide', event => {
+    if (!event.persisted) {knowledgeHall.dispose(); walker.dispose();}
+  });
   $('loading').hidden = true;
   $('workspace').setAttribute('aria-busy', 'false');
   message(`已覆盖 ${buildings.length} 个冻结建筑轮廓：${architectureIds.length} 个程序估算、${refinedIds.length} 个照片参照。覆盖不等于照片级还原。`);

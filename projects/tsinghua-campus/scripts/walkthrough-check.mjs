@@ -57,14 +57,17 @@ try {
         const rect = await (await page.$('[data-walk="forward"]')).boundingBox();
         await page.mouse.move(rect.x + rect.width / 2, rect.y + rect.height / 2); await page.mouse.down();
       }
-      await page.waitForFunction(() => window.campusApp.walkthrough.state().position[1] < -3, {timeout: 15000});
+      // The new central teaching table stops a straight Shunde walk before z=-3.
+      const interiorLimit = kind === 'shunde' ? -2.75 : -3;
+      await page.waitForFunction(limit => window.campusApp.walkthrough.state().position[1] < limit, {timeout: 15000}, interiorLimit);
       if (device === 'desktop') await page.keyboard.up('w'); else await page.mouse.up();
       const state = await page.evaluate(() => {
         const app = window.campusApp; app.render(true);
         const canvas = document.getElementById('scene');
         return {...app.walkthrough.state(), camera: app.inspection().camera.position.toArray(), image: canvas.toDataURL()};
       });
-      assert.ok(state.position[1] < -3);
+      assert.ok(state.position[1] < interiorLimit);
+      if (kind === 'shunde') assert.ok(state.position[1] > -3, 'Visitor must stop before the pond table');
       await writeFile(resolve(output, `walk-${device}-${kind}-interior.png`), Buffer.from(state.image.split(',')[1], 'base64'));
       delete state.image;
       await page.screenshot({path: resolve(output, `walk-${device}-${kind}-interior-ui.png`)});

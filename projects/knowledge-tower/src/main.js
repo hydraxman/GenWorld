@@ -7,12 +7,17 @@ import { createKnowledgeTower } from './tower.js';
 import { EXHIBIT_DESCRIPTIONS } from './exhibits.js';
 import { createLearningUI } from './learning-ui.js';
 import { loadAcademyAssets } from './public-assets.js';
+import { LABS, ROOM_LABS } from '../../../shared/knowledge-labs/experiments.js';
+import { createLabExhibit } from '../../../shared/knowledge-labs/exhibit.js';
+import { createLabUI } from '../../../shared/knowledge-labs/ui.js';
+import { setLabViewport } from '../../../shared/knowledge-labs/camera.js';
 
 const $ = id => document.getElementById(id);
 let state = { ...INITIAL_STATE };
 let engine = null;
 let learning = null;
 let planLoaded = false;
+let labUI = null;
 const floorLabels = new Map();
 const roomLabels = [];
 
@@ -41,6 +46,7 @@ function action(handler) {
 }
 
 function dispatch(change) {
+  if (labUI?.active && ['floor', 'room', 'step', 'route', 'mode'].includes(change.type)) labUI.close();
   const previous = state;
   state = transition(state, change);
   if (['floor', 'room', 'step', 'route'].includes(change.type) && learning) learning.recordVisit(state.floor, state.roomId);
@@ -129,6 +135,11 @@ function paint() {
     label.classList.toggle('active', entry.id === state.roomId);
   });
   $('room-detail').hidden = !room;
+  $('room-lab-launch').hidden = !room || !ROOM_LABS[room.id];
+  if (room && ROOM_LABS[room.id]) {
+    $('room-lab-launch').textContent = `展开实验 · ${LABS[ROOM_LABS[room.id]].title}`;
+    $('room-lab-launch').dataset.lab = ROOM_LABS[room.id];
+  }
   $('floor-overview').hidden = Boolean(room);
   if (room) {
     const exhibit = EXHIBIT_DESCRIPTIONS[room.id];
@@ -179,6 +190,7 @@ function paint() {
 }
 
 function bindUI() {
+  document.querySelectorAll('[data-lab]').forEach(button => button.addEventListener('click', action(() => openExperiment(button.dataset.lab))));
   for (const id of ['floor-nav', 'floor-labels', 'route-stops']) {
     $(id).addEventListener('click', action(event => {
       const button = event.target.closest('[data-floor]');
@@ -233,6 +245,17 @@ function applyModelState() {
 
 function fitCamera() {
   const { camera, controls, tower } = engine;
+  if (engine.labView) {
+    const center = engine.labView.root.localToWorld(new THREE.Vector3(0, 1.98, 0));
+    const region = setLabViewport(camera, engine.width, engine.height);
+    const half = THREE.MathUtils.degToRad(60 / 2);
+    const distance = 2.1 / Math.sin(Math.min(half, Math.atan(Math.tan(half) * region.width / region.height)));
+    camera.fov = 60;
+    camera.position.copy(center).addScaledVector(new THREE.Vector3(.25, 1.15, 2).normalize(), distance);
+    camera.lookAt(center); camera.updateProjectionMatrix();
+    return;
+  }
+  camera.fov = 42;
   let center;
   let radius;
   if (state.mode === 'floor') {
@@ -291,6 +314,21 @@ function isVisible(object) {
   return true;
 }
 
+function openExperiment(id) {
+  if (!engine || !labUI) throw new Error('请等待三维场景加载后再进入实验。');
+  if (!LABS[id]) throw new Error('未知知识实验。');
+  labUI.close();
+  dispatch({type: 'room', id: LABS[id].roomId});
+  const gallery = engine.tower.pickables.find(object => object.userData.roomId === LABS[id].roomId);
+  const original = gallery.getObjectByName(`exhibit-${EXHIBIT_DESCRIPTIONS[LABS[id].roomId].type}`);
+  engine.labSource = original; original.visible = false;
+  engine.labView = createLabExhibit(id, {table: false, onChange: render});
+  gallery.add(engine.labView.root); gallery.updateWorldMatrix(true, true);
+  engine.controls.enabled = false;
+  labUI.open(id, engine.labView, `知识大厦 · ${LABS[id].roomId.split('-')[0]}F`);
+  fitCamera(); render();
+}
+
 function bindPicking(canvas) {
   const raycaster = new THREE.Raycaster();
   let start = null;
@@ -304,12 +342,19 @@ function bindPicking(canvas) {
     pointers.delete(event.pointerId);
     const origin = start;
     start = null;
+    if (labUI?.active) return;
     if (!origin || origin.id !== event.pointerId || event.button !== 0 || Math.hypot(event.clientX - origin.x, event.clientY - origin.y) > 6) return;
     const rect = canvas.getBoundingClientRect();
     const pointer = new THREE.Vector2((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1);
     raycaster.setFromCamera(pointer, engine.camera);
     const hit = raycaster.intersectObjects(engine.tower.pickables, true).find(entry => isVisible(entry.object));
-    if (hit) dispatch({ type: 'room', id: hit.object.userData.roomId });
+    if (hit) {
+      let exhibit = hit.object;
+      while (exhibit && exhibit.userData.role !== 'exhibit') exhibit = exhibit.parent;
+      const id = ROOM_LABS[hit.object.userData.roomId];
+      if (exhibit && id && state.mode === 'floor' && state.roomId === hit.object.userData.roomId) openExperiment(id);
+      else dispatch({ type: 'room', id: hit.object.userData.roomId });
+    }
   }));
 }
 
@@ -346,6 +391,12 @@ function initScene() {
   controls.minPolarAngle = .16;
   controls.enablePan = false;
   engine = { renderer, scene, tower, camera, controls, width: 1, height: 1 };
+  labUI = createLabUI({host: $('viewport'), onClose: () => {
+    engine.labView?.dispose(); engine.labView = null;
+    if (engine.labSource) engine.labSource.visible = true;
+    engine.labSource = null; controls.enabled = true; camera.clearViewOffset();
+    fitCamera(); render();
+  }});
   applyModelState();
   controls.addEventListener('change', render);
   const resize = () => {
@@ -377,6 +428,7 @@ function initScene() {
   window.__knowledgeStats = { floors: FLOORS.length, rooms: FLOORS.flatMap(floor => floor.rooms).length,
     topics: FLOORS.flatMap(floor => floor.rooms.flatMap(room => room.topics)).length, meshes, triangles };
   window.__knowledgeCamera = () => ({ position: camera.position.toArray(), target: controls.target.toArray(), aspect: camera.aspect });
+  window.__knowledgeLab = () => ({state: labUI.state(), view: engine.labView?.snapshot() ?? null});
   window.__knowledgePickTargets = () => {
     scene.updateMatrixWorld(true);
     return tower.pickables.filter(isVisible).map(object => {
@@ -397,11 +449,13 @@ function initScene() {
   });
   $('loading').hidden = true;
   window.__knowledgeReady = true;
-  window.addEventListener('pagehide', () => {
+  window.addEventListener('pagehide', event => {
+    if (event.persisted) return;
+    labUI.dispose();
     observer.disconnect();
     controls.dispose();
     renderer.dispose();
-  }, { once: true });
+  });
 }
 
 buildNavigation();
