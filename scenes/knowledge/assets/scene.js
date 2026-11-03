@@ -8924,11 +8924,11 @@
           object.boundingBox = this.boundingBox.toJSON();
         }
       }
-      function serialize(library, element2) {
-        if (library[element2.uuid] === void 0) {
-          library[element2.uuid] = element2.toJSON(meta);
+      function serialize(library, element3) {
+        if (library[element3.uuid] === void 0) {
+          library[element3.uuid] = element3.toJSON(meta);
         }
-        return element2.uuid;
+        return element3.uuid;
       }
       if (this.isScene) {
         if (this.background) {
@@ -31604,13 +31604,13 @@
      *
      * @param {HTMLElement} element - The DOM element to connect to.
      */
-    connect(element2) {
-      if (element2 === void 0) {
+    connect(element3) {
+      if (element3 === void 0) {
         warn("Controls: connect() now requires an element.");
         return;
       }
       if (this.domElement !== null) this.disconnect();
-      this.domElement = element2;
+      this.domElement = element3;
     }
     /**
      * Disconnects the controls from the DOM.
@@ -44280,8 +44280,8 @@ void main() {
       }
       this.update();
     }
-    connect(element2) {
-      super.connect(element2);
+    connect(element3) {
+      super.connect(element3);
       this.domElement.addEventListener("pointerdown", this._onPointerDown);
       this.domElement.addEventListener("pointercancel", this._onPointerUp);
       this.domElement.addEventListener("contextmenu", this._onContextMenu);
@@ -44519,17 +44519,17 @@ void main() {
     }
     // deltaX and deltaY are in pixels; right and down are positive
     _pan(deltaX, deltaY) {
-      const element2 = this.domElement;
+      const element3 = this.domElement;
       if (this.object.isPerspectiveCamera) {
         const position2 = this.object.position;
         _v.copy(position2).sub(this.target);
         let targetDistance = _v.length();
         targetDistance *= Math.tan(this.object.fov / 2 * Math.PI / 180);
-        this._panLeft(2 * deltaX * targetDistance / element2.clientHeight, this.object.matrix);
-        this._panUp(2 * deltaY * targetDistance / element2.clientHeight, this.object.matrix);
+        this._panLeft(2 * deltaX * targetDistance / element3.clientHeight, this.object.matrix);
+        this._panUp(2 * deltaY * targetDistance / element3.clientHeight, this.object.matrix);
       } else if (this.object.isOrthographicCamera) {
-        this._panLeft(deltaX * (this.object.right - this.object.left) / this.object.zoom / element2.clientWidth, this.object.matrix);
-        this._panUp(deltaY * (this.object.top - this.object.bottom) / this.object.zoom / element2.clientHeight, this.object.matrix);
+        this._panLeft(deltaX * (this.object.right - this.object.left) / this.object.zoom / element3.clientWidth, this.object.matrix);
+        this._panUp(deltaY * (this.object.top - this.object.bottom) / this.object.zoom / element3.clientHeight, this.object.matrix);
       } else {
         console.warn("WARNING: OrbitControls.js encountered an unknown camera type - pan disabled.");
         this.enablePan = false;
@@ -44584,9 +44584,9 @@ void main() {
     _handleMouseMoveRotate(event) {
       this._rotateEnd.set(event.clientX, event.clientY);
       this._rotateDelta.subVectors(this._rotateEnd, this._rotateStart).multiplyScalar(this.rotateSpeed);
-      const element2 = this.domElement;
-      this._rotateLeft(_twoPI * this._rotateDelta.x / element2.clientHeight);
-      this._rotateUp(_twoPI * this._rotateDelta.y / element2.clientHeight);
+      const element3 = this.domElement;
+      this._rotateLeft(_twoPI * this._rotateDelta.x / element3.clientHeight);
+      this._rotateUp(_twoPI * this._rotateDelta.y / element3.clientHeight);
       this._rotateStart.copy(this._rotateEnd);
       this.update();
     }
@@ -44719,9 +44719,9 @@ void main() {
         this._rotateEnd.set(x, y);
       }
       this._rotateDelta.subVectors(this._rotateEnd, this._rotateStart).multiplyScalar(this.rotateSpeed);
-      const element2 = this.domElement;
-      this._rotateLeft(_twoPI * this._rotateDelta.x / element2.clientHeight);
-      this._rotateUp(_twoPI * this._rotateDelta.y / element2.clientHeight);
+      const element3 = this.domElement;
+      this._rotateLeft(_twoPI * this._rotateDelta.x / element3.clientHeight);
+      this._rotateUp(_twoPI * this._rotateDelta.y / element3.clientHeight);
       this._rotateStart.copy(this._rotateEnd);
     }
     _handleTouchMovePan(event) {
@@ -45366,7 +45366,7 @@ void main() {
         ["\u6761\u4EF6\u6982\u7387\u4E0E\u8D1D\u53F6\u65AF", "\u6839\u636E\u6761\u4EF6\u66F4\u65B0\u6982\u7387\uFF0C\u533A\u5206\u5148\u9A8C\u3001\u4F3C\u7136\u4E0E\u540E\u9A8C\u3002"],
         ["\u968F\u673A\u53D8\u91CF\u4E0E\u5206\u5E03", "\u7528\u5206\u5E03\u523B\u753B\u79BB\u6563\u6216\u8FDE\u7EED\u7ED3\u679C\u53CA\u5176\u5047\u8BBE\u3002"],
         ["\u671F\u671B\u4E0E\u65B9\u5DEE", "\u671F\u671B\u63CF\u8FF0\u5E73\u5747\uFF0C\u65B9\u5DEE\u63CF\u8FF0\u5206\u6563\uFF0C\u4E24\u8005\u4E0D\u80FD\u4EE3\u66FF\u5C3E\u90E8\u98CE\u9669\u3002"]
-      ], "\u6A21\u62DF\u8BF7\u6C42\u5230\u8FBE\u548C\u7B49\u5F85\u65F6\u95F4\uFF0C\u6BD4\u8F83\u5747\u503C\u4E0E\u9AD8\u5206\u4F4D\u6570\u3002", ["13-3"]),
+      ], "\u5728\u8377\u5858\u5B9E\u9A8C\u53F0\u89C2\u5BDF\u9A6C\u5C14\u53EF\u592B\u94FE\uFF1A\u4ECE\u5F53\u524D\u8377\u53F6\u8BFB\u53D6\u8F6C\u79FB\u6982\u7387\uFF0C\u6BD4\u8F83\u5355\u6761\u8F68\u8FF9\u4E0E\u7406\u8BBA\u5206\u5E03\uFF1B\u6982\u7387\u4E0D\u662F\u5355\u6B21\u7ED3\u679C\u7684\u627F\u8BFA\u3002", ["13-3"]),
       room("\u7EDF\u8BA1\u63A8\u65AD", "\u6837\u672C\u80FD\u652F\u6301\u600E\u6837\u7684\u7ED3\u8BBA\uFF1F", [
         ["\u4F30\u8BA1\u4E0E\u533A\u95F4", "\u62A5\u544A\u4F30\u8BA1\u7684\u4E0D\u786E\u5B9A\u6027\uFF0C\u660E\u786E\u7F6E\u4FE1\u533A\u95F4\u7684\u91CD\u590D\u62BD\u6837\u89E3\u91CA\u3002"],
         ["\u5047\u8BBE\u68C0\u9A8C", "p \u503C\u4E0D\u662F\u5047\u8BBE\u4E3A\u771F\u7684\u6982\u7387\uFF1B\u8FD8\u8981\u8003\u8651\u6548\u5E94\u91CF\u548C\u591A\u91CD\u6BD4\u8F83\u3002"],
@@ -47733,10 +47733,10 @@ void main() {
     function openExam(number = selectedFloor) {
       examFloor = number;
       submitted = false;
-      const questions = getFloorAssessment(number);
+      const questions2 = getFloorAssessment(number);
       $("exam-title").textContent = `${String(number).padStart(2, "0")}F \xB7 ${getFloor(number).title} / ${profileId === "demo" ? "\u793A\u4F8B\u8BD5\u70BC" : "\u77E5\u8BC6\u8BD5\u70BC"}`;
       $("exam-questions").replaceChildren();
-      questions.forEach((question, index) => {
+      questions2.forEach((question, index) => {
         const fieldset = element("fieldset", "exam-question");
         fieldset.append(element("legend", "", `${index + 1}. ${question.prompt}`), element("span", "exam-room", getRoom(question.roomId).name));
         question.options.forEach((option, optionIndex) => {
@@ -50513,12 +50513,902 @@ void main() {
     return group;
   }
 
+  // shared/knowledge-labs/experiments.js
+  var LABS = Object.freeze({
+    graph: {
+      title: "\u6700\u77ED\u8DEF\u6C99\u76D8",
+      roomId: "4-4",
+      concept: "BFS / Dijkstra",
+      summary: "\u9053\u8DEF\u5C11\uFF0C\u4E0D\u4E00\u5B9A\u4EE3\u4EF7\u5C0F\u3002\u8C03\u6574\u8FB9\u6743\uFF0C\u89C2\u5BDF\u961F\u5217\u3001\u677E\u5F1B\u548C\u6700\u7EC8\u8DEF\u5F84\u3002"
+    },
+    list: {
+      title: "\u94FE\u8868\u64CD\u4F5C\u53F0",
+      roomId: "3-1",
+      concept: "\u8282\u70B9 / next / head",
+      summary: "\u8282\u70B9\u4E0D\u5FC5\u6328\u5728\u4E00\u8D77\uFF1B\u8FDE\u63A5\u5173\u7CFB\u7531 next \u51B3\u5B9A\u3002\u63D2\u5165\u3001\u5220\u9664\uFF0C\u518D\u9010\u6B65\u53CD\u8F6C\u6307\u9488\u3002"
+    },
+    markov: {
+      title: "\u8377\u5858\u91CC\u7684\u9A6C\u5C14\u53EF\u592B\u94FE",
+      roomId: "15-1",
+      concept: "\u72B6\u6001 / \u8F6C\u79FB\u6982\u7387",
+      summary: "\u9752\u86D9\u4E0B\u4E00\u8DF3\u53EA\u4F9D\u8D56\u5F53\u524D\u8377\u53F6\u3002\u6982\u7387\u51B3\u5B9A\u53EF\u80FD\u6027\uFF0C\u4E0D\u4FDD\u8BC1\u6BCF\u6B21\u7684\u7ED3\u679C\u3002"
+    }
+  });
+  var ROOM_LABS = Object.freeze(Object.fromEntries(Object.entries(LABS).map(([id, lab]) => [lab.roomId, id])));
+  var GRAPH_NODES = Object.freeze(["A", "B", "C", "D", "E", "F"]);
+  var GRAPH_EDGES = Object.freeze([
+    ["A", "B", 1],
+    ["B", "F", 9],
+    ["A", "C", 2],
+    ["C", "D", 2],
+    ["D", "E", 2],
+    ["E", "F", 2],
+    ["B", "D", 2],
+    ["C", "E", 6]
+  ].map(Object.freeze));
+  var DEFAULT_TRANSITIONS = Object.freeze([
+    [0, 0.1, 0.3, 0.6],
+    [0.4, 0, 0.4, 0.2],
+    [0.2, 0.5, 0, 0.3],
+    [0.6, 0.1, 0.3, 0]
+  ].map(Object.freeze));
+  function createGraph({ algorithm = "bfs", weights = GRAPH_EDGES.map((edge) => edge[2]) } = {}) {
+    if (!["bfs", "dijkstra"].includes(algorithm)) throw new TypeError("\u8BF7\u9009\u62E9 BFS \u6216 Dijkstra\u3002");
+    if (!Array.isArray(weights) || weights.length !== GRAPH_EDGES.length || weights.some((value) => !Number.isFinite(value) || value < 1 || value > 9)) {
+      throw new RangeError("\u672C\u6C99\u76D8\u7684\u8FB9\u6743\u5FC5\u987B\u4E3A 1\u20139 \u7684\u6709\u9650\u6570\u3002");
+    }
+    return {
+      kind: "graph",
+      algorithm,
+      weights: [...weights],
+      frontier: ["A"],
+      visited: [],
+      current: null,
+      distances: Object.fromEntries(GRAPH_NODES.map((id) => [id, id === "A" ? 0 : Infinity])),
+      previous: {},
+      path: [],
+      done: false,
+      steps: 0
+    };
+  }
+  function stepGraph(state2) {
+    if (state2.done) return state2;
+    const next = structuredClone(state2);
+    if (next.algorithm === "dijkstra") next.frontier.sort((a, b) => next.distances[a] - next.distances[b] || a.localeCompare(b));
+    const current = next.frontier.shift();
+    if (!current) {
+      next.done = true;
+      return next;
+    }
+    next.current = current;
+    next.visited.push(current);
+    next.steps++;
+    if (current === "F") {
+      next.done = true;
+      for (let id = current; id; id = next.previous[id]) next.path.unshift(id);
+      return next;
+    }
+    GRAPH_EDGES.forEach(([a, b], index) => {
+      const neighbor = a === current ? b : b === current ? a : null;
+      if (!neighbor || next.visited.includes(neighbor)) return;
+      const distance = next.distances[current] + next.weights[index];
+      const discovered = Number.isFinite(next.distances[neighbor]);
+      if (!discovered && next.algorithm === "bfs" || next.algorithm === "dijkstra" && distance < next.distances[neighbor]) {
+        next.distances[neighbor] = distance;
+        next.previous[neighbor] = current;
+        if (!next.frontier.includes(neighbor)) next.frontier.push(neighbor);
+      }
+    });
+    if (next.algorithm === "dijkstra") next.frontier.sort((a, b) => next.distances[a] - next.distances[b] || a.localeCompare(b));
+    return next;
+  }
+  function createList() {
+    return {
+      kind: "list",
+      nodes: [
+        { id: "n1", value: 7, next: "n2" },
+        { id: "n2", value: 13, next: "n3" },
+        { id: "n3", value: 21, next: null }
+      ],
+      head: "n1",
+      cursor: "n1",
+      previous: null,
+      visited: [],
+      mode: "traverse",
+      done: false,
+      serial: 4,
+      steps: 0,
+      message: "head \u6307\u5411 7\u3002\u5355\u6B65\u6CBF next \u8BBF\u95EE\uFF0C\u4E0D\u6309\u753B\u9762\u4F4D\u7F6E\u67E5\u627E\u3002"
+    };
+  }
+  function listOrder(state2, head = state2.head) {
+    const ids = [], seen = /* @__PURE__ */ new Set();
+    for (let id = head; id !== null; ) {
+      if (seen.has(id)) throw new Error("\u94FE\u8868\u51FA\u73B0\u73AF\uFF0C\u65E0\u6CD5\u4F5C\u4E3A\u7EBF\u6027\u94FE\u8868\u904D\u5386\u3002");
+      const node2 = state2.nodes.find((entry) => entry.id === id);
+      if (!node2) throw new Error("next \u6307\u5411\u4E0D\u5B58\u5728\u7684\u8282\u70B9\u3002");
+      seen.add(id);
+      ids.push(id);
+      id = node2.next;
+    }
+    return ids;
+  }
+  function editList(state2, action2, selected) {
+    if (state2.mode === "reverse" && !state2.done) throw new Error("\u8BF7\u5148\u5B8C\u6210\u672C\u8F6E\u53CD\u8F6C\uFF0C\u518D\u4FEE\u6539\u8282\u70B9\u3002");
+    if (!["insert", "delete"].includes(action2)) throw new Error("\u672A\u77E5\u94FE\u8868\u64CD\u4F5C\u3002");
+    const next = structuredClone(state2), node2 = next.nodes.find((entry) => entry.id === selected);
+    if (!node2) throw new Error("\u8BF7\u5148\u9009\u62E9\u4E00\u4E2A\u5B58\u5728\u7684\u8282\u70B9\u3002");
+    if (action2 === "insert") {
+      if (next.nodes.length >= 6) throw new Error("\u9996\u7248\u5C55\u53F0\u6700\u591A\u5C55\u793A\u516D\u4E2A\u8282\u70B9\uFF1B\u53EF\u5148\u5220\u9664\u8282\u70B9\u6216\u91CD\u7F6E\u3002");
+      const added = { id: `n${next.serial}`, value: next.serial * 8 + 2, next: node2.next };
+      next.serial++;
+      node2.next = added.id;
+      next.nodes.push(added);
+      next.message = `\u5148\u4FDD\u5B58\u539F next\uFF0C\u518D\u4EE4\u65B0\u8282\u70B9\u63A5\u5411\u540E\u7EE7\uFF0C\u6700\u540E\u8BA9 ${node2.value}.next \u6307\u5411 ${added.value}\u3002`;
+    } else {
+      if (next.nodes.length === 1) throw new Error("\u9996\u7248\u5C55\u53F0\u4FDD\u7559\u81F3\u5C11\u4E00\u4E2A\u8282\u70B9\uFF1B\u53EF\u91CD\u7F6E\u521D\u59CB\u94FE\u8868\u3002");
+      for (const entry of next.nodes) if (entry.next === node2.id) entry.next = node2.next;
+      if (next.head === node2.id) next.head = node2.next;
+      next.nodes = next.nodes.filter((entry) => entry.id !== node2.id);
+      next.message = `\u5DF2\u8DF3\u8FC7\u8282\u70B9 ${node2.value}\uFF1A\u66F4\u65B0\u524D\u9A71 next\uFF1B\u82E5\u5220\u9664\u5934\u8282\u70B9\uFF0C\u5219\u66F4\u65B0 head\u3002`;
+    }
+    next.mode = "traverse";
+    next.cursor = next.head;
+    next.previous = null;
+    next.visited = [];
+    next.done = false;
+    next.steps = 0;
+    return next;
+  }
+  function stepList(state2, mode = "traverse") {
+    if (!["traverse", "reverse"].includes(mode)) throw new Error("\u672A\u77E5\u94FE\u8868\u6A21\u5F0F\u3002");
+    if (state2.mode === "reverse" && !state2.done && mode !== "reverse") throw new Error("\u53CD\u8F6C\u5C1A\u672A\u5B8C\u6210\uFF0C\u8BF7\u7EE7\u7EED\u5355\u6B65\u6216\u91CD\u7F6E\u3002");
+    const next = structuredClone(state2);
+    if (next.mode !== mode || next.done) {
+      next.mode = mode;
+      next.cursor = next.head;
+      next.previous = null;
+      next.visited = [];
+      next.done = false;
+      next.steps = 0;
+    }
+    const current = next.nodes.find((node2) => node2.id === next.cursor);
+    if (!current) throw new Error("\u5F53\u524D\u94FE\u8868\u6E38\u6807\u65E0\u6548\u3002");
+    const following = current.next;
+    next.visited.push(current.id);
+    next.steps++;
+    if (mode === "reverse") {
+      current.next = next.previous;
+      next.message = `\u4FDD\u5B58 next \u2192 ${following ?? "null"}\uFF1B${current.value}.next \u2192 ${next.previous ?? "null"}\uFF1B\u518D\u63A8\u8FDB prev \u548C current\u3002`;
+      next.previous = current.id;
+    } else next.message = `\u8BBF\u95EE ${current.value}\uFF0C\u4E0B\u4E00\u8282\u70B9\u4E3A ${following ?? "null"}\u3002\u8BFB\u53D6\u7B2C k \u4E2A\u8282\u70B9\u9700\u6CBF\u6307\u9488\u524D\u8FDB\u3002`;
+    next.cursor = following;
+    if (following === null) {
+      next.done = true;
+      if (mode === "reverse") {
+        next.head = next.previous;
+        next.message = "\u53CD\u8F6C\u5B8C\u6210\uFF1Ahead = prev\u3002\u8282\u70B9\u503C\u6CA1\u53D8\uFF0Cnext \u65B9\u5411\u5168\u90E8\u6539\u53D8\u3002";
+      } else next.message += " \u5DF2\u5230\u94FE\u5C3E\u3002";
+    }
+    return next;
+  }
+  function validateTransitions(matrix) {
+    if (!Array.isArray(matrix) || matrix.length !== 4 || matrix.some((row) => !Array.isArray(row) || row.length !== 4 || row.some((p) => !Number.isFinite(p) || p < 0 || p > 1) || Math.abs(row.reduce((a, b) => a + b, 0) - 1) > 1e-9)) {
+      throw new RangeError("\u6BCF\u884C\u5FC5\u987B\u6709\u56DB\u4E2A 0\u20131 \u7684\u6982\u7387\uFF0C\u4E14\u603B\u548C\u4E3A 1\uFF1B\u4E0D\u4F1A\u81EA\u52A8\u5F52\u4E00\u5316\u3002");
+    }
+  }
+  function createMarkov({ matrix = DEFAULT_TRANSITIONS, seed = 2026 } = {}) {
+    validateTransitions(matrix);
+    if (!Number.isInteger(seed) || seed < 0 || seed > 4294967295) throw new RangeError("\u968F\u673A\u79CD\u5B50\u5FC5\u987B\u662F\u65E0\u7B26\u53F7 32 \u4F4D\u6574\u6570\u3002");
+    return {
+      kind: "markov",
+      matrix: matrix.map((row) => [...row]),
+      seed,
+      randomState: seed,
+      current: 0,
+      previous: 0,
+      steps: 0,
+      counts: [0, 0, 0, 0],
+      departures: [0, 0, 0, 0],
+      transitions: matrix.map(() => [0, 0, 0, 0]),
+      distribution: [1, 0, 0, 0],
+      sample: null
+    };
+  }
+  function sampleDestination(row, random) {
+    if (!Number.isFinite(random) || random < 0 || random >= 1) throw new RangeError("\u62BD\u6837\u503C\u5FC5\u987B\u5728 [0, 1) \u5185\u3002");
+    if (!Array.isArray(row) || row.length !== 4 || row.some((p) => !Number.isFinite(p) || p < 0 || p > 1) || Math.abs(row.reduce((a, b) => a + b, 0) - 1) > 1e-9) throw new RangeError("\u8F6C\u79FB\u884C\u4E0D\u662F\u6709\u6548\u6982\u7387\u5206\u5E03\u3002");
+    let cumulative = 0;
+    for (let i = 0; i < row.length; i++) {
+      cumulative += row[i];
+      if (row[i] > 0 && (random < cumulative || i === row.findLastIndex((p) => p > 0))) return i;
+    }
+    throw new Error("\u62BD\u6837\u672A\u843D\u5728\u6709\u6548\u533A\u95F4\u3002");
+  }
+  function stepMarkov(state2, count = 1) {
+    if (!Number.isInteger(count) || count < 1 || count > 100) throw new RangeError("\u6BCF\u6B21\u8FD0\u884C 1\u2013100 \u8DF3\u3002");
+    const next = structuredClone(state2);
+    for (let i = 0; i < count; i++) {
+      next.randomState = Math.imul(1664525, next.randomState) + 1013904223 >>> 0;
+      next.sample = next.randomState / 4294967296;
+      next.previous = next.current;
+      next.current = sampleDestination(next.matrix[next.previous], next.sample);
+      next.departures[next.previous]++;
+      next.transitions[next.previous][next.current]++;
+      next.counts[next.current]++;
+      next.steps++;
+      next.distribution = next.matrix.map((_, column) => next.distribution.reduce((sum, p, row) => sum + p * next.matrix[row][column], 0));
+    }
+    return next;
+  }
+  function initialExperiment(id) {
+    if (id === "graph") return createGraph();
+    if (id === "list") return createList();
+    if (id === "markov") return createMarkov();
+    throw new Error(`\u672A\u77E5\u5B9E\u9A8C\uFF1A${id}`);
+  }
+  function questions(id) {
+    if (id === "graph") return [
+      { text: "\u9ED8\u8BA4\u6C99\u76D8\u4E2D\uFF0CBFS \u627E\u5230 A\u2192B\u2192F\u3002\u5B83\u6700\u5C0F\u5316\u4EC0\u4E48\uFF1F", options: ["\u603B\u8FB9\u6743", "\u7ECF\u8FC7\u7684\u8FB9\u6570", "\u8BBF\u95EE\u8282\u70B9\u7684\u5B57\u6BCD\u987A\u5E8F"], correct: 1, why: "BFS \u6309\u5C42\u6269\u5C55\uFF0C\u4FDD\u8BC1\u6700\u5C11\u8FB9\u6570\uFF1B\u9ED8\u8BA4\u8FD9\u6761\u8DEF\u6743\u91CD\u4E3A 10\uFF0C\u5E76\u975E\u6700\u5C0F\u603B\u6743\u91CD\u3002" },
+      { text: "\u9ED8\u8BA4\u6C99\u76D8\u4E2D\uFF0CDijkstra \u7684\u6700\u5C0F\u603B\u6743\u91CD\u662F\u591A\u5C11\uFF1F", options: ["7", "10", "2"], correct: 0, why: "A\u2192B\u2192D\u2192E\u2192F \u7684\u4EE3\u4EF7\u662F 1+2+2+2=7\uFF0C\u6BD4\u4E24\u6761\u8FB9\u7684\u8DEF\u7EBF\u66F4\u4FBF\u5B9C\u3002" },
+      { text: "\u628A\u4E00\u4E2A\u8FB9\u6743\u6539\u4E3A\u8D1F\u6570\uFF0C\u53EF\u4EE5\u76F4\u63A5\u7167\u7528\u6807\u51C6 Dijkstra \u5417\uFF1F", options: ["\u53EF\u4EE5\uFF0C\u6743\u91CD\u4E0D\u5F71\u54CD\u6B63\u786E\u6027", "\u4E0D\u53EF\u4EE5\uFF0C\u9700\u8981\u91CD\u65B0\u9009\u62E9\u7B97\u6CD5\u5E76\u5206\u6790\u8D1F\u73AF", "\u53EA\u8981\u8282\u70B9\u5C11\u5C31\u53EF\u4EE5"], correct: 1, why: "\u6807\u51C6 Dijkstra \u4F9D\u8D56\u975E\u8D1F\u6743\u3002\u8FD9\u4E2A\u521D\u7248\u53EA\u5141\u8BB8\u6B63\u6743\uFF0C\u4E0D\u80FD\u628A\u5B83\u7684\u7ED3\u679C\u5916\u63A8\u5230\u8D1F\u6743\u56FE\u3002" }
+    ];
+    if (id === "list") return [
+      { text: "\u5DF2\u6301\u6709\u8282\u70B9 X\uFF0C\u8981\u628A Y \u63D2\u5728\u5B83\u540E\u9762\uFF0C\u5B89\u5168\u987A\u5E8F\u662F\u4EC0\u4E48\uFF1F", options: ["X.next=Y\uFF1BY.next=X.next", "Y.next=X.next\uFF1BX.next=Y", "\u53EA\u4FEE\u6539 Y \u7684\u503C"], correct: 1, why: "\u5FC5\u987B\u5148\u4FDD\u7559\u539F\u540E\u7EE7\u3002\u53CD\u8FC7\u6765\u4F1A\u4E22\u6389\u65E7\u94FE\u63A5\uFF0C\u5E76\u53EF\u80FD\u8BA9 Y \u6307\u5411\u81EA\u5DF1\u3002" },
+      { text: "\u9010\u6B65\u53CD\u8F6C\u65F6\uFF0C\u6539\u5199 current.next \u4E4B\u524D\u5FC5\u987B\u4FDD\u5B58\u4EC0\u4E48\uFF1F", options: ["\u539F next", "\u94FE\u8868\u957F\u5EA6", "\u6700\u5927\u8282\u70B9\u503C"], correct: 0, why: "\u539F next \u662F\u5C1A\u672A\u5904\u7406\u90E8\u5206\u7684\u5165\u53E3\uFF1B\u4E0D\u4FDD\u5B58\u5C31\u65E0\u6CD5\u7EE7\u7EED\u5411\u524D\u3002" },
+      { text: "\u5355\u94FE\u8868\u8BFB\u53D6\u7B2C k \u4E2A\u8282\u70B9\uFF0C\u901A\u5E38\u9700\u8981\u4EC0\u4E48\uFF1F", options: ["\u76F4\u63A5\u7528\u4E0B\u6807 O(1) \u5B9A\u4F4D", "\u4ECE head \u6CBF next \u904D\u5386\uFF0CO(k)", "\u5148\u5BF9\u8282\u70B9\u503C\u6392\u5E8F"], correct: 1, why: "\u94FE\u8868\u6CA1\u6709\u6570\u7EC4\u7684\u8FDE\u7EED\u5BFB\u5740\u6761\u4EF6\u3002\u5DF2\u77E5\u524D\u9A71\u7684\u63D2\u5165\u53EF\u4EE5 O(1)\uFF0C\u5BFB\u627E\u524D\u9A71\u672C\u8EAB\u4ECD\u9700\u8981\u904D\u5386\u3002" }
+    ];
+    if (id === "markov") return [
+      { text: "\u4ECE A \u8DF3\u5230 D \u7684\u6982\u7387\u4E3A 0.6\uFF0C\u662F\u5426\u610F\u5473\u7740\u4E0B\u4E00\u8DF3\u4E00\u5B9A\u5230 D\uFF1F", options: ["\u4E00\u5B9A\u5230 D", "\u4E0D\u4E00\u5B9A\uFF0C\u53EA\u662F D \u6700\u6709\u53EF\u80FD", "\u524D\u4E09\u8DF3\u540E\u624D\u751F\u6548"], correct: 1, why: "0.6 \u662F\u6761\u4EF6\u6982\u7387\uFF0C\u4E0D\u662F\u627F\u8BFA\u3002\u5355\u6B21\u7ED3\u679C\u53EF\u4EE5\u662F B\u3001C \u6216 D\u3002" },
+      { text: "\u8FD9\u53EA\u9752\u86D9\u5DF2\u7ECF\u5230 C\uFF0C\u4E0B\u4E00\u8DF3\u5E94\u8BE5\u8BFB\u53D6\u54EA\u4E00\u884C\uFF1F", options: ["\u59CB\u7EC8\u8BFB\u53D6 A \u884C", "\u8BFB\u53D6 C \u884C\uFF0C\u4E0E\u66F4\u65E9\u7684\u8DEF\u5F84\u65E0\u5173", "\u628A\u6240\u6709\u884C\u76F8\u52A0"], correct: 1, why: "\u672C\u6A21\u578B\u662F\u9F50\u6B21\u4E00\u9636\u9A6C\u5C14\u53EF\u592B\u94FE\uFF1A\u7ED9\u5B9A\u5F53\u524D\u72B6\u6001\uFF0C\u4E0B\u4E00\u6B65\u5206\u5E03\u4E0D\u518D\u4F9D\u8D56\u66F4\u65E9\u5386\u53F2\u3002" },
+      { text: "\u4ECE A \u72EC\u7ACB\u51FA\u53D1\u62BD\u6837\u5341\u6B21\uFF0C\u4E00\u5B9A\u6709\u516D\u6B21\u5230 D \u5417\uFF1F", options: ["\u4E00\u5B9A\uFF0C0.6\xD710=6", "\u4E0D\u4E00\u5B9A\uFF0C6 \u662F\u671F\u671B\u6B21\u6570", "\u4E00\u5B9A\u81F3\u5C11\u516D\u6B21"], correct: 1, why: "\u6709\u9650\u6837\u672C\u4F1A\u6CE2\u52A8\u3002\u53E6\u5916\uFF0C\u8FDE\u7EED\u8DF3\u5341\u6B21\u4F1A\u7ECF\u8FC7\u4E0D\u540C\u8D77\u70B9\uFF0C\u4E0D\u80FD\u5F53\u6210\u5341\u6B21\u90FD\u4ECE A \u51FA\u53D1\u3002" }
+    ];
+    throw new Error(`\u672A\u77E5\u9898\u5E93\uFF1A${id}`);
+  }
+
+  // shared/knowledge-labs/exhibit.js
+  var graphPositions = [
+    [-1.3, 0.22, 0],
+    [-0.6, 0.22, -0.72],
+    [-0.65, 0.22, 0.72],
+    [0.2, 0.22, 0],
+    [0.75, 0.22, 0.72],
+    [1.35, 0.22, -0.55]
+  ];
+  var pads = [[-1.05, 0.14, 0.6], [-0.75, 0.14, -0.64], [0.65, 0.14, -0.64], [1.05, 0.14, 0.6]];
+  function disposeExhibitTree(group) {
+    const resources = /* @__PURE__ */ new Set();
+    group.traverse((object) => {
+      if (object.geometry) resources.add(object.geometry);
+      for (const material of [].concat(object.material ?? [])) {
+        resources.add(material);
+        for (const value of Object.values(material)) if (value?.isTexture) resources.add(value);
+      }
+    });
+    for (const resource of resources) resource.dispose();
+  }
+  function createLabExhibit(id, { table = true, labels = typeof document !== "undefined", onChange = () => {
+  } } = {}) {
+    if (!LABS[id]) throw new Error(`\u672A\u77E5\u5C55\u53F0\uFF1A${id}`);
+    const root = new Group();
+    root.name = `knowledge-lab-${id}`;
+    root.userData = { knowledgeLab: id, illustrative: true };
+    const platform = new Group(), diagram = new Group();
+    root.add(platform, diagram);
+    let state2 = initialExperiment(id), expanded = false, lift = 0, targetLift = 0, frame = null, animation = null, frog = null;
+    const motion = typeof matchMedia === "function" ? matchMedia("(prefers-reduced-motion: reduce)") : null;
+    const material = (color) => new MeshStandardMaterial({ color, roughness: 0.7, metalness: 0.04 });
+    function mesh(parent, name, geometry, color, position2, scale = [1, 1, 1]) {
+      const object = new Mesh(geometry, material(color));
+      object.name = name;
+      object.position.set(...position2);
+      object.scale.set(...scale);
+      object.castShadow = true;
+      object.receiveShadow = true;
+      parent.add(object);
+      return object;
+    }
+    const box = (parent, name, color, position2, scale) => mesh(parent, name, new BoxGeometry(1, 1, 1), color, position2, scale);
+    const ball = (parent, name, color, position2, scale) => mesh(parent, name, new SphereGeometry(1, 14, 9), color, position2, scale);
+    function label(parent, text, position2, width = 0.48, background = "#183f49") {
+      if (!labels) return;
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      if (!ctx) throw new Error("\u65E0\u6CD5\u521B\u5EFA\u5C55\u53F0\u6587\u5B57\u753B\u5E03\u3002");
+      ctx.font = "600 72px sans-serif";
+      canvas.width = Math.ceil(ctx.measureText(text).width) + 32;
+      canvas.height = 112;
+      ctx.fillStyle = background;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "600 72px sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(text, canvas.width / 2, 58);
+      const map = new CanvasTexture(canvas);
+      map.colorSpace = SRGBColorSpace;
+      const object = new Sprite(new SpriteMaterial({ map, toneMapped: false, depthTest: true }));
+      object.name = `label-${text}`;
+      object.position.set(...position2);
+      object.scale.set(width, width * canvas.height / canvas.width, 1);
+      parent.add(object);
+    }
+    function link(parent, name, from, to, color, { arrow = false, labelText, radius = 0.025, trim = 0.22 } = {}) {
+      const a = new Vector3(...from), b = new Vector3(...to), direction = b.clone().sub(a).normalize();
+      a.addScaledVector(direction, trim);
+      b.addScaledVector(direction, -trim);
+      const object = mesh(
+        parent,
+        name,
+        new CylinderGeometry(radius, radius, a.distanceTo(b), 8),
+        color,
+        a.clone().add(b).multiplyScalar(0.5).toArray()
+      );
+      object.quaternion.setFromUnitVectors(new Vector3(0, 1, 0), direction);
+      if (arrow) {
+        const tip = mesh(parent, `${name}-arrow`, new ConeGeometry(0.075, 0.17, 8), color, b.toArray());
+        tip.quaternion.copy(object.quaternion);
+      }
+      if (labelText) label(
+        parent,
+        labelText,
+        a.clone().lerp(b, 0.48).add(new Vector3(0, 0.12, 0)).toArray(),
+        labelText.endsWith("%") ? 0.45 : 0.2
+      );
+    }
+    if (table) {
+      box(platform, "exhibit-table", "#e4d9bd", [0, 1.02, 0], [3.15, 0.14, 2.05]);
+      box(platform, "pedestal", "#344d4b", [0, 0.5, 0], [0.75, 1, 1.15]);
+      box(platform, "pedestal-foot", "#b8b4a2", [0, 0.06, 0], [1.15, 0.12, 1.5]);
+      label(platform, LABS[id].title, [0, 0.8, 1.05], 2.6);
+    }
+    function build() {
+      disposeExhibitTree(diagram);
+      diagram.clear();
+      frog = null;
+      const active = "#e4a949", idle = "#62a998", dark = "#284e58";
+      if (id === "graph") {
+        box(diagram, "graph-ground", "#e9e2cb", [0, 0, 0], [3.3, 0.08, 2]);
+        GRAPH_EDGES.forEach(([a, b], i) => {
+          const inPath = state2.path.some((node2, n) => n && (node2 === a && state2.path[n - 1] === b || node2 === b && state2.path[n - 1] === a));
+          link(
+            diagram,
+            `graph-edge-${a}-${b}`,
+            graphPositions[GRAPH_NODES.indexOf(a)],
+            graphPositions[GRAPH_NODES.indexOf(b)],
+            inPath ? "#c87914" : "#739594",
+            { labelText: String(state2.weights[i]), radius: inPath ? 0.05 : 0.022 }
+          );
+        });
+        GRAPH_NODES.forEach((node2, i) => {
+          ball(
+            diagram,
+            `graph-node-${node2}`,
+            state2.current === node2 ? active : state2.visited.includes(node2) ? idle : dark,
+            graphPositions[i],
+            [0.18, 0.18, 0.18]
+          );
+          const p = [...graphPositions[i]];
+          p[1] += 0.4;
+          label(diagram, node2, p, 0.24);
+        });
+      } else if (id === "list") {
+        box(diagram, "list-ground", "#e9e2cb", [0, -0.02, 0], [3.3, 0.08, 2]);
+        const positions = new Map(state2.nodes.map((node2, i) => [node2.id, [-1.12 + i % 3 * 1.12, 0.2, i < 3 ? -0.45 : 0.6]]));
+        for (const node2 of state2.nodes) {
+          const p = positions.get(node2.id);
+          box(diagram, `list-node-${node2.id}`, node2.id === state2.cursor ? active : state2.visited.includes(node2.id) ? idle : dark, p, [0.62, 0.3, 0.38]);
+          label(diagram, String(node2.value), [p[0], p[1] + 0.29, p[2]], 0.35);
+          if (node2.next) link(diagram, `next-${node2.id}-${node2.next}`, p, positions.get(node2.next), "#b7761e", { arrow: true, trim: 0.42 });
+          else label(diagram, "null", [p[0], 0.23, p[2] + 0.37], 0.42);
+          const tags = [];
+          if (node2.id === state2.head) tags.push("head");
+          if (node2.id === state2.previous && state2.mode === "reverse") tags.push("prev");
+          if (node2.id === state2.cursor) tags.push("cur");
+          if (tags.length) label(diagram, tags.join(" / "), [p[0], 0.84, p[2]], 0.85);
+        }
+      } else {
+        const pond = mesh(diagram, "pond-water", new CylinderGeometry(1, 1, 0.1, 48), "#66bbc5", [0, 0, 0], [1.7, 1, 1.15]);
+        pond.material.roughness = 0.24;
+        for (let i = 0; i < pads.length; i++) {
+          const shape = new Shape();
+          shape.moveTo(0, 0);
+          shape.absarc(0, 0, 0.33, 0.22, Math.PI * 2 - 0.22, false);
+          shape.lineTo(0, 0);
+          const leaf = mesh(
+            diagram,
+            `lily-pad-${i}`,
+            new ShapeGeometry(shape, 24),
+            i === state2.current ? "#6a953a" : "#39846b",
+            pads[i]
+          );
+          leaf.rotation.x = -Math.PI / 2;
+          const [x, y, z] = pads[i];
+          label(diagram, "ABCD"[i], [x, y + 0.19, z + 0.34], 0.24);
+          if (i === state2.current && state2.matrix[i][i] > 0) {
+            label(diagram, `\u539F\u5730 ${Math.round(state2.matrix[i][i] * 100)}%`, [x, y + 0.65, z], 0.9);
+          }
+          if (i !== state2.current && state2.matrix[state2.current][i] > 0) {
+            const from = [...pads[state2.current]], to = [...pads[i]];
+            from[1] = to[1] = 0.28;
+            link(
+              diagram,
+              `probability-${state2.current}-${i}`,
+              from,
+              to,
+              "#f0d38b",
+              { arrow: true, labelText: `${Math.round(state2.matrix[state2.current][i] * 100)}%` }
+            );
+          }
+        }
+        frog = new Group();
+        frog.name = "markov-frog";
+        diagram.add(frog);
+        ball(frog, "frog-body", "#83b846", [0, 0.14, 0], [0.18, 0.14, 0.22]);
+        ball(frog, "frog-head", "#9fc84c", [0, 0.25, 0.1], [0.19, 0.12, 0.14]);
+        for (const side of [-1, 1]) {
+          ball(frog, "frog-eye", "#f4efcd", [side * 0.1, 0.34, 0.15], [0.066, 0.074, 0.052]);
+          ball(frog, "frog-pupil", "#163736", [side * 0.1, 0.34, 0.195], [0.029, 0.043, 0.018]);
+          ball(frog, "frog-haunch", "#619738", [side * 0.18, 0.1, -0.1], [0.1, 0.08, 0.14]);
+          ball(frog, "frog-foot", "#a7be58", [side * 0.19, 0.05, 0.12], [0.07, 0.035, 0.12]);
+        }
+        frog.position.set(...pads[state2.current]);
+      }
+      root.userData.steps = state2.steps;
+      diagram.position.y = 1.12 + lift;
+      diagram.rotation.x = lift * 0.3;
+      root.updateMatrixWorld(true);
+    }
+    function cancel() {
+      if (frame !== null) cancelAnimationFrame(frame);
+      frame = null;
+    }
+    function settle() {
+      cancel();
+      animation = null;
+      lift = targetLift;
+      diagram.position.y = 1.12 + lift;
+      diagram.rotation.x = lift * 0.3;
+      if (frog) frog.position.set(...pads[state2.current]);
+      onChange();
+    }
+    function tick(now) {
+      frame = null;
+      if (!animation) return;
+      const t = Math.min(1, (now - animation.start) / 650), ease = 1 - (1 - t) ** 4;
+      lift = animation.fromLift + (targetLift - animation.fromLift) * ease;
+      diagram.position.y = 1.12 + lift;
+      diagram.rotation.x = lift * 0.3;
+      if (frog && animation.hop) {
+        const a = new Vector3(...pads[state2.previous]), b = new Vector3(...pads[state2.current]);
+        frog.position.copy(a.lerp(b, ease));
+        frog.position.y += Math.sin(Math.PI * t) * 0.5;
+        frog.rotation.y = Math.atan2(pads[state2.current][0] - pads[state2.previous][0], pads[state2.current][2] - pads[state2.previous][2]);
+      }
+      onChange();
+      if (t < 1) frame = requestAnimationFrame(tick);
+      else animation = null;
+    }
+    function animate(hop) {
+      cancel();
+      if (!labels || motion?.matches || document.hidden) {
+        settle();
+        return;
+      }
+      animation = { start: performance.now(), fromLift: lift, hop };
+      frame = requestAnimationFrame(tick);
+    }
+    const onVisibility = () => {
+      if (document.hidden) settle();
+    };
+    if (typeof document !== "undefined") document.addEventListener("visibilitychange", onVisibility);
+    build();
+    return {
+      root,
+      diagram,
+      sync(next, { animateHop = false } = {}) {
+        if (next.kind !== id) throw new Error("\u5B9E\u9A8C\u72B6\u6001\u4E0E\u5C55\u53F0\u4E0D\u5339\u914D\u3002");
+        state2 = next;
+        build();
+        animate(animateHop);
+      },
+      expand(value) {
+        expanded = value;
+        targetLift = value ? 0.7 : 0;
+        animate(false);
+      },
+      settle,
+      snapshot: () => ({ id, expanded, lift, steps: state2.steps, animating: frame !== null }),
+      dispose() {
+        cancel();
+        if (typeof document !== "undefined") document.removeEventListener("visibilitychange", onVisibility);
+        disposeExhibitTree(root);
+        root.removeFromParent();
+      }
+    };
+  }
+
+  // shared/knowledge-labs/ui.js
+  var styles = `
+.viewport.lab-active {position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;z-index:100;background:#142d38}
+.lab-active > :not(canvas):not(.lab-panel):not(.lab-heading) {visibility:hidden!important;pointer-events:none!important}
+.lab-panel,.lab-heading {font:14px/1.6 "Segoe UI","Microsoft YaHei",sans-serif;color:#e9f0e9;box-sizing:border-box}
+.lab-panel *,.lab-heading * {box-sizing:border-box}
+.lab-panel[hidden],.lab-heading[hidden] {display:none!important}
+.lab-panel {position:absolute;z-index:105;right:18px;top:18px;bottom:18px;width:350px;overflow:auto;padding:22px;background:#173742;border:1px solid #547373;border-radius:12px;box-shadow:0 12px 40px #071a2440;scrollbar-color:#859d98 #173742;overscroll-behavior:contain}
+.lab-heading {position:absolute;z-index:105;left:24px;top:20px;max-width:calc(100% - 425px);padding:14px 18px;background:#173742;border-radius:8px;border:1px solid #547373}
+.lab-heading h2 {font-size:24px;line-height:1.3;margin:0 0 6px;font-weight:600;color:#fff}
+.lab-heading p {margin:0;color:#c6d9d7;font-size:13px}
+.lab-panel h3 {font-size:18px;color:#fff;margin:0 0 12px}
+.lab-panel p {margin:10px 0;color:#d3e4df}
+.lab-panel button,.lab-panel select,.lab-panel input {font:inherit;letter-spacing:normal;min-height:42px;max-width:100%;border-radius:5px}
+.lab-panel button {cursor:pointer;border:1px solid #829b96;padding:8px 12px;background:#284b52;color:#f1f5eb}
+.lab-panel button:hover:not(:disabled) {background:#3c6266}
+.lab-panel button.primary {background:#e5c489;color:#18323a;border-color:#e5c489;font-weight:600}
+.lab-panel button:disabled {opacity:.5;cursor:default}
+.lab-panel button:focus-visible,.lab-panel select:focus-visible,.lab-panel input:focus-visible,.lab-panel summary:focus-visible {outline:3px solid #e5c489;outline-offset:3px}
+.lab-panel ::selection {background:#e5c489;color:#173742}
+.lab-panel label {display:block;margin:12px 0 5px;color:#e2ece7}
+.lab-panel input,.lab-panel select {width:100%;padding:7px 9px;background:#102b35;color:#fff;border:1px solid #829b96;caret-color:#e5c489}
+.lab-panel .lab-actions {display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.lab-panel .lab-actions button {flex:1}
+.lab-panel .lab-status {font-variant-numeric:tabular-nums;padding:14px 0;border-block:1px solid #547373;white-space:pre-line}
+.lab-panel table {width:100%;border-collapse:collapse;font-size:12px;font-variant-numeric:tabular-nums;margin:12px 0;color:#e2ece7}
+.lab-panel th,.lab-panel td {padding:6px 4px;text-align:left;border-bottom:1px solid #547373}
+.lab-panel details {margin-top:18px;border-top:1px solid #547373;padding-top:12px}
+.lab-panel summary {cursor:pointer;color:#f1d39e;min-height:34px}
+.lab-panel .lab-probabilities {display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.lab-panel .lab-probabilities label {margin:6px 0}
+.lab-panel .lab-probabilities input {padding:5px;width:100%}
+.lab-panel .lab-quiz fieldset {border:0;padding:0;margin:18px 0 24px;min-width:0}
+.lab-panel .lab-quiz legend {padding:0;font-weight:600;color:#fff}
+.lab-panel .lab-quiz label {display:flex;align-items:flex-start;gap:8px;font-size:13px;cursor:pointer;padding:4px 0}
+.lab-panel .lab-quiz input {width:18px;height:18px;min-height:18px;flex:0 0 18px;accent-color:#e5c489;margin-top:3px}
+.lab-panel .lab-quiz output {display:block;margin-top:10px;color:#e7cf9d}
+.lab-panel .lab-error {color:#ffd6be;border:1px solid #c88061;padding:10px}
+.lab-panel .lab-note {font-size:12px;color:#c1d5d0}
+.lab-panel .lab-close {width:100%;margin-bottom:18px}
+.lab-launches {display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.lab-launches button {min-height:40px}
+@media(max-width:760px) {
+  .lab-heading {top:10px;left:10px;right:10px;max-width:none;padding:9px 12px}
+  .lab-heading h2 {font-size:18px}
+  .lab-heading p {font-size:11px}
+  .lab-panel {top:auto;bottom:0;left:0;right:0;width:100%;height:47%;padding:14px 18px;border-radius:12px 12px 0 0}
+  .lab-panel .lab-close {margin-bottom:12px}
+}
+`;
+  function element2(tag, text, className) {
+    const node2 = document.createElement(tag);
+    if (text !== void 0) node2.textContent = text;
+    if (className) node2.className = className;
+    return node2;
+  }
+  function createLabUI({ host, onClose, onState = () => {
+  } }) {
+    const style = element2("style", styles);
+    document.head.append(style);
+    const heading = element2("div", void 0, "lab-heading"), panel = element2("section", void 0, "lab-panel");
+    panel.id = "knowledge-lab-panel";
+    panel.setAttribute("aria-label", "\u4EA4\u4E92\u77E5\u8BC6\u5C55\u53F0");
+    const closeButton = element2("button", "\u6536\u8D77\u5C55\u53F0 \xB7 \u8FD4\u56DE\u573A\u666F", "lab-close");
+    closeButton.id = "lab-close";
+    const title = element2("h2"), caption = element2("p");
+    heading.append(title, caption);
+    const controls = element2("div"), status = element2("p", "", "lab-status"), data = element2("div");
+    status.id = "lab-status";
+    status.setAttribute("aria-live", "polite");
+    const error2 = element2("p", "", "lab-error");
+    error2.setAttribute("role", "alert");
+    error2.hidden = true;
+    const quiz = element2("details", void 0, "lab-quiz");
+    const note = element2("p", "\u521D\u7248\u6559\u5B66\u5B9E\u9A8C\uFF1B\u672C\u6B21\u64CD\u4F5C\u548C\u7B54\u9898\u4E0D\u8BA1\u5165\u638C\u63E1\u5EA6\u3002\u5173\u95ED\u5C55\u53F0\u4F1A\u91CD\u7F6E\uFF0C\u4E0D\u4E0A\u4F20\u6570\u636E\u3002", "lab-note");
+    panel.append(closeButton, element2("h3", "\u52A8\u624B\u8BD5\u9A8C"), controls, status, data, quiz, note, error2);
+    panel.hidden = heading.hidden = true;
+    host.append(heading, panel);
+    let id = null, state2 = null, view = null, returnFocus = null, edgeIndex = 1, selectedNode = "n1", rowIndex = 0, priorFocus = null;
+    let inertSiblings = [];
+    const abort = new AbortController();
+    function safely(handler) {
+      return (event) => {
+        try {
+          handler(event);
+          error2.hidden = true;
+        } catch (failure) {
+          console.error(failure);
+          error2.textContent = failure.message;
+          error2.hidden = false;
+        }
+      };
+    }
+    function button(parent, text, name, handler, primary = false, disabled = false) {
+      const node2 = element2("button", text, primary ? "primary" : "");
+      node2.type = "button";
+      node2.dataset.labAction = name;
+      node2.disabled = disabled;
+      node2.addEventListener("click", safely(handler));
+      parent.append(node2);
+      return node2;
+    }
+    function select(parent, label, name, entries, value, handler) {
+      const container = element2("label", label), node2 = element2("select");
+      node2.id = `lab-${name}`;
+      for (const [value2, text] of entries) {
+        const option = element2("option", text);
+        option.value = value2;
+        node2.append(option);
+      }
+      node2.value = String(value);
+      container.append(node2);
+      parent.append(container);
+      node2.addEventListener("change", safely((event) => handler(event.target.value)));
+      return node2;
+    }
+    function table(parent, headings, rows, label) {
+      const node2 = element2("table");
+      node2.setAttribute("aria-label", label);
+      const head = element2("tr");
+      headings.forEach((text) => head.append(element2("th", text)));
+      const thead = element2("thead");
+      thead.append(head);
+      node2.append(thead);
+      const body = element2("tbody");
+      for (const row of rows) {
+        const tr = element2("tr");
+        row.forEach((value) => tr.append(element2("td", String(value))));
+        body.append(tr);
+      }
+      node2.append(body);
+      parent.append(node2);
+    }
+    function update(next, hop = false) {
+      state2 = next;
+      view.sync(state2, { animateHop: hop });
+      paint2();
+      onState(state2);
+    }
+    function paint2() {
+      priorFocus = panel.contains(document.activeElement) ? document.activeElement.dataset.labAction || document.activeElement.id : null;
+      controls.replaceChildren();
+      data.replaceChildren();
+      if (id === "graph") {
+        select(
+          controls,
+          "\u641C\u7D22\u65B9\u6CD5",
+          "algorithm",
+          [["bfs", "BFS \xB7 \u6700\u5C11\u8FB9\u6570"], ["dijkstra", "Dijkstra \xB7 \u6700\u4F4E\u603B\u6743\u91CD"]],
+          state2.algorithm,
+          (algorithm) => update(createGraph({ algorithm, weights: state2.weights }))
+        );
+        const actions = element2("div", void 0, "lab-actions");
+        button(actions, state2.done ? "\u5DF2\u5230\u7EC8\u70B9 F" : "\u5355\u6B65\u6269\u5C55", "step", () => update(stepGraph(state2)), true, state2.done);
+        button(actions, "\u91CD\u8DD1\u5F53\u524D\u56FE", "reset", () => update(createGraph({ algorithm: state2.algorithm, weights: state2.weights })));
+        controls.append(actions);
+        select(controls, "\u6539\u53D8\u9053\u8DEF\u4EE3\u4EF7", "edge", GRAPH_EDGES.map(([a, b], i) => [i, `${a} \u2014 ${b}`]), edgeIndex, (value) => {
+          edgeIndex = Number(value);
+          paint2();
+        });
+        const label = element2("label", "\u8FB9\u6743\uFF081\u20139\uFF09\uFF1B\u5E94\u7528\u540E\u91CD\u65B0\u5F00\u59CB"), weight = element2("input");
+        weight.type = "number";
+        weight.min = "1";
+        weight.max = "9";
+        weight.step = "1";
+        weight.value = state2.weights[edgeIndex];
+        weight.id = "lab-weight";
+        label.append(weight);
+        controls.append(label);
+        button(controls, "\u5E94\u7528\u8FB9\u6743", "weight", () => {
+          if (!weight.checkValidity() || weight.value.trim() === "") throw new Error("\u8FB9\u6743\u8BF7\u8F93\u5165 1\u20139 \u7684\u6574\u6570\u3002");
+          const weights = [...state2.weights];
+          weights[edgeIndex] = Number(weight.value);
+          update(createGraph({ algorithm: state2.algorithm, weights }));
+        });
+        status.textContent = state2.done ? `\u8DEF\u5F84\uFF1A${state2.path.join(" \u2192 ")}
+${state2.path.length - 1} \u6761\u8FB9 \xB7 \u603B\u4EE3\u4EF7 ${state2.distances.F}` : `\u5F53\u524D\uFF1A${state2.current ?? "\u5C1A\u672A\u6269\u5C55"} \xB7 \u5DF2\u6269\u5C55 ${state2.steps} \u4E2A\u8282\u70B9
+${state2.algorithm === "bfs" ? "\u5148\u8FDB\u5148\u51FA\u961F\u5217" : "\u6309\u6682\u5B9A\u8DDD\u79BB\u6392\u5E8F"}\uFF1A${state2.frontier.join(" \u2192 ") || "\u7A7A"}`;
+        table(data, ["\u8282\u70B9", "\u6682\u5B9A\u4EE3\u4EF7", "\u524D\u9A71"], GRAPH_NODES.map((node2) => [node2, Number.isFinite(state2.distances[node2]) ? state2.distances[node2] : "\u672A\u53D1\u73B0", state2.previous[node2] ?? "\u2014"]), "\u641C\u7D22\u72B6\u6001");
+        data.append(element2("p", state2.algorithm === "bfs" ? "BFS \u9996\u6B21\u53D1\u73B0\u5C31\u5165\u961F\u3002\u8FD9\u91CC\u663E\u793A\u7D2F\u8BA1\u6743\u91CD\u4F9B\u6BD4\u8F83\uFF0C\u4F46\u5B83\u5E76\u4E0D\u6309\u6743\u91CD\u6311\u9009\u8DEF\u5F84\u3002" : "\u6BCF\u6B21\u53D6\u6682\u5B9A\u8DDD\u79BB\u6700\u5C0F\u7684\u8282\u70B9\uFF1B\u66F4\u4FBF\u5B9C\u7684\u8DEF\u7EBF\u4F1A\u66F4\u65B0\u8DDD\u79BB\u4E0E\u524D\u9A71\uFF0C\u8FD9\u4E00\u6B65\u53EB\u677E\u5F1B\u3002"));
+      } else if (id === "list") {
+        const reversing = state2.mode === "reverse" && !state2.done;
+        const actions = element2("div", void 0, "lab-actions");
+        button(actions, "\u6CBF next \u5355\u6B65", "step", () => update(stepList(state2)), true, reversing);
+        button(actions, "\u53CD\u8F6C\u4E00\u6839\u6307\u9488", "reverse", () => update(stepList(state2, "reverse")));
+        controls.append(actions);
+        if (!state2.nodes.some((node2) => node2.id === selectedNode)) selectedNode = state2.head;
+        select(
+          controls,
+          "\u64CD\u4F5C\u8282\u70B9",
+          "node",
+          state2.nodes.map((node2) => [node2.id, `${node2.value} \xB7 ${node2.id}`]),
+          selectedNode,
+          (value) => {
+            selectedNode = value;
+          }
+        );
+        const edits = element2("div", void 0, "lab-actions");
+        button(edits, "\u5728\u5176\u540E\u63D2\u5165", "insert", () => update(editList(state2, "insert", selectedNode)), false, reversing || state2.nodes.length >= 6);
+        button(edits, "\u5220\u9664\u8BE5\u8282\u70B9", "delete", () => update(editList(state2, "delete", selectedNode)), false, reversing || state2.nodes.length === 1);
+        button(edits, "\u91CD\u7F6E", "reset", () => update(createList()));
+        controls.append(edits);
+        status.textContent = state2.message;
+        table(data, ["\u8282\u70B9", "\u503C", "next"], state2.nodes.map((node2) => [node2.id, node2.value, node2.next ?? "null"]), "\u94FE\u8868\u6307\u9488");
+        data.append(element2("p", reversing ? `\u6B63\u5728\u62C6\u5F00\u518D\u63A5\u56DE\uFF1Aprev=${state2.previous ?? "null"}\uFF1Bcurrent=${state2.cursor ?? "null"}\u3002\u4E2D\u9014\u4E0D\u662F\u5B8C\u6574\u7684\u4E00\u6761\u94FE\u3002` : `\u4ECE head \u51FA\u53D1\uFF1A${listOrder(state2).map((id2) => state2.nodes.find((node2) => node2.id === id2).value).join(" \u2192 ")} \u2192 null`));
+      } else {
+        const actions = element2("div", void 0, "lab-actions");
+        button(actions, "\u9752\u86D9\u8DF3\u4E00\u6B65", "step", () => update(stepMarkov(state2), true), true);
+        button(actions, "\u5FEB\u901F\u8FD0\u884C 100 \u8DF3", "hundred", () => update(stepMarkov(state2, 100)));
+        button(actions, "\u540C\u79CD\u5B50\u91CD\u8DD1", "reset", () => update(createMarkov({ matrix: state2.matrix, seed: state2.seed })));
+        controls.append(actions);
+        status.textContent = `\u5F53\u524D\u8377\u53F6 ${"ABCD"[state2.current]} \xB7 \u5DF2\u8DF3 ${state2.steps} \u6B65
+\u4E0B\u4E00\u8DF3\u6982\u7387\uFF1A${state2.matrix[state2.current].map((p, i) => `${"ABCD"[i]} ${Math.round(p * 100)}%`).join(" / ")}` + (state2.sample === null ? "" : `
+\u4E0A\u4E00\u8DF3 ${"ABCD"[state2.previous]} \u2192 ${"ABCD"[state2.current]}\uFF1B\u62BD\u6837\u503C ${state2.sample.toFixed(4)}`);
+        select(
+          controls,
+          "\u7F16\u8F91\u54EA\u7247\u8377\u53F6\u7684\u8F6C\u79FB\u6982\u7387",
+          "row",
+          [..."ABCD"].map((letter, i) => [i, `\u4ECE ${letter} \u51FA\u53D1`]),
+          rowIndex,
+          (value) => {
+            rowIndex = Number(value);
+            paint2();
+          }
+        );
+        const row = element2("div", void 0, "lab-probabilities"), inputs = [];
+        for (let to = 0; to < 4; to++) {
+          const label = element2("label", `\u5230 ${"ABCD"[to]}`), input = element2("input");
+          input.id = `lab-probability-${to}`;
+          input.type = "number";
+          input.min = "0";
+          input.max = "1";
+          input.step = ".1";
+          input.value = state2.matrix[rowIndex][to];
+          label.append(input);
+          row.append(label);
+          inputs.push(input);
+        }
+        controls.append(row);
+        button(controls, "\u5E94\u7528\u6982\u7387\u5E76\u4ECE A \u91CD\u8DD1", "probabilities", () => {
+          if (inputs.some((input) => input.value.trim() === "" || !input.checkValidity())) throw new Error("\u8BF7\u586B\u5199 0\u20131 \u7684\u6982\u7387\uFF0C\u6B65\u957F\u4E3A 0.1\u3002");
+          const matrix = state2.matrix.map((row2) => [...row2]);
+          matrix[rowIndex] = inputs.map((input) => Number(input.value));
+          update(createMarkov({ matrix, seed: state2.seed }));
+        });
+        data.append(element2("p", "\u9ED8\u8BA4 A \u2192 B / C / D = 0.1 / 0.3 / 0.6\u3002\u6BCF\u8DF3\u8BFB\u53D6\u5F53\u524D\u4F4D\u7F6E\u90A3\u4E00\u884C\uFF1B\u6574\u884C\u4E4B\u548C\u5FC5\u987B\u4E3A 1\u3002"));
+        const details = element2("details");
+        details.append(element2("summary", "\u8F6C\u79FB\u77E9\u9635\u4E0E\u5206\u5E03\uFF1A\u4E0D\u8981\u6DF7\u6DC6\u4E24\u79CD\u7EDF\u8BA1"));
+        table(details, ["\u4ECE / \u5230", "A", "B", "C", "D"], state2.matrix.map((row2, i) => ["ABCD"[i], ...row2.map((p) => p.toFixed(1))]), "\u8F6C\u79FB\u77E9\u9635");
+        table(
+          details,
+          ["\u8377\u53F6", "\u7B2C n \u6B65\u7406\u8BBA\u6982\u7387", "\u5355\u6761\u8F68\u8FF9\u5230\u8FBE\u6B21\u6570"],
+          state2.counts.map((count, i) => ["ABCD"[i], `${(state2.distribution[i] * 100).toFixed(1)}%`, count]),
+          "\u7406\u8BBA\u5206\u5E03\u4E0E\u8F68\u8FF9\u7EDF\u8BA1"
+        );
+        details.append(element2("p", `\u7406\u8BBA\u5206\u5E03\u7528 q(n+1)=q(n)P \u8BA1\u7B97\uFF1B\u5230\u8FBE\u6B21\u6570\u662F\u8FD9\u4E00\u6761\u968F\u673A\u8F68\u8FF9\u7684\u7D2F\u8BA1\u503C\uFF0C\u4E0D\u662F\u7B2C n \u6B65\u6982\u7387\u3002\u968F\u673A\u79CD\u5B50 ${state2.seed}\uFF0C\u91CD\u8DD1\u53EF\u590D\u73B0\u3002`));
+        data.append(details);
+      }
+      if (priorFocus) {
+        const target = [...controls.querySelectorAll("button,input,select")].find((node2) => node2.dataset.labAction === priorFocus || node2.id === priorFocus);
+        if (target && !target.disabled) target.focus({ preventScroll: true });
+      }
+    }
+    function paintQuiz() {
+      quiz.replaceChildren(element2("summary", "\u5148\u9884\u6D4B\uFF0C\u518D\u89E3\u91CA \xB7 \u4E09\u4E2A\u5C0F\u6311\u6218"));
+      const form = element2("form");
+      const entries = questions(id);
+      entries.forEach((entry, index) => {
+        const field = element2("fieldset"), legend = element2("legend", `${index + 1}. ${entry.text}`);
+        field.append(legend);
+        entry.options.forEach((text, option) => {
+          const label = element2("label"), radio = element2("input");
+          radio.type = "radio";
+          radio.name = `lab-question-${index}`;
+          radio.value = option;
+          radio.required = true;
+          label.append(radio, document.createTextNode(text));
+          field.append(label);
+        });
+        const feedback = element2("output");
+        feedback.id = `lab-feedback-${index}`;
+        field.append(feedback);
+        form.append(field);
+      });
+      const submit = element2("button", "\u6838\u5BF9\u89E3\u91CA", "primary");
+      submit.type = "submit";
+      form.append(submit);
+      form.addEventListener("submit", safely((event) => {
+        event.preventDefault();
+        if (!form.reportValidity()) return;
+        const answers = new FormData(form);
+        entries.forEach((entry, index) => {
+          const correct = Number(answers.get(`lab-question-${index}`)) === entry.correct;
+          form.querySelector(`#lab-feedback-${index}`).textContent = `${correct ? "\u5224\u65AD\u6B63\u786E\u3002" : "\u518D\u60F3\u4E00\u6B65\u3002"}${entry.why}`;
+        });
+      }));
+      quiz.append(form);
+    }
+    function close() {
+      if (!id) return;
+      view.expand(false);
+      panel.hidden = heading.hidden = true;
+      host.classList.remove("lab-active");
+      for (const [node2, wasInert] of inertSiblings) node2.inert = wasInert;
+      inertSiblings = [];
+      id = null;
+      state2 = null;
+      view = null;
+      onClose();
+      if (returnFocus?.isConnected) returnFocus.focus({ preventScroll: true });
+    }
+    closeButton.addEventListener("click", close);
+    document.addEventListener("keydown", (event) => {
+      if (id && event.key === "Escape") {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        close();
+      }
+    }, { capture: true, signal: abort.signal });
+    return {
+      get active() {
+        return id !== null;
+      },
+      close,
+      open(nextId, exhibit, location) {
+        if (id) close();
+        if (!LABS[nextId]) throw new Error(`\u672A\u77E5\u5B9E\u9A8C\uFF1A${nextId}`);
+        returnFocus = document.activeElement;
+        id = nextId;
+        view = exhibit;
+        state2 = initialExperiment(id);
+        edgeIndex = 1;
+        selectedNode = "n1";
+        rowIndex = 0;
+        title.textContent = LABS[id].title;
+        caption.textContent = `${location} \xB7 ${LABS[id].concept} \xB7 \u70B9\u51FB\u64CD\u4F5C\uFF0C\u56FE\u89E3\u60AC\u6D6E\u5C55\u5F00`;
+        panel.hidden = heading.hidden = false;
+        error2.hidden = true;
+        quiz.open = false;
+        host.classList.add("lab-active");
+        for (let branch = host; branch && branch !== document.body; branch = branch.parentElement) {
+          for (const sibling of branch.parentElement.children) {
+            if (sibling === branch || sibling.tagName === "SCRIPT") continue;
+            inertSiblings.push([sibling, sibling.inert]);
+            sibling.inert = true;
+          }
+        }
+        view.sync(state2);
+        view.expand(true);
+        paint2();
+        paintQuiz();
+        closeButton.focus({ preventScroll: true });
+        onState(state2);
+      },
+      state: () => state2 ? structuredClone(state2) : null,
+      dispose() {
+        close();
+        abort.abort();
+        panel.remove();
+        heading.remove();
+        style.remove();
+      }
+    };
+  }
+
+  // shared/knowledge-labs/camera.js
+  function setLabViewport(camera, width, height) {
+    const compact = width <= 760;
+    const region = compact ? { x: 10, y: 82, width: Math.max(1, width - 20), height: Math.max(1, height * 0.53 - 92) } : { x: 18, y: 105, width: Math.max(1, width - 404), height: Math.max(1, height - 125) };
+    camera.setViewOffset(region.width, region.height, -region.x, -region.y, width, height);
+    camera.updateProjectionMatrix();
+    return region;
+  }
+
   // projects/knowledge-tower/src/main.js
   var $2 = (id) => document.getElementById(id);
   var state = { ...INITIAL_STATE };
   var engine = null;
   var learning = null;
   var planLoaded = false;
+  var labUI = null;
   var floorLabels = /* @__PURE__ */ new Map();
   var roomLabels = [];
   function node(tag, className, text) {
@@ -50543,6 +51433,7 @@ void main() {
     };
   }
   function dispatch(change) {
+    if (labUI?.active && ["floor", "room", "step", "route", "mode"].includes(change.type)) labUI.close();
     const previous = state;
     state = transition(state, change);
     if (["floor", "room", "step", "route"].includes(change.type) && learning) learning.recordVisit(state.floor, state.roomId);
@@ -50630,6 +51521,11 @@ void main() {
       label.classList.toggle("active", entry.id === state.roomId);
     });
     $2("room-detail").hidden = !room2;
+    $2("room-lab-launch").hidden = !room2 || !ROOM_LABS[room2.id];
+    if (room2 && ROOM_LABS[room2.id]) {
+      $2("room-lab-launch").textContent = `\u5C55\u5F00\u5B9E\u9A8C \xB7 ${LABS[ROOM_LABS[room2.id]].title}`;
+      $2("room-lab-launch").dataset.lab = ROOM_LABS[room2.id];
+    }
     $2("floor-overview").hidden = Boolean(room2);
     if (room2) {
       const exhibit = EXHIBIT_DESCRIPTIONS[room2.id];
@@ -50679,6 +51575,7 @@ void main() {
     window.__knowledgeState = { ...state };
   }
   function bindUI() {
+    document.querySelectorAll("[data-lab]").forEach((button) => button.addEventListener("click", action(() => openExperiment(button.dataset.lab))));
     for (const id of ["floor-nav", "floor-labels", "route-stops"]) {
       $2(id).addEventListener("click", action((event) => {
         const button = event.target.closest("[data-floor]");
@@ -50737,6 +51634,18 @@ void main() {
   }
   function fitCamera() {
     const { camera, controls, tower } = engine;
+    if (engine.labView) {
+      const center2 = engine.labView.root.localToWorld(new Vector3(0, 1.98, 0));
+      const region = setLabViewport(camera, engine.width, engine.height);
+      const half = MathUtils.degToRad(60 / 2);
+      const distance2 = 2.1 / Math.sin(Math.min(half, Math.atan(Math.tan(half) * region.width / region.height)));
+      camera.fov = 60;
+      camera.position.copy(center2).addScaledVector(new Vector3(0.25, 1.15, 2).normalize(), distance2);
+      camera.lookAt(center2);
+      camera.updateProjectionMatrix();
+      return;
+    }
+    camera.fov = 42;
     let center;
     let radius;
     if (state.mode === "floor") {
@@ -50791,6 +51700,23 @@ void main() {
     for (let current = object; current; current = current.parent) if (!current.visible) return false;
     return true;
   }
+  function openExperiment(id) {
+    if (!engine || !labUI) throw new Error("\u8BF7\u7B49\u5F85\u4E09\u7EF4\u573A\u666F\u52A0\u8F7D\u540E\u518D\u8FDB\u5165\u5B9E\u9A8C\u3002");
+    if (!LABS[id]) throw new Error("\u672A\u77E5\u77E5\u8BC6\u5B9E\u9A8C\u3002");
+    labUI.close();
+    dispatch({ type: "room", id: LABS[id].roomId });
+    const gallery = engine.tower.pickables.find((object) => object.userData.roomId === LABS[id].roomId);
+    const original = gallery.getObjectByName(`exhibit-${EXHIBIT_DESCRIPTIONS[LABS[id].roomId].type}`);
+    engine.labSource = original;
+    original.visible = false;
+    engine.labView = createLabExhibit(id, { table: false, onChange: render });
+    gallery.add(engine.labView.root);
+    gallery.updateWorldMatrix(true, true);
+    engine.controls.enabled = false;
+    labUI.open(id, engine.labView, `\u77E5\u8BC6\u5927\u53A6 \xB7 ${LABS[id].roomId.split("-")[0]}F`);
+    fitCamera();
+    render();
+  }
   function bindPicking(canvas) {
     const raycaster = new Raycaster();
     let start = null;
@@ -50807,12 +51733,19 @@ void main() {
       pointers.delete(event.pointerId);
       const origin = start;
       start = null;
+      if (labUI?.active) return;
       if (!origin || origin.id !== event.pointerId || event.button !== 0 || Math.hypot(event.clientX - origin.x, event.clientY - origin.y) > 6) return;
       const rect = canvas.getBoundingClientRect();
       const pointer = new Vector2((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1);
       raycaster.setFromCamera(pointer, engine.camera);
       const hit = raycaster.intersectObjects(engine.tower.pickables, true).find((entry) => isVisible(entry.object));
-      if (hit) dispatch({ type: "room", id: hit.object.userData.roomId });
+      if (hit) {
+        let exhibit = hit.object;
+        while (exhibit && exhibit.userData.role !== "exhibit") exhibit = exhibit.parent;
+        const id = ROOM_LABS[hit.object.userData.roomId];
+        if (exhibit && id && state.mode === "floor" && state.roomId === hit.object.userData.roomId) openExperiment(id);
+        else dispatch({ type: "room", id: hit.object.userData.roomId });
+      }
     }));
   }
   function initScene() {
@@ -50848,6 +51781,16 @@ void main() {
     controls.minPolarAngle = 0.16;
     controls.enablePan = false;
     engine = { renderer, scene, tower, camera, controls, width: 1, height: 1 };
+    labUI = createLabUI({ host: $2("viewport"), onClose: () => {
+      engine.labView?.dispose();
+      engine.labView = null;
+      if (engine.labSource) engine.labSource.visible = true;
+      engine.labSource = null;
+      controls.enabled = true;
+      camera.clearViewOffset();
+      fitCamera();
+      render();
+    } });
     applyModelState();
     controls.addEventListener("change", render);
     const resize = () => {
@@ -50884,6 +51827,7 @@ void main() {
       triangles
     };
     window.__knowledgeCamera = () => ({ position: camera.position.toArray(), target: controls.target.toArray(), aspect: camera.aspect });
+    window.__knowledgeLab = () => ({ state: labUI.state(), view: engine.labView?.snapshot() ?? null });
     window.__knowledgePickTargets = () => {
       scene.updateMatrixWorld(true);
       return tower.pickables.filter(isVisible).map((object) => {
@@ -50904,11 +51848,13 @@ void main() {
     });
     $2("loading").hidden = true;
     window.__knowledgeReady = true;
-    window.addEventListener("pagehide", () => {
+    window.addEventListener("pagehide", (event) => {
+      if (event.persisted) return;
+      labUI.dispose();
       observer.disconnect();
       controls.dispose();
       renderer.dispose();
-    }, { once: true });
+    });
   }
   buildNavigation();
   bindUI();

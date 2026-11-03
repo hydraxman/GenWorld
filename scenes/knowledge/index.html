@@ -20,6 +20,7 @@
   <main class="workspace">
     <aside class="navigator" aria-label="楼层与学习路线">
       <div class="intro"><span class="eyebrow">A PLACE TO GROW</span><h1>知识有空间，<br>成长有痕迹。</h1><p>每一个展厅，都是一块能力拼图。<br>不必按楼层，走自己的路线。</p></div>
+      <div class="lab-launches" aria-label="直接进入互动实验"><button data-lab="graph">最短路沙盘</button><button data-lab="list">链表操作台</button><button data-lab="markov">青蛙跳荷叶</button></div>
       <div class="profile-switch" role="group" aria-label="学习档案"><button data-profile="own" aria-pressed="true">我的档案</button><button data-profile="demo" aria-pressed="false">示例访客</button></div>
       <div class="profile-mini"><div><span id="profile-name">我的学习空间</span><span id="profile-badge">仅本机保存</span></div><p id="profile-caption">从一次探索，或一次测评开始。</p><div class="profile-metrics"><span><b id="visited-count">0</b>已探索</span><span><b id="known-count">0</b>已评估</span><span><b id="weak-count">0</b>待加强</span></div></div>
       <div class="search-wrap"><label class="sr-only" for="search">检索知识、展厅或楼层</label><input id="search" type="search" placeholder="搜索知识 · 例如 动态规划" autocomplete="off"><span class="search-icon" aria-hidden="true">⌕</span></div>
@@ -60,6 +61,7 @@
       <section id="room-detail" class="room-detail" hidden>
         <div class="section-label"><span id="room-name"></span><span>KNOWLEDGE NOTES</span></div>
         <div class="exhibit-note"><span class="eyebrow">THE EXHIBIT TELLS A STORY</span><h4 id="exhibit-title"></h4><p id="exhibit-summary"></p></div>
+        <button id="room-lab-launch" class="primary-button" data-lab="" hidden>展开互动实验</button>
         <div class="mastery-editor"><div><span id="room-mastery"></span><span id="mastery-source"></span></div><label for="self-rating">我的自评</label><select id="self-rating"><option value="">未自评</option><option value="0">0 · 目前薄弱</option><option value="25">25 · 了解一点</option><option value="50">50 · 正在巩固</option><option value="75">75 · 比较熟悉</option><option value="100">100 · 能独立运用</option></select><p id="self-rating-note">自评与测评分别保存；浏览不等于掌握。</p></div>
         <h3 id="room-question"></h3><div id="topic-tabs" class="topic-tabs" role="group" aria-label="展厅知识点"></div>
         <article class="topic-content" aria-live="polite"><span class="eyebrow">CONCEPT</span><h4 id="topic-title"></h4><p id="topic-summary"></p></article>
