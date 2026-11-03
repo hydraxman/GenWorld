@@ -41,8 +41,9 @@ test('every entry opens a distinct route under the repository subpath', async ()
   const home = await read('index.html');
   const preview = await read('scene.html');
   const base = new URL('https://example.test/GenWorld/');
-  assert.equal(new Set(scenes.map(scene => scene.id)).size, 6);
-  assert.equal(new Set(scenes.map(scene => scene.source)).size, 6);
+  assert.deepEqual(scenes.map(scene => scene.id), ['knowledge', 'campus', 'courtyard', 'wind-print', 'knowledge-atlas']);
+  assert.equal(new Set(scenes.map(scene => scene.source)).size, 5);
+  assert.deepEqual(scenes.map(scene => scene.number), ['01', '02', '03', '04', '05']);
   for (const scene of scenes) {
     assert.ok(home.includes(`href="scene.html?scene=${scene.id}"`));
     assert.ok(preview.includes(`data-scene="${scene.id}"`));
@@ -50,7 +51,8 @@ test('every entry opens a distinct route under the repository subpath', async ()
     assert.ok(route.pathname.startsWith('/GenWorld/scenes/'));
     await access(path.join(output, route.pathname.slice('/GenWorld/'.length), 'index.html'));
   }
-  assert.equal(scenes.find(scene => scene.id === 'shunde').source, 'scenes/campus/?view=shunde');
+  assert.doesNotMatch(home + preview, /scene\.html\?scene=shunde|data-scene="shunde"/);
+  assert.match(await read('scenes/campus/index.html'), /id="view-shunde"/);
 });
 
 test('all local links and scripts in published HTML resolve', async () => {

@@ -175,7 +175,15 @@ export function replaceBuilding(buildings, id, detail) {
   return building;
 }
 
-export function disposeOwnedDetail(detail) {
+export function disposeOwnedDetail(detail, {preserve} = {}) {
+  const retained = new Set();
+  preserve?.traverse(object => {
+    if (object.geometry) retained.add(object.geometry);
+    if (object.isMesh) for (const material of [].concat(object.material)) {
+      retained.add(material);
+      for (const value of Object.values(material)) if (value?.isTexture) retained.add(value);
+    }
+  });
   const geometries = new Set(), materials = new Set(), textures = new Set();
   detail.traverse(object => {
     if (object.geometry) geometries.add(object.geometry);
@@ -185,5 +193,5 @@ export function disposeOwnedDetail(detail) {
       for (const value of Object.values(material)) if (value?.isTexture && !value.userData.sharedCampusSurface) textures.add(value);
     }
   });
-  geometries.forEach(g => g.dispose()); materials.forEach(m => m.dispose()); textures.forEach(t => t.dispose());
+  for (const resource of [...geometries, ...materials, ...textures]) if (!retained.has(resource)) resource.dispose();
 }

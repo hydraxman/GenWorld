@@ -102,9 +102,6 @@ try {
       assert.equal(await frame.$eval('#view-plan', element => element.getAttribute('aria-pressed')), 'true');
       await frame.click('#view-shunde');
       assert.match(await frame.$eval('#selection-name', element => element.textContent), /舜德/);
-    } else if (scene.id === 'shunde') {
-      assert.match(await frame.$eval('#selection-name', element => element.textContent), /舜德/);
-      assert.equal(await frame.$eval('#selected-references', element => element.hidden), true);
     } else if (scene.id === 'wind-print') {
       await checkWindPrint({ page, frame, browser, screenshots });
     } else if (scene.id === 'knowledge-atlas') {
@@ -123,9 +120,11 @@ try {
     await page.click('.preview-home');
     await page.waitForSelector('.scene-grid');
   }
-  await page.goto(new URL('scene.html?scene=unknown', base).href);
-  assert.equal(await page.$eval('#preview-status', element => element.getAttribute('role')), 'alert');
-  assert.equal(await page.$eval('#scene-frame', element => element.hasAttribute('src')), false);
+  for (const removed of ['unknown', 'shunde']) {
+    await page.goto(new URL(`scene.html?scene=${removed}`, base).href);
+    assert.equal(await page.$eval('#preview-status', element => element.getAttribute('role')), 'alert');
+    assert.equal(await page.$eval('#scene-frame', element => element.hasAttribute('src')), false);
+  }
   await page.goto(new URL('credits.html', base).href, { waitUntil: 'networkidle0' });
   assert.match(await page.$eval('main', element => element.textContent), /ODbL/);
   assert.deepEqual(errors, []);

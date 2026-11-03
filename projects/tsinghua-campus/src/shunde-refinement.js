@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import source from '../../shunde/docs/courtyard/source-footprint.json' with {type: 'json'};
 import {createShundeModel} from '../../shunde/src/model.js';
 import {project} from './geo.js';
-import {replaceBuilding} from './model.js';
+import {disposeOwnedDetail, replaceBuilding} from './model.js';
 
 export function shundePlacement(center, localOrigin) {
   const from = source.geometry_enu_m.coordinates[0].slice(0, -1).map(([e, n]) => [e, -n]);
@@ -32,22 +32,28 @@ export function shundePlacement(center, localOrigin) {
   );
 }
 
-export function refineShunde(campus, data, featureId) {
+export function refineShunde(campus, data, featureId, {textured = typeof document !== 'undefined'} = {}) {
   const target = campus.buildings.get(featureId);
   if (!target) throw new Error(`Matched Shunde footprint is missing: ${featureId}`);
-  const built = createShundeModel(THREE, {textured: false, foliage: false, refinedFront: true, visitorLabels: typeof document !== 'undefined'});
+  const built = createShundeModel(THREE, {textured, foliage: false, refinedFront: true, visitorLabels: typeof document !== 'undefined'});
   built.group.remove(built.building);
+  disposeOwnedDetail(built.group, {preserve: built.building});
   const detail = new THREE.Group();
-  detail.name = 'Shunde pilot - existing photo-informed architecture, plain materials';
+  detail.name = 'Shunde - original architecture and procedural PBR surfaces';
   detail.add(built.building);
   detail.matrix.copy(shundePlacement(data.metadata.center, target.userData.localOriginMeters));
   detail.matrixAutoUpdate = false;
   detail.userData = {
     source: 'projects/shunde; existing photo-informed reconstruction, not newly surveyed',
     sourceFootprint: 'OSM way 84653293, combined Weilun + Shunde',
-    limitations: 'Exact wing partition, hidden elevations and heights remain estimated. Plain materials; no reference photographs used as textures.',
+    reusedSource: 'projects/shunde/src/model.js',
+    textures: textured ? 'Original Shunde ceramic, marble and stone color/normal/roughness maps; no photo textures.'
+      : 'Untextured source geometry for non-browser validation.',
+    limitations: 'Exact wing partition, hidden elevations and heights remain estimated. Original architecture retained with the existing refined entry and visitor lobby. Standalone terrain and high-density foliage excluded; campus landscaping is shared. Sign typeface is an approximation, not extracted photograph lettering.',
   };
+  const previous = target.children.find(child => child.userData.campusDetail);
   replaceBuilding(campus.buildings, featureId, detail);
+  if (previous) disposeOwnedDetail(previous);
   target.userData.baseRenderHeight = target.userData.baseRenderHeight ?? target.userData.renderHeight;
   target.updateWorldMatrix(true, true);
   const box = new THREE.Box3().setFromObject(detail);
@@ -60,7 +66,7 @@ export function refineShunde(campus, data, featureId) {
     'https://vr.tsinghua.edu.cn/jsdl1/1133.jhtml',
     'https://www.ie.tsinghua.edu.cn/lxwm.htm',
   ];
-  target.userData.refinementSummary = '既有舜德照片参照模型，保留伟伦—舜德合并院落轮廓。隐藏立面、楼高及伟伦分界仍有推定，非测绘复原。';
+  target.userData.refinementSummary = '直接复用原舜德模型的完整建筑、瓷砖网格、灰粉窗下板、深褐石材及颜色／法线／粗糙度纹理，保留已修好的入口与示意门厅。原尺度和伟伦—舜德合并轮廓不变；不搬入独立演示的巨大地面及高密度树叶。隐藏立面、楼高及伟伦分界仍有推定，楼牌字体为近似，非测绘复原。';
   target.userData.reconstructionBatch = 1;
   target.name = target.userData.name;
   return target;

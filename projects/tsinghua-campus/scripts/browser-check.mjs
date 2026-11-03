@@ -4,6 +4,7 @@ import modernSources from '../data/modern-building-sources.json' with {type: 'js
 import {PHOTO_APPEARANCES} from '../src/photo-appearance.js';
 
 export async function checkCampusGroundStability(frame) {
+  await frame.waitForFunction(() => !window.campusApp.campus.architecturePending);
   const result = await frame.evaluate(() => {
     const app = window.campusApp, {camera} = app.inspection();
     const visibility = new Map(Object.values(app.campus.layers).map(layer => [layer, layer.visible]));
@@ -12,7 +13,8 @@ export async function checkCampusGroundStability(frame) {
     copy.width = canvas.width; copy.height = canvas.height;
     const context = copy.getContext('2d', {willReadFrequently: true});
     const pixels = () => {
-      app.render(); context.drawImage(canvas, 0, 0);
+      // Force scheduled reflection caches to match the pose before comparing identical frames.
+      app.render(true); context.drawImage(canvas, 0, 0);
       return context.getImageData(0, 0, copy.width, copy.height).data;
     };
     try {

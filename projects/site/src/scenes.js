@@ -12,27 +12,21 @@ export const scenes = [
     source: 'scenes/campus/', number: '02',
   },
   {
-    id: 'shunde', title: '舜德楼', english: 'SHUNDE COURTYARD',
-    category: '建筑 × 细节', description: '走近开放院落、圆体与入口，查看照片参照的建筑重建及其校园位置。',
-    detail: '校园内定位 · 建筑细化 · 自由观察',
-    source: 'scenes/campus/?view=shunde', number: '03',
-  },
-  {
     id: 'courtyard', title: '庭院建筑', english: 'THE COURTYARD',
     category: '结构 × 光影', description: '旋转观察建筑、玻璃与水景，展开楼层，理解外观之下的空间结构。',
     detail: '视角切换 · 分层展开 · 模型导出',
-    source: 'scenes/courtyard/', number: '04',
+    source: 'scenes/courtyard/', number: '03',
   },
   {
     id: 'wind-print', title: '风向印刷所', english: 'WIND PRINT STUDIO',
     category: '风场 × 生成艺术', description: '拨动 WIND 线条，拖动种下叶片，用一阵风的时间，印一张自己的海报。',
     detail: 'p5.js 交互 · 种子构图 · PNG 导出',
-    source: 'scenes/wind-print/', number: '05',
+    source: 'scenes/wind-print/', number: '04',
   },
   {
     id: 'knowledge-atlas', title: '知序 · 知识形态', english: 'KNOWLEDGE ATLAS',
     category: '知识 × 多重视角', description: '把同一份知识看成星团、城市、地铁与流向，在九种交互中连接概念、项目和证据。',
     detail: '24个知识点 · 9种交互 · 论文灵感',
-    source: 'scenes/knowledge-atlas/', number: '06',
+    source: 'scenes/knowledge-atlas/', number: '05',
   },
 ];

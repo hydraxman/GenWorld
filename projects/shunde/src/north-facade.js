@@ -142,6 +142,11 @@ export function createNorthFacade(THREE,{textured=true,foliage=true,signGlyphs=n
     cx.fillStyle='#181c19';cx.font='700 158px "Kaiti SC", "STKaiti", serif';cx.textAlign='center';cx.fillText(text,768,169,1440);
     cx.font='29px Georgia';cx.fillText('Department of Industrial Engineering, Tsinghua University',768,224,1450);
    }else if(signGlyphs)cx.drawImage(signGlyphs,25,34,206,444);
+   else{
+    cx.fillStyle='#d0b877';cx.font='700 128px "Kaiti SC", "STKaiti", serif';cx.textAlign='center';
+    [...text].forEach((character,i)=>cx.fillText(character,128,156+i*140,206));
+    g.userData.letteringStatus='System-font approximation; no extracted reference pixels';
+   }
    const map=new THREE.CanvasTexture(c);map.colorSpace=THREE.SRGBColorSpace;
    box(g,'authored sign face',0,y,2.751,w-.035,h-.025,.012,new THREE.MeshStandardMaterial({name:text,map,roughness:.65}));
   }else box(g,'sign material fallback',0,y,2.751,w*.8,h*.8,.012,background==='white'?dark:gold);
