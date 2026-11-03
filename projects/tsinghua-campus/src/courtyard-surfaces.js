@@ -8,9 +8,10 @@ export function campusGlass(material) {
 
 export function installCourtyardSurfaces(campus) {
   let seed = 41827;
+  const textureWorld = new Map();
   const tools = createPBRTools(THREE, {rand: () => {
     seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296;
-  }, stats: {textures: 0}, materials: {}, textureWorld: new Map()});
+  }, stats: {textures: 0}, materials: {}, textureWorld});
   const finishes = new Map(['grain', 'granite', 'brick', 'paving'].map(kind => [kind,
     tools.pbr(`Shared original Courtyard ${kind} finish`, kind, [242, 242, 242], [1, 1], 256)]));
   for (const finish of finishes.values()) for (const key of ['map', 'normalMap', 'roughnessMap']) {
@@ -41,8 +42,13 @@ export function installCourtyardSurfaces(campus) {
         material.map = finish.map; material.normalMap = finish.normalMap; material.roughnessMap = finish.roughnessMap;
         material.normalScale.set(.26, .26); material.roughness = .93; material.needsUpdate = true;
         material.userData.courtyardSurface = kind;
+        const world = kind === 'brick' ? [1.05, 1.04] : kind === 'paving' ? [3.6, 3.6] : [2.4, 2.4];
+        textureWorld.set(material, world);
       }
-      if (layer === campus.layers.road && !mesh.geometry.attributes.uv) {
+      if (!Array.isArray(mesh.material) && textureWorld.has(mesh.material) && !uvOriginals.has(mesh.geometry)) {
+        uvOriginals.set(mesh.geometry, mesh.geometry.getAttribute('uv') ?? null);
+        tools.worldUV(mesh.geometry, mesh.material);
+      } else if (layer === campus.layers.road && !mesh.geometry.attributes.uv) {
         const p = mesh.geometry.attributes.position, values = new Float32Array(p.count * 2);
         for (let i = 0; i < p.count; i++) {values[i * 2] = p.getX(i) / 2.4; values[i * 2 + 1] = p.getZ(i) / 2.4;}
         uvOriginals.set(mesh.geometry, null); mesh.geometry.setAttribute('uv', new THREE.BufferAttribute(values, 2));
@@ -57,7 +63,10 @@ export function installCourtyardSurfaces(campus) {
       Object.assign(material, values); delete material.userData.courtyardSurface; delete material.userData.courtyardGlassFinish;
       material.needsUpdate = true;
     }
-    for (const geometry of uvOriginals.keys()) geometry.deleteAttribute('uv');
+    for (const [geometry, uv] of uvOriginals) {
+      if (uv) geometry.setAttribute('uv', uv);
+      else geometry.deleteAttribute('uv');
+    }
     for (const finish of finishes.values()) {
       finish.map.dispose(); finish.normalMap.dispose(); finish.roughnessMap.dispose(); finish.dispose();
     }

@@ -13,7 +13,10 @@ const server = createServer(async (request, response) => {
   const url = new URL(request.url, 'http://localhost'), relative = decodeURIComponent(url.pathname).slice(1);
   const file = path.resolve(published, relative, !relative || relative.endsWith('/') ? 'index.html' : '');
   if (!file.startsWith(published + path.sep)) {response.writeHead(403).end(); return;}
-  try {response.writeHead(200, {'Content-Type': mime[path.extname(file)] ?? 'application/octet-stream'}).end(await readFile(file));}
+  try {
+    const content = await readFile(file);
+    response.writeHead(200, {'Content-Type': mime[path.extname(file)] ?? 'application/octet-stream'}).end(content);
+  }
   catch (error) {if (error.code !== 'ENOENT') throw error; response.writeHead(404).end();}
 });
 await mkdir(output, {recursive: true});
@@ -45,6 +48,8 @@ try {
         : () => !window.__knowledgeLab().view?.animating);
       const capture = async name => {
         await settle();
+        assert.doesNotMatch(await page.$eval('body', element => element.innerText),
+          /教学陈设|虚构教学|非实地|非实测|不是在线用户|不代表认证|初版教学实验/);
         await page.screenshot({path: path.join(output, `labs-${host}-${width}-${name}.png`)});
       };
       const fill = async (selector, value) => {
@@ -53,9 +58,35 @@ try {
       if (campus) {
         await page.click('#enter-knowledge-hall');
         assert.equal(await page.evaluate(() => window.campusApp.knowledgeHall.state().count), 3);
+        assert.equal(await page.evaluate(() => window.campusApp.knowledgeHall.state().surfaces.textures), 6);
+        await capture('entry-threshold');
+        await page.waitForFunction(() => window.campusApp.walkthrough.state().phase === 'inside');
+        assert.ok(Math.abs((await page.evaluate(() => window.campusApp.walkthrough.state().position))[1] - .2) < 1e-8,
+          'The entry motion must finish past the actual Shunde doorway');
+        await capture('entry-room');
+        if (width < 760) {
+          const framing = await page.evaluate(() => {
+            const camera = window.campusApp.inspection().camera;
+            let scene = window.campusApp.campus.layers.building;
+            while (scene.parent) scene = scene.parent;
+            const pond = scene.getObjectByName('pond-water');
+            const positions = pond.geometry.attributes.position;
+            const points = Array.from({length: positions.count}, (_, index) => {
+              const point = pond.localToWorld(camera.position.clone().fromBufferAttribute(positions, index)).project(camera);
+              return {x: (point.x + 1) * innerWidth / 2, y: (1 - point.y) * innerHeight / 2};
+            });
+            return {points, panelTop: document.getElementById('walk-controls').getBoundingClientRect().top};
+          });
+          assert.ok(framing.points.every(point => point.x >= 0 && point.x <= width && point.y > 0 && point.y < framing.panelTop),
+            'The complete pond must fit above the mobile controls after entering');
+        }
         await page.keyboard.down('w'); await new Promise(done => setTimeout(done, 1800)); await page.keyboard.up('w');
         assert.ok((await page.evaluate(() => window.campusApp.walkthrough.state().position))[1] < 1.5);
         await capture('walk-in');
+        assert.equal(await page.$eval('#interact-exhibit', button => button.disabled), false);
+        await page.keyboard.press('f');
+        assert.equal((await read()).kind, 'markov');
+        await page.keyboard.press('Escape');
       }
       for (const id of ['markov', 'graph', 'list']) {
         if (campus && id === 'markov' && width === 1600) {
@@ -146,6 +177,12 @@ try {
           memories.push(await page.evaluate(() => {window.campusApp.render(true); return window.campusApp.inspection().rendering.textures;}));
         }
         assert.ok(memories.at(-1) <= memories[0], `Re-entering must not leak textures: ${memories}`);
+        await page.emulateMediaFeatures([{name: 'prefers-reduced-motion', value: 'reduce'}]);
+        await page.click('#enter-knowledge-hall');
+        assert.equal(await page.evaluate(() => window.campusApp.walkthrough.state().phase), 'inside');
+        assert.equal((await page.evaluate(() => window.campusApp.walkthrough.state().position))[1], 4.5,
+          'Reduced-motion entry leaves the visitor in manual control at the threshold');
+        await page.click('#exit-building');
       } else {
         await page.emulateMediaFeatures([{name: 'prefers-reduced-motion', value: 'reduce'}]);
         await page.click('.lab-launches [data-lab="markov"]');

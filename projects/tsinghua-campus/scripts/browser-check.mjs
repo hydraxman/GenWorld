@@ -61,7 +61,7 @@ export async function checkCampusLandscape({page, frame, screenshots}) {
       return {id, name: document.getElementById('selection-name').textContent,
         groundName: ground.name, sportsVisible: app.campus.layers.sports.visible,
         buildingCount: app.campus.buildings.size, stats: app.stats.landscape,
-        limitations: document.getElementById('selection-help').textContent,
+        limitations: ground.limitations,
         selectionLink: document.getElementById('selection-link').href};
     }, id);
     assert.equal(state.name, state.groundName); assert.equal(state.sportsVisible, true);
@@ -364,7 +364,7 @@ export async function checkCampusExpansion({page, frame, screenshots}) {
     window.campusApp.select(root.userData.featureId, true);
     return mesh.material === material && mesh.material.map === before;
   }), true, 'Selecting architecture must preserve its material');
-  assert.match(await frame.$eval('#selection-help', element => element.textContent), /程序建筑估算.*非照片/);
+  assert.equal(await frame.$('#selection-help'), null);
   await snapshot(frame);
   await page.mouse.move(viewport.width - 5, viewport.height - 5);
   await page.screenshot({path: path.join(screenshots, 'campus-architecture-windows-desktop.png')});
@@ -442,7 +442,8 @@ export async function checkCampusArchitecture({page, frame, screenshots}) {
     await frame.evaluate(id => window.campusApp.select(id, true), root.id);
     await frame.$eval('#message', element => {element.hidden = true;});
     assertFramed(await snapshot(frame));
-    assert.match(await frame.$eval('#selection-fields', element => element.textContent), /程序建筑估算/);
+    assert.ok((await frame.$eval('#selection-fields', element => element.textContent)).includes(root.id));
+    assert.equal(await frame.evaluate(id => window.campusApp.campus.buildings.get(id).userData.refinementStatus, root.id), 'procedural');
     assert.equal(await frame.$eval('#selected-references', element => element.hidden), true);
     const sample = await frame.evaluate(id => {
       const detail = window.campusApp.campus.buildings.get(id).children.find(child => child.userData.architectureLOD);
@@ -552,8 +553,8 @@ export async function checkCampusPhotoAppearances({page, frame, screenshots}) {
     assert.equal(state.source, profile.site); assert.equal(state.stage, 'procedural'); assert.equal(state.near, true);
     assert.ok(state.pages.includes(state.reference) || state.reference.endsWith(`reference-photos.html#${profile.site}`));
     assert.equal(await frame.$eval('#selected-references', element => element.hidden), false);
-    assert.match(await frame.$eval('#selection-fields', element => element.textContent), /对应照片配色.*非逐面复原/);
-    assert.match(await frame.$eval('#selection-help', element => element.textContent), /非照片逐面复原/);
+    assert.doesNotMatch(await frame.$eval('#selection-fields', element => element.textContent), /非逐面复原|示意|实测/);
+    assert.equal(await frame.$('#selection-help'), null);
     const appearance = state.hasSample ? await measureCampusAppearance(frame, 'procedural', null, profile.featureId) : null;
     if (appearance) {
       assert.ok(appearance.glazing >= 20 && appearance.glazing <= 185,
@@ -638,14 +639,16 @@ export async function checkCampusZijing({page, frame, screenshots}) {
     assertFramed(state);
     assert.equal(await frame.evaluate(() => window.campusApp.selectedApartment()), number);
     assert.equal(await frame.$eval('#selection-name', element => element.textContent), `紫荆学生公寓${number}号楼`);
-    assert.match(await frame.$eval('#selection-fields', element => element.textContent), /组团类型推定/);
+    assert.doesNotMatch(await frame.$eval('#selection-fields', element => element.textContent), /组团类型推定|示意|实测/);
     assert.equal(await frame.$eval('#export-building', element => element.hidden), false);
     const model = await frame.evaluate(number => {
       const root = [...window.campusApp.campus.buildings.values()].find(root => root.userData.apartmentNumbers?.includes(number));
       const part = root.children.find(child => child.userData.campusDetail).children.find(child => child.userData.apartmentNumber === number);
-      return {rootId: root.userData.featureId, family: part.userData.family,
+      return {rootId: root.userData.featureId, family: part.userData.family, referenceBasis: root.userData.referenceBasis,
         windows: part.userData.windowCount, height: root.userData.renderHeight};
     }, number);
+    assert.equal(model.referenceBasis, 'group-photo-typology-estimate');
+    assert.ok((await frame.$eval('#selection-fields', element => element.textContent)).includes(model.rootId));
     const appearance = [1, 8, 14, 18, 23].includes(number)
       ? await measureCampusAppearance(frame, 'zijing-dormitories', number) : null;
     if (appearance) {

@@ -42,7 +42,29 @@ export function createPBRTools(THREE,{rand,stats,materials,textureWorld,textured
         }
       }
     }
-    // Fine mineral grains: albedo, micro-height, and roughness all remain local.
+    if (kind === 'wood') {
+      const rows = 6, rowHeight = size / rows;
+      rx.fillStyle = '#c8c8c8'; rx.fillRect(0, 0, size, size);
+      for (let row = 0; row < rows; row++) {
+        const phase = rand() * Math.PI * 2, offset = between(-8, 2);
+        for (let y = 0; y < rowHeight; y++) for (let x = 0; x < size; x++) {
+          const wave = Math.sin(x / size * Math.PI * 2 + phase);
+          const grain = Math.sin(y * .72 + wave * 2.2);
+          const d = offset + grain * 6;
+          ctx.fillStyle = color(rgb[0] + d, rgb[1] + d, rgb[2] + d);
+          ctx.fillRect(x, row * rowHeight + y, 1, 1);
+          hx.fillStyle = color(134 + grain * 5, 134 + grain * 5, 134 + grain * 5);
+          hx.fillRect(x, row * rowHeight + y, 1, 1);
+        }
+        ctx.fillStyle = color(...rgb.map(value => value - 28));
+        ctx.fillRect(0, row * rowHeight, size, 1);
+        hx.fillStyle = '#656565'; hx.fillRect(0, row * rowHeight, size, 1);
+        const joint = (row % 3 + .5) * size / 3;
+        ctx.fillRect(joint, row * rowHeight, 1, rowHeight);
+        hx.fillRect(joint, row * rowHeight, 1, rowHeight);
+      }
+    }
+    // Separate local color, micro-height and roughness variation.
     for (let i=0;i<size*size*.16;i++) {
       const x=rand()*size,y=rand()*size,s=between(.35,kind==='granite'?2:1.5);
       ctx.fillStyle = rand()>.55 ? 'rgba(255,251,239,.14)' : 'rgba(31,31,25,.16)';ctx.fillRect(x,y,s,s);

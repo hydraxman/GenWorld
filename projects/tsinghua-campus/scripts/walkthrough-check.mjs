@@ -48,9 +48,12 @@ try {
       assert.equal(await page.evaluate(() => window.campusApp.walkthrough.state().active), true);
       assert.equal(await page.evaluate(() => window.campusApp.campus.layers.building.visible), true, 'Entering must restore the building layer');
       assert.equal(await page.evaluate(() => window.campusApp.walkthrough.state().id), kind);
-      assert.equal(await page.evaluate(() => window.campusApp.inspection().camera.view?.enabled), false, 'Walking must clear orbit inspection view offsets');
+      const offset = await page.evaluate(() => window.campusApp.inspection().camera.view);
+      if (width <= 850) assert.ok(offset.enabled && offset.fullHeight < offset.height, 'Mobile walking must frame the area above touch controls');
+      else assert.equal(offset?.enabled, false, 'Desktop walking must clear orbit inspection offsets');
       assert.equal(await page.$eval('#walk-controls', element => element.hidden), false);
-      assert.match(await page.$eval('#walk-note', element => element.textContent), /示意/);
+      assert.equal(await page.$('#walk-note'), null);
+      assert.doesNotMatch(await page.$eval('#walk-controls', element => element.textContent), /示意|非实地|陈设|实测/);
       await page.screenshot({path: resolve(output, `walk-${device}-${kind}-entry.png`)});
       if (device === 'desktop') await page.keyboard.down('w');
       else {

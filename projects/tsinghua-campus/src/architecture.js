@@ -1,8 +1,17 @@
 import * as THREE from 'three';
 
-export function addFootprintPrism(B, group, ring, bottom, top, material) {
+export function addFootprintPrism(B, group, ring, bottom, top, material, {holes = [], exposedSides = true} = {}) {
   const shape = new THREE.Shape(ring.map(([x, z]) => new THREE.Vector2(x, -z)));
+  for (const hole of holes) shape.holes.push(new THREE.Path(hole.map(([x, z]) => new THREE.Vector2(x, -z))));
   const geometry = new THREE.ExtrudeGeometry(shape, {depth: top - bottom, bevelEnabled: false, curveSegments: 1});
+  if (!exposedSides) {
+    // Perimeter walls already enclose these slabs; duplicate rims fight the facade.
+    const capVertices = geometry.groups[0].count;
+    for (const [name, attribute] of Object.entries(geometry.attributes)) {
+      geometry.setAttribute(name, new THREE.BufferAttribute(attribute.array.slice(0, capVertices * attribute.itemSize), attribute.itemSize));
+    }
+    geometry.clearGroups();
+  }
   geometry.rotateX(-Math.PI / 2); geometry.translate(0, bottom, 0);
   B.worldUV(geometry, material); B.add(group, geometry, material);
 }

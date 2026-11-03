@@ -15,6 +15,7 @@ import { addSemanticExhibit, EXHIBIT_DESCRIPTIONS } from './exhibits.js';
 export function createKnowledgeTower(THREE, floors) {
   const count = 16;
   const towerSpacing = 3.6;
+  const slabThickness = .3, glazingTop = towerSpacing - .6, corniceBottom = towerSpacing - .5;
   const explodedSpacing = 6.4;
   const baseY = 1.15;
   const centres = [[-5.8, -4.5], [5.8, -4.5], [-5.8, 4.5], [5.8, 4.5]];
@@ -206,11 +207,11 @@ export function createKnowledgeTower(THREE, floors) {
     const bandMaterial = material(floor.color, { emissive: floor.color, emissiveIntensity: 0.12 });
     // Four panels form a genuinely open 4 x 4 central atrium.
     for (const z of [-5.5, 5.5]) {
-      const slab = box(level, `slab-${number}-z${z}`, slabMaterial, [0, 0.15, z], [22, 0.3, 7], true);
+      const slab = box(level, `slab-${number}-z${z}`, slabMaterial, [0, slabThickness / 2, z], [22, slabThickness, 7], true);
       slab.userData.role = 'slab';
     }
     for (const x of [-6.5, 6.5]) {
-      const slab = box(level, `slab-${number}-x${x}`, slabMaterial, [x, 0.15, 0], [9, 0.3, 4], true);
+      const slab = box(level, `slab-${number}-x${x}`, slabMaterial, [x, slabThickness / 2, 0], [9, slabThickness, 4], true);
       slab.userData.role = 'slab';
     }
     // Deep limestone fascia, setback shadow lines and cornices give the floors
@@ -227,20 +228,20 @@ export function createKnowledgeTower(THREE, floors) {
       material(routeColor, { emissive: routeColor, emissiveIntensity: 0.25 }),
       [5.6, 0.35, 9.06], [9.6, 0.07, 0.08]);
     for (const x of [-5.8, 5.8]) {
-      box(level, `rear-glass-${x}`, glass, [x, 1.5, -8.82], [9.2, 2.15, 0.07]);
+      box(level, `rear-glass-${x}`, glass, [x, (slabThickness + glazingTop) / 2, -8.82], [9.2, glazingTop - slabThickness, 0.07]);
     }
     for (const x of [-10.75, 10.75]) {
-      box(level, `side-glass-${x}`, glass, [x, 1.2, -3.6], [0.07, 1.6, 9.5]);
+      box(level, `side-glass-${x}`, glass, [x, (slabThickness + glazingTop) / 2, 0], [0.07, glazingTop - slabThickness, 17.6]);
       box(level, `side-frame-${x}`, steel, [x, 3.05, 0], [0.2, 0.22, 17.6]);
       box(level, `side-rail-${x}`, steel, [x, 1.02, 0], [0.09, 0.08, 17.6]);
-      box(level, 'limestone-side-eave', pale, [x, 3.23, 0], [0.4, 0.24, 17.9], true);
+      box(level, 'limestone-side-eave', pale, [x, (corniceBottom + towerSpacing) / 2, 0], [0.4, towerSpacing - corniceBottom, 17.9], true);
       for (const z of [-8.45, -2.8, 2.8, 8.45]) {
         box(level, 'bronze-facade-mullion', steel, [x, 1.75, z], [0.11, 2.9, 0.11]);
       }
       box(level, 'warm-recessed-cove', light, [x * 0.97, 3.08, 0], [0.045, 0.035, 17]);
     }
     box(level, 'rear-frame', steel, [0, 3.05, -8.8], [21.5, 0.22, 0.2]);
-    box(level, 'rear-limestone-cornice', pale, [0, 3.23, -8.8], [22, 0.24, 0.4], true);
+    box(level, 'rear-limestone-cornice', pale, [0, (corniceBottom + towerSpacing) / 2, -8.8], [22, towerSpacing - corniceBottom, 0.4], true);
     for (const x of [-7.2, 7.2]) {
       box(level, `front-open-rail-${x}`, steel, [x, 1.02, 8.8], [6.1, 0.08, 0.09]);
     }
@@ -334,7 +335,7 @@ export function createKnowledgeTower(THREE, floors) {
       gallery.add(selection);
       for (const z of [-2.92, 2.92]) box(selection, 'selected-rim', selectionMaterial, [0, 0.47, z], [7.7, 0.025, 0.025]);
       for (const x of [-3.84, 3.84]) box(selection, 'selected-rim', selectionMaterial, [x, 0.47, 0], [0.025, 0.025, 5.84]);
-      cylinder(gallery, 'pedestal-foot', rimMaterial, [0, 0.49, 0], 1.45, 0.08);
+      cylinder(gallery, 'pedestal-foot', rimMaterial, [0, 0.48, 0], 1.45, 0.08);
       cylinder(gallery, 'pedestal-stem', steel, [0, 0.72, 0], 0.18, 0.4);
       box(gallery, 'exhibit-table', pale,
         [0, 0.99, 0], [3.55, 0.16, 2.85], true);
@@ -572,10 +573,10 @@ export function createKnowledgeTower(THREE, floors) {
     }
     refreshLearningAppearance();
     structure.visible = mode !== 'floor';
-    crown.position.y = baseY + (count - 1) * spacing + 3.35;
+    crown.position.y = baseY + (count - 1) * spacing + towerSpacing;
     plaza.visible = mode !== 'floor';
     const bottom = 0.34;
-    const top = baseY + (count - 1) * spacing + 3.2;
+    const top = baseY + (count - 1) * spacing + towerSpacing - .16;
     for (const member of verticalMembers) {
       member.position.y = (bottom + top) / 2;
       member.scale.y = top - bottom;

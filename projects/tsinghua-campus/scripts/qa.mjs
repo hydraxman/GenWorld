@@ -89,8 +89,11 @@ try {
     await page.click(button);
     await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
     await page.screenshot({path: join(output, filename)});
-    const selection = await page.evaluate(() => document.getElementById('selection-fields').textContent);
-    assert.ok(selection.includes('照片参照重建'));
+    const selectedStatus = await page.evaluate(() => {
+      const id = document.querySelector('#selection-fields dd').textContent;
+      return window.campusApp.campus.objects.get(id).userData.refinementStatus;
+    });
+    assert.equal(selectedStatus, 'detailed');
     assert.equal(await page.$eval('#selected-references', link => link.hidden), false);
   }
   const reconstructionIndex = await page.evaluate(() =>
@@ -230,7 +233,9 @@ try {
     + `?building=${encodeURIComponent(architectureIndex[0].featureId)}`, {waitUntil: 'load'});
   await offline.waitForFunction(() => window.campusApp?.ready || window.campusError, {timeout: 90000});
   assert.equal(await offline.evaluate(() => window.campusError), undefined);
-  assert.match(await offline.$eval('#selection-fields', element => element.textContent), /程序建筑估算/);
+  assert.equal(await offline.$eval('#selection-fields dd', element => element.textContent), architectureIndex[0].featureId);
+  assert.equal(await offline.evaluate(id => window.campusApp.campus.buildings.get(id).userData.refinementStatus,
+    architectureIndex[0].featureId), 'procedural');
   assert.equal(await offline.evaluate(() => window.campusApp.coverage.allFootprintsHaveArchitecture), true);
   assert.deepEqual(external, [], 'Arbitrary building deep links must remain entirely offline');
   const photoId = photoAppearances.buildings[0].featureId;
@@ -239,7 +244,7 @@ try {
   await offline.waitForFunction(() => window.campusApp?.ready || window.campusError, {timeout: 90000});
   assert.equal(await offline.evaluate(() => window.campusError), undefined);
   assert.equal(await offline.$eval('#appearance-building', element => element.value), photoAppearances.buildings[0].id);
-  assert.match(await offline.$eval('#selection-fields', element => element.textContent), /对应照片配色/);
+  assert.equal(await offline.$eval('#selection-fields dd', element => element.textContent), photoId);
   assert.deepEqual(external, [], 'Photo-guided appearance must not download or depend on the reference photograph');
   assert.deepEqual(errors, []);
   const report = {stats, singleBuildingExports: reconstructionIndex.length + architectureIndex.length,

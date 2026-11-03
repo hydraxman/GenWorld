@@ -2,9 +2,9 @@ import * as THREE from 'three';
 import polygonClipping from 'polygon-clipping';
 import {createBuilder} from '../../shunde/src/builder.js';
 import {footprintMetrics} from './geo.js';
-import {outlineEdges} from './architecture.js';
+import {outlineEdges, addFootprintPrism} from './architecture.js';
 import {disposeOwnedDetail, replaceBuilding} from './model.js';
-import {createMasonryMaterial, createGlazingMaterial, createEstimatedFacade} from './surface-materials.js';
+import {createMasonryMaterial, createCeramicMaterial, createGlazingMaterial, createEstimatedFacade} from './surface-materials.js';
 import evidence from '../data/architecture-evidence.json' with {type: 'json'};
 import {architectureSignature} from './architecture-contract.js';
 import {appearanceProfile, appearanceSource, appearanceLimitations} from './photo-appearance.js';
@@ -56,7 +56,7 @@ export function createArchitectureResources() {
   const facade = createEstimatedFacade();
   const M = {
     academic: createMasonryMaterial('architecture: estimated academic masonry', [201, 186, 161], true),
-    residential: createMasonryMaterial('architecture: estimated residential render', [213, 207, 191], true),
+    residential: createCeramicMaterial('architecture: estimated residential ceramic', [213, 207, 191]),
     commercial: createMasonryMaterial('architecture: estimated commercial stone', [193, 202, 201], true),
     neutral: createMasonryMaterial('architecture: unknown exterior, neutral masonry', [207, 204, 192], true),
     plinth: createMasonryMaterial('architecture: estimated masonry plinth', [141, 136, 124]),
@@ -96,12 +96,8 @@ export function createArchitectureResources() {
   }};
 }
 
-function prism(B, group, rings, bottom, top, material) {
-  const shape = new THREE.Shape(rings[0].map(([x, z]) => new THREE.Vector2(x, -z)));
-  for (const ring of rings.slice(1)) shape.holes.push(new THREE.Path(ring.map(([x, z]) => new THREE.Vector2(x, -z))));
-  const geometry = new THREE.ExtrudeGeometry(shape, {depth: top - bottom, bevelEnabled: false, curveSegments: 1});
-  geometry.rotateX(-Math.PI / 2); geometry.translate(0, bottom, 0);
-  B.worldUV(geometry, material); B.add(group, geometry, material);
+function prism(B, group, rings, bottom, top, material, exposedSides = true) {
+  addFootprintPrism(B, group, rings[0], bottom, top, material, {holes: rings.slice(1), exposedSides});
 }
 
 function surfaces(B) {
@@ -204,6 +200,7 @@ export function createArchitectureDetail(feature, center, origin, palette, {defe
   detail.add(near, far);
   const B = createBuilder(THREE), panels = surfaces(B);
   for (const material of [M.academic, M.residential, M.commercial, M.neutral, M.plinth]) B.textureWorld.set(material, [4, 4]);
+  B.textureWorld.set(M.residential, [1.68, 1.68]);
   if (profile) for (const material of [M.wall, M.plinth]) B.textureWorld.set(material,
     profile.surface === 'brick' ? [1.05, .52] : [2.4, 3.2]);
   const group = name => {const g = new THREE.Group(); g.name = name; near.add(g); return g;};
@@ -239,7 +236,7 @@ export function createArchitectureDetail(feature, center, origin, palette, {defe
   for (const [polygonIndex, rings] of polygons.entries()) {
     if (!deferNear) {
       prism(B, structure, rings, bottom, baseY, M.plinth);
-      prism(B, roof, rings, roofY - .14, roofY, M.roof);
+      prism(B, roof, rings, roofY - .14, roofY, M.roof, open);
     }
     if (!deferNear && profile?.roofRise) {
       if (rings.length !== 1) throw new Error('Photo-guided pitched roof cannot close an unknown courtyard.');
@@ -267,7 +264,7 @@ export function createArchitectureDetail(feature, center, origin, palette, {defe
         const strip = [p(-.05, .1), p(length + .05, .1), p(length + .05, -2), p(-.05, -2)];
         pieces = polygonClipping.difference([rings.map(r => [...r, r[0]])], [[[...strip, strip[0]]]]);
       }
-      for (const piece of pieces) prism(B, structure, piece, baseY + level * storey - .12, baseY + level * storey, M.trim);
+      for (const piece of pieces) prism(B, structure, piece, baseY + level * storey - .12, baseY + level * storey, M.trim, false);
     }
     for (const [ringIndex, edges] of edgeSets[polygonIndex].entries()) for (const edge of edges) {
       const {a, tangent: t, normal: n, length: L, yaw} = edge;

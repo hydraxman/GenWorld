@@ -55,10 +55,7 @@ export function createLearningUI({ navigate, onChange, reportError }) {
   function paintMap() {
     const profile = active();
     const summary = summarizeProfile(profile);
-    $('learning-title').textContent = profileId === 'own' ? '我的学习地图' : '示例访客 · 非真实学习记录';
-    $('learning-disclaimer').textContent = profileId === 'own'
-      ? '你的知识可以是一座不规则的岛：高层熟练、底层薄弱都正常。这里分别记录探索、自评和概念测评，不把一次浏览当作学习成果。'
-      : '这是用于展示热力图的虚构档案；你可以试着修改或做题，但不会写入“我的档案”。其他访客也是展示角色，不是在线用户。';
+    $('learning-title').textContent = profileId === 'own' ? '我的学习地图' : '示例访客的学习地图';
     $('learning-summary').replaceChildren();
     for (const [value, label] of [[summary.visited, '探索过的展厅'], [summary.known, '已有掌握度'], [summary.weak, '薄弱区域'], [summary.passedFloors.length, '楼层徽章']]) {
       const card = element('div', '');
@@ -109,9 +106,7 @@ export function createLearningUI({ navigate, onChange, reportError }) {
     const summary = summarizeProfile(profile);
     document.querySelectorAll('[data-profile]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.profile === profileId)));
     $('profile-name').textContent = profileId === 'own' ? '我的学习空间' : '示例访客 · 林同学';
-    $('profile-badge').textContent = profileId === 'demo' ? '虚构示例' : persistent ? '仅本机保存' : '临时记录';
-    $('profile-caption').textContent = profileId === 'demo' ? '数学熟练，部分基础待巩固。不是从低到高的单一等级。'
-      : `${summary.passedFloors.length} 枚楼层徽章 · 浏览与掌握分别记录。`;
+    $('profile-badge').textContent = profileId === 'demo' ? '示例档案' : persistent ? '本地档案' : '临时记录';
     $('visited-count').textContent = summary.visited;
     $('known-count').textContent = summary.known;
     $('weak-count').textContent = summary.weak;
@@ -132,7 +127,7 @@ export function createLearningUI({ navigate, onChange, reportError }) {
       $('floor-heat-strip').append(button);
     }
     const latest = [...profile.attempts].reverse().find(attempt => attempt.floor === floorNumber);
-    $('floor-exam-note').textContent = latest ? `最近试炼 ${latest.score} 分 · ${latest.passed ? '本层徽章已获得' : '错题待巩固'}；不限制继续探索。` : '4 道概念题 · 75 分过关 · 不限制楼层探索。';
+    $('floor-exam-note').textContent = latest ? `最近试炼 ${latest.score} 分 · ${latest.passed ? '本层徽章已获得' : '错题待巩固'}` : '4 道题 · 75 分通过';
     if (roomId) {
       const mastery = describeRoom(profile, roomId);
       $('room-mastery').textContent = `${mastery.label}${mastery.score === null ? '' : ` · ${mastery.score}`}`;
@@ -146,7 +141,6 @@ export function createLearningUI({ navigate, onChange, reportError }) {
         $('self-rating').append(option);
       }
       $('self-rating').value = mastery.selfRating === null ? '' : String(mastery.selfRating);
-      $('self-rating-note').textContent = mastery.examScore === null ? '自评与测评分开保存；浏览不等于掌握。' : `最近概念题：${mastery.examScore} 分。热力图优先显示测评；可重做试炼更新。`;
     }
     document.querySelectorAll('#floor-nav [data-floor]').forEach(button => {
       const entries = getFloor(Number(button.dataset.floor)).rooms.map(room => describeRoom(profile, room.id));
@@ -172,10 +166,9 @@ export function createLearningUI({ navigate, onChange, reportError }) {
       button.dataset.learner = occupant.id;
       button.append(element('i', ''), document.createTextNode(`${name} · ${occupant.floor}F`));
       button.style.setProperty('--person', occupant.color);
-      button.title = occupant.id === 'me' ? '当前探索位置，不代表掌握等级' : '虚构的示例访客位置';
+      button.title = `${name}的位置`;
       $('learner-roster').append(button);
     }
-    if (profileId === 'demo') $('learner-roster').append(element('small', '', '示例角色 / 非在线用户'));
     if ($('learning-dialog').open) paintMap();
     window.__learningState = { profileId, heatmap, summary, mastery: getMastery(profile), position: profile.position };
   }
@@ -293,9 +286,8 @@ export function createLearningUI({ navigate, onChange, reportError }) {
     $('exam-questions').querySelectorAll('input').forEach(input => { input.disabled = true; });
     const attempt = next.attempts.at(-1);
     $('exam-result').replaceChildren();
-    $('exam-result').append(element('span', 'eyebrow', attempt.passed ? 'CHECKPOINT CLEARED' : 'A NEW WAY TO LEARN'),
-      element('h3', '', `${attempt.score} 分 · ${attempt.passed ? '本层徽章已点亮' : '找到值得加强的地方'}`),
-      element('p', '', profileId === 'demo' ? '结果仅更新示例档案，不写入你的记录。' : persistent ? '结果已保存在本机；四个展厅按各自答题结果更新。' : '结果仅在本页临时保留，请导出并检查存储。'));
+    $('exam-result').append(element('h3', '', `${attempt.score} 分 · ${attempt.passed ? '本层徽章已点亮' : '错题待巩固'}`),
+      element('p', '', profileId === 'demo' ? '示例档案已更新。' : persistent ? '结果已保存。' : '结果尚未保存，请导出并检查存储。'));
     getFloorAssessment(examFloor).forEach((question, index) => {
       const correct = answers[index] === question.correctIndex;
       const entry = element('div', `answer-review ${correct ? 'correct' : 'incorrect'}`);

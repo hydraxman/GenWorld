@@ -57,7 +57,11 @@ test('each dormitory has finite, batched geometry, real window openings, UVs and
         for (const attribute of Object.values(object.geometry.attributes)) assert.ok(attribute.array.every(Number.isFinite));
         assert.ok(object.geometry.attributes.uv);
         assert.ok(object.material.name.startsWith('zijing:'));
-        if (object.material.map) assert.ok(new Set(object.geometry.attributes.uv.array).size > 10);
+        if (object.material.map) {
+          const uv = object.geometry.attributes.uv;
+          assert.ok(new Set(Array.from({length: uv.count}, (_, i) => uv.getX(i))).size > 1);
+          assert.ok(new Set(Array.from({length: uv.count}, (_, i) => uv.getY(i))).size > 1);
+        }
       });
       assert.ok(meshes >= 5 && meshes <= 16, `A dormitory must use bounded batches, not one draw call per window: ${meshes}`);
       assert.ok(part.getObjectByName(d.family === 'pitched-low-rise' ? 'Pitched roof and gable closures'

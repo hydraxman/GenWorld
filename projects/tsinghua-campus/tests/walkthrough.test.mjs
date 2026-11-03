@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import source from '../../shunde/docs/campus-context.json' with {type: 'json'};
 import {createShundeModel} from '../../shunde/src/model.js';
 import {createSEMBuilding, SEM_WAY} from '../../shunde/src/sem-building.js';
-import {stepVisitor, visitorCanStand, visitorFloor} from '../src/walkthrough.js';
+import {advanceVisitorVelocity, stepVisitor, visitorCanStand, visitorFloor} from '../src/walkthrough.js';
 
 for (const kind of ['shunde', 'jianhua']) test(`${kind} visitor actually passes through open doors into a floored bounded lobby`, () => {
   const built = kind === 'shunde' ? createShundeModel(THREE, {textured: false, foliage: false, refinedFront: true})
@@ -18,6 +18,9 @@ for (const kind of ['shunde', 'jianhua']) test(`${kind} visitor actually passes 
   built.group.updateMatrixWorld(true);
   const spec = anchor.userData.walkthrough;
   assert.ok(visitorCanStand(spec, spec.spawn));
+  assert.ok(visitorCanStand(spec, spec.entryTarget));
+  const entered = stepVisitor(spec, spec.spawn, spec.entryTarget.map((value, axis) => value - spec.spawn[axis]));
+  assert.ok(Math.hypot(...entered.map((value, axis) => value - spec.entryTarget[axis])) < 1e-10);
   const finish = stepVisitor(spec, spec.spawn, [0, -20]);
   assert.ok(finish[1] < -4);
   assert.ok(visitorCanStand(spec, finish));
@@ -38,4 +41,22 @@ for (const kind of ['shunde', 'jianhua']) test(`${kind} visitor actually passes 
   assert.ok(hit, 'A walkable lobby must have real floor geometry');
   assert.ok(Math.abs(hit.point.y - floor) < .02);
   assert.match(spec.limitations, /示意/);
+});
+
+test('walking acceleration has frame-rate-independent distance and a short controlled stop', () => {
+  function simulate(fps) {
+    let velocity = [0, 0], distance = 0;
+    for (let step = 0; step < fps; step++) {
+      const next = advanceVisitorVelocity(velocity, [0, -2.4], 1 / fps);
+      velocity = next.velocity; distance += next.delta[1];
+    }
+    return {velocity, distance};
+  }
+  const slow = simulate(20), fast = simulate(120);
+  assert.ok(Math.abs(slow.distance - fast.distance) < 1e-10);
+  assert.ok(slow.distance < -2.19 && slow.distance > -2.21);
+  const stopped = advanceVisitorVelocity(fast.velocity, [0, 0], .5);
+  assert.ok(Math.abs(stopped.delta[1]) < .2);
+  assert.ok(Math.abs(stopped.velocity[1]) < .006);
+  assert.throws(() => advanceVisitorVelocity([0, NaN], [0, 0], .1), /finite/);
 });

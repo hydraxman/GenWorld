@@ -3,7 +3,7 @@ import polygonClipping from 'polygon-clipping';
 import {createBuilder} from '../../shunde/src/builder.js';
 import {footprintMetrics, ringArea} from './geo.js';
 import {replaceBuilding, disposeOwnedDetail} from './model.js';
-import {createMasonryMaterial, createGlazingMaterial} from './surface-materials.js';
+import {createMasonryMaterial, createCeramicMaterial, createGlazingMaterial} from './surface-materials.js';
 import {ZIJING_APARTMENTS, zijingPartitions, verifyZijingSource} from './zijing-sources.js';
 import {addFootprintPrism as prism, addTriangle as triangle, outlineEdges as edgesOf} from './architecture.js';
 import catalog from '../reference-catalog.json' with {type: 'json'};
@@ -27,7 +27,7 @@ function validateOrigin(feature, center, origin) {
 
 function materials() {
   return {
-    wall: createMasonryMaterial('zijing: pale exterior masonry', [215, 218, 211], true),
+    wall: createCeramicMaterial('zijing: pale exterior masonry', [215, 218, 211]),
     plinth: createMasonryMaterial('zijing: terracotta plinth', [146, 85, 66]),
     white: new THREE.MeshStandardMaterial({name: 'zijing: painted concrete', color: '#eeeade', roughness: .82}),
     frame: new THREE.MeshStandardMaterial({name: 'zijing: aluminium frames and rails', color: '#a5adb0', metalness: .28, roughness: .53}),
@@ -93,7 +93,8 @@ function makeApartment(B, parent, part, origin, M) {
   const edges = edgesOf(ring), windowOpenings = [];
   const entry = edges.filter(edge => edge.length > 25 && edge.normal[1] > .5).sort((a, b) => b.length - a.length)[0];
   prism(B, structure, ring, 0, base, M.plinth);
-  for (let level = 1; level <= floors; level++) prism(B, structure, ring, base + level * storey - .16, base + level * storey, M.white);
+  for (let level = 1; level <= floors; level++) prism(B, structure, ring, base + level * storey - .16,
+    base + level * storey, M.white, {exposedSides: false});
   let facadeSample, doorwayProbe;
   for (const edge of edges) {
     const {a, tangent: t, normal: n, length: L, yaw} = edge;
@@ -182,6 +183,7 @@ function makeApartment(B, parent, part, origin, M) {
       }
     }
     if (!low) {
+      place(roof, L / 2, eave + .44, -.12, L, .92, .24, M.wall);
       for (const y of [eave + .3, eave + .9]) place(roof, L / 2, y, 0, L, .12, .38, M.white);
     }
   }
@@ -239,7 +241,7 @@ export function createZijingDetail(feature, center, origin) {
   const parts = zijingPartitions(feature, center), detail = new THREE.Group(), M = materials();
   detail.name = `紫荆 ${source.numbers.join(' / ')} · 组团照片类型估算`;
   const B = createBuilder(THREE, source.numbers[0]);
-  B.textureWorld.set(M.wall, [4, 2]); B.textureWorld.set(M.plinth, [1, .64]);
+  B.textureWorld.set(M.wall, [1.68, 1.68]); B.textureWorld.set(M.plinth, [1, .64]);
   for (const part of parts) makeApartment(B, detail, part, origin, M);
   B.finish();
   const used = new Set();

@@ -39,7 +39,6 @@ const styles = `
 .lab-panel .lab-quiz input {width:18px;height:18px;min-height:18px;flex:0 0 18px;accent-color:#e5c489;margin-top:3px}
 .lab-panel .lab-quiz output {display:block;margin-top:10px;color:#e7cf9d}
 .lab-panel .lab-error {color:#ffd6be;border:1px solid #c88061;padding:10px}
-.lab-panel .lab-note {font-size:12px;color:#c1d5d0}
 .lab-panel .lab-close {width:100%;margin-bottom:18px}
 .lab-launches {display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
 .lab-launches button {min-height:40px}
@@ -71,8 +70,7 @@ export function createLabUI({host, onClose, onState = () => {}}) {
   status.id = 'lab-status'; status.setAttribute('aria-live', 'polite');
   const error = element('p', '', 'lab-error'); error.setAttribute('role', 'alert'); error.hidden = true;
   const quiz = element('details', undefined, 'lab-quiz');
-  const note = element('p', '初版教学实验；本次操作和答题不计入掌握度。关闭展台会重置，不上传数据。', 'lab-note');
-  panel.append(closeButton, element('h3', '动手试验'), controls, status, data, quiz, note, error);
+  panel.append(closeButton, element('h3', '动手试验'), controls, status, data, quiz, error);
   panel.hidden = heading.hidden = true; host.append(heading, panel);
   let id = null, state = null, view = null, returnFocus = null, edgeIndex = 1, selectedNode = 'n1', rowIndex = 0, priorFocus = null;
   let inertSiblings = [];

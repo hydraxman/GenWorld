@@ -83,7 +83,6 @@ async function main() {
   await nextPaint();
   const architectureIds = applyCampusArchitecture(campus, data, {deferNear: true});
   const landmarkIds = applyCampusLandmarks(campus, data);
-  const detailedDisplay = createDetailedDisplay(campus, {batching: renderer.extensions.has('WEBGL_multi_draw')});
   loading('正在铺设地图操场、草坪与树木…', 90);
   await nextPaint();
   await prepareQingmingTextures();
@@ -134,10 +133,12 @@ async function main() {
   $('contact-shadows').checked = !compact.matches;
   let contactShadowsActive = false;
   const reflections = installCampusReflections(renderer, scene, campus, {compact: compact.matches, skyTexture});
+  const detailedDisplay = createDetailedDisplay(campus, {batching: renderer.extensions.has('WEBGL_multi_draw')});
   let knowledgeHall;
   const walker = createWalkthrough({camera: perspective, controls, canvas: renderer.domElement,
-    panel: $('walk-controls'), onChange: () => {dirty = true;},
-    onEnter: object => knowledgeHall.enter(object), onExit: () => knowledgeHall.exit()});
+    panel: $('walk-controls'), onChange: () => {dirty = true; knowledgeHall?.updateVisitor(walker.state());},
+    onEnter: object => knowledgeHall.enter(object), onExit: () => knowledgeHall.exit(),
+    onInteract: () => knowledgeHall.interact()});
   knowledgeHall = createKnowledgeHall({scene, camera: perspective, canvas: renderer.domElement,
     host: $('workspace'), walker, onChange: () => {dirty = true;}});
   let sceneTime = 0, lastMotion = performance.now();
@@ -284,33 +285,18 @@ async function main() {
     const p = building.userData;
     $('appearance-building').value = p.appearanceProfileId || '';
     $('selection-name').textContent = part?.name || p.name || '未命名建筑';
-    $('selection-help').textContent = building.userData.refinementStatus !== 'base'
-      ? building.userData.refinementSummary
-      : `当前为轮廓基模。${building.userData.baseFacadeSource} 楼高和屋顶亦非实测。`;
     $('selection-fields').replaceChildren();
     for (const [label, value] of [
-      ['编号', id], ['对象类型', p.kind === 'landmark' ? '独立地标 · 非地图建筑轮廓' : '地图建筑轮廓'],
-      ['占地', p.footprintArea === null ? '无测绘轮廓，不标注占地' : `${Math.round(p.footprintArea).toLocaleString()} m²`],
-      ['顶部标高', `${p.renderHeight.toFixed(2)} m`], ['底部标高', `${p.minHeight.toFixed(2)} m`],
-      ['高度来源', p.heightSource || '来源未标注'],
+      ['编号', id], ['对象类型', p.kind === 'landmark' ? '地标' : '建筑'],
+      ['模型占地', p.footprintArea === null ? '—' : `${Math.round(p.footprintArea).toLocaleString()} m²`],
+      ['模型顶部', `${p.renderHeight.toFixed(2)} m`], ['模型底部', `${p.minHeight.toFixed(2)} m`],
       ['原点 X/Z', p.localOriginMeters.map(v => v.toFixed(1)).join(' / ') + ' m'],
-      ...(p.kind === 'landmark' ? [['位置来源', `OSM node ${p.mapSource.id.split(':').at(-1)} · 社区地图点位，非测绘`]] : []),
-      ['重建状态', p.refinementStatus === 'detailed'
-        ? p.referenceBasis === 'group-photo-typology-estimate' ? '照片参照重建 · 组团类型推定，非逐栋照片验证' : '照片参照重建 · 非测绘'
-        : p.appearanceProfileId ? '程序建筑估算 · 对应照片配色／局部特征，非逐面复原'
-          : p.refinementStatus === 'procedural' ? '程序建筑估算 · 未逐栋照片验证' : '基模 · 待照片重建'],
       ...(p.refinementStatus === 'procedural' ? [
         ['建筑分型', ARCHITECTURE_FAMILIES[p.architectureFamily]],
-        ['类型依据', p.architectureSource.sourceId || '无可靠建筑标签，未推断用途'],
-        ['楼层节奏', `${p.estimatedFloors}层 · ${p.floorsSource}`],
+        ['展示层数', `${p.estimatedFloors}层`],
       ] : []),
-      ...(p.appearanceProfileId ? [['照片依据', p.appearanceReferencePages.join(' · ')],
-        ['外观范围', '照片约束配色与有限可见特征；全轮廓与未入镜表面仍为估算']] : []),
-      ...(numbers.length ? [['楼号', numbers.length > 1 ? `${numbers.join(' / ')} 共用一个原地图根` : `${numbers[0]}号楼`]] : []),
-      ...(part ? [['当前分楼', `${number}号楼 · ${part.userData.estimatedFloors}层外观节奏`],
-        ['楼层依据', part.userData.floorsSource]] : []),
-      ...(p.refinementStatus === 'detailed'
-        ? [['重建范围', p.reconstructionExtent === 'partial' ? '局部重建 · 仍需完善其他区域' : '轮廓范围内外观估算 · 细节含推定']] : []),
+      ...(numbers.length ? [['楼号', `${numbers.join(' / ')}号楼`]] : []),
+      ...(part ? [['当前分楼', `${number}号楼`]] : []),
     ]) {
       const term = document.createElement('dt'), detail = document.createElement('dd');
       term.textContent = label; detail.textContent = value;
@@ -466,7 +452,6 @@ async function main() {
       $('zijing-apartment').value = '';
       $('appearance-building').value = '';
       $('selection-name').textContent = '选择筛选后的建筑或地标';
-      $('selection-help').textContent = '可切换类型筛选，或通过目录逐页查看全部建筑。';
       $('selection-fields').replaceChildren();
       clearKnowledge();
       $('focus-facade').hidden = $('focus').hidden = $('export-building').hidden = $('selected-references').hidden = $('selection-link').hidden = true;
@@ -504,10 +489,8 @@ async function main() {
     $('appearance-building').value = ''; $('zijing-apartment').value = '';
     $('sports-ground').value = id;
     $('selection-name').textContent = ground.name || '地图运动场';
-    $('selection-help').textContent = ground.limitations;
     $('selection-fields').replaceChildren();
-    for (const [label, value] of [['地图来源', ground.id], ['运动类型', ground.sport || '未标注'],
-      ['范围依据', '冻结OSM多边形，裁切至校园边界；不新增建筑身份']]) {
+    for (const [label, value] of [['编号', ground.id], ['运动类型', ground.sport || '未标注']]) {
       const term = document.createElement('dt'), detail = document.createElement('dd');
       term.textContent = label; detail.textContent = value; $('selection-fields').append(term, detail);
     }
@@ -568,7 +551,7 @@ async function main() {
     if (planMode) mode(false);
     const center = new THREE.Vector3(...view.center), half = new THREE.Vector3(...view.size).multiplyScalar(.5);
     frame(new THREE.Box3(center.clone().sub(half), center.clone().add(half)), 1.12, view.direction);
-    message('人物与街景为示意，垂柳和水面细节复用 Qingming。非实测现状；图层中可关闭，或开启水面／垂柳动效。');
+    message(name === 'riverside' ? '河岸近景' : '校园街景');
   }
   for (const name of Object.keys(campus.scenery.views)) $(`view-${name}`).addEventListener('click', () => viewScenery(name));
   for (const [toggle, element] of [[$('toggle-inspector'), inspector], [$('toggle-layers'), legend]]) {
@@ -616,20 +599,6 @@ async function main() {
   $('building-count').textContent = buildings.length.toLocaleString();
   $('named-count').textContent = data.features.filter(feature =>
     feature.properties.kind === 'building' && feature.properties.name).length.toLocaleString();
-  $('refined-count').textContent = refinedIds.length;
-  $('architecture-count').textContent = coverage.counts.architectureModelBuildingObjects;
-  $('landmark-count').textContent = landmarkIds.length;
-  $('coverage-note').textContent = `${coverage.counts.architectureModelBuildingObjects} / ${buildings.length} 个地图轮廓已有建筑结构，`
-    + `${architectureIds.length}个为程序估算，${refinedIds.length}个为照片参照；`
-    + `程序外壳中${coverage.counts.photoAppearanceBuildingObjects}个新增了对应照片配色／有限特征，仍非逐面复原。`
-    + `其中${coverage.counts.groupTypologyBuildingObjects}个是组团类型推定，涵盖紫荆1–23号楼（14–17共用一个地图根）。`
-    + `${coverage.counts.remainingBaseBuildingObjects} 个仅有基模；${coverage.counts.partialPhotoModelBuildingObjects} 个照片模型仅做了局部。覆盖不等于真实还原。`;
-  $('source-note').textContent = '北京主校区 · 冻结地图650轮廓均有建筑结构，非测绘边界或最新建筑清单。'
-    + `已接入 ${siteCount} 处照片参照重建（${refinedIds.length} 个轮廓、${landmarkIds.length} 个独立地标）；隐藏立面及部分尺寸含推定。`;
-  $('landscape-note').textContent = `${landscapeStats.grounds}处地图运动场；${landscapeStats.mappedTrees}株地图树位`
-    + `＋${landscapeStats.illustrativeTrees}株绿地内示意种植。场内线、树种和冠幅非测绘；`
-    + `${landscapeStats.excludedMappedTrees}处冲突树位未展示。`
-    + `另有${landscapeStats.scenery.people}位静态示意行人及单车、长椅、路灯、石岸；非实测现状。`;
   window.addEventListener('resize', resize);
   compact.addEventListener('change', () => {
     $('contact-shadows').checked = !compact.matches;
@@ -700,7 +669,7 @@ async function main() {
   });
   $('loading').hidden = true;
   $('workspace').setAttribute('aria-busy', 'false');
-  message(`已覆盖 ${buildings.length} 个冻结建筑轮廓：${architectureIds.length} 个程序估算、${refinedIds.length} 个照片参照。覆盖不等于照片级还原。`);
+  message('选择建筑，查看知识卡片。');
 }
 
 main().catch(error => {

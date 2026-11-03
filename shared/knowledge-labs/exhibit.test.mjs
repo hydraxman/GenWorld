@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import * as THREE from 'three';
 import {createLabExhibit} from './exhibit.js';
 import {initialExperiment, stepMarkov} from './experiments.js';
-import {SHUNDE_STANDS, SHUNDE_STAND_OBSTACLES} from '../../projects/tsinghua-campus/src/knowledge-hall.js';
+import {createTeachingRoom, SHUNDE_STANDS, SHUNDE_STAND_OBSTACLES} from '../../projects/tsinghua-campus/src/knowledge-hall.js';
 import {visitorCanStand, stepVisitor} from '../../projects/tsinghua-campus/src/walkthrough.js';
 import {setLabViewport} from './camera.js';
 
@@ -22,6 +22,7 @@ test('exhibits lift within the existing Shunde ceiling and release owned geometr
       meshes++; triangles += (object.geometry.index?.count ?? object.geometry.attributes.position.count) / 3;
       object.geometry.addEventListener('dispose', () => {disposed++;});
     });
+
     assert.ok(meshes < 70); assert.ok(triangles < 20000);
     if (id === 'markov') {
       view.sync(stepMarkov(initialExperiment(id))); view.settle();
@@ -29,6 +30,17 @@ test('exhibits lift within the existing Shunde ceiling and release owned geometr
     }
     view.dispose(); assert.equal(disposed, meshes);
   }
+});
+
+test('runtime room linings fit the existing ceiling and leave the actual entry clear', () => {
+  const room = createTeachingRoom({labels: false});
+  room.updateMatrixWorld(true);
+  const bounds = new THREE.Box3().setFromObject(room);
+  assert.ok(bounds.max.y <= 4.22);
+  const ray = new THREE.Raycaster(new THREE.Vector3(0, 2.55, 4.5), new THREE.Vector3(0, 0, -1), 0, 7.7);
+  assert.equal(ray.intersectObject(room, true).length, 0);
+  const back = room.getObjectByName('interior-back-lining');
+  assert.ok(new THREE.Box3().setFromObject(back).max.z > -5.685, 'Lining covers the original lobby notice, not behind it');
 });
 
 test('Shunde exhibit tables preserve an open entrance and center aisle', () => {

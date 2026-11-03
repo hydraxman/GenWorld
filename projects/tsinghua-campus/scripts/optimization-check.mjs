@@ -106,7 +106,7 @@ try {
         !root.userData.referenceSite && !root.userData.appearanceReferenceSite);
       app.select(unknown[0]);
       const blank = document.getElementById('building-knowledge');
-      const clearsPrevious = !blank.dataset.historyId && blank.textContent.includes('暂未收录') && !blank.querySelector('a');
+      const clearsPrevious = !blank.dataset.historyId && blank.textContent.includes('暂无校史资料') && !blank.querySelector('a');
       document.getElementById('view-auditorium').click();
       return {entries: [...visited], clearsPrevious};
     });

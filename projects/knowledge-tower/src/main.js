@@ -11,6 +11,7 @@ import { LABS, ROOM_LABS } from '../../../shared/knowledge-labs/experiments.js';
 import { createLabExhibit } from '../../../shared/knowledge-labs/exhibit.js';
 import { createLabUI } from '../../../shared/knowledge-labs/ui.js';
 import { setLabViewport } from '../../../shared/knowledge-labs/camera.js';
+import { createTeachingSurfaceLibrary } from '../../../shared/knowledge-labs/surfaces.js';
 
 const $ = id => document.getElementById(id);
 let state = { ...INITIAL_STATE };
@@ -383,6 +384,11 @@ function initScene() {
   fill.position.set(-30, 40, -20);
   scene.add(fill);
   const tower = createKnowledgeTower(THREE, FLOORS);
+  const surfaceLibrary = createTeachingSurfaceLibrary();
+  const surfaces = surfaceLibrary.install(tower.group, object => {
+    if (/^(gallery-deck|reading-bench-seat|reading-shelf|low-partition|elevator-landing)/.test(object.name)) return 'wood';
+    if (/^(slab-|limestone-|exhibit-table)/.test(object.name)) return 'stone';
+  });
   scene.add(tower.group);
   const camera = new THREE.PerspectiveCamera(42, 1, .1, 1500);
   const controls = new OrbitControls(camera, $('scene'));
@@ -429,6 +435,7 @@ function initScene() {
     topics: FLOORS.flatMap(floor => floor.rooms.flatMap(room => room.topics)).length, meshes, triangles };
   window.__knowledgeCamera = () => ({ position: camera.position.toArray(), target: controls.target.toArray(), aspect: camera.aspect });
   window.__knowledgeLab = () => ({state: labUI.state(), view: engine.labView?.snapshot() ?? null});
+  window.__knowledgeInspection = () => ({camera, tower, scene, render, surfaces: surfaces.stats});
   window.__knowledgePickTargets = () => {
     scene.updateMatrixWorld(true);
     return tower.pickables.filter(isVisible).map(object => {
@@ -452,9 +459,11 @@ function initScene() {
   window.addEventListener('pagehide', event => {
     if (event.persisted) return;
     labUI.dispose();
+    surfaces.dispose();
     observer.disconnect();
     controls.dispose();
     renderer.dispose();
+    surfaceLibrary.dispose();
   });
 }
 

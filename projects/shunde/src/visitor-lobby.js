@@ -20,10 +20,7 @@ export function addVisitorLobby(THREE, B, parent, materials, kind, {textured}) {
     const context = canvas.getContext('2d');
     context.fillStyle = '#e9e4d8'; context.fillRect(0, 0, 768, 384);
     context.fillStyle = '#344b43'; context.textAlign = 'center';
-    context.font = '48px sans-serif'; context.fillText('门厅示意', 384, 130);
-    context.font = '22px sans-serif'; context.fillText('ILLUSTRATIVE VISITOR LOBBY', 384, 195);
-    context.fillRect(224, 232, 320, 2);
-    context.font = '24px sans-serif'; context.fillText('非实测室内复原', 384, 292);
+    context.font = '72px sans-serif'; context.fillText(shunde ? '舜德楼' : '建华楼', 384, 216);
     notice.map = B.texture(canvas, true); notice.color.set('#ffffff');
   }
   box('Illustrative visitor notice surround', 0, floor + 1.85, back + .24, 2.8, 1.48, .1, materials.frame);
@@ -46,6 +43,6 @@ export function addVisitorLobby(THREE, B, parent, materials, kind, {textured}) {
   ];
   parent.userData.walkthrough = {id: kind, title: shunde ? '舜德楼 · 门厅' : '建华楼 · 北门中庭',
     limitations: '入口外观有照片参照；室内铺装、座椅及可漫游门厅范围为示意，不代表完整室内平面或实测现状。',
-    spawn: [0, shunde ? 4.5 : 4.6], yaw: Math.PI, eyeHeight: 1.65, zones,
+    spawn: [0, shunde ? 4.5 : 4.6], entryTarget: [0, shunde ? .2 : -2.6], yaw: Math.PI, eyeHeight: 1.65, zones,
     obstacles: [-1, 1].map(sign => ({min: [sign * 4.3 - .95, back + .75], max: [sign * 4.3 + .95, back + 1.65]}))};
 }

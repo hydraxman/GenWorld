@@ -21,7 +21,8 @@ export function createLabExhibit(id, {table = true, labels = typeof document !==
   const root = new THREE.Group();
   root.name = `knowledge-lab-${id}`;
   root.userData = {knowledgeLab: id, illustrative: true};
-  const platform = new THREE.Group(), diagram = new THREE.Group();
+  const platform = new THREE.Group(), diagram = new THREE.Group(), focusRing = new THREE.Group();
+  focusRing.name = 'nearby-exhibit-highlight'; focusRing.visible = false; platform.add(focusRing);
   root.add(platform, diagram);
   let state = initialExperiment(id), expanded = false, lift = 0, targetLift = 0, frame = null, animation = null, frog = null;
   const motion = typeof matchMedia === 'function' ? matchMedia('(prefers-reduced-motion: reduce)') : null;
@@ -66,6 +67,8 @@ export function createLabExhibit(id, {table = true, labels = typeof document !==
     box(platform, 'pedestal', '#344d4b', [0, .5, 0], [.75, 1, 1.15]);
     box(platform, 'pedestal-foot', '#b8b4a2', [0, .06, 0], [1.15, .12, 1.5]);
     label(platform, LABS[id].title, [0, .8, 1.05], 2.6);
+    for (const x of [-1.54, 1.54]) box(focusRing, 'focus-edge', '#ffd077', [x, 1.105, 0], [.025, .025, 2]);
+    for (const z of [-1, 1]) box(focusRing, 'focus-edge', '#ffd077', [0, 1.105, z], [3.1, .025, .025]);
   }
   function build() {
     disposeExhibitTree(diagram); diagram.clear(); frog = null;
@@ -169,6 +172,7 @@ export function createLabExhibit(id, {table = true, labels = typeof document !==
   if (typeof document !== 'undefined') document.addEventListener('visibilitychange', onVisibility);
   build();
   return {root, diagram,
+    focus(value) {focusRing.visible = Boolean(value);},
     sync(next, {animateHop = false} = {}) {
       if (next.kind !== id) throw new Error('实验状态与展台不匹配。');
       state = next; build(); animate(animateHop);

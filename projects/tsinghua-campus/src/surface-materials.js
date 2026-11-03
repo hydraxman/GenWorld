@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {createPBRTools} from '../../../shared/pbr.js';
+import {createPBRTools as createShundePBRTools, squareGridAt} from '../../shunde/src/pbr.js';
 const masonryAtlases = new Map();
 
 function surfaceTextures(name, sample, size = 128) {
@@ -40,17 +41,25 @@ function surfaceTextures(name, sample, size = 128) {
 }
 
 export function createMasonryMaterial(name, rgb, stone = false) {
+  return createExteriorSurface(name, rgb, stone ? 'granite' : 'brick');
+}
+
+export function createCeramicMaterial(name, rgb) {
+  return createExteriorSurface(name, rgb, 'square-grid');
+}
+
+function createExteriorSurface(name, rgb, kind) {
+  const stone = kind === 'granite', ceramic = kind === 'square-grid';
   if (typeof document !== 'undefined') {
-    const kind = stone ? 'granite' : 'brick';
     if (!masonryAtlases.has(kind)) {
       let seed = 41827;
-      const tools = createPBRTools(THREE, {rand: () => {
+      const tools = (ceramic ? createShundePBRTools : createPBRTools)(THREE, {rand: () => {
         seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296;
       }, stats: {textures: 0}, materials: {}, textureWorld: new Map()});
-      const template = tools.pbr(`Shared ${kind}`, kind, [242, 242, 242], [4, 4], 256);
+      const template = tools.pbr(`Shared ${kind}`, kind, [242, 242, 242], ceramic ? [1.68, 1.68] : [4, 4], ceramic ? 512 : 256);
       for (const key of ['map', 'normalMap', 'roughnessMap']) {
-        template[key].repeat.set(stone ? 2 : 3.7, stone ? 2 : 3.45);
-        template[key].name = `Shared ${kind}: generated Courtyard ${key}; no photograph`;
+        template[key].repeat.set(ceramic ? 1 : stone ? 2 : 3.7, ceramic ? 1 : stone ? 2 : 3.45);
+        template[key].name = `Shared ${kind}: generated ${ceramic ? 'Shunde' : 'Courtyard'} ${key}; no photograph`;
         template[key].userData.sharedCampusSurface = true;
       }
       masonryAtlases.set(kind, {template, references: 0});
@@ -58,7 +67,7 @@ export function createMasonryMaterial(name, rgb, stone = false) {
     const atlas = masonryAtlases.get(kind), material = atlas.template.clone();
     material.name = name;
     material.color.setRGB(rgb[0] / 242, rgb[1] / 242, rgb[2] / 242, THREE.SRGBColorSpace);
-    material.normalScale.set(.28, .28);
+    material.normalScale.set(ceramic ? .15 : .28, ceramic ? .15 : .28);
     material.userData.courtyardSurface = kind;
     atlas.references++;
     const release = () => {
@@ -72,15 +81,21 @@ export function createMasonryMaterial(name, rgb, stone = false) {
     return material;
   }
   const textures = surfaceTextures(name, (u, v) => {
+    if (ceramic) {
+      const seam = squareGridAt(u * 16, v * 16).joint;
+      const variation = Math.sin(Math.floor(u * 16) * 71.1 + Math.floor(v * 16) * 39.7) * 3;
+      return {color: rgb.map(value => Math.max(0, Math.min(255, value + (seam ? -28 : variation)))),
+        height: seam ? -.2 : .02};
+    }
     const row = Math.floor(v * 8), seam = v * 8 % 1 < .065 ||
       (u * (stone ? 2 : 4) + row % 2 * .5) % 1 < .035;
     const grain = Math.floor(u * 128) * 7 + Math.floor(v * 128) * 11;
     const variation = (grain % 7) - 3 + (row % 2 ? 3 : -2);
     return {color: rgb.map(value => Math.max(0, Math.min(255, value + (seam ? (stone ? 18 : -19) : variation)))),
       height: seam ? -.3 : .02 * (grain % 5)};
-  });
+  }, ceramic ? 256 : 128);
   return new THREE.MeshStandardMaterial({name, color: '#ffffff', ...textures,
-    normalScale: new THREE.Vector2(.24, .24), roughness: stone ? .78 : .88});
+    normalScale: new THREE.Vector2(ceramic ? .15 : .24, ceramic ? .15 : .24), roughness: stone || ceramic ? .78 : .88});
 }
 
 export function createGlazingMaterial(name) {

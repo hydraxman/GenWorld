@@ -1,7 +1,21 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import * as THREE from 'three';
-import {createMasonryMaterial, createGlazingMaterial, createEstimatedFacade, createLawnMaterial} from '../src/surface-materials.js';
+import {createMasonryMaterial, createCeramicMaterial, createGlazingMaterial, createEstimatedFacade, createLawnMaterial} from '../src/surface-materials.js';
+
+test('reused Shunde ceramic has sixteen square tiles per 1.68m and independent normal data', () => {
+  const material = createCeramicMaterial('test ceramic', [210, 205, 195]);
+  const {data, width} = material.map.image;
+  const pixel = (x, y) => data[(y * width + x) * 4];
+  assert.equal(width, 256);
+  for (let tile = 0; tile < 16; tile++) {
+    assert.ok(pixel(tile * 16, 8) < pixel(tile * 16 + 8, 8) - 20);
+    assert.ok(pixel(8, tile * 16) < pixel(8, tile * 16 + 8) - 20);
+  }
+  assert.equal(material.map.colorSpace, THREE.SRGBColorSpace);
+  assert.equal(material.normalMap.colorSpace, THREE.NoColorSpace);
+  assert.deepEqual(material.map.image.data, createCeramicMaterial('same ceramic', [210, 205, 195]).map.image.data);
+});
 
 test('procedural masonry separates sRGB color from unit-vector normal data and remains deterministic', () => {
   for (const stone of [false, true]) {

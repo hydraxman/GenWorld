@@ -15,7 +15,7 @@ export function renderKnowledgeCard(container, site) {
   container.dataset.historyId = entry?.id || '';
   container.append(element('h3', '校史与建筑'));
   if (!entry) {
-    container.append(element('p', '这栋建筑暂未收录经核实的校史资料。地图名称、程序外观和估算楼层不作为历史依据。'));
+    container.append(element('p', '暂无校史资料。'));
     return;
   }
   container.append(element('p', entry.summary, 'knowledge-intro'));
@@ -46,7 +46,7 @@ export function renderKnowledgeCard(container, site) {
     }
   }
   const notes = element('details', null, 'knowledge-sources');
-  notes.append(element('summary', `资料来源与范围 · ${cited.size}项`));
+  notes.append(element('summary', `资料来源 · ${cited.size}项`));
   const list = element('ol');
   for (const [id] of cited) {
     const source = sources.get(id), row = element('li'), link = element('a', source.title);
@@ -54,7 +54,5 @@ export function renderKnowledgeCard(container, site) {
     row.append(link, element('small', source.publisher)); list.append(row);
   }
   notes.append(list);
-  for (const limitation of entry.limitations) notes.append(element('p', limitation));
-  notes.append(element('p', '史料摘要离线可读；外部来源仅在点击时打开。模型中的推定尺寸与示意空间不等同于史实。'));
   container.append(notes);
 }
