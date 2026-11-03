@@ -33,5 +33,8 @@ footer{position:absolute;bottom:20px;left:32px;right:32px;font-size:10px;color:#
 .walk-controls{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);width:min(440px,calc(100% - 28px));padding:16px;background:#fffdf8;border:1px solid #cbd3c8;border-radius:12px;box-shadow:0 12px 36px #253d3520}
 .walk-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.walk-heading strong{font-size:16px}.walk-controls p{font-size:12px;line-height:1.6;margin:10px 0;color:#45574c}.walk-controls small{display:block;color:#45574c;font-size:11px;line-height:1.6;margin-top:12px}
 .walk-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.walk-pad button{min-height:44px;touch-action:none;user-select:none;font-size:13px}.walk-pad button:active{background:#634377;color:#fff}
+#interact-exhibit{width:100%;min-height:44px;margin-bottom:10px;text-align:left;background:#31534d;color:#fff;border-color:#31534d}
+#interact-exhibit:disabled{background:#f0eee5;color:#56675a;border-color:#cbd3c8;opacity:1}
+@media(max-width:850px){.walk-controls{padding:12px}.walk-controls p{font-size:11px;margin:6px 0}#shunde-lab-launches{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-bottom:0}#shunde-lab-launches button{min-height:44px;padding:6px;font-size:12px;line-height:1.4}}
 @media(min-width:851px){.walk-controls{left:auto;right:24px;transform:none;width:360px}.walk-pad button{min-height:40px}}
 @media(max-height:550px){.walk-controls{bottom:42px;padding:10px}.walk-controls small{max-width:340px;font-size:11px;margin-top:6px}.walk-controls p{margin:5px 0}.walk-pad button{min-height:34px}}

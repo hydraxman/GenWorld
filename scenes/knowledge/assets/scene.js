@@ -46146,6 +46146,7 @@ void main() {
   function createKnowledgeTower(THREE, floors) {
     const count = 16;
     const towerSpacing = 3.6;
+    const slabThickness = 0.3, glazingTop = towerSpacing - 0.6, corniceBottom = towerSpacing - 0.5;
     const explodedSpacing = 6.4;
     const baseY = 1.15;
     const centres = [[-5.8, -4.5], [5.8, -4.5], [-5.8, 4.5], [5.8, 4.5]];
@@ -46359,11 +46360,11 @@ void main() {
       });
       const bandMaterial = material(floor.color, { emissive: floor.color, emissiveIntensity: 0.12 });
       for (const z of [-5.5, 5.5]) {
-        const slab = box(level, `slab-${number}-z${z}`, slabMaterial, [0, 0.15, z], [22, 0.3, 7], true);
+        const slab = box(level, `slab-${number}-z${z}`, slabMaterial, [0, slabThickness / 2, z], [22, slabThickness, 7], true);
         slab.userData.role = "slab";
       }
       for (const x of [-6.5, 6.5]) {
-        const slab = box(level, `slab-${number}-x${x}`, slabMaterial, [x, 0.15, 0], [9, 0.3, 4], true);
+        const slab = box(level, `slab-${number}-x${x}`, slabMaterial, [x, slabThickness / 2, 0], [9, slabThickness, 4], true);
         slab.userData.role = "slab";
       }
       for (const z of [-8.98, 8.98]) {
@@ -46386,20 +46387,20 @@ void main() {
         [9.6, 0.07, 0.08]
       );
       for (const x of [-5.8, 5.8]) {
-        box(level, `rear-glass-${x}`, glass, [x, 1.5, -8.82], [9.2, 2.15, 0.07]);
+        box(level, `rear-glass-${x}`, glass, [x, (slabThickness + glazingTop) / 2, -8.82], [9.2, glazingTop - slabThickness, 0.07]);
       }
       for (const x of [-10.75, 10.75]) {
-        box(level, `side-glass-${x}`, glass, [x, 1.2, -3.6], [0.07, 1.6, 9.5]);
+        box(level, `side-glass-${x}`, glass, [x, (slabThickness + glazingTop) / 2, 0], [0.07, glazingTop - slabThickness, 17.6]);
         box(level, `side-frame-${x}`, steel, [x, 3.05, 0], [0.2, 0.22, 17.6]);
         box(level, `side-rail-${x}`, steel, [x, 1.02, 0], [0.09, 0.08, 17.6]);
-        box(level, "limestone-side-eave", pale, [x, 3.23, 0], [0.4, 0.24, 17.9], true);
+        box(level, "limestone-side-eave", pale, [x, (corniceBottom + towerSpacing) / 2, 0], [0.4, towerSpacing - corniceBottom, 17.9], true);
         for (const z of [-8.45, -2.8, 2.8, 8.45]) {
           box(level, "bronze-facade-mullion", steel, [x, 1.75, z], [0.11, 2.9, 0.11]);
         }
         box(level, "warm-recessed-cove", light, [x * 0.97, 3.08, 0], [0.045, 0.035, 17]);
       }
       box(level, "rear-frame", steel, [0, 3.05, -8.8], [21.5, 0.22, 0.2]);
-      box(level, "rear-limestone-cornice", pale, [0, 3.23, -8.8], [22, 0.24, 0.4], true);
+      box(level, "rear-limestone-cornice", pale, [0, (corniceBottom + towerSpacing) / 2, -8.8], [22, towerSpacing - corniceBottom, 0.4], true);
       for (const x of [-7.2, 7.2]) {
         box(level, `front-open-rail-${x}`, steel, [x, 1.02, 8.8], [6.1, 0.08, 0.09]);
       }
@@ -46508,7 +46509,7 @@ void main() {
         gallery.add(selection);
         for (const z2 of [-2.92, 2.92]) box(selection, "selected-rim", selectionMaterial, [0, 0.47, z2], [7.7, 0.025, 0.025]);
         for (const x2 of [-3.84, 3.84]) box(selection, "selected-rim", selectionMaterial, [x2, 0.47, 0], [0.025, 0.025, 5.84]);
-        cylinder(gallery, "pedestal-foot", rimMaterial, [0, 0.49, 0], 1.45, 0.08);
+        cylinder(gallery, "pedestal-foot", rimMaterial, [0, 0.48, 0], 1.45, 0.08);
         cylinder(gallery, "pedestal-stem", steel, [0, 0.72, 0], 0.18, 0.4);
         box(
           gallery,
@@ -46751,10 +46752,10 @@ void main() {
       }
       refreshLearningAppearance();
       structure.visible = mode !== "floor";
-      crown.position.y = baseY + (count - 1) * spacing + 3.35;
+      crown.position.y = baseY + (count - 1) * spacing + towerSpacing;
       plaza.visible = mode !== "floor";
       const bottom = 0.34;
-      const top = baseY + (count - 1) * spacing + 3.2;
+      const top = baseY + (count - 1) * spacing + towerSpacing - 0.16;
       for (const member of verticalMembers) {
         member.position.y = (bottom + top) / 2;
         member.scale.y = top - bottom;
@@ -47589,8 +47590,7 @@ void main() {
     function paintMap() {
       const profile = active();
       const summary = summarizeProfile(profile);
-      $("learning-title").textContent = profileId === "own" ? "\u6211\u7684\u5B66\u4E60\u5730\u56FE" : "\u793A\u4F8B\u8BBF\u5BA2 \xB7 \u975E\u771F\u5B9E\u5B66\u4E60\u8BB0\u5F55";
-      $("learning-disclaimer").textContent = profileId === "own" ? "\u4F60\u7684\u77E5\u8BC6\u53EF\u4EE5\u662F\u4E00\u5EA7\u4E0D\u89C4\u5219\u7684\u5C9B\uFF1A\u9AD8\u5C42\u719F\u7EC3\u3001\u5E95\u5C42\u8584\u5F31\u90FD\u6B63\u5E38\u3002\u8FD9\u91CC\u5206\u522B\u8BB0\u5F55\u63A2\u7D22\u3001\u81EA\u8BC4\u548C\u6982\u5FF5\u6D4B\u8BC4\uFF0C\u4E0D\u628A\u4E00\u6B21\u6D4F\u89C8\u5F53\u4F5C\u5B66\u4E60\u6210\u679C\u3002" : "\u8FD9\u662F\u7528\u4E8E\u5C55\u793A\u70ED\u529B\u56FE\u7684\u865A\u6784\u6863\u6848\uFF1B\u4F60\u53EF\u4EE5\u8BD5\u7740\u4FEE\u6539\u6216\u505A\u9898\uFF0C\u4F46\u4E0D\u4F1A\u5199\u5165\u201C\u6211\u7684\u6863\u6848\u201D\u3002\u5176\u4ED6\u8BBF\u5BA2\u4E5F\u662F\u5C55\u793A\u89D2\u8272\uFF0C\u4E0D\u662F\u5728\u7EBF\u7528\u6237\u3002";
+      $("learning-title").textContent = profileId === "own" ? "\u6211\u7684\u5B66\u4E60\u5730\u56FE" : "\u793A\u4F8B\u8BBF\u5BA2\u7684\u5B66\u4E60\u5730\u56FE";
       $("learning-summary").replaceChildren();
       for (const [value, label] of [[summary.visited, "\u63A2\u7D22\u8FC7\u7684\u5C55\u5385"], [summary.known, "\u5DF2\u6709\u638C\u63E1\u5EA6"], [summary.weak, "\u8584\u5F31\u533A\u57DF"], [summary.passedFloors.length, "\u697C\u5C42\u5FBD\u7AE0"]]) {
         const card = element("div", "");
@@ -47640,8 +47640,7 @@ void main() {
       const summary = summarizeProfile(profile);
       document.querySelectorAll("[data-profile]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.profile === profileId)));
       $("profile-name").textContent = profileId === "own" ? "\u6211\u7684\u5B66\u4E60\u7A7A\u95F4" : "\u793A\u4F8B\u8BBF\u5BA2 \xB7 \u6797\u540C\u5B66";
-      $("profile-badge").textContent = profileId === "demo" ? "\u865A\u6784\u793A\u4F8B" : persistent ? "\u4EC5\u672C\u673A\u4FDD\u5B58" : "\u4E34\u65F6\u8BB0\u5F55";
-      $("profile-caption").textContent = profileId === "demo" ? "\u6570\u5B66\u719F\u7EC3\uFF0C\u90E8\u5206\u57FA\u7840\u5F85\u5DE9\u56FA\u3002\u4E0D\u662F\u4ECE\u4F4E\u5230\u9AD8\u7684\u5355\u4E00\u7B49\u7EA7\u3002" : `${summary.passedFloors.length} \u679A\u697C\u5C42\u5FBD\u7AE0 \xB7 \u6D4F\u89C8\u4E0E\u638C\u63E1\u5206\u522B\u8BB0\u5F55\u3002`;
+      $("profile-badge").textContent = profileId === "demo" ? "\u793A\u4F8B\u6863\u6848" : persistent ? "\u672C\u5730\u6863\u6848" : "\u4E34\u65F6\u8BB0\u5F55";
       $("visited-count").textContent = summary.visited;
       $("known-count").textContent = summary.known;
       $("weak-count").textContent = summary.weak;
@@ -47662,7 +47661,7 @@ void main() {
         $("floor-heat-strip").append(button);
       }
       const latest = [...profile.attempts].reverse().find((attempt) => attempt.floor === floorNumber2);
-      $("floor-exam-note").textContent = latest ? `\u6700\u8FD1\u8BD5\u70BC ${latest.score} \u5206 \xB7 ${latest.passed ? "\u672C\u5C42\u5FBD\u7AE0\u5DF2\u83B7\u5F97" : "\u9519\u9898\u5F85\u5DE9\u56FA"}\uFF1B\u4E0D\u9650\u5236\u7EE7\u7EED\u63A2\u7D22\u3002` : "4 \u9053\u6982\u5FF5\u9898 \xB7 75 \u5206\u8FC7\u5173 \xB7 \u4E0D\u9650\u5236\u697C\u5C42\u63A2\u7D22\u3002";
+      $("floor-exam-note").textContent = latest ? `\u6700\u8FD1\u8BD5\u70BC ${latest.score} \u5206 \xB7 ${latest.passed ? "\u672C\u5C42\u5FBD\u7AE0\u5DF2\u83B7\u5F97" : "\u9519\u9898\u5F85\u5DE9\u56FA"}` : "4 \u9053\u9898 \xB7 75 \u5206\u901A\u8FC7";
       if (roomId2) {
         const mastery = describeRoom(profile, roomId2);
         $("room-mastery").textContent = `${mastery.label}${mastery.score === null ? "" : ` \xB7 ${mastery.score}`}`;
@@ -47676,7 +47675,6 @@ void main() {
           $("self-rating").append(option);
         }
         $("self-rating").value = mastery.selfRating === null ? "" : String(mastery.selfRating);
-        $("self-rating-note").textContent = mastery.examScore === null ? "\u81EA\u8BC4\u4E0E\u6D4B\u8BC4\u5206\u5F00\u4FDD\u5B58\uFF1B\u6D4F\u89C8\u4E0D\u7B49\u4E8E\u638C\u63E1\u3002" : `\u6700\u8FD1\u6982\u5FF5\u9898\uFF1A${mastery.examScore} \u5206\u3002\u70ED\u529B\u56FE\u4F18\u5148\u663E\u793A\u6D4B\u8BC4\uFF1B\u53EF\u91CD\u505A\u8BD5\u70BC\u66F4\u65B0\u3002`;
       }
       document.querySelectorAll("#floor-nav [data-floor]").forEach((button) => {
         const entries = getFloor(Number(button.dataset.floor)).rooms.map((room2) => describeRoom(profile, room2.id));
@@ -47705,10 +47703,9 @@ void main() {
         button.dataset.learner = occupant.id;
         button.append(element("i", ""), document.createTextNode(`${name} \xB7 ${occupant.floor}F`));
         button.style.setProperty("--person", occupant.color);
-        button.title = occupant.id === "me" ? "\u5F53\u524D\u63A2\u7D22\u4F4D\u7F6E\uFF0C\u4E0D\u4EE3\u8868\u638C\u63E1\u7B49\u7EA7" : "\u865A\u6784\u7684\u793A\u4F8B\u8BBF\u5BA2\u4F4D\u7F6E";
+        button.title = `${name}\u7684\u4F4D\u7F6E`;
         $("learner-roster").append(button);
       }
-      if (profileId === "demo") $("learner-roster").append(element("small", "", "\u793A\u4F8B\u89D2\u8272 / \u975E\u5728\u7EBF\u7528\u6237"));
       if ($("learning-dialog").open) paintMap();
       window.__learningState = { profileId, heatmap, summary, mastery: getMastery(profile), position: profile.position };
     }
@@ -47836,9 +47833,8 @@ void main() {
       const attempt = next.attempts.at(-1);
       $("exam-result").replaceChildren();
       $("exam-result").append(
-        element("span", "eyebrow", attempt.passed ? "CHECKPOINT CLEARED" : "A NEW WAY TO LEARN"),
-        element("h3", "", `${attempt.score} \u5206 \xB7 ${attempt.passed ? "\u672C\u5C42\u5FBD\u7AE0\u5DF2\u70B9\u4EAE" : "\u627E\u5230\u503C\u5F97\u52A0\u5F3A\u7684\u5730\u65B9"}`),
-        element("p", "", profileId === "demo" ? "\u7ED3\u679C\u4EC5\u66F4\u65B0\u793A\u4F8B\u6863\u6848\uFF0C\u4E0D\u5199\u5165\u4F60\u7684\u8BB0\u5F55\u3002" : persistent ? "\u7ED3\u679C\u5DF2\u4FDD\u5B58\u5728\u672C\u673A\uFF1B\u56DB\u4E2A\u5C55\u5385\u6309\u5404\u81EA\u7B54\u9898\u7ED3\u679C\u66F4\u65B0\u3002" : "\u7ED3\u679C\u4EC5\u5728\u672C\u9875\u4E34\u65F6\u4FDD\u7559\uFF0C\u8BF7\u5BFC\u51FA\u5E76\u68C0\u67E5\u5B58\u50A8\u3002")
+        element("h3", "", `${attempt.score} \u5206 \xB7 ${attempt.passed ? "\u672C\u5C42\u5FBD\u7AE0\u5DF2\u70B9\u4EAE" : "\u9519\u9898\u5F85\u5DE9\u56FA"}`),
+        element("p", "", profileId === "demo" ? "\u793A\u4F8B\u6863\u6848\u5DF2\u66F4\u65B0\u3002" : persistent ? "\u7ED3\u679C\u5DF2\u4FDD\u5B58\u3002" : "\u7ED3\u679C\u5C1A\u672A\u4FDD\u5B58\uFF0C\u8BF7\u5BFC\u51FA\u5E76\u68C0\u67E5\u5B58\u50A8\u3002")
       );
       getFloorAssessment(examFloor).forEach((question, index) => {
         const correct = answers[index] === question.correctIndex;
@@ -50793,7 +50789,10 @@ void main() {
     const root = new Group();
     root.name = `knowledge-lab-${id}`;
     root.userData = { knowledgeLab: id, illustrative: true };
-    const platform = new Group(), diagram = new Group();
+    const platform = new Group(), diagram = new Group(), focusRing = new Group();
+    focusRing.name = "nearby-exhibit-highlight";
+    focusRing.visible = false;
+    platform.add(focusRing);
     root.add(platform, diagram);
     let state2 = initialExperiment(id), expanded = false, lift = 0, targetLift = 0, frame = null, animation = null, frog = null;
     const motion = typeof matchMedia === "function" ? matchMedia("(prefers-reduced-motion: reduce)") : null;
@@ -50861,6 +50860,8 @@ void main() {
       box(platform, "pedestal", "#344d4b", [0, 0.5, 0], [0.75, 1, 1.15]);
       box(platform, "pedestal-foot", "#b8b4a2", [0, 0.06, 0], [1.15, 0.12, 1.5]);
       label(platform, LABS[id].title, [0, 0.8, 1.05], 2.6);
+      for (const x of [-1.54, 1.54]) box(focusRing, "focus-edge", "#ffd077", [x, 1.105, 0], [0.025, 0.025, 2]);
+      for (const z of [-1, 1]) box(focusRing, "focus-edge", "#ffd077", [0, 1.105, z], [3.1, 0.025, 0.025]);
     }
     function build() {
       disposeExhibitTree(diagram);
@@ -51006,6 +51007,9 @@ void main() {
     return {
       root,
       diagram,
+      focus(value) {
+        focusRing.visible = Boolean(value);
+      },
       sync(next, { animateHop = false } = {}) {
         if (next.kind !== id) throw new Error("\u5B9E\u9A8C\u72B6\u6001\u4E0E\u5C55\u53F0\u4E0D\u5339\u914D\u3002");
         state2 = next;
@@ -51066,7 +51070,6 @@ void main() {
 .lab-panel .lab-quiz input {width:18px;height:18px;min-height:18px;flex:0 0 18px;accent-color:#e5c489;margin-top:3px}
 .lab-panel .lab-quiz output {display:block;margin-top:10px;color:#e7cf9d}
 .lab-panel .lab-error {color:#ffd6be;border:1px solid #c88061;padding:10px}
-.lab-panel .lab-note {font-size:12px;color:#c1d5d0}
 .lab-panel .lab-close {width:100%;margin-bottom:18px}
 .lab-launches {display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
 .lab-launches button {min-height:40px}
@@ -51102,8 +51105,7 @@ void main() {
     error2.setAttribute("role", "alert");
     error2.hidden = true;
     const quiz = element2("details", void 0, "lab-quiz");
-    const note = element2("p", "\u521D\u7248\u6559\u5B66\u5B9E\u9A8C\uFF1B\u672C\u6B21\u64CD\u4F5C\u548C\u7B54\u9898\u4E0D\u8BA1\u5165\u638C\u63E1\u5EA6\u3002\u5173\u95ED\u5C55\u53F0\u4F1A\u91CD\u7F6E\uFF0C\u4E0D\u4E0A\u4F20\u6570\u636E\u3002", "lab-note");
-    panel.append(closeButton, element2("h3", "\u52A8\u624B\u8BD5\u9A8C"), controls, status, data, quiz, note, error2);
+    panel.append(closeButton, element2("h3", "\u52A8\u624B\u8BD5\u9A8C"), controls, status, data, quiz, error2);
     panel.hidden = heading.hidden = true;
     host.append(heading, panel);
     let id = null, state2 = null, view = null, returnFocus = null, edgeIndex = 1, selectedNode = "n1", rowIndex = 0, priorFocus = null;
@@ -51400,6 +51402,238 @@ ${state2.algorithm === "bfs" ? "\u5148\u8FDB\u5148\u51FA\u961F\u5217" : "\u6309\
     camera.setViewOffset(region.width, region.height, -region.x, -region.y, width, height);
     camera.updateProjectionMatrix();
     return region;
+  }
+
+  // shared/pbr.js
+  function createPBRTools(THREE, { rand, stats, materials, textureWorld, textured = true }) {
+    const between = (a, b) => a + rand() * (b - a);
+    const clamp2 = (n) => Math.max(0, Math.min(255, n));
+    const color = (r, g, b) => `rgb(${clamp2(r) | 0},${clamp2(g) | 0},${clamp2(b) | 0})`;
+    function canvas(size) {
+      const c = document.createElement("canvas");
+      c.width = c.height = size;
+      return [c, c.getContext("2d", { willReadFrequently: true })];
+    }
+    function texture(c, srgb = false) {
+      const t = new THREE.CanvasTexture(c);
+      t.wrapS = t.wrapT = THREE.RepeatWrapping;
+      t.anisotropy = 8;
+      if (srgb) t.colorSpace = THREE.SRGBColorSpace;
+      t.name = `Procedural ${stats.textures++}`;
+      return t;
+    }
+    function pbr(name, kind, rgb, world, size = 512) {
+      if (!textured) {
+        const mat2 = new THREE.MeshStandardMaterial({ name, color: new THREE.Color(...rgb.map((v) => v / 255)), roughness: 1, metalness: 0 });
+        materials[name] = mat2;
+        textureWorld.set(mat2, world);
+        return mat2;
+      }
+      const [c, ctx] = canvas(size), [h, hx] = canvas(size), [r, rx] = canvas(size);
+      ctx.fillStyle = color(...rgb);
+      ctx.fillRect(0, 0, size, size);
+      hx.fillStyle = "#858585";
+      hx.fillRect(0, 0, size, size);
+      rx.fillStyle = "#dddddd";
+      rx.fillRect(0, 0, size, size);
+      if (kind === "brick" || kind === "paving" || kind === "tile") {
+        const cols = kind === "brick" ? 4 : kind === "tile" ? 8 : 6;
+        const rows = kind === "brick" ? 16 : kind === "tile" ? 12 : 12;
+        const w = size / cols, ht = size / rows;
+        ctx.fillStyle = kind === "brick" ? "#a39887" : "#77776e";
+        ctx.fillRect(0, 0, size, size);
+        hx.fillStyle = "#444444";
+        hx.fillRect(0, 0, size, size);
+        for (let y = 0; y < rows; y++) for (let x = -1; x < cols + 1; x++) {
+          const off = y % 2 ? w / 2 : 0, xx = x * w + off, yy = y * ht;
+          const d = between(-15, 15), gap = kind === "brick" ? 2 : 2.5;
+          ctx.fillStyle = color(rgb[0] + d, rgb[1] + d, rgb[2] + d);
+          ctx.fillRect(xx + gap, yy + gap, w - gap * 2, ht - gap * 2);
+          hx.fillStyle = "#b5b5b5";
+          hx.fillRect(xx + gap, yy + gap, w - gap * 2, ht - gap * 2);
+          ctx.strokeStyle = "rgba(255,255,245,.14)";
+          ctx.lineWidth = 1;
+          ctx.strokeRect(xx + gap + 0.5, yy + gap + 0.5, w - gap * 2 - 1, ht - gap * 2 - 1);
+          if (kind === "tile") {
+            ctx.strokeStyle = "rgba(22,27,27,.3)";
+            ctx.beginPath();
+            ctx.moveTo(xx + w * 0.8, yy + 2);
+            ctx.lineTo(xx + w * 0.8, yy + ht - 2);
+            ctx.stroke();
+          }
+        }
+      }
+      if (kind === "wood") {
+        const rows = 6, rowHeight = size / rows;
+        rx.fillStyle = "#c8c8c8";
+        rx.fillRect(0, 0, size, size);
+        for (let row = 0; row < rows; row++) {
+          const phase = rand() * Math.PI * 2, offset = between(-8, 2);
+          for (let y = 0; y < rowHeight; y++) for (let x = 0; x < size; x++) {
+            const wave = Math.sin(x / size * Math.PI * 2 + phase);
+            const grain = Math.sin(y * 0.72 + wave * 2.2);
+            const d = offset + grain * 6;
+            ctx.fillStyle = color(rgb[0] + d, rgb[1] + d, rgb[2] + d);
+            ctx.fillRect(x, row * rowHeight + y, 1, 1);
+            hx.fillStyle = color(134 + grain * 5, 134 + grain * 5, 134 + grain * 5);
+            hx.fillRect(x, row * rowHeight + y, 1, 1);
+          }
+          ctx.fillStyle = color(...rgb.map((value) => value - 28));
+          ctx.fillRect(0, row * rowHeight, size, 1);
+          hx.fillStyle = "#656565";
+          hx.fillRect(0, row * rowHeight, size, 1);
+          const joint = (row % 3 + 0.5) * size / 3;
+          ctx.fillRect(joint, row * rowHeight, 1, rowHeight);
+          hx.fillRect(joint, row * rowHeight, 1, rowHeight);
+        }
+      }
+      for (let i = 0; i < size * size * 0.16; i++) {
+        const x = rand() * size, y = rand() * size, s = between(0.35, kind === "granite" ? 2 : 1.5);
+        ctx.fillStyle = rand() > 0.55 ? "rgba(255,251,239,.14)" : "rgba(31,31,25,.16)";
+        ctx.fillRect(x, y, s, s);
+        hx.fillStyle = rand() > 0.5 ? "#939393" : "#a6a6a6";
+        hx.fillRect(x, y, 0.8, 0.8);
+        const rv = between(170, 249);
+        rx.fillStyle = color(rv, rv, rv);
+        rx.fillRect(x, y, 2, 2);
+      }
+      const heights = hx.getImageData(0, 0, size, size).data;
+      const [nc, nx] = canvas(size), normal = nx.createImageData(size, size);
+      for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+        const ix = (y * size + x) * 4;
+        const dx = heights[(y * size + (x + 1) % size) * 4] - heights[(y * size + (x + size - 1) % size) * 4];
+        const dy = heights[((y + 1) % size * size + x) * 4] - heights[((y + size - 1) % size * size + x) * 4];
+        const v = new THREE.Vector3(-dx * 0.018, dy * 0.018, 1).normalize();
+        normal.data[ix] = (v.x * 0.5 + 0.5) * 255;
+        normal.data[ix + 1] = (v.y * 0.5 + 0.5) * 255;
+        normal.data[ix + 2] = (v.z * 0.5 + 0.5) * 255;
+        normal.data[ix + 3] = 255;
+      }
+      nx.putImageData(normal, 0, 0);
+      const mat = new THREE.MeshStandardMaterial({ name, map: texture(c, true), normalMap: texture(nc), roughnessMap: texture(r), roughness: 1, metalness: 0, normalScale: new THREE.Vector2(0.5, 0.5) });
+      materials[name] = mat;
+      textureWorld.set(mat, world);
+      return mat;
+    }
+    function worldUV(geo, mat) {
+      if (!textureWorld.has(mat)) return;
+      const [sx, sy] = textureWorld.get(mat), p = geo.attributes.position, n = geo.attributes.normal;
+      const a = new Float32Array(p.count * 2);
+      for (let i = 0; i < p.count; i++) {
+        const nx = Math.abs(n.getX(i)), ny = Math.abs(n.getY(i)), nz = Math.abs(n.getZ(i));
+        let u, v;
+        if (ny > nx && ny > nz) {
+          u = p.getX(i);
+          v = p.getZ(i);
+        } else if (nx > nz) {
+          u = p.getZ(i);
+          v = p.getY(i);
+        } else {
+          u = p.getX(i);
+          v = p.getY(i);
+        }
+        a[i * 2] = u / sx;
+        a[i * 2 + 1] = v / sy;
+      }
+      geo.setAttribute("uv", new THREE.BufferAttribute(a, 2));
+    }
+    return { pbr, worldUV, texture };
+  }
+
+  // shared/knowledge-labs/surfaces.js
+  function createTeachingSurfaceLibrary() {
+    let seed = 7813;
+    const tools = createPBRTools(three_module_exports, { rand: () => {
+      seed = Math.imul(seed, 1664525) + 1013904223 >>> 0;
+      return seed / 4294967296;
+    }, stats: { textures: 0 }, materials: {}, textureWorld: /* @__PURE__ */ new Map() });
+    const templates = /* @__PURE__ */ new Map(), installations = /* @__PURE__ */ new Set();
+    let released = false;
+    function install(root, select) {
+      if (released) throw new Error("Teaching surface library has been disposed.");
+      const kinds = /* @__PURE__ */ new Map(), geometries = /* @__PURE__ */ new Map(), originals = [], materials = [];
+      root.traverse((object) => {
+        if (!object.isMesh || Array.isArray(object.material)) return;
+        const kind = select(object);
+        if (!kind) return;
+        if (!["wood", "stone"].includes(kind)) throw new Error(`Unknown teaching surface: ${kind}`);
+        if (kinds.has(object.material) && kinds.get(object.material) !== kind) throw new Error("A shared material cannot have conflicting surfaces.");
+        kinds.set(object.material, kind);
+      });
+      for (const [material, kind] of kinds) {
+        if (!templates.has(kind)) {
+          const template2 = tools.pbr(
+            `Original teaching ${kind}`,
+            kind === "stone" ? "granite" : kind,
+            [246, 246, 246],
+            kind === "wood" ? [2.4, 1.2] : [1.2, 1.2],
+            kind === "wood" ? 512 : 256
+          );
+          for (const key of ["map", "normalMap", "roughnessMap"]) template2[key].name = `Original teaching ${kind} ${key}`;
+          templates.set(kind, template2);
+        }
+        const template = templates.get(kind);
+        materials.push({
+          material,
+          map: material.map,
+          normalMap: material.normalMap,
+          roughnessMap: material.roughnessMap,
+          normalScale: material.normalScale.clone(),
+          roughness: material.roughness,
+          metalness: material.metalness
+        });
+        for (const key of ["map", "normalMap", "roughnessMap"]) material[key] = template[key];
+        material.normalScale.set(kind === "wood" ? 0.18 : 0.16, kind === "wood" ? 0.18 : 0.16);
+        material.roughness = 1;
+        material.metalness = 0;
+        material.needsUpdate = true;
+      }
+      root.traverse((object) => {
+        if (!object.isMesh || !kinds.has(object.material) || object.geometry.type !== "BoxGeometry") return;
+        const template = templates.get(kinds.get(object.material));
+        const key = `${object.geometry.uuid}:${object.scale.toArray().join(",")}:${kinds.get(object.material)}`;
+        if (!geometries.has(key)) {
+          const geometry = object.geometry.clone(), scaled = object.geometry.clone();
+          scaled.scale(...object.scale.toArray());
+          tools.worldUV(scaled, template);
+          geometry.setAttribute("uv", scaled.getAttribute("uv").clone());
+          scaled.dispose();
+          geometries.set(key, geometry);
+        }
+        originals.push([object, object.geometry]);
+        object.geometry = geometries.get(key);
+      });
+      let disposed = false;
+      const installation = {
+        stats: { materials: kinds.size, textures: templates.size * 3, uvGeometries: geometries.size },
+        dispose() {
+          if (disposed) return;
+          disposed = true;
+          for (const [object, geometry] of originals) object.geometry = geometry;
+          for (const { material, ...original } of materials) {
+            Object.assign(material, original);
+            material.needsUpdate = true;
+          }
+          for (const geometry of geometries.values()) geometry.dispose();
+          installations.delete(installation);
+        }
+      };
+      installations.add(installation);
+      return installation;
+    }
+    return {
+      install,
+      dispose() {
+        if (released) return;
+        released = true;
+        for (const installation of installations) installation.dispose();
+        for (const material of templates.values()) {
+          for (const key of ["map", "normalMap", "roughnessMap"]) material[key].dispose();
+          material.dispose();
+        }
+        templates.clear();
+      }
+    };
   }
 
   // projects/knowledge-tower/src/main.js
@@ -51773,6 +52007,11 @@ ${state2.algorithm === "bfs" ? "\u5148\u8FDB\u5148\u51FA\u961F\u5217" : "\u6309\
     fill2.position.set(-30, 40, -20);
     scene.add(fill2);
     const tower = createKnowledgeTower(three_module_exports, FLOORS);
+    const surfaceLibrary = createTeachingSurfaceLibrary();
+    const surfaces = surfaceLibrary.install(tower.group, (object) => {
+      if (/^(gallery-deck|reading-bench-seat|reading-shelf|low-partition|elevator-landing)/.test(object.name)) return "wood";
+      if (/^(slab-|limestone-|exhibit-table)/.test(object.name)) return "stone";
+    });
     scene.add(tower.group);
     const camera = new PerspectiveCamera(42, 1, 0.1, 1500);
     const controls = new OrbitControls(camera, $2("scene"));
@@ -51828,6 +52067,7 @@ ${state2.algorithm === "bfs" ? "\u5148\u8FDB\u5148\u51FA\u961F\u5217" : "\u6309\
     };
     window.__knowledgeCamera = () => ({ position: camera.position.toArray(), target: controls.target.toArray(), aspect: camera.aspect });
     window.__knowledgeLab = () => ({ state: labUI.state(), view: engine.labView?.snapshot() ?? null });
+    window.__knowledgeInspection = () => ({ camera, tower, scene, render, surfaces: surfaces.stats });
     window.__knowledgePickTargets = () => {
       scene.updateMatrixWorld(true);
       return tower.pickables.filter(isVisible).map((object) => {
@@ -51851,9 +52091,11 @@ ${state2.algorithm === "bfs" ? "\u5148\u8FDB\u5148\u51FA\u961F\u5217" : "\u6309\
     window.addEventListener("pagehide", (event) => {
       if (event.persisted) return;
       labUI.dispose();
+      surfaces.dispose();
       observer.disconnect();
       controls.dispose();
       renderer.dispose();
+      surfaceLibrary.dispose();
     });
   }
   buildNavigation();
