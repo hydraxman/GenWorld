@@ -50762,6 +50762,137 @@ void main() {
     throw new Error(`\u672A\u77E5\u9898\u5E93\uFF1A${id}`);
   }
 
+  // node_modules/three/examples/jsm/geometries/RoundedBoxGeometry.js
+  var _tempNormal = new Vector3();
+  function getUv(faceDirVector, normal, uvAxis, projectionAxis, radius, sideLength) {
+    const totArcLength = 2 * Math.PI * radius / 4;
+    const centerLength = Math.max(sideLength - 2 * radius, 0);
+    const halfArc = Math.PI / 4;
+    _tempNormal.copy(normal);
+    _tempNormal[projectionAxis] = 0;
+    _tempNormal.normalize();
+    const arcUvRatio = 0.5 * totArcLength / (totArcLength + centerLength);
+    const arcAngleRatio = 1 - _tempNormal.angleTo(faceDirVector) / halfArc;
+    if (Math.sign(_tempNormal[uvAxis]) === 1) {
+      return arcAngleRatio * arcUvRatio;
+    } else {
+      const lenUv = centerLength / (totArcLength + centerLength);
+      return lenUv + arcUvRatio + arcUvRatio * (1 - arcAngleRatio);
+    }
+  }
+  var RoundedBoxGeometry = class _RoundedBoxGeometry extends BoxGeometry {
+    /**
+     * Constructs a new rounded box geometry.
+     *
+     * @param {number} [width=1] - The width. That is, the length of the edges parallel to the X axis.
+     * @param {number} [height=1] - The height. That is, the length of the edges parallel to the Y axis.
+     * @param {number} [depth=1] - The depth. That is, the length of the edges parallel to the Z axis.
+     * @param {number} [segments=2] - Number of segments that form the rounded corners.
+     * @param {number} [radius=0.1] - The radius of the rounded corners.
+     */
+    constructor(width = 1, height = 1, depth = 1, segments = 2, radius = 0.1) {
+      const totalSegments = segments * 2 + 1;
+      radius = Math.min(width / 2, height / 2, depth / 2, radius);
+      super(1, 1, 1, totalSegments, totalSegments, totalSegments);
+      this.type = "RoundedBoxGeometry";
+      this.parameters = {
+        width,
+        height,
+        depth,
+        segments,
+        radius
+      };
+      if (totalSegments === 1) return;
+      const geometry2 = this.toNonIndexed();
+      this.index = null;
+      this.attributes.position = geometry2.attributes.position;
+      this.attributes.normal = geometry2.attributes.normal;
+      this.attributes.uv = geometry2.attributes.uv;
+      const position2 = new Vector3();
+      const normal = new Vector3();
+      const box = new Vector3(width, height, depth).divideScalar(2).subScalar(radius);
+      const positions = this.attributes.position.array;
+      const normals = this.attributes.normal.array;
+      const uvs = this.attributes.uv.array;
+      const faceTris = positions.length / 6;
+      const faceDirVector = new Vector3();
+      const halfSegmentSize = 0.5 / totalSegments;
+      for (let i = 0, j = 0; i < positions.length; i += 3, j += 2) {
+        position2.fromArray(positions, i);
+        normal.copy(position2);
+        normal.x -= Math.sign(normal.x) * halfSegmentSize;
+        normal.y -= Math.sign(normal.y) * halfSegmentSize;
+        normal.z -= Math.sign(normal.z) * halfSegmentSize;
+        normal.normalize();
+        positions[i + 0] = box.x * Math.sign(position2.x) + normal.x * radius;
+        positions[i + 1] = box.y * Math.sign(position2.y) + normal.y * radius;
+        positions[i + 2] = box.z * Math.sign(position2.z) + normal.z * radius;
+        normals[i + 0] = normal.x;
+        normals[i + 1] = normal.y;
+        normals[i + 2] = normal.z;
+        const side = Math.floor(i / faceTris);
+        switch (side) {
+          case 0:
+            faceDirVector.set(1, 0, 0);
+            uvs[j + 0] = getUv(faceDirVector, normal, "z", "y", radius, depth);
+            uvs[j + 1] = 1 - getUv(faceDirVector, normal, "y", "z", radius, height);
+            break;
+          case 1:
+            faceDirVector.set(-1, 0, 0);
+            uvs[j + 0] = 1 - getUv(faceDirVector, normal, "z", "y", radius, depth);
+            uvs[j + 1] = 1 - getUv(faceDirVector, normal, "y", "z", radius, height);
+            break;
+          case 2:
+            faceDirVector.set(0, 1, 0);
+            uvs[j + 0] = 1 - getUv(faceDirVector, normal, "x", "z", radius, width);
+            uvs[j + 1] = getUv(faceDirVector, normal, "z", "x", radius, depth);
+            break;
+          case 3:
+            faceDirVector.set(0, -1, 0);
+            uvs[j + 0] = 1 - getUv(faceDirVector, normal, "x", "z", radius, width);
+            uvs[j + 1] = 1 - getUv(faceDirVector, normal, "z", "x", radius, depth);
+            break;
+          case 4:
+            faceDirVector.set(0, 0, 1);
+            uvs[j + 0] = 1 - getUv(faceDirVector, normal, "x", "y", radius, width);
+            uvs[j + 1] = 1 - getUv(faceDirVector, normal, "y", "x", radius, height);
+            break;
+          case 5:
+            faceDirVector.set(0, 0, -1);
+            uvs[j + 0] = getUv(faceDirVector, normal, "x", "y", radius, width);
+            uvs[j + 1] = 1 - getUv(faceDirVector, normal, "y", "x", radius, height);
+            break;
+        }
+      }
+    }
+    /**
+     * Factory method for creating an instance of this class from the given
+     * JSON object.
+     *
+     * @param {Object} data - A JSON object representing the serialized geometry.
+     * @returns {RoundedBoxGeometry} A new instance.
+     */
+    static fromJSON(data) {
+      return new _RoundedBoxGeometry(
+        data.width,
+        data.height,
+        data.depth,
+        data.segments,
+        data.radius
+      );
+    }
+  };
+
+  // shared/knowledge-labs/anatomy-finishes.js
+  var ANATOMY_FINISHES = Object.freeze({
+    gold: "#d3bb88",
+    goldRecess: "#a1844f",
+    steel: "#b8bdc1",
+    steelRecess: "#8f959b",
+    gunmetal: "#444a51",
+    rubber: "#2a2b2e"
+  });
+
   // shared/knowledge-labs/exhibit.js
   var graphPositions = [
     [-1.3, 0.22, 0],
@@ -50775,6 +50906,7 @@ void main() {
   function disposeExhibitTree(group) {
     const resources = /* @__PURE__ */ new Set();
     group.traverse((object) => {
+      if (object.isInstancedMesh) object.dispose();
       if (object.geometry) resources.add(object.geometry);
       for (const material of [].concat(object.material ?? [])) {
         resources.add(material);
@@ -50795,6 +50927,7 @@ void main() {
     platform.add(focusRing);
     root.add(platform, diagram);
     let state2 = initialExperiment(id), expanded = false, lift = 0, targetLift = 0, frame = null, animation = null, frog = null;
+    let detailLabels = [], previewLabels = [];
     const motion = typeof matchMedia === "function" ? matchMedia("(prefers-reduced-motion: reduce)") : null;
     const material = (color) => new MeshStandardMaterial({ color, roughness: 0.7, metalness: 0.04 });
     function mesh(parent, name, geometry, color, position2, scale = [1, 1, 1]) {
@@ -50808,8 +50941,9 @@ void main() {
       return object;
     }
     const box = (parent, name, color, position2, scale) => mesh(parent, name, new BoxGeometry(1, 1, 1), color, position2, scale);
+    const rounded = (parent, name, color, position2, size, radius = 0.025) => mesh(parent, name, new RoundedBoxGeometry(...size, 2, radius), color, position2);
     const ball = (parent, name, color, position2, scale) => mesh(parent, name, new SphereGeometry(1, 14, 9), color, position2, scale);
-    function label(parent, text, position2, width = 0.48, background = "#183f49") {
+    function label(parent, text, position2, width = 0.48, { detail = false, plaque = false } = {}) {
       if (!labels) return;
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
@@ -50817,19 +50951,34 @@ void main() {
       ctx.font = "600 72px sans-serif";
       canvas.width = Math.ceil(ctx.measureText(text).width) + 32;
       canvas.height = 112;
-      ctx.fillStyle = background;
+      ctx.fillStyle = plaque ? "#e7e1d2" : "#274c50";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "#ffffff";
+      ctx.fillStyle = plaque ? "#263c3c" : "#ffffff";
       ctx.font = "600 72px sans-serif";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       ctx.fillText(text, canvas.width / 2, 58);
       const map = new CanvasTexture(canvas);
       map.colorSpace = SRGBColorSpace;
-      const object = new Sprite(new SpriteMaterial({ map, toneMapped: false, depthTest: true }));
+      const height = width * canvas.height / canvas.width;
+      const object = plaque ? new Mesh(
+        new PlaneGeometry(width, height),
+        new MeshStandardMaterial({ map, roughness: 0.75, side: FrontSide })
+      ) : new Sprite(new SpriteMaterial({ map, toneMapped: false, depthTest: true }));
       object.name = `label-${text}`;
       object.position.set(...position2);
-      object.scale.set(width, width * canvas.height / canvas.width, 1);
+      object.userData.labelRole = plaque ? "plaque" : detail ? "detail" : "node";
+      if (!plaque) {
+        object.scale.set(width, height, 1);
+        if (!detail) {
+          previewLabels.push({ object, width, height });
+          if (!expanded) object.scale.multiplyScalar(0.65);
+        }
+      }
+      if (detail) {
+        detailLabels.push(object);
+        object.visible = expanded;
+      }
       parent.add(object);
     }
     function link(parent, name, from, to, color, { arrow = false, labelText, radius = 0.025, trim = 0.22 } = {}) {
@@ -50852,14 +51001,20 @@ void main() {
         parent,
         labelText,
         a.clone().lerp(b, 0.48).add(new Vector3(0, 0.12, 0)).toArray(),
-        labelText.endsWith("%") ? 0.45 : 0.2
+        labelText.endsWith("%") ? 0.38 : 0.18,
+        { detail: true }
       );
     }
     if (table) {
-      box(platform, "exhibit-table", "#e4d9bd", [0, 1.02, 0], [3.15, 0.14, 2.05]);
-      box(platform, "pedestal", "#344d4b", [0, 0.5, 0], [0.75, 1, 1.15]);
-      box(platform, "pedestal-foot", "#b8b4a2", [0, 0.06, 0], [1.15, 0.12, 1.5]);
-      label(platform, LABS[id].title, [0, 0.8, 1.05], 2.6);
+      rounded(platform, "exhibit-table", "#e4dfd1", [0, 1.035, 0], [3.15, 0.11, 2.05]);
+      const trim = rounded(platform, "table-edge-reveal", ANATOMY_FINISHES.gold, [0, 0.973, 0], [3.1, 0.026, 2], 0.012);
+      trim.material.metalness = 0.65;
+      trim.material.roughness = 0.34;
+      rounded(platform, "pedestal", "#344d4b", [0, 0.52, 0], [1.18, 0.88, 1.3], 0.05);
+      rounded(platform, "pedestal-foot", ANATOMY_FINISHES.gunmetal, [0, 0.06, 0], [1.48, 0.12, 1.6], 0.04);
+      rounded(platform, "exhibit-plaque-backing", ANATOMY_FINISHES.goldRecess, [0, 0.84, 1.019], [2.48, 0.27, 0.055], 0.018);
+      label(platform, LABS[id].title, [0, 0.84, 1.05], id === "markov" ? 2.25 : 1.66, { plaque: true });
+      for (const x of [-0.43, 0.43]) box(platform, "pedestal-flute", ANATOMY_FINISHES.goldRecess, [x, 0.49, 0.656], [0.014, 0.66, 0.012]);
       for (const x of [-1.54, 1.54]) box(focusRing, "focus-edge", "#ffd077", [x, 1.105, 0], [0.025, 0.025, 2]);
       for (const z of [-1, 1]) box(focusRing, "focus-edge", "#ffd077", [0, 1.105, z], [3.1, 0.025, 0.025]);
     }
@@ -50867,9 +51022,11 @@ void main() {
       disposeExhibitTree(diagram);
       diagram.clear();
       frog = null;
+      detailLabels = [];
+      previewLabels = [];
       const active = "#e4a949", idle = "#62a998", dark = "#284e58";
       if (id === "graph") {
-        box(diagram, "graph-ground", "#e9e2cb", [0, 0, 0], [3.3, 0.08, 2]);
+        rounded(diagram, "graph-ground", "#dcded5", [0, 0, 0], [3.08, 0.08, 1.94]);
         GRAPH_EDGES.forEach(([a, b], i) => {
           const inPath = state2.path.some((node2, n) => n && (node2 === a && state2.path[n - 1] === b || node2 === b && state2.path[n - 1] === a));
           link(
@@ -50882,6 +51039,14 @@ void main() {
           );
         });
         GRAPH_NODES.forEach((node2, i) => {
+          const [x, , z] = graphPositions[i];
+          mesh(
+            diagram,
+            `graph-socket-${node2}`,
+            new CylinderGeometry(0.22, 0.24, 0.045, 24),
+            ANATOMY_FINISHES.steel,
+            [x, 0.063, z]
+          );
           ball(
             diagram,
             `graph-node-${node2}`,
@@ -50894,11 +51059,12 @@ void main() {
           label(diagram, node2, p, 0.24);
         });
       } else if (id === "list") {
-        box(diagram, "list-ground", "#e9e2cb", [0, -0.02, 0], [3.3, 0.08, 2]);
+        rounded(diagram, "list-ground", "#dcded5", [0, -0.02, 0], [3.08, 0.08, 1.94]);
         const positions = new Map(state2.nodes.map((node2, i) => [node2.id, [-1.12 + i % 3 * 1.12, 0.2, i < 3 ? -0.45 : 0.6]]));
         for (const node2 of state2.nodes) {
           const p = positions.get(node2.id);
-          box(diagram, `list-node-${node2.id}`, node2.id === state2.cursor ? active : state2.visited.includes(node2.id) ? idle : dark, p, [0.62, 0.3, 0.38]);
+          rounded(diagram, `list-node-${node2.id}`, node2.id === state2.cursor ? active : state2.visited.includes(node2.id) ? idle : dark, p, [0.62, 0.3, 0.38]);
+          box(diagram, `list-pointer-field-${node2.id}`, ANATOMY_FINISHES.steel, [p[0] + 0.18, p[1] + 0.153, p[2]], [0.14, 0.015, 0.29]);
           label(diagram, String(node2.value), [p[0], p[1] + 0.29, p[2]], 0.35);
           if (node2.next) link(diagram, `next-${node2.id}-${node2.next}`, p, positions.get(node2.next), "#b7761e", { arrow: true, trim: 0.42 });
           else label(diagram, "null", [p[0], 0.23, p[2] + 0.37], 0.42);
@@ -50906,10 +51072,15 @@ void main() {
           if (node2.id === state2.head) tags.push("head");
           if (node2.id === state2.previous && state2.mode === "reverse") tags.push("prev");
           if (node2.id === state2.cursor) tags.push("cur");
-          if (tags.length) label(diagram, tags.join(" / "), [p[0], 0.84, p[2]], 0.85);
+          if (tags.length) label(diagram, tags.join(" / "), [p[0], 0.84, p[2]], 0.65, { detail: true });
         }
       } else {
-        const pond = mesh(diagram, "pond-water", new CylinderGeometry(1, 1, 0.1, 48), "#66bbc5", [0, 0, 0], [1.7, 1, 1.15]);
+        mesh(diagram, "pond-basin", new CylinderGeometry(1, 1, 0.14, 64), ANATOMY_FINISHES.gunmetal, [0, -0.025, 0], [1.74, 1, 1.19]);
+        const rim = mesh(diagram, "pond-rim", new TorusGeometry(1, 0.014, 6, 64), ANATOMY_FINISHES.gold, [0, 0.06, 0], [1.72, 1.17, 1]);
+        rim.rotation.x = -Math.PI / 2;
+        rim.material.metalness = 0.6;
+        rim.material.roughness = 0.3;
+        const pond = mesh(diagram, "pond-water", new CylinderGeometry(1, 1, 0.1, 64), "#4d9f9f", [0, 0, 0], [1.7, 1, 1.15]);
         pond.material.roughness = 0.24;
         for (let i = 0; i < pads.length; i++) {
           const shape = new Shape();
@@ -50919,7 +51090,7 @@ void main() {
           const leaf = mesh(
             diagram,
             `lily-pad-${i}`,
-            new ShapeGeometry(shape, 24),
+            new ExtrudeGeometry(shape, { depth: 0.018, bevelEnabled: false, steps: 1, curveSegments: 24 }),
             i === state2.current ? "#6a953a" : "#39846b",
             pads[i]
           );
@@ -50927,7 +51098,7 @@ void main() {
           const [x, y, z] = pads[i];
           label(diagram, "ABCD"[i], [x, y + 0.19, z + 0.34], 0.24);
           if (i === state2.current && state2.matrix[i][i] > 0) {
-            label(diagram, `\u539F\u5730 ${Math.round(state2.matrix[i][i] * 100)}%`, [x, y + 0.65, z], 0.9);
+            label(diagram, `\u539F\u5730 ${Math.round(state2.matrix[i][i] * 100)}%`, [x, y + 0.65, z], 0.7, { detail: true });
           }
           if (i !== state2.current && state2.matrix[state2.current][i] > 0) {
             const from = [...pads[state2.current]], to = [...pads[i]];
@@ -51018,6 +51189,10 @@ void main() {
       },
       expand(value) {
         expanded = value;
+        detailLabels.forEach((label2) => {
+          label2.visible = value;
+        });
+        previewLabels.forEach(({ object, width, height }) => object.scale.set(width, height, 1).multiplyScalar(value ? 1 : 0.65));
         targetLift = value ? 0.7 : 0;
         animate(false);
       },
@@ -51589,7 +51764,7 @@ ${state2.algorithm === "bfs" ? "\u5148\u8FDB\u5148\u51FA\u961F\u5217" : "\u6309\
         material.needsUpdate = true;
       }
       root.traverse((object) => {
-        if (!object.isMesh || !kinds.has(object.material) || object.geometry.type !== "BoxGeometry") return;
+        if (!object.isMesh || object.userData.meterUV || !kinds.has(object.material) || !["BoxGeometry", "RoundedBoxGeometry"].includes(object.geometry.type)) return;
         const template = templates.get(kinds.get(object.material));
         const key = `${object.geometry.uuid}:${object.scale.toArray().join(",")}:${kinds.get(object.material)}`;
         if (!geometries.has(key)) {
@@ -52122,6 +52297,32 @@ ${state2.algorithm === "bfs" ? "\u5148\u8FDB\u5148\u51FA\u961F\u5217" : "\u6309\
     console.error(error2);
   }
 })();
+/*!
+ * Selected material colors adapted from wheresryan22/anatomy, kit/turn.mjs,
+ * T3_MATERIALS light palettes at 1482e8469b0a9e0d8cc18ea2740a01423d29ae80.
+ *
+ * MIT License
+ *
+ * Copyright (c) 2026 Ryan
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 /*! Bundled license information:
 
 three/build/three.core.js:
