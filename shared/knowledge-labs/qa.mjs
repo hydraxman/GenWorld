@@ -164,6 +164,11 @@ try {
         assert.equal(await page.evaluate(() => window.campusApp.knowledgeHall.state().count), 0);
         await page.select('#visit-building', 'jianhua');
         assert.equal(await page.evaluate(() => window.campusApp.knowledgeHall.state().count), 0);
+        await page.waitForFunction(() => window.campusApp.walkthrough.state().phase === 'inside');
+        await page.keyboard.press('f');
+        assert.equal(await page.evaluate(() => window.campusApp.knowledgeHall.state().active), null,
+          'Jianhua finishes must not activate absent Shunde exhibits');
+        assert.equal(await page.$eval('#interact-exhibit', button => button.hidden), true);
         await page.click('#exit-building');
         await page.click('#enter-knowledge-hall');
         assert.equal(await page.evaluate(() => window.campusApp.knowledgeHall.state().count), 3);
@@ -171,12 +176,27 @@ try {
         assert.equal(await page.evaluate(() => window.campusApp.stats.buildings), 650);
         const memories = [];
         for (let i = 0; i < 3; i++) {
-          await page.click('#enter-knowledge-hall');
-          await page.click('[data-hall-lab="markov"]'); await settle();
-          await page.keyboard.press('Escape'); await page.click('#exit-building');
-          memories.push(await page.evaluate(() => {window.campusApp.render(true); return window.campusApp.inspection().rendering.textures;}));
+          for (const kind of ['shunde', 'jianhua']) {
+            await page.evaluate(kind => window.campusApp.visitBuilding(kind), kind);
+            if (kind === 'shunde') {
+              await page.click('[data-hall-lab="markov"]'); await settle(); await page.keyboard.press('Escape');
+            } else await page.waitForFunction(() => window.campusApp.walkthrough.state().phase === 'inside');
+            assert.equal(await page.evaluate(() => {
+              const scene = window.campusApp.campus.group.parent;
+              let lights = 0; scene.traverse(object => {if (object.isRectAreaLight) lights++;}); return lights;
+            }), 3);
+            await page.click('#exit-building');
+            assert.equal(await page.evaluate(() => {
+              let lights = 0; window.campusApp.campus.group.parent.traverse(object => {if (object.isRectAreaLight) lights++;}); return lights;
+            }), 0);
+          }
+          memories.push(await page.evaluate(() => {
+            window.campusApp.render(true);
+            const {textures, geometries} = window.campusApp.inspection().rendering; return {textures, geometries};
+          }));
         }
-        assert.ok(memories.at(-1) <= memories[0], `Re-entering must not leak textures: ${memories}`);
+        for (const key of ['textures', 'geometries']) assert.ok(memories.at(-1)[key] <= memories[0][key],
+          `Re-entering both interiors must not leak ${key}: ${JSON.stringify(memories)}`);
         await page.emulateMediaFeatures([{name: 'prefers-reduced-motion', value: 'reduce'}]);
         await page.click('#enter-knowledge-hall');
         assert.equal(await page.evaluate(() => window.campusApp.walkthrough.state().phase), 'inside');

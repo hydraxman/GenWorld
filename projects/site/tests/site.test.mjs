@@ -88,3 +88,14 @@ test('retains third-party attribution and downloadable map databases', async () 
   assert.match(await read('scenes/wind-print/vendor/LICENSE.txt'), /GNU LESSER GENERAL PUBLIC LICENSE/);
   assert.match(await read('credits.html'), /LGPL 2\.1/);
 });
+
+test('retains the full Anatomy MIT notice in both shared exhibit bundles', async () => {
+  const source = await readFile(path.resolve(import.meta.dirname, '..', '..', '..', 'shared', 'knowledge-labs', 'anatomy-finishes.js'), 'utf8');
+  const notice = source.slice(source.indexOf('MIT License'), source.indexOf('*/')).split('\n')
+    .map(line => line.trim().replace(/^\* ?/, '').trim()).filter(Boolean);
+  for (const file of ['scenes/campus/assets/scene.js', 'scenes/knowledge/assets/scene.js']) {
+    const bundle = await read(file);
+    for (const line of notice) assert.ok(bundle.includes(line), `Missing Anatomy license line in ${file}: ${line}`);
+  }
+  assert.match(await read('credits.html'), /Copyright \(c\) 2026 Ryan/);
+});

@@ -38,7 +38,8 @@ export function createTeachingSurfaceLibrary() {
       material.roughness = 1; material.metalness = 0; material.needsUpdate = true;
     }
     root.traverse(object => {
-      if (!object.isMesh || !kinds.has(object.material) || object.geometry.type !== 'BoxGeometry') return;
+      if (!object.isMesh || object.userData.meterUV || !kinds.has(object.material) ||
+          !['BoxGeometry', 'RoundedBoxGeometry'].includes(object.geometry.type)) return;
       const template = templates.get(kinds.get(object.material));
       const key = `${object.geometry.uuid}:${object.scale.toArray().join(',')}:${kinds.get(object.material)}`;
       if (!geometries.has(key)) {
