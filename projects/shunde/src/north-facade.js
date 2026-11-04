@@ -1,5 +1,5 @@
 import {createBuilder} from './builder.js';
-import {addVisitorLobby} from './visitor-lobby.js';
+import {addVisitorLobby, SHUNDE_LOBBY_FLOOR} from './visitor-lobby.js';
 
 import {SHUNDE} from './spec.js';
 
@@ -157,7 +157,12 @@ export function createNorthFacade(THREE,{textured=true,foliage=true,signGlyphs=n
  stats.signs=['舜德楼','清华大学工业工程系'];stats.portalHeightToColumnHeight=(E.portalTop-S.baseY)/(E.top-S.baseY);
  // Foundation follows the same nonrectangular outline as the upper plates.
  // The photo's wide apron continues far past the columns into the facade plinth.
- box(portico,'continuous facade plinth course',0,.52,5.40,W,.76,1.3,limestone);
+ const slab=SHUNDE_LOBBY_FLOOR,bed=slab.top-slab.thickness,slabFront=slab.z+slab.depth/2;
+ box(portico,'continuous facade plinth bed',0,(.14+bed)/2,5.40,W,bed-.14,1.3,limestone);
+ for(const side of [-1,1])box(portico,'plinth cap beside lobby paving',side*(W+slab.width)/4,bed+slab.thickness/2,5.40,
+  (W-slab.width)/2,slab.thickness,1.3,limestone);
+ box(portico,'plinth cap beyond lobby paving',0,bed+slab.thickness/2,(slabFront+6.05)/2,
+  slab.width,slab.thickness,6.05-slabFront,limestone);
  box(portico,'continuous upper landing',0,.40,6.03,33.2,1.0,1.25,limestone);
  const warningYellow=plain('Warning yellow','#b9a338',.84),warningBlack=plain('Warning charcoal','#252b28',.92);
  for(let i=0;i<6;i++){

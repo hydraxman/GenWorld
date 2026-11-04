@@ -8,8 +8,26 @@ import {createProjectServer} from './serve.mjs';
 
 const output = resolve(import.meta.dirname, '..', 'output'), report = {};
 const fixture = await build({stdin: {contents: `
+  import {Vector3, Raycaster} from 'three';
   export {Vector3, Raycaster, DoubleSide} from 'three';
   export {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+  export function verifyDoorwayPaving(root, anchor, camera) {
+    root.updateMatrixWorld(true);
+    let samples = 0;
+    for (const x of [-5.3, -.65, .17, .65, 5.3]) for (const z of [-5.5, -.3, .8, 1.4, 2.8, 4.6, 4.9, 5.3]) {
+      const origin = anchor.localToWorld(new Vector3(x, 1.3, z));
+      const ray = new Raycaster(origin, new Vector3(0, -1, 0), 0, 1.3); ray.camera = camera;
+      const hits = ray.intersectObject(root, true).filter(hit => {
+        for (let parent = hit.object; parent; parent = parent.parent) if (!parent.visible) return false;
+        return Math.abs(anchor.worldToLocal(hit.point.clone()).y - .9) < .0001;
+      });
+      if (hits.length !== 1 || !hits[0].object.material.name.includes('Gray forecourt paving')) {
+        throw new Error('Competing or missing doorway paving at ' + [x, z] + ': ' + hits.map(hit => hit.object.material.name));
+      }
+      samples++;
+    }
+    return samples;
+  }
 `, resolveDir: resolve(import.meta.dirname, '..')}, bundle: true, write: false, format: 'iife', globalName: 'VisitorFixture'});
 await mkdir(output, {recursive: true});
 const server = createProjectServer();
@@ -34,8 +52,8 @@ try {
     await page.goto(url.href, {waitUntil: 'load', timeout: 90000});
     await page.waitForFunction(() => window.campusApp?.ready || window.campusError, {timeout: 90000});
     assert.equal(await page.evaluate(() => window.campusError), undefined);
+    await page.addScriptTag({content: fixture.outputFiles[0].text});
     if (device === 'desktop') {
-      await page.addScriptTag({content: fixture.outputFiles[0].text});
       const cdp = await page.createCDPSession();
       await cdp.send('Browser.setDownloadBehavior', {behavior: 'deny'});
     }
@@ -54,6 +72,48 @@ try {
       assert.equal(await page.$eval('#walk-controls', element => element.hidden), false);
       assert.equal(await page.$('#walk-note'), null);
       assert.doesNotMatch(await page.$eval('#walk-controls', element => element.textContent), /示意|非实地|陈设|实测/);
+      const checkControls = async () => {
+        const layout = await page.evaluate(() => {
+          const panel = document.getElementById('walk-controls').getBoundingClientRect();
+          const footer = document.querySelector('footer').getBoundingClientRect();
+          return {width: panel.width, height: panel.height, bottom: panel.bottom, footerTop: footer.top,
+            overflow: document.documentElement.scrollWidth > innerWidth,
+            buttons: [...document.querySelectorAll('#walk-controls button')].filter(button => button.getClientRects().length).map(button => {
+              const rect = button.getBoundingClientRect();
+              return {width: rect.width, height: rect.height, text: button.textContent.trim(),
+                label: button.getAttribute('aria-label'), title: button.title,
+                reachable: document.elementFromPoint(rect.x + rect.width / 2, rect.y + rect.height / 2)?.closest('button') === button};
+            })};
+        });
+        assert.ok(layout.width <= 258 && layout.height <= 170, `Controls must stay compact: ${JSON.stringify(layout)}`);
+        assert.ok(layout.bottom + 6 <= layout.footerTop, 'Compact controls must not cover attribution');
+        assert.equal(layout.overflow, false);
+        for (const button of layout.buttons) {
+          assert.ok(button.width >= 44 && button.height >= 44 && button.reachable);
+          assert.ok(button.label && button.title, 'Icon buttons must remain named');
+          assert.doesNotMatch(button.text, /[\u3400-\u9fff]/);
+        }
+        return layout;
+      };
+      await checkControls();
+      await page.waitForFunction(() => window.campusApp.walkthrough.state().phase === 'inside');
+      if (kind === 'shunde') assert.equal(await page.evaluate(() => {
+        const app = window.campusApp;
+        let anchor; app.campus.group.traverse(object => {if (object.userData.walkthrough?.id === 'shunde') anchor = object;});
+        return VisitorFixture.verifyDoorwayPaving(app.campus.group.parent, anchor, app.inspection().camera);
+      }), 40);
+      for (const action of ['turn-left', 'turn-right', 'left', 'right', 'back', 'forward']) {
+        const before = await page.evaluate(() => window.campusApp.walkthrough.state());
+        const rect = await (await page.$(`[data-walk="${action}"]`)).boundingBox();
+        await page.mouse.move(rect.x + rect.width / 2, rect.y + rect.height / 2); await page.mouse.down();
+        await new Promise(done => setTimeout(done, 180)); await page.mouse.up();
+        const after = await page.evaluate(() => window.campusApp.walkthrough.state());
+        assert.ok(action.startsWith('turn-') ? Math.abs(after.yaw - before.yaw) > .05 :
+          Math.hypot(...after.position.map((value, i) => value - before.position[i])) > .03, `${action} must still work`);
+        await new Promise(done => setTimeout(done, 250));
+      }
+      // Re-enter for the existing deterministic corridor and collision checks.
+      await page.evaluate(kind => window.campusApp.visitBuilding(kind), kind);
       await page.screenshot({path: resolve(output, `walk-${device}-${kind}-entry.png`)});
       if (device === 'desktop') await page.keyboard.down('w');
       else {
@@ -85,6 +145,11 @@ try {
       await page.screenshot({path: resolve(output, `walk-${device}-${kind}-interior-looking-out.png`)});
       for (let i = 0; i < 3; i++) await look(-200, -8);
       if (device === 'mobile') {
+        for (const [testWidth, testHeight] of [[320, 740], [740, 390]]) {
+          await page.setViewport({width: testWidth, height: testHeight});
+          await checkControls();
+          await page.screenshot({path: resolve(output, `walk-controls-${kind}-${testWidth}.png`)});
+        }
         await page.setViewport({width: 430, height: 932});
         assert.equal(await page.evaluate(() => window.campusApp.walkthrough.state().active), true, 'Resize must not exit walking');
       }
@@ -132,7 +197,8 @@ try {
             if (!hit || Math.abs(anchor.worldToLocal(hit.point.clone()).y - floor) > .02) throw new Error('Exported lobby has no supporting floor.');
             const notice = [...materials].find(material => material.name === 'Illustrative visitor lobby notice');
             if (!notice?.map) throw new Error('The rendered lobby limitation notice was not exported.');
-            return {kind, bytes: blob.size, identities, doorwayRays: 3};
+            const pavingRays = kind === 'shunde' ? T.verifyDoorwayPaving(scene, anchor) : 0;
+            return {kind, bytes: blob.size, identities, doorwayRays: 3, pavingRays};
           } finally {
             geometries.forEach(geometry => geometry.dispose()); materials.forEach(material => material.dispose());
             textures.forEach(texture => texture.dispose());

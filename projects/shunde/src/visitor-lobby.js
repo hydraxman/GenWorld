@@ -1,9 +1,12 @@
+export const SHUNDE_LOBBY_FLOOR = Object.freeze({width: 11.6, depth: 11.6, z: -.4, top: .9, thickness: .1});
+
 export function addVisitorLobby(THREE, B, parent, materials, kind, {textured}) {
-  const shunde = kind === 'shunde', floor = shunde ? .9 : .45, back = shunde ? -6 : -8;
-  const width = shunde ? 11.6 : 20.1;
+  const shunde = kind === 'shunde', floor = shunde ? SHUNDE_LOBBY_FLOOR.top : .45, back = shunde ? -6 : -8;
+  const width = shunde ? SHUNDE_LOBBY_FLOOR.width : 20.1;
   const box = (name, x, y, z, w, h, d, material) => B.box(parent, name, x, y, z, w, h, d, material);
   if (shunde) {
-    box('Illustrative lobby floor', 0, floor - .05, -.4, width, .1, 11.6, materials.floor);
+    const slab = SHUNDE_LOBBY_FLOOR;
+    box('Illustrative lobby floor', 0, floor - slab.thickness / 2, slab.z, width, slab.thickness, slab.depth, materials.floor);
     box('Illustrative lobby ceiling', 0, 4.3, -2.4, width, .16, 7.4, materials.wall);
     box('Illustrative lobby back wall', 0, 2.6, back, width, 3.4, .18, materials.wall);
     for (const sign of [-1, 1]) box('Illustrative lobby side wall', sign * width / 2, 2.6, -2.4, .18, 3.4, 7.4, materials.wall);

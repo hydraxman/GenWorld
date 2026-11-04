@@ -4,7 +4,22 @@ import * as THREE from 'three';
 import source from '../../shunde/docs/campus-context.json' with {type: 'json'};
 import {createShundeModel} from '../../shunde/src/model.js';
 import {createSEMBuilding, SEM_WAY} from '../../shunde/src/sem-building.js';
-import {advanceVisitorVelocity, stepVisitor, visitorCanStand, visitorFloor} from '../src/walkthrough.js';
+import {advanceVisitorVelocity, setWalkViewport, stepVisitor, visitorCanStand, visitorFloor} from '../src/walkthrough.js';
+
+test('assembled Shunde doorway has one paving surface, not coplanar foundation tiles', () => {
+  const built = createShundeModel(THREE, {textured: false, foliage: false, refinedFront: true});
+  let anchor;
+  built.group.traverse(object => {if (object.userData.walkthrough?.id === 'shunde') anchor = object;});
+  built.group.updateMatrixWorld(true);
+  for (const x of [-5.3, -.65, .17, .65, 5.3]) for (const z of [-5.5, -.3, .8, 1.4, 2.8, 4.6, 4.9, 5.3]) {
+    const origin = anchor.localToWorld(new THREE.Vector3(x, 1.3, z));
+    const hits = new THREE.Raycaster(origin, new THREE.Vector3(0, -1, 0), 0, 1.3).intersectObject(built.building, true)
+      .filter(hit => Math.abs(anchor.worldToLocal(hit.point.clone()).y - .9) < .0001);
+    assert.equal(hits.length, 1, `Competing top faces at ${x},${z}: ${hits.map(hit => hit.object.material.name).join(' / ')}`);
+    assert.equal(hits[0].object.material.name, 'Gray forecourt paving');
+    assert.equal(hits[0].object.material.polygonOffset, false, 'Repair geometry rather than biasing depth');
+  }
+});
 
 for (const kind of ['shunde', 'jianhua']) test(`${kind} visitor actually passes through open doors into a floored bounded lobby`, () => {
   const built = kind === 'shunde' ? createShundeModel(THREE, {textured: false, foliage: false, refinedFront: true})
@@ -59,4 +74,22 @@ test('walking acceleration has frame-rate-independent distance and a short contr
   assert.ok(Math.abs(stopped.delta[1]) < .2);
   assert.ok(Math.abs(stopped.velocity[1]) < .006);
   assert.throws(() => advanceVisitorVelocity([0, NaN], [0, 0], .1), /finite/);
+});
+
+test('compact walking controls reveal more height without cropping the pond on portrait screens', () => {
+  const camera = new THREE.PerspectiveCamera(65, 1, .06, 6000);
+  camera.position.set(0, 2.55, .2); camera.lookAt(0, 2.55, -4.15); camera.updateMatrixWorld(true);
+  for (const [width, height] of [[320, 740], [390, 844], [430, 932], [390, 1100], [740, 390], [1600, 1000]]) {
+    const freeHeight = height - 224;
+    setWalkViewport(camera, width, height, freeHeight);
+    if (width > 850) {
+      assert.equal(camera.fov, 65); assert.equal(camera.view?.enabled, false); continue;
+    }
+    for (const x of [-1.7, 1.7]) for (const z of [-5.3, -3]) {
+      const point = new THREE.Vector3(x, 2.07, z).project(camera);
+      assert.ok(Math.abs(point.x) < 1, `Pond cropped horizontally at ${width}x${height}`);
+      const y = (1 - point.y) * height / 2;
+      assert.ok(y > 0 && y < freeHeight, `Pond obstructed by compact controls at ${width}x${height}`);
+    }
+  }
 });

@@ -38,6 +38,17 @@ export function advanceVisitorVelocity(velocity, target, seconds) {
     delta: target.map((value, index) => value * seconds + (velocity[index] - value) * (1 - decay) / 12)};
 }
 
+export function setWalkViewport(camera, width, height, freeHeight) {
+  camera.aspect = width / height; camera.fov = 65;
+  if (width <= 850) {
+    const visibleHeight = Math.max(120, freeHeight);
+    // Keep at least 60 degrees horizontally as the compact panel reveals more height.
+    camera.fov = Math.max(65, THREE.MathUtils.radToDeg(2 * Math.atan(Math.tan(Math.PI / 6) * visibleHeight / width)));
+    camera.setViewOffset(width, visibleHeight, 0, 0, width, height);
+  } else camera.clearViewOffset();
+  camera.updateProjectionMatrix();
+}
+
 export function createWalkthrough({camera, controls, canvas, panel, onChange, onEnter = () => {}, onExit = () => {}, onInteract = () => {}}) {
   const keys = new Set(), held = new Set(), listeners = new AbortController();
   const options = {signal: listeners.signal};
@@ -54,12 +65,7 @@ export function createWalkthrough({camera, controls, canvas, panel, onChange, on
     const target = eye.clone().add(new THREE.Vector3(Math.sin(yaw) * Math.cos(pitch), Math.sin(pitch), Math.cos(yaw) * Math.cos(pitch)));
     camera.position.copy(anchor.localToWorld(eye)); camera.lookAt(anchor.localToWorld(target));
     const width = canvas.clientWidth, height = canvas.clientHeight;
-    camera.aspect = width / height;
-    if (width <= 850) {
-      const freeHeight = Math.max(120, panel.getBoundingClientRect().top - canvas.getBoundingClientRect().top);
-      camera.setViewOffset(width, freeHeight, 0, 0, width, height);
-    } else camera.clearViewOffset();
-    camera.updateProjectionMatrix();
+    setWalkViewport(camera, width, height, panel.getBoundingClientRect().top - canvas.getBoundingClientRect().top);
     camera.updateMatrixWorld(true); onChange();
   };
   const release = () => {

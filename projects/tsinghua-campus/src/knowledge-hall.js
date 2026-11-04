@@ -147,7 +147,8 @@ export function createKnowledgeHall({scene, camera, canvas, host, walker, onChan
   const surfaceLibrary = createTeachingSurfaceLibrary();
   const launches = document.createElement('div');
   launches.className = 'lab-launches'; launches.id = 'shunde-lab-launches'; launches.hidden = true;
-  document.getElementById('walk-controls').append(launches);
+  const actions = document.getElementById('walk-actions');
+  actions.append(launches);
   let anchor = null, selected = null, finishes = null, surfaces = null, nearby = null;
   const interact = document.getElementById('interact-exhibit');
   const ui = createLabUI({host, onClose: () => {
@@ -172,8 +173,15 @@ export function createKnowledgeHall({scene, camera, canvas, host, walker, onChan
     walker.suspend(); selected = id;
     ui.open(id, views.get(id), '舜德楼 · 知识门厅'); focus();
   }
+  const icons = {
+    graph: '<path d="m6 7 11 2M6 7l3 11m8-9-8 9"/><circle cx="5" cy="5" r="3"/><circle cx="19" cy="9" r="3"/><circle cx="9" cy="20" r="2"/>',
+    markov: '<path d="M12 7c-4-3-7 0-7 3 0 4 3 7 7 8 4-1 7-4 7-8 0-3-3-6-7-3ZM12 7v5l-4-3M4 18l-2 2 3 2m15-4 2 2-3 2"/>',
+    list: '<rect x="2" y="8" width="6" height="8" rx="1"/><rect x="16" y="8" width="6" height="8" rx="1"/><path d="M8 12h8m-3-3 3 3-3 3"/>',
+  };
   for (const {id} of SHUNDE_STANDS) {
-    const button = document.createElement('button'); button.textContent = LABS[id].title; button.dataset.hallLab = id;
+    const button = document.createElement('button'); button.dataset.hallLab = id;
+    button.setAttribute('aria-label', LABS[id].title); button.title = LABS[id].title;
+    button.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icons[id]}</svg>`;
     button.addEventListener('click', () => open(id)); launches.append(button);
   }
   function exit() {
@@ -181,7 +189,7 @@ export function createKnowledgeHall({scene, camera, canvas, host, walker, onChan
     surfaces?.dispose(); surfaces = null;
     views.forEach(view => view.dispose()); views.clear(); group.removeFromParent();
     if (finishes) {disposeExhibitTree(finishes); finishes.removeFromParent(); finishes = null;}
-    anchor = null; selected = null; launches.hidden = true; walker.setObstacles([]);
+    anchor = null; selected = null; actions.hidden = launches.hidden = true; walker.setObstacles([]);
     nearby = null; interact.hidden = true;
   }
   return {get active() {return ui.active;}, open, focus, exit,
@@ -195,8 +203,9 @@ export function createKnowledgeHall({scene, camera, canvas, host, walker, onChan
       nearby = close;
       views.forEach((view, id) => view.focus(id === nearby));
       interact.disabled = !nearby;
-      interact.textContent = nearby ? `展开「${LABS[nearby].title}」 · F` :
+      const description = nearby ? `展开「${LABS[nearby].title}」 · F` :
         visitor.phase === 'entering' ? '正在穿过门厅 · 移动或拖动可接管' : '走近并面向展台后按 F 互动';
+      interact.setAttribute('aria-label', description); interact.title = description;
     },
     enter(object) {
       exit();
@@ -213,7 +222,7 @@ export function createKnowledgeHall({scene, camera, canvas, host, walker, onChan
       scene.add(group);
       walker.setObstacles(kind === 'shunde' ? [...SHUNDE_STAND_OBSTACLES, {min: [-5.5, -5.7], max: [5.5, -5.46]}]
         : [{min: [-5.3, -7.6], max: [5.3, -7.37]}]);
-      interact.hidden = launches.hidden = kind !== 'shunde';
+      actions.hidden = interact.hidden = launches.hidden = kind !== 'shunde';
       if (kind === 'shunde') document.getElementById('walk-title').textContent = '舜德楼 · 知识门厅';
       onChange();
     },

@@ -118,13 +118,25 @@
       <div><a href="https://openfreemap.org/" target="_blank" rel="noreferrer">OpenFreeMap</a> · <a href="https://openmaptiles.org/" target="_blank" rel="noreferrer">© OpenMapTiles</a> · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">© OpenStreetMap contributors / ODbL</a></div>
     </footer>
     <div id="message" role="status">正在建立校园基模…</div>
-    <section id="walk-controls" class="walk-controls" aria-label="建筑内部漫游" hidden>
-      <div class="walk-heading"><strong id="walk-title"></strong><button id="exit-building">退出漫游</button></div>
-      <p>拖动看向 · WASD／方向键移动 · Q、E 转向 · Esc 退出</p>
-      <button id="interact-exhibit" disabled>走近展台后按 F 互动</button>
-      <div class="walk-pad" aria-label="触屏移动控制">
-        <button data-walk="turn-left" aria-label="向左转">左转</button><button data-walk="forward">前进</button><button data-walk="turn-right" aria-label="向右转">右转</button>
-        <button data-walk="left">左移</button><button data-walk="back">后退</button><button data-walk="right">右移</button>
+    <section id="walk-controls" class="walk-controls" aria-label="建筑内部漫游" aria-describedby="walk-help" hidden>
+      <div class="walk-heading"><strong id="walk-title"></strong>
+        <button id="exit-building" aria-label="退出漫游" title="退出漫游 · Esc" aria-keyshortcuts="Escape">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 4H4v16h6M10 12h10m-4-4 4 4-4 4"/></svg><kbd>Esc</kbd>
+        </button>
+      </div>
+      <span id="walk-help" class="walk-sr-only">拖动场景看向，WASD 或方向键移动，Q、E 转向，F 展开展台，Esc 退出。</span>
+      <div class="walk-body">
+        <div class="walk-pad" role="group" aria-label="移动和转向">
+          <button data-walk="turn-left" aria-label="向左转" title="向左转 · Q" aria-keyshortcuts="q"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10h10a6 6 0 0 1 6 6v4M8 6l-4 4 4 4"/></svg><kbd>Q</kbd></button>
+          <button data-walk="forward" aria-label="前进" title="前进 · W / ↑" aria-keyshortcuts="w ArrowUp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20V4m-6 6 6-6 6 6"/></svg><kbd>W</kbd></button>
+          <button data-walk="turn-right" aria-label="向右转" title="向右转 · E" aria-keyshortcuts="e"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10H10a6 6 0 0 0-6 6v4m12-14 4 4-4 4"/></svg><kbd>E</kbd></button>
+          <button data-walk="left" aria-label="左移" title="左移 · A / ←" aria-keyshortcuts="a ArrowLeft"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H4m6-6-6 6 6 6"/></svg><kbd>A</kbd></button>
+          <button data-walk="back" aria-label="后退" title="后退 · S / ↓" aria-keyshortcuts="s ArrowDown"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16m-6-6 6 6 6-6"/></svg><kbd>S</kbd></button>
+          <button data-walk="right" aria-label="右移" title="右移 · D / →" aria-keyshortcuts="d ArrowRight"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg><kbd>D</kbd></button>
+        </div>
+        <div id="walk-actions" class="walk-actions" role="group" aria-label="知识展台">
+          <button id="interact-exhibit" aria-label="走近并面向展台后按 F 互动" title="走近并面向展台后按 F 互动" aria-keyshortcuts="f" disabled><kbd>F</kbd></button>
+        </div>
       </div>
     </section>
     <section id="loading" class="loading" aria-label="校园加载进度">

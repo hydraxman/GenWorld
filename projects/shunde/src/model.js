@@ -1,6 +1,7 @@
 import {createBuilder} from './builder.js';
 import {FOOTPRINT,SOURCE_ENU} from './footprint.js';
 import {createNorthFacade} from './north-facade.js';
+import {SHUNDE_LOBBY_FLOOR} from './visitor-lobby.js';
 import {addPines} from './pine.js';
 
 /** Combined source-plan complex. Shunde north/west/cylinder is the photo focus.
@@ -54,7 +55,18 @@ export function createShundeModel(THREE,{textured=true,foliage=true,signGlyphs=n
   const lo=door.x-1.3,hi=door.x+1.3;
   return [p,...[[lo,0],[lo,3.3],[hi,3.3],[hi,0]].map(([x,z])=>door.toWorld(x,z))];
  });
- for(const [points,y,h,material] of [[outline,-.4,.45,tile],[foundationOutline,.05,.85,tile],[upperOutline,21.55,.4,concrete],[lowOutline,14.4,.4,concrete]]){
+ const a=FOOTPRINT[1],b=FOOTPRINT[2],dx=b[0]-a[0],dz=b[1]-a[1],angle=Math.atan2(dz,dx);
+ const frontAnchor=part('NORTH entry surface — faces negative scene Z',building,{role:'north-entry',outwardNormal:[Math.sin(angle),0,-Math.cos(angle)],photoWidthStatus:'source north edge plus photo bay proportions, estimated placement'});
+ frontAnchor.rotation.y=Math.PI-angle;frontAnchor.scale.x=Math.hypot(dx,dz)/66.56;
+ frontAnchor.position.set((a[0]+b[0])/2-5*Math.sin(angle),0,(a[1]+b[1])/2+5*Math.cos(angle));
+ frontAnchor.updateMatrix();
+ const slab=SHUNDE_LOBBY_FLOOR,half=slab.width/2,rear=slab.z-slab.depth/2,bed=slab.top-slab.thickness;
+ // Recess the foundation cap beneath the paving, keeping a continuous supporting bed.
+ const pavingRecess=foundationOutline.flatMap(p=>p===a?[p,...[[half,5],[half,rear],[-half,rear],[-half,5]].map(([x,z])=>{
+  const point=new THREE.Vector3(x,0,z).applyMatrix4(frontAnchor.matrix);return [point.x,point.z];
+ })]:[p]);
+ for(const [points,y,h,material] of [[outline,-.4,.45,tile],[foundationOutline,.05,bed-.05,tile],
+  [pavingRecess,bed,slab.thickness,tile],[upperOutline,21.55,.4,concrete],[lowOutline,14.4,.4,concrete]]){
   const shape=new THREE.Shape(points.map(([x,z])=>new THREE.Vector2(x,-z)));
   const g=new THREE.ExtrudeGeometry(shape,{depth:h,bevelEnabled:false,curveSegments:1});g.rotateX(-Math.PI/2);g.translate(0,y,0);B.worldUV(g,material);B.add(roof,g,material);
  }
@@ -171,12 +183,9 @@ export function createShundeModel(THREE,{textured=true,foliage=true,signGlyphs=n
   for(let x=.2;x<L;x+=1.45){strip(g,x,.16,15.37,.17,tile,2.0,3.65);if(x%5<1.5)strip(g,x,.18,14.72,1.35,tile,.35,.18);}
  }
  const front=createNorthFacade(THREE,{textured,foliage:false,signGlyphs,refined:refinedFront,visitorLabels});
- const a=FOOTPRINT[1],b=FOOTPRINT[2],dx=b[0]-a[0],dz=b[1]-a[1],angle=Math.atan2(dz,dx);
  // Local +z of old FRONT surface becomes geographic north; this component alone
  // is transformed, NOT an old solid or rear cylinder.
- const frontAnchor=part('NORTH entry surface — faces negative scene Z',building,{role:'north-entry',outwardNormal:[Math.sin(angle),0,-Math.cos(angle)],photoWidthStatus:'source north edge plus photo bay proportions, estimated placement'});
- frontAnchor.rotation.y=Math.PI-angle;frontAnchor.scale.x=Math.hypot(dx,dz)/66.56;
- frontAnchor.position.set((a[0]+b[0])/2-5*Math.sin(angle),0,(a[1]+b[1])/2+5*Math.cos(angle));front.building.traverse(o=>{if(o.isMesh&&/architectural glass/i.test(o.material.name))o.material=glass;});frontAnchor.add(front.building);
+ front.building.traverse(o=>{if(o.isMesh&&/architectural glass/i.test(o.material.name))o.material=glass;});frontAnchor.add(front.building);
  const frontLandscape=part('North forecourt planting',campus);frontLandscape.position.copy(frontAnchor.position);frontLandscape.rotation.copy(frontAnchor.rotation);
  // Move the complete pine crowns/branches north, clear of the facade and plinth.
  frontLandscape.translateZ(7);
