@@ -12,6 +12,8 @@ export function installCampusReflections(renderer, scene, campus, {compact = fal
   const waterMeshes = campus.layers.water.children.filter(mesh => mesh.isMesh);
   if (waterMeshes.length !== 1) throw new Error('Campus reflection expects the single merged frozen water surface.');
   const originalWater = waterMeshes[0], geometry = originalWater.geometry.clone();
+  const paving = campus.layers.road.children.find(mesh => mesh.isMesh).material;
+  const dryColor = paving.color.clone(), dryRoughness = paving.roughness;
   geometry.translate(0, -.12, 0); geometry.rotateX(Math.PI / 2);
   const reflector = new Reflector(geometry, {shader: createCampusWaterShader(THREE), color: CAMPUS_WATER_COLOR,
     textureWidth: resolution, textureHeight: resolution, multisample: 0, clipBias: WATER_REFLECTION_CLIP_BIAS});
@@ -117,6 +119,15 @@ export function installCampusReflections(renderer, scene, campus, {compact = fal
     }
   }
   return {update, refresh, pending: () => performance.now() >= wakeAt,
+    setWeather(preset) {
+      paving.color.copy(dryColor).multiplyScalar(1 - preset.wet * .40);
+      paving.roughness = THREE.MathUtils.lerp(dryRoughness, .27, preset.wet);
+      water.material.uniforms.color.value.set(preset.water);
+      // Use the new sky immediately while the rate-limited local captures catch up.
+      water.material.uniforms.reflectionEnabled.value = 0;
+      glass.invalidate(); glass.setEnabled(false);
+      lastGlassKey = ''; lastWaterKey = '';
+    },
     setTime(time) {
       if (!Number.isFinite(time) || time < 0) throw new RangeError('Water time must be finite and non-negative.');
       water.material.uniforms.time.value = time; stats.waterTime = time;
@@ -134,6 +145,7 @@ export function installCampusReflections(renderer, scene, campus, {compact = fal
       });
     },
     dispose() {
+      paving.color.copy(dryColor); paving.roughness = dryRoughness;
       for (const [material, fallback] of metalFallbacks) {
         material.envMap = fallback.envMap; material.envMapIntensity = fallback.envMapIntensity;
         material.needsUpdate = true; fallback.dispose();

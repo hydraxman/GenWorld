@@ -309,6 +309,8 @@ export function createOldLibraryDetail(feature, center, localOrigin) {
       if (matrix) g.applyMatrix4(matrix);
       add(group, g, mat);
     };
+    // The west entrance is an open, dark portal, not another gridded window.
+    if (door) return s;
     for (let i = 1; i < 5; i++) {
       const u = x - radius + width * i / 5;
       const top = arched ? spring + Math.sqrt(Math.max(0, radius ** 2 - (u - x) ** 2)) : bottom + height;
@@ -355,6 +357,10 @@ export function createOldLibraryDetail(feature, center, localOrigin) {
       }
     }
     box(facade, x, 5.68, -0.34, 2.58, 0.8, 0.24, stone);
+    for (const y of [5.26, 6.10]) box(facade, x, y, -.29, 2.67, .10, .36, stone);
+    for (const sign of [-1, 1]) {
+      box(facade, x + sign * 1.20, 3.43, -.38, .14, 3.55, .28, stone);
+    }
   }
   wallShape(facade, centralWall, -0.55, 0.45, brick);
   // Paired square projecting corners; only the center face recedes. No solid

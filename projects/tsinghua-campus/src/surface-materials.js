@@ -48,6 +48,18 @@ export function createCeramicMaterial(name, rgb) {
   return createExteriorSurface(name, rgb, 'square-grid');
 }
 
+export function createBandedSandstone() {
+  const name = 'art-museum:banded sandstone';
+  const maps = surfaceTextures(name, (u, v) => {
+    const course = Math.floor(v * 4), phase = v * 4 - course;
+    const joint = phase < .042 || (u * 2 + (course % 2) * .5) % 1 < .009;
+    const grain = Math.sin(2 * Math.PI * (u * 12 + v * 33)) * 1.8;
+    const shade = (course % 2 ? -13 : 10) + grain - (joint ? 14 : 0);
+    return {color: [191, 157, 141].map(c => Math.round(c + shade)), height: joint ? -.28 : grain * .018};
+  });
+  return new THREE.MeshStandardMaterial({name, ...maps, roughness: .83, normalScale: new THREE.Vector2(.35, .35)});
+}
+
 function createExteriorSurface(name, rgb, kind) {
   const stone = kind === 'granite', ceramic = kind === 'square-grid';
   if (typeof document !== 'undefined') {

@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
 import polygonClipping from 'polygon-clipping';
 import {footprintMetrics, pointInPolygon, segmentDistance} from './geo.js';
+import {campusSkyGLSL} from './campus-sky.js';
 
 const CELL = 230, CITY_HALF = CELL * 15.5, TREE_LIMIT = 2200;
 const STREETS = Array.from({length: 32}, (_, i) => (i - 15.5) * CELL + Math.sin(i * 1.7) * 22);
@@ -147,34 +148,40 @@ function crownGeometry() {
   return geometry;
 }
 
-export function createCampusSurroundings(data, lawnMaterial) {
+export function createCampusSurroundings(data, lawnMaterial, skyTexture) {
   if (!lawnMaterial?.map) throw new Error('Surroundings require the existing shared campus lawn surface.');
   const layout = createSurroundingsLayout(data), group = new THREE.Group();
   group.name = 'Campus surroundings';
   group.userData = {displayOnly: true, source: 'Original procedural urban and park backdrop; not mapped buildings',
     exportPolicy: 'Outside authoritative campus model; excluded from building exports'};
   const atmosphere = {value: 1}, hazeColor = new THREE.Color('#8acbfa').multiplyScalar(1.35);
+  const visibility = {value: new THREE.Vector2(1800, 10500)};
   const materials = new Set(), geometries = new Set(), texture = facadeTexture();
   function material(name, options, facade = false) {
     const result = new THREE.MeshStandardMaterial({name, roughness: .92, ...options});
     result.onBeforeCompile = shader => {
       shader.uniforms.backdropAtmosphere = atmosphere;
       shader.uniforms.backdropHaze = {value: hazeColor};
+      shader.uniforms.backdropVisibility = visibility;
+      if (skyTexture) shader.uniforms.campusSky = {value: skyTexture};
       // Keep high overview cameras from washing out the entire surrounding district.
-      shader.vertexShader = `varying float backdropDepth;\n${shader.vertexShader}`
+      shader.vertexShader = `varying float backdropDepth; varying vec2 horizonDirection;\n${shader.vertexShader}`
         .replace('#include <project_vertex>', `#include <project_vertex>
+          horizonDirection = (vec4(mvPosition.xyz, 0.) * viewMatrix).xz;
           backdropDepth = max(0., length(mvPosition.xyz) - max(cameraPosition.y, 0.) * .9);`);
       if (facade) shader.vertexShader = shader.vertexShader.replace('#include <uv_vertex>', `#include <uv_vertex>
         #if defined(USE_MAP) && defined(USE_INSTANCING)
           vec3 size = vec3(length(instanceMatrix[0].xyz), length(instanceMatrix[1].xyz), length(instanceMatrix[2].xyz));
           vMapUv = abs(normal.y) > .5 ? vec2(.02) : uv * vec2(abs(normal.x) > .5 ? size.z : size.x, size.y) / vec2(4., 3.4);
         #endif`);
-      shader.fragmentShader = `varying float backdropDepth;
-        uniform float backdropAtmosphere; uniform vec3 backdropHaze;\n${shader.fragmentShader}`
+      shader.fragmentShader = `varying float backdropDepth; varying vec2 horizonDirection; ${skyTexture ? campusSkyGLSL : ''}
+        uniform float backdropAtmosphere; uniform vec3 backdropHaze; uniform vec2 backdropVisibility;\n${shader.fragmentShader}`
         .replace('#include <opaque_fragment>', `#include <opaque_fragment>
-          gl_FragColor.rgb = mix(gl_FragColor.rgb, backdropHaze, backdropAtmosphere * smoothstep(1800., 10500., backdropDepth));`);
+          float hazeAmount = backdropAtmosphere * smoothstep(backdropVisibility.x, backdropVisibility.y, backdropDepth);
+          if (hazeAmount > 0.) gl_FragColor.rgb = mix(gl_FragColor.rgb,
+            ${skyTexture ? 'campusSkyColor(vec3(horizonDirection.x, .0001, horizonDirection.y))' : 'backdropHaze'}, hazeAmount);`);
     };
-    result.customProgramCacheKey = () => `campus-surroundings-v1-${facade}`;
+    result.customProgramCacheKey = () => `campus-surroundings-v2-${facade}-${Boolean(skyTexture)}`;
     materials.add(result);
     return result;
   }
@@ -284,6 +291,10 @@ export function createCampusSurroundings(data, lawnMaterial) {
     newTextures: 1, newTextureBytes: texture.image.data.byteLength, sharedLawnTextures: 3};
   let disposed = false;
   return {group, stats, layout,
+    setWeather(preset) {
+      hazeColor.set(preset.sky.horizon).multiplyScalar(1.35);
+      visibility.value.set(...preset.visibility);
+    },
     update(camera) {atmosphere.value = camera.isOrthographicCamera ? 0 : 1;},
     dispose() {
       if (disposed) return;

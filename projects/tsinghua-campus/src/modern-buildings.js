@@ -4,7 +4,7 @@ import {footprintMetrics} from './geo.js';
 import {replaceBuilding, disposeOwnedDetail} from './model.js';
 import sources from '../data/modern-building-sources.json' with {type: 'json'};
 import catalog from '../reference-catalog.json' with {type: 'json'};
-import {createMasonryMaterial, createGlazingMaterial} from './surface-materials.js';
+import {createMasonryMaterial, createGlazingMaterial, createBandedSandstone} from './surface-materials.js';
 
 export const MODERN_BUILDINGS = sources.buildings;
 const LIMITS = {
@@ -66,8 +66,8 @@ function buildContext(source, metrics, origin) {
     name: `${source.referenceSite}:${name}`, roughness: .88, ...options,
   });
   const M = {
-    wall: createMasonryMaterial(`${source.referenceSite}:masonry`,
-      source.referenceSite === 'art-museum' ? [188, 155, 136] : [174, 96, 56], source.referenceSite === 'art-museum'),
+    wall: source.referenceSite === 'art-museum' ? createBandedSandstone() :
+      createMasonryMaterial(`${source.referenceSite}:masonry`, [174, 96, 56]),
     stone: createMasonryMaterial(`${source.referenceSite}:paving`, [193, 185, 171], true),
     metal: material('metal', {color: '#d9dbd8', metalness: .25, roughness: .64}),
     arch: material('painted-arch', {color: '#fffefa', metalness: 0, roughness: .6}),
@@ -110,10 +110,22 @@ function artMuseum(C) {
     box(frontGlass, x, 6.3, -6.69, .12, 11.9, .18, M.dark);
   }
   for (const y of [3.3, 6.3, 9.3]) box(frontGlass, w * .12, y, -6.68, w * .67, .1, .2, M.dark);
-  const bays = 18, pitch = (w - 8) / bays;
+  // The photographed screen sits inside a stone frame; the solid eastern return
+  // hangs above the open portico rather than ending at the last freestanding fin.
+  const left = -w * .465, right = w * .295;
+  const frontFrame = new THREE.Shape();
+  frontFrame.moveTo(-w / 2, 12); frontFrame.lineTo(w / 2, 12); frontFrame.lineTo(w / 2, 22.8);
+  frontFrame.lineTo(right, 22.8); frontFrame.lineTo(right, 12.45); frontFrame.lineTo(left, 12.45);
+  frontFrame.lineTo(left, 22.8); frontFrame.lineTo(-w / 2, 22.8); frontFrame.closePath();
+  const frameGeo = new THREE.ExtrudeGeometry(frontFrame, {depth: 1.95, bevelEnabled: false});
+  frameGeo.translate(0, 0, -1.95); B.worldUV(frameGeo, M.wall); B.add(upper, frameGeo, M.wall);
+  // Follow the mapped east edge to the notch, never fill the notch itself.
+  const end = clip(clip(clip(ring, 0, w / 2 - 1.9, false), 1, -1.95), 1, -d * .45, false);
+  extrude(upper, end, 12, 22.8, M.wall);
+  const bays = 18, pitch = (right - left) / bays;
   for (let i = 0; i < bays; i++) {
-    const x = -w / 2 + 4 + (i + .5) * pitch;
-    box(upper, x, 18, -1.4, pitch * .64, 9.6, 2.8, M.wall);
+    const x = left + (i + .5) * pitch;
+    box(upper, x, 17.45, -1.94, pitch * .78, 10, 2.8, M.wall);
   }
   for (let i = 0; i < 11; i++) {
     const x = -w * .16 + i * w * .06;
@@ -144,9 +156,19 @@ function sportsCenter(C) {
   const {M, width: w, depth: d, group, box, B, beam} = C;
   const platform = group('Raised rectangular platform and split entrance stair banks');
   box(platform, 0, 1.15, -d / 2, w * .94, 1.74, d * .88, M.stone);
+  const platformFront = -d * .06, tread = (-.3 - platformFront) / 10;
   for (const side of [-1, 1]) for (let i = 0; i < 10; i++) {
-    box(platform, side * w * .25, .28 + (10 - i) * .087, -2.2 + i * .24,
-      w * .38, (10 - i) * .174, .27, M.stone);
+    box(platform, side * w * .25, .28 + (10 - i) * .087, platformFront + (i + .5) * tread,
+      w * .38, (10 - i) * .174, tread, M.stone);
+  }
+  for (const side of [-1, 1]) for (const lane of [.06, .23, .435]) {
+    const x = side * w * lane;
+    for (const i of [0, 3, 6, 9]) {
+      const z = platformFront + (i + .5) * tread, top = .28 + (10 - i) * .174;
+      beam(platform, [x, top, z], [x, top + .9, z], .046, M.metal);
+    }
+    beam(platform, [x, 2.92, platformFront + .5 * tread],
+      [x, 2.92 - 9 * .174, platformFront + 9.5 * tread], .058, M.metal);
   }
   const body = group('Elliptical arena with continuous clerestory and stone spandrels');
   const piers = group('Upper clerestory stone piers and open balcony rails');
@@ -237,6 +259,14 @@ function sportsCenter(C) {
   const canopyY = lowerTop + .2;
   box(entry, 0, canopyY, frontZ + 1.3, w * .40, .15, 3.5, M.glass);
   for (const x of [-w * .18, 0, w * .18]) beam(entry, [x, 2.1, frontZ + 2.6], [x, canopyY - .05, frontZ + 2.6], .18);
+  // The straight silver door bank stands forward of the curved lower curtain wall.
+  const doorWidth = w * .103, threshold = 2.02, doorTop = Math.min(canopyY - .4, threshold + 3.05);
+  box(entry, 0, (threshold + doorTop) / 2, frontZ + .2, doorWidth, doorTop - threshold, .12, M.glass);
+  for (let leaf = 0; leaf <= 6; leaf++) {
+    box(entry, (leaf / 6 - .5) * doorWidth, (threshold + doorTop) / 2, frontZ + .30,
+      leaf % 2 ? .07 : .14, doorTop - threshold, .14, M.metal);
+  }
+  for (const y of [doorTop, doorTop - .52]) box(entry, 0, y, frontZ + .30, doorWidth + .12, .12, .16, M.metal);
   C.dimensions = {radiusX: rx, radiusZ: rz, arenaCenterZ: cz, eave, roofRise: rise, archCrown,
     archHalfSpan: archX, archBeamHalfHeight, archWebDepth,
     upperBandBottom: upperBottom, lowerBandTop: lowerTop, photoLandmarks: photo,
@@ -274,8 +304,12 @@ function musicHall(C) {
     const pane = new THREE.Shape();
     pane.moveTo(x - half, top); pane.lineTo(x, low); pane.lineTo(x + half, top); pane.closePath();
     const geo = new THREE.ShapeGeometry(pane); geo.translate(0, 0, -1.04); B.add(windows, geo, M.glass);
-    const vertices = [x - half, top, .03, x, foldTip, .75, x, low, .03,
-      x + half, top, .03, x, low, .03, x, foldTip, .75];
+    // At the head the recess is deepest; below the pane a convex arris tapers
+    // into the brick plane. Two front-facing planes give a continuous light/dark pair.
+    const left = [x - half, top, .035], right = [x + half, top, .035];
+    const ridge = [x, low, .90], tip = [x, foldTip, .035], throat = [x, low, -.09];
+    const vertices = [...left, ...tip, ...ridge, ...ridge, ...tip, ...right,
+      ...left, ...ridge, ...throat, ...throat, ...ridge, ...right];
     const reveals = new THREE.BufferGeometry();
     reveals.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
     reveals.computeVertexNormals(); B.worldUV(reveals, M.wall); B.add(windows, reveals, M.wall);
@@ -328,6 +362,16 @@ export function createModernBuildingDetail(feature, center, origin) {
   const C = buildContext(source, metrics, origin);
   ({'art-museum': artMuseum, 'sports-center': sportsCenter, 'music-hall': musicHall})[source.referenceSite](C);
   C.B.finish();
+  if (source.referenceSite === 'art-museum') C.detail.traverse(o => {
+    if (o.material !== C.M.wall) return;
+    const {position, normal, uv} = o.geometry.attributes;
+    // A single course datum across piers, curved columns and the cantilever.
+    for (let i = 0; i < uv.count; i++) {
+      const vertical = Math.abs(normal.getY(i)) < .8;
+      const u = vertical && Math.abs(normal.getX(i)) > Math.abs(normal.getZ(i)) ? position.getZ(i) : position.getX(i);
+      uv.setXY(i, u / 4.8, (vertical ? position.getY(i) : position.getZ(i)) / 2.4);
+    }
+  });
   const arenaRoof = C.detail.getObjectByName('Shallow elliptical ribbed metal roof');
   if (arenaRoof) arenaRoof.traverse(object => {
     if (!object.isMesh) return;

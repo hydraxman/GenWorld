@@ -1,3 +1,5 @@
+import {campusWeather} from './campus-weather.js';
+
 export const SKY_TEXTURE_SIZE = [1024, 512];
 
 export const campusSkyGLSL = `
@@ -24,40 +26,25 @@ function noise(x, y) {
   return (a + (b - a) * u) * (1 - v) + (c + (d - c) * u) * v;
 }
 
-export function createCampusSky(THREE) {
+export function createCampusSky(THREE, initialWeather = 'clear') {
   const [width, height] = SKY_TEXTURE_SIZE, bytes = new Uint8Array(width * height * 4);
-  const horizon = new THREE.Color('#8acbfa'), zenith = new THREE.Color('#0867d2'), pixel = new THREE.Color();
+  const densities = new Uint8Array(width * height);
   const longitude = Array.from({length: width}, (_, x) => {
     const angle = ((x + .5) / width - .5) * Math.PI * 2;
     return [Math.cos(angle), Math.sin(angle)];
   });
-  for (let y = 0; y < height; y++) {
+  for (let y = height / 2; y < height; y++) {
     const latitude = ((y + .5) / height - .5) * Math.PI;
     const elevation = Math.sin(latitude), radius = Math.cos(latitude);
-    const gradient = Math.pow(Math.max(0, elevation), .35), cloudHorizon = smooth(.015, .18, elevation);
     for (let x = 0; x < width; x++) {
       let density = 0;
-      if (cloudHorizon > 0) {
-        let u = longitude[x][0] * radius / (elevation + .18) * 3.2 + 8.4;
-        let v = longitude[x][1] * radius / (elevation + .18) * 3.2 - 3.7;
-        for (const weight of [.5, .25, .14, .07, .04]) {
-          density += noise(u, v) * weight;
-          u = u * 2.03 + 5.2; v = v * 2.03 - 3.4;
-        }
+      let u = longitude[x][0] * radius / (elevation + .18) * 3.2 + 8.4;
+      let v = longitude[x][1] * radius / (elevation + .18) * 3.2 - 3.7;
+      for (const weight of [.5, .25, .14, .07, .04]) {
+        density += noise(u, v) * weight;
+        u = u * 2.03 + 5.2; v = v * 2.03 - 3.4;
       }
-      const cloud = smooth(.52, .69, density) * cloudHorizon;
-      const light = 1.9 + smooth(.5, .76, density) * 1.1;
-      pixel.copy(horizon).lerp(zenith, gradient).multiplyScalar(1.35);
-      pixel.r += (light - pixel.r) * cloud;
-      pixel.g += (light * 1.01 - pixel.g) * cloud;
-      pixel.b += (light * 1.025 - pixel.b) * cloud;
-      // Store radiance/3 in sRGB for an inexpensive mipmapped 2 MB texture.
-      pixel.multiplyScalar(1 / 3).convertLinearToSRGB();
-      const offset = (y * width + x) * 4;
-      bytes[offset] = Math.round(Math.min(1, pixel.r) * 255);
-      bytes[offset + 1] = Math.round(Math.min(1, pixel.g) * 255);
-      bytes[offset + 2] = Math.round(Math.min(1, pixel.b) * 255);
-      bytes[offset + 3] = 255;
+      densities[y * width + x] = Math.round(density * 255);
     }
   }
   const texture = new THREE.DataTexture(bytes, width, height, THREE.RGBAFormat);
@@ -67,6 +54,38 @@ export function createCampusSky(THREE) {
   texture.minFilter = THREE.LinearMipmapLinearFilter; texture.magFilter = THREE.LinearFilter;
   texture.generateMipmaps = true; texture.needsUpdate = true;
   texture.userData = {sharedCampusSurface: true, source: 'Original deterministic procedural sky; no image downloads', radianceScale: 3};
+  // Keep the GPU texture and cloud field. Only re-light the panorama on user selection.
+  const pixel = new THREE.Color(), row = new THREE.Color(), cloudColor = new THREE.Color();
+  function setWeather(id) {
+    const {sky: spec, direction} = campusWeather(id);
+    if (texture.userData.weather === id) return;
+    const sun = new THREE.Vector3(...direction).normalize(), horizon = new THREE.Color(spec.horizon),
+      zenith = new THREE.Color(spec.zenith), high = new THREE.Color(spec.cloud).multiplyScalar(spec.light),
+      low = new THREE.Color(spec.cloudLow).multiplyScalar(spec.base),
+      glow = spec.glow && new THREE.Color(spec.glow).multiplyScalar(2.8);
+    for (let y = 0; y < height; y++) {
+      const latitude = ((y + .5) / height - .5) * Math.PI, el = Math.sin(latitude), r = Math.cos(latitude);
+      const cloudHorizon = smooth(.015, .18, el);
+      row.copy(horizon).lerp(zenith, Math.pow(Math.max(0, el), .35)).multiplyScalar(1.35);
+      for (let x = 0; x < width; x++) {
+        const i = y * width + x, density = densities[i] / 255;
+        const cloud = smooth(spec.cover[0], spec.cover[1], density) * cloudHorizon;
+        pixel.copy(row);
+        if (glow) {
+          const dot = r * (longitude[x][0] * sun.x + longitude[x][1] * sun.z) + el * sun.y;
+          pixel.lerp(glow, .76 * smooth(.48, 1, dot) ** 2 + .24 * smooth(.997, .99985, dot));
+        }
+        cloudColor.copy(low).lerp(high, smooth(.36, .74, density));
+        pixel.lerp(cloudColor, cloud).multiplyScalar(1 / 3).convertLinearToSRGB();
+        bytes[i * 4] = Math.round(Math.min(1, pixel.r) * 255);
+        bytes[i * 4 + 1] = Math.round(Math.min(1, pixel.g) * 255);
+        bytes[i * 4 + 2] = Math.round(Math.min(1, pixel.b) * 255);
+        bytes[i * 4 + 3] = 255;
+      }
+    }
+    texture.userData.weather = id; texture.needsUpdate = true;
+  }
+  setWeather(initialWeather);
   const material = new THREE.ShaderMaterial({
     name: 'Campus blue sky and white clouds', side: THREE.BackSide, depthWrite: false,
     uniforms: {campusSky: {value: texture}},
@@ -90,5 +109,5 @@ export function createCampusSky(THREE) {
   sky.name = 'Campus blue sky and white clouds';
   sky.frustumCulled = false; sky.renderOrder = -1;
   sky.raycast = () => {};
-  return {sky, texture};
+  return {sky, texture, setWeather};
 }

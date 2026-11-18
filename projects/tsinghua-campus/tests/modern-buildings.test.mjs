@@ -159,6 +159,13 @@ test('art museum has a real open colonnade, recessed glass, elevated screen and 
   }
   const hits = ray(detail, [10, 3, -4.8], [0, 1, 0]);
   assert.ok(hits.length && hits[0].distance > 9, 'A solid full-footprint extrusion would fill the portico');
+  const cheek = ray(detail, [63, 17, 3], [0, 0, -1])[0];
+  assert.match(cheek.object.material.name, /banded sandstone/);
+  close(cheek.distance, 3);
+  const {position, normal, uv} = cheek.object.geometry.attributes;
+  for (let i = 0; i < position.count; i++) {
+    if (Math.abs(normal.getY(i)) < .8) close(uv.getY(i), position.getY(i) / 2.4);
+  }
   const feature = featureFor(forSite('art-museum')), metrics = footprintMetrics(feature.geometry, data.metadata.center);
   const points = metrics.projected[0][0].map(([x, z]) => new THREE.Vector3(x - metrics.origin[0], 40, z - metrics.origin[1]));
   for (const u of [.2, .5, .8]) for (const v of [.2, .5, .8]) {
@@ -186,6 +193,11 @@ test('sports center retains a rectangular map platform but has an elliptical are
   assert.ok(bounds.max.y - bounds.min.y >= p.roofRise && bounds.max.y - bounds.min.y < p.roofRise + .15);
   assert.ok(detail.getObjectByName('Open white parabolic arch and triangulated steel web').children.length >= 1);
   assert.ok(detail.getObjectByName('Upper clerestory stone piers and open balcony rails').children.length >= 1);
+  const lip = p.arenaCenterZ * .12;
+  for (const z of [lip - .02, lip + .02]) {
+    const surface = ray(detail, [p.radiusX * .55, 2.6, z], [0, -1, 0])[0];
+    close(surface.distance, .58, .001);
+  }
   const hit = ray(detail, [p.radiusX * .95, 15, p.arenaCenterZ + p.radiusZ * .95], [0, 1, 0]);
   assert.equal(hit.length, 0, 'The roof must not be a box filling the map footprint corners');
   assert.match(detail.userData.limits, /不是工程结构/);

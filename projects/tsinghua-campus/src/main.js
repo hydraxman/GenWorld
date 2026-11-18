@@ -9,6 +9,7 @@ import catalog from './reference-catalog.js';
 import {viewBounds} from './view-bounds.js';
 import {fitInspectionView, fitInspectionShadow, updateInspectionClipping} from './inspection-view.js';
 import {createCampusDaylight} from './daylight.js';
+import {CAMPUS_WEATHER, campusWeather} from './campus-weather.js';
 import {createCampusRenderPipeline} from './render-pipeline.js';
 import {ZIJING_APARTMENTS} from './zijing-sources.js';
 import {applyCampusArchitecture, prepareArchitectureExport, ARCHITECTURE_FAMILIES} from './campus-architecture.js';
@@ -55,7 +56,9 @@ async function main() {
   const compact = window.matchMedia('(max-width: 850px)');
   renderer.setPixelRatio(Math.min(devicePixelRatio, compact.matches ? 1.5 : 1.75));
   const scene = new THREE.Scene();
-  const {sun, skyTexture} = createCampusDaylight(renderer, scene);
+  let weatherId = new URLSearchParams(location.search).get('weather') ?? 'clear';
+  const daylight = createCampusDaylight(renderer, scene, weatherId);
+  const {sun, skyTexture} = daylight;
   const drawScene = createCampusRenderPipeline(renderer, scene);
   const campus = createCampusModel(data);
   scene.add(campus.group);
@@ -105,7 +108,7 @@ async function main() {
   const bounds = new THREE.Box3().setFromObject(campus.group);
   const size = bounds.getSize(new THREE.Vector3());
   const span = Math.max(size.x, size.z);
-  const surroundings = createCampusSurroundings(data, campus.layers.green.children[0].material);
+  const surroundings = createCampusSurroundings(data, campus.layers.green.children[0].material, skyTexture);
   scene.add(surroundings.group);
   const perspective = new THREE.PerspectiveCamera(40, 1, 1, 30000);
   const plan = new THREE.OrthographicCamera(-1000, 1000, 1000, -1000, 1, 30000);
@@ -129,6 +132,28 @@ async function main() {
   $('contact-shadows').checked = !compact.matches;
   let contactShadowsActive = false;
   const reflections = installCampusReflections(renderer, scene, campus, {compact: compact.matches, skyTexture});
+  const picker = $('campus-weather');
+  for (const [id, preset] of Object.entries(CAMPUS_WEATHER)) picker.add(new Option(preset.label, id));
+  function weatherLink(url) {
+    if (weatherId === 'clear') url.searchParams.delete('weather');
+    else url.searchParams.set('weather', weatherId);
+    return url.href;
+  }
+  function applyWeather() {
+    const activeId = planMode ? 'clear' : weatherId, preset = campusWeather(activeId);
+    daylight.setWeather(activeId); surroundings.setWeather(preset); reflections.setWeather(preset);
+    if (framedBounds) fitInspectionShadow(sun, framedBounds, preset.direction);
+    picker.value = weatherId; picker.disabled = planMode;
+    dirty = true;
+  }
+  picker.addEventListener('change', () => {
+    weatherId = picker.value; applyWeather();
+    if (!$('selection-link').hidden && $('selection-link').hasAttribute('href')) {
+      $('selection-link').href = weatherLink(new URL($('selection-link').href));
+    }
+    if (location.protocol !== 'file:') history.replaceState(null, '', weatherLink(new URL(location.href)));
+  });
+  applyWeather();
   const detailedDisplay = createDetailedDisplay(campus, {batching: renderer.extensions.has('WEBGL_multi_draw')});
   let knowledgeHall;
   const walker = createWalkthrough({camera: perspective, controls, canvas: renderer.domElement,
@@ -213,13 +238,14 @@ async function main() {
       height: $('workspace').clientHeight, region: inspectionRegion(), padding,
       direction: planMode ? [0, 1, 0] : direction});
     controls.target.copy(middle);
-    fitInspectionShadow(sun, targetBounds);
+    fitInspectionShadow(sun, targetBounds, campusWeather(planMode ? 'clear' : weatherId).direction);
     controls.update();
     dirty = true;
   }
   function mode(usePlan) {
     if (walker.active) walker.exit();
     planMode = usePlan;
+    applyWeather();
     camera = usePlan ? plan : perspective;
     controls.object = camera;
     controls.enableRotate = !usePlan;
@@ -306,7 +332,7 @@ async function main() {
     permalink.search = '';
     if (part) permalink.searchParams.set('view', `zijing-${number}`);
     else permalink.searchParams.set('building', id);
-    $('selection-link').href = permalink.href;
+    $('selection-link').href = weatherLink(permalink);
     const referenceSite = p.referenceSite || p.appearanceReferenceSite;
     renderKnowledgeCard($('building-knowledge'), referenceSite);
     $('open-knowledge').hidden = false;
@@ -495,7 +521,7 @@ async function main() {
     $('selected-references').hidden = false;
     $('selected-references').href = `https://www.openstreetmap.org/way/${id.split(':').at(-1)}`;
     const link = new URL(location.href); link.search = ''; link.searchParams.set('ground', id);
-    $('selection-link').hidden = false; $('selection-link').href = link.href;
+    $('selection-link').hidden = false; $('selection-link').href = weatherLink(link);
     if (compact.matches) panel(inspector, $('toggle-inspector'), false);
     const [x0, z0, x1, z1] = ground.bounds;
     frame(new THREE.Box3(new THREE.Vector3(x0, 0, z0), new THREE.Vector3(x1, 4, z1)), 1.15, [.2, 1.2, 1]);
@@ -662,7 +688,7 @@ async function main() {
   draw();
   performance.mark('campus-ready');
   window.addEventListener('pagehide', event => {
-    if (!event.persisted) {knowledgeHall.dispose(); walker.dispose(); surroundings.dispose();}
+    if (!event.persisted) {knowledgeHall.dispose(); walker.dispose(); surroundings.dispose(); reflections.dispose(); daylight.dispose();}
   });
   $('loading').hidden = true;
   $('workspace').setAttribute('aria-busy', 'false');

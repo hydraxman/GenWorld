@@ -59,10 +59,11 @@ function pattern(kind) {
     const joint = kind === 'brick'
       ? y % 16 < 1 || (x + Math.floor(y / 16) % 2 * 16) % 32 < 1
       : y % 32 < 2;
+    const row = Math.floor(y / 16), col = Math.floor((x + row % 2 * 16) / 32) % 4;
     const shade = kind === 'brick'
-      ? ((Math.floor(x / 16) * 13 + Math.floor(y / 16) * 7) % 11) - 5
+      ? (Math.imul(col * 31 + row * 123 + 53, 67) % 47) - 23 + Math.sin(x * 13 + y * 7) * 2
       : 7 * Math.sin(Math.PI * (x % 16 + 0.5) / 16);
-    const base = kind === 'brick' ? (joint ? [157, 151, 131] : [115, 116, 107])
+    const base = kind === 'brick' ? (joint ? [174, 164, 146] : [150, 138, 119])
       : (joint ? [142, 75, 49] : [180, 104, 66]);
     const offset = (y * size + x) * 4;
     for (let c = 0; c < 3; c++) pixels[offset + c] = base[c] + shade;
@@ -203,7 +204,7 @@ export function createTongfangDetail(feature, center, origin) {
     brick: mat('generated grey brick', '#ffffff', {map: pattern('brick')}),
     tile: mat('generated terracotta tiles', '#ffffff', {map: pattern('tile'), side: THREE.DoubleSide}),
     stone: mat('pale stone sills and steps', '#cfccbc'),
-    frame: mat('blue-grey painted joinery', '#729196', {roughness: 0.72}),
+    frame: mat('blue-grey painted joinery', '#8ba3ad', {roughness: 0.72}),
     glass: mat('muted recessed glass', '#496066', {roughness: 0.34, metalness: 0.12}),
     dark: mat('dark glazing bars and lamp iron', '#2f3532', {roughness: 0.7}),
     timber: mat('dark exposed eaves', '#4c4639'),

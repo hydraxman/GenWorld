@@ -124,6 +124,17 @@ function makeApartment(B, parent, part, origin, M) {
     const entryBay = edge === entry ? Math.floor(bays / 2) : -1;
     for (let level = 0; level < floors; level++) {
       const floorY = base + level * storey, mat = level === 0 ? M.plinth : M.wall;
+      if (front && !low && level > 0) {
+        // The street photo resolves pale, spaced horizontal blades above the windows.
+        // Keep the gaps open; three continuous runs cost less than a grille per window.
+        for (let blade = 0; blade < 3; blade++) {
+          place(balconies, L / 2, floorY + head + .14 + blade * .17, .31, L - .18, .065, .54, M.white);
+        }
+        for (let bay = 0; bay <= bays; bay++) {
+          place(balconies, Math.max(.12, Math.min(L - .12, bay * pitch)), floorY + head + .31,
+            .26, .07, .52, .48, M.frame);
+        }
+      }
       if (level === 0 && entryBay >= 0) {
         const center = (entryBay + .5) * pitch, left = center - openingWidth / 2, right = center + openingWidth / 2;
         place(structure, left / 2, floorY + sill / 2, -.17, left, sill, .34, mat);
@@ -173,13 +184,21 @@ function makeApartment(B, parent, part, origin, M) {
         place(balconies, bay * pitch, base + floors * storey / 2, .73, .24, floors * storey, .95, M.white);
       }
       for (let bay = 0; bay < bays; bay++) {
-        const x = (bay + .5) * pitch, half = pitch * .33;
-        const point = (dx, y, z) => [a[0] + t[0] * (x + dx) + n[0] * z, y, a[1] + t[1] * (x + dx) + n[1] * z];
-        triangle(B, roof, [point(-half, eave, 1.2), point(half, eave, 1.2), point(0, eave + .95, 1.2)], M.white);
-        for (const side of [-1, 1]) {
-          triangle(B, roof, [point(side * half, eave, 1.25), point(0, eave + .95, 1.25), point(0, eave + .95, -2.9)], M.roof);
-          triangle(B, roof, [point(side * half, eave, 1.25), point(0, eave + .95, -2.9), point(side * half, eave, -2.9)], M.roof);
+        const x = (bay + .5) * pitch;
+        // The aerial view shows the roof slope continuing over each balcony:
+        // a clipped horizontal nose with two angled returns, not a row of triangular dormers.
+        const path = [[-pitch * .49, 0], [-pitch * .34, 1.42], [pitch * .34, 1.42], [pitch * .49, 0]];
+        const outline = new THREE.Shape(path.map(([u, depth]) => new THREE.Vector2(u, -depth)));
+        const hood = new THREE.ExtrudeGeometry(outline, {depth: .16, bevelEnabled: false});
+        hood.rotateX(-Math.PI / 2);
+        const pos = hood.attributes.position, roofMat = number <= 7 ? M.redRoof : M.roof;
+        const handed = Math.sign(t[0] * n[1] - t[1] * n[0]);
+        for (let i = 0; i < pos.count; i++) {
+          const dx = x + handed * pos.getX(i), depth = pos.getZ(i), y = eave - .16 + pos.getY(i) - depth * .30;
+          pos.setXYZ(i, a[0] + t[0] * dx + n[0] * depth, y, a[1] + t[1] * dx + n[1] * depth);
         }
+        hood.computeVertexNormals(); B.worldUV(hood, roofMat); B.add(roof, hood, roofMat);
+        place(balconies, x, eave - .50, 1.395, pitch * .68, .105, .07, M.white);
       }
     }
     if (!low) {

@@ -58,13 +58,13 @@ export function fitInspectionView(camera, box, {width, height, region, padding =
   return center;
 }
 
-export function fitInspectionShadow(light, box) {
+export function fitInspectionShadow(light, box, direction = DAYLIGHT_DIRECTION) {
   corners(box);
   const size = box.getSize(new THREE.Vector3());
   const extent = Math.max(24, size.length() * .7);
   const center = box.getCenter(new THREE.Vector3());
   light.target.position.copy(center);
-  light.position.copy(center).addScaledVector(new THREE.Vector3(...DAYLIGHT_DIRECTION).normalize(), extent * 3);
+  light.position.copy(center).addScaledVector(new THREE.Vector3(...direction).normalize(), extent * 3);
   Object.assign(light.shadow.camera, {
     left: -extent, right: extent, top: extent, bottom: -extent,
     near: extent * .1, far: extent * 6,
